@@ -6,6 +6,7 @@ Basic models of synaptic transmission.
 Compare with: Rothman, J.S. and Silver, R.A. (2016),
 "Data-Driven Modeling of Synaptic Transmission and Integration",
 Prog.Mol.Biol.Transl.Sci.
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4748401/
 '''
 
 import numpy as np
