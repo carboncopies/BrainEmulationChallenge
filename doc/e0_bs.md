@@ -6,8 +6,8 @@ chain for whole brain emulation.
 
 It is an E0 level example, because there are only 2 "neurons" involved.
 
-![Fig.1](./Deriving-whole-brain-emulation.png)
-A pyramid of dependencies from the goals of successful whole brain emulation to brain
+![Fig.1](./Deriving-whole-brain-emulation.png)  
+**Fig.1.** A pyramid of dependencies from the goals of successful whole brain emulation to brain
 specific data.
 
 For the sake of completeness, and because it is the first proof-of-concept level, this example
@@ -29,10 +29,10 @@ etc. This ensures that files are shown in process order when listed.
 `<process-label>` is the corresponding label of the process step, "groundtruth",
 "acquisition", "translation", "emulation".
 
-`<topic-level>` is one of the IDs from I to XI, as showin the diagram above.
+`<topic-level>` is one of the IDs from I to XI, as showin the diagram in Fig.1 above.
 
 `<topic-label>` is the corresponding label of the topic level, as shown in the diagram
-above, such as "sampleprep", "systemidentification", "successcriteria".
+in Fig.1 above, such as "sampleprep", "systemidentification", "successcriteria".
 
 ## Overview
 
