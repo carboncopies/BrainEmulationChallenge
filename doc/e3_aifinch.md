@@ -21,7 +21,7 @@ The basic process of study with the VBP is as follows:
    KGT in a specified manenr. Acquire data from the KGT.
 
 3. Specify and generate an experimental process of system identification to be
-   applied to the data acquired from the KGT. The system identificatoin and
+   applied to the data acquired from the KGT. The system identification and
    translation (SIT) procedure is used to generate model system architectures
    and to estimate the parameters in those models by translating measurements
    acquired from the KGT.
