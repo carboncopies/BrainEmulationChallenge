@@ -6,7 +6,7 @@ chain for whole brain emulation.
 
 It is an E0 level example, because there are only 2 "neurons" involved.
 
-[Fig.1](!./Deriving-whole-brain-emulation.png)
+![Fig.1](./Deriving-whole-brain-emulation.png)
 A pyramid of dependencies from the goals of successful whole brain emulation to brain
 specific data.
 
