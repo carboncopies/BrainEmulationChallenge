@@ -41,5 +41,11 @@ in Fig.1 above, such as "sampleprep", "systemidentification", "successcriteria".
 3. Specify a system identification process using the data.
 4. Specify a validation procedure for the resulting emulation.
 
+## KGT: `bs_vbp00_groundtruth_xi_sampleprep.py`
+
+![Fig.2](./e0_bs.png)  
+**Fig.2.** Generated diagram depicting the known ground-truth model with two
+ball-and-stick (soma and axon) neurons.
+
 ---
 Randal A. Koene, 20230621

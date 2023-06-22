@@ -5,7 +5,9 @@
 Definitions of brain region descriptors.
 '''
 
-from .Geometry import Geometry
+import matplotlib.pyplot as plt
+
+from .Geometry import Geometry, PlotInfo
 from .NeuralCircuit import NeuralCircuit
 
 class Region:
@@ -24,8 +26,11 @@ class BrainRegion(Region):
         super().__init__(id=id)
         self.shape = shape
         self.content = content
-        self.content.init_cell_structure(domain=self.shape)
+        self.content.init_cells(domain=self.shape)
 
-    def show(self):
-        self.shape.show()
-        self.content.show()
+    def show(self, pltinfo=None):
+        doshow = pltinfo is None
+        if pltinfo is None: pltinfo = PlotInfo('Brain region %s' % str(self.id))
+        self.shape.show(pltinfo)
+        self.content.show(pltinfo)
+        if doshow: plt.show()
