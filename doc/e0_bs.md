@@ -47,5 +47,8 @@ in Fig.1 above, such as "sampleprep", "systemidentification", "successcriteria".
 **Fig.2.** Generated diagram depicting the known ground-truth model with two
 ball-and-stick (soma and axon) neurons.
 
+![Fig.3](./e0_bs_recorded.png)  
+**Fig.3.** Plot of recorded changes in membrane potential of the two ball-and-stick neurons.
+
 ---
 Randal A. Koene, 20230621
