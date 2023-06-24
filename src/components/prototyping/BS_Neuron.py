@@ -30,8 +30,8 @@ class BS_Neuron(Neuron):
 
         self.tau_PSPr = 5.0     # All BS receptors are identical
         self.tau_PSPd = 25.0
-        self.vPSP = 8.0
-        
+        self.vPSP = 20.0
+
         self.morphology = {
             'soma': soma,
             'axon': axon,
@@ -106,6 +106,14 @@ class BS_Neuron(Neuron):
         self.Vm_mV = self.Vrest_mV + vSpike_t + vAHP_t + vPSP_t
         if recording: self.record(t_ms)
 
+    def detect_threshold(self, t_ms:float):
+        '''
+        Compare Vm with Vact.
+        '''
+        if self.in_absref: return
+        if self.Vm_mV >= self.Vact_mV:
+            self.t_act_ms.append(t_ms)
+
     def update(self, t_ms:float, recording:bool):
         tdiff_ms = t_ms - self.t_ms
         if tdiff_ms<0: return
@@ -118,6 +126,7 @@ class BS_Neuron(Neuron):
 
         # 2. Update variables.
         self.update_Vm(t_ms, recording)
+        self.detect_threshold(t_ms)
 
         # 3. Remember the update time.
         self.t_ms = t_ms
