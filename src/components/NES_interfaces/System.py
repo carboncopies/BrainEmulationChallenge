@@ -5,20 +5,22 @@
 Definitions of in-silico ground-truth systems.
 '''
 
+from .BG_API import BGNES_simulation_create
+
 from .NeuralCircuit import NeuralCircuit
 from .Region import Region
 
 class System:
     def __init__(self, name:str):
-        self.name=name
+        # Cached references:
         self.neuralcircuits = {}
         self.regions = {}
-        self.dt_ms = 1.0
-        self.t_ms = 0
-        self.t_recordall_start_ms = 0
-        self.t_recordall_max_ms = 0
 
-        self.t_recorded_ms = []
+        # Cached state:
+        self.t_ms = 0
+
+        # Create through API call:
+        self.id = BGNES_simulation_create(name)
 
     def add_circuit(self, circuit:NeuralCircuit)->NeuralCircuit:
         self.neuralcircuits[circuit.id] = circuit

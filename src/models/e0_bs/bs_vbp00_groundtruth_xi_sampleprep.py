@@ -33,7 +33,7 @@ INITTEXT1='''
 
 def init_groundtruth(show_all=False)->System:
 
-    bs_system = System()
+    bs_system = System('e0_bs')
 
     print(INITTEXT1)
 
