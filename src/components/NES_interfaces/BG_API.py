@@ -21,19 +21,28 @@ def API_call_raw(uri:str)->requests.Response:
 def BGAPI_call(rq:str)->requests.Response:
     return requests.get(BGAPI_BASE_URI+rq)
 
-def BGNES_simulation_create(name:str)->str:
-    response = BGAPI_call('/NES/Simulation/Create?SimulationName='+name)
+def BGNES_handle_response(
+    response:requests.Response,
+    caller=str,
+    retstrings=('StatusCode'))->list:
     if response.status_code==200:
         try:
             data = response.json()
             if data['StatusCode']==0:
-                return data['SimulationID']
+                retdata = []
+                for retstr in retstrings:
+                    retdata.append(data[retstr])
+                return retdata
             else:
-                raise Exception('BGNES_simulation_create: API returned status code %s.' % data['StatusCode'])
+                raise Exception('%s: API returned status code %s.' % (caller, data['StatusCode']))
         except Exception as e:
-            raise Exception('BGNES_simulation_create: API did not return expected JSON data.')
+            raise Exception('%s: API did not return expected JSON data.' % caller)
     else:
-        raise Exception('BGNES_simulation_create: Failed with GET status %s.' % response.status_code)
+        raise Exception('%s: Failed with GET status %s.' % (caller, response.status_code))
+
+def BGNES_simulation_create(name:str)->str:
+    response = BGAPI_call('/NES/Simulation/Create?SimulationName='+name)
+    return BGNES_handle_response(response, 'BGNES_simulation_create', ('SimulationID'))[0]
 
 def BGNES_sphere_create(radius_nm:float, center_nm:tuple, name=None)->str:
     if name is None:
@@ -47,23 +56,12 @@ def BGNES_sphere_create(radius_nm:float, center_nm:tuple, name=None)->str:
             str(center_nm),
             str(name)
             ))
-    if response.status_code==200:
-        try:
-            data = response.json()
-            if data['StatusCode']==0:
-                return data['ShapeID']
-            else:
-                raise Exception('BGNES_sphere_create: API returned status code %s.' % data['StatusCode'])
-        except Exception as e:
-            raise Exception('BGNES_sphere_create: API did not return expected JSON data.')
-    else:
-        raise Exception('BGNES_sphere_create: Failed with GET status %s.' % response.status_code)
-
+    return BGNES_handle_response(response, 'BGNES_sphere_create', ('ShapeID'))[0]
 
 # -- Testing API calls: -----------------------------------------
 
 if __name__ == '__main__':
-    
+
     print('Calling BGNES_sphere_create...')
     sphere_id = BGNES_sphere_create(10, (0,0,0))
     print('Shape ID: '+str(sphere_id))
