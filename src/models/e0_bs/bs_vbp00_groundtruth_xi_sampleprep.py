@@ -13,12 +13,21 @@ VBP process step 00: groundtruth
 WBE topic-level XI: sample preparation / preservation (in-silico)
 '''
 
+USENES=True
+
 import vbpcommon
-from prototyping.System import System
-from prototyping.Geometry import Box
-from prototyping.BS_Aligned_NC import BS_Aligned_NC
-from prototyping.Region import BrainRegion
-from prototyping.KGTRecords import plot_recorded
+if USENES:
+    from NES_interfaces.System import System
+    from NES_interfaces.Geometry import Box
+    from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
+    from NES_interfaces.Region import BrainRegion
+    from NES_interfaces.KGTRecords import plot_recorded
+else:
+    from prototyping.System import System
+    from prototyping.Geometry import Box
+    from prototyping.BS_Aligned_NC import BS_Aligned_NC
+    from prototyping.Region import BrainRegion
+    from prototyping.KGTRecords import plot_recorded
 
 # -- Initialize Known Ground-Truth System: -----------------------------------
 
