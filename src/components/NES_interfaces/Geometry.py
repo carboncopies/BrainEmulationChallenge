@@ -33,7 +33,7 @@ class Box(Geometry):
         self.center_um = center_um
         self.dims_um = dims_um
         self.rotations_rad = rotations_rad
-        BGNES_box_create(
+        self.id = BGNES_box_create(
             CenterPosition_nm=center_um,
             Dimensions_nm=dims_um,
             Rotation_rad=rotations_rad)

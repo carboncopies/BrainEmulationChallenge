@@ -7,12 +7,13 @@ Definitions of ball-and-stick neuron types.
 
 import numpy as np
 
-from prototyping.Geometry import PlotInfo, Sphere, Cylinder
+from BS_API import BGNES_BS_compartment_create
+from .Geometry import PlotInfo, Sphere, Cylinder
 from .Neuron import Neuron
 
-def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:
-    if tdiff<0: return 0
-    return amp*( -np.exp(-tdiff/tau_rise) + np.exp(-tdiff/tau_decay) )
+# def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:
+#     if tdiff<0: return 0
+#     return amp*( -np.exp(-tdiff/tau_rise) + np.exp(-tdiff/tau_decay) )
 
 class BS_Neuron(Neuron):
     '''
@@ -21,6 +22,8 @@ class BS_Neuron(Neuron):
     '''
     def __init__(self, id:str, soma:Sphere, axon:Cylinder):
         super().__init__(id)
+
+
         self.Vm_mV = -60.0      # Membrane potential
         self.Vrest_mV = -60.0   # Resting membrane potential
         self.Vact_mV = -50.0    # Action potential firing threshold
@@ -36,19 +39,44 @@ class BS_Neuron(Neuron):
             'soma': soma,
             'axon': axon,
         }
+        # Create soma compartment:
+        self.soma_id = BGNES_BS_compartment_create(
+            ShapeID=soma.id,
+            MembranePotential_mV=self.Vm_mV,
+            SpikeThreshold_mV=self.Vact_mV,
+            DecayTime_ms=self.tau_AHP_ms = 30.0,
+
+            RestingPotential_mV=self.Vrest_mV,
+            AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
+        )
+        # Create axon compartment:
+        self.soma_id = BGNES_BS_compartment_create(
+            ShapeID=axon.id,
+            MembranePotential_mV=self.Vm_mV,
+            SpikeThreshold_mV=self.Vact_mV,
+            DecayTime_ms=self.tau_AHP_ms = 30.0,
+
+            RestingPotential_mV=self.Vrest_mV,
+            AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
+        )
         self.receptors = []
         self.t_directstim_ms = []
+        self.patch_id = None
 
-        self.t_ms = 0
-        self._has_spiked = False
-        self.in_absref = False
-        self.t_act_ms = []
-        self._dt_act_ms = None
+        # self.t_ms = 0
+        # self._has_spiked = False
+        # self.in_absref = False
+        # self.t_act_ms = []
+        # self._dt_act_ms = None
 
-        self.t_recorded_ms = []
-        self.Vm_recorded = []
+        # self.t_recorded_ms = []
+        # self.Vm_recorded = []
 
     def attach_direct_stim(self, t_ms:float):
+        self.patch_id = BGNES_DAC_create(
+            DestinationCompartmentID=self.soma_id,
+            ClampLocation_nm=[0,0,0])
+        #... TODO: How to prepare the output list?
         self.t_directstim_ms.append(t_ms)
 
     def show(self, pltinfo=None):

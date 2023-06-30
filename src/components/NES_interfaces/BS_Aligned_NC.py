@@ -70,12 +70,12 @@ class BS_Aligned_NC(NeuralCircuit):
             print('Displaying cell number %d.' % cell_id)
             self.cells[cell_id].show(pltinfo)
 
-    def update(self, t_ms:float, recording:bool):
-        for cell in self.cells:
-            cell.update(t_ms, recording)
+    # def update(self, t_ms:float, recording:bool):
+    #     for cell in self.cells:
+    #         cell.update(t_ms, recording)
 
-    def get_recording(self)->dict:
-        data = {}
-        for cell in self.cells:
-            data[cell.id] = cell.get_recording()
-        return data
+    # def get_recording(self)->dict:
+    #     data = {}
+    #     for cell in self.cells:
+    #         data[cell.id] = cell.get_recording()
+    #     return data
