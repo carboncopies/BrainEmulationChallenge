@@ -88,6 +88,23 @@ def BGNES_simulation_runfor(Runtime_ms:float)->str:
     response = BGAPI_call(reqstr)
     return BGNES_handle_response(response, 'BGNES_simulation_runfor')[0]
 
+def BGNES_get_simulation_status()->str:
+    global AUTHKEY
+    reqstr = '/NES/Simulation/GetStatus?AuthKey=%s&SimulationID=%s' % (
+            AUTHKEY,
+            SIMID,
+        )
+    response = BGAPI_call(reqstr)
+    seeking = [
+        'IsSimulating',
+        'RealWorldTimeRemaining_ms',
+        'RealWorldTimeElapsed_ms',
+        'InSimulationTime_ms',
+        'InSimulationTimeRemaining_ms',
+        'PercentComplete'
+    ]
+    return BGNES_handle_response(response, 'BGNES_simulation_runfor', seeking)
+
 def BGNES_simulation_recordall(MaxRecordTime_ms:float)->str:
     global AUTHKEY
     reqstr = '/NES/Simulation/RecordAll?AuthKey=%s&SimulationID=%s&MaxRecordTime_ms=%s' % (
@@ -115,7 +132,7 @@ def BGNES_sphere_create(radius_nm:float, center_nm:tuple, name=None)->str:
             AUTHKEY,
             SIMID,
             str(radius_nm),
-            str(center_nm),
+            json.dumps(list(center_nm)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -133,9 +150,9 @@ def BGNES_cylinder_create(
             AUTHKEY,
             SIMID,
             str(Point1Radius_nm),
-            str(Point1Position_nm),
+            json.dumps(list(Point1Position_nm)),
             str(Point2Radius_nm),
-            str(Point2Position_nm),
+            json.dumps(list(Point2Position_nm)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -151,9 +168,9 @@ def BGNES_box_create(
     reqstr = '/NES/Geometry/Shape/Box/Create?AuthKey=%s&SimulationID=%s&CenterPosition_nm=%s&Dimensions_nm=%s&Rotation_rad=%s%s' % (
             AUTHKEY,
             SIMID,
-            str(CenterPosition_nm),
-            str(Dimensions_nm),
-            str(Rotation_rad),
+            json.dumps(list(CenterPosition_nm)),
+            json.dumps(list(Dimensions_nm)),
+            json.dumps(list(Rotation_rad)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -211,7 +228,7 @@ def BGNES_BS_receptor_create(
             str(DestinationCompartmentID),
             str(Conductance_nS),
             str(TimeConstant_ms),
-            str(ReceptorLocation_nm),
+            json.dumps(list(ReceptorLocation_nm)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -227,7 +244,7 @@ def BGNES_DAC_create(
             AUTHKEY,
             SIMID,
             str(DestinationCompartmentID),
-            str(ClampLocation_nm),
+            json.dumps(list(ClampLocation_nm)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -242,7 +259,7 @@ def BGNES_DAC_set_output_list(
             AUTHKEY,
             SIMID,
             str(TargetDAC),
-            str(DACVoltages_mV),
+            json.dumps(DACVoltages_mV),
             str(Timestep_ms)
         )
     response = BGAPI_call(reqstr)
@@ -258,7 +275,7 @@ def BGNES_ADC_create(
             AUTHKEY,
             SIMID,
             str(SourceCompartmentID),
-            str(ClampLocation_nm),
+            json.dumps(list(ClampLocation_nm)),
             namestr
         )
     response = BGAPI_call(reqstr)
@@ -365,6 +382,14 @@ if __name__ == '__main__':
     print('Running the simulation...')
     status = BGNES_simulation_runfor(500.0)
     print('Status: '+str(status))
+
+    print('Checking simulation status...')
+    while True:
+        status = BGNES_get_simulation_status()
+        print('Status: '+str(status))
+        if not status[0]:
+            break
+    print('Simulation done.')
 
     print('Retrieving recorded data...')
     data = BGNES_get_recording()

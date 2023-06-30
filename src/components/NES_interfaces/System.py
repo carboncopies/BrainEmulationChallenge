@@ -5,7 +5,9 @@
 Definitions of in-silico ground-truth systems.
 '''
 
-from .BG_API import BGNES_simulation_create, BGNES_simulation_recordall, BGNES_get_recording, BGNES_simulation_runfor
+from time import sleep
+
+from .BG_API import BGNES_simulation_create, BGNES_simulation_recordall, BGNES_get_recording, BGNES_simulation_runfor, BGNES_get_simulation_status
 
 from .NeuralCircuit import NeuralCircuit
 from .Region import Region
@@ -45,5 +47,8 @@ class System:
     def get_recording(self)->dict:
         return BGNES_get_recording()
 
-    def run_for(self, t_run_ms:float):
-        BGNES_simulation_runfor()
+    def run_for(self, t_run_ms:float, blocking=True):
+        BGNES_simulation_runfor(t_run_ms)
+        if not blocking: return
+        while BGNES_get_simulation_status()[0]:
+            sleep(0.005)
