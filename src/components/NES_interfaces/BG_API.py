@@ -179,8 +179,10 @@ def BGNES_box_create(
 def BGNES_BS_compartment_create(
     ShapeID:str,
     MembranePotential_mV:float,
+    RestingPotential_mV:float,
     SpikeThreshold_mV:float,
     DecayTime_ms:float,
+    AfterHyperpolarizationAmplitude_mV:float,
     name=None)->str:
     global AUTHKEY
     namestr = '' if name is None else '&Name='+str(name)
@@ -189,8 +191,10 @@ def BGNES_BS_compartment_create(
             SIMID,
             str(ShapeID),
             str(MembranePotential_mV),
+            str(RestingPotential_mV),
             str(SpikeThreshold_mV),
             str(DecayTime_ms),
+            str(AfterHyperpolarizationAmplitude_mV),
             namestr
         )
     response = BGAPI_call(reqstr)

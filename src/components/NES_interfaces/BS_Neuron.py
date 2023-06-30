@@ -50,7 +50,7 @@ class BS_Neuron(Neuron):
             AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
         )
         # Create axon compartment:
-        self.soma_id = BGNES_BS_compartment_create(
+        self.axon_id = BGNES_BS_compartment_create(
             ShapeID=axon.id,
             MembranePotential_mV=self.Vm_mV,
             SpikeThreshold_mV=self.Vact_mV,
