@@ -7,7 +7,7 @@ Definitions of ball-and-stick neuron types.
 
 import numpy as np
 
-from BS_API import BGNES_BS_compartment_create
+from .BG_API import BGNES_BS_compartment_create
 from .Geometry import PlotInfo, Sphere, Cylinder
 from .Neuron import Neuron
 
@@ -43,20 +43,18 @@ class BS_Neuron(Neuron):
         self.soma_id = BGNES_BS_compartment_create(
             ShapeID=soma.id,
             MembranePotential_mV=self.Vm_mV,
-            SpikeThreshold_mV=self.Vact_mV,
-            DecayTime_ms=self.tau_AHP_ms = 30.0,
-
             RestingPotential_mV=self.Vrest_mV,
+            SpikeThreshold_mV=self.Vact_mV,
+            DecayTime_ms=self.tau_AHP_ms,
             AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
         )
         # Create axon compartment:
         self.axon_id = BGNES_BS_compartment_create(
             ShapeID=axon.id,
             MembranePotential_mV=self.Vm_mV,
-            SpikeThreshold_mV=self.Vact_mV,
-            DecayTime_ms=self.tau_AHP_ms = 30.0,
-
             RestingPotential_mV=self.Vrest_mV,
+            SpikeThreshold_mV=self.Vact_mV,
+            DecayTime_ms=self.tau_AHP_ms,
             AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
         )
         self.receptors = []

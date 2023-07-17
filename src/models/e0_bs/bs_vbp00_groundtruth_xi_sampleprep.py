@@ -13,10 +13,13 @@ VBP process step 00: groundtruth
 WBE topic-level XI: sample preparation / preservation (in-silico)
 '''
 
+scriptversion='0.0.1'
+
 USENES=True
 
 import vbpcommon
 if USENES:
+    from NES_interfaces.BG_API import BGNES_QuickStart
     from NES_interfaces.System import System
     from NES_interfaces.Geometry import Box
     from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
@@ -28,6 +31,12 @@ else:
     from prototyping.BS_Aligned_NC import BS_Aligned_NC
     from prototyping.Region import BrainRegion
     from prototyping.KGTRecords import plot_recorded
+
+def quickstart(user:str, passwd:str):
+    if USENES:
+        if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
+            print('BG NES Interface access failed.')
+            exit(1)
 
 # -- Initialize Known Ground-Truth System: -----------------------------------
 
@@ -144,6 +153,8 @@ def parse_command_line()->tuple:
     return (show_all, runtime_ms)
 
 if __name__ == '__main__':
+
+    quickstart('Admonishing','Instruction')
 
     show_all, runtime_ms = parse_command_line()
 

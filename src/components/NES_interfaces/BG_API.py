@@ -27,7 +27,7 @@ def API_call_raw(uri:str)->requests.Response:
     return requests.get(uri)
 
 def BGAPI_call(rq:str)->requests.Response:
-    #print('Request is: '+str(rq))
+    print('Request is: '+str(rq))
     response = requests.get(BGAPI_BASE_URI+rq)
     #print('Response is: '+str(response.text))
     return response
@@ -66,6 +66,7 @@ def BGNES_GetToken(user:str, passwd:str)->str:
 
 def BGNES_simulation_create(name:str)->str:
     global AUTHKEY
+    print('Auth key is: '+str(AUTHKEY))
     response = BGAPI_call('/NES/Simulation/Create?AuthKey=%s&SimulationName=%s' % (AUTHKEY, name))
     return BGNES_handle_response(response, 'BGNES_simulation_create', ['SimulationID'])[0]
 
@@ -123,7 +124,12 @@ def BGNES_get_recording()->dict:
         )
     response = BGAPI_call(reqstr)
     jsondatastr = BGNES_handle_response(response, 'BGNES_get_recording', ['Recording'])[0]
-    return json.loads(jsondatastr)
+    try:
+        data = json.loads(jsondatastr)
+    except Exception as e:
+        print('Exception: %s. Original string: %s' % (str(e), str(jsondatastr)))
+        return {}
+    return data
 
 def BGNES_sphere_create(radius_nm:float, center_nm:tuple, name=None)->str:
     global AUTHKEY
@@ -186,7 +192,7 @@ def BGNES_BS_compartment_create(
     name=None)->str:
     global AUTHKEY
     namestr = '' if name is None else '&Name='+str(name)
-    reqstr = '/NES/Compartment/BS/Create?AuthKey=%s&SimulationID=%s&ShapeID=%s&MembranePotential_mV=%s&SpikeThreshold_mV=%s&DecayTime_ms=%s%s' % (
+    reqstr = '/NES/Compartment/BS/Create?AuthKey=%s&SimulationID=%s&ShapeID=%s&MembranePotential_mV=%s&RestingPotential_mV=%s&SpikeThreshold_mV=%s&DecayTime_ms=%s&AfterHyperpolarizationAmplitude_mV=%s%s' % (
             AUTHKEY,
             SIMID,
             str(ShapeID),
@@ -214,7 +220,7 @@ def BGNES_connection_staple_create(
             namestr
         )
     response = BGAPI_call(reqstr)
-    return BGNES_handle_response(response, 'BGNES_connection_staple_create', ['ConnectionID'])[0]
+    return BGNES_handle_response(response, 'BGNES_connection_staple_create', ['StapleID'])[0]
 
 def BGNES_BS_receptor_create(
     SourceCompartmentID:str,
@@ -225,7 +231,7 @@ def BGNES_BS_receptor_create(
     name=None)->str:
     global AUTHKEY
     namestr = '' if name is None else '&Name='+str(name)
-    reqstr = '/NES/Connection/Staple/Create?AuthKey=%s&SimulationID=%s&SourceCompartmentID=%s&DestinationCompartmentID=%s&Conductance_nS=%s&TimeConstant_ms=%s&ReceptorLocation_nm=%s%s' % (
+    reqstr = '/NES/Connection/Receptor/Create?AuthKey=%s&SimulationID=%s&SourceCompartmentID=%s&DestinationCompartmentID=%s&Conductance_nS=%s&TimeConstant_ms=%s&ReceptorLocation_nm=%s%s' % (
             AUTHKEY,
             SIMID,
             str(SourceCompartmentID),
@@ -236,7 +242,8 @@ def BGNES_BS_receptor_create(
             namestr
         )
     response = BGAPI_call(reqstr)
-    return BGNES_handle_response(response, 'BGNES_BS_receptor_create', ['ConnectionID'])[0]
+    print(str(response.json()))
+    return BGNES_handle_response(response, 'BGNES_BS_receptor_create', ['ReceptorID'])[0]
 
 def BGNES_DAC_create(
     DestinationCompartmentID:str,
@@ -309,6 +316,32 @@ def BGNES_ADC_get_recorded_data(
     response = BGAPI_call(reqstr)
     return BGNES_handle_response(response, 'BGNES_ADC_get_recorded_data', ['RecordedData_mV', 'Timestep_ms'])
 
+# -- Higher level functions: ------------------------------------
+
+def BGNES_QuickStart(user:str, passwd:str, scriptversion:str, versionmustmatch:bool, verbose=False)->bool:
+    '''
+    Check system version compatibility, check system status, and
+    obtain authentication token in a single call.
+    '''
+    version = BGNES_Version()
+    if verbose: print('BGNES Version: '+str(version))
+    if versionmustmatch:
+        if version != scriptversion:
+            print('Version mismatch. Script version is %s.' % scriptversion)
+            return False
+
+    systemstate, servicestate = BGNES_Status()
+    if systemstate != 'Healthy':
+        print('System state: '+str(systemstate))
+        return False
+    if servicestate != 0:
+        print('NES service status: '+str(servicestate))
+        return False
+
+    global AUTHKEY
+    AUTHKEY = BGNES_GetToken(user,passwd)
+    return True
+
 # -- Testing API calls: -----------------------------------------
 
 if __name__ == '__main__':
@@ -343,11 +376,11 @@ if __name__ == '__main__':
     print('Shape ID: '+str(box_id))
 
     print('Calling BGNES_BS_compartment_create...')
-    compartment_id = BGNES_BS_compartment_create(sphere_id, -60.0, -50.0, 30.0)
+    compartment_id = BGNES_BS_compartment_create(sphere_id, -60.0, -50.0, 30.0, 30.0, -20.0)
     print('Compartment ID: '+str(compartment_id))
 
     print('Calling BGNES_BS_compartment_create for second compartment...')
-    second_compartment_id = BGNES_BS_compartment_create(cylinder_id, -60.0, -50.0, 30.0)
+    second_compartment_id = BGNES_BS_compartment_create(cylinder_id, -60.0, -50.0, 30.0, 30.0, -20.0)
     print('Second Compartment ID: '+str(second_compartment_id))
 
     print('Calling BGNES_connection_staple_create...')
