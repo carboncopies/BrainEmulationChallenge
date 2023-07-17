@@ -50,5 +50,6 @@ class System:
     def run_for(self, t_run_ms:float, blocking=True):
         BGNES_simulation_runfor(t_run_ms)
         if not blocking: return
+        # TODO: *** Beware that the following can get stuck.
         while BGNES_get_simulation_status()[0]:
             sleep(0.005)

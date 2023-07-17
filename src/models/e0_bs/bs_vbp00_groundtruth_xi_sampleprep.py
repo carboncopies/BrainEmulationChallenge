@@ -13,6 +13,15 @@ VBP process step 00: groundtruth
 WBE topic-level XI: sample preparation / preservation (in-silico)
 '''
 
+# TODO: *** Do some rewriting such that all of the functional
+#           setup through NES is nicely separated from the
+#           morphology and other things that are handled only in Python.
+#           Then, have the prototyping version work the same way, except
+#           that the functional part is also in Python. Ideally, the
+#           non-functional parts can use shared code across both versions.
+# TODO: *** Ensure that the NES and prototype update functions are
+#           indeed identical, i.e. the default parameters are also the same.
+
 scriptversion='0.0.1'
 
 USENES=True

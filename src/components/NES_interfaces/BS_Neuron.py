@@ -7,7 +7,7 @@ Definitions of ball-and-stick neuron types.
 
 import numpy as np
 
-from .BG_API import BGNES_BS_compartment_create
+from .BG_API import BGNES_BS_compartment_create, BGNES_connection_staple_create, BGNES_DAC_set_output_list
 from .Geometry import PlotInfo, Sphere, Cylinder
 from .Neuron import Neuron
 
@@ -57,6 +57,7 @@ class BS_Neuron(Neuron):
             DecayTime_ms=self.tau_AHP_ms,
             AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
         )
+        self.staple_id = BGNES_connection_staple_create(self.soma_id, self.axon_id)
         self.receptors = []
         self.t_directstim_ms = []
         self.patch_id = None
@@ -71,11 +72,19 @@ class BS_Neuron(Neuron):
         # self.Vm_recorded = []
 
     def attach_direct_stim(self, t_ms:float):
-        self.patch_id = BGNES_DAC_create(
-            DestinationCompartmentID=self.soma_id,
-            ClampLocation_nm=[0,0,0])
-        #... TODO: How to prepare the output list?
+        if self.patch_id is None:
+            self.patch_id = BGNES_DAC_create(
+                DestinationCompartmentID=self.soma_id,
+                ClampLocation_nm=[0,0,0])
         self.t_directstim_ms.append(t_ms)
+
+    def register_DAC_data_list(self):
+        if self.patch_id is not None:
+            DAC_settings = [ (0, self.Vrest_mV) ]
+            for t_stim in self.t_directstim_ms:
+                DAC_settings.append( (t_stim, self.Vact_mV+10.0 ) )
+                DAC_settings.append( (t_stim+5.0, self.Vrest_mV ) )
+        BGNES_DAC_set_output_list(self.patch_id, DAC_settings)
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neuron %s.' % str(self.id))

@@ -46,7 +46,14 @@ class BS_Aligned_NC(NeuralCircuit):
                 raise Exception('BS_Aligned_NC.Set_Weight: Unknown source cell %d.' % from_cell)
             target_cell = self.cells[from_to[1]]
             from_cell_ref = self.cells[from_cell]
-            target_cell.receptors.append( (from_cell_ref, 1.0) ) # source and weight
+            weigth = 1.0
+            from_cell_id = from_cell_ref.axon_id
+            to_cell_id = target_cell.soma_id
+            receptor_location = target_cell.morphology['soma'].center_um
+            receptor_conductance = target_cell.vPSP * weigth
+            time_constants = [ target_cell.tau_PSPr, target_cell.tau_PSPd ]
+            receptor_id = BGNES_BS_receptor_create(from_cell_id, to_cell_id, receptor_conductance, json.dumps(time_constants), receptor_location)
+            target_cell.receptors.append( (from_cell_ref, weigth, receptor_id) )
             target_cell.morphology['receptor'] = BS_Receptor(self.cells, from_cell)
 
     def Encode(self,
@@ -62,7 +69,11 @@ class BS_Aligned_NC(NeuralCircuit):
             t, cell_num = stim
             if cell_num >= len(self.cells):
                 raise Exception('BS_Aligned_NC.attach_direct_stim: %d exceeds number of cells.' % cell_num)
+            # First, we create the DACs where they haven't yet been created and cache cell-specific stimulation times.
             self.cells[cell_num].attach_direct_stim(t)
+        for cell in self.cells:
+            # Then, initialize the DACs with their respective data lists.
+            cell.register_DAC_data_list()
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neural circuit %s.' % str(self.id))
