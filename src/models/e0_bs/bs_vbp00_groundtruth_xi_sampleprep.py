@@ -139,6 +139,10 @@ Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms]
        VBP process step 00: This script specifies a known ground-truth system.
        WBE topic-level XI: sample preparation / preservation (in-silico).
 
+       The test run of the model that is carried out here obtains data in
+       God's Eye mode. This data should not be used to test system
+       identification and emulation.
+
 '''
 
 def parse_command_line()->tuple:

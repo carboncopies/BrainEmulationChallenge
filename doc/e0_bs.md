@@ -50,5 +50,11 @@ ball-and-stick (soma and axon) neurons.
 ![Fig.3](./e0_bs_recorded.png)  
 **Fig.3.** Plot of recorded changes in membrane potential of the two ball-and-stick neurons.
 
+## Double-blind data acquisition: `bs_vbp01_doubleblind_x_acquisition.py`
+
+## System identification: `bs_vbp02_translation_iv_system_identification.py`
+
+## Emulation validation: `bs_vbp03_emulation_iii_validation.py`
+
 ---
 Randal A. Koene, 20230621
