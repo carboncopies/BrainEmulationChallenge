@@ -6,6 +6,7 @@ Definitions of in-silico ground-truth systems.
 """
 
 from time import sleep
+from typing import Any
 
 from .BG_API import (
     BGNES_simulation_create,
@@ -61,3 +62,37 @@ class System:
         # TODO: *** Beware that the following can get stuck.
         while BGNES_get_simulation_status()[0]:
             sleep(0.005)
+
+    def set_spontaneous_activity(self, settings: list[tuple[tuple[int, int], int]]):
+        # TODO: This method must be implemented.
+        pass
+
+    def get_geo_center(self) -> tuple[float, float, float]:
+        # TODO: This method must be implemented.
+        return (0.0, 0.0, 0.0)
+
+    def attach_recording_electrodes(
+        self,
+        specifications: list[
+            dict[str, str | tuple[int, int, int] | list[tuple[int, int, int]]]
+        ],
+    ):
+        # TODO: This method must be implemented
+        pass
+
+    def attach_calcium_imaging(
+        self,
+        specifications: dict[str, str | list[int], float, tuple[float, float, float]],
+    ):
+        # TODO: This method must be implemented.
+        pass
+
+    def component_by_id(self, key: str, action: str) -> Any:
+        # TODO: This method must be implemented.
+        pass
+
+    def get_em_stack(
+        self, specifications: dict[str, str | float | tuple[float, float, float]]
+    ) -> Any:
+        # TODO: This method must be implemented.
+        pass

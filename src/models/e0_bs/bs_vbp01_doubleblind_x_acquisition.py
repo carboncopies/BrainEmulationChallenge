@@ -24,6 +24,9 @@ from prototyping.System import System
 
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
+    from NES_interfaces.KGTRecords import (
+        plot_recorded,
+    )  # TODO: Is this the right place to import this?
 else:
     pass
 
@@ -126,6 +129,9 @@ def run_functional_data_acquisition(bs_acq_system: System, runtime_ms: float):
     bs_acq_system.run_for(runtime_ms)
 
     data = {}
+    # Adding "t_ms" entry to avoid raising Exceptions
+    data["t_ms"] = None  # TODO: Change this to something more meaningful
+
     data["electrode"] = bs_acq_system.component_by_id("electrode_0", "get_record")
     data["calcium"] = bs_acq_system.component_by_id("calcium_0", "get_record")
 
