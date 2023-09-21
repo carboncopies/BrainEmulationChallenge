@@ -2,57 +2,72 @@
 # aifinch_emulation.py
 # Randal A. Koene, 20230215
 
-'''
+"""
 This file is used to run, validate and test AIFinch emulations that were
 generated with aifinch_translation.py.
-'''
+"""
 import aifinch_groundtruth as kgt
 import aifinch_acquisition as acq
 import aifinch_translation as sit
 
 # == EM Model Building: =================================================================================
 
+
 class BuildEmulation:
-    '''
+    """
     Use the derived layout of models and their estimated parameters to build an emulation.
-    '''
-    def __init__(self,
-        sit_result:dict,):
+    """
+
+    def __init__(
+        self,
+        sit_result: dict,
+    ):
         self.sit_result = sit_result
         # TODO:
         # - Much more!
 
+
 # == Evaluation Methods: ================================================================================
 
+
 class EvaluateBehavior:
-    '''
+    """
     Evaluate behavioral performance, comparing behavior of a ground-truth system with that of
     an emulated system.
-    '''
-    def __init__(self,
-        kgt_behavior:Region,
-        em_behavior:Region,):
+    """
+
+    def __init__(
+        self,
+        kgt_behavior: Region,
+        em_behavior: Region,
+    ):
         self.kgt_behavior = kgt_behavior
         self.em_behavior = em_behavior
 
     def show():
         pass
 
+
 class EvaluateOutputActivity:
-    '''
+    """
     Evaluate neuronal response performance, comparing responses of a ground-truth system with that of
     an emulated system.
-    '''
-    def __init__(self,
-        kgt_resp:Region,
-        em_resp:Region,):
+    """
+
+    def __init__(
+        self,
+        kgt_resp: Region,
+        em_resp: Region,
+    ):
         self.kgt_resp = kgt_resp
         self.em_resp = em_resp
 
     def show():
         pass
 
+
 # == Initialize: ========================================================================================
+
 
 def init(kgt_system: dict, sit_process: dict):
     # TODO:
@@ -62,7 +77,9 @@ def init(kgt_system: dict, sit_process: dict):
     #   specific model selection process and system identification method.
 
     # 2. Set up the emulation:
-    aif_em_model = BuildEmulation(sit_result=sit_process,)
+    aif_em_model = BuildEmulation(
+        sit_result=sit_process,
+    )
 
     # 3. Memory stimulation patterns for both ground-truth and emulated systems:
     # TODO:
@@ -73,54 +90,79 @@ def init(kgt_system: dict, sit_process: dict):
     # 4. Set up knowth-truth input and output delivery:
     aif_kgt_in = RegionPath(
         src=aif_validation_cues,
-        dst=kgt_system['regions']['ltm'],
-        method=[ '1-1', 'patchclamp' ])
+        dst=kgt_system["regions"]["ltm"],
+        method=["1-1", "patchclamp"],
+    )
     aif_kgt_resp = SpikeMonitor()
     aif_kgt_out = RegionPath(
-        src=kgt_system['regions']['ltm'],
-        dst=kgt_system['regions']['resp'],
-        method=[ '1-1', 'patchclamp' ])
-    aif_kgt_singing_finch = NotesToSound(soundlib='finch_trills.wav')
+        src=kgt_system["regions"]["ltm"],
+        dst=kgt_system["regions"]["resp"],
+        method=["1-1", "patchclamp"],
+    )
+    aif_kgt_singing_finch = NotesToSound(soundlib="finch_trills.wav")
     aif_kgt_vocalization = PatternMapper(
-        src=aif_kgt_resp,
-        dst=aif_kgt_singing_finch,
-        method='nearest')
+        src=aif_kgt_resp, dst=aif_kgt_singing_finch, method="nearest"
+    )
 
     # 5. Set up emulation output and output delivery:
     aif_em_in = RegionPath(
-        src=aif_validation_cues,
-        dst=aif_em_model,
-        method=[ '1-1', 'patchclamp' ])
+        src=aif_validation_cues, dst=aif_em_model, method=["1-1", "patchclamp"]
+    )
     aif_em_resp = SpikeMonitor()
     aif_em_out = RegionPath(
         src=aif_em_model,
-        dst=kgt_system['regions']['resp'],
-        method=[ '1-1', 'patchclamp' ])
-    aif_em_singing_finch = NotesToSound(soundlib='finch_trills.wav')
+        dst=kgt_system["regions"]["resp"],
+        method=["1-1", "patchclamp"],
+    )
+    aif_em_singing_finch = NotesToSound(soundlib="finch_trills.wav")
     aif_em_vocalization = PatternMapper(
-        src=aif_em_resp,
-        dst=aif_em_singing_finch,
-        method='nearest')
+        src=aif_em_resp, dst=aif_em_singing_finch, method="nearest"
+    )
 
     aif_em_eval_system = {
-        'em_model': { 'ltm': aif_em_model, },
-        'val_data': { 'cue': aif_validation_cues, },
-        'systems': {
-            'kgt': {
-                'regions': { 'cue': aif_validation_cues, 'ltm': kgt_system['regions']['ltm'], 'resp': aif_kgt_resp,  },
-                'pathways': { 'cue': aif_kgt_in, 'resp': aif_kgt_out, 'singing': aif_kgt_vocalization, },
-                'embodiment': { 'singing': aif_kgt_singing_finch, },
+        "em_model": {
+            "ltm": aif_em_model,
+        },
+        "val_data": {
+            "cue": aif_validation_cues,
+        },
+        "systems": {
+            "kgt": {
+                "regions": {
+                    "cue": aif_validation_cues,
+                    "ltm": kgt_system["regions"]["ltm"],
+                    "resp": aif_kgt_resp,
+                },
+                "pathways": {
+                    "cue": aif_kgt_in,
+                    "resp": aif_kgt_out,
+                    "singing": aif_kgt_vocalization,
+                },
+                "embodiment": {
+                    "singing": aif_kgt_singing_finch,
+                },
             },
-            'em': {
-                'regions': { 'cue': aif_validation_cues, 'ltm': aif_em_model, 'resp': aif_em_resp,  },
-                'pathways': { 'cue': aif_em_in, 'resp': aif_em_out, 'singing': aif_em_vocalization, },
-                'embodiment': { 'singing': aif_em_singing_finch, },
+            "em": {
+                "regions": {
+                    "cue": aif_validation_cues,
+                    "ltm": aif_em_model,
+                    "resp": aif_em_resp,
+                },
+                "pathways": {
+                    "cue": aif_em_in,
+                    "resp": aif_em_out,
+                    "singing": aif_em_vocalization,
+                },
+                "embodiment": {
+                    "singing": aif_em_singing_finch,
+                },
             },
         },
     }
     return aif_em_eval_system
 
-HELP='''
+
+HELP = """
 Usage: aifinch_emulation.py [-h]
 
        -h         Show this usage information.
@@ -139,7 +181,8 @@ Usage: aifinch_emulation.py [-h]
        3. System identification and translation.
        4. Building and evaluating the emulated system.
 
-'''
+"""
+
 
 def parse_command_line():
     from sys import argv
@@ -148,12 +191,12 @@ def parse_command_line():
     scriptpath = cmdline.pop(0)
     while len(cmdline) > 0:
         arg = cmdline.pop(0)
-        if arg == '-h':
+        if arg == "-h":
             print(HELP)
             exit(0)
 
-if __name__ == '__main__':
 
+if __name__ == "__main__":
     parse_command_line()
 
     # 1. Instantiate or import the known ground-truth, acquisition systems, and system identification
@@ -167,18 +210,20 @@ if __name__ == '__main__':
     # 6. Default performance evaluation comparing ground-truth and emulated behavior:
     #    Generate random cues for the KGT sytstem and for the emulation.
     #    Record responses and compare.
-    aif_em_eval_system['systems']['kgt']['regions']['cue'].all(
-        cue_pattern_ratio=0.4,
-        cue_sequence_length=3)
-    aif_em_eval_system['systems']['em']['regions']['cue'].all(
-        cue_pattern_ratio=0.4,
-        cue_sequence_length=3)
+    aif_em_eval_system["systems"]["kgt"]["regions"]["cue"].all(
+        cue_pattern_ratio=0.4, cue_sequence_length=3
+    )
+    aif_em_eval_system["systems"]["em"]["regions"]["cue"].all(
+        cue_pattern_ratio=0.4, cue_sequence_length=3
+    )
     behavior = EvaluateBehavior(
-        kgt_behavior=aif_em_eval_system['systems']['kgt']['embodiment'],
-        em_behavior=aif_em_eval_system['systems']['em']['embodiment'],)
+        kgt_behavior=aif_em_eval_system["systems"]["kgt"]["embodiment"],
+        em_behavior=aif_em_eval_system["systems"]["em"]["embodiment"],
+    )
     responses = EvaluateOutputActivity(
-        kgt_resp=aif_em_eval_system['systems']['kgt']['regions']['resp'],
-        em_resp=aif_em_eval_system['systems']['em']['regions']['resp'],)
+        kgt_resp=aif_em_eval_system["systems"]["kgt"]["regions"]["resp"],
+        em_resp=aif_em_eval_system["systems"]["em"]["regions"]["resp"],
+    )
 
     behavior.show()
     responses.show()
