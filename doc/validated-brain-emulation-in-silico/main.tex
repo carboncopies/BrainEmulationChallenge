@@ -8,7 +8,7 @@
 %
 
 \documentclass{ldr-article}
-
+\usepackage{biblatex}
 \addbibresource{main.bib}
 
 % here we can set the page counter to the correct global page counter
@@ -106,7 +106,7 @@ Functional characteristics of each cell in \firstexp are specified by a neuron d
 
 The \firstexp example is purposely extremely simple:
 \begin{itemize}
-	\item There is 1 brain region with a box shape, 20 micrometers on each side.
+	\item There is 1 brain region with a box shape, $20 \mu m$ on each side.
 	\item The brain region contains a single neural circuit.
 	\item That neural circuit has 2 neurons, one pre-synaptic, one post-synaptic.
 	\item The neurons are identical, using the default parameter values for the ball-and-stick neuron class (\textit{BS\_Neuron}), see Table~\ref{tab:bs_neuron_default_pars}.
@@ -238,6 +238,31 @@ A call to the \textit{attach\_recording\_electrodes()} member function is used t
 	\item The positions of recording sites on the electrode, in this case one site at the very tip.
 \end{itemize}
 
+Similarly, a call to the \textit{attach\_calcium\_imaging()} member function is used to set up a calcium imaging device. In \firstexp, we specify:
+\begin{itemize}
+	\item Both neurons will fluoresce and show up during imaging.
+	\item We will use a simulated jGCaMP8 calicium indicator~(\cite{zhang2023}) with relatively fast and short response dynamics, specified by an indicator rise time of $2 ms$ and an indicator interval of $20 ms$.
+	\item The lens front position is $(0, 20, 0)$, $20 \mu m$ above the simulated sample, and is positioned vertically, as indicated by a rear position $(0, 40, 0)$.
+\end{itemize}
+
+\subsubsection{Simulating functional data acquisition}
+
+Simulated electrode and calcium imaging devices record data while we run the model for a specified number of simulated milliseconds.
+
+(Here: put more about how those simulated devices generate the recorded data by using simulated physics.)
+
+\subsubsection{Simulating structural data acquisition}
+
+We provide high-throughput microscope specifications:
+\begin{itemize}
+	\item Obtain images from the 'full' sample.
+	\item The full sample is carved into sample sections $6 \mu m$ wide and long.
+	\item Each image has $6000$ by $6000$ pixels.
+	\item The voxel resolution (represented by each pixel) is $4 nm$ in x and y and $30 nm$ in the z dimension.
+\end{itemize}
+
+(Here: put more about how a simulated high-throughput EM image stack is generated using simulated optics.)
+
 \subsection{Requirement VIII: Collected data and post-processing}
 
 (Here: Describe what it means for the collected data to be the "relevant" brain data.)
@@ -286,11 +311,7 @@ A call to the \textit{attach\_recording\_electrodes()} member function is used t
 
 (Here: Point to the follow-up research and the general procedure of step-wise advancement. Add a reference to the project and company.)
 
-
-\nocite{other2019references,kramer2019why,phillips2018yarrr}
-
 \printbibliography
-
 
 \section{Data, Code and Materials Availability Statement}
 
