@@ -61,7 +61,7 @@ def BS_Axon(
 
 def BS_Receptor(
     cells_list:list,
-    src_cell:int,
+    src_cell_id:str,
     )->Box:
-    receptor_location = cells_list[src_cell].morphology['soma'].center_um
+    receptor_location = cells_list[src_cell_id].morphology['soma'].center_um
     return Box(receptor_location, (0.1, 0.1, 0.1))

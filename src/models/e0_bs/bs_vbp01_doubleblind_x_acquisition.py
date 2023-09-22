@@ -16,15 +16,18 @@ WBE topic-level X: data acquisition (in-silico)
 
 scriptversion='0.0.1'
 
-USENES=True
+from sys import argv
+
+USENES='-p' not in argv
 
 import vbpcommon
 from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
+    from NES_interfaces.System import System
 else:
-    pass
+    from prototyping.System import System
 
 def quickstart(user:str, passwd:str):
     if USENES:
@@ -54,8 +57,8 @@ def init_spontaneous_activity(bs_acq_system:System):
     spont_spike_interval_ms_stdev = 140
     spont_spike_interval_pair = (spont_spike_interval_ms_mean, spont_spike_interval_ms_stdev)
     spont_spike_settings = [
-        (spont_spike_interval_pair, 0), # Setting for neuron 0.
-        (spont_spike_interval_pair, 1), # Setting for neuron 1.
+        (spont_spike_interval_pair, '0'), # Setting for neuron 0.
+        (spont_spike_interval_pair, '1'), # Setting for neuron 1.
     ]
     print('Setting up spontaneous activity at each neuron.')
 
@@ -74,7 +77,7 @@ def init_recording_electrode(bs_acq_system:System):
 def init_calcium_imaging(bs_acq_system:System):
     calcium_specs = {
         'id': 'calcium_0',
-        'fluorescing_neurons': [ 0, 1, ], # All neurons show up in calcium imaging.
+        'fluorescing_neurons': [ '0', '1', ], # All neurons show up in calcium imaging.
         'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
         'indicator_rise_ms': 2.0,
         'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
@@ -131,11 +134,12 @@ def run_structural_data_acquisition(bs_acq_system:System):
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms]
+Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p]
 
        -h         Show this usage information.
        -v         Be verbose, show all diagrams.
        -t         Run for ms milliseconds.
+       -p         Run prototype code (default is NES interface).
 
        VBP process step 01: This script specifies double-blind data acquisition.
        WBE topic-level X: data acquisition (in-silico).
@@ -147,8 +151,6 @@ Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms]
 '''
 
 def parse_command_line()->tuple:
-    from sys import argv
-
     show_all = False
     runtime_ms = 500.0
 
@@ -163,14 +165,21 @@ def parse_command_line()->tuple:
             show_all = True
         elif arg== '-t':
             runtime_ms = float(cmdline.pop(0))
+        # Note that -p is tested at the top of the script.
+
+    if show_all:
+        if USENES:
+            print('Using NES Interface code.')
+        else:
+            print('Using prototype code.')
 
     return (show_all, runtime_ms)
 
 if __name__ == '__main__':
 
-    quickstart('Admonishing','Instruction')
-
     show_all, runtime_ms = parse_command_line()
+
+    quickstart('Admonishing','Instruction')
 
     bs_acq_system = init_groundtruth(show_all=show_all)
 

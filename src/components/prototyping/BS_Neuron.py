@@ -6,6 +6,7 @@ Definitions of ball-and-stick neuron types.
 '''
 
 import numpy as np
+import scipy.stats as stats
 
 from prototyping.Geometry import PlotInfo, Sphere, Cylinder
 from .Neuron import Neuron
@@ -32,6 +33,10 @@ class BS_Neuron(Neuron):
         self.tau_PSPd = 25.0
         self.vPSP = 20.0
 
+        self.tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
+        self.t_spont_next = -1
+        self.dt_spont_dist = None
+
         self.morphology = {
             'soma': soma,
             'axon': axon,
@@ -50,6 +55,13 @@ class BS_Neuron(Neuron):
 
     def attach_direct_stim(self, t_ms:float):
         self.t_directstim_ms.append(t_ms)
+
+    def set_spontaneous_activity(self, mean_stdev:tuple):
+        self.tau_spont_mean_stdev_ms = mean_stdev
+        mu = self.tau_spont_mean_stdev_ms[0]
+        sigma = self.tau_spont_mean_stdev_ms[1]
+        a, b = 0, 2*mu
+        self.dt_spont_dist = stats.truncnorm((a - mu) / sigma, (b - mu) / sigma, loc=mu, scale=sigma)
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neuron %s.' % str(self.id))
@@ -114,6 +126,18 @@ class BS_Neuron(Neuron):
         if self.Vm_mV >= self.Vact_mV:
             self.t_act_ms.append(t_ms)
 
+    def spontaneous_activity(self, t_ms:float):
+        '''
+        Possible spontaneous activity.
+        '''
+        if self.in_absref: return
+        if self.tau_spont_mean_stdev_ms[0] == 0: return
+        if t_ms >= self.t_spont_next:
+            if self.t_spont_next >= 0:
+                self.t_act_ms.append(t_ms)
+            dt_spont = self.dt_spont_dist.rvs(1)[0]
+            self.t_spont_next = t_ms + dt_spont
+
     def update(self, t_ms:float, recording:bool):
         tdiff_ms = t_ms - self.t_ms
         if tdiff_ms<0: return
@@ -127,6 +151,7 @@ class BS_Neuron(Neuron):
         # 2. Update variables.
         self.update_Vm(t_ms, recording)
         self.detect_threshold(t_ms)
+        self.spontaneous_activity(t_ms)
 
         # 3. Remember the update time.
         self.t_ms = t_ms

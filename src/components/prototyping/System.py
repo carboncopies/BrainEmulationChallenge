@@ -32,6 +32,15 @@ class System:
         for circuit in self.neuralcircuits:
             self.neuralcircuits[circuit].attach_direct_stim(tstim_ms)
 
+    def set_spontaneous_activity(self, spont_spike_settings:list):
+        '''
+        Expects a list of tuples where each tuple associates a mean and stdev
+        spike interval with a neuron identified by its ID string.
+        E.g. [ ((280, 140), '0'), ... ]
+        '''
+        for circuit in self.neuralcircuits:
+            self.neuralcircuits[circuit].set_spontaneous_activity(spont_spike_settings)
+
     def set_record_all(self, t_max_ms=-1):
         '''
         Record all dynamically calculated values for a maximum of t_max_ms

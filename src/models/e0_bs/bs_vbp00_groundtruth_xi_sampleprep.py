@@ -24,7 +24,9 @@ WBE topic-level XI: sample preparation / preservation (in-silico)
 
 scriptversion='0.0.1'
 
-USENES=True
+from sys import argv
+
+USENES='-p' not in argv
 
 import vbpcommon
 if USENES:
@@ -102,10 +104,10 @@ cause a somatic action potential at any time.
 def init_experiment(bs_kgt_system:System):
     print(STIMTEXT1)
     t_soma_fire_ms = [
-        (100.0, 0),
-        (200.0, 0),
-        (300.0, 0),
-        (400.0, 0),
+        (100.0, '0'),
+        (200.0, '0'),
+        (300.0, '0'),
+        (400.0, '0'),
     ]
     print('Directed somatic firing: '+str(t_soma_fire_ms))
 
@@ -130,11 +132,12 @@ def run_experiment(bs_kgt_system:System, runtime_ms:float):
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms]
+Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms] [-p]
 
        -h         Show this usage information.
        -v         Be verbose, show all diagrams.
        -t         Run for ms milliseconds.
+       -p         Run prototype code (default is NES interface).
 
        VBP process step 00: This script specifies a known ground-truth system.
        WBE topic-level XI: sample preparation / preservation (in-silico).
@@ -146,8 +149,6 @@ Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms]
 '''
 
 def parse_command_line()->tuple:
-    from sys import argv
-
     show_all = False
     runtime_ms = 500.0
 
@@ -162,14 +163,21 @@ def parse_command_line()->tuple:
             show_all = True
         elif arg== '-t':
             runtime_ms = float(cmdline.pop(0))
+        # Note that -p is tested at the top of the script.
+
+    if show_all:
+        if USENES:
+            print('Using NES Interface code.')
+        else:
+            print('Using prototype code.')
 
     return (show_all, runtime_ms)
 
 if __name__ == '__main__':
 
-    quickstart('Admonishing','Instruction')
-
     show_all, runtime_ms = parse_command_line()
+
+    quickstart('Admonishing','Instruction')
 
     bs_kgt_system = init_groundtruth(show_all=show_all)
 
