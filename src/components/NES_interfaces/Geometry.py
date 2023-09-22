@@ -21,7 +21,7 @@ class PlotInfo:
 
 
 class Geometry:
-    def __init__(self, id_val: int):
+    def __init__(self, id_val: str):
         self.id = id_val
 
 
@@ -31,8 +31,13 @@ class Box(Geometry):
     """
 
     def __init__(
-        self, center_um=(0, 0, 0), dims_um=(5.0, 10.0, 10.0), rotations_rad=(0, 0, 0)
+        self,
+        id_val: str,
+        center_um=(0, 0, 0),
+        dims_um=(5.0, 10.0, 10.0),
+        rotations_rad=(0, 0, 0),
     ):
+        super().__init__(id_val)
         self.center_um = center_um
         self.dims_um = dims_um
         self.rotations_rad = rotations_rad
@@ -95,7 +100,7 @@ class Sphere(Geometry):
     A sphere-like geometry defined by center an radius.
     """
 
-    def __init__(self, id_val: int, center_um: tuple, radius_um: float):
+    def __init__(self, id_val: str, center_um: tuple, radius_um: float):
         super().__init__(id_val)
         self.center_um = center_um
         self.radius_um = radius_um
@@ -123,7 +128,7 @@ class Cylinder(Geometry):
 
     def __init__(
         self,
-        id_val: int,
+        id_val: str,
         end0_um: tuple,
         end0_radius_um: float,
         end1_um: tuple,
