@@ -26,8 +26,10 @@ from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
     from NES_interfaces.System import System
+    from NES_interfaces.KGTRecords import plot_recorded
 else:
     from prototyping.System import System
+    from prototyping.KGTRecords import plot_recorded
 
 def quickstart(user:str, passwd:str):
     if USENES:

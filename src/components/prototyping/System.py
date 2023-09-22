@@ -7,6 +7,8 @@ Definitions of in-silico ground-truth systems.
 
 from .NeuralCircuit import NeuralCircuit
 from .Region import Region
+from .Electrodes import Recording_Electrode
+from .Calcium_Imaging import Calcium_Imaging
 
 class System:
     def __init__(self, name:str):
@@ -20,6 +22,18 @@ class System:
 
         self.t_recorded_ms = []
 
+        self.recording_electrodes = []
+        self.calcium_imaging = None
+
+    def component_by_id(self, component_id:str, component_function:str):
+        '''
+        Runs a specified function in any component in the System that matches id.
+        '''
+        # TODO: Complete this.
+        component = None
+        result = None
+        return result
+
     def add_circuit(self, circuit:NeuralCircuit)->NeuralCircuit:
         self.neuralcircuits[circuit.id] = circuit
         return circuit
@@ -27,6 +41,25 @@ class System:
     def add_region(self, region:Region)->Region:
         self.regions[region.id] = region
         return region
+
+    def get_geo_center(self)->tuple:
+        '''
+        Find and return the geometric center of the system.
+        This is done by finding the centroid of all the cell centers.
+        '''
+        x, y, z = 0, 0, 0
+        num_cells = 0
+        for circuit in self.neuralcircuits:
+            circuit_cell_centers = self.neuralcircuits[circuit].get_cell_centers()
+            for cell_center in circuit_cell_centers:
+                x += cell_center[0]
+                y += cell_center[1]
+                z += cell_center[2]
+                num_cells += 1
+        x /= num_cells
+        y /= num_cells
+        z /= num_cells
+        return x, y, z
 
     def attach_direct_stim(self, tstim_ms:list):
         for circuit in self.neuralcircuits:
@@ -40,6 +73,13 @@ class System:
         '''
         for circuit in self.neuralcircuits:
             self.neuralcircuits[circuit].set_spontaneous_activity(spont_spike_settings)
+
+    def attach_recording_electrodes(self, set_of_electrode_specs:list):
+        for electrode_specs in set_of_electrode_specs:
+            self.recording_electrodes.append(Recording_Electrode(electrode_specs))
+
+    def attach_calcium_imaging(self, calcium_specs:dict):
+        self.calcium_imaging = Calcium_Imaging(calcium_specs)
 
     def set_record_all(self, t_max_ms=-1):
         '''

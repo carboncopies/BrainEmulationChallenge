@@ -36,8 +36,14 @@ class BS_Aligned_NC(NeuralCircuit):
             )
             self.cells[cell_id] = cell
 
+    def get_cell_centers(self)->list:
+        cell_centers = []
+        for cell_id in self.cells:
+            cell_centers.append(self.cells[cell_id].get_cell_center())
+        return cell_centers
+
     def Set_Weight(self, from_to:tuple, method:str):
-        print('Setting up connection from %d to %d.' % from_to)
+        print('Setting up connection from %s to %s.' % from_to)
         if method=='binary':
             to_cell = from_to[1]
             if to_cell not in self.cells:

@@ -53,6 +53,9 @@ class BS_Neuron(Neuron):
         self.t_recorded_ms = []
         self.Vm_recorded = []
 
+    def get_cell_center(self)->tuple:
+        return self.morphology['soma'].center_um
+
     def attach_direct_stim(self, t_ms:float):
         self.t_directstim_ms.append(t_ms)
 

@@ -77,7 +77,7 @@ def init_groundtruth(show_all=False)->System:
 
     # 2. Initialize the connection between the 2 neurons:
     bs_net.Encode(
-        pattern_set=[ ( 0, 1 ), ], # From cell 0 to cell 1.
+        pattern_set=[ ( '0', '1' ), ], # From cell 0 to cell 1.
         encoding_method='instant',
         synapse_weight_method='binary'
         )
