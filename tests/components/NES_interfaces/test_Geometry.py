@@ -22,17 +22,6 @@ class TestPlotInfo:
         assert self.fig.figsize == (4, 4)
 
 
-class TestGeometry:
-    """Tests the Geometry class."""
-
-    def __init__(self):
-        self.geo = Geometry("090")
-
-    def test_id_attribute(self):
-        """Test if the id attribute is a string."""
-        assert isinstance(self.geo.id) == int
-
-
 class TestBox:
     """Tests the Box class."""
 
