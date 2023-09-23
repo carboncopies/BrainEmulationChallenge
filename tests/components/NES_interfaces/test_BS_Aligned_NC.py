@@ -1,14 +1,13 @@
 """
 Tests for class BS_Aligned_NC.py.
 """
-from src.components.NES_interfaces import BS_Aligned_NC
+import unittest
+import context
+from src.components.NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
 
 
-class TestBSAlignedNC:
+class TestBSAlignedNC(unittest.TestCase):
     """Tests for BS_Aligned_NC"""
 
-    def __init__(self):
+    def setUp(self):
         self.neural_circuit = BS_Aligned_NC("test_id", 2)
-
-    def test_init_cells(self):
-        raise NotImplementedError
