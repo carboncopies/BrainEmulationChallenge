@@ -11,3 +11,12 @@ class TestBSAlignedNC(unittest.TestCase):
 
     def setUp(self):
         self.neural_circuit = BS_Aligned_NC("test_id", 2)
+
+    def test_Set_Weight(self):
+        pass
+
+    def test_Encode(self):
+        pass
+
+    def test_attach_direct_stim(self):
+        pass
