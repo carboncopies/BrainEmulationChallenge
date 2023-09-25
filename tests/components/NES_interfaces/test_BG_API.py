@@ -5,7 +5,7 @@ import json
 import random
 import pytest
 import requests
-import context
+from . import context
 from src.components.NES_interfaces.BG_API import (
     API_call_raw,
     BGNES_handle_response,

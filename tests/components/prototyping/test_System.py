@@ -1,20 +1,16 @@
-"""
-Tests for module System.py.
-"""
+"""Tests for module System.py"""
 
 import unittest
 from . import context
-from src.components.NES_interfaces.System import System
+from src.components.prototyping.System import System
 
 
 class TestSystem(unittest.TestCase):
     """Tests for class System."""
 
     def setUp(self):
-        name = "test"
-        user = "Admonishing"
-        password = "Instruction"
-        self.system = System(name, user, password)
+        """"""
+        pass
 
     def test_component_by_id(self):
         """"""

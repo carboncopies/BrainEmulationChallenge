@@ -2,7 +2,7 @@
 Tests for module NES_AMPA_Receptor.py.
 """
 import unittest
-import context
+from . import context
 from src.components.NES_interfaces.NES_AMPA_Receptor import NES_AMPA_Receptor
 
 

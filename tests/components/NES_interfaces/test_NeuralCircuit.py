@@ -1,7 +1,7 @@
 """
 Tests for module NeuralCircuit.py.
 """
-import context
+from . import context
 from src.components.NES_interfaces.NeuralCircuit import NeuralCircuit
 
 

@@ -2,7 +2,7 @@
 Tests for module Region.py.
 """
 
-import context
+from . import context
 from src.components.NES_interfaces.Region import Region, BrainRegion
 from src.components.NES_interfaces.Geometry import Geometry, Box
 from src.components.NES_interfaces.BS_Aligned_NC import BS_Aligned_NC

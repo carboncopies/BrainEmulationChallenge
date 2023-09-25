@@ -3,7 +3,7 @@ Tests for module BS_Neuron.py.
 """
 import random
 import unittest
-import context
+from . import context
 from src.components.NES_interfaces.BS_Neuron import BS_Neuron
 from src.components.NES_interfaces.Geometry import Sphere, Cylinder
 

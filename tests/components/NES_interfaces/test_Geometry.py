@@ -2,7 +2,7 @@
 
 import unittest
 from math import pi
-import context
+from . import context
 from src.components.NES_interfaces.Geometry import (
     Box,
     Sphere,

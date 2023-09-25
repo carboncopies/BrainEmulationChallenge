@@ -2,7 +2,7 @@
 Tests for class BS_Aligned_NC.py.
 """
 import unittest
-import context
+from . import context
 from src.components.NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
 
 

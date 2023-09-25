@@ -1,17 +1,16 @@
-"""
-Tests for the module NMDA_Receptor.py.
-"""
+"""Tests for module NMDA_Receptor.py"""
 
 import unittest
 from . import context
-from src.components.NES_interfaces.NMDA_Receptor import NMDA_Receptor
+from src.components.prototyping.NMDA_Receptor import NMDA_Receptor
 
 
-class testNMDAReceptor(unittest.TestCase):
+class TestNMDAReceptor(unittest.TestCase):
     """Tests for class NMDA_Receptor."""
 
     def setUp(self):
-        self.receptor = NMDA_Receptor()
+        """"""
+        pass
 
     def test_set_phi_V_type(self):
         """"""

@@ -3,7 +3,7 @@ Tests for module SynTr_Quantal_Release.py.
 """
 
 import unittest
-import context
+from . import context
 from src.components.NES_interfaces.SynTr_Quantal_Release import SynTr_Quantal_Release
 
 
