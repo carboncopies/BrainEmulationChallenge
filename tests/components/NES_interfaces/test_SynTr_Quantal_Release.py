@@ -15,4 +15,4 @@ class TestSynTrQuantalRelease(unittest.TestCase):
 
     def test_quantal_content_m(self):
         """Test if the correct quantal content is returned."""
-        assert self.instance.quantal_content == 1.5
+        assert self.instance.quantal_content_m() == 1.5

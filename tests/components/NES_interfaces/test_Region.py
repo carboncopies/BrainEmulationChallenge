@@ -18,7 +18,7 @@ def test_region_creation():
 def test_brain_region_creation():
     """Test if a brain region object is successfully instantiated."""
     shape = Box()
-    neural_circuit = BS_Aligned_NC()
-    brain_region = BrainRegion(shape, neural_circuit)
+    neural_circuit = BS_Aligned_NC("Test")
+    brain_region = BrainRegion("TestID", shape, neural_circuit)
     assert isinstance(brain_region.shape, Geometry)
     assert isinstance(brain_region.content, NeuralCircuit)
