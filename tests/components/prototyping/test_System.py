@@ -9,8 +9,8 @@ class TestSystem(unittest.TestCase):
     """Tests for class System."""
 
     def setUp(self):
-        """"""
-        pass
+        name = "test"
+        self.system = System(name)
 
     def test_component_by_id(self):
         """"""

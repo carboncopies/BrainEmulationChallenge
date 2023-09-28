@@ -9,5 +9,8 @@ class TestNeuralCircuit(unittest.TestCase):
     """Tests for class NeuralCircuit."""
 
     def setUp(self):
-        """"""
-        pass
+        self.neural_circuit = NeuralCircuit("SomeID")
+
+    def test_id(self):
+        """Tests if the id of a neural circuit object is an int."""
+        assert isinstance(self.neural_circuit.id, str)

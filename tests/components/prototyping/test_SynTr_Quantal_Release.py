@@ -9,9 +9,8 @@ class TestSynTrQuantalRelease(unittest.TestCase):
     """Tests for class SynTr_Quantal_Release."""
 
     def setUp(self):
-        """"""
-        pass
+        self.instance = SynTr_Quantal_Release(5, 0.3)
 
     def test_quantal_content_m(self):
-        """"""
-        pass
+        """Test if the correct quantal content is returned."""
+        assert self.instance.quantal_content_m() == 1.5

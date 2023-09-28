@@ -10,4 +10,8 @@ class TestNeuron(unittest.TestCase):
 
     def setUp(self):
         """"""
-        pass
+        self.neuron = Neuron("SomeID")
+
+    def test_id(self):
+        """Test if the id attribute of a neuron object is an int."""
+        assert isinstance(self.neuron.id, str)
