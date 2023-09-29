@@ -25,3 +25,18 @@ def plot_recorded(data:dict):
 	for c in range(len(Vm_cells)):
 		plt.plot(t_ms, Vm_cells[c])
 	plt.show()
+
+def plot_electrodes(data:dict):
+	if 't_ms' not in data:
+		raise Exception('plot_recorded: Missing t_ms record.')
+	t_ms = data['t_ms']
+	matchlen = len('electrode')
+	for k in data.keys():
+		if k[0:matchlen] == 'electrode':
+			electrode_data = data[k]
+			fig = plt.figure(figsize=(4,4))
+			plt.title('Electrode %s' % k)
+			E_mV = electrode_data['E']
+			for site in range(len(E_mV)):
+				plt.plot(t_ms, E_mV[site])
+			plt.show()

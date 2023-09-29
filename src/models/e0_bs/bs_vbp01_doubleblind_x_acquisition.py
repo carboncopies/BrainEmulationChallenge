@@ -26,10 +26,12 @@ from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
     from NES_interfaces.System import System
-    from NES_interfaces.KGTRecords import plot_recorded
+    from NES_interfaces.KGTRecords import plot_electrodes
+    from NES_interfaces.Geometry import vec3add
 else:
     from prototyping.System import System
-    from prototyping.KGTRecords import plot_recorded
+    from prototyping.KGTRecords import plot_recorded, plot_electrodes
+    from prototyping.Geometry import vec3add
 
 def quickstart(user:str, passwd:str):
     if USENES:
@@ -66,11 +68,18 @@ def init_spontaneous_activity(bs_acq_system:System):
 
     bs_acq_system.set_spontaneous_activity(spont_spike_settings)
 
-def init_recording_electrode(bs_acq_system:System):
+def init_recording_electrode(bs_acq_system:System, num_sites:int, sites_ratio:float, noise_level:float):
+    geo_center_xyz_um = bs_acq_system.get_geo_center()
+    sites = [ (0, 0, 0), ] # Only one site at the tip.
+    for s in range(1,num_sites):
+        r = s*sites_ratio
+        sites.append((0, 0, r))
     electode_specs = {
         'id': 'electrode_0',
-        'tip_position': bs_acq_system.get_geo_center(),
-        'sites': [ (0, 0, 0), ], # Only one site at the tip.
+        'tip_position': geo_center_xyz_um,
+        'end_position': vec3add(geo_center_xyz_um, (0, 0, 5.0)),
+        'sites': sites,
+        'noise_level': noise_level
     }
     set_of_electrode_specs = [ electode_specs, ] # A single electrode.
 
@@ -89,12 +98,12 @@ def init_calcium_imaging(bs_acq_system:System):
 
     bs_acq_system.attach_calcium_imaging(calcium_specs)
 
-def init_functional_data_acquisition(bs_acq_system:System):
+def init_functional_data_acquisition(bs_acq_system:System, num_sites:int, sites_ratio:float, noise_level:float):
     print(ACQSETUPTEXT1)
 
     init_spontaneous_activity(bs_acq_system)
 
-    init_recording_electrode(bs_acq_system)
+    init_recording_electrode(bs_acq_system, num_sites, sites_ratio, noise_level)
 
     init_calcium_imaging(bs_acq_system)
 
@@ -107,20 +116,29 @@ Running functional data acquisition for %.1f milliseconds...
 def run_functional_data_acquisition(bs_acq_system:System, runtime_ms:float):
     print(RUNTEXT1 % runtime_ms)
 
+    bs_acq_system.set_record_all() # Turning this on for comparison with electrodes.
+    bs_acq_system.set_record_instruments()
+
     bs_acq_system.run_for(runtime_ms)
 
-    data = {}
-    data['electrode'] = bs_acq_system.component_by_id('electrode_0', 'get_record')
-    data['calcium'] = bs_acq_system.component_by_id('calcium_0', 'get_record')
+    #data = {}
+    #data['electrode'] = bs_acq_system.component_by_id('electrode_0', 'get_record')
+    #data['calcium'] = bs_acq_system.component_by_id('calcium_0', 'get_record')
 
-    plot_recorded(data)
+    godseye = bs_acq_system.get_recording()
+    data = bs_acq_system.get_instrument_recordings()    
+
+    plot_recorded(godseye)
+    plot_electrodes(data)
+
+    #print(str(data))
 
 RUNTEXT2='''
 Running structural data acquisition...
 '''
 
 def run_structural_data_acquisition(bs_acq_system:System):
-    print(RUNTEXT2 % runtime_ms)
+    print(RUNTEXT2)
 
     em_specs = {
         'scope': 'full',
@@ -131,17 +149,20 @@ def run_structural_data_acquisition(bs_acq_system:System):
 
     data = bs_acq_system.get_em_stack(em_specs)
 
-    plot_recorded(data)
+    #plot_recorded(data)
 
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p]
+Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p] [-s num] [-S ratio] [-n level]
 
        -h         Show this usage information.
        -v         Be verbose, show all diagrams.
        -t         Run for ms milliseconds.
        -p         Run prototype code (default is NES interface).
+       -s         Number of sites per electrode.
+       -S         Ratio separation of each site on an electrode.
+       -n         Noise level.
 
        VBP process step 01: This script specifies double-blind data acquisition.
        WBE topic-level X: data acquisition (in-silico).
@@ -155,6 +176,9 @@ Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p]
 def parse_command_line()->tuple:
     show_all = False
     runtime_ms = 500.0
+    num_sites = 1
+    sites_ratio = 0.1
+    noise_level = 0
 
     cmdline = argv.copy()
     scriptpath = cmdline.pop(0)
@@ -167,6 +191,12 @@ def parse_command_line()->tuple:
             show_all = True
         elif arg== '-t':
             runtime_ms = float(cmdline.pop(0))
+        elif arg== '-s':
+            num_sites = int(cmdline.pop(0))
+        elif arg== '-S':
+            sites_ratio = float(cmdline.pop(0))
+        elif arg== '-n':
+            noise_level = float(cmdline.pop(0))
         # Note that -p is tested at the top of the script.
 
     if show_all:
@@ -175,17 +205,17 @@ def parse_command_line()->tuple:
         else:
             print('Using prototype code.')
 
-    return (show_all, runtime_ms)
+    return (show_all, runtime_ms, num_sites, sites_ratio, noise_level)
 
 if __name__ == '__main__':
 
-    show_all, runtime_ms = parse_command_line()
+    show_all, runtime_ms, num_sites, sites_ratio, noise_level = parse_command_line()
 
     quickstart('Admonishing','Instruction')
 
     bs_acq_system = init_groundtruth(show_all=show_all)
 
-    init_functional_data_acquisition(bs_acq_system)
+    init_functional_data_acquisition(bs_acq_system, num_sites, sites_ratio, noise_level)
 
     run_functional_data_acquisition(bs_acq_system, runtime_ms)
 

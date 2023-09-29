@@ -25,6 +25,11 @@ class System:
         self.recording_electrodes = []
         self.calcium_imaging = None
 
+        self.t_instruments_start_ms = 0
+        self.t_instruments_max_ms = 0
+
+        self.t_instruments_ms = []
+
     def component_by_id(self, component_id:str, component_function:str):
         '''
         Runs a specified function in any component in the System that matches id.
@@ -41,6 +46,15 @@ class System:
     def add_region(self, region:Region)->Region:
         self.regions[region.id] = region
         return region
+
+    def get_all_neurons(self)->list:
+        '''
+        Collects a list of references to all neurons in all neural circuits.
+        '''
+        all_neurons = []
+        for circuit in self.neuralcircuits:
+            all_neurons += self.neuralcircuits[circuit].get_neurons()
+        return all_neurons
 
     def get_geo_center(self)->tuple:
         '''
@@ -76,15 +90,15 @@ class System:
 
     def attach_recording_electrodes(self, set_of_electrode_specs:list):
         for electrode_specs in set_of_electrode_specs:
-            self.recording_electrodes.append(Recording_Electrode(electrode_specs))
+            self.recording_electrodes.append(Recording_Electrode(electrode_specs, self))
 
     def attach_calcium_imaging(self, calcium_specs:dict):
-        self.calcium_imaging = Calcium_Imaging(calcium_specs)
+        self.calcium_imaging = Calcium_Imaging(calcium_specs, self)
 
     def set_record_all(self, t_max_ms=-1):
         '''
         Record all dynamically calculated values for a maximum of t_max_ms
-        milliseconds. Setting t_max_ms effectively turns off recording.
+        milliseconds. Setting t_max_ms=0 effectively turns off recording.
         Setting t_max_ms to -1 means record forever.
         '''
         recording_was_off = self.t_recordall_max_ms == 0
@@ -102,6 +116,33 @@ class System:
             data[circuit] = self.neuralcircuits[circuit].get_recording()
         return data
 
+    def set_record_instruments(self, t_max_ms=-1):
+        '''
+        Record with specified simulated recording instruments for a maximum
+        of t_max_ms milliseconds.
+        Setting t_max_ms=0 effectively turns off instrument recording.
+        Setting t_max_ms to -1 means record forever.
+        '''
+        instruments_were_off = self.t_instruments_max_ms == 0
+        self.t_instruments_max_ms = t_max_ms
+        if self.t_instruments_max_ms != 0:
+            self.t_instruments_start_ms = self.t_ms
+
+    def instruments_are_recording(self)->bool:
+        if self.t_instruments_max_ms < 0: return True
+        return self.t_ms < (self.t_instruments_start_ms+self.t_instruments_max_ms)
+
+    def get_instrument_recordings(self)->dict:
+        data = { 't_ms': self.t_instruments_ms }
+        for electrode in self.recording_electrodes:
+            data[electrode.id] = electrode.get_recording()
+        if self.calcium_imaging:
+            data[self.calcium_imaging.id] = self.calcium_imaging.get_recording()
+        return data
+
+    def get_em_stack(self, em_specs:dict)->dict:
+        return {}
+
     def run_for(self, t_run_ms:float):
         t_end_ms = self.t_ms + t_run_ms
         while self.t_ms < t_end_ms:
@@ -109,4 +150,11 @@ class System:
             if recording: self.t_recorded_ms.append(self.t_ms)
             for circuit in self.neuralcircuits:
                 self.neuralcircuits[circuit].update(self.t_ms, recording)
+            instruments = self.instruments_are_recording()
+            if instruments:
+                self.t_instruments_ms.append(self.t_ms)
+                for electrode in self.recording_electrodes:
+                    electrode.record(self.t_ms)
+                if self.calcium_imaging:
+                    self.calcium_imaging.record(self.t_ms)
             self.t_ms += self.dt_ms

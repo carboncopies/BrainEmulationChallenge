@@ -10,6 +10,12 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.linalg import norm
 
+def vec3add(v1:tuple, v2:tuple)->tuple:
+    return ( v1[0]+v2[0], v1[1]+v2[1], v1[2]+v2[2] )
+
+def vec3sub(v:tuple, vsub:tuple)->tuple:
+    return ( v1[0]-v2[0], v1[1]-v2[1], v1[2]-v2[2] )
+
 class PlotInfo:
     def __init__(self, title:str):
         self.fig = plt.figure(figsize=(4,4))
