@@ -27,11 +27,11 @@ if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
     from NES_interfaces.System import System
     from NES_interfaces.KGTRecords import plot_electrodes
-    from NES_interfaces.Geometry import vec3add
+    from NES_interfaces.Spatial import vec3add
 else:
     from prototyping.System import System
     from prototyping.KGTRecords import plot_recorded, plot_electrodes
-    from prototyping.Geometry import vec3add
+    from prototyping.Spatial import vec3add
 
 def quickstart(user:str, passwd:str):
     if USENES:
@@ -92,8 +92,9 @@ def init_calcium_imaging(bs_acq_system:System):
         'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
         'indicator_rise_ms': 2.0,
         'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
-        'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
-        'microscope_rear_position_um': (0.0, 40.0, 0.0),
+        #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
+        #'microscope_rear_position_um': (0.0, 40.0, 0.0),
+        'voxelspace_side_px': 30,
     }
 
     bs_acq_system.attach_calcium_imaging(calcium_specs)

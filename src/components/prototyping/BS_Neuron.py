@@ -10,6 +10,7 @@ import scipy.stats as stats
 
 from prototyping.Geometry import PlotInfo, Sphere, Cylinder
 from .Neuron import Neuron
+from .Calcium_Imaging import fluorescent_voxel
 
 def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:
     if tdiff<0: return 0
@@ -50,11 +51,60 @@ class BS_Neuron(Neuron):
         self.t_act_ms = []
         self._dt_act_ms = None
 
+        self.FIFO = None
+
         self.t_recorded_ms = []
         self.Vm_recorded = []
 
     def get_cell_center(self)->tuple:
         return self.morphology['soma'].center_um
+
+    def get_voxels(self, voxel_um:float, adjacent_radius_um:float, include_components:list)->list:
+        '''
+        Based on the neuron morphology and voxel specifications, return
+        a list of fluorescent_voxel objects intersecting and adjacent to
+        the neuron.
+        Virtual voxel locations are based on a Euclidean grid with a
+        spacing determined by the voxel_um resolution.
+        The adjacent_radius_um is interpreted as any virtual voxel
+        locations where the corresponding voxel would be within that
+        distance from a voxel included in the list.
+        The include_components list contains the morphology key strings
+        of components that are to be included in the voxel search
+        (e.g. in the case of calcium imaging, this can depend on the
+        type of GCaMP used).
+        To avoid duplicates, and to ensure that intersecting voxels are
+        not also provided as adjacent voxels, a unique dict is created
+        with keys that indicate a virtual voxel location according to
+        three integer indices that are multiplied with voxel_um.
+        The steps of the process for each piece of morphology are:
+        1. Traverse the morphology in step sizes of voxel_um.
+        2. At each step, determine the corresponding voxel location,
+           as well as adjacent voxels within the adjacent_radius_um.
+        3. Generate corresponding location indices, generate corresponding key.
+        4. Check if the voxel already exists in the dict. Intersecting
+           voxels have priority over adjacent voxels.
+        5. When done, convert the dict values into a list and return that.
+        '''
+        # TODO: Do the full process. (For now, as a test, we just return
+        #       a voxel for the soma center, see Geometry:Sphere.get_voxels().)
+        voxel_dict = {}
+        # Find intersecting voxels:
+        for component in self.morphology:
+            if component in include_components:
+                voxel_dict.update(self.morphology[component].get_voxels(voxel_um, self))
+        # Add adjacent voxels:
+        voxel_list = list(voxel_dict.values())
+        for voxel in voxel_list:
+            adjacent_voxels_dict = voxel.get_adjacent_dict(adjacent_radius_um)
+            for voxel_indices in adjacent_voxels_dict:
+                if voxel_indices not in voxel_dict:
+                    voxel_dict[voxel_indices] = adjacent_voxels_dict[voxel_indices]
+        return list(voxel_dict.values())
+
+    def set_FIFO(self, FIFO_ms:float, dt_ms:float):
+        fifosize = int(FIFO_ms//dt_ms) + 1
+        self.FIFO = np.ones(fifosize)*self.Vrest_mV
 
     def attach_direct_stim(self, t_ms:float):
         self.t_directstim_ms.append(t_ms)
@@ -119,6 +169,9 @@ class BS_Neuron(Neuron):
         vPSP_t = self.vPSP_t(t_ms)
         # 3. Calculate membrane potential:
         self.Vm_mV = self.Vrest_mV + vSpike_t + vAHP_t + vPSP_t
+        if self.FIFO is not None:
+            np.roll(self.FIFO,1)
+            self.FIFO[0] = self.Vm_mV
         if recording: self.record(t_ms)
 
     def detect_threshold(self, t_ms:float):

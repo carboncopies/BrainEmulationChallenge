@@ -56,6 +56,17 @@ class System:
             all_neurons += self.neuralcircuits[circuit].get_neurons()
         return all_neurons
 
+    def get_neurons_by_IDs(self, listofIDs:list)->list:
+        listed_neurons = []
+        for circuit in self.neuralcircuits:
+            listed_neurons += self.neuralcircuits[circuit].get_neurons_by_IDs(listofIDs)
+        return listed_neurons
+
+    def get_all_neuron_IDs(self)->list:
+        all_neurons = self.get_all_neurons()
+        all_neuron_IDs = [ n.id for n in all_neurons ]
+        return all_neuron_IDs
+
     def get_geo_center(self)->tuple:
         '''
         Find and return the geometric center of the system.

@@ -10,11 +10,8 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.linalg import norm
 
-def vec3add(v1:tuple, v2:tuple)->tuple:
-    return ( v1[0]+v2[0], v1[1]+v2[1], v1[2]+v2[2] )
-
-def vec3sub(v:tuple, vsub:tuple)->tuple:
-    return ( v1[0]-v2[0], v1[1]-v2[1], v1[2]-v2[2] )
+from .Neuron import Neuron
+from .Calcium_Imaging import fluorescent_voxel
 
 class PlotInfo:
     def __init__(self, title:str):
@@ -79,11 +76,25 @@ class Box(Geometry):
 
 class Sphere(Geometry):
     '''
-    A sphere-like geometry defined by center an radius.
+    A sphere-like geometry defined by center and radius.
     '''
     def __init__(self, center_um:tuple, radius_um:float):
         self.center_um = center_um
         self.radius_um = radius_um
+
+    def get_voxels(self, voxel_um:float, neuron:Neuron)->dict:
+        # TODO: Do the full process. (For now, as a test, we just return
+        #       a voxel for the soma center.)
+        voxels_dict = {}
+        x = self.center_um[0]
+        y = self.center_um[1]
+        z = self.center_um[2]
+        indices_key = '%d_%d_%d' % (x,y,z)
+        voxels_dict[indices_key] = fluorescent_voxel(
+            np.array([x, y, z]),
+            voxel_um,
+            neuron)
+        return voxels_dict
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Sphere shape')

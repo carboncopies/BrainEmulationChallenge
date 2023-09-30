@@ -39,6 +39,13 @@ class BS_Aligned_NC(NeuralCircuit):
     def get_neurons(self)->list:
         return list(self.cells.values())
 
+    def get_neurons_by_IDs(self, listofIDs:list)->list:
+        listed_neurons = []
+        for cell_id in listofIDs:
+            if cell_id in self.cells:
+                listed_neurons.append(self.cells[cell_id])
+        return listed_neurons
+
     def get_cell_centers(self)->list:
         cell_centers = []
         for cell_id in self.cells:
