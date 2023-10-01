@@ -28,9 +28,9 @@ class BrainRegion(Region):
         self.content = content
         self.content.init_cells(domain=self.shape)
 
-    def show(self, pltinfo=None):
+    def show(self, show:dict, pltinfo=None):
         doshow = pltinfo is None
         if pltinfo is None: pltinfo = PlotInfo('Brain region %s' % str(self.id))
-        self.shape.show(pltinfo)
-        self.content.show(pltinfo)
+        if show['regions']: self.shape.show(pltinfo)
+        if show['cells']: self.content.show(pltinfo)
         if doshow: plt.show()

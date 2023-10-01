@@ -5,6 +5,9 @@
 Definitions of in-silico ground-truth systems.
 '''
 
+import matplotlib.pyplot as plt
+
+from .Spatial import PlotInfo
 from .NeuralCircuit import NeuralCircuit
 from .Region import Region
 from .Electrodes import Recording_Electrode
@@ -103,8 +106,8 @@ class System:
         for electrode_specs in set_of_electrode_specs:
             self.recording_electrodes.append(Recording_Electrode(electrode_specs, self))
 
-    def attach_calcium_imaging(self, calcium_specs:dict):
-        self.calcium_imaging = Calcium_Imaging(calcium_specs, self)
+    def attach_calcium_imaging(self, calcium_specs:dict, show:dict):
+        self.calcium_imaging = Calcium_Imaging(calcium_specs, self, show=show)
 
     def set_record_all(self, t_max_ms=-1):
         '''
@@ -169,3 +172,60 @@ class System:
                 if self.calcium_imaging:
                     self.calcium_imaging.record(self.t_ms)
             self.t_ms += self.dt_ms
+
+    def show(self, show:dict, pltinfo=None):
+        doshow = pltinfo is None
+        if pltinfo is None: pltinfo = PlotInfo('System %s' % str(self.name))
+        for region in self.regions.values():
+            region.show(show=show, pltinfo=pltinfo)
+        if doshow: plt.show()
+
+class Common_Parameters:
+    def __init__(self, scriptpath:str):
+        self.scriptpath = scriptpath
+        self.show = {
+            'text': False,
+            'regions': False,
+            'cells': False,
+            'voxels': False,
+        }
+        self.runtime_ms = 500.0
+
+COMMON_HELP='''
+       -h         Show this usage information.
+       -v         Be verbose, show all diagrams.
+       -V         Show specified diagram (multiple -V statements allowed).
+                  Options are: all, text, regions, cells, voxels.
+       -t         Run for ms milliseconds.
+       -p         Run prototype code (default is NES interface).
+'''
+
+def common_commandline_parsing(cmdline:list, pars:Common_Parameters, HELP:str)->str:
+    arg = cmdline.pop(0)
+    if arg == '-h':
+        print(HELP)
+        exit(0)
+    elif arg== '-v':
+        pars.show = {
+            'text': True,
+            'regions': True,
+            'cells': True,
+            'voxels': True,
+        }
+        return None
+    elif arg== '-V':
+        diagram = cmdline.pop(0)
+        if diagram in pars.show:
+            pars.show[diagram] = True
+        elif diagram == 'all':
+            pars.show = {
+            'text': True,
+            'regions': True,
+            'cells': True,
+            'voxels': True,
+        }
+        return None
+    elif arg== '-t':
+        pars.runtime_ms = float(cmdline.pop(0))
+        return None
+    return arg

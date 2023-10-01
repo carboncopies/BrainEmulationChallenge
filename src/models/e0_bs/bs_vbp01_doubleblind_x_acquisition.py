@@ -16,6 +16,8 @@ WBE topic-level X: data acquisition (in-silico)
 
 scriptversion='0.0.1'
 
+import matplotlib.pyplot as plt
+import numpy as np
 from sys import argv
 
 USENES='-p' not in argv
@@ -25,13 +27,13 @@ from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System
+    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
     from NES_interfaces.KGTRecords import plot_electrodes
-    from NES_interfaces.Spatial import vec3add
+    from NES_interfaces.Spatial import vec3add, VecBox
 else:
-    from prototyping.System import System
-    from prototyping.KGTRecords import plot_recorded, plot_electrodes
-    from prototyping.Spatial import vec3add
+    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
+    from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium
+    from prototyping.Spatial import vec3add, VecBox
 
 def quickstart(user:str, passwd:str):
     if USENES:
@@ -85,28 +87,38 @@ def init_recording_electrode(bs_acq_system:System, num_sites:int, sites_ratio:fl
 
     bs_acq_system.attach_recording_electrodes(set_of_electrode_specs)
 
-def init_calcium_imaging(bs_acq_system:System):
+def init_calcium_imaging(bs_acq_system:System, show:dict):
     calcium_specs = {
         'id': 'calcium_0',
         'fluorescing_neurons': [ '0', '1', ], # All neurons show up in calcium imaging.
         'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
         'indicator_rise_ms': 2.0,
+        'indicator_decay_ms': 40.0,
         'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
         #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
         #'microscope_rear_position_um': (0.0, 40.0, 0.0),
         'voxelspace_side_px': 30,
+        'imaged_subvolume': VecBox(
+                center=np.array([0, -5, 0]),
+                half=np.array([6.0, 6.0, 2.0]),
+                dx=np.array([1.0, 0.0, 0.0]),
+                dy=np.array([0.0, 1.0, 0.0]),
+                dz=np.array([0.0, 0.0, 1.0]), # Positive dz indicates most visible top surface.
+            ),
     }
 
-    bs_acq_system.attach_calcium_imaging(calcium_specs)
+    bs_acq_system.attach_calcium_imaging(calcium_specs, show=show)
 
-def init_functional_data_acquisition(bs_acq_system:System, num_sites:int, sites_ratio:float, noise_level:float):
+    if show['voxels']: bs_acq_system.calcium_imaging.show_voxels()
+
+def init_functional_data_acquisition(bs_acq_system:System, num_sites:int, sites_ratio:float, noise_level:float, show:dict):
     print(ACQSETUPTEXT1)
 
     init_spontaneous_activity(bs_acq_system)
 
     init_recording_electrode(bs_acq_system, num_sites, sites_ratio, noise_level)
 
-    init_calcium_imaging(bs_acq_system)
+    init_calcium_imaging(bs_acq_system, show=show)
 
 # -- Run Experiment: ---------------------------------------------------------
 
@@ -129,8 +141,15 @@ def run_functional_data_acquisition(bs_acq_system:System, runtime_ms:float):
     godseye = bs_acq_system.get_recording()
     data = bs_acq_system.get_instrument_recordings()    
 
+    for neuron in bs_acq_system.calcium_imaging.neuron_refs:
+        fig = plt.figure(figsize=(4,4))
+        plt.title('Calcium samples')
+        plt.plot(neuron.t_Ca_samples, neuron.Ca_samples, color='g')
+        plt.show()
+
     plot_recorded(godseye)
     plot_electrodes(data)
+    plot_calcium(data)
 
     #print(str(data))
 
@@ -155,12 +174,9 @@ def run_structural_data_acquisition(bs_acq_system:System):
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p] [-s num] [-S ratio] [-n level]
-
-       -h         Show this usage information.
-       -v         Be verbose, show all diagrams.
-       -t         Run for ms milliseconds.
-       -p         Run prototype code (default is NES interface).
+Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V diagram] [-t ms]
+       [-p] [-s num] [-S ratio] [-n level]
+%s
        -s         Number of sites per electrode.
        -S         Ratio separation of each site on an electrode.
        -n         Noise level.
@@ -172,52 +188,44 @@ Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-t ms] [-p] [-s num] [-S
        the use of brain data collection methods. The resulting data is intended
        for use in system identification and emulation.
 
-'''
+''' % COMMON_HELP
 
 def parse_command_line()->tuple:
-    show_all = False
-    runtime_ms = 500.0
     num_sites = 1
     sites_ratio = 0.1
     noise_level = 0
 
     cmdline = argv.copy()
-    scriptpath = cmdline.pop(0)
+    pars = Common_Parameters(cmdline.pop(0))
     while len(cmdline) > 0:
-        arg = cmdline.pop(0)
-        if arg == '-h':
-            print(HELP)
-            exit(0)
-        elif arg== '-v':
-            show_all = True
-        elif arg== '-t':
-            runtime_ms = float(cmdline.pop(0))
-        elif arg== '-s':
-            num_sites = int(cmdline.pop(0))
-        elif arg== '-S':
-            sites_ratio = float(cmdline.pop(0))
-        elif arg== '-n':
-            noise_level = float(cmdline.pop(0))
+        arg = common_commandline_parsing(cmdline, pars, HELP)
+        if arg is not None:
+            if arg== '-s':
+                num_sites = int(cmdline.pop(0))
+            elif arg== '-S':
+                sites_ratio = float(cmdline.pop(0))
+            elif arg== '-n':
+                noise_level = float(cmdline.pop(0))
         # Note that -p is tested at the top of the script.
 
-    if show_all:
+    if pars.show['text']:
         if USENES:
             print('Using NES Interface code.')
         else:
             print('Using prototype code.')
 
-    return (show_all, runtime_ms, num_sites, sites_ratio, noise_level)
+    return (pars, num_sites, sites_ratio, noise_level)
 
 if __name__ == '__main__':
 
-    show_all, runtime_ms, num_sites, sites_ratio, noise_level = parse_command_line()
+    pars, num_sites, sites_ratio, noise_level = parse_command_line()
 
     quickstart('Admonishing','Instruction')
 
-    bs_acq_system = init_groundtruth(show_all=show_all)
+    bs_acq_system = init_groundtruth(show=pars.show)
 
-    init_functional_data_acquisition(bs_acq_system, num_sites, sites_ratio, noise_level)
+    init_functional_data_acquisition(bs_acq_system, num_sites, sites_ratio, noise_level, show=pars.show)
 
-    run_functional_data_acquisition(bs_acq_system, runtime_ms)
+    run_functional_data_acquisition(bs_acq_system, pars.runtime_ms)
 
     run_structural_data_acquisition(bs_acq_system)

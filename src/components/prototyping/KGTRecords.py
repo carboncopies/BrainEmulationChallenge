@@ -7,6 +7,7 @@ Utility functions used with known ground-truth recorded data.
 
 import numpy as np
 import matplotlib.pyplot as plt
+from PIL import Image
 
 def plot_recorded(data:dict):
 	if 't_ms' not in data:
@@ -28,7 +29,7 @@ def plot_recorded(data:dict):
 
 def plot_electrodes(data:dict):
 	if 't_ms' not in data:
-		raise Exception('plot_recorded: Missing t_ms record.')
+		raise Exception('plot_electrodes: Missing t_ms record.')
 	t_ms = data['t_ms']
 	matchlen = len('electrode')
 	for k in data.keys():
@@ -40,3 +41,22 @@ def plot_electrodes(data:dict):
 			for site in range(len(E_mV)):
 				plt.plot(t_ms, E_mV[site])
 			plt.show()
+
+def plot_calcium(data:dict):
+	if 't_ms' not in data:
+		raise Exception('plot_calcium: Missing t_ms record.')
+	t_ms = data['t_ms']
+	matchlen = len('calcium')
+	for k in data.keys():
+		if k[0:matchlen] == 'calcium':
+			calcium_data = data[k]
+			for indicator in calcium_data:
+				image_stack = calcium_data[indicator]
+				image_stack_size = len(image_stack)
+				print('%s image stack size: %d' % (indicator, image_stack_size))
+				for i in range(image_stack_size):
+					print('Image %d (%s), sum of values = %f' % (i, str(image_stack[i].shape), image_stack[i].sum()))
+					#img = Image.fromarray(image_stack[i])
+					#plt.imshow(img)
+					plt.imshow(image_stack[i], cmap='gray', vmin=0, vmax=255)
+					plt.show()

@@ -5,16 +5,14 @@
 Definitions of ball-and-stick neuron types.
 '''
 
+import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
 from prototyping.Geometry import PlotInfo, Sphere, Cylinder
+from .SignalFunctions import dblexp, convolve_1d
 from .Neuron import Neuron
 from .Calcium_Imaging import fluorescent_voxel
-
-def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:
-    if tdiff<0: return 0
-    return amp*( -np.exp(-tdiff/tau_rise) + np.exp(-tdiff/tau_decay) )
 
 class BS_Neuron(Neuron):
     '''
@@ -52,6 +50,9 @@ class BS_Neuron(Neuron):
         self._dt_act_ms = None
 
         self.FIFO = None
+        self.convolved_FIFO = None
+        self.Ca_samples = []
+        self.t_Ca_samples = []
 
         self.t_recorded_ms = []
         self.Vm_recorded = []
@@ -92,19 +93,23 @@ class BS_Neuron(Neuron):
         # Find intersecting voxels:
         for component in self.morphology:
             if component in include_components:
+                #print('DEBUG(BS_Neuron.get_voxels) == Voxel component: '+str(component))
                 voxel_dict.update(self.morphology[component].get_voxels(voxel_um, self))
+        #print('DEBUG(BS_Neuron.get_voxels) == Component voxels: '+str(len(voxel_dict)))
         # Add adjacent voxels:
         voxel_list = list(voxel_dict.values())
         for voxel in voxel_list:
             adjacent_voxels_dict = voxel.get_adjacent_dict(adjacent_radius_um)
+            #print('DEBUG(BS_Neuron.get_voxels) == Candidate adjacents: '+str(len(adjacent_voxels_dict)))
             for voxel_indices in adjacent_voxels_dict:
                 if voxel_indices not in voxel_dict:
                     voxel_dict[voxel_indices] = adjacent_voxels_dict[voxel_indices]
+        #print('DEBUG(BS_Neuron.get_voxels) == Component+Adjacent voxels: '+str(len(voxel_dict)))
         return list(voxel_dict.values())
 
     def set_FIFO(self, FIFO_ms:float, dt_ms:float):
         fifosize = int(FIFO_ms//dt_ms) + 1
-        self.FIFO = np.ones(fifosize)*self.Vrest_mV
+        self.FIFO = np.zeros(fifosize) #np.ones(fifosize)*self.Vrest_mV
 
     def attach_direct_stim(self, t_ms:float):
         self.t_directstim_ms.append(t_ms)
@@ -170,8 +175,8 @@ class BS_Neuron(Neuron):
         # 3. Calculate membrane potential:
         self.Vm_mV = self.Vrest_mV + vSpike_t + vAHP_t + vPSP_t
         if self.FIFO is not None:
-            np.roll(self.FIFO,1)
-            self.FIFO[0] = self.Vm_mV
+            self.FIFO = np.roll(self.FIFO,1)
+            self.FIFO[0] = self.Vm_mV-self.Vrest_mV
         if recording: self.record(t_ms)
 
     def detect_threshold(self, t_ms:float):
@@ -211,6 +216,32 @@ class BS_Neuron(Neuron):
 
         # 3. Remember the update time.
         self.t_ms = t_ms
+
+    def update_convolved_FIFO(self, kernel:np.array):
+        # We have to flip the signal FIFO, because the most recent is in [0].
+        # We need this, because the kernel has a specific time order.
+        # Alternatively, when we prepare the kernel we can flip it and
+        # remember to view [0] as most recent in the convolution result.
+        #v_convolved = convolve_1d(signal=self.FIFO[::-1], kernel=(1/len(kernel))*kernel[::-1])
+        #self.convolved_FIFO = np.array(v_convolved)
+
+        Ca_signal = -1.0*self.FIFO[::-1]
+        Ca_signal[Ca_signal < 0.0] = 0
+        self.convolved_FIFO = np.array(convolve_1d(signal=Ca_signal, kernel=kernel)) #[::-1]))
+        self.Ca_samples.append(self.convolved_FIFO[10]+1.0)
+        self.t_Ca_samples.append(self.t_ms)
+
+        # if self.t_ms > 80.0:
+        #     #tmaxsteps = max([ len(self.convolved_FIFO), len(self.FIFO), len(kernel) ])
+        #     tmaxsteps = max([ len(self.convolved_FIFO), len(Ca_signal), len(kernel) ])
+        #     t_ms = [ self.t_ms-(tstep*1.0) for tstep in range(tmaxsteps) ]
+        #     fig = plt.figure(figsize=(4,4))
+        #     plt.title('Fluorescence convolution')
+        #     #plt.plot(t_ms[:len(self.FIFO)], (1/60)*self.FIFO, color='r')
+        #     plt.plot(t_ms[:len(Ca_signal)], Ca_signal[::-1], color='r')
+        #     #plt.plot(t_ms[:len(kernel)], kernel, color='g')
+        #     plt.plot(t_ms[:len(self.convolved_FIFO)], self.convolved_FIFO[::-1], color='b')
+        #     plt.show()
 
     def get_recording(self)->dict:
         return {

@@ -31,13 +31,13 @@ USENES='-p' not in argv
 import vbpcommon
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System
+    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
     from NES_interfaces.Geometry import Box
     from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
     from NES_interfaces.Region import BrainRegion
     from NES_interfaces.KGTRecords import plot_recorded
 else:
-    from prototyping.System import System
+    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
     from prototyping.Geometry import Box
     from prototyping.BS_Aligned_NC import BS_Aligned_NC
     from prototyping.Region import BrainRegion
@@ -60,7 +60,7 @@ INITTEXT1='''
    Defaults are applied to other parameters.
 '''
 
-def init_groundtruth(show_all=False)->System:
+def init_groundtruth(show:dict)->System:
 
     bs_system = System('e0_bs')
 
@@ -73,7 +73,7 @@ def init_groundtruth(show_all=False)->System:
         shape=Box( dims_um=(20.0, 20.0, 20.0) ),
         content=bs_net) )
 
-    if show_all: bs_region.show()
+    if show['regions']: bs_region.show(show=show)
 
     # 2. Initialize the connection between the 2 neurons:
     bs_net.Encode(
@@ -82,7 +82,8 @@ def init_groundtruth(show_all=False)->System:
         synapse_weight_method='binary'
         )
 
-    if show_all: bs_region.show()
+    #if show['regions']: bs_region.show()
+    if show['regions']: bs_system.show(show=show)
 
     return bs_system
 
@@ -132,13 +133,8 @@ def run_experiment(bs_kgt_system:System, runtime_ms:float):
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms] [-p]
-
-       -h         Show this usage information.
-       -v         Be verbose, show all diagrams.
-       -t         Run for ms milliseconds.
-       -p         Run prototype code (default is NES interface).
-
+Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V diagram] [-t ms] [-p]
+%s
        VBP process step 00: This script specifies a known ground-truth system.
        WBE topic-level XI: sample preparation / preservation (in-silico).
 
@@ -146,41 +142,33 @@ Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-t ms] [-p]
        God's Eye mode. This data should not be used to test system
        identification and emulation.
 
-'''
+''' % COMMON_HELP
 
 def parse_command_line()->tuple:
-    show_all = False
-    runtime_ms = 500.0
-
     cmdline = argv.copy()
-    scriptpath = cmdline.pop(0)
+    pars = Common_Parameters(cmdline.pop(0))
     while len(cmdline) > 0:
-        arg = cmdline.pop(0)
-        if arg == '-h':
-            print(HELP)
-            exit(0)
-        elif arg== '-v':
-            show_all = True
-        elif arg== '-t':
-            runtime_ms = float(cmdline.pop(0))
+        arg = common_commandline_parsing(cmdline, pars, HELP)
+        if arg is not None:
+            pass
         # Note that -p is tested at the top of the script.
 
-    if show_all:
+    if pars.show['text']:
         if USENES:
             print('Using NES Interface code.')
         else:
             print('Using prototype code.')
 
-    return (show_all, runtime_ms)
+    return pars
 
 if __name__ == '__main__':
 
-    show_all, runtime_ms = parse_command_line()
+    pars = parse_command_line()
 
     quickstart('Admonishing','Instruction')
 
-    bs_kgt_system = init_groundtruth(show_all=show_all)
+    bs_kgt_system = init_groundtruth(show=pars.show)
 
     init_experiment(bs_kgt_system)
 
-    run_experiment(bs_kgt_system, runtime_ms)
+    run_experiment(bs_kgt_system, pars.runtime_ms)
