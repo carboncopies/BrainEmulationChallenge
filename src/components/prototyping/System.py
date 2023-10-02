@@ -5,6 +5,7 @@
 Definitions of in-silico ground-truth systems.
 '''
 
+import numpy as np
 import matplotlib.pyplot as plt
 
 from .Spatial import PlotInfo
@@ -190,6 +191,7 @@ class Common_Parameters:
             'voxels': False,
         }
         self.runtime_ms = 500.0
+        self.randomseed = None
 
 COMMON_HELP='''
        -h         Show this usage information.
@@ -197,6 +199,7 @@ COMMON_HELP='''
        -V         Show specified diagram (multiple -V statements allowed).
                   Options are: all, text, regions, cells, voxels.
        -t         Run for ms milliseconds.
+       -R         Set random seed.
        -p         Run prototype code (default is NES interface).
 '''
 
@@ -228,4 +231,7 @@ def common_commandline_parsing(cmdline:list, pars:Common_Parameters, HELP:str)->
     elif arg== '-t':
         pars.runtime_ms = float(cmdline.pop(0))
         return None
+    elif arg== '-R':
+        pars.randomseed = int(cmdline.pop(0))
+        np.random.seed(pars.randomseed)
     return arg

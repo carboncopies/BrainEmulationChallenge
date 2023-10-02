@@ -133,7 +133,8 @@ def run_experiment(bs_kgt_system:System, runtime_ms:float):
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V diagram] [-t ms] [-p]
+Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V diagram] [-t ms]
+       [-R seed] [-p]
 %s
        VBP process step 00: This script specifies a known ground-truth system.
        WBE topic-level XI: sample preparation / preservation (in-silico).

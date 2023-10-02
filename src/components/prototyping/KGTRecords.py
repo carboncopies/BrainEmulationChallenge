@@ -7,6 +7,7 @@ Utility functions used with known ground-truth recorded data.
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap
 from PIL import Image
 
 def plot_recorded(data:dict):
@@ -42,9 +43,20 @@ def plot_electrodes(data:dict):
 				plt.plot(t_ms, E_mV[site])
 			plt.show()
 
-def plot_calcium(data:dict):
+# frames = [Image.open(image) for image in glob.glob(f"{frame_folder}/*.JPG")]
+# frame_one = frames[0]
+# frame_one.save("my_awesome.gif", format="GIF", append_images=frames, save_all=True, duration=100, loop=0)
+
+def plot_calcium(data:dict, gifpath:str, show_all=False):
 	if 't_ms' not in data:
 		raise Exception('plot_calcium: Missing t_ms record.')
+	N = 256
+	vals = np.ones((N, 4))
+	vals[:, 0] = 0 #np.linspace(90/256, 1, N)
+	vals[:, 1] = np.linspace(0, 1, N)
+	vals[:, 2] = 0 #np.linspace(41/256, 1, N)
+	fluorescent_colormap = ListedColormap(vals)
+	ms_between_frames = 100
 	t_ms = data['t_ms']
 	matchlen = len('calcium')
 	for k in data.keys():
@@ -54,9 +66,11 @@ def plot_calcium(data:dict):
 				image_stack = calcium_data[indicator]
 				image_stack_size = len(image_stack)
 				print('%s image stack size: %d' % (indicator, image_stack_size))
-				for i in range(image_stack_size):
-					print('Image %d (%s), sum of values = %f' % (i, str(image_stack[i].shape), image_stack[i].sum()))
-					#img = Image.fromarray(image_stack[i])
-					#plt.imshow(img)
-					plt.imshow(image_stack[i], cmap='gray', vmin=0, vmax=255)
-					plt.show()
+				frames = [ Image.fromarray(np.uint8(fluorescent_colormap(image.astype(float)/255.0)*255)).resize((512,512)) for image in image_stack ]
+				#frames = [ Image.fromarray(image) for image in image_stack ]
+				frames[0].save(gifpath, format="GIF", append_images=frames, save_all=True, duration=ms_between_frames, loop=0)
+				if show_all:
+					for i in range(image_stack_size):
+						print('Image %d (%s), sum of values = %f' % (i, str(image_stack[i].shape), image_stack[i].sum()))
+						plt.imshow(image_stack[i], cmap=fluorescent_colormap, vmin=0, vmax=255) # was camp='gray'
+						plt.show()

@@ -105,6 +105,7 @@ def init_calcium_imaging(bs_acq_system:System, show:dict):
                 dy=np.array([0.0, 1.0, 0.0]),
                 dz=np.array([0.0, 0.0, 1.0]), # Positive dz indicates most visible top surface.
             ),
+        'generate_during_sim': False,
     }
 
     bs_acq_system.attach_calcium_imaging(calcium_specs, show=show)
@@ -134,9 +135,8 @@ def run_functional_data_acquisition(bs_acq_system:System, runtime_ms:float):
 
     bs_acq_system.run_for(runtime_ms)
 
-    #data = {}
-    #data['electrode'] = bs_acq_system.component_by_id('electrode_0', 'get_record')
-    #data['calcium'] = bs_acq_system.component_by_id('calcium_0', 'get_record')
+    if not bs_acq_system.calcium_imaging.specs['generate_during_sim']:
+        bs_acq_system.calcium_imaging.record_aposteriori()
 
     godseye = bs_acq_system.get_recording()
     data = bs_acq_system.get_instrument_recordings()    
@@ -149,7 +149,7 @@ def run_functional_data_acquisition(bs_acq_system:System, runtime_ms:float):
 
     plot_recorded(godseye)
     plot_electrodes(data)
-    plot_calcium(data)
+    plot_calcium(data, gifpath='/tmp/vbp01.gif', show_all=False)
 
     #print(str(data))
 
@@ -175,7 +175,7 @@ def run_structural_data_acquisition(bs_acq_system:System):
 
 HELP='''
 Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V diagram] [-t ms]
-       [-p] [-s num] [-S ratio] [-n level]
+       [-R seed] [-p] [-s num] [-S ratio] [-n level]
 %s
        -s         Number of sites per electrode.
        -S         Ratio separation of each site on an electrode.

@@ -29,7 +29,7 @@ def voxel_containing_point(point:np.array, voxel_um:float)->dict:
     }
 
 class fluorescent_voxel:
-    def __init__(self, xyz:np.array, voxel_um:float, neuron:Neuron, adj_dist_ratio=0):
+    def __init__(self, xyz:np.array, voxel_um:float, neuron:Neuron, adj_dist_ratio=0, type_brightness=1.0):
         '''
         See: https://docs.google.com/document/d/1t1bPin-7YHswiNs4z7tSqFOLp7a1RQBXQQdhumkoOpQ/edit
         Note that adj_dist_ratio is d/adjacent_radius_um, where d is the distance
@@ -41,6 +41,7 @@ class fluorescent_voxel:
         self.intersects = adj_dist_ratio==0 # If False then adjacent.
         self.act_brightness = 1.0-adj_dist_ratio # Reduce when adjacent at some distance.
         self.depth_brightness = 1.0
+        self.type_brightness = type_brightness
         self.image_pixels = []
         self.fifo_ref = None
 
@@ -50,6 +51,8 @@ class fluorescent_voxel:
         For each location determine if it is within adjacent_radius_um
         of self.xyz. If so, then create an adjacent voxel object and
         add it to the dict that is returned with an integer indices key.
+        TODO: Probably use the same search method here as in Sphere.get_voxels()
+              instead of having two different ones, which can be confusing.
         '''
         adjacent_voxels_dict = {}
         radius_steps = int(adjacent_radius_um // self.voxel_um)
@@ -66,7 +69,8 @@ class fluorescent_voxel:
                                 voxelspecs['center'],
                                 self.voxel_um,
                                 self.neuron_ref,
-                                adj_dist_ratio=r/adjacent_radius_um)
+                                adj_dist_ratio=r/adjacent_radius_um,
+                                type_brightness=self.type_brightness)
                             adjacent_voxels_dict[voxelspecs['key']] = adj
                             #print('DEBUG(fluorescent_voxel.get_adjacent_dict) == Adjacent voxel pos: '+str(adj.xyz))
         return adjacent_voxels_dict
@@ -79,7 +83,7 @@ class fluorescent_voxel:
         depth_dimming = d_top / (d_top + d_bottom)
         self.depth_brightness = 1.0 - depth_dimming
 
-    def set_image_pixels(self, subvolume:VecBox, image_dims_px:tuple):
+    def set_image_pixels(self, subvolume:VecBox, image_dims_px:tuple, pixel_contributions:np.array):
         '''
         TODO: See the TODO note in Calcium_Imaging.initialize_projection_circles().
         '''
@@ -87,6 +91,7 @@ class fluorescent_voxel:
         xy = (int(dxyz[0])+image_dims_px[0]//2, int(dxyz[1]+image_dims_px[1]//2))
         if xy[0] >= 0 and xy[1] >= 0 and xy[0] < image_dims_px[0] and xy[1] < image_dims_px[1]:
             self.image_pixels.append(xy)
+            pixel_contributions[xy] += 1
 
     def record_fluorescence(self, image_t:np.array):
         '''
@@ -101,14 +106,25 @@ class fluorescent_voxel:
         constants.
         On top of that, we take a snapshot only at specific sample
         intervals.
+        This function carries out image generation during simulation.
         TODO: Make sure this equation actually produces something like
               what calcium imaging shows through fluorescence, both
               when membrane potential is low and high (corresponding
               calcium concentrations).
         '''
-        lum = 60.0*self.neuron_ref.Ca_samples[-1] * self.act_brightness * self.depth_brightness
+        lum = 60.0*self.neuron_ref.Ca_samples[-1] * self.act_brightness * self.depth_brightness * self.type_brightness
         for pixel in self.image_pixels:
             image_t[int(pixel[0]),int(pixel[1])] += lum
+
+    def record_fluorescence_aposteriori(self, images:list, max_Ca:float):
+        '''
+        This function creates images after simulation.
+        '''
+        amp = (255.0/max_Ca)*self.act_brightness*self.depth_brightness*self.type_brightness
+        for i in range(len(self.neuron_ref.Ca_samples)):
+            lum = amp*self.neuron_ref.Ca_samples[i]
+            for pixel in self.image_pixels:
+                images[i][int(pixel[0]),int(pixel[1])] += lum
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Voxel')
@@ -180,17 +196,26 @@ class Sphere(Geometry):
         self.radius_um = radius_um
 
     def get_voxels(self, voxel_um:float, neuron:Neuron)->dict:
-        # TODO: Do the full process. (For now, as a test, we just return
-        #       a voxel for the soma center.)
+        # TODO: There has to be a faster way to do this in the optimized implementation.
         voxels_dict = {}
-        voxelspecs = voxel_containing_point(self.center_um, voxel_um)
-        #print('DEBUG(Sphere.get_voxels) == Voxel indices key: '+voxelspecs['key'])
-        #print('DEBUG(Sphere.get_voxels) == Sphere voxel center: '+str(self.center_um))
-        voxels_dict[voxelspecs['key']] = fluorescent_voxel(
-            voxelspecs['center'],
-            voxel_um,
-            neuron)
-        #print('DEBUG(Sphere.get_voxels) == Voxel xyz: '+str(voxels_dict[voxelspecs['key']].xyz))
+        center = np.array(list(self.center_um))
+        # 1. Carry out raster search for points.
+        raster = np.arange(-self.radius_um, self.radius_um+0.001, voxel_um)
+        square_radius = self.radius_um*self.radius_um
+        for z in range(0, len(raster)):
+            for y in range(0, len(raster)):
+                for x in range(0, len(raster)):
+                    # 2. Determine if point is within sphere.
+                    xyz = np.array([ raster[x], raster[y], raster[z]])
+                    square_dist = xyz.dot(xyz)
+                    if square_dist <= square_radius:
+                        # 3. Get corresponding voxel.
+                        voxelspecs = voxel_containing_point(self.center_um+xyz, voxel_um)
+                        voxels_dict[voxelspecs['key']] = fluorescent_voxel(
+                            voxelspecs['center'],
+                            voxel_um,
+                            neuron,
+                            type_brightness=1.0)
         return voxels_dict
 
     def show(self, pltinfo=None):
@@ -217,8 +242,24 @@ class Cylinder(Geometry):
         self.end1_radius_um = end1_radius_um
 
     def get_voxels(self, voxel_um:float, neuron:Neuron)->dict:
-        # TODO: Implement this.
+        # TODO: There has to be a faster way to do this in the optimized implementation.
         voxels_dict = {}
+        xyz_start = np.array(list(self.end0_um))
+        xyz_end = np.array(list(self.end1_um))
+        dxyz = xyz_end - xyz_start
+        mag_dxyz = np.sqrt(dxyz.dot(dxyz))
+        dxyz = (voxel_um/mag_dxyz)*dxyz
+        xyz = xyz_start
+        d = 0
+        while d < mag_dxyz:
+            voxelspecs = voxel_containing_point(xyz, voxel_um)
+            voxels_dict[voxelspecs['key']] = fluorescent_voxel(
+                voxelspecs['center'],
+                voxel_um,
+                neuron,
+                type_brightness=3.0)
+            xyz += dxyz
+            d += voxel_um
         return voxels_dict
 
     def R_at_position(self, xi:float)->float:

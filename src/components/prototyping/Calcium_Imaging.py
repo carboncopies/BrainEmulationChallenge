@@ -63,6 +63,7 @@ class Calcium_Imaging:
             #'microscope_rear_position_um': (0.0, 40.0, 0.0),
             'voxelspace_side_px': 30,
             'imaging_interval_ms': 30.0,
+            'generate_during_sim': True,
         }
         self.specs.update(specs)
 
@@ -82,11 +83,13 @@ class Calcium_Imaging:
         self.voxelspace = []
 
         self.fluorescence_kernel = None
+        self.max_pixel_contributions = 0
 
         self.t_recorded_ms = []
         self.image_dims_px = None
         self.image_t = None
         self.images = []
+        self.num_samples = 0
 
         self.voxel_um = self.get_voxel_size_um()
         self.include_components = self.get_visible_components_list()
@@ -110,11 +113,11 @@ class Calcium_Imaging:
 
     def get_visible_components_list(self)->list:
         if self.calcium_indicator=='jGCaMP8':
-            return ['soma']
+            return ['soma', 'axon', ]
         elif self.calcium_indicator=='synGCaMP6f':
             return ['soma', 'axon', 'synapse']
         else:
-            return ['soma']
+            return ['soma', ]
 
     def set_image_sizes(self):
         x_px = int((2*self.specs['imaged_subvolume'].half[0])//self.voxel_um)
@@ -172,11 +175,13 @@ class Calcium_Imaging:
         #       some depth and return a summed image (a bit weird, perhaps).
         #       In other words, here we simply project to a pixel at the
         #       x,y location.
+        pixel_contributions = np.zeros(self.image_dims_px, dtype=int)
         for voxel in self.voxelspace:
-            voxel.set_image_pixels(self.specs['imaged_subvolume'], self.image_dims_px)
-        print('List of voxel locations and corresponding 2D image pixels:')
-        for voxel in self.voxelspace:
-            print('Voxel at %s projecting to %s.' % (str(voxel.xyz), str(voxel.image_pixels)))
+            voxel.set_image_pixels(self.specs['imaged_subvolume'], self.image_dims_px, pixel_contributions)
+        self.max_pixel_contributions = pixel_contributions.max()            
+        # print('List of voxel locations and corresponding 2D image pixels:')
+        # for voxel in self.voxelspace:
+        #     print('Voxel at %s projecting to %s.' % (str(voxel.xyz), str(voxel.image_pixels)))
 
     def initialize_fluorescence_kernel(self):
         kernel = []
@@ -201,14 +206,31 @@ class Calcium_Imaging:
             if (t_ms - self.t_recorded_ms[-1])<self.specs['imaging_interval_ms']: return
 
         self.t_recorded_ms.append(t_ms)
-        # TODO: Generate actual images for the fluorescence.
-        self.image_t = np.zeros(self.image_dims_px)
         for neuron in self.neuron_refs:
             neuron.update_convolved_FIFO(self.fluorescence_kernel)
+        self.num_samples += 1
+        if self.specs['generate_during_sim']:
+            self.image_t = np.zeros(self.image_dims_px)
+            for voxel in self.voxelspace:
+                voxel.record_fluorescence(self.image_t)
+            self.images.append(self.image_t.astype(np.uint8))
+
+    def record_aposteriori(self):
+        '''
+        Generate image stack after the end of simulation.
+        '''
+        max_Ca = 0
+        for neuron in self.neuron_refs:
+            max_Ca = max(max_Ca, max(neuron.Ca_samples))
+        max_Ca *= (self.max_pixel_contributions/4.0)
+        for i in range(self.num_samples):
+            self.images.append(np.zeros(self.image_dims_px))
         for voxel in self.voxelspace:
-            voxel.record_fluorescence(self.image_t)
-        self.images.append(self.image_t.astype(np.uint8))
-        #print('CALCIUM image shape: '+str(self.image_t.shape))
+            voxel.record_fluorescence_aposteriori(self.images, max_Ca)
+        uint8_images = []
+        for i in range(self.num_samples):
+            uint8_images.append(np.clip(self.images[i], 0, 255).astype(np.uint8))
+        self.images = uint8_images
 
     def get_recording(self)->dict:
         data = {}
