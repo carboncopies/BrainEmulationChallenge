@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# syn_transmission.py
+# test_receptors.py
 # Randal A. Koene, 20230507
 
 '''

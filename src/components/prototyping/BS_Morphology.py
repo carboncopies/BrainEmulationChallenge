@@ -35,7 +35,7 @@ def BS_Axon(
     soma_radius_um=0.5,
     end0_radius_um=0.1,
     end1_radius_um=0.1)->Cylinder:
-    if align=='right':
+    if align=='left':
         end0 = (
             (domain_bounds[0][0]+domain_bounds[1][0])/2,
             domain_bounds[0][1],
@@ -46,7 +46,7 @@ def BS_Axon(
             domain_bounds[1][1]-(soma_radius_um*2),
             end0[2],
         )
-    elif align=='left':
+    elif align=='right':
         end0 = (
             (domain_bounds[0][0]+domain_bounds[1][0])/2,
             domain_bounds[1][1],

@@ -78,7 +78,7 @@ class BS_Aligned_NC(NeuralCircuit):
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neural circuit %s.' % str(self.id))
         for cell_id in range(len(self.cells)):
-            print('Displaying cell number %d.' % cell_id)
+            #print('DEBUG(BS_Aligned_NC.show) == Displaying cell number %d.' % cell_id)
             self.cells[cell_id].show(pltinfo)
 
     # def update(self, t_ms:float, recording:bool):

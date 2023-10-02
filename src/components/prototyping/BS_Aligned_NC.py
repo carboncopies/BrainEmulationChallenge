@@ -36,6 +36,16 @@ class BS_Aligned_NC(NeuralCircuit):
             )
             self.cells[cell_id] = cell
 
+    def get_neurons(self)->list:
+        return list(self.cells.values())
+
+    def get_neurons_by_IDs(self, listofIDs:list)->list:
+        listed_neurons = []
+        for cell_id in listofIDs:
+            if cell_id in self.cells:
+                listed_neurons.append(self.cells[cell_id])
+        return listed_neurons
+
     def get_cell_centers(self)->list:
         cell_centers = []
         for cell_id in self.cells:
@@ -84,7 +94,7 @@ class BS_Aligned_NC(NeuralCircuit):
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neural circuit %s.' % str(self.id))
         for cell_id in self.cells:
-            print('Displaying cell %s.' % cell_id)
+            #print('DEBUG(BS_Aligned_NC.show) == Displaying cell %s.' % cell_id)
             self.cells[cell_id].show(pltinfo)
 
     def update(self, t_ms:float, recording:bool):
