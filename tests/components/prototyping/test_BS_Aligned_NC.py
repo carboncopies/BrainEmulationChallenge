@@ -14,6 +14,11 @@ class TestBSAlignedNC(unittest.TestCase):
     def setUp(self):
         self.circuit = BS_Aligned_NC("SomeID")
 
+    def initialize_cells(self):
+        """Helper function to initialize cells with a box domain."""
+        domain = Box()
+        self.circuit.init_cells(domain)
+
     def test_init_cells(self):
         """Test if the cells are initialized correctly."""
 
@@ -30,13 +35,14 @@ class TestBSAlignedNC(unittest.TestCase):
         cell_centers = self.circuit.get_cell_centers()
         assert len(cell_centers) == 0
 
-        domain = Box()
-        self.circuit.init_cells(domain)
+        self.initialize_cells()
         cell_centers = self.circuit.get_cell_centers()
         assert len(cell_centers) == 2
 
     def test_Set_Weight(self):
         """Test if the weights for connections between cells are set properly."""
+        self.initialize_cells()
+
         # Case 1: Method supplied is not implemented
         method = "foobar"
         from_val, to = "0", "1"
@@ -69,6 +75,8 @@ class TestBSAlignedNC(unittest.TestCase):
 
     def test_Encode(self):
         """Test if encoding is done in a correct fashion."""
+        self.initialize_cells()
+
         # Case 1: Encoding method is invalid
         pattern_set = [("0", "1")]
         with pytest.raises(ValueError) as excinfo:
@@ -102,6 +110,8 @@ class TestBSAlignedNC(unittest.TestCase):
         Test if direct stimulus is correctly attached to the
         cells in the neural circuit.
         """
+        self.initialize_cells()
+
         # Case 1: An empty list is passed.
         tstim_ms = []
         self.circuit.attach_direct_stim(tstim_ms)
@@ -119,7 +129,7 @@ class TestBSAlignedNC(unittest.TestCase):
         )
 
         # Case 3: All parameters are valid.
-        tstim_ms = [(0.1, 0), (0.1, 1)]
+        tstim_ms = [(0.1, "0"), (0.1, "1")]
         self.circuit.attach_direct_stim(tstim_ms)
         for cell_id in self.circuit.cells:
             cell = self.circuit.cells[cell_id]
@@ -130,6 +140,8 @@ class TestBSAlignedNC(unittest.TestCase):
         Test if spontaneous activity is set correctly in the
         neurons of the circuit.
         """
+        self.initialize_cells()
+
         # Case 1: An empty list is supplied.
         spont_spike_settings = []
         self.circuit.set_spontaneous_activity(spont_spike_settings)
@@ -159,12 +171,16 @@ class TestBSAlignedNC(unittest.TestCase):
     def test_update(self):
         """Test if the update function updates all cells of the
         neural circuit correctly."""
+        self.initialize_cells()
+
         self.circuit.update(0.1, False)
         for cell_id in self.circuit.cells:
             assert self.circuit.cells[cell_id].t_ms == 0.1
 
     def test_get_recording(self):
         """Test if each neuron's recorded data is returned correctly."""
+        self.initialize_cells()
+
         data = self.circuit.get_recording()
         for cell_id in self.circuit.cells:
             assert data[cell_id] == self.circuit.cells[cell_id].get_recording()

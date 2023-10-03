@@ -10,10 +10,28 @@ class TestBSAlignedNC(unittest.TestCase):
     """Tests for BS_Aligned_NC"""
 
     def setUp(self):
-        self.neural_circuit = BS_Aligned_NC("test_id", 2)
+        self.circuit = BS_Aligned_NC("test_id", 2)
+
+    def initialize_cells(self):
+        """Helper function to initialize cells with a box domain."""
+        domain = Box()
+        self.circuit.init_cells(domain)
+
+    def test_init_cells(self):
+        """Test if the cells are initialized correctly."""
+
+        # No cells for uninitialized cells.
+        assert len(self.circuit.cells) == 0
+
+        domain = Box()
+        assert hasattr(domain, "equal_slice_bounds")
+        self.circuit.init_cells(domain)
+        assert len(self.circuit.cells) == self.circuit.num_cells
 
     def test_Set_Weight(self):
         """Test if the weights for connections between cells are set properly."""
+        self.initialize_cells()
+
         # Case 1: Method supplied is not implemented
         method = "foobar"
         from_val, to = "0", "1"
@@ -46,6 +64,8 @@ class TestBSAlignedNC(unittest.TestCase):
 
     def test_Encode(self):
         """Test if encoding is done in a correct fashion."""
+        self.initialize_cells()
+
         # Case 1: Encoding method is invalid
         pattern_set = [("0", "1")]
         with pytest.raises(ValueError) as excinfo:
@@ -79,6 +99,8 @@ class TestBSAlignedNC(unittest.TestCase):
         Test if direct stimulus is correctly attached to the
         cells in the neural circuit.
         """
+        self.initialize_cells()
+
         # Case 1: An empty list is passed.
         tstim_ms = []
         self.circuit.attach_direct_stim(tstim_ms)
