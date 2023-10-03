@@ -54,12 +54,12 @@ class TestBSNeuron(unittest.TestCase):
     def test_set_spontaneous_activity(self):
         """Test if the spontaneous activity parameters are correctly set."""
         test_mu, test_std = 0.1, 0.5
-        calc_dt_spont_dist = stats.truncnorm.rvs(
+        calc_dt_spont_dist = stats.truncnorm(
             -test_mu / test_std, test_mu / test_std, loc=test_mu, scale=test_std
         )
         self.neuron.set_spontaneous_activity((test_mu, test_std))
         assert self.neuron.tau_spont_mean_stdev_ms == (test_mu, test_std)
-        assert self.neuron.dt_spont_dist == calc_dt_spont_dist
+        assert self.neuron.dt_spont_dist.stats() == calc_dt_spont_dist.stats()
 
     def test_show(self):
         """"""
