@@ -149,6 +149,7 @@ class TestSystem(unittest.TestCase):
 
         # Case 2: A wrong cell ID is provided
         spont_spike_settings = [((280, 140), "99")]
+        self.system.set_spontaneous_activity(spont_spike_settings)
         for circuit_id in self.system.neuralcircuits:
             circuit = self.system.neuralcircuits[circuit_id]
             for cell_id in circuit.cells:
@@ -156,6 +157,7 @@ class TestSystem(unittest.TestCase):
 
         # Case 3: All parameters are valid.
         spont_spike_settings = [((280, 140), "0")]
+        self.system.set_spontaneous_activity(spont_spike_settings)
         for circuit_id in self.system.neuralcircuits:
             circuit = self.system.neuralcircuits[circuit_id]
             mu, sigma = 280, 140
