@@ -61,8 +61,13 @@ class TestBSNeuron(unittest.TestCase):
         assert self.neuron.tau_spont_mean_stdev_ms == (test_mu, test_std)
         assert self.neuron.dt_spont_dist.stats() == calc_dt_spont_dist.stats()
 
-    def test_show(self):
-        """"""
+    def test_get_voxels(self):
+        """Test if the voxels associated with the neuron are returned
+        properly."""
+
+    def test_set_FIFO(self):
+        """Test if the FIFO attribute is set correctly."""
+        # TODO: Write this
         pass
 
     def test_record(self):

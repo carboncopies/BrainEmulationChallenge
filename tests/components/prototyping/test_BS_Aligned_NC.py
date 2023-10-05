@@ -164,10 +164,6 @@ class TestBSAlignedNC(unittest.TestCase):
             )
             assert self.cells[cell_id].dt_spont_dist.stats() == calculated.stats()
 
-    def test_show(self):
-        """"""
-        pass
-
     def test_update(self):
         """Test if the update function updates all cells of the
         neural circuit correctly."""

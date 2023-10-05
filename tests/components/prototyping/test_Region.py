@@ -28,7 +28,3 @@ class TestBrainRegion(unittest.TestCase):
         brain_region = BrainRegion("TestID", shape, neural_circuit)
         assert isinstance(brain_region.shape, Geometry)
         assert isinstance(brain_region.content, NeuralCircuit)
-
-    def test_show(self):
-        """"""
-        pass
