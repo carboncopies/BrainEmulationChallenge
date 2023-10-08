@@ -34,13 +34,14 @@ from .Neuron import Neuron
 
 def voxels_within_bounds(candidate_voxels:list, subvolume:VecBox)->list:
     visible_voxels = []
+    print('Checking subvolume bounds...')
     for voxel in candidate_voxels:
         if point_is_within_box(voxel.xyz, subvolume):
             visible_voxels.append(voxel)
     return visible_voxels
 
 class Calcium_Imaging:
-    def __init__(self, specs:dict, system_ref, show:dict):
+    def __init__(self, specs:dict, system_ref, pars):
         '''
         The characteristics in specs override default characteristics.
         Any that are not defined in specs remain at default values.
@@ -76,7 +77,7 @@ class Calcium_Imaging:
         #self.microscope_lensfront_position_um = specs['microscope_lensfront_position_um']
         #self.microscope_rear_position_um = specs['microscope_rear_position_um']
         self.system_ref = system_ref
-        self.show = show
+        self.show = pars.show
 
         self.neuron_refs = system_ref.get_neurons_by_IDs(self.fluorescing_neurons)
 
@@ -94,7 +95,7 @@ class Calcium_Imaging:
         self.voxel_um = self.get_voxel_size_um()
         self.include_components = self.get_visible_components_list()
         self.set_image_sizes()
-        self.instantiate_voxel_space(show=show)
+        self.instantiate_voxel_space(pars=pars)
         self.initialize_depth_dimming()
         self.initialize_projection_circles()
         self.initialize_fluorescence_kernel()
@@ -124,7 +125,7 @@ class Calcium_Imaging:
         y_px = int((2*self.specs['imaged_subvolume'].half[1])//self.voxel_um)
         self.image_dims_px = (x_px, y_px)
 
-    def instantiate_voxel_space(self, show:dict):
+    def instantiate_voxel_space(self, pars):
         '''
         Traverse morphology of fluorescing neurons in the system.
         For each component, determine all of the "voxels" intersected
@@ -134,12 +135,17 @@ class Calcium_Imaging:
         for neuron in self.neuron_refs:
             add_candidate_voxels = neuron.get_voxels(
                 voxel_um=self.voxel_um,
+                subvolume=self.specs['imaged_subvolume'],
                 adjacent_radius_um=0.1,
                 include_components=self.include_components)
             #print('DEBUG(Calcium_Imaging.instantiate_voxel_space) == Neuron %s has %d candidate voxels.' % (neuron.id, len(add_candidate_voxels)))
             candidate_voxels += add_candidate_voxels
-        if show['voxels']:
-            self.show_voxels(candidate_voxels, show_subvolume=True)
+        if pars.show['voxels']:
+            self.show_voxels(
+                savefolder=pars.savefolder,
+                voxelfile='Ca-candidate-voxels.'+pars.figext,
+                voxelspace=candidate_voxels,
+                show_subvolume=True)
         self.voxelspace = voxels_within_bounds(candidate_voxels, self.specs['imaged_subvolume'])
         print('Voxel space contains %d fluorescing voxels.' % len(self.voxelspace))
 
@@ -237,7 +243,7 @@ class Calcium_Imaging:
         data[self.calcium_indicator] = self.images
         return data
 
-    def show_voxels(self, voxelspace=None, show_subvolume=False, pltinfo=None):
+    def show_voxels(self, savefolder:str, voxelfile:str, voxelspace=None, show_subvolume=False, pltinfo=None, figspecs={'linewidth':0.5,'figext':'pdf'}):
         doshow = pltinfo is None
         if pltinfo is None: pltinfo = PlotInfo('Calcium Imaging Voxels')
         if voxelspace is None: voxelspace = self.voxelspace
@@ -246,22 +252,19 @@ class Calcium_Imaging:
         pltinfo.colors['cylinders'] = (1,0,0,0.2)
         pltinfo.colors['boxes'] = (1.0, 1.0, 0.0, 0.05)
 
-        # REMOVE THIS
-        # for region in self.system_ref.regions.values():
-        #     circuit = region.content
-        #     for cell in circuit.cells.values():
-        #         soma = cell.morphology['soma']
-        #         print('DEBUG(Calcium_Imaging.show_voxels) == Cell center: '+str(soma.center_um))
-
-        self.system_ref.show(show=self.show, pltinfo=pltinfo)
+        self.system_ref.show(show=self.show, pltinfo=pltinfo, linewidth=figspecs['linewidth'])
         if show_subvolume:
-            self.show_subvolume(pltinfo=pltinfo)
+            self.show_subvolume(savefolder, pltinfo=pltinfo, figspecs=figspecs)
         for voxel in voxelspace:
-            voxel.show(pltinfo=pltinfo)
-        if doshow: plt.show()
+            voxel.show(pltinfo=pltinfo, linewidth=figspecs['linewidth'])
+        if doshow:
+            plt.draw()
+            plt.savefig(savefolder+'/'+voxelfile, dpi=300)
 
-    def show_subvolume(self, pltinfo=None):
+    def show_subvolume(self, savefolder:str, pltinfo=None, figspecs={'linewidth':0.5,'figext':'pdf'}):
         doshow = pltinfo is None
         if pltinfo is None: pltinfo = PlotInfo('Calcium Imaging Subvolume')
-        self.specs['imaged_subvolume'].show(pltinfo=pltinfo)
-        if doshow: plt.show()
+        self.specs['imaged_subvolume'].show(pltinfo=pltinfo, linewidth=figspecs['linewidth'])
+        if doshow:
+            plt.draw()
+            plt.savefig(savefolder+'/Ca-subvolume.'+figspecs['figext'], dpi=300)

@@ -130,14 +130,14 @@ class AMPA_Receptor:
 		return Gsyn_pS_t
 
 
-	def plot_it(self, x:list, ys:list, titles:list, nrows=1, ncols=1):
+	def plot_it(self, x:list, ys:list, titles:list, nrows=1, ncols=1, linewidth=0.5):
 		fig, axs = plt.subplots(nrows=nrows, ncols=ncols)
 		for i in range(len(ys)):
 			if ncols==1:
-				axs.plot(x, ys[i])
+				axs.plot(x, ys[i], linewidth=linewidth)
 				axs.set_title(titles[i])
 			else:
-				axs[i].plot(x, ys[i])
+				axs[i].plot(x, ys[i], linewidth=linewidth)
 				axs[i].set_title(titles[i])
 		plt.show()
 

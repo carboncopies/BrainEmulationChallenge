@@ -20,6 +20,7 @@ class Recording_Electrode:
 			'end_position': (0, 0, 5.0),
 			'sites': [ (0, 0, 0), ], # A single site at the tip.
 			'noise_level': 0,
+			'sensitivity_dampening': 2.0,
 		}
 		self.specs.update(specs)
 
@@ -94,8 +95,11 @@ class Recording_Electrode:
 		site_distances_um = self.neuron_soma_to_site_distances_squared_um[site_idx]
 		for n_i in range(len(self.neuron_refs)):
 			Vm = self.neuron_refs[n_i].Vm_mV
-			Ein_mV = Vm / site_distances_um[n_i]
-			Ei_mV += Ein_mV
+			if site_distances_um[n_i] <= 1.0:
+				Ein_mV = Vm
+			else:
+				Ein_mV = Vm / site_distances_um[n_i]
+			Ei_mV += (Ein_mV/self.specs['sensitivity_dampening'])
 		Ei_mV += self.add_noise()
 		return Ei_mV
 

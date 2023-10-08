@@ -84,7 +84,7 @@ def get_cube_edges(vertices:np.array)->list:
     ]
     return edges
 
-def plot_cube(cube_definition:list, facecolor=(0,0,1,0.1), force_scaling=False, pltinfo=None):
+def plot_cube(cube_definition:list, facecolor=(0,0,1,0.1), force_scaling=False, pltinfo=None, linewidth=0.5):
     '''
     Expects four points: cube_definition = [
         (0,0,0), (0,1,0), (1,0,0), (0,0,1)
@@ -96,7 +96,7 @@ def plot_cube(cube_definition:list, facecolor=(0,0,1,0.1), force_scaling=False, 
 
     vertices = get_cube_vertices(cube_definition)
     edges = get_cube_edges(vertices)
-    faces = Poly3DCollection(edges, linewidths=1, edgecolors='k')
+    faces = Poly3DCollection(edges, linewidths=linewidth, edgecolors='k')
     faces.set_facecolor(facecolor)
 
     pltinfo.ax.add_collection3d(faces)
@@ -106,7 +106,7 @@ def plot_cube(cube_definition:list, facecolor=(0,0,1,0.1), force_scaling=False, 
         pltinfo.ax.scatter(vertices[:,0], vertices[:,1], vertices[:,2], s=0)
         pltinfo.ax.set_aspect('equal')
 
-def plot_voxel(voxel_definition:dict, force_scaling=False, pltinfo=None):
+def plot_voxel(voxel_definition:dict, force_scaling=False, pltinfo=None, linewidth=0.5):
     '''
     Expects dict with 'xyz' a 3 element tuple, list or np.array and 'size' a float.
     '''
@@ -120,7 +120,7 @@ def plot_voxel(voxel_definition:dict, force_scaling=False, pltinfo=None):
         (xyz[0]-half, xyz[1]-half, xyz[2]+half),
     ]
     #print('DEBUG(plot_voxel) == Cube def: %s' % (str(cube_definition)))
-    plot_cube(cube_definition, pltinfo.colors['voxels'], force_scaling, pltinfo)
+    plot_cube(cube_definition, pltinfo.colors['voxels'], force_scaling, pltinfo, linewidth=linewidth)
 
 class VecBox:
     '''
@@ -137,7 +137,7 @@ class VecBox:
     # TODO: Add functions to initialize dx, dy and dz from 8 points or from
     #       surfaces or other ways to define a box, e.g. Box below.
 
-    def show(self, force_scaling=False, pltinfo=None):
+    def show(self, force_scaling=False, pltinfo=None, linewidth=0.5):
         # TODO: Make this also work for subvolumes where dx, dy, and dz are not
         #       parallel to axes x, y and z.
         half_x = self.half[0]*self.dx
@@ -150,7 +150,7 @@ class VecBox:
             self.center - half_x - half_y + half_z,
         ]
         #print('DEBUG(VecBox.show) == Cube def: %s' % (str(cube_definition)))
-        plot_cube(cube_definition, (0.0, 1.0, 1.0, 0.2), force_scaling, pltinfo)
+        plot_cube(cube_definition, (0.0, 1.0, 1.0, 0.2), force_scaling, pltinfo, linewidth=linewidth)
 
 def point_is_within_box(point:np.array, box:VecBox)->bool:
     '''
@@ -158,3 +158,22 @@ def point_is_within_box(point:np.array, box:VecBox)->bool:
     '''
     d = point - box.center
     return (abs(np.dot(d, box.dx)) <= box.half[0]) and (abs(np.dot(d, box.dy)) <= box.half[1]) and (abs(np.dot(d, box.dz)) <= box.half[2])
+
+class Plane:
+    def __init__(self, point:np.array, direction:np.array):
+        self.point = point
+        self.direction = direction # Normal (pointing outwards from object).
+
+class SixPlanesBox:
+    '''
+    This box is defined by six planes.
+    '''
+    def __init__(self, vecbox:VecBox):
+        self.sides = {
+            'front': Plane(vecbox.center-(vecbox.half[2]*vecbox.dz), -vecbox.dz),
+            'back': Plane(vecbox.center+(vecbox.half[2]*vecbox.dz), vecbox.dz),
+            'top': Plane(vecbox.center+(vecbox.half[0]*vecbox.dx), vecbox.dx),
+            'bottom': Plane(vecbox.center-(vecbox.half[0]*vecbox.dx), -vecbox.dx),
+            'left': Plane(vecbox.center-(vecbox.half[1]*vecbox.dy), -vecbox.dy),
+            'right': Plane(vecbox.center+(vecbox.half[1]*vecbox.dy), vecbox.dy),
+        }

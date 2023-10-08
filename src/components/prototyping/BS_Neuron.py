@@ -9,10 +9,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
-from prototyping.Geometry import PlotInfo, Sphere, Cylinder
+from .Spatial import VecBox
+from .Geometry import PlotInfo, Sphere, Cylinder
 from .SignalFunctions import dblexp, convolve_1d
 from .Neuron import Neuron
 from .Calcium_Imaging import fluorescent_voxel
+from .BS_Morphology import BS_Morphology
 
 class BS_Neuron(Neuron):
     '''
@@ -60,7 +62,7 @@ class BS_Neuron(Neuron):
     def get_cell_center(self)->tuple:
         return self.morphology['soma'].center_um
 
-    def get_voxels(self, voxel_um:float, adjacent_radius_um:float, include_components:list)->list:
+    def get_voxels(self, voxel_um:float, subvolume:VecBox, adjacent_radius_um:float, include_components:list)->list:
         '''
         Based on the neuron morphology and voxel specifications, return
         a list of fluorescent_voxel objects intersecting and adjacent to
@@ -86,6 +88,8 @@ class BS_Neuron(Neuron):
         4. Check if the voxel already exists in the dict. Intersecting
            voxels have priority over adjacent voxels.
         5. When done, convert the dict values into a list and return that.
+        The subvolume definition is used to skip generating candidate voxels
+        for morphology components that are entirely outside the subvolume.
         '''
         # TODO: Do the full process. (For now, as a test, we just return
         #       a voxel for the soma center, see Geometry:Sphere.get_voxels().)
@@ -94,7 +98,7 @@ class BS_Neuron(Neuron):
         for component in self.morphology:
             if component in include_components:
                 #print('DEBUG(BS_Neuron.get_voxels) == Voxel component: '+str(component))
-                voxel_dict.update(self.morphology[component].get_voxels(voxel_um, self))
+                voxel_dict.update(self.morphology[component].get_voxels(voxel_um, subvolume, self))
         #print('DEBUG(BS_Neuron.get_voxels) == Component voxels: '+str(len(voxel_dict)))
         # Add adjacent voxels:
         voxel_list = list(voxel_dict.values())
@@ -121,10 +125,63 @@ class BS_Neuron(Neuron):
         a, b = 0, 2*mu
         self.dt_spont_dist = stats.truncnorm((a - mu) / sigma, (b - mu) / sigma, loc=mu, scale=sigma)
 
-    def show(self, pltinfo=None):
+    def to_dict(self)->dict:
+        morphology = {}
+        for morph in self.morphology:
+            morphology[morph] = self.morphology[morph].to_dict()
+        receptors = []
+        for receptor in self.receptors:
+            receptors.append( (receptor[0].id, receptor[1]) )
+        cell_data = {
+            'id': self.id,
+            'Vm_mV': self.Vm_mV,
+            'Vrest_mV': self.Vrest_mV,
+            'Vact_mV': self.Vact_mV,
+
+            'Vahp_mV': self.Vahp_mV,
+            'tau_AHP_ms': self.tau_AHP_ms,
+
+            'tau_PSPr': self.tau_PSPr,
+            'tau_PSPd': self.tau_PSPd,
+            'vPSP': self.vPSP,
+
+            'tau_spont_mean_stdev_ms': self.tau_spont_mean_stdev_ms,
+            't_spont_next': self.t_spont_next, # TODO: Should this be here?
+            'dt_spont_dist': self.dt_spont_dist, # TODO: Should this be here?
+
+            'morphology': morphology,
+            'receptors': receptors,
+            't_directstim_ms': self.t_directstim_ms,
+        }
+        return cell_data
+
+    def from_dict(self, cell_data:dict):
+        self.id = cell_data['id']
+        self.Vm_mV = cell_data['Vm_mV']
+        self.Vrest_mV = cell_data['Vrest_mV']
+        self.Vact_mV = cell_data['Vact_mV']
+
+        self.Vahp_mV = cell_data['Vahp_mV']
+        self.tau_AHP_ms = cell_data['tau_AHP_ms']
+
+        self.tau_PSPr = cell_data['tau_PSPr']
+        self.tau_PSPd = cell_data['tau_PSPd']
+        self.vPSP = cell_data['vPSP']
+
+        self.tau_spont_mean_stdev_ms = cell_data['tau_spont_mean_stdev_ms']
+        self.t_spont_next = cell_data['t_spont_next'] # TODO: Should this be here?
+        self.dt_spont_dist = cell_data['dt_spont_dist'] # TODO: Should this be here?
+
+        self.t_directstim_ms = cell_data['t_directstim_ms']
+        self.receptors = cell_data['receptors'] # This needs follow-up conversion to references in System.from_dict().
+        self.morphology = {}
+        for morph in cell_data['morphology']:
+            self.morphology[morph] = BS_Morphology(cell_data['morphology'][morph])
+
+    def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Neuron %s.' % str(self.id))
         for cellcomp in self.morphology:
-            self.morphology[cellcomp].show(pltinfo)
+            self.morphology[cellcomp].show(pltinfo, linewidth=linewidth)
 
     def record(self, t_ms:float):
         self.t_recorded_ms.append(t_ms)

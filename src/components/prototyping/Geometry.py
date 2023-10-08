@@ -10,8 +10,77 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.linalg import norm
 
-from .Spatial import PlotInfo, VecBox, plot_voxel
+from .Spatial import PlotInfo, VecBox, plot_voxel, point_is_within_box, Plane, SixPlanesBox
 from .Neuron import Neuron
+
+def plane_distance(p:Plane, point:np.array)->float:
+    d = point - p.point
+    return d.dot(p.direction)
+
+# s:Sphere
+def sphere_inside_plane(s, p:Plane)->bool:
+    return (-plane_distance(p, np.array(list(s.center_um)))) > s.radius_um
+
+# s:Sphere
+def sphere_outside_plane(s, p:Plane)->bool:
+    return plane_distance(p, np.array(list(s.center_um))) > s.radius_um
+
+# s:Sphere
+def sphere_intersects_plane(s, p:Plane)->bool:
+    return abs(plane_distance(p, np.array(list(s.center_um)))) <= s.radius_um
+
+# s:Sphere
+def sphere_inside_outside_intersects_plane(s, p:Plane)->int:
+    pdist = plane_distance(p, np.array(list(s.center_um)))
+    if pdist > s.radius_um: return 1
+    if (-pdist) > s.radius_um: return -1
+    return 0
+
+# s:Sphere
+def sphere_inside_box(s, b:SixPlanesBox)->bool:
+    for plane in b.sides.values():
+        if not sphere_inside_plane(s, plane): return False
+    return True
+
+# s:Sphere
+def sphere_intersects_plane_point(s, p:Plane)->dict:
+    d = plane_distance(p, np.array(list(s.center_um)))
+    proj = p.direction*d
+    return {
+        'point': np.array(list(s.center_um))-proj,
+        'radius': np.sqrt(max(s.radius_um*s.radius_um - d*d, 0)),
+        'intersects': abs(d) <= s.radius_um,
+    }
+
+check = {
+    'top': [ 'left', 'right', 'front', 'back', ],
+    'bottom': [ 'left', 'right', 'front', 'back', ],
+    'left': [ 'top', 'bottom', 'front', 'back', ],
+    'right': [ 'top', 'bottom', 'front', 'back', ],
+    'front': [ 'top', 'bottom', 'left', 'right', ],
+    'back': [ 'top', 'bottom', 'left', 'right', ],
+}
+
+# s:Sphere
+def sphere_intersects_box(s, b:SixPlanesBox)->bool:
+    for intersect_side in check:
+        res = sphere_intersects_plane_point(s, b.sides[intersect_side])
+        if res['intersects']:
+            and_res = True
+            for side in check[intersect_side]:
+                if plane_distance(b.sides[side], res['point']) > res['radius']:
+                    and_res = False
+                    break
+            if and_res: return True
+    return False
+
+# s:Sphere
+def sphere_outside_box(s, b:SixPlanesBox)->bool:
+    return not (sphere_inside_box(s, b) or sphere_intersects_box(s, b))
+
+# c:Cylinder
+def cylinder_outside_box(c, b:VecBox)->bool:
+    return not point_is_within_box(np.array(list(c.end0_um)), b) and not point_is_within_box(np.array(list(c.end1_um)), b)
 
 class Geometry:
     def __init__(self):
@@ -126,13 +195,13 @@ class fluorescent_voxel:
             for pixel in self.image_pixels:
                 images[i][int(pixel[0]),int(pixel[1])] += lum
 
-    def show(self, pltinfo=None):
+    def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Voxel')
         voxel_definition = {
             'xyz': self.xyz,
             'size': self.voxel_um
         }
-        plot_voxel(voxel_definition, pltinfo=pltinfo) # force_scaling=True,
+        plot_voxel(voxel_definition, pltinfo=pltinfo, linewidth=linewidth) # force_scaling=True,
 
 class Box(Geometry):
     '''
@@ -169,7 +238,21 @@ class Box(Geometry):
     def int_sides(self)->np.ndarray:
         return np.array(list(self.dims_um), dtype=np.uint32)
 
-    def show(self, pltinfo=None):
+    def to_dict(self)->dict:
+        return {
+            'geometry': 'box',
+            'center_um': self.center_um,
+            'dims_um': self.dims_um,
+            'rotations_rad': self.rotations_rad,
+        }
+
+    def from_dict(self, data:dict):
+        self.center_um = data['center_um']
+        self.dims_um = data['dims_um']
+        self.rotations_rad = data['rotations_rad']
+        return self
+
+    def show(self, pltinfo=None, linewidth=0.5):
         doshow = pltinfo is None
         if pltinfo is None: pltinfo = PlotInfo('Box shape')
         def get_cube_from_spherical_coords():   
@@ -184,20 +267,26 @@ class Box(Geometry):
             x*self.dims_um[0]+self.center_um[0],
             y*self.dims_um[1]+self.center_um[1],
             z*self.dims_um[2]+self.center_um[2],
-            color=pltinfo.colors['boxes'])
+            color=pltinfo.colors['boxes'],
+            linewidth=linewidth)
         if doshow: plt.show()
 
 class Sphere(Geometry):
     '''
     A sphere-like geometry defined by center and radius.
     '''
-    def __init__(self, center_um:tuple, radius_um:float):
+    def __init__(self,
+        center_um=( 0, 0, 0 ),
+        radius_um=1.0):
         self.center_um = center_um
         self.radius_um = radius_um
 
-    def get_voxels(self, voxel_um:float, neuron:Neuron)->dict:
+    def get_voxels(self, voxel_um:float, subvolume:VecBox, neuron:Neuron)->dict:
         # TODO: There has to be a faster way to do this in the optimized implementation.
         voxels_dict = {}
+        if sphere_outside_box(self, SixPlanesBox(subvolume)): return voxels_dict
+
+        print('Getting sphere voxels...')
         center = np.array(list(self.center_um))
         # 1. Carry out raster search for points.
         raster = np.arange(-self.radius_um, self.radius_um+0.001, voxel_um)
@@ -218,7 +307,19 @@ class Sphere(Geometry):
                             type_brightness=1.0)
         return voxels_dict
 
-    def show(self, pltinfo=None):
+    def to_dict(self)->dict:
+        return {
+            'geometry': 'sphere',
+            'center_um': self.center_um,
+            'radius_um': self.radius_um,
+        }
+
+    def from_dict(self, data:dict):
+        self.center_um = data['center_um']
+        self.radius_um = data['radius_um']
+        return self
+
+    def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Sphere shape')
         u, v = np.mgrid[0:2*np.pi:50j, 0:np.pi:50j]
         x = self.radius_um*np.cos(u)*np.sin(v)
@@ -228,22 +329,30 @@ class Sphere(Geometry):
             x+self.center_um[0],
             y+self.center_um[1],
             z+self.center_um[2],
-            color=pltinfo.colors['spheres'],)
+            color=pltinfo.colors['spheres'],
+            linewidth=linewidth,)
             #alpha=0.5*np.random.random()+0.5)
 
 class Cylinder(Geometry):
     '''
     A cylinder-like geometry defined by two circular end planes.
     '''
-    def __init__(self, end0_um:tuple, end0_radius_um:float, end1_um:tuple, end1_radius_um:float):
+    def __init__(self,
+        end0_um=(0,0,0),
+        end0_radius_um=0.1,
+        end1_um=(1,0,0),
+        end1_radius_um=0.1):
         self.end0_um = end0_um
         self.end1_um = end1_um
         self.end0_radius_um = end0_radius_um
         self.end1_radius_um = end1_radius_um
 
-    def get_voxels(self, voxel_um:float, neuron:Neuron)->dict:
+    def get_voxels(self, voxel_um:float, subvolume:VecBox, neuron:Neuron)->dict:
         # TODO: There has to be a faster way to do this in the optimized implementation.
         voxels_dict = {}
+        if cylinder_outside_box(self, subvolume): return voxels_dict
+
+        print('Getting cylinder voxels...')
         xyz_start = np.array(list(self.end0_um))
         xyz_end = np.array(list(self.end1_um))
         dxyz = xyz_end - xyz_start
@@ -268,7 +377,23 @@ class Cylinder(Geometry):
         rdiff = self.end1_radius_um - self.end0_radius_um
         return self.end0_radius_um + xi*rdiff
 
-    def show(self, pltinfo=None):
+    def to_dict(self)->dict:
+        return {
+            'geometry': 'cylinder',
+            'end0_um': self.end0_um,
+            'end1_um': self.end1_um,
+            'end0_radius_um': self.end0_radius_um,
+            'end1_radius_um': self.end1_radius_um,
+        }
+
+    def from_dict(self, data:dict):
+        self.end0_um = data['end0_um']
+        self.end1_um = data['end1_um']
+        self.end0_radius_um = data['end0_radius_um']
+        self.end1_radius_um = data['end1_radius_um']
+        return self
+
+    def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Cylinder shape')
         # axis and radius
         p0 = np.array(self.end0_um)
@@ -303,6 +428,6 @@ class Cylinder(Geometry):
             [self.R_at_position(xi=x/mag) for x in t[0]] * np.sin(theta) * n1[i] +
             [self.R_at_position(xi=x/mag) for x in t[0]] * np.cos(theta) * n2[i]
             for i in [0, 1, 2] ]
-        pltinfo.ax.plot_surface(X, Y, Z, color=pltinfo.colors['cylinders'])
+        pltinfo.ax.plot_surface(X, Y, Z, color=pltinfo.colors['cylinders'], linewidth=linewidth)
         #plot axis
         #ax.plot(*zip(p0, p1), color = 'red')

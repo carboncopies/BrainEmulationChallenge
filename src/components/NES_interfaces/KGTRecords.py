@@ -8,7 +8,7 @@ Utility functions used with known ground-truth recorded data.
 import numpy as np
 import matplotlib.pyplot as plt
 
-def plot_recorded(data:dict):
+def plot_recorded(data:dict, linewidth=0.5):
 	if 't_ms' not in data:
 		raise Exception('plot_recorded: Missing t_ms record.')
 	t_ms = data['t_ms']
@@ -23,5 +23,5 @@ def plot_recorded(data:dict):
 	fig = plt.figure(figsize=(4,4))
 	plt.title('Recorded data')
 	for c in range(len(Vm_cells)):
-		plt.plot(t_ms, Vm_cells[c])
+		plt.plot(t_ms, Vm_cells[c], linewidth=linewidth)
 	plt.show()

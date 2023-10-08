@@ -31,15 +31,15 @@ USENES='-p' not in argv
 import vbpcommon
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
+    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
     from NES_interfaces.Geometry import Box
-    from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC
+    from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC, BS_Uniform_Random_NC
     from NES_interfaces.Region import BrainRegion
     from NES_interfaces.KGTRecords import plot_recorded
 else:
-    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP
+    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
     from prototyping.Geometry import Box
-    from prototyping.BS_Aligned_NC import BS_Aligned_NC
+    from prototyping.BS_Aligned_NC import BS_Aligned_NC, BS_Uniform_Random_NC
     from prototyping.Region import BrainRegion
     from prototyping.KGTRecords import plot_recorded
 
@@ -60,20 +60,22 @@ INITTEXT1='''
    Defaults are applied to other parameters.
 '''
 
-def init_groundtruth(show:dict)->System:
+def init_groundtruth(pars:Common_Parameters)->System:
 
     bs_system = System('e0_bs')
 
     print(INITTEXT1)
 
-    NUM_NODES=2
-    bs_net = bs_system.add_circuit( BS_Aligned_NC(id='BS NC', num_cells=NUM_NODES) )
+    if pars.extra['distribution'] == 'unirand':
+        bs_net = bs_system.add_circuit( BS_Uniform_Random_NC(id='BS NC', num_cells=pars.extra['num_nodes']) )
+    else:
+        bs_net = bs_system.add_circuit( BS_Aligned_NC(id='BS NC', num_cells=pars.extra['num_nodes']) )
     bs_region = bs_system.add_region( BrainRegion(
         id='BS',
         shape=Box( dims_um=(20.0, 20.0, 20.0) ),
         content=bs_net) )
 
-    if show['regions']: bs_region.show(show=show)
+    if pars.show['regions']: bs_region.show(show=pars.show)
 
     # 2. Initialize the connection between the 2 neurons:
     bs_net.Encode(
@@ -82,8 +84,12 @@ def init_groundtruth(show:dict)->System:
         synapse_weight_method='binary'
         )
 
-    #if show['regions']: bs_region.show()
-    if show['regions']: bs_system.show(show=show)
+    #if pars.show['regions']: bs_region.show()
+    if pars.show['regions']: bs_system.show(show=pars.show)
+
+    file = pars.fullpath(pars.extra['save_kgt'])
+    print('Saving known ground-truth (KGT) system to %s.' % file)
+    bs_system.save(file)
 
     return bs_system
 
@@ -120,22 +126,28 @@ RUNTEXT1='''
 Running experiment for %.1f milliseconds...
 '''
 
-def run_experiment(bs_kgt_system:System, runtime_ms:float):
-    print(RUNTEXT1 % runtime_ms)
+def run_experiment(bs_kgt_system:System, pars:Common_Parameters):
+    print(RUNTEXT1 % pars.runtime_ms)
     bs_kgt_system.set_record_all()
 
-    bs_kgt_system.run_for(runtime_ms)
+    bs_kgt_system.run_for(pars.runtime_ms)
 
     data = bs_kgt_system.get_recording()
 
-    plot_recorded(data)
+    plot_recorded(savefolder=pars.savefolder, data=data, figspecs=pars.figspecs())
 
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
-Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V diagram] [-t ms]
-       [-R seed] [-p]
+Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V output] [-t ms]
+       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-N neurons]
+       [-D method] [-K file]
 %s
+       -N         Number of neurons in ground truth system.
+       -D         Distribution method: aligned, unirand.
+       -K         Save known ground-truth system (KTG) as file (default:
+                  kgt.json).
+
        VBP process step 00: This script specifies a known ground-truth system.
        WBE topic-level XI: sample preparation / preservation (in-silico).
 
@@ -146,11 +158,23 @@ Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V diagram] [-t ms]
 ''' % COMMON_HELP
 
 def parse_command_line()->tuple:
+    extra_pars = {
+        'num_nodes': 2,
+        'distribution': 'aligned',
+        'save_kgt': 'kgt.json',
+    }
+
     cmdline = argv.copy()
     pars = Common_Parameters(cmdline.pop(0))
     while len(cmdline) > 0:
         arg = common_commandline_parsing(cmdline, pars, HELP)
         if arg is not None:
+            if arg== '-N':
+                extra_pars['num_nodes'] = int(cmdline.pop(0))
+            elif arg== '-D':
+                extra_pars['distribution'] = str(cmdline.pop(0))
+            elif arg== '-K':
+                extra_pars['save_kgt'] = str(cmdline.pop(0))
             pass
         # Note that -p is tested at the top of the script.
 
@@ -160,16 +184,18 @@ def parse_command_line()->tuple:
         else:
             print('Using prototype code.')
 
+    pars.extra = extra_pars
     return pars
 
 if __name__ == '__main__':
 
     pars = parse_command_line()
+    make_savefolder(pars)
 
     quickstart('Admonishing','Instruction')
 
-    bs_kgt_system = init_groundtruth(show=pars.show)
+    bs_kgt_system = init_groundtruth(pars=pars)
 
     init_experiment(bs_kgt_system)
 
-    run_experiment(bs_kgt_system, pars.runtime_ms)
+    run_experiment(bs_kgt_system, pars=pars)

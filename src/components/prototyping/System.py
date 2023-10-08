@@ -7,10 +7,13 @@ Definitions of in-silico ground-truth systems.
 
 import numpy as np
 import matplotlib.pyplot as plt
+from datetime import datetime
+from os import makedirs
+import json
 
 from .Spatial import PlotInfo
 from .NeuralCircuit import NeuralCircuit
-from .Region import Region
+from .Region import Region, BrainRegion
 from .Electrodes import Recording_Electrode
 from .Calcium_Imaging import Calcium_Imaging
 
@@ -107,8 +110,8 @@ class System:
         for electrode_specs in set_of_electrode_specs:
             self.recording_electrodes.append(Recording_Electrode(electrode_specs, self))
 
-    def attach_calcium_imaging(self, calcium_specs:dict, show:dict):
-        self.calcium_imaging = Calcium_Imaging(calcium_specs, self, show=show)
+    def attach_calcium_imaging(self, calcium_specs:dict, pars):
+        self.calcium_imaging = Calcium_Imaging(calcium_specs, self, pars=pars)
 
     def set_record_all(self, t_max_ms=-1):
         '''
@@ -174,12 +177,72 @@ class System:
                     self.calcium_imaging.record(self.t_ms)
             self.t_ms += self.dt_ms
 
-    def show(self, show:dict, pltinfo=None):
+    def to_dict(self)->dict:
+        # neuralcircuits = {}
+        # for circuit in self.neuralcircuits:
+        #     neuralcircuits[circuit.id] = circuit.to_dict()
+        regions = {}
+        for region in self.regions:
+            regions[region] = self.regions[region].to_dict()
+        system_data = {
+            'name': self.name,
+            #'neuralcircuits': neuralcircuits, # Already included in region.
+            'regions': regions,
+            'dt_ms': self.dt_ms,
+            't_ms': self.t_ms,
+            't_recordall_start_ms': self.t_recordall_start_ms,
+            't_recordall_max_ms': self.t_recordall_max_ms,
+            # TODO: Should we include defined instruments?
+        }
+        return system_data
+
+    def from_dict(self, system_data:dict):
+        self.name = system_data['name']
+        self.dt_ms = system_data['dt_ms']
+        self.t_ms = system_data['t_ms']
+        self.t_recordall_start_ms = system_data['t_recordall_start_ms']
+        self.t_recordall_max_ms = system_data['t_recordall_max_ms']
+        # self.neuralcircuits = {}
+        # for circuit_id in system_data['neuralcircuits']:
+        #     circuit = BS_Aligned_NC('')
+        #     circuit.from_dict(system_data['neuralcircuits'][circuit_id])
+        #     self.add_circuit(circuit)
+        self.regions = {}
+        for region_id in system_data['regions']:
+            region = BrainRegion('', None, None)
+            region.from_dict(system_data['regions'][region_id])
+            self.add_region(region)
+        self.neuralcircuits = {}
+        for region in self.regions:
+            self.add_circuit(self.regions[region].content)
+        # Convert connection data to contain references to neurons:
+        all_neurons = self.get_all_neurons()
+        for neuron in all_neurons:
+            receptors_with_references = []
+            for receptor in neuron.receptors:
+                n_id, weight = receptor
+                n_ref = self.get_neurons_by_IDs([ n_id, ])[0]
+                receptors_with_references.append( (n_ref, weight) )
+            neuron.receptors = receptors_with_references                
+        # TODO: Should we include defined instruments?
+
+    def save(self, file:str):
+        with open(file, 'w') as f:
+            # tmp = self.to_dict()
+            # print(str(tmp))
+            json.dump(self.to_dict(), f)
+
+    def load(self, file:str):
+        with open(file, 'r') as f:
+            system_data = json.load(f)
+        self.from_dict(system_data)
+
+    def show(self, show:dict, pltinfo=None, linewidth=0.5):
         doshow = pltinfo is None
         if pltinfo is None: pltinfo = PlotInfo('System %s' % str(self.name))
         for region in self.regions.values():
-            region.show(show=show, pltinfo=pltinfo)
-        if doshow: plt.show()
+            region.show(show=show, pltinfo=pltinfo, linewidth=linewidth)
+        if doshow: plt.draw()
 
 class Common_Parameters:
     def __init__(self, scriptpath:str):
@@ -192,14 +255,33 @@ class Common_Parameters:
         }
         self.runtime_ms = 500.0
         self.randomseed = None
+        self.savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
+        self.linewidth = 0.5
+        self.figsize = (6,6)
+        self.figext = 'pdf'
+        self.extra = {}
+    def figspecs(self)->dict:
+        return {
+            'figsize': self.figsize,
+            'linewidth': self.linewidth,
+            'figext': self.figext,
+        }
+    def fullpath(self, file:str)->str:
+        if file[0]=='/':
+            return file
+        return self.savefolder + '/' + file
 
 COMMON_HELP='''
        -h         Show this usage information.
        -v         Be verbose, show all diagrams.
-       -V         Show specified diagram (multiple -V statements allowed).
+       -V         Show specified output (multiple -V statements allowed).
                   Options are: all, text, regions, cells, voxels.
        -t         Run for ms milliseconds.
        -R         Set random seed.
+       -d         Directory to save to (default is /tmp/vbp_<datetime>.
+       -l         Line width (default=0.5).
+       -f         Figure size in inches (default=6.0).
+       -x         Figure file type extension (default=pdf).
        -p         Run prototype code (default is NES interface).
 '''
 
@@ -234,4 +316,24 @@ def common_commandline_parsing(cmdline:list, pars:Common_Parameters, HELP:str)->
     elif arg== '-R':
         pars.randomseed = int(cmdline.pop(0))
         np.random.seed(pars.randomseed)
+        return None
+    elif arg== '-d':
+        pars.savefolder = str(cmdline.pop(0))
+        return None
+    elif arg== '-l':
+        pars.linewidth = float(cmdline.pop(0))
+        return None
+    elif arg== '-f':
+        fig_side_size = float(cmdline.pop(0))
+        pars.figsize = (fig_side_size, fig_side_size)
+        return None
+    elif arg== '-x':
+        pars.figext = str(cmdline.pop(0))
+        return None
+    elif arg== '-p':
+        return None
     return arg
+
+def make_savefolder(pars:Common_Parameters):
+    makedirs(pars.savefolder, exist_ok=True)
+    print('Saving output to %s.' % pars.savefolder)
