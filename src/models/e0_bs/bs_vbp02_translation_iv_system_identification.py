@@ -61,7 +61,7 @@ def system_identification(pars:Common_Parameters):
 # -- Load System: ------------------------------------------------------------
 
 LOADEMUTEXT1='''
-1. Skipping system identification, loading emulation from file %s.
+1. Skipping system identification, loading system from %s.
 '''
 
 def load_system(pars:Common_Parameters):
@@ -75,15 +75,22 @@ def load_system(pars:Common_Parameters):
 
     if pars.show['regions']: bs_system.show(show=pars.show)
 
+    file = pars.fullpath(pars.extra['save_emu'])
+    print('Saving emulation system to %s' % file)
+
+    bs_system.save(file=file)
+
 # -- Entry point: ------------------------------------------------------------
 
 HELP='''
 Usage: bs_vbp02_translation_iv_system_identification.py [-h] [-v] [-V output] [-t ms]
        [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-s] [-L file] [-K file]
+       [-E file]
 %s
        -s         Skip system identification, simply duplicate KGT.
        -L         Load acquired data from file (default: data.pkl.gz).
        -K         Load system from file (default: kgt.json).
+       -E         Save emulated system to file (default: emu.json).
 
        VBP process step 01: This script specifies double-blind data acquisition.
        WBE topic-level X: data acquisition (in-silico).
@@ -99,6 +106,7 @@ def parse_command_line()->tuple:
         'identify': True,
         'load_data': 'data.pkl.gz',
         'load_kgt': 'kgt.json',
+        'save_emu': 'emu.json',
     }
 
     cmdline = argv.copy()
@@ -112,6 +120,8 @@ def parse_command_line()->tuple:
                 extra_pars['load_data'] = str(cmdline.pop(0))
             elif arg== '-K':
                 extra_pars['load_kgt'] = str(cmdline.pop(0))
+            elif arg== '-E':
+                extra_pars['save_emu'] = str(cmdline.pop(0))
             else:
                 print('Unknown command line parameter: '+str(arg))
                 exit(0)

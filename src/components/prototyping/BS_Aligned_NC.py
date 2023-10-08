@@ -25,20 +25,20 @@ class BS_Aligned_NC(NeuralCircuit):
         self.num_cells = num_cells
         self.cells = {}
 
-    def add_cell(self, cell_id:str, soma:Geometry, axon:Geometry):
-        cell = BS_Neuron(
-            cell_id,
-            soma,
-            axon,
-        )
-        self.cells[cell_id] = cell
+    def add_cell(self, cell:BS_Neuron):
+        self.cells[cell.id] = cell
 
     def init_cells(self, domain:Geometry):
         for n in range(self.num_cells):
             domain_bounds = domain.equal_slice_bounds(self.num_cells, n)
             soma = BS_Soma(domain_bounds, align='left')
             axon = BS_Axon(domain_bounds, align='right', soma_radius_um=soma.radius_um)
-            self.add_cell(cell_id=str(n), soma=soma, axon=axon)
+            cell = BS_Neuron(
+                str(n),
+                soma,
+                axon,
+            )
+            self.add_cell(cell=cell)
 
     def get_neurons(self)->list:
         return list(self.cells.values())
@@ -109,10 +109,11 @@ class BS_Aligned_NC(NeuralCircuit):
     def from_dict(self, circuit_data:dict):
         self.id = circuit_data['id']
         self.num_cells = circuit_data['num_cells']
+        self.cells = {}
         for cell_id in circuit_data['cells']:
             cell = BS_Neuron('', None, None)
             cell.from_dict(circuit_data['cells'][cell_id])
-            self.add_cell(cell_id=cell.id, soma=cell.morphology['soma'], axon=cell.morphology['axon'])
+            self.add_cell(cell=cell)
 
     def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Neural circuit %s.' % str(self.id))
