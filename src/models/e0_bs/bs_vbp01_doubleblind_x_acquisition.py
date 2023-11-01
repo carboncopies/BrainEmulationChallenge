@@ -204,7 +204,7 @@ HELP='''
 Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V output] [-t ms]
        [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-N neurons]
        [-D method] [-s sites] [-S ratio] [-n level] [-C um] [-c ycenter]
-       [-L file] [-A file]
+       [-L file] [-A file] [-K file]
 %s
        -N         Number of neurons in ground truth system.
        -D         Distribution method: aligned, unirand.
@@ -216,6 +216,8 @@ Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V output] [-t ms]
        -L         Load known ground-truth system (KTG) ('' means generate,
                   default: kgt.json).
        -A         Save acquired data (default: data.pkl.gz).
+       -K         Save known ground-truth system (KTG) as file (default:
+                  kgt.json).
 
        VBP process step 01: This script specifies double-blind data acquisition.
        WBE topic-level X: data acquisition (in-silico).
@@ -237,6 +239,7 @@ def parse_command_line()->tuple:
         'calcium_y': -5.0,
         'load_kgt': 'kgt.json',
         'save_data': 'data.pkl.gz',
+        'save_kgt': 'kgt.json',
     }
 
     cmdline = argv.copy()
@@ -262,6 +265,8 @@ def parse_command_line()->tuple:
                 extra_pars['load_kgt'] = str(cmdline.pop(0))
             elif arg== '-A':
                 extra_pars['save_data'] = str(cmdline.pop(0))
+            elif arg== '-K':
+                extra_pars['save_kgt'] = str(cmdline.pop(0))
             else:
                 print('Unknown command line parameter: '+str(arg))
                 exit(0)

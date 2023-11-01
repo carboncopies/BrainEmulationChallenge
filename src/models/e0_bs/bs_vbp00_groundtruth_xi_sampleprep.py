@@ -52,7 +52,7 @@ def quickstart(user:str, passwd:str):
 # -- Initialize Known Ground-Truth System: -----------------------------------
 
 INITTEXT1='''
-1. Defining a 2-neuron system:
+1. Defining a %s-neuron system:
    a. Scale: The number of principal nodes.
    b. Functional: The type of network arrangment
       (aligned ball-and-stick).
@@ -64,7 +64,7 @@ def init_groundtruth(pars:Common_Parameters)->System:
 
     bs_system = System('e0_bs')
 
-    print(INITTEXT1)
+    print(INITTEXT1 % str(pars.extra['num_nodes']))
 
     if pars.extra['distribution'] == 'unirand':
         bs_net = bs_system.add_circuit( BS_Uniform_Random_NC(id='BS NC', num_cells=pars.extra['num_nodes']) )

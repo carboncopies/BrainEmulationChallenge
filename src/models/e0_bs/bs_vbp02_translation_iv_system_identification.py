@@ -95,10 +95,6 @@ Usage: bs_vbp02_translation_iv_system_identification.py [-h] [-v] [-V output] [-
        VBP process step 01: This script specifies double-blind data acquisition.
        WBE topic-level X: data acquisition (in-silico).
 
-       The acquisition experiment carried out here collects data by simulating
-       the use of brain data collection methods. The resulting data is intended
-       for use in system identification and emulation.
-
 ''' % COMMON_HELP
 
 def parse_command_line()->tuple:

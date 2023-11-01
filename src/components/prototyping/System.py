@@ -220,7 +220,6 @@ class System:
         for neuron in all_neurons:
             receptors_with_references = []
             for receptor in neuron.receptors:
-                print(str(receptor))
                 n_id, weight = receptor
                 n_ref = self.get_neurons_by_IDs([ n_id, ])[0]
                 receptors_with_references.append( (n_ref, weight) )
