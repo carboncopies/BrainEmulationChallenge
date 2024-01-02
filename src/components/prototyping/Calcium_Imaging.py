@@ -28,8 +28,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from .SignalFunctions import dblexp, delayed_pulse
-from .Spatial import PlotInfo, VecBox, point_is_within_box, plot_voxel
-from .Geometry import fluorescent_voxel
+from .common.Spatial import PlotInfo, VecBox, point_is_within_box, plot_voxel
+from .common._Geometry import fluorescent_voxel
 from .common.Neuron import Neuron
 
 def voxels_within_bounds(candidate_voxels:list, subvolume:VecBox)->list:

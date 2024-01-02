@@ -5,7 +5,9 @@
 Definitions of linearly aligned ball-and-stick neural circuits.
 '''
 
-from .Geometry import PlotInfo, Geometry
+from .common.Spatial import PlotInfo
+from .common._Geometry import Geometry
+from .Geometry import Sphere, Cylinder
 from .common._BSAlignedNC import _BSAlignedNC
 from .BS_Morphology import BS_Soma, BS_Axon, BS_Receptor
 from .BS_Neuron import BS_Neuron

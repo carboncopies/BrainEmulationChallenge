@@ -12,7 +12,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.linalg import norm
 
-from .common.Geometry import _Cylinder, _Sphere, _Box
+from .common._Geometry import _Cylinder, _Sphere, _Box
 
 class Geometry:
     def __init__(self):

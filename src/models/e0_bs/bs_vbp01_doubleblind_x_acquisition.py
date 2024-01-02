@@ -26,16 +26,15 @@ import vbpcommon
 from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 
 from common.Common_Parameters import Common_Parameters, common_commandline_parsing, make_savefolder, COMMON_HELP
+from common.Spatial import vec3add, VecBox
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
     from NES_interfaces.System import System
     from NES_interfaces.KGTRecords import plot_electrodes
-    from NES_interfaces.Spatial import vec3add, VecBox
     from NES_interfaces.Data import save_acq_data
 else:
     from prototyping.System import System
     from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium_signals, plot_calcium
-    from prototyping.Spatial import vec3add, VecBox
     from prototyping.Data import save_acq_data
 
 def quickstart(user:str, passwd:str):

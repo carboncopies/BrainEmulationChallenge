@@ -1,4 +1,4 @@
-# Geometry.py
+# _Geometry.py
 # Randal A. Koene, 20230621
 
 '''
@@ -11,7 +11,7 @@ import numpy as np
 from scipy.linalg import norm
 
 from .Spatial import PlotInfo, VecBox, plot_voxel, point_is_within_box, Plane, SixPlanesBox
-from .common.Neuron import Neuron
+from .Neuron import Neuron
 
 def plane_distance(p:Plane, point:np.array)->float:
     d = point - p.point

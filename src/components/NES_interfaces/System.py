@@ -13,7 +13,7 @@ from .common.NeuralCircuit import NeuralCircuit
 from .Region import Region
 
 class System:
-    def __init__(self, name:str, user:str, passwd:str):
+    def __init__(self, name:str): #, user:str, passwd:str):
         # Cached references:
         self.neuralcircuits = {}
         self.regions = {}

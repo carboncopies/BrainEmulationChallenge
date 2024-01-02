@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import scipy.stats as stats
 
-from .Spatial import VecBox
-from .Geometry import PlotInfo, Sphere, Cylinder
+from .common.Spatial import VecBox, PlotInfo
+from .Geometry import Sphere, Cylinder
 from .SignalFunctions import dblexp, convolve_1d
 from .common.Neuron import Neuron
 from .Calcium_Imaging import fluorescent_voxel

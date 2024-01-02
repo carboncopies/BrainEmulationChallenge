@@ -7,7 +7,8 @@ Definitions of brain region descriptors.
 
 import matplotlib.pyplot as plt
 
-from .Geometry import Geometry, PlotInfo
+from .common.Spatial import PlotInfo
+from .common._Geometry import Geometry
 from .common.NeuralCircuit import NeuralCircuit
 
 class Region:

@@ -7,8 +7,9 @@ Definitions of ball-and-stick neuron types.
 
 import numpy as np
 
+from .common.Spatial import PlotInfo
 from .BG_API import BGNES_BS_compartment_create, BGNES_connection_staple_create, BGNES_DAC_set_output_list
-from .Geometry import PlotInfo, Sphere, Cylinder
+from .Geometry import Sphere, Cylinder
 from .common.Neuron import Neuron
 
 # def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:

@@ -8,7 +8,7 @@ Definitions of in-silico ground-truth systems.
 import matplotlib.pyplot as plt
 import json
 
-from .Spatial import PlotInfo
+from .common.Spatial import PlotInfo
 from .common.NeuralCircuit import NeuralCircuit
 from .Region import Region, BrainRegion
 from .Electrodes import Recording_Electrode

@@ -6,6 +6,7 @@ Common parts of the definitions of linearly algined ball-and-stick
 neural circuits.
 '''
 
+from ._Geometry import Geometry
 from .NeuralCircuit import NeuralCircuit
 
 class _BSAlignedNC(NeuralCircuit):

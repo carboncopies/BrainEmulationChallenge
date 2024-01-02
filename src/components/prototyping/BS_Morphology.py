@@ -6,7 +6,8 @@ Helper functions to generate morphology components for
 ball-and-stick neurons.
 '''
 
-from .Geometry import Geometry, Box, Sphere, Cylinder
+from .common._Geometry import Geometry
+from .Geometry import Box, Sphere, Cylinder
 
 def BS_Soma(domain_bounds:list, align:str, radius_um=0.5)->Sphere:
     if align=='left':
