@@ -24,15 +24,32 @@ USENES='-p' not in argv
 import vbpcommon
 from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
 
+from common.Common_Parameters import Common_Parameters, common_commandline_parsing, make_savefolder, COMMON_HELP
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
+    from NES_interfaces.System import System
     from NES_interfaces.KGTRecords import plot_electrodes
     from NES_interfaces.Spatial import vec3add, VecBox
+    from NES_interfaces.Metrics_C11 import Metrics_C11
+    from NES_interfaces.Metrics_C4 import Metrics_C4
+    from NES_interfaces.Metrics_C8 import Metrics_C8
+    from NES_interfaces.Metrics_N1 import Metrics_N1
+    from NES_interfaces.Metrics_N2 import Metrics_N2
+    from NES_interfaces.Metrics_N3 import Metrics_N3
+    from NES_interfaces.Metrics_N4 import Metrics_N4
+    from NES_interfaces.Metrics_P3 import Metrics_P3
 else:
-    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
+    from prototyping.System import System
     from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium_signals, plot_calcium
     from prototyping.Spatial import vec3add, VecBox
+    from prototyping.Metrics_C11 import Metrics_C11
+    from prototyping.Metrics_C4 import Metrics_C4
+    from prototyping.Metrics_C8 import Metrics_C8
+    from prototyping.Metrics_N1 import Metrics_N1
+    from prototyping.Metrics_N2 import Metrics_N2
+    from prototyping.Metrics_N3 import Metrics_N3
+    from prototyping.Metrics_N4 import Metrics_N4
+    from prototyping.Metrics_P3 import Metrics_P3
 
 def quickstart(user:str, passwd:str):
     if USENES:
@@ -80,9 +97,53 @@ def load_ground_truth(pars:Common_Parameters)->System:
 
 # -- Validate Success Criteria: ----------------------------------------------
 
+VALIDATETEXT1='''
+The following success criteria and corresponding metrics are applied
+to the emulated neural circuit:
+
+#1 - P-3 Observable behavior and responses are sufficiently similar.
+#2 - C-4 Dynamic evolution through plasticity.
+#3 - C-8 A specified set of memories, possibly encoded specifically for
+     the test, is retrieved sufficiently well.
+#4 - C-11 Objectively verifiable memories are retrieved with a sufficiently
+     similar set of correct and incorrect answers.
+#5 - N-1 Reconstruction of neuronal circuits through system identification
+     and tuning of properties is sufficiently accurate.
+#6 - N-2 MIMO neural traces match within a specified envelope.
+#7 - N-3 Spatio-temporal patterns, brain rhythms, synchronization are
+     sufficiently similar when stimulated.
+#8 - N-4 Spatio-temporal patterns, brain rhythms, synchronization are
+     sufficiently similar in specific brain states or modes.
+
+'''
+
 def validate_success_criteria(bs_emulation:System, bs_kgt:System):
 
-    print('Success criterion: ')
+    print(VALIDATETEXT1)
+
+    metricsp3 = Metrics_P3(bs_emulation, bs_kgt)
+    metricsp3.validate()
+
+    metricsc4 = Metrics_C4(bs_emulation, bs_kgt)
+    metricsc4.validate()
+
+    metricsc8 = Metrics_C8(bs_emulation, bs_kgt)
+    metricsc8.validate()
+
+    metricsc11 = Metrics_C11(bs_emulation, bs_kgt)
+    metricsc11.validate()
+
+    metricsn1 = Metrics_N1(bs_emulation, bs_kgt)
+    metricsn1.validate()
+
+    metricsn2 = Metrics_N2(bs_emulation, bs_kgt)
+    metricsn2.validate()
+
+    metricsn3 = Metrics_N3(bs_emulation, bs_kgt)
+    metricsn3.validate()
+
+    metricsn4 = Metrics_N4(bs_emulation, bs_kgt)
+    metricsn4.validate()
 
 # -- Entry point: ------------------------------------------------------------
 

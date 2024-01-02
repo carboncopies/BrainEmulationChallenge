@@ -8,7 +8,7 @@ Definitions of linearly aligned ball-and-stick neural circuits.
 import numpy as np
 
 from .Geometry import PlotInfo, Geometry, Sphere, Cylinder
-from .NeuralCircuit import NeuralCircuit
+from .common.NeuralCircuit import NeuralCircuit
 from .BS_Morphology import BS_Soma, BS_Axon, BS_Receptor
 from .BS_Neuron import BS_Neuron
 

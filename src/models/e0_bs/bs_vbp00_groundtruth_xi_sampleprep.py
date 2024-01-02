@@ -29,15 +29,16 @@ from sys import argv
 USENES='-p' not in argv
 
 import vbpcommon
+from common.Common_Parameters import Common_Parameters, common_commandline_parsing, make_savefolder, COMMON_HELP
 if USENES:
     from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
+    from NES_interfaces.System import System
     from NES_interfaces.Geometry import Box
     from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC, BS_Uniform_Random_NC
     from NES_interfaces.Region import BrainRegion
     from NES_interfaces.KGTRecords import plot_recorded
 else:
-    from prototyping.System import System, Common_Parameters, common_commandline_parsing, COMMON_HELP, make_savefolder
+    from prototyping.System import System
     from prototyping.Geometry import Box
     from prototyping.BS_Aligned_NC import BS_Aligned_NC, BS_Uniform_Random_NC
     from prototyping.Region import BrainRegion
@@ -101,7 +102,7 @@ The imagined nature of the 2-neuron ball-and-stick circuit
 provides no differentiation of dendritic input sources to
 the neurons. Activity is elicited exclusively by generating
 potential at or near a soma to the point where a cell fires
-and action potential.
+and action potential is propagated.
 
 God's eye direct access to every aspect of the in-silico
 ground-truth system includes the ability to specifically

@@ -6,7 +6,7 @@ Definitions of linearly aligned ball-and-stick neural circuits.
 '''
 
 from .Geometry import PlotInfo, Geometry
-from .NeuralCircuit import NeuralCircuit
+from .common.NeuralCircuit import NeuralCircuit
 from .BS_Morphology import BS_Soma, BS_Axon, BS_Receptor
 from .BS_Neuron import BS_Neuron
 
@@ -21,7 +21,10 @@ class BS_Aligned_NC(NeuralCircuit):
 
         super().__init__(id=id)
         self.num_cells = num_cells
-        self.cells = []
+        self.cells = {}
+
+    def add_cell(self, cell:BS_Neuron):
+        self.cells[cell.id] = cell
 
     def init_cells(self, domain:Geometry):
         for n in range(self.num_cells):
@@ -33,7 +36,17 @@ class BS_Aligned_NC(NeuralCircuit):
                 soma,
                 axon,
             )
-            self.cells.append(cell)
+            self.add_cell(cell=cell)
+
+    def get_neurons(self)->list:
+        return list(self.cells.values())
+
+    def get_neurons_by_IDs(self, listofIDs:list)->list:
+        listed_neurons = []
+        for cell_id in listofIDs:
+            if cell_id in self.cells:
+                listed_neurons.append(self.cells[cell_id])
+        return listed_neurons
 
     def Set_Weight(self, from_to:tuple, method:str):
         print('Setting up connection from %d to %d.' % from_to)
