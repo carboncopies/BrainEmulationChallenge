@@ -12,7 +12,7 @@ import scipy.stats as stats
 from .Spatial import VecBox
 from .Geometry import PlotInfo, Sphere, Cylinder
 from .SignalFunctions import dblexp, convolve_1d
-from .Neuron import Neuron
+from .common.Neuron import Neuron
 from .Calcium_Imaging import fluorescent_voxel
 from .BS_Morphology import BS_Morphology
 
@@ -43,7 +43,6 @@ class BS_Neuron(Neuron):
             'axon': axon,
         }
         self.receptors = []
-        self.t_directstim_ms = []
 
         self.t_ms = 0
         self._has_spiked = False

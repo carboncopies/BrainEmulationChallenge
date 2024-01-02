@@ -9,7 +9,7 @@ from time import sleep
 
 from .BG_API import BGNES_simulation_create, BGNES_simulation_recordall, BGNES_get_recording, BGNES_simulation_runfor, BGNES_get_simulation_status
 
-from .NeuralCircuit import NeuralCircuit
+from .common.NeuralCircuit import NeuralCircuit
 from .Region import Region
 
 class System:

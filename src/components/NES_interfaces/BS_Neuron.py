@@ -9,7 +9,7 @@ import numpy as np
 
 from .BG_API import BGNES_BS_compartment_create, BGNES_connection_staple_create, BGNES_DAC_set_output_list
 from .Geometry import PlotInfo, Sphere, Cylinder
-from .Neuron import Neuron
+from .common.Neuron import Neuron
 
 # def dblexp(amp:float, tau_rise:float, tau_decay:float, tdiff:float)->float:
 #     if tdiff<0: return 0

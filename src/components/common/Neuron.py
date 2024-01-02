@@ -8,3 +8,5 @@ Definitions of neuron types.
 class Neuron:
     def __init__(self, id:str):
         self.id = id
+        self.t_directstim_ms = []
+
