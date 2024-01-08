@@ -19,6 +19,9 @@ AUTHKEY=''
 global SIMID
 SIMID=''
 
+global DEBUG_API
+DEBUG_API=True
+
 def API_call_raw(uri:str)->requests.Response:
     '''
     Make a raw call through the Braingenix API.
@@ -27,15 +30,17 @@ def API_call_raw(uri:str)->requests.Response:
     return requests.get(uri)
 
 def BGAPI_call(rq:str)->requests.Response:
-    print('Request is: '+str(rq))
+    if DEBUG_API: print('Request is: '+str(rq))
     response = requests.get(BGAPI_BASE_URI+rq)
-    #print('Response is: '+str(response.text))
+    if DEBUG_API: print('Response is: '+str(response.text))
     return response
 
 def BGNES_handle_response(
-    response:requests.Response,
-    caller=str,
-    retstrings:list=['StatusCode'])->list:
+        response:requests.Response,
+        caller=str,
+        retstrings:list=['StatusCode']
+    )->list:
+
     if response.status_code==200:
         try:
             data = response.json()

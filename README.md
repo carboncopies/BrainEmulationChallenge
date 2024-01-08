@@ -1,5 +1,9 @@
 # aifinch
 
+## Installing the BrainGenix Python Client module
+
+To run model scripts using the NES API for backend processing, you need to install the BrainGenix Python Client
+module. You can do this with `pip3` to install the module from `PyPi`.
 
 
 ## Getting started
