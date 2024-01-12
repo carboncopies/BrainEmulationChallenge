@@ -41,24 +41,36 @@ class BS_Neuron(Neuron):
             'axon': axon,
         }
         # Create soma compartment:
-        self.soma_id = BGNES_BS_compartment_create(
-            ShapeID=soma.id,
+        # self.soma_id = BGNES_BS_compartment_create(
+        #     ShapeID=soma.id,
+        #     MembranePotential_mV=self.Vm_mV,
+        #     RestingPotential_mV=self.Vrest_mV,
+        #     SpikeThreshold_mV=self.Vact_mV,
+        #     DecayTime_ms=self.tau_AHP_ms,
+        #     AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
+        # )
+        # # Create axon compartment:
+        # self.axon_id = BGNES_BS_compartment_create(
+        #     ShapeID=axon.id,
+        #     MembranePotential_mV=self.Vm_mV,
+        #     RestingPotential_mV=self.Vrest_mV,
+        #     SpikeThreshold_mV=self.Vact_mV,
+        #     DecayTime_ms=self.tau_AHP_ms,
+        #     AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
+        # )
+        # self.staple_id = BGNES_connection_staple_create(self.soma_id, self.axon_id)
+        self.neuron_id = BGNES_BS_neuron_create(
+            SomaID=soma.ID, 
+            AxonID=axon.ID,
             MembranePotential_mV=self.Vm_mV,
             RestingPotential_mV=self.Vrest_mV,
             SpikeThreshold_mV=self.Vact_mV,
             DecayTime_ms=self.tau_AHP_ms,
             AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
+            PostsynapticPotentialRiseTime_ms=self.tau_PSPr,
+            PostsynapticPotentialDecayTime_ms=self.tau_PSPd,
+            PostsynapticPotentialAmplitude_mV=self.vPSP,
         )
-        # Create axon compartment:
-        self.axon_id = BGNES_BS_compartment_create(
-            ShapeID=axon.id,
-            MembranePotential_mV=self.Vm_mV,
-            RestingPotential_mV=self.Vrest_mV,
-            SpikeThreshold_mV=self.Vact_mV,
-            DecayTime_ms=self.tau_AHP_ms,
-            AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
-        )
-        self.staple_id = BGNES_connection_staple_create(self.soma_id, self.axon_id)
         self.receptors = []
         self.t_directstim_ms = []
         self.patch_id = None
