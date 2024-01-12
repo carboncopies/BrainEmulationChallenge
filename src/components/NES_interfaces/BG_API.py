@@ -274,8 +274,8 @@ def BGNES_BS_receptor_create(
     return receptor
 
 def BGNES_BS_neuron_create(
-    SomaID,
-    AxonID,
+    Soma,
+    Axon,
     MembranePotential_mV:float,
     RestingPotential_mV:float,
     SpikeThreshold_mV:float,
@@ -290,8 +290,8 @@ def BGNES_BS_neuron_create(
         name = generate_autoname('neuron-')
     Cfg = NES.Models.Neurons.BS.Configuration()
     Cfg.Name = name
-    Cfg.SomaID = SomaID,
-    Cfg.AxonID = AxonID
+    Cfg.Soma = Soma
+    Cfg.Axon = Axon
     Cfg.MembranePotential_mV = MembranePotential_mV
     Cfg.RestingPotential_mV = RestingPotential_mV
     Cfg.SpikeThreshold_mV = SpikeThreshold_mV
@@ -484,8 +484,8 @@ if __name__ == '__main__':
 
     print('Calling BGNES_BS_neuron_create...')
     neuron = BGNES_BS_neuron_create(
-        SomaID=sphere.ID, 
-        AxonID=cylinder.ID,
+        Soma=sphere.ID, 
+        Axon=cylinder.ID,
         MembranePotential_mV=-60.0,
         RestingPotential_mV=-60.0,
         SpikeThreshold_mV=-50.0,
