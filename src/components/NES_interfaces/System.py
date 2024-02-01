@@ -7,13 +7,12 @@ Definitions of in-silico ground-truth systems.
 
 from time import sleep
 
-from .BG_API import BGNES_simulation_create, BGNES_simulation_recordall, BGNES_get_recording, BGNES_simulation_runfor, BGNES_get_simulation_status
-
+import common.glb as glb
 from .common.NeuralCircuit import NeuralCircuit
 from .Region import Region
 
 class System:
-    def __init__(self, name:str): #, user:str, passwd:str):
+    def __init__(self, name:str):
         # Cached references:
         self.neuralcircuits = {}
         self.regions = {}
@@ -22,7 +21,7 @@ class System:
         self.t_ms = 0
 
         # Create through API call:
-        self.id = BGNES_simulation_create(name)
+        glb.bg_api.BGNES_simulation_create(name=name)
 
     def add_circuit(self, circuit:NeuralCircuit)->NeuralCircuit:
         self.neuralcircuits[circuit.id] = circuit
@@ -42,14 +41,14 @@ class System:
         milliseconds. Setting t_max_ms effectively turns off recording.
         Setting t_max_ms to -1 means record forever.
         '''
-        BGNES_simulation_recordall(t_max_ms)
+        glb.bg_api.BGNES_simulation_recordall(t_max_ms)
 
     def get_recording(self)->dict:
-        return BGNES_get_recording()
+        return glb.bg_api.BGNES_get_recording()
 
     def run_for(self, t_run_ms:float, blocking=True):
-        BGNES_simulation_runfor(t_run_ms)
+        glb.bg_api.BGNES_simulation_runfor(t_run_ms)
         if not blocking: return
         # TODO: *** Beware that the following can get stuck.
-        while BGNES_get_simulation_status()[0]:
+        while glb.bg_api.BGNES_get_simulation_status()[0]:
             sleep(0.005)

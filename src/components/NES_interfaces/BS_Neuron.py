@@ -7,8 +7,8 @@ Definitions of ball-and-stick neuron types.
 
 import numpy as np
 
+import common.glb as glb
 from .common.Spatial import PlotInfo
-from .BG_API import BGNES_BS_compartment_create, BGNES_connection_staple_create, BGNES_DAC_set_output_list
 from .Geometry import Sphere, Cylinder
 from .common.Neuron import Neuron
 
@@ -59,9 +59,9 @@ class BS_Neuron(Neuron):
         #     AfterHyperpolarizationAmplitude_mV=self.Vahp_mV,
         # )
         # self.staple_id = BGNES_connection_staple_create(self.soma_id, self.axon_id)
-        self.neuron_id = BGNES_BS_neuron_create(
-            SomaID=soma.ID, 
-            AxonID=axon.ID,
+        self.neuron_id = glb.bg_api.BGNES_BS_neuron_create(
+            Soma=soma.id, 
+            Axon=axon.id,
             MembranePotential_mV=self.Vm_mV,
             RestingPotential_mV=self.Vrest_mV,
             SpikeThreshold_mV=self.Vact_mV,
@@ -86,7 +86,7 @@ class BS_Neuron(Neuron):
 
     def attach_direct_stim(self, t_ms:float):
         if self.patch_id is None:
-            self.patch_id = BGNES_DAC_create(
+            self.patch_id = glb.bg_api.BGNES_DAC_create(
                 DestinationCompartmentID=self.soma_id,
                 ClampLocation_nm=[0,0,0])
         self.t_directstim_ms.append(t_ms)
@@ -97,7 +97,7 @@ class BS_Neuron(Neuron):
             for t_stim in self.t_directstim_ms:
                 DAC_settings.append( (t_stim, self.Vact_mV+10.0 ) )
                 DAC_settings.append( (t_stim+5.0, self.Vrest_mV ) )
-        BGNES_DAC_set_output_list(self.patch_id, DAC_settings)
+        glb.bg_api.BGNES_DAC_set_output_list(self.patch_id, DAC_settings)
 
     def show(self, pltinfo=None):
         if pltinfo is None: pltinfo = PlotInfo('Neuron %s.' % str(self.id))

@@ -29,9 +29,10 @@ from sys import argv
 USENES='-p' not in argv
 
 import vbpcommon
+import common.glb as glb
 from common.Common_Parameters import Common_Parameters, common_commandline_parsing, make_savefolder, COMMON_HELP
 if USENES:
-    from NES_interfaces.BG_API import BGNES_QuickStart
+    from NES_interfaces.BG_API import BG_API_Setup
     from NES_interfaces.System import System
     from NES_interfaces.Geometry import Box
     from NES_interfaces.BS_Aligned_NC import BS_Aligned_NC, BS_Uniform_Random_NC
@@ -46,9 +47,13 @@ else:
 
 def quickstart(user:str, passwd:str):
     if USENES:
-        if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
+        BG_API_Setup(user=user, passwd=passwd)
+        if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
             print('BG NES Interface access failed.')
             exit(1)
+        return glb.bg_api
+    else:
+        return None
 
 # -- Initialize Known Ground-Truth System: -----------------------------------
 

@@ -84,7 +84,7 @@ def cylinder_outside_box(c, b:VecBox)->bool:
 
 class Geometry:
     def __init__(self):
-        pass
+        self.id = None
 
 def voxel_containing_point(point:np.array, voxel_um:float)->dict:
     indices = ( int(point[0]//voxel_um),
@@ -211,6 +211,7 @@ class _Box(Geometry):
         center_um = ( 0, 0, 0 ),
         dims_um = ( 5.0, 10.0, 10.0 ),
         rotations_rad = (0, 0, 0) ):
+        super().__init__()
         self.center_um = center_um
         self.dims_um = dims_um
         self.rotations_rad = rotations_rad
@@ -278,6 +279,7 @@ class _Sphere(Geometry):
     def __init__(self,
         center_um=( 0, 0, 0 ),
         radius_um=1.0):
+        super().__init__()
         self.center_um = center_um
         self.radius_um = radius_um
 
@@ -342,6 +344,7 @@ class _Cylinder(Geometry):
         end0_radius_um=0.1,
         end1_um=(1,0,0),
         end1_radius_um=0.1):
+        super().__init__()
         self.end0_um = end0_um
         self.end1_um = end1_um
         self.end0_radius_um = end0_radius_um
