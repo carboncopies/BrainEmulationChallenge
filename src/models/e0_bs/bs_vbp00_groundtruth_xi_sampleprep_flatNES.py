@@ -39,6 +39,7 @@ from datetime import datetime
 
 import vbpcommon
 import common.glb as glb
+from NES_interfaces.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 api_is_local=True
@@ -97,7 +98,7 @@ box = glb.bg_api.BGNES_box_create(
 
 region_id='BS'
 region_content=circuit_id
-region_shape=box.id
+region_shape=box.ID
 
 # 3.3 Init cells within circuit:
 
@@ -108,6 +109,7 @@ if circuit_distribution != 'unirand':
 # 3.3.1 Find uniform random distributed soma positions that do not overlap:
 
 soma_radius_um = 0.5
+dist_threshold = 4*soma_radius_um*soma_radius_um
 
 somas = []
 soma_positions = []
@@ -115,7 +117,7 @@ for n in range(circuit_num_cells):
     need_position = True
     while need_position:
         xyz = np.random.uniform(-0.5, 0.5, 3)
-        xyz = xyz*np.array(list(domain.dims_um)) + np.array(list(domain.center_um))
+        xyz = xyz*np.array(box_dims) + np.array(box_center)
         # 2. Check it isn't too close to other neurons already placed.
         need_position = False
         for soma_pos in soma_positions:
@@ -132,32 +134,34 @@ for n in range(circuit_num_cells):
 
 # 3.3.2 Create axons and direct them to neighboring cells:
 
-soma_radius_um = 0.5
 end0_radius_um = 0.1
 end1_radius_um = 0.1
-dist_threshold = 4*soma_radius_um*soma_radius_um
 
 # TODO: We don't need the axon_ends list if we remember end0 and end0
 #       in Cylinder creation in pyBrainGenixClient.
 
 axons = []
 axon_ends = []
-axons_to = -1*np.ones(self.num_cells, dtype=int)
-min_dist_squared = max(box_dims)**2
+axons_to = -1*np.ones(circuit_num_cells, dtype=int)
+max_dist_squared = max(box_dims)**2
 for n in range(circuit_num_cells):
+    min_dist_squared = max_dist_squared
     # Find nearest cell:
     nearest = -1
     for i in range(len(soma_positions)):
-        if i != idx:
-            if axons_to[i] != n:
+        if i != n:
+            if axons_to[i] != n: # Avoid tiny loops.
                 v = soma_positions[n] - soma_positions[i]
                 d_squared = v.dot(v)
                 if d_squared < min_dist_squared:
                     min_dist_squared = d_squared
                     nearest = i
     axons_to[n] = nearest
+    #print('This one is %s and nearest is %s.' % (str(n), str(nearest)))
     dv_axon = soma_positions[nearest] - soma_positions[n]
     mag = np.sqrt(dv_axon.dot(dv_axon))
+    if mag == 0:
+        exit(1)
     dv_axon = (1/mag)*dv_axon
     end0 = soma_positions[n] + (soma_radius_um*dv_axon)
     end1 = soma_positions[nearest] - (soma_radius_um*dv_axon)
@@ -229,7 +233,7 @@ for pattern in connection_pattern_set:
     receptor_location = axon_ends[int(pattern[1])][1] # soma_positions[int(pattern[1])]
     receptor_conductance = neuron_vPSP * weight
     time_constants = [ neuron_tau_PSPr, neuron_tau_PSPd ]
-    receptor = glb.bg_api.BGNES_BS_receptor_create(
+    receptor = glb.bg_api.BGNES_BS_receptor_create( # ******* CONTINUE HERE BY FIXING THE API & NES
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
         Conductance_nS=receptor_conductance,
@@ -330,7 +334,7 @@ while glb.bg_api.BGNES_get_simulation_status()[0]:
 
 # 5.3 Retrieve recordings and plot
 
-recording_dict = return glb.bg_api.BGNES_get_recording()
+recording_dict = glb.bg_api.BGNES_get_recording()
 
 plot_recorded(
     savefolder=savefolder,
