@@ -272,7 +272,7 @@ class BG_API:
         SourceCompartmentID:str,
         DestinationCompartmentID:float,
         Conductance_nS:float,
-        TimeConstant_ms:float,
+        TimeConstants_ms:list,
         ReceptorLocation_um:tuple,
         name=None)->str:
         if name is None:
@@ -282,7 +282,7 @@ class BG_API:
         Cfg.SourceCompartment = SourceCompartmentID
         Cfg.DestinationCompartment = DestinationCompartmentID
         Cfg.Conductance_nS = Conductance_nS
-        Cfg.TimeConstant_ms = TimeConstant_ms
+        Cfg.TimeConstants_ms = TimeConstants_ms
         Cfg.ReceptorLocation_um = ReceptorLocation_um
         receptor = self.Simulation.Sim.AddReceptor(Cfg)
         return receptor
@@ -431,7 +431,7 @@ if __name__ == '__main__':
 
     print('Calling BGNES_simulation_create...')
     glb.bg_api.BGNES_simulation_create(name='test')
-    print('Simulation: '+str(bg_api.Simulation.Sim.ID))
+    print('Simulation: '+str(glb.bg_api.Simulation.Sim.ID))
 
     print('Calling BGNES_sphere_create...')
     sphere = glb.bg_api.BGNES_sphere_create(

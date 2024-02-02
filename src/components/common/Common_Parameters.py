@@ -21,6 +21,7 @@ class Common_Parameters:
         self.runtime_ms = 500.0
         self.randomseed = None
         self.savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
+        self.api_is_local = False
         self.linewidth = 0.5
         self.figsize = (6,6)
         self.figext = 'pdf'
@@ -48,6 +49,7 @@ COMMON_HELP='''
        -f         Figure size in inches (default=6.0).
        -x         Figure file type extension (default=pdf).
        -p         Run prototype code (default is NES interface).
+       -a         NES interface API is running locally.
 '''
 
 def common_commandline_parsing(cmdline:list, pars:Common_Parameters, HELP:str)->str:
@@ -96,6 +98,9 @@ def common_commandline_parsing(cmdline:list, pars:Common_Parameters, HELP:str)->
         pars.figext = str(cmdline.pop(0))
         return None
     elif arg== '-p':
+        return None
+    elif arg== '-a':
+        pars.api_is_local = True
         return None
     return arg
 

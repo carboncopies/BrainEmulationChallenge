@@ -45,9 +45,11 @@ else:
     from prototyping.Region import BrainRegion
     from prototyping.KGTRecords import plot_recorded
 
-def quickstart(user:str, passwd:str):
+def quickstart(user:str, passwd:str, api_is_local:bool):
     if USENES:
         BG_API_Setup(user=user, passwd=passwd)
+        if api_is_local:
+            glb.bg_api.set_local()
         if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
             print('BG NES Interface access failed.')
             exit(1)
@@ -146,8 +148,8 @@ def run_experiment(bs_kgt_system:System, pars:Common_Parameters):
 
 HELP='''
 Usage: bs_vbp00_groundtruth_xi_sampleprep.py [-h] [-v] [-V output] [-t ms]
-       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-N neurons]
-       [-D method] [-K file]
+       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-a]
+       [-N neurons] [-D method] [-K file]
 %s
        -N         Number of neurons in ground truth system.
        -D         Distribution method: aligned, unirand.
@@ -198,7 +200,10 @@ if __name__ == '__main__':
     pars = parse_command_line()
     make_savefolder(pars)
 
-    quickstart('Admonishing','Instruction')
+    quickstart(
+        user='Admonishing',
+        passwd='Instruction',
+        api_is_local=pars.api_is_local)
 
     bs_kgt_system = init_groundtruth(pars=pars)
 

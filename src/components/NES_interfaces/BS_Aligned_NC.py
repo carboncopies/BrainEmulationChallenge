@@ -5,6 +5,9 @@
 Definitions of linearly aligned ball-and-stick neural circuits.
 '''
 
+import json
+
+import common.glb as glb
 from .common.Spatial import PlotInfo
 from .common._Geometry import Geometry
 from .Geometry import Sphere, Cylinder
@@ -29,22 +32,22 @@ class BS_Aligned_NC(_BSAlignedNC):
     def Set_Weight(self, from_to:tuple, method:str):
         from_cell, target_cell, from_cell_ref, weight = self.prepare_Set_Weight(from_to, method)
 
-        from_cell_id = from_cell_ref.axon_id
-        to_cell_id = target_cell.soma_id
+        from_cell_id = from_cell_ref.morphology['axon'].id
+        to_cell_id = target_cell.morphology['soma'].id
         receptor_location = target_cell.morphology['soma'].center_um
-        receptor_conductance = target_cell.vPSP * weigth
+        receptor_conductance = target_cell.vPSP * weight
         time_constants = [ target_cell.tau_PSPr, target_cell.tau_PSPd ]
-        receptor_id = BGNES_BS_receptor_create(from_cell_id, to_cell_id, receptor_conductance, json.dumps(time_constants), receptor_location)
-        target_cell.receptors.append( (from_cell_ref, weigth, receptor_id) )
+        receptor_id = glb.bg_api.BGNES_BS_receptor_create(from_cell_id, to_cell_id, receptor_conductance, json.dumps(time_constants), receptor_location)
+        target_cell.receptors.append( (from_cell_ref, weight, receptor_id) )
         target_cell.morphology['receptor'] = BS_Receptor(self.cells, from_cell)
 
     def attach_direct_stim(self, tstim_ms:list):
         for stim in tstim_ms:
-            t, cell_num = stim
+            t, cell_id = stim
             if cell_id not in self.cells:
-                raise Exception('BS_Aligned_NC.attach_direct_stim: Cell %d not found.' % cell_num)
+                raise Exception('BS_Aligned_NC.attach_direct_stim: Cell %d not found.' % cell_id)
             # First, we create the DACs where they haven't yet been created and cache cell-specific stimulation times.
-            self.cells[cell_num].attach_direct_stim(t)
+            self.cells[cell_id].attach_direct_stim(t)
         for cell in self.cells:
             # Then, initialize the DACs with their respective data lists.
             cell.register_DAC_data_list()

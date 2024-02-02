@@ -404,6 +404,9 @@ class _Cylinder(Geometry):
         # unit vector in direction of axis
         v = p1 - p0
         mag = norm(v)
+        if mag == 0:
+            print('Warning: Encountered zero-mag, Cylinder p0 and p1 may be identical!')
+            return
         v = v / mag
         # make some vector not in the same direction as v
         not_v = np.array([1, 0, 0])

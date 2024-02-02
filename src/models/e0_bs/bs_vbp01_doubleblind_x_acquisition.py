@@ -37,8 +37,10 @@ else:
     from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium_signals, plot_calcium
     from prototyping.Data import save_acq_data
 
-def quickstart(user:str, passwd:str):
+def quickstart(user:str, passwd:str, api_is_local:bool):
     if USENES:
+        if api_is_local:
+            glb.bg_api.set_local()
         if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
             print('BG NES Interface access failed.')
             exit(1)
@@ -202,9 +204,9 @@ def run_structural_data_acquisition(bs_acq_system:System)->dict:
 
 HELP='''
 Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V output] [-t ms]
-       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-N neurons]
-       [-D method] [-s sites] [-S ratio] [-n level] [-C um] [-c ycenter]
-       [-L file] [-A file] [-K file]
+       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-a]
+       [-N neurons] [-D method] [-s sites] [-S ratio] [-n level] [-C um]
+       [-c ycenter] [-L file] [-A file] [-K file]
 %s
        -N         Number of neurons in ground truth system.
        -D         Distribution method: aligned, unirand.

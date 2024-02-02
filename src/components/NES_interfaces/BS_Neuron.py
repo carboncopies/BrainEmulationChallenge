@@ -24,7 +24,6 @@ class BS_Neuron(Neuron):
     def __init__(self, id:str, soma:Sphere, axon:Cylinder):
         super().__init__(id)
 
-
         self.Vm_mV = -60.0      # Membrane potential
         self.Vrest_mV = -60.0   # Resting membrane potential
         self.Vact_mV = -50.0    # Action potential firing threshold
@@ -35,6 +34,10 @@ class BS_Neuron(Neuron):
         self.tau_PSPr = 5.0     # All BS receptors are identical
         self.tau_PSPd = 25.0
         self.vPSP = 20.0
+
+        self.tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
+        self.t_spont_next = -1
+        self.dt_spont_dist = None
 
         self.morphology = {
             'soma': soma,
@@ -99,10 +102,40 @@ class BS_Neuron(Neuron):
                 DAC_settings.append( (t_stim+5.0, self.Vrest_mV ) )
         glb.bg_api.BGNES_DAC_set_output_list(self.patch_id, DAC_settings)
 
-    def show(self, pltinfo=None):
+    def to_dict(self)->dict:
+        morphology = {}
+        for morph in self.morphology:
+            morphology[morph] = self.morphology[morph].to_dict()
+        receptors = []
+        for receptor in self.receptors:
+            receptors.append( (receptor[0].id, receptor[1]) )
+        cell_data = {
+            'id': self.id,
+            'Vm_mV': self.Vm_mV,
+            'Vrest_mV': self.Vrest_mV,
+            'Vact_mV': self.Vact_mV,
+
+            'Vahp_mV': self.Vahp_mV,
+            'tau_AHP_ms': self.tau_AHP_ms,
+
+            'tau_PSPr': self.tau_PSPr,
+            'tau_PSPd': self.tau_PSPd,
+            'vPSP': self.vPSP,
+
+            'tau_spont_mean_stdev_ms': self.tau_spont_mean_stdev_ms,
+            't_spont_next': self.t_spont_next, # TODO: Should this be here?
+            'dt_spont_dist': self.dt_spont_dist, # TODO: Should this be here?
+
+            'morphology': morphology,
+            'receptors': receptors,
+            't_directstim_ms': self.t_directstim_ms,
+        }
+        return cell_data
+
+    def show(self, pltinfo=None, linewidth=0.5):
         if pltinfo is None: pltinfo = PlotInfo('Neuron %s.' % str(self.id))
         for cellcomp in self.morphology:
-            self.morphology[cellcomp].show(pltinfo)
+            self.morphology[cellcomp].show(pltinfo, linewidth=linewidth)
 
     def record(self, t_ms:float):
         self.t_recorded_ms.append(t_ms)

@@ -18,6 +18,7 @@ from .Calcium_Imaging import Calcium_Imaging
 class System:
     def __init__(self, name:str):
         self.name=name
+
         self.neuralcircuits = {}
         self.regions = {}
         self.dt_ms = 1.0

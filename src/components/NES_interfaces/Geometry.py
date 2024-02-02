@@ -27,10 +27,11 @@ class Box(_Box):
             dims_um=dims_um,
             rotations_rad=rotations_rad,
             )
-        self.id = glb.bg_api.BGNES_box_create(
+        box = glb.bg_api.BGNES_box_create(
             CenterPosition_um=center_um,
             Dimensions_um=dims_um,
             Rotation_rad=rotations_rad)
+        self.id = box.id
 
 class Sphere(_Sphere):
     '''

@@ -50,8 +50,10 @@ else:
     from prototyping.Metrics_N4 import Metrics_N4
     from prototyping.Metrics_P3 import Metrics_P3
 
-def quickstart(user:str, passwd:str):
+def quickstart(user:str, passwd:str, api_is_local:bool):
     if USENES:
+        if api_is_local:
+            glb.bg_api.set_local()
         if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
             print('BG NES Interface access failed.')
             exit(1)
@@ -148,8 +150,8 @@ def validate_success_criteria(bs_emulation:System, bs_kgt:System):
 
 HELP='''
 Usage: bs_vbp03_emulation_iii_validation.py [-h] [-v] [-V output] [-t ms]
-       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-E file]
-       [-K file]
+       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-a]
+       [-E file] [-K file]
 %s
        -E         Load emulation system from file (default: emu.json).
        -K         Load ground truth system from file (default: kgt.json).
