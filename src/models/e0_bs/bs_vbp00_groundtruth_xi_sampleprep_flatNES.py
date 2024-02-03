@@ -213,9 +213,6 @@ for n in range(circuit_num_cells):
 # *** TODO: This is clearly a candidate where things are a) too
 #           difficult to specify, and b) probably not even correct. 
 
-# *** TODO: NES is missing a time constant... should have rise and fall
-#           in receptors (see prototype).
-
 # *** TODO: Receptor form and function need to be linked in the backend.
 
 connection_pattern_set = [ ( '0', '1' ), ] # From cell 0 to cell 1.
@@ -232,12 +229,12 @@ for pattern in connection_pattern_set:
     to_compartment_id = to_cell.SomaID # somas[int(pattern[1])].id
     receptor_location = axon_ends[int(pattern[1])][1] # soma_positions[int(pattern[1])]
     receptor_conductance = neuron_vPSP * weight
-    time_constants = [ neuron_tau_PSPr, neuron_tau_PSPd ]
-    receptor = glb.bg_api.BGNES_BS_receptor_create( # ******* CONTINUE HERE BY FIXING THE API & NES
+    receptor = glb.bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
         Conductance_nS=receptor_conductance,
-        TimeConstants_ms=time_constants,
+        TimeConstantRise_ms=neuron_tau_PSPr,
+        TimeConstantDecay_ms=neuron_tau_PSPd,
         ReceptorLocation_um=receptor_location,
     )
     # Maybe add the receptor to a list... maybe with neuron id and weight
