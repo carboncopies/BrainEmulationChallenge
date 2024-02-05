@@ -235,12 +235,13 @@ for pattern in connection_pattern_set:
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
-        ReceptorLocation_um=receptor_location,
+        ReceptorLocation_um=tuple(receptor_location),
     )
     # Maybe add the receptor to a list... maybe with neuron id and weight
     receptor_box = glb.bg_api.BGNES_box_create(
             CenterPosition_um=receptor_location,
-            Dimensions_um=[0.1,0.1,0.1],)
+            Dimensions_um=[0.1,0.1,0.1],
+            Rotation_rad=[0,0,0],)
     receptor_morphologies.append(receptor_box)
 
 # 3.6 (Optionally) visualize the system with the connection
@@ -292,7 +293,7 @@ for stim in t_soma_fire_ms:
 for cell_id in DAC_stims:
     patch_clamp = glb.bg_api.BGNES_DAC_create(
         DestinationCompartmentID=cells[cell_id].SomaID,
-        ClampLocation_nm=[0,0,0],
+        ClampLocation_um=[0,0,0],
     )
     DAC_stims[cell_id]['patch_clamp'] = patch_clamp
 
@@ -303,7 +304,10 @@ for cell_id in DAC_stims:
     for t_stim in DAC_stims[cell_id]['stims']:
         DAC_settings.append( (t_stim, neuron_Vact_mV+10.0 ) )
         DAC_settings.append( (t_stim+5.0, neuron_Vrest_mV ) )
-    glb.bg_api.BGNES_DAC_set_output_list(DAC_stims[cell_id]['patch_clamp'].ID, DAC_settings)
+    print('At DAC on cell %s, DAC control commands: %s' % (str(cell_id), str(DAC_settings)))
+    glb.bg_api.BGNES_DAC_set_output_list(
+        TargetDAC=DAC_stims[cell_id]['patch_clamp'].ID,
+        DACControlPairs=DAC_settings,)
 
 # 5. Run experiment
 

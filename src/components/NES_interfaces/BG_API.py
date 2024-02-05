@@ -64,6 +64,9 @@ class BG_API:
         self.use_https = True
 
         self.autonames = [ ]
+        self.ReqID = 0
+
+        self.NESRequest_batch = []
 
         # Initializing the default URI
         if is_local:
@@ -95,6 +98,15 @@ class BG_API:
         r_str = prepend+str(r)
         self.autonames.append(r_str)
         return r_str
+
+    def gen_ReqID(self)->int:
+        self.ReqID += 1
+        return self.ReqID
+
+    def get_SimID(self)->int:
+        if not self.Simulation:
+            return -1
+        return self.Simulation.Sim.ID
 
    # --------------------------------------------------------------------
 
@@ -270,9 +282,10 @@ class BG_API:
 
     def BGNES_BS_receptor_create(self, 
         SourceCompartmentID:str,
-        DestinationCompartmentID:float,
+        DestinationCompartmentID:str,
         Conductance_nS:float,
-        TimeConstants_ms:list,
+        TimeConstantRise_ms:float,
+        TimeConstantDecay_ms:float,
         ReceptorLocation_um:tuple,
         name=None)->str:
         if name is None:
@@ -282,7 +295,8 @@ class BG_API:
         Cfg.SourceCompartment = SourceCompartmentID
         Cfg.DestinationCompartment = DestinationCompartmentID
         Cfg.Conductance_nS = Conductance_nS
-        Cfg.TimeConstants_ms = TimeConstants_ms
+        Cfg.TimeConstantRise_ms = TimeConstantRise_ms
+        Cfg.TimeConstantDecay_ms = TimeConstantDecay_ms
         Cfg.ReceptorLocation_um = ReceptorLocation_um
         receptor = self.Simulation.Sim.AddReceptor(Cfg)
         return receptor
@@ -331,11 +345,62 @@ class BG_API:
         DAC = self.Simulation.Sim.AddPatchClampDAC(Cfg)
         return DAC
 
+    def BGNES_NESRequest(self)->str:
+        # Send.
+        # RequestJSONstr = json.dumps(self.NESRequest_batch)
+        # res = self.Simulation.ClientInstance.NESRequest(RequestJSONstr)
+        res = self.Simulation.ClientInstance.NESRequest(self.NESRequest_batch)
+        # Clear batch buffer.
+        self.NESRequest_batch = []
+        return res
+
+    def BGNES_add_to_batch(self, Req:dict):
+        self.NESRequest_batch.append(Req)
+
+    # Adds request ID and wraps in brackets, then adds to batch.
+    def BGNES_make_and_batch_NESRequest(self,
+        ReqFunc:str,
+        ReqParams:dict,):
+
+        ReqID = self.gen_ReqID()
+        Req = {
+            "ReqID": ReqID,
+            ReqFunc: ReqParams,
+        }
+
+        self.BGNES_add_to_batch(Req)
+
+    # NOTE: This has to use the new NESRequest API.
+    # Format:
+    # "PatchClampDACSetOutputList": {
+    #   "SimulationID": <SimID>,
+    #   "PatchClampDACID": <DAC-ID>,
+    #   "ControlData": [
+    #      [ <t_ms>, <v_mV> ],
+    #      (more pairs)
+    #   ]
+    # }
+    # 
     def BGNES_DAC_set_output_list(self, 
         TargetDAC,
-        DACVoltages_mV:list,
-        Timestep_ms:float)->str:
-        return TargetDAC.SetOutputList(Timestep_ms, DACVoltages_mV)
+        DACControlPairs:list,
+        batch_it=False)->str:
+
+        SimID = self.get_SimID()
+        if SimID < 0:
+            return None
+
+        ReqFunc = 'PatchClampDACSetOutputList'
+        ReqParams = {
+            "SimulationID": SimID,
+            "PatchClampDACID": TargetDAC.ID,
+            "ControlData": DACControlPairs,
+        }
+
+        self.BGNES_make_and_batch_NESRequest(ReqFunc, ReqParams)
+        if batch_it:
+            return "batched"
+        return self.BGNES_NESRequest() # Send the batch immediately.
 
     def BGNES_ADC_create(self, 
         SourceCompartmentID:str,
@@ -491,7 +556,8 @@ if __name__ == '__main__':
         SourceCompartmentID=compartment.ID, 
         DestinationCompartmentID=second_compartment.ID,
         Conductance_nS=50.0,
-        TimeConstant_ms=30.0,
+        TimeConstantRise_ms=5.0,
+        TimeConstantDecay_ms=30.0,
         ReceptorLocation_um=(5,5,5),
     )
     print('Receptor ID: '+str(receptor.ID))
@@ -519,11 +585,16 @@ if __name__ == '__main__':
     print('DAC ID: '+str(DAC.ID))
 
     print('Calling BGNES_DAC_set_output_list...')
+    DAC_control_commands = [(0, -60.0), (100.0, -40.0), (105.0, -60.0), (200.0, -40.0), (205.0, -60.0), (300.0, -40.0), (305.0, -60.0), (400.0, -40.0), (405.0, -60.0)]
+    print('With control commands: '+str(DAC_control_commands))
     status = glb.bg_api.BGNES_DAC_set_output_list(
         TargetDAC=DAC,
-        DACVoltages_mV=[50.0, 60.0, 70.0],
-        Timestep_ms=100.0,
+        DACControlPairs=DAC_control_commands,
     )
+    #print(str(status.text))
+    for resp in status:
+        if resp['StatusCode'] != 0:
+            raise Exception('NES request returned an error in request '+str(resp['ReqID']))
     print('Status code: '+str(status))
 
     print('Calling BGNES_ADC_create...')
