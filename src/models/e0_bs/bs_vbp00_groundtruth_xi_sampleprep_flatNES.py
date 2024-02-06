@@ -36,6 +36,7 @@ scriptversion='0.0.1'
 
 import numpy as np
 from datetime import datetime
+from time import sleep
 
 import vbpcommon
 import common.glb as glb
@@ -269,10 +270,10 @@ cause a somatic action potential at any time.
 
 print(STIMTEXT1)
 t_soma_fire_ms = [
-    (100.0, '0'),
-    (200.0, '0'),
-    (300.0, '0'),
-    (400.0, '0'),
+    (100.0, 0),
+    (200.0, 0),
+    (300.0, 0),
+    (400.0, 0),
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
@@ -334,8 +335,11 @@ glb.bg_api.BGNES_simulation_runfor(runtime_ms)
 
 # 5.2.2 Await its completion (this is blocking code)
 
-while glb.bg_api.BGNES_get_simulation_status()[0]:
+for i in range(0, 100):
+    print(str(glb.bg_api.BGNES_get_simulation_status()))
     sleep(0.005)
+# while glb.bg_api.BGNES_get_simulation_status()[0]:
+#     sleep(0.005)
 
 # 5.3 Retrieve recordings and plot
 
