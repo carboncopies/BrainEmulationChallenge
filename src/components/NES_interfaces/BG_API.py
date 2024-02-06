@@ -370,6 +370,31 @@ class BG_API:
 
         self.BGNES_add_to_batch(Req)
 
+    def BGNES_NES_Common(self,
+        ReqFunc:str,
+        ReqParams:dict,
+        batch_it:bool,):
+
+        SimID = self.get_SimID()
+        if SimID < 0:
+            return None
+
+        ReqParams["SimulationID"] = SimID
+        self.BGNES_make_and_batch_NESRequest(ReqFunc, ReqParams)
+        if batch_it:
+            return "batched"
+        return self.BGNES_NESRequest() # Send the batch immediately.
+
+    def BGNES_set_specific_AP_times(self,
+        TimeNeuronPairs:list,
+        batch_it=False):
+
+        ReqFunc = 'SetSpecificAPTimes'
+        ReqParams = {
+            "TimeNeuronPairs": TimeNeuronPairs,
+        }
+        return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+
     # NOTE: This has to use the new NESRequest API.
     # Format:
     # "PatchClampDACSetOutputList": {
@@ -384,23 +409,14 @@ class BG_API:
     def BGNES_DAC_set_output_list(self, 
         TargetDAC,
         DACControlPairs:list,
-        batch_it=False)->str:
-
-        SimID = self.get_SimID()
-        if SimID < 0:
-            return None
+        batch_it=False):
 
         ReqFunc = 'PatchClampDACSetOutputList'
         ReqParams = {
-            "SimulationID": SimID,
             "PatchClampDACID": TargetDAC.ID,
             "ControlData": DACControlPairs,
         }
-
-        self.BGNES_make_and_batch_NESRequest(ReqFunc, ReqParams)
-        if batch_it:
-            return "batched"
-        return self.BGNES_NESRequest() # Send the batch immediately.
+        return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
 
     def BGNES_ADC_create(self, 
         SourceCompartmentID:str,

@@ -276,38 +276,42 @@ t_soma_fire_ms = [
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
-# 4.1 Convert to stims-by-patch-clamp-DAC
-
-DAC_stims = {}
-for stim in t_soma_fire_ms:
-    t, cell_id = stim
-    if cell_id not in DAC_stims:
-        DAC_stims[cell_id] = {
-            'stims': [],
-            'patch_clamp': None,
-        }
-    DAC_stims[cell_id]['stims'].append(t)
-
-# 4.2 Create DACs for direct stimulation
-
-for cell_id in DAC_stims:
-    patch_clamp = glb.bg_api.BGNES_DAC_create(
-        DestinationCompartmentID=cells[cell_id].SomaID,
-        ClampLocation_um=[0,0,0],
+response = glb.bg_api.BGNES_set_specific_AP_times(
+        TimeNeuronPairs=t_soma_fire_ms,
     )
-    DAC_stims[cell_id]['patch_clamp'] = patch_clamp
 
-# 4.3 Init DAC voltage transitions according to stim lists
+# # 4.1 Convert to stims-by-patch-clamp-DAC
 
-for cell_id in DAC_stims:
-    DAC_settings = [ (0, neuron_Vrest_mV) ]
-    for t_stim in DAC_stims[cell_id]['stims']:
-        DAC_settings.append( (t_stim, neuron_Vact_mV+10.0 ) )
-        DAC_settings.append( (t_stim+5.0, neuron_Vrest_mV ) )
-    print('At DAC on cell %s, DAC control commands: %s' % (str(cell_id), str(DAC_settings)))
-    glb.bg_api.BGNES_DAC_set_output_list(
-        TargetDAC=DAC_stims[cell_id]['patch_clamp'].ID,
-        DACControlPairs=DAC_settings,)
+# DAC_stims = {}
+# for stim in t_soma_fire_ms:
+#     t, cell_id = stim
+#     if cell_id not in DAC_stims:
+#         DAC_stims[cell_id] = {
+#             'stims': [],
+#             'patch_clamp': None,
+#         }
+#     DAC_stims[cell_id]['stims'].append(t)
+
+# # 4.2 Create DACs for direct stimulation
+
+# for cell_id in DAC_stims:
+#     patch_clamp = glb.bg_api.BGNES_DAC_create(
+#         DestinationCompartmentID=cells[cell_id].SomaID,
+#         ClampLocation_um=[0,0,0],
+#     )
+#     DAC_stims[cell_id]['patch_clamp'] = patch_clamp
+
+# # 4.3 Init DAC voltage transitions according to stim lists
+
+# for cell_id in DAC_stims:
+#     DAC_settings = [ (0, neuron_Vrest_mV) ]
+#     for t_stim in DAC_stims[cell_id]['stims']:
+#         DAC_settings.append( (t_stim, neuron_Vact_mV+10.0 ) )
+#         DAC_settings.append( (t_stim+5.0, neuron_Vrest_mV ) )
+#     print('At DAC on cell %s, DAC control commands: %s' % (str(cell_id), str(DAC_settings)))
+#     glb.bg_api.BGNES_DAC_set_output_list(
+#         TargetDAC=DAC_stims[cell_id]['patch_clamp'].ID,
+#         DACControlPairs=DAC_settings,)
 
 # 5. Run experiment
 
