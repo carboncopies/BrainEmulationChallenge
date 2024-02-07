@@ -33,11 +33,19 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
                         Vm_cells.append(cell_data['Vm_mV'])
     elif "neurons" in data:
         data = data["neurons"]
+        # Find largest ID in the data:
+        maxID = 0
         for neuron_id in data:
-            if 'Vm_mV' not in data[neuron_id]:
-                print('Missing Vm_mV at neuron '+str(neuron_id))
-            else:
-                Vm_cells.append(data[neuron_id]['Vm_mV'])
+            if int(neuron_id)>maxID:
+                maxID = int(neuron_id)
+        # Find neurons in order:
+        for n_id in range(0, maxID):
+            neuron_id = str(n_id)
+            if neuron_id in data:
+                if 'Vm_mV' not in data[neuron_id]:
+                    print('Missing Vm_mV at neuron '+str(neuron_id))
+                else:
+                    Vm_cells.append(data[neuron_id]['Vm_mV'])
     else:
         print('Missing cells membrane potential data.')
         return

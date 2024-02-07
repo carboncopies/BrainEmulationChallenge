@@ -197,8 +197,8 @@ for n in range(circuit_num_cells):
         MembranePotential_mV=neuron_Vm_mV,
         RestingPotential_mV=neuron_Vrest_mV,
         SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_Vahp_mV,
-        AfterHyperpolarizationAmplitude_mV=neuron_tau_AHP_ms,
+        DecayTime_ms=neuron_tau_AHP_ms,
+        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
         PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
         PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
         PostsynapticPotentialAmplitude_mV=neuron_vPSP,
@@ -271,9 +271,13 @@ cause a somatic action potential at any time.
 print(STIMTEXT1)
 t_soma_fire_ms = [
     (100.0, 0),
-    (200.0, 0),
-    (300.0, 0),
-    (400.0, 0),
+    (150.0, 5),
+    (200.0, 10),
+    (250.0, 15),
+    (300.0, 18),
+    (350.0, 13),
+    (400.0, 8),
+    (450.0, 3),
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
