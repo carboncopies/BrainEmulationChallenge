@@ -335,17 +335,29 @@ glb.bg_api.BGNES_simulation_runfor(runtime_ms)
 
 # 5.2.2 Await its completion (this is blocking code)
 
-for i in range(0, 100):
-    print(str(glb.bg_api.BGNES_get_simulation_status()))
-    sleep(0.005)
-# while glb.bg_api.BGNES_get_simulation_status()[0]:
+# for i in range(0, 100):
+#     print(str(glb.bg_api.BGNES_get_simulation_status()))
 #     sleep(0.005)
+while glb.bg_api.BGNES_get_simulation_status()['IsSimulating']:
+    sleep(0.005)
 
 # 5.3 Retrieve recordings and plot
 
 recording_dict = glb.bg_api.BGNES_get_recording()
+if isinstance(recording_dict, dict):
+    if "StatusCode" in recording_dict:
+        if recording_dict["StatusCode"] != 0:
+            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
+        else:
+            if "Recording" not in recording_dict:
+                print('Missing "Recording" key.')
+            else:
+                if recording_dict["Recording"] is None:
+                    print('Recording is empty.')
+                else:
+                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
 
-plot_recorded(
-    savefolder=savefolder,
-    data=recording_dict,
-    figspecs=figspecs,)
+                    plot_recorded(
+                        savefolder=savefolder,
+                        data=recording_dict["Recording"],
+                        figspecs=figspecs,)
