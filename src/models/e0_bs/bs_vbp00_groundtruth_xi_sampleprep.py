@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# bs_vbp00_groundtruth_xi_sampleprep_flatNES.py
+# bs_vbp00_groundtruth_xi_sampleprep.py
 # Randal A. Koene, 20240202
 
 '''
@@ -8,9 +8,8 @@ number of variables to address while still demonstrating the full process and de
 chain for whole brain emulation.
 
 This file implements an in-silico fully known ground-truth system.
-In this example file, the _flatNES version, we do this with a
-minimum of Python complexity, keeping the script as flat as
-possible and maximizing immediate use of NES calls.
+In this example file, we do this with a minimum of Python complexity,
+keeping the script as flat as possible and maximizing immediate use of NES calls.
 
 The idea here is to get this to achieve the same result as the Python prototype
 but try not to constrain the implementation by basing it hard on the prototype
@@ -278,9 +277,6 @@ for n in range(circuit_num_cells):
 
 # 3.5 Set up an instant binary connection from cell 0 to cell 1
 
-# *** TODO: This is clearly a candidate where things are a) too
-#           difficult to specify, and b) probably not even correct. 
-
 AMPA_conductance = 40.0 #60 # nS
 weight = 1.0 # binary
 
@@ -404,11 +400,7 @@ response = glb.bg_api.BGNES_set_specific_AP_times(
 
 # 5. Run experiment
 
-RUNTEXT1='''
-Running experiment for %.1f milliseconds...
-'''
-
-print(RUNTEXT1 % runtime_ms)
+print('\nRunning experiment for %.1f milliseconds...\n' % runtime_ms)
 
 # 5.1 Set record-all
 
