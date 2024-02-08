@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # SignalFunctions.py
 # Randal A. Koene, 20230930
 
@@ -26,3 +27,21 @@ def convolve_1d(signal:np.array, kernel:np.array)->list:
         )
         for i in range(1-len(kernel),len(signal))
     ]
+
+if __name__ == '__main__':
+    import matplotlib.pyplot as plt
+
+    amp = 1.0
+    tau_rise = 3 # ms
+    tau_decay = 30 # ms
+
+    v = []
+    t = []
+    for i in range(0, 1000):
+        t_i = 0.1*i # ms
+        t.append(t_i)
+        v.append(dblexp(amp, tau_rise, tau_decay, t_i))
+
+    print('Max amplitude: '+str(max( [abs(max(v)), abs(min(v))] )) )
+    plt.plot(t, v)
+    plt.show()

@@ -175,16 +175,83 @@ for n in range(circuit_num_cells):
                 Point2Position_um=end1,)
     axons.append(axon)
 
-# 3.3.3 Create neurons:
+# 3.3.3 Create compartments for somas:
 
 neuron_Vm_mV = -60.0
 neuron_Vrest_mV = -60.0
 neuron_Vact_mV = -50.0
 neuron_Vahp_mV = -20.0
 neuron_tau_AHP_ms = 30.0
+
+soma_compartments = []
+for soma in somas:
+    compartment = glb.bg_api.BGNES_BS_compartment_create(
+                    ShapeID=soma.ID,
+                    MembranePotential_mV=neuron_Vm_mV,
+                    RestingPotential_mV=neuron_Vrest_mV,
+                    SpikeThreshold_mV=neuron_Vact_mV,
+                    DecayTime_ms=neuron_tau_AHP_ms,
+                    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+    soma_compartments.append(compartment)
+
+# 3.3.4 Create compartments for axons:
+
+axon_compartments = []
+for axon in axons:
+    compartment = glb.bg_api.BGNES_BS_compartment_create(
+                    ShapeID=axon.ID,
+                    MembranePotential_mV=neuron_Vm_mV,
+                    RestingPotential_mV=neuron_Vrest_mV,
+                    SpikeThreshold_mV=neuron_Vact_mV,
+                    DecayTime_ms=neuron_tau_AHP_ms,
+                    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+    axon_compartments.append(compartment)
+
+# 3.3.5 Create neurons:
+
+# Current at typical single AMPA receptor is in pA range.
+# Multiple receptors or in specific conditions can get up to nA (or even uA) range.
+# In hippocampus, estimates are that a single synapse can have 50-100 active
+# AMPA receptors. In hippocampus, through the typical number of receptors and
+# one or more synapses, typical AMPA current is several hundres pA or into the
+# low nA range.
+# In hippocampus, transmission from one neuron to another can involve a few to
+# several hundred synapses.
+# A single AMPA receptor channel has a conductance in the range of 9-10 pS.
+#
+# Example: Currents through AMPA receptors from a medial temporal lobe neuron
+# to a hippocampal neuron.
+#
+#   Number of synapses involved = 80
+#   Number of active receptors per synapse = 75
+#   Average conductance of a single receptor channel = 10 pS
+#   Average potential difference across cell boundary = (-)55 mV
+#   Typical current across the connection = (-)55 * 10^-3 * 80*75*10 * 10^-12 A
+#     = 3300000 * 10^-15 A = (-)3.3 * 10^-9 A = (-)3.3 nA
+#
+#   Rewritten to represent magnitudes for the whole connection between the
+#   two neurons (i = v * g):
+#   (-)3.3 nA = (-)55 mV * 60 nS
+#
+#   The double exponential PSP response model represents the accumulation of
+#   charge over time and its gradual decay, causing a difference in the
+#   membrane potential. For the example current and conductance given, the
+#   firing threshold should be reached after a brief rise-time at the
+#   hippocampal neuron. That's a change in the membrane potential of about
+#   10 mV. To represent that level of change at the peak of the double
+#   exponential ( -exp(-tDiff / tauRise) + exp(-tDiff / tauDecay) ), with
+#   a current of about 3.3 nA and conductance of about 60 nS, we need
+#   a constant weight scaling factor (using v = i*r = i/g):
+#     10 mV = w_scaling * (3.3 nA / 60 nS) * peak_doubleexp
+#   The peak of the double exponential is around 0.69
+#     w_scaling = 10*10^-3 * 60 / (3.3 * 0.69) = 0.264
+#   Combining this with the 3.3 nA gives a I_PSP_nA constant of about 0.87 nA.
+#   And for mV, 870 nA:
+#     10 mV = (870 nA / 60 nS) * peak_doubleexp
+
 neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
-neuron_vPSP = 20.0
+neuron_IPSP = 870.0 # nA
 #neuron_tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
 #neuron_t_spont_next = -1
 
@@ -192,8 +259,8 @@ cells = {}
 for n in range(circuit_num_cells):
     cell_id = str(n)
     cell = glb.bg_api.BGNES_BS_neuron_create(
-        Soma=somas[n].ID, 
-        Axon=axons[n].ID,
+        Soma=soma_compartments[n].ID, 
+        Axon=axon_compartments[n].ID,
         MembranePotential_mV=neuron_Vm_mV,
         RestingPotential_mV=neuron_Vrest_mV,
         SpikeThreshold_mV=neuron_Vact_mV,
@@ -201,7 +268,7 @@ for n in range(circuit_num_cells):
         AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
         PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
         PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
-        PostsynapticPotentialAmplitude_mV=neuron_vPSP,
+        PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
     cells[cell_id] = cell
 
@@ -214,22 +281,37 @@ for n in range(circuit_num_cells):
 # *** TODO: This is clearly a candidate where things are a) too
 #           difficult to specify, and b) probably not even correct. 
 
-# *** TODO: Receptor form and function need to be linked in the backend.
+AMPA_conductance = 40.0 #60 # nS
+weight = 1.0 # binary
 
-connection_pattern_set = [ ( '0', '1' ), ] # From cell 0 to cell 1.
+connection_pattern_set = [
+    ( 0, 1 ), # From cell 0 to cell 1.
+    ( 1, 2 ),
+    ( 2, 3 ),
+    ( 3, 4 ),
+    ( 5, 6 ),
+    ( 6, 0 ),
+    ( 15, 0 ),
+    ( 15, 3 ),
+] 
+receptor_functionals = []
 receptor_morphologies = []
 for pattern in connection_pattern_set:
     print("Setting up a 'binary' connection from %s to %s." % pattern)
+
     # Find the neurons:
-    from_cell = cells[pattern[0]]
-    to_cell = cells[pattern[1]]
-    # Set the weight:
-    weight = 1.0 # binary
+    from_cell = cells[str(pattern[0])]
+    to_cell = cells[str(pattern[1])]
+
     # Find the compartments:
-    from_compartment_id = from_cell.AxonID # axons[int(pattern[0])].id
-    to_compartment_id = to_cell.SomaID # somas[int(pattern[1])].id
-    receptor_location = axon_ends[int(pattern[1])][1] # soma_positions[int(pattern[1])]
-    receptor_conductance = neuron_vPSP * weight
+    from_compartment_id = from_cell.AxonID
+    to_compartment_id = to_cell.SomaID
+    receptor_location = axon_ends[pattern[1]][1]
+
+    # Set the total conductance through receptors at synapses at this connection:
+    receptor_conductance = weight * AMPA_conductance
+
+    # Build receptor function:
     receptor = glb.bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
@@ -238,7 +320,9 @@ for pattern in connection_pattern_set:
         TimeConstantDecay_ms=neuron_tau_PSPd,
         ReceptorLocation_um=tuple(receptor_location),
     )
-    # Maybe add the receptor to a list... maybe with neuron id and weight
+    receptor_functionals.append( (receptor, to_cell) )
+
+    # Build receptor form:
     receptor_box = glb.bg_api.BGNES_box_create(
             CenterPosition_um=receptor_location,
             Dimensions_um=[0.1,0.1,0.1],

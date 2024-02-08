@@ -311,7 +311,7 @@ class BG_API:
         AfterHyperpolarizationAmplitude_mV:float,
         PostsynapticPotentialRiseTime_ms:float,
         PostsynapticPotentialDecayTime_ms:float,
-        PostsynapticPotentialAmplitude_mV:float,
+        PostsynapticPotentialAmplitude_nA:float,
         name=None)->str:
         if name is None:
             name = self.generate_autoname('neuron-')
@@ -326,7 +326,7 @@ class BG_API:
         Cfg.AfterHyperpolarizationAmplitude_mV = AfterHyperpolarizationAmplitude_mV
         Cfg.PostsynapticPotentialRiseTime_ms = PostsynapticPotentialRiseTime_ms
         Cfg.PostsynapticPotentialDecayTime_ms = PostsynapticPotentialDecayTime_ms
-        Cfg.PostsynapticPotentialAmplitude_mV = PostsynapticPotentialAmplitude_mV
+        Cfg.PostsynapticPotentialAmplitude_nA = PostsynapticPotentialAmplitude_nA
         neuron = self.Simulation.Sim.AddBSNeuron(Cfg)
         return neuron
 
