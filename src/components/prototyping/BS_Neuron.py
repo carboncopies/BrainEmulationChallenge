@@ -231,7 +231,7 @@ class BS_Neuron(Neuron):
         # 3. Calculate membrane potential:
         self.Vm_mV = self.Vrest_mV + vSpike_t + vAHP_t + vPSP_t
         if self.FIFO is not None:
-            self.FIFO = np.roll(self.FIFO,1)
+            self.FIFO = np.roll(self.FIFO,1) # Rolls to the right, [0] available to be replaced.
             self.FIFO[0] = self.Vm_mV-self.Vrest_mV
         if recording: self.record(t_ms)
 

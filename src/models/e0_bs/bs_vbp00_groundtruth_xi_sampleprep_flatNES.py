@@ -417,17 +417,29 @@ glb.bg_api.BGNES_simulation_recordall(t_max_ms)
 
 # 5.2 Run for specified simulation time
 
+# Get the simulation timer before the next run:
+status_dict = glb.bg_api.BGNES_get_simulation_status()
+if status_dict['StatusCode'] != 0:
+    print('Simulation status '+str(status_dict['StatusCode']))
+    exit(1)
+t_before_run = status_dict['InSimulationTime_ms']
+
 # 5.2.1 Start the simulation
 
 glb.bg_api.BGNES_simulation_runfor(runtime_ms)
 
 # 5.2.2 Await its completion (this is blocking code)
 
-# for i in range(0, 100):
-#     print(str(glb.bg_api.BGNES_get_simulation_status()))
-#     sleep(0.005)
-while glb.bg_api.BGNES_get_simulation_status()['IsSimulating']:
+while True:
     sleep(0.005)
+    status_dict = glb.bg_api.BGNES_get_simulation_status()
+    if status_dict['StatusCode'] != 0:
+        print('Simulation status '+str(status_dict['StatusCode']))
+        exit(1)
+    # Ensure that runfor started and that it ended.
+    if status_dict['InSimulationTime_ms'] > t_before_run:
+        if not status_dict['IsSimulating']:
+            break
 
 # 5.3 Retrieve recordings and plot
 
