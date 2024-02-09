@@ -25,6 +25,9 @@ import vbpcommon
 import common.glb as glb
 from NES_interfaces.BG_API import BG_API_Setup
 
+import BrainGenix.NES as NES
+import BrainGenix
+
 api_is_local=True
 savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
 figspecs = {
@@ -81,3 +84,28 @@ SimulationID = task_status_response["SimulationID"]
 glb.bg_api.Simulation.Sim.ID = SimulationID
 
 print('New ID of loaded Simulation: '+str(SimulationID))
+
+
+VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
+VisualizerJob.ImageWidth_px = 2048
+VisualizerJob.ImageHeight_px = 2048
+
+
+
+# Render In Circle Around Sim
+Radius = 30
+Steps = 50
+ZHeight = 50
+
+for Point in PointsInCircum(Radius, Steps):
+
+    VisualizerJob.CameraFOVList_deg.append(110)
+    VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
+    VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
+
+Visualizer = MySim.SetupVisualizer()
+Visualizer.GenerateVisualization(VisualizerJob)
+
+
+Visualizer.SaveImages("Visualizations", 2)
+
