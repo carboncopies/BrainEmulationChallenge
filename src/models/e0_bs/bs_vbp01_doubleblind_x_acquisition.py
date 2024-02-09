@@ -44,10 +44,40 @@ if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbos
 
 # 2. Load ground-truth network
 
-# *** MODIFY THIS AS PER THE INSTRUCTIONS IN COMMENTS IN NES!
+# 2.1 Request Loading
 
 sys_name='2024-02-08_18:15:53-e0_bs'
-glb.bg_api.BGNES_load(timestampedname=sys_name)
+loadingtaskID = glb.bg_api.BGNES_load(timestampedname=sys_name)
 
-print('Loaded Simulation ID: '+str(glb.bg_api.Simulation.Sim.ID))
+print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
 
+# 2.2 Await Loading and set Simulation ID
+
+while True:
+    sleep(0.005)
+    response_list = glb.bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+    if not isinstance(response_list, list):
+        print('Bad response format. Expected list of NESRequest responses.')
+        exit(1)
+    task_status_response = response_list[0]
+    if task_status_response['StatusCode'] != 0:
+        print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
+        exit(1)
+    if "TaskStatus" not in task_status_response:
+        print('No TaskStatus received.')
+        exit(1)
+    task_status = task_status_response['TaskStatus']
+    if task_status > 1:
+        print('Loading Task failed.')
+        exit(1)
+    if task_status == 0:
+        break
+
+print('Loading task completed successfully.')
+if "SimulationID" not in task_status_response:
+    print('Missing SimulationID.')
+    exit(1)
+SimulationID = task_status_response["SimulationID"]
+glb.bg_api.Simulation.Sim.ID = SimulationID
+
+print('New ID of loaded Simulation: '+str(SimulationID))

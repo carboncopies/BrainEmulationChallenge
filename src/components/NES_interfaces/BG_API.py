@@ -413,7 +413,7 @@ class BG_API:
 
     # This returns a Simulation object (with temporary Sim.ID) and
     # a task ID for the loading task to watch with BGNES_get_manager_task_status().
-    def BGNES_load(self, timestampedname:str)->tuple:
+    def BGNES_load(self, timestampedname:str)->int:
         self.Simulation = SimClientInstance(
             credentials=self.credentials,
             simname=timestampedname,
@@ -426,21 +426,25 @@ class BG_API:
         ReqParams = {
             "SavedSimName": timestampedname,
         }
-        response = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it=False)
-        if not isinstance(response, dict):
-            print('Loading failed.')
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it=False)
+        if not isinstance(responses, list):
+            print('Bad response format. Expected list of NESRequest responses.')
             exit(1)
-        if "StatusCode" not in response:
-            print('Bad response format.')
+        firstreq_response = responses[0]
+        if not isinstance(firstreq_response, dict):
+            print('Bad response format. Expected NESRequest respone dict.')
             exit(1)
-        if response["StatusCode"] != 0:
-            print('Loading failed.')
+        if "StatusCode" not in firstreq_response:
+            print('Bad response format. Missing StatusCode.')
             exit(1)
-        if "TaskID" not in response:
+        if firstreq_response["StatusCode"] != 0:
+            print('Loading failed. StatusCode: '+str(firstreq_response["StatusCode"]))
+            exit(1)
+        if "TaskID" not in firstreq_response:
             print("Missing Loading Task ID.")
             exit(1)
-        TaskID = response["TaskID"]
-        return (self.Simulation, TaskID)
+        TaskID = firstreq_response["TaskID"]
+        return TaskID
 
     def BGNES_get_manager_task_status(self, taskID:int, batch_it=False):
         ReqFunc = 'ManTaskStatus'
