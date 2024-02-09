@@ -331,7 +331,8 @@ for pattern in connection_pattern_set:
 
 # 3.7 Save the ground-truth system
 
-# glb.bg_api.Some_sort_of_call()
+response = glb.bg_api.BGNES_save()
+print('Saved simulation: '+str(response));
 
 STIMTEXT1='''
 Dynamic activity:

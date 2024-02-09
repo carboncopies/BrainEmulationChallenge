@@ -19,8 +19,11 @@ class Credentials:
         self.user = user
         self.passwd = passwd
 
+# This can be used when creating a simulation or when loading a simulation.
+# When loading, the simname should be the save-name of the simulation
+# (with its timestamp), and the loading flag must be True.
 class SimClientInstance:
-    def __init__(self, credentials:Credentials, simname:str, host:str='api.braingenix.org', port:int=443, use_https:bool=True):
+    def __init__(self, credentials:Credentials, simname:str, host:str='api.braingenix.org', port:int=443, use_https:bool=True, loading:bool=False):
         self.ClientCfg = NES.Client.Configuration()
         self.ClientCfg.Mode = NES.Client.Modes.Remote
         self.ClientCfg.Host = host
@@ -33,8 +36,16 @@ class SimClientInstance:
         assert(self.ClientInstance.IsReady())
 
         self.SimulationCfg = NES.Simulation.Configuration()
-        self.SimulationCfg.Name = simname
-        self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg)
+        if loading:
+            namepos = simname.find('-')
+            if namepos<0:
+                self.SimulationCfg.Name = "UnNamed"
+            else:
+                self.SimulationCfg.Name = simname[namepos+1:]
+            self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg, create=False)
+        else:
+            self.SimulationCfg.Name = simname
+            self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg)
 
 # Create one of these through the BG_API_Setup function to ensure
 # that it is accessible through the global reference variable bg_api.
@@ -392,6 +403,49 @@ class BG_API:
         ReqFunc = 'SetSpecificAPTimes'
         ReqParams = {
             "TimeNeuronPairs": TimeNeuronPairs,
+        }
+        return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+
+    def BGNES_save(self, batch_it=False):
+        ReqFunc = 'SimulationSave'
+        ReqParams = {}
+        return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+
+    # This returns a Simulation object (with temporary Sim.ID) and
+    # a task ID for the loading task to watch with BGNES_get_manager_task_status().
+    def BGNES_load(self, timestampedname:str)->tuple:
+        self.Simulation = SimClientInstance(
+            credentials=self.credentials,
+            simname=timestampedname,
+            host=self.uri_host,
+            port=self.uri_port,
+            use_https=self.use_https,
+            loading=True,
+        )
+        ReqFunc = 'SimulationLoad'
+        ReqParams = {
+            "SavedSimName": timestampedname,
+        }
+        response = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it=False)
+        if not isinstance(response, dict):
+            print('Loading failed.')
+            exit(1)
+        if "StatusCode" not in response:
+            print('Bad response format.')
+            exit(1)
+        if response["StatusCode"] != 0:
+            print('Loading failed.')
+            exit(1)
+        if "TaskID" not in response:
+            print("Missing Loading Task ID.")
+            exit(1)
+        TaskID = response["TaskID"]
+        return (self.Simulation, TaskID)
+
+    def BGNES_get_manager_task_status(self, taskID:int, batch_it=False):
+        ReqFunc = 'ManTaskStatus'
+        ReqParams = {
+            'TaskID': taskID,
         }
         return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
 

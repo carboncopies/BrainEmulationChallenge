@@ -18,6 +18,8 @@ scriptversion='0.0.1'
 
 import matplotlib.pyplot as plt
 import numpy as np
+from datetime import datetime
+from time import sleep
 
 import vbpcommon
 import common.glb as glb
@@ -41,4 +43,11 @@ if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbos
     exit(1)
 
 # 2. Load ground-truth network
+
+# *** MODIFY THIS AS PER THE INSTRUCTIONS IN COMMENTS IN NES!
+
+sys_name='2024-02-08_18:15:53-e0_bs'
+glb.bg_api.BGNES_load(timestampedname=sys_name)
+
+print('Loaded Simulation ID: '+str(glb.bg_api.Simulation.Sim.ID))
 
