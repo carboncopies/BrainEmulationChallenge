@@ -20,6 +20,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
 from time import sleep
+import math
 
 import vbpcommon
 import common.glb as glb
@@ -27,6 +28,10 @@ from NES_interfaces.BG_API import BG_API_Setup
 
 import BrainGenix.NES as NES
 import BrainGenix
+
+def PointsInCircum(r,n=100):
+    return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
+
 
 api_is_local=True
 savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
@@ -85,6 +90,57 @@ glb.bg_api.Simulation.Sim.ID = SimulationID
 
 print('New ID of loaded Simulation: '+str(SimulationID))
 
+# 2.3 Show model
+
+# (add call here)
+
+# 3. Initialize functional data acquisition
+
+ACQSETUPTEXT1='''
+Simulated functional data acquisition:
+Two types of simulated functional recording methods are
+set up, an electrode and a calcium imaging microscope.
+Calcium imaging is slower and may reflect a summation
+of signals (Wei et al., 2019).
+
+Model activity is elicited by spontaneous activity.
+
+Simulated functional recording involves the application
+of simulated physics to generate data derived from a
+combination of model neuronal activity and simulated
+confounding factors.
+'''
+
+print(ACQSETUPTEXT1)
+
+# 3.1 Initialize spontaneous activity
+
+# Spontaneous activity can be turned on or off, a list of neurons can be
+# provided by ID, an empty list means "all" neurons.
+neuron_ids = [] # all
+spontaneous_on = True
+spont_spike_interval_ms_mean = 280
+spont_spike_interval_ms_stdev = 140
+
+success = glb.bg_api.BGNES_set_spontaneous_activity(
+    spontaneous_on=spontaneous_on,
+    spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
+    spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
+    neuron_ids=neuron_ids)
+
+if not success:
+    print('Failed to set up spontaneous activity.')
+    exit(1)
+
+print('Spontaneous activity at each neuron successfully activated.')
+
+# 3.2 Initialize recording electrodes
+
+# 3.3 Initialize calcium imaging
+
+# ----------------------------------------------------
+
+exit(0)
 
 VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
 VisualizerJob.ImageWidth_px = 2048
@@ -103,7 +159,7 @@ for Point in PointsInCircum(Radius, Steps):
     VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
     VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
 
-Visualizer = MySim.SetupVisualizer()
+Visualizer = glb.bg_api.Simulation.Sim.SetupVisualizer()
 Visualizer.GenerateVisualization(VisualizerJob)
 
 

@@ -396,6 +396,27 @@ class BG_API:
             return "batched"
         return self.BGNES_NESRequest() # Send the batch immediately.
 
+    # Returns (success, first_response_dict).
+    def BGNES_First_NESResponse(self, source:str, batch_it:bool, responses)->tuple:
+        if batch_it:
+            if isinstance(responses, str):
+                return ((responses == "batched"), {})
+            return (False, {})
+        if not isinstance(responses, list):
+            print('Bad response format. Expected list of NESRequest responses.')
+            return (False, {})
+        firstreq_response = responses[0]
+        if not isinstance(firstreq_response, dict):
+            print('Bad response format. Expected NESRequest response dict.')
+            return (False, {})
+        if "StatusCode" not in firstreq_response:
+            print('Bad response format. Missing StatusCode.')
+            return (False, {})
+        if firstreq_response["StatusCode"] != 0:
+            print(str(source)+' failed. StatusCode: '+str(firstreq_response["StatusCode"]))
+            return (False, {})
+        return (True, firstreq_response)
+
     def BGNES_set_specific_AP_times(self,
         TimeNeuronPairs:list,
         batch_it=False):
@@ -405,6 +426,24 @@ class BG_API:
             "TimeNeuronPairs": TimeNeuronPairs,
         }
         return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+
+    def BGNES_set_spontaneous_activity(self,
+        spontaneous_on:bool,
+        spont_spike_interval_ms_mean:float,
+        spont_spike_interval_ms_stdev:float,
+        neuron_ids:list,
+        batch_it=False)->bool:
+
+        ReqFunc = 'SetSpontaneousActivity'
+        ReqParams = {
+            'Active': spontaneous_on,
+            'SpikeIntervalMean_ms': spont_spike_interval_ms_mean,
+            'SpikeIntervalStDev_ms': spont_spike_interval_ms_stdev,
+            'NeuronIDs': neuron_ids,
+        }
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
+        return success
 
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'SimulationSave'
@@ -427,18 +466,8 @@ class BG_API:
             "SavedSimName": timestampedname,
         }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it=False)
-        if not isinstance(responses, list):
-            print('Bad response format. Expected list of NESRequest responses.')
-            exit(1)
-        firstreq_response = responses[0]
-        if not isinstance(firstreq_response, dict):
-            print('Bad response format. Expected NESRequest respone dict.')
-            exit(1)
-        if "StatusCode" not in firstreq_response:
-            print('Bad response format. Missing StatusCode.')
-            exit(1)
-        if firstreq_response["StatusCode"] != 0:
-            print('Loading failed. StatusCode: '+str(firstreq_response["StatusCode"]))
+        success, first_response = self.BGNES_First_NESResponse('Loading', False, responses)
+        if not success:
             exit(1)
         if "TaskID" not in firstreq_response:
             print("Missing Loading Task ID.")

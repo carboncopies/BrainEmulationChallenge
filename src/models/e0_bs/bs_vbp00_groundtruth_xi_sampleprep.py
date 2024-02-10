@@ -43,6 +43,8 @@ from NES_interfaces.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 api_is_local=True
+randomseed = 12345
+np.random.seed(randomseed)
 num_nodes=20
 circuit_distribution='unirand'
 runtime_ms = 500.0
