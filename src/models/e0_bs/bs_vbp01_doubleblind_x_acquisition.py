@@ -25,6 +25,7 @@ import math
 import vbpcommon
 import common.glb as glb
 from NES_interfaces.BG_API import BG_API_Setup
+from NES_interfaces.KGTRecords import plot_recorded
 
 import BrainGenix.NES as NES
 import BrainGenix
@@ -34,6 +35,7 @@ def PointsInCircum(r,n=100):
 
 
 api_is_local=True
+runtime_ms=500.0
 savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
 figspecs = {
     'figsize': (6,6),
@@ -118,12 +120,10 @@ print(ACQSETUPTEXT1)
 # Spontaneous activity can be turned on or off, a list of neurons can be
 # provided by ID, an empty list means "all" neurons.
 neuron_ids = [] # all
-spontaneous_on = True
 spont_spike_interval_ms_mean = 280
-spont_spike_interval_ms_stdev = 140
+spont_spike_interval_ms_stdev = 140 # 0 means no spontaneous activity
 
 success = glb.bg_api.BGNES_set_spontaneous_activity(
-    spontaneous_on=spontaneous_on,
     spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
     spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
     neuron_ids=neuron_ids)
@@ -137,6 +137,41 @@ print('Spontaneous activity at each neuron successfully activated.')
 # 3.2 Initialize recording electrodes
 
 # 3.3 Initialize calcium imaging
+
+# ----------------------------------------------------
+
+print('\nRunning experiment for %.1f milliseconds...\n' % runtime_ms)
+
+# 5.1 Set record-all
+
+t_max_ms=-1 # record forever
+glb.bg_api.BGNES_simulation_recordall(t_max_ms)
+
+# 5.2 Run for specified simulation time
+
+if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
+    exit(1)
+
+# 5.3 Retrieve recordings and plot
+
+recording_dict = glb.bg_api.BGNES_get_recording()
+if isinstance(recording_dict, dict):
+    if "StatusCode" in recording_dict:
+        if recording_dict["StatusCode"] != 0:
+            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
+        else:
+            if "Recording" not in recording_dict:
+                print('Missing "Recording" key.')
+            else:
+                if recording_dict["Recording"] is None:
+                    print('Recording is empty.')
+                else:
+                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
+
+                    plot_recorded(
+                        savefolder=savefolder,
+                        data=recording_dict["Recording"],
+                        figspecs=figspecs,)
 
 # ----------------------------------------------------
 

@@ -10,6 +10,7 @@ BrainGenix API.
 import requests
 import json
 import random
+from time import sleep
 
 import common.glb as glb
 import BrainGenix.NES as NES
@@ -193,6 +194,35 @@ class BG_API:
 
     def BGNES_simulation_runfor(self, Runtime_ms:float)->str:
         return self.Simulation.Sim.RunFor(Runtime_ms)['StatusCode']
+
+    def BGNES_simulation_runfor_and_await_outcome(self, Runtime_ms:float, timeout_ms=10000)->bool:
+        # Get the simulation timer before the next run:
+        status_dict = self.BGNES_get_simulation_status()
+        if status_dict['StatusCode'] != 0:
+            print('Simulation status '+str(status_dict['StatusCode']))
+            return False
+        t_before_run = status_dict['InSimulationTime_ms']
+
+        # Run:
+        self.BGNES_simulation_runfor(Runtime_ms)
+
+        # Await completion:
+        dt_s = 0.005
+        dt_ms = int(dt_s*1000)
+        while True:
+            sleep(dt_s)
+            status_dict = self.BGNES_get_simulation_status()
+            if status_dict['StatusCode'] != 0:
+                print('Simulation failed. Status '+str(status_dict['StatusCode']))
+                return False
+            # Ensure that runfor started and that it ended.
+            if status_dict['InSimulationTime_ms'] > t_before_run:
+                if not status_dict['IsSimulating']:
+                    return True
+            timeout_ms -= dt_ms
+            if timeout_ms <= 0:
+                print('Waiting for simulation completion timed out.')
+                return False
 
     def BGNES_get_simulation_status(self)->str:
         return self.Simulation.Sim.GetStatus()
@@ -427,8 +457,8 @@ class BG_API:
         }
         return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
 
+    # spont_spike_interval_ms_stdev == 0 means no spontaneous activity
     def BGNES_set_spontaneous_activity(self,
-        spontaneous_on:bool,
         spont_spike_interval_ms_mean:float,
         spont_spike_interval_ms_stdev:float,
         neuron_ids:list,
@@ -436,7 +466,6 @@ class BG_API:
 
         ReqFunc = 'SetSpontaneousActivity'
         ReqParams = {
-            'Active': spontaneous_on,
             'SpikeIntervalMean_ms': spont_spike_interval_ms_mean,
             'SpikeIntervalStDev_ms': spont_spike_interval_ms_stdev,
             'NeuronIDs': neuron_ids,
@@ -466,7 +495,7 @@ class BG_API:
             "SavedSimName": timestampedname,
         }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it=False)
-        success, first_response = self.BGNES_First_NESResponse('Loading', False, responses)
+        success, firstreq_response = self.BGNES_First_NESResponse('Loading', False, responses)
         if not success:
             exit(1)
         if "TaskID" not in firstreq_response:
