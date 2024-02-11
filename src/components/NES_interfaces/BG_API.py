@@ -471,7 +471,7 @@ class BG_API:
             'NeuronIDs': neuron_ids,
         }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
-        success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
+        success, first_response = self.BGNES_First_NESResponse('Set Spontaneous Activity', batch_it, responses)
         return success
 
     def get_vec3_from_response(self, response, prefix:str, units="um")->tuple:
@@ -489,14 +489,36 @@ class BG_API:
             return (False, [])
         return (True, [x, y, z])
 
+    def get_list_from_response(self, response, listkey:str)->tuple:
+        if not listkey in response:
+            print('Bad format. Expected list.')
+            return (False, [])
+        thelist = response[listkey]
+        if not isinstance(thelist, list):
+            print('Wrong type. Expected list.')
+            return (False, [])
+        return (True, thelist)
+
     def BGNES_get_geometric_center(self, batch_it=False)->tuple:
         ReqFunc = "SimulationGetGeoCenter"
         ReqParams = {}
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
-        success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
+        success, first_response = self.BGNES_First_NESResponse('Get Geometric Center', batch_it, responses)
         if not success:
             return (False, [])
         return self.get_vec3_from_response(first_response, "GeoCenter")
+
+    def BGNES_attach_recording_electrodes(self,
+        set_of_electrode_specs:list,
+        batch_it=False)->list:
+
+        ReqFunc = "AttachRecordingElectrodes"
+        ReqParams = set_of_electrode_specs
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        success, first_response = self.BGNES_First_NESResponse('Attach Recording Electrodes', batch_it, responses)
+        if not success:
+            return []
+        return self.get_list_from_response(first_response, "ElectrodeIDs")
 
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'SimulationSave'

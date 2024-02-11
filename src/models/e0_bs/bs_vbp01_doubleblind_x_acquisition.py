@@ -42,6 +42,15 @@ figspecs = {
     'linewidth': 0.5,
     'figext': 'pdf',
 }
+extra_pars = {
+    'num_nodes': 2,
+    'distribution': 'aligned',
+    'calcium_fov': 12.0,
+    'calcium_y': -5.0,
+    'load_kgt': 'kgt.json',
+    'save_data': 'data.pkl.gz',
+    'save_kgt': 'kgt.json',
+}
 
 # 1. Init NES connection
 
@@ -144,6 +153,31 @@ if not success:
     exit(1)
 
 print('Geometric center of simulation: '+str(geocenter))
+
+# 3.2.2 Set up electrode parameters
+
+num_sites = 1
+sites_ratio = 0.1
+noise_level = 0
+end_position = np.array(geocenter) + np.array([0, 0, 5.0])
+
+rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
+for rec_site in range(1, num_sites):
+    electrode_ratio = rec_site * sites_ratio
+    rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
+
+electrode_specs = {
+    'id': 'electrode_0',
+    'tip_position': geo_center_xyz_um,
+    'end_position': end_position.tolist(),
+    'sites': rec_sites_on_electrode,
+    'noise_level': noise_level,
+}
+set_of_electrode_specs = [ electode_specs, ] # A single electrode.
+
+list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+
+print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
 
 # 3.3 Initialize calcium imaging
 
