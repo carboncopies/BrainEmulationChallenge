@@ -229,6 +229,7 @@ if isinstance(recording_dict, dict):
 if 't_ms' not in instrument_data:
     print('Missing t_ms record in instruments data.')
 else:
+    t_ms = instrument_data['t_ms']
     if 'Electrodes' not in instrument_data:
         print('No Electrode recording data in instrument data.')
     else:
