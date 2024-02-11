@@ -167,13 +167,13 @@ for rec_site in range(1, num_sites):
     rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
 
 electrode_specs = {
-    'id': 'electrode_0',
-    'tip_position': geo_center_xyz_um,
+    'name': 'electrode_0',
+    'tip_position': geocenter,
     'end_position': end_position.tolist(),
     'sites': rec_sites_on_electrode,
     'noise_level': noise_level,
 }
-set_of_electrode_specs = [ electode_specs, ] # A single electrode.
+set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
 
 list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
@@ -181,23 +181,33 @@ print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
 
 # 3.3 Initialize calcium imaging
 
+# *** PENDING...
+
 # ----------------------------------------------------
 
-print('\nRunning experiment for %.1f milliseconds...\n' % runtime_ms)
+print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
 
-# 5.1 Set record-all
+# 5.1 Set record-all and record instruments
 
 t_max_ms=-1 # record forever
 glb.bg_api.BGNES_simulation_recordall(t_max_ms)
+if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
+    exit(1)
 
 # 5.2 Run for specified simulation time
 
 if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
+# *** Here get calcium imaging a-posteriori.
+
 # 5.3 Retrieve recordings and plot
 
 recording_dict = glb.bg_api.BGNES_get_recording()
+success, instrument_data = glb.bg_api.BGNES_get_instrument_recordings()
+if not success:
+    exit(1)
+
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
         if recording_dict["StatusCode"] != 0:
@@ -215,6 +225,31 @@ if isinstance(recording_dict, dict):
                         savefolder=savefolder,
                         data=recording_dict["Recording"],
                         figspecs=figspecs,)
+
+if 't_ms' not in instrument_data:
+    print('Missing t_ms record in instruments data.')
+else:
+    if 'Electrodes' not in instrument_data:
+        print('No Electrode recording data in instrument data.')
+    else:
+        electrode_data = instrument_data['Electrodes']
+        for electrode_name in electrode_data.keys():
+            specific_electrode_data = electrode_data[electrode_name]
+            E_mV = specific_electrode_data['E_mV']
+            if len(E_mV)<1:
+                print('Zero E_mV records found at electrode %s.' % electrode_name)
+            else:
+                fig = plt.figure(figsize=figspecs['figsize'])
+                gs = fig.add_gridspec(len(E_mV),1, hspace=0)
+                axs = gs.subplots(sharex=True, sharey=True)
+                fig.suptitle('Electrode %s' % electrode_name)
+                for site in range(len(E_mV)):
+                    if len(E_mV)==1:
+                        axs.plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                    else:
+                        axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                plt.draw()
+                plt.savefig(savefolder+'/%s.%s' % (str(electrode_name),figspecs['figext']), dpi=300)
 
 # ----------------------------------------------------
 

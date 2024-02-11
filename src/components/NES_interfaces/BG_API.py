@@ -513,12 +513,29 @@ class BG_API:
         batch_it=False)->list:
 
         ReqFunc = "AttachRecordingElectrodes"
-        ReqParams = set_of_electrode_specs
+        ReqParams = {
+            "ElectrodeSpecs": set_of_electrode_specs,
+        }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
         success, first_response = self.BGNES_First_NESResponse('Attach Recording Electrodes', batch_it, responses)
         if not success:
             return []
         return self.get_list_from_response(first_response, "ElectrodeIDs")
+
+    # 0.0 means stop recording, -1.0 means record forever.
+    def BGNES_set_record_instruments(self, t_max_ms:float, batch_it=False)->bool:
+        ReqFunc = "SetRecordInstruments"
+        ReqParams = {
+            'MaxRecordTime_ms': t_max_ms,
+        }
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Set Record Instruments', batch_it, responses)[0]
+
+    def BGNES_get_instrument_recordings(self, batch_it=False)->tuple:
+        ReqFunc = "GetInstrumentRecordings"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Get Instrument Recordings', batch_it, responses)
 
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'SimulationSave'
