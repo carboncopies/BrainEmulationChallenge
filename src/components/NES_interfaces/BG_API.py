@@ -474,6 +474,30 @@ class BG_API:
         success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
         return success
 
+    def get_vec3_from_response(self, response, prefix:str, units="um")->tuple:
+        xlabel = prefix+'X_'+units
+        ylabel = prefix+'Y_'+units
+        zlabel = prefix+'Z_'+units
+        if not (xlabel in response and ylabel in response and zlabel in response):
+            print('Bad format. Expected 3D vector.')
+            return (False, [])
+        x = response[xlabel]
+        y = response[ylabel]
+        z = response[zlabel]
+        if not (isinstance(x, (float,int)) and isinstance(y, (float,int)) and isinstance(z, (float,int))):
+            print('Wrong types. Expected 3D vector of floats or ints.')
+            return (False, [])
+        return (True, [x, y, z])
+
+    def BGNES_get_geometric_center(self, batch_it=False)->tuple:
+        ReqFunc = "SimulationGetGeoCenter"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
+        if not success:
+            return (False, [])
+        return self.get_vec3_from_response(first_response, "GeoCenter")
+
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'SimulationSave'
         ReqParams = {}

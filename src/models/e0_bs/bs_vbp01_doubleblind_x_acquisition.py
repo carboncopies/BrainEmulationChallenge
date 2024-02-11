@@ -136,6 +136,15 @@ print('Spontaneous activity at each neuron successfully activated.')
 
 # 3.2 Initialize recording electrodes
 
+# 3.2.1 Find the geometric center of the system based on soma center locations
+
+success, geocenter = glb.bg_api.BGNES_get_geometric_center()
+if not success:
+    print('Failed to find geometric center of simulation.')
+    exit(1)
+
+print('Geometric center of simulation: '+str(geocenter))
+
 # 3.3 Initialize calcium imaging
 
 # ----------------------------------------------------
