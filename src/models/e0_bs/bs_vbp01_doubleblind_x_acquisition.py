@@ -257,6 +257,8 @@ else:
                 fig = plt.figure(figsize=figspecs['figsize'])
                 gs = fig.add_gridspec(len(E_mV),1, hspace=0)
                 axs = gs.subplots(sharex=True, sharey=True)
+                axs.set_xlabel("Time (ms)")
+                axs.set_ylabel("Electrode Voltage (mV)")
                 fig.suptitle('Electrode %s' % electrode_name)
                 for site in range(len(E_mV)):
                     if len(E_mV)==1:
