@@ -298,7 +298,7 @@ else:
 
 
 # ----------------------------------------------------
-# Now, we render the visualized data optionally
+# Now, we render the visualized model optionally
 # ----------------------------------------------------
 if (Args.RenderVisualization):
     print("rendering visualization of neural network\n")
