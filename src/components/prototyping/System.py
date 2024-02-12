@@ -163,10 +163,16 @@ class System:
     def run_for(self, t_run_ms:float):
         t_end_ms = self.t_ms + t_run_ms
         while self.t_ms < t_end_ms:
+
+            # Track time-points for God's eye recording
             recording = self.is_recording()
             if recording: self.t_recorded_ms.append(self.t_ms)
+
+            # Call update in circuits (neurons, etc)
             for circuit in self.neuralcircuits:
                 self.neuralcircuits[circuit].update(self.t_ms, recording)
+
+            # Carry out simulated instrument recordings
             instruments = self.instruments_are_recording()
             if instruments:
                 self.t_instruments_ms.append(self.t_ms)
@@ -174,6 +180,7 @@ class System:
                     electrode.record(self.t_ms)
                 if self.calcium_imaging:
                     self.calcium_imaging.record(self.t_ms)
+
             self.t_ms += self.dt_ms
 
     def to_dict(self)->dict:

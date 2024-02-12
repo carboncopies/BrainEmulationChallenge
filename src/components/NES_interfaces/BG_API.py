@@ -471,8 +471,71 @@ class BG_API:
             'NeuronIDs': neuron_ids,
         }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
-        success, first_response = self.BGNES_First_NESResponse('Loading', batch_it, responses)
+        success, first_response = self.BGNES_First_NESResponse('Set Spontaneous Activity', batch_it, responses)
         return success
+
+    def get_vec3_from_response(self, response, prefix:str, units="um")->tuple:
+        xlabel = prefix+'X_'+units
+        ylabel = prefix+'Y_'+units
+        zlabel = prefix+'Z_'+units
+        if not (xlabel in response and ylabel in response and zlabel in response):
+            print('Bad format. Expected 3D vector.')
+            return (False, [])
+        x = response[xlabel]
+        y = response[ylabel]
+        z = response[zlabel]
+        if not (isinstance(x, (float,int)) and isinstance(y, (float,int)) and isinstance(z, (float,int))):
+            print('Wrong types. Expected 3D vector of floats or ints.')
+            return (False, [])
+        return (True, [x, y, z])
+
+    def get_list_from_response(self, response, listkey:str)->tuple:
+        if not listkey in response:
+            print('Bad format. Expected list.')
+            return (False, [])
+        thelist = response[listkey]
+        if not isinstance(thelist, list):
+            print('Wrong type. Expected list.')
+            return (False, [])
+        return (True, thelist)
+
+    def BGNES_get_geometric_center(self, batch_it=False)->tuple:
+        ReqFunc = "SimulationGetGeoCenter"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        success, first_response = self.BGNES_First_NESResponse('Get Geometric Center', batch_it, responses)
+        if not success:
+            return (False, [])
+        return self.get_vec3_from_response(first_response, "GeoCenter")
+
+    def BGNES_attach_recording_electrodes(self,
+        set_of_electrode_specs:list,
+        batch_it=False)->list:
+
+        ReqFunc = "AttachRecordingElectrodes"
+        ReqParams = {
+            "ElectrodeSpecs": set_of_electrode_specs,
+        }
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        success, first_response = self.BGNES_First_NESResponse('Attach Recording Electrodes', batch_it, responses)
+        if not success:
+            return []
+        return self.get_list_from_response(first_response, "ElectrodeIDs")
+
+    # 0.0 means stop recording, -1.0 means record forever.
+    def BGNES_set_record_instruments(self, t_max_ms:float, batch_it=False)->bool:
+        ReqFunc = "SetRecordInstruments"
+        ReqParams = {
+            'MaxRecordTime_ms': t_max_ms,
+        }
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Set Record Instruments', batch_it, responses)[0]
+
+    def BGNES_get_instrument_recordings(self, batch_it=False)->tuple:
+        ReqFunc = "GetInstrumentRecordings"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Get Instrument Recordings', batch_it, responses)
 
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'SimulationSave'

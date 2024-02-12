@@ -54,6 +54,15 @@ figspecs = {
     'linewidth': 0.5,
     'figext': 'pdf',
 }
+extra_pars = {
+    'num_nodes': 2,
+    'distribution': 'aligned',
+    'calcium_fov': 12.0,
+    'calcium_y': -5.0,
+    'load_kgt': 'kgt.json',
+    'save_data': 'data.pkl.gz',
+    'save_kgt': 'kgt.json',
+}
 
 # 1. Init NES connection
 
@@ -151,25 +160,69 @@ print('Spontaneous activity at each neuron successfully activated.')
 
 # 3.2 Initialize recording electrodes
 
+# 3.2.1 Find the geometric center of the system based on soma center locations
+
+success, geocenter = glb.bg_api.BGNES_get_geometric_center()
+if not success:
+    print('Failed to find geometric center of simulation.')
+    exit(1)
+
+print('Geometric center of simulation: '+str(geocenter))
+
+# 3.2.2 Set up electrode parameters
+
+num_sites = 1
+sites_ratio = 0.1
+noise_level = 0
+end_position = np.array(geocenter) + np.array([0, 0, 5.0])
+
+rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
+for rec_site in range(1, num_sites):
+    electrode_ratio = rec_site * sites_ratio
+    rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
+
+electrode_specs = {
+    'name': 'electrode_0',
+    'tip_position': geocenter,
+    'end_position': end_position.tolist(),
+    'sites': rec_sites_on_electrode,
+    'noise_level': noise_level,
+}
+set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
+
+list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+
+print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
+
 # 3.3 Initialize calcium imaging
+
+# *** PENDING...
 
 # ----------------------------------------------------
 
-print('\nRunning experiment for %.1f milliseconds...\n' % runtime_ms)
+print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
 
-# 5.1 Set record-all
+# 5.1 Set record-all and record instruments
 
 t_max_ms=-1 # record forever
 glb.bg_api.BGNES_simulation_recordall(t_max_ms)
+if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
+    exit(1)
 
 # 5.2 Run for specified simulation time
 
 if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
+# *** Here get calcium imaging a-posteriori.
+
 # 5.3 Retrieve recordings and plot
 
 recording_dict = glb.bg_api.BGNES_get_recording()
+success, instrument_data = glb.bg_api.BGNES_get_instrument_recordings()
+if not success:
+    exit(1)
+
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
         if recording_dict["StatusCode"] != 0:
@@ -187,6 +240,32 @@ if isinstance(recording_dict, dict):
                         savefolder=savefolder,
                         data=recording_dict["Recording"],
                         figspecs=figspecs,)
+
+if 't_ms' not in instrument_data:
+    print('Missing t_ms record in instruments data.')
+else:
+    t_ms = instrument_data['t_ms']
+    if 'Electrodes' not in instrument_data:
+        print('No Electrode recording data in instrument data.')
+    else:
+        electrode_data = instrument_data['Electrodes']
+        for electrode_name in electrode_data.keys():
+            specific_electrode_data = electrode_data[electrode_name]
+            E_mV = specific_electrode_data['E_mV']
+            if len(E_mV)<1:
+                print('Zero E_mV records found at electrode %s.' % electrode_name)
+            else:
+                fig = plt.figure(figsize=figspecs['figsize'])
+                gs = fig.add_gridspec(len(E_mV),1, hspace=0)
+                axs = gs.subplots(sharex=True, sharey=True)
+                fig.suptitle('Electrode %s' % electrode_name)
+                for site in range(len(E_mV)):
+                    if len(E_mV)==1:
+                        axs.plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                    else:
+                        axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                plt.draw()
+                plt.savefig(savefolder+'/%s.%s' % (str(electrode_name),figspecs['figext']), dpi=300)
 
 # ----------------------------------------------------
 
