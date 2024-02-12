@@ -524,7 +524,9 @@ class BG_API:
 
     def BGNES_calcium_imaging_attach(self, calcium_specs:dict, batch_it=False):
         ReqFunc = "CalciumImagingAttach"
-        ReqParams = calcium_specs
+        ReqParams = {
+            "CalciumSpecs": calcium_specs,
+        }
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
         return self.BGNES_First_NESResponse('Ca Imaging Attach', batch_it, responses)[0]
 
