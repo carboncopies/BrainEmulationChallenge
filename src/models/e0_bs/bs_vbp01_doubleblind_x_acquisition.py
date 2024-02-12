@@ -42,15 +42,6 @@ figspecs = {
     'linewidth': 0.5,
     'figext': 'pdf',
 }
-extra_pars = {
-    'num_nodes': 2,
-    'distribution': 'aligned',
-    'calcium_fov': 12.0,
-    'calcium_y': -5.0,
-    'load_kgt': 'kgt.json',
-    'save_data': 'data.pkl.gz',
-    'save_kgt': 'kgt.json',
-}
 
 # 1. Init NES connection
 
@@ -181,7 +172,31 @@ print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
 
 # 3.3 Initialize calcium imaging
 
-# *** PENDING...
+calcium_fov = 12.0
+calcium_y = -5.0
+calcium_specs = {
+    'name': 'calcium_0',
+    'fluorescing_neurons': [], # Empty means all neurons show up in calcium imaging.
+    'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
+    'indicator_rise_ms': 2.0,
+    'indicator_decay_ms': 40.0,
+    'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
+    #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
+    #'microscope_rear_position_um': (0.0, 40.0, 0.0),
+    'voxelspace_side_px': 30,
+    'imaged_subvolume': {
+        'center': [0, calcium_y, 0],
+        'half': [calcium_fov/2.0, calcium_fov/2.0, 2.0],
+        'dx': [1.0, 0.0, 0.0],
+        'dy': [0.0, 1.0, 0.0],
+        'dz': [0.0, 0.0, 1.0], # Positive dz indicates most visible top surface.
+    },
+    'generate_during_sim': False,
+}
+
+glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
+
+glb.bg_api.BGNES_calcium_imaging_show_voxels()
 
 # ----------------------------------------------------
 
@@ -199,7 +214,8 @@ if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
 if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
-# *** Here get calcium imaging a-posteriori.
+if not calcium_specs['generate_during_sim']:
+    glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
 
 # 5.3 Retrieve recordings and plot
 
@@ -226,10 +242,13 @@ if isinstance(recording_dict, dict):
                         data=recording_dict["Recording"],
                         figspecs=figspecs,)
 
+                    # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
+
 if 't_ms' not in instrument_data:
     print('Missing t_ms record in instruments data.')
 else:
     t_ms = instrument_data['t_ms']
+
     if 'Electrodes' not in instrument_data:
         print('No Electrode recording data in instrument data.')
     else:
@@ -251,6 +270,12 @@ else:
                         axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
                 plt.draw()
                 plt.savefig(savefolder+'/%s.%s' % (str(electrode_name),figspecs['figext']), dpi=300)
+
+    if 'CaImaging' not in instrument_data:
+        print('No Calcium Imaging recording data in instrument data')
+    else:
+        caimaging_data = instrument_data['CaImaging']
+        # ...
 
 # ----------------------------------------------------
 

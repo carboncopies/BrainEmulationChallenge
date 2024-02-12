@@ -522,6 +522,24 @@ class BG_API:
             return []
         return self.get_list_from_response(first_response, "ElectrodeIDs")
 
+    def BGNES_calcium_imaging_attach(self, calcium_specs:dict, batch_it=False):
+        ReqFunc = "CalciumImagingAttach"
+        ReqParams = calcium_specs
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Ca Imaging Attach', batch_it, responses)[0]
+
+    def BGNES_calcium_imaging_show_voxels(self, batch_it=False)->tuple:
+        ReqFunc = "CalciumImagingShowVoxels"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Ca Imaging Show Voxels', batch_it, responses)
+
+    def BGNES_calcium_imaging_record_aposteriori(self, batch_it=False)->bool:
+        ReqFunc = "CalciumImagingRecordAposteriori"
+        ReqParams = {}
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Ca Imaging Record A-Posteriori', batch_it, responses)[0]
+
     # 0.0 means stop recording, -1.0 means record forever.
     def BGNES_set_record_instruments(self, t_max_ms:float, batch_it=False)->bool:
         ReqFunc = "SetRecordInstruments"
