@@ -39,8 +39,8 @@ def PointsInCircum(r,n=100):
 
 
 Parser = argparse.ArgumentParser(description="vbp script")
-Parser.add_argument("-RenderVisualization", default=False, type=bool, help="Enable or disable visualization")
-Parser.add_argument("-RenderEM", default=False, type=bool, help="Enable or disable em stack rendering")
+Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
+Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
 Args = Parser.parse_args()
 
 
