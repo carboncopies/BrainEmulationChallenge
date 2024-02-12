@@ -306,8 +306,8 @@ if (Args.RenderEM):
 
     EMConfig = NES.VSDA.EM.Configuration()
     EMConfig.PixelResolution_nm = 0.05
-    EMConfig.ImageWidth_px = 1024
-    EMConfig.ImageHeight_px = 1024
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
     EMConfig.SliceThickness_nm = 100
     EMConfig.ScanRegionOverlap_percent = 10
     EMConfig.MicroscopeFOV_deg = 50
