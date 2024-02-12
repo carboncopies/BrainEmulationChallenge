@@ -189,7 +189,6 @@ electrode_specs = {
     'noise_level': noise_level,
 }
 set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
-
 list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
 print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
@@ -265,7 +264,8 @@ else:
                     else:
                         axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
                 plt.draw()
-                plt.savefig(savefolder+'/%s.%s' % (str(electrode_name),figspecs['figext']), dpi=300)
+                print(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}')
+                plt.savefig(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}', dpi=300)
 
 # ----------------------------------------------------
 
