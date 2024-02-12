@@ -1,0 +1,13 @@
+# Ignore all generated data
+Visualizations/*
+Renders/*
+*.png
+*.bmp
+*.exr
+*.gif
+*.mp4
+*.mkv
+*.nes
+__pycache__/*
+
+.SimulationHandle

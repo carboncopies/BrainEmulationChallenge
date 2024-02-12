@@ -334,7 +334,12 @@ for pattern in connection_pattern_set:
 # 3.7 Save the ground-truth system
 
 response = glb.bg_api.BGNES_save()
-print('Saved simulation: '+str(response));
+print('Saved simulation: '+str(response))
+
+with open(".SimulationHandle", "w") as f:
+    print(f"Saving simulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
+    f.write(response[0]['SavedSimName'])
+
 
 STIMTEXT1='''
 Dynamic activity:

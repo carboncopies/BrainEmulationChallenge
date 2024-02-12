@@ -20,23 +20,35 @@ import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
 from time import sleep
+import argparse
 import math
 
 import vbpcommon
 import common.glb as glb
+import os
 from NES_interfaces.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 import BrainGenix.NES as NES
 import BrainGenix
+from BrainGenix.Tools.StackStitcher.StackStitcher import StitchManySlices
 
 def PointsInCircum(r,n=100):
     return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
 
 
+
+Parser = argparse.ArgumentParser(description="vbp script")
+Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
+Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
+Args = Parser.parse_args()
+
+
+
+
 api_is_local=True
 runtime_ms=500.0
-savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
+savefolder = './Renders/vbp_'+datetime.now().strftime("%F_%X")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -55,8 +67,11 @@ if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbos
 # 2. Load ground-truth network
 
 # 2.1 Request Loading
+sys_name=None
+with open(".SimulationHandle", "r") as f:
+    sys_name = f.read()
+print(f"Loading simulation with handle '{sys_name}'")
 
-sys_name='2024-02-08_18:15:53-e0_bs'
 loadingtaskID = glb.bg_api.BGNES_load(timestampedname=sys_name)
 
 print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
@@ -165,7 +180,6 @@ electrode_specs = {
     'noise_level': noise_level,
 }
 set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
-
 list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
 print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
@@ -262,6 +276,8 @@ else:
                 fig = plt.figure(figsize=figspecs['figsize'])
                 gs = fig.add_gridspec(len(E_mV),1, hspace=0)
                 axs = gs.subplots(sharex=True, sharey=True)
+                axs.set_xlabel("Time (ms)")
+                axs.set_ylabel("Electrode Voltage (mV)")
                 fig.suptitle('Electrode %s' % electrode_name)
                 for site in range(len(E_mV)):
                     if len(E_mV)==1:
@@ -269,7 +285,8 @@ else:
                     else:
                         axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
                 plt.draw()
-                plt.savefig(savefolder+'/%s.%s' % (str(electrode_name),figspecs['figext']), dpi=300)
+                print(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}')
+                plt.savefig(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}', dpi=300)
 
     if 'CaImaging' not in instrument_data:
         print('No Calcium Imaging recording data in instrument data')
@@ -279,28 +296,59 @@ else:
 
 # ----------------------------------------------------
 
-exit(0)
 
-VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
-VisualizerJob.ImageWidth_px = 2048
-VisualizerJob.ImageHeight_px = 2048
-
-
-
-# Render In Circle Around Sim
-Radius = 30
-Steps = 50
-ZHeight = 50
-
-for Point in PointsInCircum(Radius, Steps):
-
-    VisualizerJob.CameraFOVList_deg.append(110)
-    VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
-    VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
-
-Visualizer = glb.bg_api.Simulation.Sim.SetupVisualizer()
-Visualizer.GenerateVisualization(VisualizerJob)
+# ----------------------------------------------------
+# Now, we render the visualized data optionally
+# ----------------------------------------------------
+if (Args.RenderVisualization):
+    print("rendering visualization of neural network\n")
+    VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
+    VisualizerJob.ImageWidth_px = 2048
+    VisualizerJob.ImageHeight_px = 2048
 
 
-Visualizer.SaveImages("Visualizations", 2)
+    # Render In Circle Around Sim
+    Radius = 20
+    Steps = 50
+    ZHeight = 0
 
+    for Point in PointsInCircum(Radius, Steps):
+
+        VisualizerJob.CameraFOVList_deg.append(110)
+        VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
+        VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
+
+    Visualizer = glb.bg_api.Simulation.Sim.SetupVisualizer()
+    Visualizer.GenerateVisualization(VisualizerJob)
+
+
+    Visualizer.SaveImages("Renders/Visualizations", 2)
+
+# ----------------------------------------------------
+# And, we optionally render the EM Stack, and reconstruct it.
+# ----------------------------------------------------
+if (Args.RenderEM):
+    print("\nRendering EM image stack to disk\n")
+
+
+    EMConfig = NES.VSDA.EM.Configuration()
+    EMConfig.PixelResolution_nm = 0.05
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
+    EMConfig.SliceThickness_nm = 100
+    EMConfig.ScanRegionOverlap_percent = 10
+    EMConfig.MicroscopeFOV_deg = 50
+    EMConfig.NumPixelsPerVoxel_px = 1
+    VSDAEMInstance = glb.bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
+
+    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10])
+    VSDAEMInstance.QueueRenderOperation()
+    VSDAEMInstance.WaitForRender()
+    VSDAEMInstance.SaveImageStack("Renders/EM/Raw")
+
+
+    print(" -- Reconstructing Image Stack")
+    StitchManySlices("Renders/EM/Raw", "Renders/EM/Stitched", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+
+
+# ----------------------------------------------------
