@@ -197,15 +197,15 @@ calcium_specs = {
     'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
     #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
     #'microscope_rear_position_um': (0.0, 40.0, 0.0),
-    'voxelspace_side_px': 30,
-    'imaged_subvolume': {
+    'voxelspace_side_px': 30, # CHANGE TO: voxelsize_um
+    'imaged_subvolume': { # CHANGE TO: bottom left top right... but take care of rotation
         'center': [0, calcium_y, 0],
         'half': [calcium_fov/2.0, calcium_fov/2.0, 2.0],
         'dx': [1.0, 0.0, 0.0],
         'dy': [0.0, 1.0, 0.0],
         'dz': [0.0, 0.0, 1.0], # Positive dz indicates most visible top surface.
     },
-    'generate_during_sim': False,
+    'generate_during_sim': False, # PROBABLY REMOVE
 }
 
 glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
