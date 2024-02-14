@@ -179,14 +179,18 @@ class BG_API:
 
    # --------------------------------------------------------------------
 
-    def BGNES_simulation_create(self, name:str):
+    def BGNES_simulation_create(self, name:str, ExistingID:int = -1):
+        Loading:bool = ExistingID != -1
         self.Simulation = SimClientInstance(
             credentials=self.credentials,
             simname=name,
             host=self.uri_host,
             port=self.uri_port,
             use_https=self.use_https,
+            loading=Loading
         )
+        if (ExistingID != -1):
+            self.Simulation.Sim.ID = ExistingID
         return self.Simulation
 
     def BGNES_simulation_reset(self)->str:
@@ -451,7 +455,7 @@ class BG_API:
         TimeNeuronPairs:list,
         batch_it=False):
 
-        ReqFunc = 'SetSpecificAPTimes'
+        ReqFunc = 'Simulation/SetSpecificAPTimes'
         ReqParams = {
             "TimeNeuronPairs": TimeNeuronPairs,
         }
@@ -464,7 +468,7 @@ class BG_API:
         neuron_ids:list,
         batch_it=False)->bool:
 
-        ReqFunc = 'SetSpontaneousActivity'
+        ReqFunc = 'Simulation/SetSpontaneousActivity'
         ReqParams = {
             'SpikeIntervalMean_ms': spont_spike_interval_ms_mean,
             'SpikeIntervalStDev_ms': spont_spike_interval_ms_stdev,
@@ -500,7 +504,7 @@ class BG_API:
         return (True, thelist)
 
     def BGNES_get_geometric_center(self, batch_it=False)->tuple:
-        ReqFunc = "SimulationGetGeoCenter"
+        ReqFunc = "Simulation/GetGeoCenter"
         ReqParams = {}
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
         success, first_response = self.BGNES_First_NESResponse('Get Geometric Center', batch_it, responses)
@@ -512,7 +516,7 @@ class BG_API:
         set_of_electrode_specs:list,
         batch_it=False)->list:
 
-        ReqFunc = "AttachRecordingElectrodes"
+        ReqFunc = "Simulation/AttachRecordingElectrodes"
         ReqParams = {
             "ElectrodeSpecs": set_of_electrode_specs,
         }
@@ -542,7 +546,7 @@ class BG_API:
 
     # 0.0 means stop recording, -1.0 means record forever.
     def BGNES_set_record_instruments(self, t_max_ms:float, batch_it=False)->bool:
-        ReqFunc = "SetRecordInstruments"
+        ReqFunc = "Simulation/SetRecordInstruments"
         ReqParams = {
             'MaxRecordTime_ms': t_max_ms,
         }
@@ -550,13 +554,13 @@ class BG_API:
         return self.BGNES_First_NESResponse('Set Record Instruments', batch_it, responses)[0]
 
     def BGNES_get_instrument_recordings(self, batch_it=False)->tuple:
-        ReqFunc = "GetInstrumentRecordings"
+        ReqFunc = "Simulation/GetInstrumentRecordings"
         ReqParams = {}
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
         return self.BGNES_First_NESResponse('Get Instrument Recordings', batch_it, responses)
 
     def BGNES_save(self, batch_it=False):
-        ReqFunc = 'SimulationSave'
+        ReqFunc = 'Simulation/Save'
         ReqParams = {}
         return self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
 
@@ -571,7 +575,7 @@ class BG_API:
             use_https=self.use_https,
             loading=True,
         )
-        ReqFunc = 'SimulationLoad'
+        ReqFunc = 'Simulation/Load'
         ReqParams = {
             "SavedSimName": timestampedname,
         }
