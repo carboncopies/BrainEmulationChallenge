@@ -191,8 +191,9 @@ calcium_y = -5.0
 calcium_specs = {
     'name': 'calcium_0',
 }
-CAConfig = NES.VSDA.CA.Configuration()
-CAConfig.PixelResolution_nm = 0.1 # This is actually um!!!!!!!!!!!
+
+CAConfig = NES.VSDA.Calcium.Configuration()
+CAConfig.VoxelResolution_nm = 0.1 # This is actually um!!!!!!!!!!!
 CAConfig.ImageWidth_px = 512
 CAConfig.ImageHeight_px = 512
 CAConfig.NumVoxelsPerSlice = 4
@@ -203,13 +204,9 @@ CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
 CAConfig.IndicatorInterval_ms = 20.0, # Max. spike rate trackable 50 Hz.
-VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACA(EMConfig)
-
-VSDACAInstance.DefineScanRegion([-10,-10,-10], [10,10,10])
-
-VSDACAInstance.QueueRenderOperation()
-VSDACAInstance.WaitForRender()
-VSDACAInstance.SaveImageStack("Renders/CA/Raw")
+VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
+ 
+VSDACAInstance.DefineScanRegion([-10,-10, 9], [10,10,10])
 
 # glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
 
@@ -227,12 +224,21 @@ if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
     exit(1)
 
 # 5.2 Run for specified simulation time
-
 if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
-if not calcium_specs['generate_during_sim']:
-    glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
+# if not calcium_specs['generate_during_sim']:
+#     glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
+
+
+# Please fix the label here Randal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+VSDACAInstance.QueueRenderOperation()
+VSDACAInstance.WaitForRender()
+VSDACAInstance.SaveImageStack("Renders/CA/Raw")
+
+
+
+
 
 # 5.3 Retrieve recordings and plot
 
