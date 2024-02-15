@@ -190,27 +190,30 @@ calcium_fov = 12.0
 calcium_y = -5.0
 calcium_specs = {
     'name': 'calcium_0',
-    'fluorescing_neurons': [], # Empty means all neurons show up in calcium imaging.
-    'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
-    'indicator_rise_ms': 2.0,
-    'indicator_decay_ms': 40.0,
-    'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
-    #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
-    #'microscope_rear_position_um': (0.0, 40.0, 0.0),
-    'voxelspace_side_px': 30, # CHANGE TO: voxelsize_um
-    'imaged_subvolume': { # CHANGE TO: bottom left top right... but take care of rotation
-        'center': [0, calcium_y, 0],
-        'half': [calcium_fov/2.0, calcium_fov/2.0, 2.0],
-        'dx': [1.0, 0.0, 0.0],
-        'dy': [0.0, 1.0, 0.0],
-        'dz': [0.0, 0.0, 1.0], # Positive dz indicates most visible top surface.
-    },
-    'generate_during_sim': False, # PROBABLY REMOVE
 }
+CAConfig = NES.VSDA.CA.Configuration()
+CAConfig.PixelResolution_nm = 0.1 # This is actually um!!!!!!!!!!!
+CAConfig.ImageWidth_px = 512
+CAConfig.ImageHeight_px = 512
+CAConfig.NumVoxelsPerSlice = 4
+CAConfig.ScanRegionOverlap_percent = 0
+CAConfig.FlourescingNeuronIDs = []
+CAConfig.NumPixelsPerVoxel_px = 1
+CAConfig.CalciumIndicator = 'jGCaMP8'
+CAConfig.IndicatorRiseTime_ms = 2.0
+CAConfig.IndicatorDecayTime_ms = 40.0
+CAConfig.IndicatorInterval_ms = 20.0, # Max. spike rate trackable 50 Hz.
+VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACA(EMConfig)
 
-glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
+VSDACAInstance.DefineScanRegion([-10,-10,-10], [10,10,10])
 
-glb.bg_api.BGNES_calcium_imaging_show_voxels()
+VSDACAInstance.QueueRenderOperation()
+VSDACAInstance.WaitForRender()
+VSDACAInstance.SaveImageStack("Renders/CA/Raw")
+
+# glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
+
+# glb.bg_api.BGNES_calcium_imaging_show_voxels()
 
 # ----------------------------------------------------
 
