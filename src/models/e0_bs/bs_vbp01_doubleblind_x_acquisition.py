@@ -300,8 +300,33 @@ else:
     if 'Calcium' not in instrument_data:
         print('No Calcium Concentration neuron data in instrument data')
     else:
+        # Returns "Ca_t_ms" data and data for each neuron ID (e.g. "0") with a list of calcium concentrations
+        # at each "Ca_t_ms" time point.
         caimaging_data = instrument_data['Calcium']
-        # ...
+        # Get the time points
+        if "Ca_t_ms" in caimaging_data:
+            Ca_t_ms = caimaging_data["Ca_t_ms"]
+            # Find the neuron IDs for which data is included
+            neuron_ids = []
+            for n in range(100):
+                if str(n) in caimaging_data:
+                    neuron_ids.append(str(n))
+            for neuron_id in neuron_ids:
+                neuron_Ca_data = caimaging_data[neuron_id]
+                if len(neuron_Ca_data) < 1:
+                    print('No Calcium concentration data for neuron '+neuron_id)
+                else:
+                    fig = plt.figure(figsize=figspecs['figsize'])
+                    gs = fig.add_gridspec(len(E_mV),1, hspace=0)
+                    axs = gs.subplots(sharex=True, sharey=True)
+                    axs.set_xlabel("Time (ms)")
+                    axs.set_ylabel("Calcium Concentrations")
+                    fig.suptitle('Neuron %s' % neuron_id)
+                    axs.plot(Ca_t_ms, neuron_Ca_data, linewidth=figspecs['linewidth'])
+                    plt.draw()
+                    print(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}')
+                    plt.savefig(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}', dpi=300)
+
 
 # ----------------------------------------------------
 
