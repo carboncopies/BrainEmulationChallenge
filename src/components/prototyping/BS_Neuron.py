@@ -284,7 +284,7 @@ class BS_Neuron(Neuron):
         Ca_signal = -1.0*self.FIFO[::-1]
         Ca_signal[Ca_signal < 0.0] = 0
         self.convolved_FIFO = np.array(convolve_1d(signal=Ca_signal, kernel=kernel)) #[::-1]))
-        self.Ca_samples.append(self.convolved_FIFO[10]+1.0)
+        self.Ca_samples.append(self.convolved_FIFO[10]+1.0) # A bit arbitrary to be taking the 10th value
         self.t_Ca_samples.append(self.t_ms)
 
         # if self.t_ms > 80.0:
