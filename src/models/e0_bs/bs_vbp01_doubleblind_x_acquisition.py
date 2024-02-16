@@ -297,10 +297,10 @@ else:
                 print(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}')
                 plt.savefig(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}', dpi=300)
 
-    if 'CaImaging' not in instrument_data:
-        print('No Calcium Imaging recording data in instrument data')
+    if 'Calcium' not in instrument_data:
+        print('No Calcium Concentration neuron data in instrument data')
     else:
-        caimaging_data = instrument_data['CaImaging']
+        caimaging_data = instrument_data['Calcium']
         # ...
 
 # ----------------------------------------------------
