@@ -204,9 +204,9 @@ CAConfig.NumPixelsPerVoxel_px = 1
 CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
-CAConfig.IndicatorInterval_ms = 20.0, # Max. spike rate trackable 50 Hz.
+CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
 VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
- 
+
 VSDACAInstance.DefineScanRegion([-10,-10, 9], [10,10,10])
 
 # glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
