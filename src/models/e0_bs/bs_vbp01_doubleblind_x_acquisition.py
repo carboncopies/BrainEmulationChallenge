@@ -206,6 +206,7 @@ CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
 CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
+CAConfig.ImagingInterval_ms = 25.0   # Interval at which CCD snapshots are made of the microscope image.
 VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
 VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1])
