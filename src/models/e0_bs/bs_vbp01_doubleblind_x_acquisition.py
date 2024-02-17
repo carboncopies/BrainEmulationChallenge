@@ -200,14 +200,14 @@ CAConfig.ImageHeight_px = 512
 CAConfig.NumVoxelsPerSlice = 4
 CAConfig.ScanRegionOverlap_percent = 0
 CAConfig.FlourescingNeuronIDs = []
-CAConfig.NumPixelsPerVoxel_px = 1
+CAConfig.NumPixelsPerVoxel_px = 2
 CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
 CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
 VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
-VSDACAInstance.DefineScanRegion([-10,-10, 9], [10,10,10])
+VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1])
 
 # glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
 
@@ -235,7 +235,7 @@ if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
 # Please fix the label here Randal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 VSDACAInstance.QueueRenderOperation()
 VSDACAInstance.WaitForRender()
-VSDACAInstance.SaveImageStack("Renders/CA/Raw")
+VSDACAInstance.SaveImageStack("Renders/CA/Raw", 1)
 
 
 

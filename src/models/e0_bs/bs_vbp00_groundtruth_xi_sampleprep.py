@@ -91,7 +91,7 @@ circuit_num_cells=num_nodes
 #     of a brain region:
 
 box_center = [0,0,0]
-box_dims = [20.0, 20.0, 20.0]
+box_dims = [20.0, 20.0, 2.0]
 box_rot = [0,0,0]
 box = glb.bg_api.BGNES_box_create(
             CenterPosition_um=box_center,
