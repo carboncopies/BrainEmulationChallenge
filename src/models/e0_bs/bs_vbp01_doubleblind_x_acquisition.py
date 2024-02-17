@@ -193,6 +193,7 @@ calcium_specs = {
 }
 
 CAConfig = NES.VSDA.Calcium.Configuration()
+CAConfig.BrightnessAmplification = 10.0
 CAConfig.VoxelResolution_nm = 0.1 # This is actually um!!!!!!!!!!!
 CAConfig.ImageWidth_px = 512
 CAConfig.ImageHeight_px = 512

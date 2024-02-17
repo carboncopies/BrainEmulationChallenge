@@ -559,6 +559,91 @@ class BG_API:
         responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
         return self.BGNES_First_NESResponse('Get Instrument Recordings', batch_it, responses)
 
+    def BGNES_CaImagingSetupMicroscope(self,
+            VoxelResolution_nm: float, # is um
+            ImageWidth_px: int,
+            ImageHeight_px: int,
+            NumVoxelsPerSlice: int,
+            ScanRegionOverlap_percent: float,
+            NumPixelsPerVoxel_px: int,
+            FlourescingNeuronIDs: list, # Empty means all.
+            CalciumIndicator: str,
+            IndicatorRiseTime_ms: float,
+            IndicatorDecayTime_ms: float,
+            IndicatorInterval_ms: float,
+            BrightnessAmplification: float,
+            batch_it=False,
+        )->bool:
+        ReqFunc = "VSDA/Ca/SetupMicroscope"
+        ReqParams = {
+            "VoxelResolution_nm": VoxelResolution_nm, # is um
+            "ImageWidth_px": ImageWidth_px,
+            "ImageHeight_px": ImageHeight_px,
+            "NumVoxelsPerSlice": NumVoxelsPerSlice,
+            "ScanRegionOverlap_percent": ScanRegionOverlap_percent,
+            "NumPixelsPerVoxel_px": NumPixelsPerVoxel_px,
+            "FlourescingNeuronIDs": FlourescingNeuronIDs,
+            "CalciumIndicator": CalciumIndicator,
+            "IndicatorRiseTime_ms": IndicatorRiseTime_ms,
+            "IndicatorDecayTime_ms": IndicatorDecayTime_ms,
+            "IndicatorInterval_ms": IndicatorInterval_ms,
+            "BrightnessAmplification": BrightnessAmplification,
+        }
+        responses = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return self.BGNES_First_NESResponse('Setup Ca Imaging Microscope', batch_it, responses)[0]
+
+    def BGNES_DefineScanRegion(self,
+        Point1_um:list,
+        Point2_um:list,
+        batch_it=False)->tuple:
+        ReqFunc = "VSDA/Ca/DefineScanRegion"
+        ReqParams = {
+            "Point1_um": Point1_um,
+            "Point2_um": Point2_um,
+        }
+        success, first_response  = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        if not success:
+            return (False, "")
+        return self.BGNES_First_NESResponse('Define Scan Region', batch_it, responses)[0]
+        if "ScanRegionID" not in first_response:
+            return (False, "")
+        return (True, first_response["ScanRegionID"])
+
+    def BGNES_CaQueueRenderOperation(self,
+        ScanRegionID:str,
+        batch_it=False)->bool:
+        ReqFunc = "VSDA/Ca/QueueRenderOperation"
+        ReqParams = {
+            "ScanRegionID": ScanRegionID,
+        }
+        success, first_response  = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        return success
+
+    def GetCaRenderStatus(self)->tuple:
+        ReqFunc = "VSDA/Ca/GetRenderStatus"
+        ReqParams = {}
+        return self.BGNES_NES_Common(ReqFunc, ReqParams, False)
+
+    def CaWaitForRender(self)->bool:
+        try:
+            NES.VSDA.CA.WaitForRender(StatusFunc=self.GetCaRenderStatus)
+        except Exception as e:
+            print('Wait for Render failed.')
+            return False
+        return True
+
+    def GetCaImageStack(self, ScanRegionID:str, batch_it=False)->tuple:
+        ReqFunc = "VSDA/Ca/GetImageStack"
+        ReqParams = {
+            "ScanRegionID": ScanRegionID,
+        }
+        success, first_response  = self.BGNES_NES_Common(ReqFunc, ReqParams, batch_it)
+        if not success:
+            return (False, [])
+        if "RenderedImages" not in first_response:
+            return (False, [])
+        return (True, first_response["RenderedImages"])
+
     def BGNES_save(self, batch_it=False):
         ReqFunc = 'Simulation/Save'
         ReqParams = {}
