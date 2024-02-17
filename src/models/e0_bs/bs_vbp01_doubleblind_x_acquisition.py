@@ -193,15 +193,15 @@ calcium_specs = {
 }
 
 CAConfig = NES.VSDA.Calcium.Configuration()
-CAConfig.BrightnessAmplification = 10.0
-CAConfig.AttenuationPerUm = 0.1
-CAConfig.VoxelResolution_nm = 0.1 # This is actually um!!!!!!!!!!!
-CAConfig.ImageWidth_px = 512
-CAConfig.ImageHeight_px = 512
+CAConfig.BrightnessAmplification = 3.0
+CAConfig.AttenuationPerUm = 0.01
+CAConfig.VoxelResolution_nm = 0.025 # This is actually um!!!!!!!!!!!
+CAConfig.ImageWidth_px = 1024
+CAConfig.ImageHeight_px = 1024
 CAConfig.NumVoxelsPerSlice = 16
 CAConfig.ScanRegionOverlap_percent = 0
 CAConfig.FlourescingNeuronIDs = []
-CAConfig.NumPixelsPerVoxel_px = 2
+CAConfig.NumPixelsPerVoxel_px = 1
 CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
