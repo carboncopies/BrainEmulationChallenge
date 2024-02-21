@@ -67,7 +67,7 @@ if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbos
 # 2. Init simulation
 
 sys_name='e0_bs'
-glb.bg_api.BGNES_simulation_create(name=sys_name)
+glb.bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
 
