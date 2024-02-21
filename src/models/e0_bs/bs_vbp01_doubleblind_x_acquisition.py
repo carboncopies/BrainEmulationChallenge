@@ -206,10 +206,10 @@ CAConfig.CalciumIndicator = 'jGCaMP8'
 CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
 CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
-CAConfig.ImagingInterval_ms = 25.0   # Interval at which CCD snapshots are made of the microscope image.
+CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made of the microscope image.
 VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
-VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1])
+VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1], [0,0,0.785])
 
 # glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
 
@@ -378,7 +378,7 @@ if (Args.RenderEM):
     EMConfig.NumPixelsPerVoxel_px = 1
     VSDAEMInstance = glb.bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
-    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10])
+    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10], [0,0,0])
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
     VSDAEMInstance.SaveImageStack("Renders/EM/Raw")
