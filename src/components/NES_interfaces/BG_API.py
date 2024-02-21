@@ -24,7 +24,7 @@ class Credentials:
 # When loading, the simname should be the save-name of the simulation
 # (with its timestamp), and the loading flag must be True.
 class SimClientInstance:
-    def __init__(self, credentials:Credentials, simname:str, host:str='api.braingenix.org', port:int=443, use_https:bool=True, loading:bool=False):
+    def __init__(self, credentials:Credentials, simname:str, seed:int, host:str='api.braingenix.org', port:int=443, use_https:bool=True, loading:bool=False):
         self.ClientCfg = NES.Client.Configuration()
         self.ClientCfg.Mode = NES.Client.Modes.Remote
         self.ClientCfg.Host = host
@@ -37,6 +37,7 @@ class SimClientInstance:
         assert(self.ClientInstance.IsReady())
 
         self.SimulationCfg = NES.Simulation.Configuration()
+        self.SimulationCfg.Seed = seed
         if loading:
             namepos = simname.find('-')
             if namepos<0:
