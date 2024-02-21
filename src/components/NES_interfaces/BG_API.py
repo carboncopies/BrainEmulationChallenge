@@ -44,7 +44,7 @@ class SimClientInstance:
                 self.SimulationCfg.Name = "UnNamed"
             else:
                 self.SimulationCfg.Name = simname[namepos+1:]
-            self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg, create=False)
+            self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg, _Create=False)
         else:
             self.SimulationCfg.Name = simname
             self.Sim = self.ClientInstance.CreateSimulation(self.SimulationCfg)
@@ -180,7 +180,7 @@ class BG_API:
 
    # --------------------------------------------------------------------
 
-    def BGNES_simulation_create(self, name:str, ExistingID:int = -1):
+    def BGNES_simulation_create(self, name:str, ExistingID:int = -1, seed:int = 0):
         Loading:bool = ExistingID != -1
         self.Simulation = SimClientInstance(
             credentials=self.credentials,
@@ -188,7 +188,8 @@ class BG_API:
             host=self.uri_host,
             port=self.uri_port,
             use_https=self.use_https,
-            loading=Loading
+            loading=Loading,
+            seed=seed
         )
         if (ExistingID != -1):
             self.Simulation.Sim.ID = ExistingID
@@ -660,6 +661,7 @@ class BG_API:
             port=self.uri_port,
             use_https=self.use_https,
             loading=True,
+            seed=0
         )
         ReqFunc = 'Simulation/Load'
         ReqParams = {
