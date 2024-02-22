@@ -305,6 +305,7 @@ for pattern in connection_pattern_set:
     from_compartment_id = from_cell.AxonID
     to_compartment_id = to_cell.SomaID
     receptor_location = axon_ends[pattern[1]][1]
+    print('Receptor loction: '+str(receptor_location))
 
     # Set the total conductance through receptors at synapses at this connection:
     receptor_conductance = weight * AMPA_conductance
