@@ -378,7 +378,7 @@ if (Args.RenderEM):
     EMConfig.NumPixelsPerVoxel_px = 1
     VSDAEMInstance = glb.bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
-    VSDAEMInstance.DefineScanRegion([-6, -1, -1], [-4, 1, 1], [0,0,0]) #([-10,-10,-10], [10,10,10], [0,0,0])
+    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10], [0,0,0])
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
     VSDAEMInstance.SaveImageStack("Renders/EM/Raw")
