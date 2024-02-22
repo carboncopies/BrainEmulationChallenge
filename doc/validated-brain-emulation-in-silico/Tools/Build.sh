@@ -1,4 +1,4 @@
 #!/bin/bash
 
 cd ..
-pdflatex main.tex
+pdflatex main.tex $1
