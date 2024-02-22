@@ -309,6 +309,13 @@ for pattern in connection_pattern_set:
     # Set the total conductance through receptors at synapses at this connection:
     receptor_conductance = weight * AMPA_conductance
 
+    # Build receptor form:
+    receptor_box = glb.bg_api.BGNES_box_create(
+            CenterPosition_um=receptor_location,
+            Dimensions_um=[0.1,0.1,0.1],
+            Rotation_rad=[0,0,0],)
+    receptor_morphologies.append(receptor_box)
+
     # Build receptor function:
     receptor = glb.bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
@@ -316,16 +323,10 @@ for pattern in connection_pattern_set:
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
-        ReceptorLocation_um=tuple(receptor_location),
+        ReceptorMorphology=receptor_box.ID,
+        #ReceptorLocation_um=tuple(receptor_location),
     )
     receptor_functionals.append( (receptor, to_cell) )
-
-    # Build receptor form:
-    receptor_box = glb.bg_api.BGNES_box_create(
-            CenterPosition_um=receptor_location,
-            Dimensions_um=[0.1,0.1,0.1],
-            Rotation_rad=[0,0,0],)
-    receptor_morphologies.append(receptor_box)
 
 # 3.6 (Optionally) visualize the system with the connection
 
