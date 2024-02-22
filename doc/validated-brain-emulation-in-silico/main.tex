@@ -24,7 +24,8 @@
 \author{
 Randal A. Koene\\
 Thomas Liao\\
-Carboncopies Foundation for Brain Research (Should this say 'Substrate Independent Mind' instead?)
+Carboncopies Foundation for Brain Research (Should this say 'Substrate Independent Minds' instead?)\\
+(Also, is it in the right place?)
 }
 
 \def\firstexp{\textit{e0\_bs} }
@@ -259,6 +260,8 @@ Simulated electrode and calcium imaging devices record data while we run the mod
 
 (Here: put more about how those simulated devices generate the recorded data by using simulated physics.)
 
+
+% Section about EM Rendering
 \subsubsection{Simulating structural data acquisition}
 
 We provide high-throughput microscope specifications:
@@ -270,6 +273,25 @@ We provide high-throughput microscope specifications:
 \end{itemize}
 
 (Here: put more about how a simulated high-throughput EM image stack is generated using simulated optics.)
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/VBP_EM_Render_Pipeline.drawio.png}
+    \caption{High-level overview of the electron microscopy rendering process.}
+    \label{fig:em-pipeline}
+\end{figure}
+
+
+Our approach involves three major steps. Firstly, we divide the volume into $n$ subregions, based on various system resource constraints. Next, we rasterize the geometric primitives used to represent the neural morphology in each subregion. Finally, the voxel array is traversed and converted to a 2D image array, post-processing applied, and saved.
+
+% Todo: add detailed section describing each of these major steps
+% Convert the above overview into a bullet-point based list
+% Make a diagram showing the process? (maybe 3d, and have it show the voxel rasterization process? (better explainer than words))
+% Also, describe some of the optimziations done and performance improvements
+% Actually, the whole thing should be simplified a bit... (Don't include optimizations in the overview, add those in a subsection of this)
+% right, that's all i think.
+
+
 
 \subsection{Requirement VIII: Collected data and post-processing}
 
@@ -312,6 +334,31 @@ We provide high-throughput microscope specifications:
 \subsection{Requirement I: Achieving a successful whole brain emulation for the ball-and-stick neural system}
 
 (Here: Describe the outcome.)
+
+
+
+% Section For How Our Software Backend Works
+\section{Software Architecture (rephrase this later)}
+
+(This also all probably needs to be rephrased later but here's something for now, just so we have something to show for it. I'm not really sure what the right tone to use here is so I'll try my best, but again, we *will* need to fix this later i think.)
+
+(WHERE DID MY FIGURE GO!?!?!? WHY IS IT UP ABOVE THIS AND NOT RIGHT BELOW THIS MESSAGE?!?!?!?!)
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1\linewidth]{Figures/VBP_System_Architecture_Overview.drawio.png}
+    \caption{Diagram showing system architecture following a user's request.
+}
+    \label{fig:system-architecture}
+\end{figure}
+
+When designing the software system needed to generate the datasets, we elected to use a client-server based approach. This was done so out of concerns relating to performance and scalabillity. In future research, we envision generating significantly larger and more complex datasets, which would likely not fit on a single computer. To address this issue from the start, we focused on splitting the code in two places. On the client side, a simple python client library handles model definition and setup, while the backend resides on much more powerful servers.
+
+
+
+
+
+
 
 \section{Discussion}
 

@@ -1,0 +1,61 @@
+<mxfile host="Electron" modified="2024-02-22T06:54:39.995Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36" etag="yriLnhvAtei_RBKO1yQu" version="21.6.8" type="device">
+  <diagram name="Page-1" id="YLCZ99XMq3Lqlmrvh2A6">
+    <mxGraphModel dx="989" dy="576" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1920" pageHeight="1200" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-11" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" edge="1" parent="1" source="KBkn1uSz7Tg7dzy34HRC-3" target="KBkn1uSz7Tg7dzy34HRC-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-12" value="Python Script" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" vertex="1" connectable="0" parent="KBkn1uSz7Tg7dzy34HRC-11">
+          <mxGeometry x="-0.2322" y="1" relative="1" as="geometry">
+            <mxPoint y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-3" value="User" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="30" y="122.5" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-4" value="User&#39;s Computer" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="77.5" width="300" height="125" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-13" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" edge="1" parent="KBkn1uSz7Tg7dzy34HRC-4" source="KBkn1uSz7Tg7dzy34HRC-6" target="KBkn1uSz7Tg7dzy34HRC-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-6" value="VBP Python Libraries" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;" vertex="1" parent="KBkn1uSz7Tg7dzy34HRC-4">
+          <mxGeometry x="20" y="45" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-7" value="BrainGenix Python Client" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;" vertex="1" parent="KBkn1uSz7Tg7dzy34HRC-4">
+          <mxGeometry x="160" y="45" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-8" value="BrainGenix Backend (Scalable)" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="500" y="77.5" width="360" height="122.5" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-17" value="" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" edge="1" parent="KBkn1uSz7Tg7dzy34HRC-8" source="KBkn1uSz7Tg7dzy34HRC-9" target="KBkn1uSz7Tg7dzy34HRC-16">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-18" value="RPC Calls" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" vertex="1" connectable="0" parent="KBkn1uSz7Tg7dzy34HRC-17">
+          <mxGeometry x="-0.2464" y="3" relative="1" as="geometry">
+            <mxPoint x="10" y="-9" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-9" value="API Gateway" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;" vertex="1" parent="KBkn1uSz7Tg7dzy34HRC-8">
+          <mxGeometry x="20" y="45" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-16" value="NES Service" style="rounded=0;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;fontColor=default;" vertex="1" parent="KBkn1uSz7Tg7dzy34HRC-8">
+          <mxGeometry x="220" y="45" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-14" style="edgeStyle=none;shape=connector;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;labelBackgroundColor=default;strokeColor=default;fontFamily=Helvetica;fontSize=11;fontColor=default;endArrow=classic;" edge="1" parent="1" source="KBkn1uSz7Tg7dzy34HRC-7" target="KBkn1uSz7Tg7dzy34HRC-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-15" value="HTTP" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=11;fontFamily=Helvetica;fontColor=default;" vertex="1" connectable="0" parent="KBkn1uSz7Tg7dzy34HRC-14">
+          <mxGeometry x="0.1821" y="-1" relative="1" as="geometry">
+            <mxPoint x="-7" y="-13" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KBkn1uSz7Tg7dzy34HRC-19" value="Virtual Brain Platform Architecture Overview" style="swimlane;whiteSpace=wrap;html=1;fontFamily=Helvetica;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="10" y="30" width="870" height="200" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
