@@ -333,7 +333,7 @@ class BG_API:
         Conductance_nS:float,
         TimeConstantRise_ms:float,
         TimeConstantDecay_ms:float,
-        ReceptorLocation_um:tuple,
+        ReceptorMorphology:int,
         name=None)->str:
         if name is None:
             name = self.generate_autoname('receptor-')
@@ -344,7 +344,7 @@ class BG_API:
         Cfg.Conductance_nS = Conductance_nS
         Cfg.TimeConstantRise_ms = TimeConstantRise_ms
         Cfg.TimeConstantDecay_ms = TimeConstantDecay_ms
-        Cfg.ReceptorLocation_um = ReceptorLocation_um
+        Cfg.ReceptorMorphology = ReceptorMorphology
         receptor = self.Simulation.Sim.AddReceptor(Cfg)
         return receptor
 
