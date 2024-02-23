@@ -370,8 +370,8 @@ if (Args.RenderEM):
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
     EMConfig.PixelResolution_nm = 0.005 # is actually um!!!!!
-    EMConfig.ImageWidth_px = 1024
-    EMConfig.ImageHeight_px = 1024
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
     EMConfig.SliceThickness_nm = 100 # This is currently not used.
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
