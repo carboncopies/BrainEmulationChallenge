@@ -5,18 +5,13 @@
 Definitions of geometric shapes and their utility methods.
 '''
 
-from .BG_API import BGNES_box_create
-
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 from scipy.linalg import norm
 
+import common.glb as glb
 from .common._Geometry import _Cylinder, _Sphere, _Box
-
-class Geometry:
-    def __init__(self):
-        pass
 
 class Box(_Box):
     '''
@@ -32,10 +27,11 @@ class Box(_Box):
             dims_um=dims_um,
             rotations_rad=rotations_rad,
             )
-        self.id = BGNES_box_create(
-            CenterPosition_nm=center_um,
-            Dimensions_nm=dims_um,
+        box = glb.bg_api.BGNES_box_create(
+            CenterPosition_um=center_um,
+            Dimensions_um=dims_um,
             Rotation_rad=rotations_rad)
+        self.id = box.id
 
 class Sphere(_Sphere):
     '''
@@ -48,6 +44,10 @@ class Sphere(_Sphere):
         super().__init__(
             center_um=center_um,
             radius_um=radius_um,
+            )
+        self.id = glb.bg_api.BGNES_sphere_create(
+            radius_um=radius_um,
+            center_um=center_um,
             )
 
 class Cylinder(_Cylinder):
@@ -65,4 +65,10 @@ class Cylinder(_Cylinder):
             end0_radius_um=end0_radius_um,
             end1_um=end1_um,
             end1_radius_um=end1_radius_um,
+            )
+        self.id = glb.bg_api.BGNES_cylinder_create(
+            Point1Radius_um=end0_radius_um,
+            Point1Position_um=end0_um,
+            Point2Radius_um=end1_radius_um,
+            Point2Position_um=end1_um,
             )

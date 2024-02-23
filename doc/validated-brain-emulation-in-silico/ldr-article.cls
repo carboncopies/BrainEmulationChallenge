@@ -154,13 +154,14 @@
 
 \renewcommand{\figurename}{Figure}
 
-% Use biblatex for reference management
-\RequirePackage[style=apa]{biblatex}
-% References section is only left-justified
-\renewcommand*{\bibfont}{\raggedright}
-% Add new lines between bib entries instead of indented paragraphs
-\renewcommand*{\bibparsep}{\baselineskip}
-\renewcommand*{\bibhang}{0em}
+% Breaks for now, so disabling this -- fixme!
+% % Use biblatex for reference management
+% \RequirePackage[style=apa]{biblatex}
+% % References section is only left-justified
+% \renewcommand*{\bibfont}{\raggedright}
+% % Add new lines between bib entries instead of indented paragraphs
+% \renewcommand*{\bibparsep}{\baselineskip}
+% \renewcommand*{\bibhang}{0em}
 
 
 % Remove ugly colorful boxes around references (and make URLs blue)

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# bs_vbp01_doubleblind_x_acquisition.py
-# Randal A. Koene, 20230914
+# bs_vbp00_groundtruth_xi_sampleprep.py
+# Randal A. Koene, 20240208
 
 '''
 The ball-and-stick example is intended to provide the simplest in-silico case with the smallest
@@ -18,32 +18,100 @@ scriptversion='0.0.1'
 
 import matplotlib.pyplot as plt
 import numpy as np
-from sys import argv
-
-USENES='-p' not in argv
+from datetime import datetime
+from time import sleep
+import argparse
+import math
 
 import vbpcommon
-from bs_vbp00_groundtruth_xi_sampleprep import init_groundtruth
+import common.glb as glb
+import os
+from NES_interfaces.BG_API import BG_API_Setup
+from NES_interfaces.KGTRecords import plot_recorded
 
-from common.Common_Parameters import Common_Parameters, common_commandline_parsing, make_savefolder, COMMON_HELP
-from common.Spatial import vec3add, VecBox
-if USENES:
-    from NES_interfaces.BG_API import BGNES_QuickStart
-    from NES_interfaces.System import System
-    from NES_interfaces.KGTRecords import plot_electrodes
-    from NES_interfaces.Data import save_acq_data
-else:
-    from prototyping.System import System
-    from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium_signals, plot_calcium
-    from prototyping.Data import save_acq_data
+import BrainGenix.NES as NES
+import BrainGenix
+from BrainGenix.Tools.StackStitcher.StackStitcher import StitchManySlices
 
-def quickstart(user:str, passwd:str):
-    if USENES:
-        if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
-            print('BG NES Interface access failed.')
-            exit(1)
+def PointsInCircum(r,n=100):
+    return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
 
-# -- Initialize Functional Data Acquisition: ---------------------------------
+
+
+Parser = argparse.ArgumentParser(description="vbp script")
+Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
+Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
+Args = Parser.parse_args()
+
+
+
+
+api_is_local=True
+runtime_ms=500.0
+savefolder = './Renders/vbp_'+datetime.now().strftime("%F_%X")
+figspecs = {
+    'figsize': (6,6),
+    'linewidth': 0.5,
+    'figext': 'pdf',
+}
+
+# 1. Init NES connection
+
+BG_API_Setup(user='Admonishing', passwd='Instruction')
+if api_is_local:
+    glb.bg_api.set_local()
+if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
+    print('BG NES Interface access failed.')
+    exit(1)
+
+# 2. Load ground-truth network
+
+# 2.1 Request Loading
+sys_name=None
+with open(".SimulationHandle", "r") as f:
+    sys_name = f.read()
+print(f"Loading simulation with handle '{sys_name}'")
+
+loadingtaskID = glb.bg_api.BGNES_load(timestampedname=sys_name)
+
+print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
+
+# 2.2 Await Loading and set Simulation ID
+
+while True:
+    sleep(0.005)
+    response_list = glb.bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+    if not isinstance(response_list, list):
+        print('Bad response format. Expected list of NESRequest responses.')
+        exit(1)
+    task_status_response = response_list[0]
+    if task_status_response['StatusCode'] != 0:
+        print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
+        exit(1)
+    if "TaskStatus" not in task_status_response:
+        print('No TaskStatus received.')
+        exit(1)
+    task_status = task_status_response['TaskStatus']
+    if task_status > 1:
+        print('Loading Task failed.')
+        exit(1)
+    if task_status == 0:
+        break
+
+print('Loading task completed successfully.')
+if "SimulationID" not in task_status_response:
+    print('Missing SimulationID.')
+    exit(1)
+SimulationID = task_status_response["SimulationID"]
+glb.bg_api.Simulation.Sim.ID = SimulationID
+
+print('New ID of loaded Simulation: '+str(SimulationID))
+
+# 2.3 Show model
+
+# (add call here)
+
+# 3. Initialize functional data acquisition
 
 ACQSETUPTEXT1='''
 Simulated functional data acquisition:
@@ -60,254 +128,264 @@ combination of model neuronal activity and simulated
 confounding factors.
 '''
 
-LOADTEXT1='''
-1. Loading system from file %s.
-'''
+print(ACQSETUPTEXT1)
 
-def load_groundtruth(pars:Common_Parameters)->System:
+# 3.1 Initialize spontaneous activity
 
-    file = pars.fullpath(pars.extra['load_kgt'])
-    print(LOADTEXT1 % file)
+# Spontaneous activity can be turned on or off, a list of neurons can be
+# provided by ID, an empty list means "all" neurons.
+neuron_ids = [] # all
+spont_spike_interval_ms_mean = 280
+spont_spike_interval_ms_stdev = 140 # 0 means no spontaneous activity
 
-    kgt_system = System('e0_bs')
+success = glb.bg_api.BGNES_set_spontaneous_activity(
+    spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
+    spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
+    neuron_ids=neuron_ids)
 
-    kgt_system.load(file=file)
+if not success:
+    print('Failed to set up spontaneous activity.')
+    exit(1)
 
-    if pars.show['regions']: kgt_system.show(show=pars.show)
+print('Spontaneous activity at each neuron successfully activated.')
 
-    return kgt_system
+# 3.2 Initialize recording electrodes
 
-def init_spontaneous_activity(bs_acq_system:System):
-    spont_spike_interval_ms_mean = 280
-    spont_spike_interval_ms_stdev = 140
-    spont_spike_interval_pair = (spont_spike_interval_ms_mean, spont_spike_interval_ms_stdev)
-    neuron_ids = bs_acq_system.get_all_neuron_IDs()
-    spont_spike_settings = [ (spont_spike_interval_pair, neuron_id) for neuron_id in neuron_ids ]
-    print('Setting up spontaneous activity at each neuron.')
+# 3.2.1 Find the geometric center of the system based on soma center locations
 
-    bs_acq_system.set_spontaneous_activity(spont_spike_settings)
+success, geocenter = glb.bg_api.BGNES_get_geometric_center()
+if not success:
+    print('Failed to find geometric center of simulation.')
+    exit(1)
 
-def init_recording_electrode(bs_acq_system:System, pars:Common_Parameters):
-    geo_center_xyz_um = bs_acq_system.get_geo_center()
-    sites = [ (0, 0, 0), ] # Only one site at the tip.
-    for s in range(1,pars.extra['num_sites']):
-        r = s*pars.extra['sites_ratio']
-        sites.append((0, 0, r))
-    electode_specs = {
-        'id': 'electrode_0',
-        'tip_position': geo_center_xyz_um,
-        'end_position': vec3add(geo_center_xyz_um, (0, 0, 5.0)),
-        'sites': sites,
-        'noise_level': pars.extra['noise_level']
-    }
-    set_of_electrode_specs = [ electode_specs, ] # A single electrode.
+print('Geometric center of simulation: '+str(geocenter))
 
-    bs_acq_system.attach_recording_electrodes(set_of_electrode_specs)
+# 3.2.2 Set up electrode parameters
 
-def init_calcium_imaging(bs_acq_system:System, pars:Common_Parameters):
-    calcium_specs = {
-        'id': 'calcium_0',
-        'fluorescing_neurons': bs_acq_system.get_all_neuron_IDs(), # All neurons show up in calcium imaging.
-        'calcium_indicator': 'jGCaMP8', # Fast sensitive GCaMP (Zhang et al., 2023).
-        'indicator_rise_ms': 2.0,
-        'indicator_decay_ms': 40.0,
-        'indicator_interval_ms': 20.0, # Max. spike rate trackable 50 Hz.
-        #'microscope_lensfront_position_um': (0.0, 20.0, 0.0),
-        #'microscope_rear_position_um': (0.0, 40.0, 0.0),
-        'voxelspace_side_px': 30,
-        'imaged_subvolume': VecBox(
-                center=np.array([0, pars.extra['calcium_y'], 0]),
-                half=np.array([pars.extra['calcium_fov']/2.0, pars.extra['calcium_fov']/2.0, 2.0]),
-                dx=np.array([1.0, 0.0, 0.0]),
-                dy=np.array([0.0, 1.0, 0.0]),
-                dz=np.array([0.0, 0.0, 1.0]), # Positive dz indicates most visible top surface.
-            ),
-        'generate_during_sim': False,
-    }
+num_sites = 1
+sites_ratio = 0.1
+noise_level = 0
+end_position = np.array(geocenter) + np.array([0, 0, 5.0])
 
-    bs_acq_system.attach_calcium_imaging(calcium_specs, pars=pars)
+rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
+for rec_site in range(1, num_sites):
+    electrode_ratio = rec_site * sites_ratio
+    rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
 
-    if pars.show['voxels']: bs_acq_system.calcium_imaging.show_voxels(
-        savefolder=pars.savefolder,
-        voxelfile='Ca-voxels.'+pars.figspecs()['figext'],
-        figspecs=pars.figspecs())
+electrode_specs = {
+    'name': 'electrode_0',
+    'tip_position': geocenter,
+    'end_position': end_position.tolist(),
+    'sites': rec_sites_on_electrode,
+    'noise_level': noise_level,
+}
+set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
+list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
-def init_functional_data_acquisition(bs_acq_system:System, pars:Common_Parameters):
-    print(ACQSETUPTEXT1)
+print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
 
-    init_spontaneous_activity(bs_acq_system)
+# 3.3 Initialize calcium imaging
 
-    init_recording_electrode(bs_acq_system, pars=pars)
+calcium_fov = 12.0
+calcium_y = -5.0
+calcium_specs = {
+    'name': 'calcium_0',
+}
 
-    init_calcium_imaging(bs_acq_system, pars=pars)
+CAConfig = NES.VSDA.Calcium.Configuration()
+CAConfig.BrightnessAmplification = 3.0
+CAConfig.AttenuationPerUm = 0.01
+CAConfig.VoxelResolution_nm = 0.025 # This is actually um!!!!!!!!!!!
+CAConfig.ImageWidth_px = 1024
+CAConfig.ImageHeight_px = 1024
+CAConfig.NumVoxelsPerSlice = 16
+CAConfig.ScanRegionOverlap_percent = 0
+CAConfig.FlourescingNeuronIDs = []
+CAConfig.NumPixelsPerVoxel_px = 1
+CAConfig.CalciumIndicator = 'jGCaMP8'
+CAConfig.IndicatorRiseTime_ms = 2.0
+CAConfig.IndicatorDecayTime_ms = 40.0
+CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
+CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made of the microscope image.
+VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
-# -- Run Experiment: ---------------------------------------------------------
+VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1], [0,0,0.785])
 
-RUNTEXT1='''
-Running functional data acquisition for %.1f milliseconds...
-'''
+# glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
 
-def run_functional_data_acquisition(bs_acq_system:System, pars:Common_Parameters)->tuple:
-    print(RUNTEXT1 % pars.runtime_ms)
+# glb.bg_api.BGNES_calcium_imaging_show_voxels()
 
-    bs_acq_system.set_record_all() # Turning this on for comparison with electrodes.
-    bs_acq_system.set_record_instruments()
+# ----------------------------------------------------
 
-    bs_acq_system.run_for(pars.runtime_ms)
+print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
 
-    if not bs_acq_system.calcium_imaging.specs['generate_during_sim']:
-        bs_acq_system.calcium_imaging.record_aposteriori()
+# 5.1 Set record-all and record instruments
 
-    godseye = bs_acq_system.get_recording()
-    data = bs_acq_system.get_instrument_recordings()    
+t_max_ms=-1 # record forever
+glb.bg_api.BGNES_simulation_recordall(t_max_ms)
+if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
+    exit(1)
 
-    casignals = {
-        't_Ca_samples': [],
-        'Ca_samples': [],
-    }
-    for neuron in bs_acq_system.calcium_imaging.neuron_refs:
-        casignals['t_Ca_samples'] = neuron.t_Ca_samples
-        casignals['Ca_samples'].append(neuron.Ca_samples)
+# 5.2 Run for specified simulation time
+if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
+    exit(1)
 
-    plot_calcium_signals(savefolder=pars.savefolder, data=casignals, figspecs=pars.figspecs())
-    plot_recorded(savefolder=pars.savefolder, data=godseye, figspecs=pars.figspecs())
-    plot_electrodes(savefolder=pars.savefolder, data=data, figspecs=pars.figspecs())
-    plot_calcium(data, gifpath=pars.savefolder+'/vbp01.gif', show_all=False)
+# if not calcium_specs['generate_during_sim']:
+#     glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
 
-    #print(str(data))
 
-    return data, casignals, godseye
+# Please fix the label here Randal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+VSDACAInstance.QueueRenderOperation()
+VSDACAInstance.WaitForRender()
+VSDACAInstance.SaveImageStack("Renders/CA/Raw", 1)
 
-RUNTEXT2='''
-Running structural data acquisition...
-'''
 
-def run_structural_data_acquisition(bs_acq_system:System)->dict:
-    print(RUNTEXT2)
 
-    em_specs = {
-        'scope': 'full',
-        'sample_width_um': 6.0,
-        'sample_height_um': 6.0,
-        'resolution_nm': (4.0, 4.0, 30.0),
-    }
 
-    data = bs_acq_system.get_em_stack(em_specs)
 
-    #plot_recorded(data)
+# 5.3 Retrieve recordings and plot
 
-    return data
+recording_dict = glb.bg_api.BGNES_get_recording()
+success, instrument_data = glb.bg_api.BGNES_get_instrument_recordings()
+if not success:
+    exit(1)
 
-# -- Entry point: ------------------------------------------------------------
-
-HELP='''
-Usage: bs_vbp01_doubleblind_x_acquisition.py [-h] [-v] [-V output] [-t ms]
-       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-N neurons]
-       [-D method] [-s sites] [-S ratio] [-n level] [-C um] [-c ycenter]
-       [-L file] [-A file] [-K file]
-%s
-       -N         Number of neurons in ground truth system.
-       -D         Distribution method: aligned, unirand.
-       -s         Number of sites per electrode.
-       -S         Ratio separation of each site on an electrode.
-       -n         Noise level.
-       -C         Calcium imaging FOV diameter in micrometers.
-       -c         Calcium imaging y-axis center position.
-       -L         Load known ground-truth system (KTG) ('' means generate,
-                  default: kgt.json).
-       -A         Save acquired data (default: data.pkl.gz).
-       -K         Save known ground-truth system (KTG) as file (default:
-                  kgt.json).
-
-       VBP process step 01: This script specifies double-blind data acquisition.
-       WBE topic-level X: data acquisition (in-silico).
-
-       The acquisition experiment carried out here collects data by simulating
-       the use of brain data collection methods. The resulting data is intended
-       for use in system identification and emulation.
-
-''' % COMMON_HELP
-
-def parse_command_line()->tuple:
-    extra_pars = {
-        'num_nodes': 2,
-        'distribution': 'aligned',
-        'num_sites': 1,
-        'sites_ratio': 0.1,
-        'noise_level': 0,
-        'calcium_fov': 12.0,
-        'calcium_y': -5.0,
-        'load_kgt': 'kgt.json',
-        'save_data': 'data.pkl.gz',
-        'save_kgt': 'kgt.json',
-    }
-
-    cmdline = argv.copy()
-    pars = Common_Parameters(cmdline.pop(0))
-    while len(cmdline) > 0:
-        arg = common_commandline_parsing(cmdline, pars, HELP)
-        if arg is not None:
-            if arg== '-s':
-                extra_pars['num_sites'] = int(cmdline.pop(0))
-            elif arg== '-S':
-                extra_pars['sites_ratio'] = float(cmdline.pop(0))
-            elif arg== '-n':
-                extra_pars['noise_level'] = float(cmdline.pop(0))
-            elif arg== '-N':
-                extra_pars['num_nodes'] = int(cmdline.pop(0))
-            elif arg== '-C':
-                extra_pars['calcium_fov'] = float(cmdline.pop(0))
-            elif arg== '-c':
-                extra_pars['calcium_y'] = float(cmdline.pop(0))
-            elif arg== '-D':
-                extra_pars['distribution'] = str(cmdline.pop(0))
-            elif arg== '-L':
-                extra_pars['load_kgt'] = str(cmdline.pop(0))
-            elif arg== '-A':
-                extra_pars['save_data'] = str(cmdline.pop(0))
-            elif arg== '-K':
-                extra_pars['save_kgt'] = str(cmdline.pop(0))
-            else:
-                print('Unknown command line parameter: '+str(arg))
-                exit(0)
-        # Note that -p is tested at the top of the script.
-
-    if pars.show['text']:
-        if USENES:
-            print('Using NES Interface code.')
+if isinstance(recording_dict, dict):
+    if "StatusCode" in recording_dict:
+        if recording_dict["StatusCode"] != 0:
+            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
         else:
-            print('Using prototype code.')
+            if "Recording" not in recording_dict:
+                print('Missing "Recording" key.')
+            else:
+                if recording_dict["Recording"] is None:
+                    print('Recording is empty.')
+                else:
+                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
 
-    pars.extra = extra_pars
-    return pars
+                    plot_recorded(
+                        savefolder=savefolder,
+                        data=recording_dict["Recording"],
+                        figspecs=figspecs,)
 
-if __name__ == '__main__':
+                    # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
 
-    pars = parse_command_line()
-    make_savefolder(pars)
+if 't_ms' not in instrument_data:
+    print('Missing t_ms record in instruments data.')
+else:
+    t_ms = instrument_data['t_ms']
 
-    quickstart('Admonishing','Instruction')
-
-    if pars.extra['load_kgt']=='':
-        bs_acq_system = init_groundtruth(pars=pars)
+    if 'Electrodes' not in instrument_data:
+        print('No Electrode recording data in instrument data.')
     else:
-        bs_acq_system = load_groundtruth(pars=pars)
+        electrode_data = instrument_data['Electrodes']
+        for electrode_name in electrode_data.keys():
+            specific_electrode_data = electrode_data[electrode_name]
+            E_mV = specific_electrode_data['E_mV']
+            if len(E_mV)<1:
+                print('Zero E_mV records found at electrode %s.' % electrode_name)
+            else:
+                fig = plt.figure(figsize=figspecs['figsize'])
+                gs = fig.add_gridspec(len(E_mV),1, hspace=0)
+                axs = gs.subplots(sharex=True, sharey=True)
+                axs.set_xlabel("Time (ms)")
+                axs.set_ylabel("Electrode Voltage (mV)")
+                fig.suptitle('Electrode %s' % electrode_name)
+                for site in range(len(E_mV)):
+                    if len(E_mV)==1:
+                        axs.plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                    else:
+                        axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                plt.draw()
+                print(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}')
+                plt.savefig(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}', dpi=300)
 
-    init_functional_data_acquisition(bs_acq_system, pars=pars)
+    if 'Calcium' not in instrument_data:
+        print('No Calcium Concentration neuron data in instrument data')
+    else:
+        # Returns "Ca_t_ms" data and data for each neuron ID (e.g. "0") with a list of calcium concentrations
+        # at each "Ca_t_ms" time point.
+        caimaging_data = instrument_data['Calcium']
+        # Get the time points
+        if "Ca_t_ms" in caimaging_data:
+            Ca_t_ms = caimaging_data["Ca_t_ms"]
+            # Find the neuron IDs for which data is included
+            neuron_ids = []
+            for n in range(100):
+                if str(n) in caimaging_data:
+                    neuron_ids.append(str(n))
+            for neuron_id in neuron_ids:
+                neuron_Ca_data = caimaging_data[neuron_id]
+                if len(neuron_Ca_data) < 1:
+                    print('No Calcium concentration data for neuron '+neuron_id)
+                else:
+                    fig = plt.figure(figsize=figspecs['figsize'])
+                    gs = fig.add_gridspec(len(E_mV),1, hspace=0)
+                    axs = gs.subplots(sharex=True, sharey=True)
+                    axs.set_xlabel("Time (ms)")
+                    axs.set_ylabel("Calcium Concentrations")
+                    fig.suptitle('Neuron %s' % neuron_id)
+                    axs.plot(Ca_t_ms, neuron_Ca_data, linewidth=figspecs['linewidth'])
+                    plt.draw()
+                    print(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}')
+                    plt.savefig(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}', dpi=300)
 
-    functional_data, casignals, godseye = run_functional_data_acquisition(bs_acq_system, pars=pars)
 
-    structural_data = run_structural_data_acquisition(bs_acq_system)
+# ----------------------------------------------------
 
-    data = {
-        'functional': functional_data,
-        'structural': structural_data,
-    }
-    file = pars.fullpath(pars.extra['save_data'])
 
-    print('Saving acquired data to %s.' % file)
-    save_acq_data(data=data, file=file)
+# ----------------------------------------------------
+# Now, we render the visualized model optionally
+# ----------------------------------------------------
+if (Args.RenderVisualization):
+    print("rendering visualization of neural network\n")
+    VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
+    VisualizerJob.ImageWidth_px = 2048
+    VisualizerJob.ImageHeight_px = 2048
 
-    print('Generating figure plots...')
-    plt.show()
-    print('Done')
+
+    # Render In Circle Around Sim
+    Radius = 20
+    Steps = 50
+    ZHeight = 0
+
+    for Point in PointsInCircum(Radius, Steps):
+
+        VisualizerJob.CameraFOVList_deg.append(110)
+        VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
+        VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
+
+    Visualizer = glb.bg_api.Simulation.Sim.SetupVisualizer()
+    Visualizer.GenerateVisualization(VisualizerJob)
+
+
+    Visualizer.SaveImages("Renders/Visualizations", 2)
+
+# ----------------------------------------------------
+# And, we optionally render the EM Stack, and reconstruct it.
+# ----------------------------------------------------
+if (Args.RenderEM):
+    print("\nRendering EM image stack to disk\n")
+
+    # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
+    EMConfig = NES.VSDA.EM.Configuration()
+    EMConfig.PixelResolution_nm = 0.005 # is actually um!!!!!
+    EMConfig.ImageWidth_px = 1024
+    EMConfig.ImageHeight_px = 1024
+    EMConfig.SliceThickness_nm = 100 # This is currently not used.
+    EMConfig.ScanRegionOverlap_percent = 0
+    EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
+    EMConfig.NumPixelsPerVoxel_px = 1
+    VSDAEMInstance = glb.bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
+
+    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10], [0,0,0])
+    VSDAEMInstance.QueueRenderOperation()
+    VSDAEMInstance.WaitForRender()
+    VSDAEMInstance.SaveImageStack("Renders/EM/Raw")
+
+
+    print(" -- Reconstructing Image Stack")
+    StitchManySlices("Renders/EM/Raw", "Renders/EM/Stitched", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+
+
+# ----------------------------------------------------

@@ -38,8 +38,10 @@ else:
     from prototyping.KGTRecords import plot_recorded, plot_electrodes, plot_calcium_signals, plot_calcium
     from prototyping.Data import load_acq_data
 
-def quickstart(user:str, passwd:str):
+def quickstart(user:str, passwd:str, api_is_local:bool):
     if USENES:
+        if api_is_local:
+            glb.bg_api.set_local()
         if not BGNES_QuickStart(user, passwd, scriptversion, versionmustmatch=False, verbose=False):
             print('BG NES Interface access failed.')
             exit(1)
@@ -84,8 +86,8 @@ def load_system(pars:Common_Parameters):
 
 HELP='''
 Usage: bs_vbp02_translation_iv_system_identification.py [-h] [-v] [-V output] [-t ms]
-       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-s] [-L file] [-K file]
-       [-E file]
+       [-R seed] [-d dir] [-l width] [-f size] [-x ext] [-p] [-a] [-s] [-L file]
+       [-K file] [-E file]
 %s
        -s         Skip system identification, simply duplicate KGT.
        -L         Load acquired data from file (default: data.pkl.gz).

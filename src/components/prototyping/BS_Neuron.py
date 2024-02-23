@@ -231,7 +231,7 @@ class BS_Neuron(Neuron):
         # 3. Calculate membrane potential:
         self.Vm_mV = self.Vrest_mV + vSpike_t + vAHP_t + vPSP_t
         if self.FIFO is not None:
-            self.FIFO = np.roll(self.FIFO,1)
+            self.FIFO = np.roll(self.FIFO,1) # Rolls to the right, [0] available to be replaced.
             self.FIFO[0] = self.Vm_mV-self.Vrest_mV
         if recording: self.record(t_ms)
 
@@ -284,7 +284,7 @@ class BS_Neuron(Neuron):
         Ca_signal = -1.0*self.FIFO[::-1]
         Ca_signal[Ca_signal < 0.0] = 0
         self.convolved_FIFO = np.array(convolve_1d(signal=Ca_signal, kernel=kernel)) #[::-1]))
-        self.Ca_samples.append(self.convolved_FIFO[10]+1.0)
+        self.Ca_samples.append(self.convolved_FIFO[10]+1.0) # A bit arbitrary to be taking the 10th value
         self.t_Ca_samples.append(self.t_ms)
 
         # if self.t_ms > 80.0:
