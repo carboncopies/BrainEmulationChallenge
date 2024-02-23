@@ -13,7 +13,7 @@ import random
 from time import sleep
 
 import common.glb as glb
-import pyBrainGenixClient.NES as NES
+from .BrainGenix import NES as NES
 # USE THIS TO USE THE PYPI VERSION: import BrainGenix.NES as NES
 
 class Credentials:
