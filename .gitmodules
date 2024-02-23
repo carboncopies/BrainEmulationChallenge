@@ -1,0 +1,3 @@
+[submodule "PythonClient"]
+	path = PythonClient
+	url = https://gitlab.braingenix.org/carboncopies/BrainGenix/NES/PythonClient.git
