@@ -13,7 +13,8 @@ import random
 from time import sleep
 
 import common.glb as glb
-import BrainGenix.NES as NES
+import pyBrainGenixClient.NES as NES
+# USE THIS TO USE THE PYPI VERSION: import BrainGenix.NES as NES
 
 class Credentials:
     def __init__(self, user:str, passwd:str):
@@ -35,6 +36,8 @@ class SimClientInstance:
         self.ClientCfg.Password = credentials.passwd
         self.ClientInstance = NES.Client.Client(self.ClientCfg)
         assert(self.ClientInstance.IsReady())
+
+        print('BrainGenix Python Client version is '+str(self.ClientInstance.GetClientVersion()))
 
         self.SimulationCfg = NES.Simulation.Configuration()
         self.SimulationCfg.Seed = seed
