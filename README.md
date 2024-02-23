@@ -1,6 +1,17 @@
 # aifinch
 
-## Installing the BrainGenix Python Client module
+## Finishing repository cloning to initialize the Python Client submodule
+
+To update and initialize the Python Client submodule that is needed by VBP to make
+API calls to the NES server, simply run the following:
+
+```
+./RunThisToCloneSubmodules.sh
+```
+
+## (OUTDATED) Installing the BrainGenix Python Client module
+
+Note: This method is outdated and may require updating imports to uses the pip installed Python Client.
 
 To run model scripts using the NES API for backend processing, you need to install the BrainGenix Python Client
 module. You can do this with `pip3` to install the module from `PyPi`.
