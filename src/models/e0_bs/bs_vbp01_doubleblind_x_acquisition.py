@@ -41,6 +41,7 @@ def PointsInCircum(r,n=100):
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
+Parser.add_argument("-RenderCA", action='store_ture', help="Enable or disable Calcium imaging rendering")
 Args = Parser.parse_args()
 
 
@@ -233,14 +234,10 @@ if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
 # if not calcium_specs['generate_during_sim']:
 #     glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
 
-
-# Please fix the label here Randal!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-VSDACAInstance.QueueRenderOperation()
-VSDACAInstance.WaitForRender()
-VSDACAInstance.SaveImageStack("Renders/CA/Raw", 1)
-
-
-
+if (Args.RenderCA):
+    VSDACAInstance.QueueRenderOperation()
+    VSDACAInstance.WaitForRender()
+    VSDACAInstance.SaveImageStack("Renders/CA/Raw", 1)
 
 
 # 5.3 Retrieve recordings and plot
