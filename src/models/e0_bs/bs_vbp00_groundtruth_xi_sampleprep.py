@@ -38,8 +38,8 @@ from datetime import datetime
 from time import sleep
 
 import vbpcommon
-import common.glb as glb
-from NES_interfaces.BG_API import BG_API_Setup
+#import common.glb as glb
+from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 api_is_local=True
@@ -57,17 +57,17 @@ figspecs = {
 
 # 1. Init NES connection
 
-BG_API_Setup(user='Admonishing', passwd='Instruction')
+bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
 if api_is_local:
-    glb.bg_api.set_local()
-if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
+    bg_api.set_local()
+if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
     print('BG NES Interface access failed.')
     exit(1)
 
 # 2. Init simulation
 
 sys_name='e0_bs'
-glb.bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
+bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
 
@@ -93,7 +93,7 @@ circuit_num_cells=num_nodes
 box_center = [0,0,0]
 box_dims = [20.0, 20.0, 2.0]
 box_rot = [0,0,0]
-box = glb.bg_api.BGNES_box_create(
+box = bg_api.BGNES_box_create(
             CenterPosition_um=box_center,
             Dimensions_um=box_dims,
             Rotation_rad=box_rot)
@@ -129,7 +129,7 @@ for n in range(circuit_num_cells):
                 need_position = True
                 break
     soma_positions.append(xyz)
-    soma = glb.bg_api.BGNES_sphere_create(
+    soma = bg_api.BGNES_sphere_create(
                 radius_um=soma_radius_um,
                 center_um=xyz,)
     somas.append(soma)
@@ -169,7 +169,7 @@ for n in range(circuit_num_cells):
     end1 = soma_positions[nearest] - (soma_radius_um*dv_axon)
     axon_ends.append( (end0, end1) )
 
-    axon = glb.bg_api.BGNES_cylinder_create(
+    axon = bg_api.BGNES_cylinder_create(
                 Point1Radius_um=end0_radius_um,
                 Point1Position_um=end0,
                 Point2Radius_um=end1_radius_um,
@@ -186,7 +186,7 @@ neuron_tau_AHP_ms = 30.0
 
 soma_compartments = []
 for soma in somas:
-    compartment = glb.bg_api.BGNES_BS_compartment_create(
+    compartment = bg_api.BGNES_BS_compartment_create(
                     ShapeID=soma.ID,
                     MembranePotential_mV=neuron_Vm_mV,
                     RestingPotential_mV=neuron_Vrest_mV,
@@ -199,7 +199,7 @@ for soma in somas:
 
 axon_compartments = []
 for axon in axons:
-    compartment = glb.bg_api.BGNES_BS_compartment_create(
+    compartment = bg_api.BGNES_BS_compartment_create(
                     ShapeID=axon.ID,
                     MembranePotential_mV=neuron_Vm_mV,
                     RestingPotential_mV=neuron_Vrest_mV,
@@ -259,7 +259,7 @@ neuron_IPSP = 870.0 # nA
 cells = {}
 for n in range(circuit_num_cells):
     cell_id = str(n)
-    cell = glb.bg_api.BGNES_BS_neuron_create(
+    cell = bg_api.BGNES_BS_neuron_create(
         Soma=soma_compartments[n].ID, 
         Axon=axon_compartments[n].ID,
         MembranePotential_mV=neuron_Vm_mV,
@@ -311,14 +311,14 @@ for pattern in connection_pattern_set:
     receptor_conductance = weight * AMPA_conductance
 
     # Build receptor form:
-    receptor_box = glb.bg_api.BGNES_box_create(
+    receptor_box = bg_api.BGNES_box_create(
             CenterPosition_um=receptor_location,
             Dimensions_um=[0.1,0.1,0.1],
             Rotation_rad=[0,0,0],)
     receptor_morphologies.append(receptor_box)
 
     # Build receptor function:
-    receptor = glb.bg_api.BGNES_BS_receptor_create(
+    receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
         Conductance_nS=receptor_conductance,
@@ -335,7 +335,7 @@ for pattern in connection_pattern_set:
 
 # 3.7 Save the ground-truth system
 
-response = glb.bg_api.BGNES_save()
+response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
 
 with open(".SimulationHandle", "w") as f:
@@ -371,7 +371,7 @@ t_soma_fire_ms = [
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
-response = glb.bg_api.BGNES_set_specific_AP_times(
+response = bg_api.BGNES_set_specific_AP_times(
         TimeNeuronPairs=t_soma_fire_ms,
     )
 
@@ -415,16 +415,16 @@ print('\nRunning experiment for %.1f milliseconds...\n' % runtime_ms)
 # 5.1 Set record-all
 
 t_max_ms=-1 # record forever
-glb.bg_api.BGNES_simulation_recordall(t_max_ms)
+bg_api.BGNES_simulation_recordall(t_max_ms)
 
 # 5.2 Run for specified simulation time
 
-if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
+if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
 # 5.3 Retrieve recordings and plot
 
-recording_dict = glb.bg_api.BGNES_get_recording()
+recording_dict = bg_api.BGNES_get_recording()
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
         if recording_dict["StatusCode"] != 0:

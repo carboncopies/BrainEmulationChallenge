@@ -24,9 +24,9 @@ import argparse
 import math
 
 import vbpcommon
-import common.glb as glb
+#import common.glb as glb
 import os
-from NES_interfaces.BG_API import BG_API_Setup
+from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 import BrainGenix.NES as NES
@@ -41,7 +41,7 @@ def PointsInCircum(r,n=100):
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
-Parser.add_argument("-RenderCA", action='store_ture', help="Enable or disable Calcium imaging rendering")
+Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Calcium imaging rendering")
 Args = Parser.parse_args()
 
 
@@ -58,10 +58,10 @@ figspecs = {
 
 # 1. Init NES connection
 
-BG_API_Setup(user='Admonishing', passwd='Instruction')
+bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
 if api_is_local:
-    glb.bg_api.set_local()
-if not glb.bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
+    bg_api.set_local()
+if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
     print('BG NES Interface access failed.')
     exit(1)
 
@@ -73,7 +73,7 @@ with open(".SimulationHandle", "r") as f:
     sys_name = f.read()
 print(f"Loading simulation with handle '{sys_name}'")
 
-loadingtaskID = glb.bg_api.BGNES_load(timestampedname=sys_name)
+loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
 
 print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
 
@@ -81,7 +81,7 @@ print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID),
 
 while True:
     sleep(0.005)
-    response_list = glb.bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+    response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
     if not isinstance(response_list, list):
         print('Bad response format. Expected list of NESRequest responses.')
         exit(1)
@@ -104,7 +104,7 @@ if "SimulationID" not in task_status_response:
     print('Missing SimulationID.')
     exit(1)
 SimulationID = task_status_response["SimulationID"]
-glb.bg_api.Simulation.Sim.ID = SimulationID
+bg_api.Simulation.Sim.ID = SimulationID
 
 print('New ID of loaded Simulation: '+str(SimulationID))
 
@@ -139,7 +139,7 @@ neuron_ids = [] # all
 spont_spike_interval_ms_mean = 280
 spont_spike_interval_ms_stdev = 140 # 0 means no spontaneous activity
 
-success = glb.bg_api.BGNES_set_spontaneous_activity(
+success = bg_api.BGNES_set_spontaneous_activity(
     spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
     spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
     neuron_ids=neuron_ids)
@@ -154,7 +154,7 @@ print('Spontaneous activity at each neuron successfully activated.')
 
 # 3.2.1 Find the geometric center of the system based on soma center locations
 
-success, geocenter = glb.bg_api.BGNES_get_geometric_center()
+success, geocenter = bg_api.BGNES_get_geometric_center()
 if not success:
     print('Failed to find geometric center of simulation.')
     exit(1)
@@ -181,7 +181,7 @@ electrode_specs = {
     'noise_level': noise_level,
 }
 set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
-list_of_electrode_IDs = glb.bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+list_of_electrode_IDs = bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
 print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
 
@@ -208,7 +208,7 @@ CAConfig.IndicatorRiseTime_ms = 2.0
 CAConfig.IndicatorDecayTime_ms = 40.0
 CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
 CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made of the microscope image.
-VSDACAInstance = glb.bg_api.Simulation.Sim.AddVSDACa(CAConfig)
+VSDACAInstance = bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
 VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1], [0,0,0.785])
 
@@ -223,12 +223,12 @@ print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runti
 # 5.1 Set record-all and record instruments
 
 t_max_ms=-1 # record forever
-glb.bg_api.BGNES_simulation_recordall(t_max_ms)
-if not glb.bg_api.BGNES_set_record_instruments(t_max_ms):
+bg_api.BGNES_simulation_recordall(t_max_ms)
+if not bg_api.BGNES_set_record_instruments(t_max_ms):
     exit(1)
 
 # 5.2 Run for specified simulation time
-if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
+if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
 # if not calcium_specs['generate_during_sim']:
@@ -237,13 +237,13 @@ if not glb.bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
 if (Args.RenderCA):
     VSDACAInstance.QueueRenderOperation()
     VSDACAInstance.WaitForRender()
-    VSDACAInstance.SaveImageStack("Renders/CA/Raw", 1)
+    VSDACAInstance.SaveImageStack("Renders/CA/Raw", 10)
 
 
 # 5.3 Retrieve recordings and plot
 
-recording_dict = glb.bg_api.BGNES_get_recording()
-success, instrument_data = glb.bg_api.BGNES_get_instrument_recordings()
+recording_dict = bg_api.BGNES_get_recording()
+success, instrument_data = bg_api.BGNES_get_instrument_recordings()
 if not success:
     exit(1)
 
@@ -352,7 +352,7 @@ if (Args.RenderVisualization):
         VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
         VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
 
-    Visualizer = glb.bg_api.Simulation.Sim.SetupVisualizer()
+    Visualizer = bg_api.Simulation.Sim.SetupVisualizer()
     Visualizer.GenerateVisualization(VisualizerJob)
 
 
@@ -366,14 +366,14 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.005 # is actually um!!!!!
+    EMConfig.PixelResolution_nm = 0.05 # is actually um!!!!!
     EMConfig.ImageWidth_px = 1024
     EMConfig.ImageHeight_px = 1024
     EMConfig.SliceThickness_nm = 100 # This is currently not used.
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
-    VSDAEMInstance = glb.bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
+    VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
     VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10], [0,0,0])
     VSDAEMInstance.QueueRenderOperation()
