@@ -44,7 +44,7 @@ To understand the two types of formats that are being defined here, and to see w
                     ...
                 ],
                 'TimeStamp_ms': [0,....,999,1999,...,2299]
-                'RecordedData': [
+                'ElectricField_mV': [
                     [...site 0 electric field potential in mV...]
                     [...site 1...]
                     ...
