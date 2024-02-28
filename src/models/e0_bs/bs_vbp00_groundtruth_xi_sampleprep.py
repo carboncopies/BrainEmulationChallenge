@@ -48,7 +48,7 @@ np.random.seed(randomseed)
 num_nodes=20
 circuit_distribution='unirand'
 runtime_ms = 500.0
-savefolder = '/tmp/vbp_'+datetime.now().strftime("%F_%X")
+savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
