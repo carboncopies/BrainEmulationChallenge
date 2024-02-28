@@ -401,7 +401,7 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.005 # is actually um!!!!!
+    EMConfig.PixelResolution_nm = 0.05 # is actually um!!!!!
     EMConfig.ImageWidth_px = 1024
     EMConfig.ImageHeight_px = 1024
     EMConfig.SliceThickness_nm = 100 # This is currently not used.
@@ -417,6 +417,7 @@ if (Args.RenderEM):
     VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
+    os.makedirs(f"{savefolder}/ChallengeOutput/EMRegions/0")
     NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0")
 
     
@@ -434,7 +435,10 @@ if (Args.RenderEM):
 
 
     print(" -- Reconstructing Image Stack")
+    os.makedirs(f"{savefolder}/EMRegions/0")
     StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+
+    TotalEMRenders += 1
 
 
 # ----------------------------------------------------
