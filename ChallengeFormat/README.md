@@ -54,6 +54,11 @@ To understand the two types of formats that are being defined here, and to see w
 
         At time points where recordings are made, the electric field potential
         is recorded at all of the sites of that electrode.
+        TipPosition and EndPosition are specified in world coordinates.
+        The XRatio, YRatio and ZRatio of each electrode site specify where a
+        site is located on the eletrode as a ratio of its X, Y and Z dimensions.
+        For example, a site located at ZRatio=0.5 in the middle of the electrode
+        along its Z-axis.
 
 
 
