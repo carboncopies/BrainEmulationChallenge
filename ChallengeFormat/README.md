@@ -43,11 +43,17 @@ To understand the two types of formats that are being defined here, and to see w
                     [XRatio, YRatio, ZRatio],
                     ...
                 ],
-                'RecordedData': [
-                    // fill in here please
+                'TimeStamp_ms': [0,....,999,1999,...,2299]
+                'ElectricField_mV': [
+                    [...site 0 electric field potential in mV...]
+                    [...site 1...]
+                    ...
                 ]
             }
         ```
+
+        At time points where recordings are made, the electric field potential
+        is recorded at all of the sites of that electrode.
 
 
 
