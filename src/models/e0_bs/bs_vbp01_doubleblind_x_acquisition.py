@@ -22,6 +22,7 @@ from datetime import datetime
 from time import sleep
 import argparse
 import math
+import json
 
 import vbpcommon
 #import common.glb as glb
@@ -267,6 +268,14 @@ if isinstance(recording_dict, dict):
 
                     # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
 
+def write_electrode_output(
+    folder:str,
+    electrode_number:int,
+    data:dict):
+    os.makedirs(folder, exist_ok=True)
+    with open(folder+'/'+str(electrode_number)+'.json','w') as f:
+        json.dump(data, f)
+
 if 't_ms' not in instrument_data:
     print('Missing t_ms record in instruments data.')
 else:
@@ -276,12 +285,15 @@ else:
         print('No Electrode recording data in instrument data.')
     else:
         electrode_data = instrument_data['Electrodes']
+        electrode_file_number = 0
         for electrode_name in electrode_data.keys():
             specific_electrode_data = electrode_data[electrode_name]
             E_mV = specific_electrode_data['E_mV']
             if len(E_mV)<1:
                 print('Zero E_mV records found at electrode %s.' % electrode_name)
             else:
+
+                # Plot electrode data
                 fig = plt.figure(figsize=figspecs['figsize'])
                 gs = fig.add_gridspec(len(E_mV),1, hspace=0)
                 axs = gs.subplots(sharex=True, sharey=True)
@@ -296,6 +308,24 @@ else:
                 plt.draw()
                 print(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}')
                 plt.savefig(savefolder+f'/{str(electrode_name)}.{figspecs["figext"]}', dpi=300)
+
+                # Produce electrode data output in standardized format (see ChallengeFormat)
+                outputdata = {
+                    'Name': str(electrode_name),
+                    'TipPosition': set_of_electrode_specs[electrode_file_number]['tip_position'],
+                    'EndPosition': set_of_electrode_specs[electrode_file_number]['end_position'],
+                    'Sites': set_of_electrode_specs[electrode_file_number]['sites'],
+                    'TimeStamp_ms': t_ms,
+                    'ElectricField_mV': E_mV,
+                }
+                write_electrode_output(
+                    folder=savefolder+'/challengeoutput',
+                    electrode_number=electrode_file_number,
+                    data=outputdata,
+                    )
+
+                electrode_file_number += 1
+
 
     if 'Calcium' not in instrument_data:
         print('No Calcium Concentration neuron data in instrument data')
