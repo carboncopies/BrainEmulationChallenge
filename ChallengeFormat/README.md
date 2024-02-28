@@ -13,3 +13,96 @@ To understand the two types of formats that are being defined here, and to see w
 
 
 # Provided Data
+
+- Root Directory
+
+    - `Index.json` (file)
+        
+        ```json
+            {
+                'TotalElectrodes': <int>,
+                'TotalEMRegions': <int>,
+                'TotalCARegions': <int>
+            }
+        ```
+
+    - `Electrodes` (dir)
+        
+        Contains one file per electrode, the total number of files will be equal to the TotalElectrodes parameter in Index.json.
+        Files start at `0`, and count upwards sequentially.
+        The format is as follows: `%i.json` where `%i` is an integer.
+
+        - `0.json` Example Format:
+
+        ```json
+            {
+                'Name': <string>,
+                'TipPosition': [XPos_um, YPos_um, ZPos_um],
+                'EndPosition': [XPos_um, YPos_um, ZPos_um],
+                'Sites': [
+                    [XRatio, YRatio, ZRatio],
+                    ...
+                ],
+                'RecordedData': [
+                    // fill in here please
+                ]
+            }
+        ```
+
+
+
+    - `EMRegions` (dir)
+
+        This directory will have `TotalEMRegions` subdirectories, also named in sequential integers starting from 0.
+        Each one will represent a specific region. 
+        Please see the below example of one region.
+
+        - `0` Example Dir:
+
+            - `Params.json` Example file: 
+            ```json
+                {
+                    'TotalImages': <int>,
+                    'NumImagesX': <int>,
+                    'NumImagesY': <int>,
+                    'NumSlices': <int>,
+                    'SliceThickness_um': <float>,
+                    'ScanRegionBottomLeft_um': [X_um, Y_um, Z_um],
+                    'ScanRegionTopRight_um': [X_um, Y_um, Z_um],
+                    'Overlap_percent': <float>,
+                    'PixelResolution_um': <float>
+                }
+            ```
+
+            - `Data` Directory:
+
+                This directory contains the image files.
+                There will be many subdirectories containing each slice, and these will have the images for each slice within.
+                Please see the example Provided Dataset for more info.
+
+    - `CARegions` (dir)
+
+        This directory will have `TotalCARegions` subdirectories, also named in sequential integers starting from 0.
+        Each one will represent a specific region. 
+        Please see the below example of one region.
+
+        - `0` Example Dir:
+
+            - `Params.json` Example file: 
+            ```json
+                {
+                    'TotalImages': <int>,
+                    'SheetThickness_um': <float>,
+                    'ScanRegionBottomLeft_um': [X_um, Y_um, Z_um],
+                    'ScanRegionTopRight_um': [X_um, Y_um, Z_um],
+                    'PixelResolution_um': <float>,
+                    'IndicatorName': <string>,
+                    'ImageTimestep_ms': <float>,
+                }
+            ```
+
+            - `Data` Directory:
+
+                This directory contains the image files.
+                There will be many subdirectories containing each slice, and these will have the images for each slice within.
+                Please see the example Provided Dataset for more info.
