@@ -47,6 +47,10 @@ Args = Parser.parse_args()
 
 
 
+TotalElectrodes:int = 0;
+TotalCARenders:int = 0;
+TotalEMRenders:int = 0;
+
 
 api_is_local=True
 runtime_ms=500.0
@@ -319,12 +323,13 @@ else:
                     'ElectricField_mV': E_mV,
                 }
                 write_electrode_output(
-                    folder=savefolder+'/challengeoutput',
+                    folder=savefolder+'/ChallengeOutput/Electrodes',
                     electrode_number=electrode_file_number,
                     data=outputdata,
                     )
 
                 electrode_file_number += 1
+                TotalElectrodes = electrode_file_number
 
 
     if 'Calcium' not in instrument_data:
@@ -405,14 +410,41 @@ if (Args.RenderEM):
     EMConfig.NumPixelsPerVoxel_px = 1
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
-    VSDAEMInstance.DefineScanRegion([-10,-10,-10], [10,10,10], [0,0,0])
+
+    BottomLeft_um = [-10,-10,-10]
+    TopRight_um = [10,10,10]
+    Rotation_rad = [0,0,0]
+    VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
-    VSDAEMInstance.SaveImageStack("Renders/EM/Raw")
+    NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0")
+
+    
+    # Generate EM JSON Info
+    EMInfoJSON:dict = {
+        'ScanRegionBottomLeft_um': BottomLeft_um,
+        'ScanRegionTopRight_um': TopRight_um,
+        'SampleRotation_rad': Rotation_rad,
+        'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
+        'SliceThickness_um': EMConfig.PixelResolution_nm,
+        'NumImagesX': NumImagesX,
+        'NumImagesY': NumImagesY,
+        'NumSlices': NumSlices
+    }
 
 
     print(" -- Reconstructing Image Stack")
-    StitchManySlices("Renders/EM/Raw", "Renders/EM/Stitched", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+    StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
 
 
 # ----------------------------------------------------
+
+
+# Now, we generate the Index file
+OutputData:dict = {
+    "TotalElectrodes": TotalElectrodes,
+    "TotalEMRegions": TotalEMRenders,
+    "TotalCARegions": TotalCARenders
+}
+with open(f"{savefolder}/ChallengeOutput/Index.json", 'w') as F:
+    F.write(json.dumps(OutputData))

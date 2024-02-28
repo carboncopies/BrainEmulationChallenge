@@ -68,15 +68,14 @@ To understand the two types of formats that are being defined here, and to see w
             - `Params.json` Example file: 
             ```json
                 {
-                    'TotalImages': <int>,
                     'NumImagesX': <int>,
                     'NumImagesY': <int>,
                     'NumSlices': <int>,
                     'SliceThickness_um': <float>,
                     'ScanRegionBottomLeft_um': [X_um, Y_um, Z_um],
                     'ScanRegionTopRight_um': [X_um, Y_um, Z_um],
-                    'Overlap_percent': <float>,
-                    'PixelResolution_um': <float>
+                    'SampleRotation_rad': [X_rad, Y_rad, Z_rad],
+                    'Overlap_percent': <float>
                 }
             ```
 
@@ -97,13 +96,12 @@ To understand the two types of formats that are being defined here, and to see w
             - `Params.json` Example file: 
             ```json
                 {
-                    'TotalImages': <int>,
                     'SheetThickness_um': <float>,
                     'ScanRegionBottomLeft_um': [X_um, Y_um, Z_um],
                     'ScanRegionTopRight_um': [X_um, Y_um, Z_um],
-                    'PixelResolution_um': <float>,
+                    'SampleRotation_rad': [X_rad, Y_rad, Z_rad],
                     'IndicatorName': <string>,
-                    'ImageTimestep_ms': <float>,
+                    'ImageTimestep_ms': <float>
                 }
             ```
 
