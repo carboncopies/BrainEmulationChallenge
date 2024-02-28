@@ -50,7 +50,7 @@ Args = Parser.parse_args()
 
 api_is_local=True
 runtime_ms=500.0
-savefolder = './Renders/vbp_'+datetime.now().strftime("%F_%X")
+savefolder = './Renders/vbp_'+str(datetime.now().strftime("%F_%X")).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
