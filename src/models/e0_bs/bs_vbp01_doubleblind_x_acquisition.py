@@ -215,7 +215,14 @@ CAConfig.IndicatorInterval_ms = 20.0 # Max. spike rate trackable 50 Hz.
 CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made of the microscope image.
 VSDACAInstance = bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
-VSDACAInstance.DefineScanRegion([-10,-10, -1], [10,10,1], [0,0,0.785])
+
+BottomLeftPos_um = [-10,-10, -1]
+TopRightPos_um = [10,10,1]
+SampleRotation_rad = [0,0,0]
+
+VSDACAInstance.DefineScanRegion(BottomLeftPos_um, TopRightPos_um, SampleRotation_rad)
+
+
 
 # glb.bg_api.BGNES_calcium_imaging_attach(calcium_specs)
 
@@ -242,8 +249,25 @@ if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
 if (Args.RenderCA):
     VSDACAInstance.QueueRenderOperation()
     VSDACAInstance.WaitForRender()
-    VSDACAInstance.SaveImageStack("Renders/CA/Raw", 10)
-    CaImagingStackStitcher.StitchManySlices("Renders/CA/Raw", "Renders/CA/Stitched", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+    os.makedirs(f"{savefolder}/ChallengeOutput/CARegions/0/Data")
+    VSDACAInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/CARegions/0/Data", 10)
+
+
+    CaJSON:dict = {
+        "SheetThickness_um": CAConfig.NumVoxelsPerSlice * CAConfig.VoxelResolution_nm,
+        "ScanRegionBottomLeft_um": BottomLeftPos_um,
+        "ScanRegionTopRight_um": TopRightPos_um,
+        "SampleRotation_rad": SampleRotation_rad,
+        "IndicatorName": CAConfig.CalciumIndicator,
+        "ImageTimestep_ms": CAConfig.ImagingInterval_ms
+    }
+    with open(f"{savefolder}/ChallengeOutput/CARegions/0/Params.json", 'w') as F:
+        F.write(json.dumps(CaJSON))
+
+    os.makedirs(f"{savefolder}/CARegions/0")
+    CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+
+
 
 # 5.3 Retrieve recordings and plot
 
@@ -391,7 +415,7 @@ if (Args.RenderVisualization):
     Visualizer.GenerateVisualization(VisualizerJob)
 
 
-    Visualizer.SaveImages("Renders/Visualizations", 2)
+    Visualizer.SaveImages(f"{savefolder}/Visualizations/0", 2)
 
 # ----------------------------------------------------
 # And, we optionally render the EM Stack, and reconstruct it.
