@@ -32,7 +32,7 @@ from NES_interfaces.KGTRecords import plot_recorded
 
 import BrainGenix.NES as NES
 import BrainGenix
-from BrainGenix.Tools.StackStitcher.StackStitcher import StitchManySlices
+from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
 
 def PointsInCircum(r,n=100):
     return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
@@ -243,7 +243,7 @@ if (Args.RenderCA):
     VSDACAInstance.QueueRenderOperation()
     VSDACAInstance.WaitForRender()
     VSDACAInstance.SaveImageStack("Renders/CA/Raw", 10)
-
+    StackStitcher.StitchManySlices("Renders/CA/Raw", "Renders/CA/Stitched", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 # 5.3 Retrieve recordings and plot
 
@@ -437,7 +437,7 @@ if (Args.RenderEM):
 
     print(" -- Reconstructing Image Stack")
     os.makedirs(f"{savefolder}/EMRegions/0")
-    StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+    StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
 
     TotalEMRenders += 1
 
