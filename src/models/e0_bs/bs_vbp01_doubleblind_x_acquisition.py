@@ -243,7 +243,7 @@ if (Args.RenderCA):
     VSDACAInstance.QueueRenderOperation()
     VSDACAInstance.WaitForRender()
     VSDACAInstance.SaveImageStack("Renders/CA/Raw", 10)
-    StackStitcher.StitchManySlices("Renders/CA/Raw", "Renders/CA/Stitched", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+    CaImagingStackStitcher.StitchManySlices("Renders/CA/Raw", "Renders/CA/Stitched", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 # 5.3 Retrieve recordings and plot
 
