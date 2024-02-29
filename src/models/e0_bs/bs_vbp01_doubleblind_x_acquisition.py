@@ -252,6 +252,7 @@ if (Args.RenderCA):
     os.makedirs(f"{savefolder}/ChallengeOutput/CARegions/0/Data")
     VSDACAInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/CARegions/0/Data", 10)
 
+    TotalCARenders += 1
 
     CaJSON:dict = {
         "SheetThickness_um": CAConfig.NumVoxelsPerSlice * CAConfig.VoxelResolution_nm,

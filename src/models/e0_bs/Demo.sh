@@ -11,7 +11,7 @@ echo "Firstly, creating simulation on NES"
 echo "Now, running data acquisition step"
 ./bs_vbp01_doubleblind_x_acquisition.py -RenderVisualization -RenderEM -RenderCA
 
-echo "Creating Visualization GIF"
-ffmpeg -i "Renders/Visualizations/%d.png" Renders/Visualizations/Spin.gif -y
+# echo "Creating Visualization GIF"
+# ffmpeg -i "Renders/Visualizations/%d.png" Renders/Visualizations/Spin.gif -y
 
 echo "Done."
