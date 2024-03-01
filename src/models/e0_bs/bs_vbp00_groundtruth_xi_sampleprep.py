@@ -42,7 +42,15 @@ import vbpcommon
 from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
-api_is_local=True
+
+import argparse
+Parser = argparse.ArgumentParser(description="vbp script")
+Parser.add_argument("-Remote", action='store_true', help="Render remotely or on localhost")
+Args = Parser.parse_args()
+
+
+api_is_local=Args.Remote
+
 randomseed = 12345
 np.random.seed(randomseed)
 num_nodes=20
