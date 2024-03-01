@@ -43,7 +43,7 @@ Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
 Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Calcium imaging rendering")
-Parser.add_argument("-Remote", action='store_true', help="Render remotely or on localhost")
+Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
 Args = Parser.parse_args()
 
 
@@ -53,7 +53,7 @@ TotalCARenders:int = 0;
 TotalEMRenders:int = 0;
 
 
-api_is_local=Args.Remote
+api_is_local=Args.Local
 runtime_ms=500.0
 savefolder = './Renders/vbp_'+str(datetime.now().strftime("%F_%X")).replace(":", "_")
 figspecs = {

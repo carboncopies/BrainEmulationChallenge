@@ -45,11 +45,11 @@ from NES_interfaces.KGTRecords import plot_recorded
 
 import argparse
 Parser = argparse.ArgumentParser(description="vbp script")
-Parser.add_argument("-Remote", action='store_true', help="Render remotely or on localhost")
+Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
 Args = Parser.parse_args()
 
 
-api_is_local=Args.Remote
+api_is_local=Args.Local
 
 randomseed = 12345
 np.random.seed(randomseed)
