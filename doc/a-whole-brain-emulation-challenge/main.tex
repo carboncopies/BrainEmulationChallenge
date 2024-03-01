@@ -83,58 +83,199 @@ There is presently not a single published proof-of-concept example where a proce
 % SECTIONS PART 2 - introduction to the data (e.g. the process that leads to the data)
 % =================================================================================
 
+\subsection{From brain matter to stacks of image data}
+
+\comment{The first and foundational milestone for feasible whole brain emulation is an ability to acquire complete high resolution data from nervous systems up to the scale of the human brain.}{This only talks about the data as obtained via EM imaging, even though the challenge can also provide functional data. That may be okay, as this is still the part of the paper discussing the problem. Alternatively, we could be more general in our problem description.}
+There are now nanoscale morphology and connectome data sets available from a single sample for complete Drosophila brain and for multiple cubic millimeters of mouse brain.
+A new project has already been launched to obtain such a data set for an entire mouse brain.
+These are data sets that contain high resolution details for many connected brain regions, short- and long-distance connections in complete neural circuits.
+Identifiable features that correspond to specific neuron types, and more.
+There is a fair chance - if we knew what we were doing in terms of translation to model architecture and parameters and in terms of constraints and error correction - that existing data is enough to produce a working functional reconstruction of the fruit fly brain.
+
+\subsection{From images to traced 3D objects}
+
+Advanced sample preparation and microscopy technology – using electron microscopes and, sometimes coregistered, light microscopes – were used to obtain stacks of images.
+Those are then stitched together and reconstructed to form a 3D visual representation consisting of high resolution voxels that measure mere nanometers on each side.
+Automated tracing algorithms, such as those developed at Google, are able to show the detailed morphology of neural cell bodies, axons, dendrites, synaptic spines, postsynaptic densities, glial cells, vasculature throughout a 3D reconstruction.
+This takes us from voxels to 3D objects, the first step in data processing, much as one might go from individual 1 ms voltage measurements to a voltage trace over time when the data collection instrument is an electrode, or from snapshots of luminescence to voltage traces over time when the data collection instrument is Calcium imaging.
+
+
 % =================================================================================
 % SECTIONS PART 3 - state of the art (many ideas, little validation/verification)
 % =================================================================================
+
+\section{Translation from brain data to model parameters}
+
+The goal is to reconstruct the working cells and neural circuits, able to process information and reproduce the cognitive behavior of the brain that was scanned.
+
+Translating measurable, observable data to correct model architecture of functional model parameters is now the primary scientific challenge.
+
+We had gone from voxels to 3D objects. Now we need to go from 3D objects to interacting sets of equations.
+
+Most of computational neuroscience is not used to this problem. More typically, models are constructed to test a largely correlational hypothesis.
+
+A controversial paper by the Kording lab pointed out that these typical methods cannot succeed at reverse engineering the brain any more than they could reverse engineer a microchip.
+
+Finding a correlation between the activity of a transistor somewhere on a chip with the I/O behavior of that chip for a specific task is far from an explanation of how the chip works.
+
+Still, a small number of leading research groups are reconfiguring their efforts towards this goal in a way that will obviously be paradigm changing in neuroscience.
+
+And some different methods are being tried.
+
+One is to measure components and to derive from that likely electrical properties.
+
+Another is to train machine learning to recognize features by having coregistered Calcium imaging with structural scans.
+
+Then there is the putative use of tags that could identify components by unique proteins.
+
+And in some cases, advances are attempted by using a rough identification of principal calls and interneurons to make circuit predictions (Shiu et al).
+
 
 % =================================================================================
 % SECTIONS PART 4 - proposing a solution (how validation and accelerating iterative improvement, competition of methods, are achieved in other domains)
 % =================================================================================
 
+\section{Validation, verification and competitive improvement}
+
+In machine learning and artificial intelligence, it is understood that successfully training a system requires not just a training data set but also validation and verification stages, a way to measure the performance of the system.
+
+Standardized, well-understood challenges
+
+AI algorithms → tested / compared on well known standard test sets (e.g. ImageNet)
+
+Well understood data sets, tuned to aims & requirement → thorough, fair, rapid feedback → rapid growth of neural reconstruction
+
+
+
+Similarly, the performance of a resulting emulation, created using a candidate reconstruction procedure that includes system identification and translation of data to parameters needs to be testable.
+
+Without that, it is impossible to make claims about the correctness of the outcome or to compare different methods.
+
+Some metrics have been applied in functional neuroprosthetic methods, such as work by Dong Song and others on the hippocampal prosthesis, where the I/O of the emulation must match an envelope around recorded activity.
+
+Here we run into a problem for structure to function translation.
+
+No one knows what the circuits inside a Drosophila brain or a mouse brain are supposed to be. So, how do we know if the ones we reconstructed are right or wrong? How wrong? And where are the mistakes to correct?
+
+Sure, we have some idea of the external behavior of a fruit fly or a mouse. If the model is of a whole brain and the emulated animal runs at all and can still find its way through a maze then you’re probably fine. But that is incredibly unlikely in early models.
+
+More likely, the model does not run, or it runs, but produces no recognizable behavior. Then what?
+
+One cannot tell if there are hidden errors that produce a problematic evolution of the behavior of the reconstructed animal, errors that did not manifest in the experimental condition tested.
+
+Imagine that you were trying to reverse engineer and reconstruct a microchip, but you have no idea what the full set of I/O functions of the original chip are supposed to be. Worse, you may not even understand that it is using a binary code, that a specific number of channels together form symbols. If you then look at the microchip under a microscope and you use some method to convert what you see into conductivity equations, how would you know where to look for mistakes when it misbehaves?
+
+Develop serialized, standardized whole-brain emulation challenge (platforms: VBP + NES) - rigorous, trusted
+
+In the fields of machine learning and artificial intelligence, it is commonplace that new algorithms are tested, compared, and prove themselves through their performance well understood standardized data sets, such as ImageNet and others.
+
+The nascent field of neural system reconstruction or brain emulation will grow rapidly through fair, thorough and rapid feedback as soon as there are solid and well understood challenge data sets, well tuned to aims and requirements.
+
+This is something that an objective, rigorous and trusted neutral party, a team working at the Carboncopies Foundation can provide.
+
+Therefore, we decided that the first end-to-end project for our BrainGenix-NES and Virtual Brain Platforms is to develop a serialized and standardized whole-brain emulation challenge.
+
+
 % =================================================================================
 % SECTIONS PART 5 - implementing the solution (competition on known ground-truth systems, WBE challenge, two essential components: 1 - success criteria expressed by validation metrics, 2 - fully known ground-truth systems needed for rigorous metrics and performance)
 % =================================================================================
+
+\section{The challenge: Competing on fully known ground-truth systems}
+
+There are two essential components: 1 - success criteria expressed by validation metrics, 2 - fully known ground-truth systems needed for rigorous metrics and performance).
+
+\subsection{Fully known ground-truth systems}
+
+We provide brain data that was obtained from little brains, neural systems, for which we have the fully known ground-truth.
+
+Obviously, these fully known ground-truth systems cannot be fruit flies, mice, or even the nematode C.Elegans. After all, we actually need to know and understand the circuits within them.
+
+These are systems we have to create, and they come in two fundamentally different forms: In-silico and in-vitro.
+
+In-vitro, we grow neural cell cultures on top of electrode arrays.
+
+Their structure and connectivity is viewable under a microscope.
+
+The electrodes permit recording and stimulation of each neuron.
+
+The system is fully knowable in functional terms.
+
+In-silico, we develop simulated neuronal systems that give us even more degrees of freedom, precision control, testability and insight. Very useful for gradual increase of sophistication (see ladder of serialized challenges).
+
+\subsection{Rigorous performance evaluation: Success criteria and validation metrics}
+
+A model presents and ideal, excluding some aspects of reality while including others, focusing on success criteria.
+
+Emulation objectives were used to formulate success criteria for an emulation.
+
+Success criteria lead to corresponding validation metrics that are applied.
+
+We started with 80 success criteria that were reduced by categorization into 25 significant to WBE.
+
+From these we extract 8 initial success criteria applicable to small neural circuit reconstructions. We are building validation metrics for these.
+
+The challenge participant receives a score on each and detailed feedback about system functions found, missed or confabulated, and about the location and type of errors, which hopefully help to further improve methods.
+
+WBE objectives → Success Criteria
+80 → 25 (cat.) → 8 initial
+Validation metrics
+Score + Feedback
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/success-criteria.jpg}
+	\caption{Success-criteria.}
+	\label{fig:success-criteria}
+\end{figure}
+
 
 % =================================================================================
 % SECTIONS PART 6 - the challenge taking process (with example)
 % =================================================================================
 
-% =================================================================================
-% SECTIONS PART 7 - results and how to use them
-% =================================================================================
+\section{Taking the challenge}
 
-% =================================================================================
-% SECTIONS PART 8 - progression (ladder of sophistication, in-silico to in-vitro to in-situ)
-% =================================================================================
+A challenge participant proposes a new method that assumes that data was acquired in some particular way. For example, the participant may require co-registered Calcium imaging.
 
+Because data acquisition requirements can be very specific (especially these early days) the team has to actively maintain the challenge, working with participants to provide the sort and format of data expected.
 
+The desired data acquisition approach is described to the whole-brian emulation challenge administering team. Physics applied.
 
+The team has or creates a set of fully known ground-truth systems.
 
-(Here: A paragraph that explains why the first example uses two imaginary ball-and-stick neurons.)
+The challenge admin team had a God’s Eye view of the system structure and function, and produces sets of acquired brain data. The ground-truth systems are not shared with the challenge participants. The participants receive the acquired data stack.
+
+The participants then apply their proposed methods and reconstruct one or more candidate emulated systems.
+The challenge admin team then compares the structure and performance of each emulated system side by side with the corresponding ground-truth system.
+
+\begin{figure}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/challenge-process.jpg}
+	\caption{Diagram of the challenge process.}
+	\label{fig:challenge-process}
+\end{figure}
+
+\begin{enumerate}
+	\item Participant proposes method and expected data acquisition
+	\item Admin team works with participant, physical sim of data acquisition
+	\item Admin team has fully known ground-truth systems
+	\item God’s Eye view of structure and function → data set produced for participant
+	\item Participants apply methods → produce emulation
+	\item Admin team compares ground-truth and emulation side-by-side
+\end{enumerate}
+
+\subsection{End-to-end example}
+
 The ball-and-stick example is intended to provide the simplest in-silico case with the smallest
 number of variables to address while still demonstrating the full process and dependencies
 chain for whole brain emulation (see Fig.~\ref{fig:dependencies-pyramid}). This is an opportunity to anchor the development of useful similarity metrics for brain emulation.
 
-(Here: Describe the I-XI requirements in the pyramid figure. Remove the topic levels text from the figure and put that description in here instead.)
-
 In the following sections, we describe the process (parts I through XI) with the aid of an example experiment, \firstexp, that is designed as a simplest case in-silico with the minimum number of variables that can demonstrate the process. The abbreviation "bs" stands for ball-and-stick, because the neurons have only a spherical soma and a single axon component.
 
-% -------------------------------------
-% HERE: Add a desxcription of the WBE Challenge, as per the Transvision talk. This can then be
-%       rewritten and reformatted to create the proper flow between all the things that need to be
-%       conveyed.
-% -------------------------------------
+In-silico sample preparation (XI) and characterized physiology (IX and VII).
+How we equate characterized ephys and biological brain samples with VBP architecture and components.
 
-% %%% Add rewritten from: https://docs.google.com/document/d/1cKPBagv6YdD0KzLB-7ykoYiedZeG27py9NpsjuBRThU/edit
-
-% %%% Add rewritten from https://docs.google.com/presentation/d/1c-oTM1neFsgqYN-vGu04ZRI30pW9pO6PLMy2gPfRbE0/edit#slide=id.g2b111662fa3_0_25
-
-\section{Known ground-truth: In-silico sample preparation (XI) and characterized physiology (IX and VII)}
-
-(Here: A paragraph explaining how we equate characterized ephys and biological brain samples with VBP architecture and components.)
-
-
-\subsection{Requirement IX: Establishing a set of virtual physiological components with well-characterized dynamics}
+Establishing a set of virtual physiological components with well-characterized dynamics (requirement IX).
 
 For the purposes of testing methods and metrics, within this virtual brain laboratory, we define both the \textbf{morphology} and \textbf{physiology} of virtual components that we declare to be our \textbf{ground-truth} about which we know everything. The components of the \firstexp ground-truth model are as follows:
 
@@ -199,52 +340,48 @@ where $v_{spike}(t) = V_{spike}$ during the absolute refractory period, and $v_{
 The refractory contribution of the spike:
 \begin{eqnarray}
 	v_{spike}(t) 	& = V_{spike} & \textrm{if } \Delta t_{act} \le \tau_{abs} \\
-					& = 0 mV & \textrm{otherwise,} \nonumber
+	& = 0 mV & \textrm{otherwise,} \nonumber
 \end{eqnarray}
 where $\Delta t_{act}$ is the time since onset of the most recent action potential.
 
 Modulation of the membrane potential by after-hyperpolarization:
 \begin{eqnarray}
 	v_{AHP}(t)		& = V_{AHP} \exp(\frac{-\Delta t_{act}}{\tau_{AHP}}) & \textrm{if } \Delta t_{act} > \tau_{abs} \\
-					& = 0 mV & \textrm{otherwise.} \nonumber
+	& = 0 mV & \textrm{otherwise.} \nonumber
 \end{eqnarray}
 
 Post-synaptic contributions to the membrane potential caused by the propagation of pre-synaptic action potentials through input receptors:
 \begin{eqnarray}
 	v_{PSPi}(t)		& = w_{syn} V_{PSP} ( -\exp(\frac{-\Delta t_{act,i}}{\tau_{PSPr}}) + \exp(\frac{-\Delta t_{act,i}}{\tau_{PSPd}}) ) & \textrm{if the pre-synaptic neuron has spiked.} \\
-					& = 0 mV & \textrm{otherwise,} \nonumber
+	& = 0 mV & \textrm{otherwise,} \nonumber
 \end{eqnarray}
 where $\Delta t_{act,i}$ is the time since onset of the most recent action potential at the pre-synaptic neuron connected through receptor $i$.
 
-A threshold crossing occurs if the new momentary membrane potential is at or beyond the firing threshold, $V_m \ge V_{act}$. If so, then a new spike onset time, $t_{act}$ is appended to the list of the neuron's spike times. That list is consulted by adjacent post-synaptic neurons that receive receptor input from this spiking neuron.
+A threshold crossing occurs if the new momentary membrane potential is at or beyond the firing threshold, $V_m \ge V_{act}$. If so, then a new spike onset time, $t_{act}$ is appended to the list of the neuron's spike times. That list is consulted by adjacent post-synaptic neurons that receive receptor input from this spiking neuron.s
 
-(Here: Mention how one would proceed on to the next more sophisticated step and towards working with real brain tissue for which there is no known ground-truth.)
+In-silico representation of virtual brain components (requirement VII).
+Describe preparation and use of the components library. Add reference to SW.
 
-\subsubsection{Requirement VII: In-silico representation of virtual brain components}
-
-(Here: Describe preparation and use of the components library. Add reference to SW.)
-
-\subsection{Requirement XI: Preparation of the virtual brain architecture of the known ground-truth system}
-
-(Here: Describe how the architecture is set up. Add reference to SW. I.e. describe the steps that the model script takes to get to a defined known ground-truth system.)
+Preparation of the virtual brain architecture of the known ground-truth system (requirement XI).
+Describe how the architecture is set up. Add reference to SW. I.e. describe the steps that the model script takes to get to a defined known ground-truth system.
 
 \subsubsection{A virtual brain ground-truth system provides a ``God's eye'' record}
 
-(Here: Describe how every calculated variable can be recorded for analysis and how that aids the development of similarity validation metrics.)
+Every calculated variable can be recorded for analysis. That aids the development of similarity validation metrics.
 
 \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{figures/e0_bs_recorded.png}
-    \caption{Plot of ball-and-stick neuron membrane potentials as recorded in ``God's eye'' mode during an experiment run.
-}
-    \label{fig:ball-and-stick}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/e0_bs_recorded.png}
+	\caption{Plot of ball-and-stick neuron membrane potentials as recorded in ``God's eye'' mode during an experiment run.
+	}
+	\label{fig:ball-and-stick}
 \end{figure}
 
-(Here: Make it clear that this is not the same as experimental data acquisition from the origin system.)
+This is not the same as the virtualized experimental data acquisition to be carried out in the origin system.
 
-\section{Data acquisition: Double-blind experimentation in a virtual brain laboratory (X and VIII)}
+\subsection{Data acquisition: Double-blind experimentation in a virtual brain laboratory (requirements X and VIII)}
 
-(Here: Describe that even though the ground-truth model is fully known to the designer, the experimenter is blind to this and can use only data obtained through in-silico data acquisition that mirrors the process of data acquisition from biological brain systems.)
+Even though the ground-truth model is fully known to the designer, the experimenter is blind to this and can use only data obtained through in-silico data acquisition that mirrors the process of data acquisition from biological brain systems.
 
 Simulated data acquisition is not permitted the God's eye view. Instead, it is constrained to the use of simulated data recording devices and simulated stimulation devices.
 
@@ -262,7 +399,7 @@ Simulated data acquisition can be sophisticated and can attempt to model realist
 \end{enumerate}
 The simplified laboratory conditions reason is particularly useful, because this allows methods to be tested first in vastly simplified conditions where the capabilities and limitations of the method can be identified, demonstrated and evaluated in their most obvious form, without distracting contributors.
 
-\subsection{Requirement X: In-silico experimental data acquisition}
+\subsection{In-silico experimental data acquisition (requirement X)}
 
 (Here: Describe the data acquisition set up with the previously prepared KGT system and running data acquisition simulations. Add reference to SW.)
 
@@ -319,10 +456,10 @@ We provide high-throughput microscope specifications:
 (Here: put more about how a simulated high-throughput EM image stack is generated using simulated optics.)
 
 \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{Figures/VBP_EM_Render_Pipeline.drawio.png}
-    \caption{High-level overview of the electron microscopy rendering process.}
-    \label{fig:em-pipeline}
+	\centering
+	\includegraphics[width=1\linewidth]{Figures/VBP_EM_Render_Pipeline.drawio.png}
+	\caption{High-level overview of the electron microscopy rendering process.}
+	\label{fig:em-pipeline}
 \end{figure}
 
 
@@ -337,78 +474,101 @@ Our approach involves three major steps. Firstly, we divide the volume into $n$ 
 
 
 
-\subsection{Requirement VIII: Collected data and post-processing}
+\subsection{Collected data and post-processing (requirement VIII)}
 
 (Here: Describe what it means for the collected data to be the "relevant" brain data.)
 
 (Here: Describe the format of data obtained and how it may be post-processed for this simple experiment. Add reference to SW.)
 
-\section{System Identification and Translation to emulation model parameters (IV-VI)}
-
-(Here: Explain what system identification is, model selection and structuring. Explain what Translation means, model fitting. Point out the importance of constraints and their application. Explain that this process can involve multiple concurrent attempts or repeated attempts, guided by the validation step and error identification.)
-
-\subsection{Requirement VI: Model selection and structure derivation from activity data and morphological data (VI)}
-
-(Here: Describe the process. Add reference to SW.)
-
-\subsection{Requirement V: Application of constraints at multiple levels (V)}
-
-(Here: Describe the process. Add reference to SW.)
-
-\subsection{Requirement IV: Completing a process of system identification and translation for model architecture and parameters}
-
-(Here: Describe the process. Add reference to SW.)
-
-\section{Validation of candidate emulated systems using similarity and performance metrics based on success criteria for successful whole brain emulation (I-III)}
+\subsection{Validation of candidate emulated systems using similarity and performance metrics based on success criteria for successful whole brain emulation (requirements I-III)}
 
 (Here: Describe similarity metrics that can be used in known ground-truth system and those that can be used in a broader category of systems, even biological brains. Explain that these will evolve as research proceeds from these most basic in-silico systems to more sophisticated systems.)
 
-\subsection{Requirement III: Measuring similarity and performance}
+\subsubsection{Measuring similarity and performance (requirement III)}
 
 (Here: Describe the application of metrics and the evaluation of results.)
 
-\subsubsection{Using known ground-truth systems to develop methods for the identification of error sources and their correction}
+% =================================================================================
+% SECTIONS PART 7 - results and how to use them
+% =================================================================================
+
+\section{Learning from performance and errors}
+
+\subsection{Using known ground-truth systems to develop methods for the identification of error sources and their correction}
 
 (Here: Describe an example of an error and how its cause is determined. Describe how the system identification and translation is adjusted and the outcome improved. Add reference to SW.)
 
-\subsection{Requirement II: Meeting success criteria}
+\subsection{Meeting success criteria (requirement II)}
 
 (Here: Describe this important relationship.)
 
-\subsection{Requirement I: Achieving a successful whole brain emulation for the ball-and-stick neural system}
+\subsection{Achieving a successful whole brain emulation for the ball-and-stick neural system (requirement I)}
 
 (Here: Describe the outcome.)
 
+% =================================================================================
+% SECTIONS PART 8 - progression (ladder of sophistication, in-silico to in-vitro to in-situ)
+% =================================================================================
 
+\section{A ladder of serialized challenges}
 
-% Section For How Our Software Backend Works
-\section{Software Architecture (rephrase this later)}
+The challenge is not a single challenge system. It is a serialized ladder of challenges.
 
-(This also all probably needs to be rephrased later but here's something for now, just so we have something to show for it. I'm not really sure what the right tone to use here is so I'll try my best, but again, we *will* need to fix this later i think.)
+A challenger should begin by trying proposed methods with the easiest challenge, then work their way up the ladder.
 
-(WHERE DID MY FIGURE GO!?!?!? WHY IS IT UP ABOVE THIS AND NOT RIGHT BELOW THIS MESSAGE?!?!?!?!)
+We can compare this with analogous challenges that have been used in the development of AI. For example, a first computer vision challenge might test the ability to distinguish clear images of bicycles from those of cars.
+
+Following computer vision challenges might add object rotations, occlusions, noise, etc.
+
+Challenges become progressively more realistic and progressively harder.
+
+We begin with 	very simple ground-truth systems that produce data sets much easier 	to interpret than real data sets.
+
+This can be as simple a 2, 10, 20 or 100 “ball-and-stick” neurons, where the system morphology is restricted to spheres for cell bodies and single cylinders for axons. No other object in the interstitial spaces, no glial cells, no vasculature. Identification of components should be relatively easy at that stage.
+
+More sophistication is added if the challenger is able to handle the simplified case. The next stage might have multiple neuron types, might have dendrites with detailed branching and functional effects of dendritic computation that depend on the locations of synapses.
+
+At another stage, circuits may include recurrent connections.
+
+Beyond that, we may require not merely static circuit reconstruction, but also correct emulation of plasticity functions, for success criteria that require that system behavior evolves within an acceptable envelope.
+
+When you want to test if a student understands and can work with fundamental concepts you let them solve some problems with spherical objects in a vacuum, you don’t immediately ask for orbits involving realistic, oddly shaped bodies.
+
+Mention how one would proceed on to the next more sophisticated step and towards working with real brain tissue for which there is no known ground-truth.
+
+\subsection{Real-world conditions and animal brains}
+
+At every level of sophistication, models and their components must have form (spatial definition) and function (activity definition).
+
+This ensures a link between structure and function, which realistic translation and system identification candidates will need to make use of.
+
+Eventually, the sophistication of the in-silico ground-truth systems begins to approximate that of an in-vitro ground-truth system.
+
+After successful validation with such systems the application of translation and system identification methods can proceed to partially knowable systems
+
+E.g. slices of neural tissue.
+
+E.g. tiny animals, such as the C.Elegans nematode (Kording Lab focus).
+
+Prof. Kording’s lab will be providing preliminary peer review of our platform.
+
+\begin{enumerate}
+	\item form and function at each level of sophistication
+	\item in-silico sophistication begins to approximate in-vitro
+	\item proceed to partially knowable systems
+	\item e.g. slices, tiny animals
+\end{enumerate}
 
 \begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{Figures/VBP_System_Architecture_Overview.drawio.png}
-    \caption{Diagram showing system architecture following a user's request.
-}
-    \label{fig:system-architecture}
+	\centering
+	\includegraphics[width=1\linewidth]{figures/to-animal-brains.jpg}
+	\caption{To animal brains.}
+	\label{fig:to-animal-brains}
 \end{figure}
-
-When designing the software system needed to generate the datasets, we elected to use a client-server based approach. This was done so out of concerns relating to performance and scalabillity. In future research, we envision generating significantly larger and more complex datasets, which would likely not fit on a single computer. To address this issue from the start, we focused on splitting the code in two places. On the client side, a simple python client library handles model definition and setup, while the backend resides on much more powerful servers.
-
-
-
-
-
 
 
 \section{Discussion}
 
-(Here: Discuss the main takeaways and important insights about the process for this simple system.)
-
-(Here: Point to the follow-up research and the general procedure of step-wise advancement. Add a reference to the project and company.)
 
 % Broken for now, disabling (due to same issue with biblatex, please fix dependencies Randal!)
 %\printbibliography
