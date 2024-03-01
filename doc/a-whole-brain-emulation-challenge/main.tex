@@ -51,6 +51,34 @@ Carboncopies Foundation for Brain Research (Should this say 'Substrate Independe
 % SECTIONS PART 1 - problem description (paradigm change and translation challenge)
 % =================================================================================
 
+\section{Introduction}
+
+REWRITE THESE NOTES:
+
+A field of neuroscience that is aimed at neural circuit function reconstruction in a way that extends beyond the requirements explored in systems neuroscience, cognitive neuroscience, or neuroinformatics.
+
+A description of how most neuroscience goes about making hypotheses, making predictions, testing hypotheses, making claims.
+Existing specializations have emphasized the use of computation for hypothesis testing in the context of fundamental but abstracted concepts.
+
+A description of how computational models are used in most of neuroscience in that process.
+
+A reference to Konrad Kording’s paper about the problem that neuroscience would have in trying to explain a microchip.
+
+A description of the aim of reducing the abstraction level and increasing the resolution at which modeling takes place until computational reconstructions have the functional characteristics of a specific sample, animal or person. These aims include not just correlational predictions, but a complete mapping that describes how representations have “meaning” from step to step within the propagating activity of a system. And these aims include identifying subjective uniqueness, and being able to recreate that in prosthetic form.
+A neuroscience of reconstruction must emphasize not just shared operational fundamentals but individually unique functional structure, such as that which enables retrieval of personal memories.
+
+For this process, we can apply well known methods for the progression from data to insight to hypothesis to model at the highest resolution.
+
+Above that, we are working in the realm of large, complex systems with emergent properties, where characteristics depend on applied constraints.
+
+The problem of satisfactory derivation of model parameters from data, identification and application of constraints is unsolved, building specimen-specific large scale neural reconstructions is relatively new, although reconstruction of individual neurons has history (e.g. see BlueBrain papers).
+
+The problem has similarities with those in AI, where complex features and behaviors expressed in real world data need to be captured in rigorous and validated algorithms.
+
+REWRITE BELOW FOR PROPER STYLE AND LANGUAGE:
+
+There is presently not a single published proof-of-concept example where a process of brain emulation has been carried out at some scale and where a validation was performed to quantify the degree to which an emulation satisfies necessary success criteria. Scientific motivation to make progress in brain emulation depends on having a touch-stone implementation and reference evaluation to quantitatively improve upon. The only way to evaluate claims of brain emulation is through the use of metrics that compare an emulation with an original system. Similarity metrics must measure similarity in ways that matter to the goal of whole brain emulation, i.e. that satisfy cognitive success criteria. E.g. spike train timing is not duplicated, but the probability of spiking is modulated sensibly and the evolution of system attractors is plausible. Similarity metrics are needed at multiple levels and while some can be used only with fully known ground-truth systems, others will carry over to whole brain systems. The principle of brain emulation depends on the ability to satisfy cognitive success criteria while replacing implementation details at some scale. In analog, potentially chaotic systems, scale separation is achieved through the application of operational constraints. E.g. rhythms (brain) or clock cycles (computer), neural population activity (brain) or parity bits (computer), action potentials (brain) or binary thresholds (computer). The application of constraints at consecutive levels limits the size of each black box in system identification.
+
 % =================================================================================
 % SECTIONS PART 2 - introduction to the data (e.g. the process that leads to the data)
 % =================================================================================
@@ -80,23 +108,7 @@ Carboncopies Foundation for Brain Research (Should this say 'Substrate Independe
 % =================================================================================
 
 
-\section{Introduction}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=1\linewidth]{figures/Deriving-whole-brain-emulation.png}
-    \caption{The dependencies pyramid from goals of successful whole brain emulation to brain data requirements.
-}
-    \label{fig:dependencies-pyramid}
-\end{figure}
-
-(Here: tiny paragraph about "brain emulation".)
-
-(Here: a paragraph about how the process of model building for emulation is different than the typical computational neuroscience model building process.)
-field of neuroscience that is aimed at neural circuit function reconstruction in a way that extends beyond the requirements explored in systems neuroscience, cognitive neuroscience, or neuroinformatics. Existing specializations have emphasized the use of computation for hypothesis testing in the context of fundamental but abstracted concepts. A neuroscience of reconstruction must emphasize not just shared operational fundamentals but individually unique functional structure, such as that which enables retrieval of personal memories.
-
-(Here: Rewrite the sentences below into proper journal style and language.)
-There is presently not a single published proof-of-concept example where a process of brain emulation has been carried out at some scale and where a validation was performed to quantify the degree to which an emulation satisfies necessary success criteria. Scientific motivation to make progress in brain emulation depends on having a touch-stone implementation and reference evaluation to quantitatively improve upon. The only way to evaluate claims of brain emulation is through the use of metrics that compare an emulation with an original system. Similarity metrics must measure similarity in ways that matter to the goal of whole brain emulation, i.e. that satisfy cognitive success criteria. E.g. spike train timing is not duplicated, but the probability of spiking is modulated sensibly and the evolution of system attractors is plausible. Similarity metrics are needed at multiple levels and while some can be used only with fully known ground-truth systems, others will carry over to whole brain systems. The principle of brain emulation depends on the ability to satisfy cognitive success criteria while replacing implementation details at some scale. In analog, potentially chaotic systems, scale separation is achieved through the application of operational constraints. E.g. rhythms (brain) or clock cycles (computer), neural population activity (brain) or parity bits (computer), action potentials (brain) or binary thresholds (computer). The application of constraints at consecutive levels limits the size of each black box in system identification.
 
 (Here: A paragraph that explains why the first example uses two imaginary ball-and-stick neurons.)
 The ball-and-stick example is intended to provide the simplest in-silico case with the smallest
