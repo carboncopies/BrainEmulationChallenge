@@ -8,8 +8,10 @@
 %
 
 \documentclass{ldr-article}
-%\usepackage{biblatex}
-%\addbibresource{main.bib}
+\usepackage{easyReview} % for \comment, \alert, etc.
+\usepackage{biblatex}
+\usepackage{authblk}
+\addbibresource{main.bib}
 
 % here we can set the page counter to the correct global page counter
 \setcounter{page}{1}
@@ -20,13 +22,11 @@
 
 \title{A proof-of-concept process for validated brain emulation boot-strapped on an in-silico fully known ground-truth neural circuit}
 
+\author[1]{Randal A. Koene}
+\author[1]{Thomas Liao}
+\affil[1]{Carboncopies Foundation for Brain Research}
 
-\author{
-Randal A. Koene\\
-Thomas Liao\\
-Carboncopies Foundation for Brain Research (Should this say 'Substrate Independent Minds' instead?)\\
-(Also, is it in the right place?)
-}
+%\date{}                     %% if you don't need date to appear
 
 \def\firstexp{\textit{e0\_bs} }
 
@@ -35,12 +35,12 @@ Carboncopies Foundation for Brain Research (Should this say 'Substrate Independe
     \maketitle
 
     \begin{abstract}
-       (This will need to be re-written... the text here is temporary.)
+       \alert{REWRITE}: 
        There is presently not a single published proof-of-concept example where a process of brain emulation has been carried out at some scale and where a validation was performed to quantify the degree to which an emulation satisfies necessary success criteria. Scientific motivation to make progress in brain emulation depends on having a touch-stone implementation and reference evaluation to quantitatively improve upon. The only way to evaluate claims of brain emulation is through the use of metrics that compare an emulation with an original system. Similarity metrics must measure similarity in ways that matter to the goal of whole brain emulation, i.e. that satisfy cognitive success criteria. E.g. spike train timing is not duplicated, but the probability of spiking is modulated sensibly and the evolution of system attractors is plausible. Similarity metrics are needed at multiple levels and while some can be used only with fully known ground-truth systems, others will carry over to whole brain systems. The principle of brain emulation depends on the ability to satisfy cognitive success criteria while replacing implementation details at some scale. In analog, potentially chaotic systems, scale separation is achieved through the application of operational constraints. E.g. rhythms (brain) or clock cycles (computer), neural population activity (brain) or parity bits (computer), action potentials (brain) or binary thresholds (computer). The application of constraints at consecutive levels limits the size of each black box in system identification.
     \end{abstract}
     
     \keywords{brain emulation; system identification; similarity metrics; in-silico}
-    \correspondingauthor{Randal A. Koene, CSO, Carboncopies Foundation for Brain Research, Sacramento, CA, and Nextup Neuro, LLC, Email: rkoene@carboncopies.org.}
+    \correspondingauthor{Randal A. Koene, CSO, Carboncopies Foundation for Brain Research, Sacramento, CA, Email: rkoene@carboncopies.org.}
     \orcids{https://orcid.org/0000-1234-5678-9999; }
     % for multiple ORCIDs, use \orcids and URLs separated by semicolons, e.g.:
     %\orcids{https://orcid.org/0000-1234-5678-9999;https://orcid.org/0000-5678-1234-9999}
@@ -53,31 +53,27 @@ Carboncopies Foundation for Brain Research (Should this say 'Substrate Independe
 
 \section{Introduction}
 
-REWRITE THESE NOTES:
+With the availability of high throughput electron microscopy, exapansion microscopy, Calcium and voltage imaging, co-registered combinations of these techniques~\cite{phelps2021,court2023} and further advancements, high resolution data sets that span multiple brain regions or entire small animal brains such as Drosophila~\cite{zheng2018} may now offer inroads to expansive neuronal circuit analysis~\cite{scheffer2020,buhmann2021}. Results of such analysis represent a paradigm change in the conduct of neuroscience. So far, almost all investigations in neuroscience have relied on correlational studies, in which a modicum of insight gleaned from observational data leads to the formulation of mechanistic hypotheses, corresponding computaitonal modeling, predictions made using those models, so that experimental testing of the predictions offers support or modification of hypotheses. These are indirect methods for the study of a black box system of highly complex internal structure, recently critiqued as being unlikely to lead to a full understanding of brain function~\cite{jonas2017}. Large scale, high resolution reconstruction of brain circuitry can instead lead to mechanistic explanations and predictions of cognitive function with meaningful descriptions of representations and their transformation along the full trajectory of stages in neural processing. Insights that come from circuit reconstructions of this kind, a reverse enginering of cognitive processes, will lead to valuable advances in neuroprosthetic medicine, understanding of the causes and effects of neurodegenerative disease, possible implementations of similar processes in artificial intelligence, and in-silico emulations of brain function.
 
-With the availability of high throughput electron microscopy, exapansion microscopy, Calcium and voltage imaging, co-registered combinations of these techniques and further advancements, high resolution data sets that span multiple brain regions or entire small animal brains such as Drosophila~\cite[Janelia...]{dro} may now offer inroads to expansive neuronal circuit analysis. Results of such analysis represent a paradigm change in the conduct of neuroscience. So far, almost all investigations in neuroscience have relied on correlational studies, in which a modicum of insight gleaned from observational data leads to the formulation of mechanistic hypotheses, corresponding computaitonal modeling, predictions made using those models, so that experimental testing of the predictions offers support or modification of hypotheses. These are indirect methods for the study of a black box system of highly complex internal structure, recently critiqued as being unlikely to lead to a full understanding of brain function~\cite[Kording et al.]{Kord}. Large scale, high resolution reconstruction of brain circuitry can instead lead to mechanistic explanations and predictions of cognitive function with meaningful descriptions of representations and their transformation along the full trajectory of stages in neural processing. Insights that come from circuit reconstructions of this kind, a reverse enginering of cognitive processes, will lead to valuable advances in neuroprosthetic medicine, understanding of the causes and effects of neurodegenerative disease, possible implementations of similar processes in artificial intelligence, and in-silico emulations of brain function.
+\alert{REWRITE}: A description of the aim of reducing the abstraction level and increasing the resolution at which modeling takes place until computational reconstructions have the functional characteristics of a specific sample, animal or person.
 
+These aims include not just correlational predictions, but a complete mapping that describes how representations have ``meaning'' from step to step within the propagating activity of a system. And these aims include identifying subjective uniqueness, and being able to recreate that in prosthetic form. A neuroscience of reconstruction must emphasize not just shared operational fundamentals but individually unique functional structure, such as that which enables retrieval of animal-specific or personal memories.
 
-A reference to Konrad Kording’s paper about the problem that neuroscience would have in trying to explain a microchip.
-
-A description of the aim of reducing the abstraction level and increasing the resolution at which modeling takes place until computational reconstructions have the functional characteristics of a specific sample, animal or person. These aims include not just correlational predictions, but a complete mapping that describes how representations have “meaning” from step to step within the propagating activity of a system. And these aims include identifying subjective uniqueness, and being able to recreate that in prosthetic form.
-A neuroscience of reconstruction must emphasize not just shared operational fundamentals but individually unique functional structure, such as that which enables retrieval of personal memories.
-
-The modeling process for the detailed reconstruction of specimen-specific neural circuitry is, at high resolution (neuronal morphology, synapse placement, ion channel characteristics) carried out using well known computational modeling techniques. Patch-clamp studies of synaptic and neural response, interactions along stretches of dendrite, application of algorithmic models that characterize dynamic behavior of ion channels produce predictive computational models at this resolution~\cite[]{bluebrain}. 
+The modeling process for the detailed reconstruction of specimen-specific neural circuitry is, at high resolution (neuronal morphology, synapse placement, ion channel characteristics) carried out using well known computational modeling techniques. Patch-clamp studies of synaptic and neural response, interactions along stretches of dendrite, application of algorithmic models that characterize dynamic behavior of ion channels produce predictive computational models at this resolution~\cite{markram2015}. 
 
 Dynamic behavior at this resolution is stochastically characterized and easily influenced by small parameter changes, such as result from uncertainties in collected brain data or reconstruction errors. Large scale circuits composed of these high resolution models could exhibit divergent behavior of a chaotic nature due to such dependencies unless well constrained at a higher level of abstraction. This is the level of complex systems with emergent properties. That such constraints must be involved with reliable brain function is clear, given the remarkable robustness of cognitive function that depends on reliably cooperating activity in multiple brain regions under widely varying circumstances. A number of homeostatic or error correcting constraints have already been identified in theory and in practice. They include a reliance on neuronal population activity, transmission through groups of synapses, propagation through spikes and bursts, the applicaiton of lateral inhibition, phase locking by global modulating rhythms, and much more. A sensible application of constraints at successive levels of a detailed functional reconstruction will be essential.
 
-REWRITE:
+\alert{REWRITE}:
 The problem of satisfactory derivation of model parameters from data, identification and application of constraints is unsolved, building specimen-specific large scale neural reconstructions is relatively new, although reconstruction of individual neurons has history (e.g. see BlueBrain papers).
 
-REWRITE:
+\alert{REWRITE}:
 The problem has similarities with those in AI, where complex features and behaviors expressed in real world data need to be captured in rigorous and validated algorithms.
 
 At present, there is no published proof-of-concept procedure by which to reconstruct, emulate and validate the circuit function of sample brain tissue at a scale that includes short- and long-distance connections contained in recent electronmicroscopy connectome data. In fact, the success criteria to which validation and verification of such emulation belong have not been established. 
 
-Improving methods effectively depends on rigorous testing, using metrics when it is possible determine errors precisely by comparing results achieved with intended correct results. This is possible when the original neural system examined is known fully. Such a system provides a ground-truth to strive for. Validation metrics derived from success criteria will measure similarities and deviations that matter to the cognitive functions of a (whole) brain emulation. For example, although a spatio-temporal pattern of spikes is rarely, if ever, duplicated precisely in neurobiological systems, sufficient approximation of spike probabliity as a function of time is a relevant measure.
+Efficient improvement of methods is possible with rigorous testing, applying metrics when it is possible to determine errors precisely by comparing results achieved with intended correct results. This is possible when the original neural system examined is known fully. Such a system provides a ground-truth to strive for. Validation metrics derived from success criteria will measure similarities and deviations that matter to the cognitive functions of a (whole) brain emulation. For example, although a spatio-temporal pattern of spikes is rarely, if ever, duplicated precisely in neurobiological systems, sufficient approximation of spike probabliity as a function of time is a relevant measure.
 
-REWRITE:
+\alert{REWRITE}:
 Similarity metrics must measure similarity in ways that matter to the goal of whole brain emulation, i.e. that satisfy cognitive success criteria. E.g. spike train timing is not duplicated, but the probability of spiking is modulated sensibly and the evolution of system attractors is plausible. Similarity metrics are needed at multiple levels and while some can be used only with fully known ground-truth systems, others will carry over to whole brain systems. The principle of brain emulation depends on the ability to satisfy cognitive success criteria while replacing implementation details at some scale. In analog, potentially chaotic systems, scale separation is achieved through the application of operational constraints. E.g. rhythms (brain) or clock cycles (computer), neural population activity (brain) or parity bits (computer), action potentials (brain) or binary thresholds (computer). The application of constraints at consecutive levels limits the size of each black box in system identification.
 
 % =================================================================================
@@ -131,6 +127,12 @@ Then there is the putative use of tags that could identify components by unique 
 
 And in some cases, advances are attempted by using a rough identification of principal calls and interneurons to make circuit predictions (Shiu et al).
 
+\comment{ADD LIST OF PAPERS WITH CANDIDATE METHODS, FIRST POSSIBLE CONTESTANT:}{The idea here is that we already identify some of those who we hope will take the challenge and call them out. We may then take one or more of these and attempt them on our ground-truth systems ourselves as a demonstration.}
+\begin{itemize}
+	\item add here...
+	\item and more...
+\end{itemize}
+
 
 % =================================================================================
 % SECTIONS PART 4 - proposing a solution (how validation and accelerating iterative improvement, competition of methods, are achieved in other domains)
@@ -144,7 +146,7 @@ Standardized, well-understood challenges
 
 AI algorithms → tested / compared on well known standard test sets (e.g. ImageNet)
 
-Well understood data sets, tuned to aims & requirement → thorough, fair, rapid feedback → rapid growth of neural reconstruction
+Well understood data sets, tuned to aims and requirement → thorough, fair, rapid feedback → rapid growth of neural reconstruction
 
 
 
@@ -240,7 +242,7 @@ A challenge participant proposes a new method that assumes that data was acquire
 
 Because data acquisition requirements can be very specific (especially these early days) the team has to actively maintain the challenge, working with participants to provide the sort and format of data expected.
 
-The desired data acquisition approach is described to the whole-brian emulation challenge administering team. Physics applied.
+The desired data acquisition approach is described to the whole-brian emulation challenge administering team. Physics applied. (See related work~\cite{aberra2018}.)
 
 The team has or creates a set of fully known ground-truth systems.
 
@@ -266,6 +268,8 @@ The challenge admin team then compares the structure and performance of each emu
 \end{enumerate}
 
 \subsection{End-to-end example}
+
+\comment{PROPOSED MODELING FOR US}{We can work our way up to what we want to show in the paper, for example, by doing the following sequence of things: (1) Raw and basic demonstration of the process by creating a ground-truth system, making an emulation by copying that with a few error-edits, applying metrics and presenting the result, (2) Attempting to apply published reconstruction methods on data ourselves to create an emulation, presenting results, (3) Improving our platform until that presentation with a published method works. To make this more fun, I popose that the ground-truth system we create should have a built-in cognitive function that does something, so that we can "discover" it.}
 
 The ball-and-stick example is intended to provide the simplest in-silico case with the smallest
 number of variables to address while still demonstrating the full process and dependencies
@@ -572,7 +576,7 @@ Prof. Kording’s lab will be providing preliminary peer review of our platform.
 
 
 % Broken for now, disabling (due to same issue with biblatex, please fix dependencies Randal!)
-%\printbibliography
+\printbibliography
 
 \section{Data, Code and Materials Availability Statement}
 
