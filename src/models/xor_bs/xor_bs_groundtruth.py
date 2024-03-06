@@ -102,68 +102,90 @@ P_B0_pos  = [ 15,-15, 0]
 P_B1_pos  = [ 15, 15, 0]
 P_out_pos = [ 45,  0, 0]
 
-soma_positions = [
-    P_in0_pos,
-    P_in1_pos,
-    P_A0_pos,
-    I_A0_pos,
-    I_A1_pos,
-    P_A1_pos,
-    P_B0_pos,
-    P_B1_pos,
-    P_out_pos,
-]
+soma_positions = {
+    'P_in0': P_in0_pos,
+    'P_in1': P_in1_pos,
+    'P_A0': P_A0_pos,
+    'I_A0': I_A0_pos,
+    'I_A1': I_A1_pos,
+    'P_A1': P_A1_pos,
+    'P_B0': P_B0_pos,
+    'P_B1': P_B1_pos,
+    'P_out': P_out_pos,
+}
 
-somas = []
-for xyz in soma_positions:
+neuron_names = list(soma_positions.keys())
+
+somas = {}
+for n in neuron_names:
     soma = bg_api.BGNES_sphere_create(
                 radius_um=soma_radius_um,
-                center_um=xyz,)
-    somas.append(soma)
+                center_um=soma_positions[n],)
+    somas[n] = soma
 
-# 3.2 Create axons and direct them to neighboring cells:
+# 3.2 Define shapes for the connections and place them
 
-end0_radius_um = 0.1
-end1_radius_um = 0.1
+end0_radius_um = 0.75 # Typical radius at the axon hillock of a pyramidal neuron in human cortex.
+end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neurons in human cortex.
 
-# TODO: We don't need the axon_ends list if we remember end0 and end0
-#       in Cylinder creation in pyBrainGenixClient.
+axon_ends = {}
 
-axons = []
-axon_ends = []
-axons_to = -1*np.ones(circuit_num_cells, dtype=int)
-max_dist_squared = max(box_dims)**2
-for n in range(circuit_num_cells):
-    min_dist_squared = max_dist_squared
-    # Find nearest cell:
-    nearest = -1
-    for i in range(len(soma_positions)):
-        if i != n:
-            if axons_to[i] != n: # Avoid tiny loops.
-                v = soma_positions[n] - soma_positions[i]
-                d_squared = v.dot(v)
-                if d_squared < min_dist_squared:
-                    min_dist_squared = d_squared
-                    nearest = i
-    axons_to[n] = nearest
-    #print('This one is %s and nearest is %s.' % (str(n), str(nearest)))
-    dv_axon = soma_positions[nearest] - soma_positions[n]
-    mag = np.sqrt(dv_axon.dot(dv_axon))
-    if mag == 0:
-        exit(1)
-    dv_axon = (1/mag)*dv_axon
-    end0 = soma_positions[n] + (soma_radius_um*dv_axon)
-    end1 = soma_positions[nearest] - (soma_radius_um*dv_axon)
-    axon_ends.append( (end0, end1) )
+Pin0_PA0_start = list(np.array(P_in0_pos) + np.array([soma_radius_um, 0, 0]))
+Pin0_PA0_end   = list(np.array(P_A0_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_in0_P_A0'] = (Pin0_PA0_start, Pin0_PA0_end)
 
+Pin1_PA1_start = list(np.array(P_in1_pos) + np.array([soma_radius_um, 0, 0]))
+Pin1_PA1_end   = list(np.array(P_A1_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_in1_P_A1'] = (Pin1_PA1_start, Pin1_PA1_end)
+
+Pin0_IA0_start = list(np.array(P_in0_pos) + np.array([soma_radius_um, 0, 0]))
+Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
+
+Pin1_IA1_start = list(np.array(P_in1_pos) + np.array([soma_radius_um, 0, 0]))
+Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
+
+PA0_PB0_start  = list(np.array(P_A0_pos) + np.array([soma_radius_um, 0, 0]))
+PA0_PB0_end    = list(np.array(P_B0_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_A0_P_B0'] = (PA0_PB0_start, PA0_PB0_end)
+
+PA1_PB1_start  = list(np.array(P_A1_pos) + np.array([soma_radius_um, 0, 0]))
+PA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_A1_P_B1'] = (PA1_PB1_start, PA1_PB1_end)
+
+IA0_PB0_start  = list(np.array(I_A0_pos) + np.array([soma_radius_um, 0, 0]))
+IA0_PB0_end    = list(np.array(P_B0_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['I_A0_P_B0'] = (IA0_PB0_start, IA0_PB0_end)
+
+IA1_PB1_start  = list(np.array(I_A1_pos) + np.array([soma_radius_um, 0, 0]))
+IA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['I_A1_P_B1'] = (IA1_PB1_start, IA1_PB1_end)
+
+PB0_Pout_start = list(np.array(P_B0_pos) + np.array([soma_radius_um, 0, 0]))
+PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_B0_P_out'] = (PB0_Pout_start, PB0_Pout_end)
+
+PB1_Pout_start = list(np.array(P_B1_pos) + np.array([soma_radius_um, 0, 0]))
+PB1_Pout_end   = list(np.array(P_out_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['P_B1_P_out'] = (PB1_Pout_start, PB1_Pout_end)
+
+Pout_start = list(np.array(P_out_pos) + np.array([soma_radius_um, 0, 0]))
+Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0]))
+axon_ends['P_out'] = (Pout_start, Pout_end)
+
+axon_names = list(axon_ends.keys())
+
+axons = {}
+for a in axon_names:
     axon = bg_api.BGNES_cylinder_create(
                 Point1Radius_um=end0_radius_um,
-                Point1Position_um=end0,
+                Point1Position_um=axon_ends[a][0],
                 Point2Radius_um=end1_radius_um,
-                Point2Position_um=end1,)
-    axons.append(axon)
+                Point2Position_um=axon_ends[a][1],)
+    axons[a] = axon
 
-# 3.3.3 Create compartments for somas:
+# 3.3 Create compartments.
 
 neuron_Vm_mV = -60.0
 neuron_Vrest_mV = -60.0
@@ -171,31 +193,29 @@ neuron_Vact_mV = -50.0
 neuron_Vahp_mV = -20.0
 neuron_tau_AHP_ms = 30.0
 
-soma_compartments = []
-for soma in somas:
+soma_compartments = {}
+for n in neuron_names:
     compartment = bg_api.BGNES_BS_compartment_create(
-                    ShapeID=soma.ID,
+                    ShapeID=somas[n].ID,
                     MembranePotential_mV=neuron_Vm_mV,
                     RestingPotential_mV=neuron_Vrest_mV,
                     SpikeThreshold_mV=neuron_Vact_mV,
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
-    soma_compartments.append(compartment)
+    soma_compartments[n] = compartment
 
-# 3.3.4 Create compartments for axons:
-
-axon_compartments = []
-for axon in axons:
+axon_compartments = {}
+for a in axon_names:
     compartment = bg_api.BGNES_BS_compartment_create(
-                    ShapeID=axon.ID,
+                    ShapeID=axons[a].ID,
                     MembranePotential_mV=neuron_Vm_mV,
                     RestingPotential_mV=neuron_Vrest_mV,
                     SpikeThreshold_mV=neuron_Vact_mV,
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
-    axon_compartments.append(compartment)
+    axon_compartments[a] = compartment
 
-# 3.3.5 Create neurons:
+# 3.4 Create principal neurons.
 
 # Current at typical single AMPA receptor is in pA range.
 # Multiple receptors or in specific conditions can get up to nA (or even uA) range.
@@ -243,59 +263,216 @@ neuron_IPSP = 870.0 # nA
 #neuron_tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
 #neuron_t_spont_next = -1
 
-cells = {}
-for n in range(circuit_num_cells):
-    cell_id = str(n)
-    cell = bg_api.BGNES_BS_neuron_create(
-        Soma=soma_compartments[n].ID, 
-        Axon=axon_compartments[n].ID,
-        MembranePotential_mV=neuron_Vm_mV,
-        RestingPotential_mV=neuron_Vrest_mV,
-        SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
-        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
-        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
-        PostsynapticPotentialAmplitude_nA=neuron_IPSP,
-    )
-    cells[cell_id] = cell
+Pin0 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_in0'].ID, 
+    Axon=axon_compartments['P_in0_P_A0'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+# *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
 
-# 3.4 (Optionally) visualize the system
+Pin1 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_in1'].ID, 
+    Axon=axon_compartments['P_in1_P_A1'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+# *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
 
-# glb.bg_api.Some_sort_of_call()
+Pin1 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_in1'].ID, 
+    Axon=axon_compartments['P_in1_P_A1'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
 
-# 3.5 Set up an instant binary connection from cell 0 to cell 1
+PA0 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_A0'].ID, 
+    Axon=axon_compartments['P_A0_P_B0'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+PA1 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_A1'].ID, 
+    Axon=axon_compartments['P_A1_P_B1'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+PB0 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_B0'].ID, 
+    Axon=axon_compartments['P_B0_P_out'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+PB1 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_B1'].ID, 
+    Axon=axon_compartments['P_B1_P_out'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+Pout = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['P_out'].ID, 
+    Axon=axon_compartments['P_out'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+# 3.5 Create interneurons.
+
+IA0 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['I_A0'].ID, 
+    Axon=axon_compartments['I_A0_P_B0'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+IA1 = bg_api.BGNES_BS_neuron_create(
+    Soma=soma_compartments['I_A1'].ID, 
+    Axon=axon_compartments['I_A1_P_B1'].ID,
+    MembranePotential_mV=neuron_Vm_mV,
+    RestingPotential_mV=neuron_Vrest_mV,
+    SpikeThreshold_mV=neuron_Vact_mV,
+    DecayTime_ms=neuron_tau_AHP_ms,
+    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+    PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+    PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+    PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+)
+
+cells = {
+    'P_in0': Pin0,
+    'P_in1': Pin1,
+
+    'P_A0': PA0,
+    'P_A1': PA1,
+
+    'P_B0': PB0,
+    'P_B1': PB1,
+
+    'Pout': Pout,
+
+    'I_A0': IA0,
+    'I_A1': IA1,
+}
+
+input_neurons = {
+    'P_in0': Pin0,
+    'P_in1': Pin1,
+}
+layerA_neurons = {
+    'P_A0': PA0,
+    'P_A1': PA1,
+    'I_A0': IA0,
+    'I_A1': IA1,
+}
+layerB_neurons = {
+    'P_B0': PB0,
+    'P_B1': PB1,
+}
+output_neurons = {
+    'Pout': Pout,
+}
+
+# 3.6 Create receptors for active connections.
 
 AMPA_conductance = 40.0 #60 # nS
+GABA_conductance = -40.0 # nS
 weight = 1.0 # binary
 
-connection_pattern_set = [
-    ( 0, 1 ), # From cell 0 to cell 1.
-    ( 1, 2 ),
-    ( 2, 3 ),
-    ( 3, 4 ),
-    ( 5, 6 ),
-    ( 6, 0 ),
-    ( 15, 0 ),
-    ( 15, 3 ),
-] 
+# dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
+connection_pattern_set = {
+    'P_in0_P_A0': ( 'P_A0', AMPA_conductance),
+    'P_in1_P_A1': ( 'P_A1', AMPA_conductance),
+    'P_in0_I_A0': ( 'I_A0', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
+    'P_in1_I_A1': ( 'I_A1', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
+
+    'P_A0_P_B0': ( 'P_B0', AMPA_conductance),
+    'P_A1_P_B1': ( 'P_B1', AMPA_conductance),
+
+    'I_A0_P_B0': ( 'P_B0', GABA_conductance),
+    'I_A1_P_B1': ( 'P_B1', GABA_conductance),
+
+    'P_B0_P_out': ( 'P_out', AMPA_conductance),
+    'P_B1_P_out': ( 'P_out', AMPA_conductance),
+}
+
 receptor_functionals = []
 receptor_morphologies = []
-for pattern in connection_pattern_set:
-    print("Setting up a 'binary' connection from %s to %s." % pattern)
+for connection in connection_pattern_set.keys():
+    # Set the total conductance through receptors at synapses at this connection:
+    conductance = connection_pattern_set[connection][1]
+    receptor_conductance = weight * conductance
+    if receptor_conductance >= 0:
+        print("Setting up a 'AMPA' connection for %s." % connection)
+    else:
+        print("Setting up a 'GABA' connection for %s." % connection)
 
     # Find the neurons:
-    from_cell = cells[str(pattern[0])]
-    to_cell = cells[str(pattern[1])]
+    to_cell = cells[connection_pattern_set[connection][0]]
 
     # Find the compartments:
-    from_compartment_id = from_cell.AxonID
+    from_compartment_id = axon_compartments[connection]
     to_compartment_id = to_cell.SomaID
-    receptor_location = axon_ends[pattern[1]][1]
+    receptor_location = axon_ends[connection][1]
     print('Receptor loction: '+str(receptor_location))
-
-    # Set the total conductance through receptors at synapses at this connection:
-    receptor_conductance = weight * AMPA_conductance
 
     # Build receptor form:
     receptor_box = bg_api.BGNES_box_create(
@@ -312,15 +489,10 @@ for pattern in connection_pattern_set:
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
         ReceptorMorphology=receptor_box.ID,
-        #ReceptorLocation_um=tuple(receptor_location),
     )
     receptor_functionals.append( (receptor, to_cell) )
 
-# 3.6 (Optionally) visualize the system with the connection
-
-# glb.bg_api.Some_sort_of_call()
-
-# 3.7 Save the ground-truth system
+# 3.7 Save the ground-truth system.
 
 response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
@@ -332,68 +504,34 @@ with open(".SimulationHandle", "w") as f:
 
 STIMTEXT1='''
 Dynamic activity:
-The imagined nature of the 2-neuron ball-and-stick circuit
-provides no differentiation of dendritic input sources to
-the neurons. Activity is elicited exclusively by generating
-potential at or near a soma to the point where a cell fires
-and action potential is propagated.
 
 God's eye direct access to every aspect of the in-silico
 ground-truth system includes the ability to specifically
 cause a somatic action potential at any time.
+
+We use this to test the XOR logic by running the input
+spiking sequences:
+
+  0 0 = (no spikes for the first 100 ms)
+  1 0 = (100.0, P_in0)
+  0 1 = (200.0, P_in1)
+  1 1 = (300.0, P_in0), (300.0, P_in1)
 '''
 
 # 4. Init experiment
 
 print(STIMTEXT1)
 t_soma_fire_ms = [
-    (100.0, 0),
-    (150.0, 5),
-    (200.0, 10),
-    (250.0, 15),
-    (300.0, 18),
-    (350.0, 13),
-    (400.0, 8),
-    (450.0, 3),
+    (100.0, cells['P_in0'].ID),
+    (200.0, cells['P_in1'].ID),
+    (300.0, cells['P_in0'].ID),
+    (300.0, cells['P_in1'].ID),
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
 response = bg_api.BGNES_set_specific_AP_times(
-        TimeNeuronPairs=t_soma_fire_ms,
-    )
-
-# # 4.1 Convert to stims-by-patch-clamp-DAC
-
-# DAC_stims = {}
-# for stim in t_soma_fire_ms:
-#     t, cell_id = stim
-#     if cell_id not in DAC_stims:
-#         DAC_stims[cell_id] = {
-#             'stims': [],
-#             'patch_clamp': None,
-#         }
-#     DAC_stims[cell_id]['stims'].append(t)
-
-# # 4.2 Create DACs for direct stimulation
-
-# for cell_id in DAC_stims:
-#     patch_clamp = glb.bg_api.BGNES_DAC_create(
-#         DestinationCompartmentID=cells[cell_id].SomaID,
-#         ClampLocation_um=[0,0,0],
-#     )
-#     DAC_stims[cell_id]['patch_clamp'] = patch_clamp
-
-# # 4.3 Init DAC voltage transitions according to stim lists
-
-# for cell_id in DAC_stims:
-#     DAC_settings = [ (0, neuron_Vrest_mV) ]
-#     for t_stim in DAC_stims[cell_id]['stims']:
-#         DAC_settings.append( (t_stim, neuron_Vact_mV+10.0 ) )
-#         DAC_settings.append( (t_stim+5.0, neuron_Vrest_mV ) )
-#     print('At DAC on cell %s, DAC control commands: %s' % (str(cell_id), str(DAC_settings)))
-#     glb.bg_api.BGNES_DAC_set_output_list(
-#         TargetDAC=DAC_stims[cell_id]['patch_clamp'].ID,
-#         DACControlPairs=DAC_settings,)
+    TimeNeuronPairs=t_soma_fire_ms,
+)
 
 # 5. Run experiment
 
