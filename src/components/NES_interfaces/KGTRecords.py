@@ -13,7 +13,7 @@ from PIL import Image
 from os.path import isdir
 from os import makedirs
 
-def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}):
+def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
     if 't_ms' not in data:
         raise Exception('plot_recorded: Missing t_ms record.')
 
@@ -39,7 +39,7 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
             if int(neuron_id)>maxID:
                 maxID = int(neuron_id)
         # Find neurons in order:
-        for n_id in range(0, maxID):
+        for n_id in range(0, maxID+1):
             neuron_id = str(n_id)
             if neuron_id in data:
                 if 'Vm_mV' not in data[neuron_id]:
@@ -60,6 +60,9 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
         # else:
         #   ax = fig.add_subplot(gs[c], sharex=ax)
         axs[c].plot(t_ms, Vm_cells[c], linewidth=figspecs['linewidth'])
+        if cell_titles:
+            #axs[c].title.set_text(cell_titles[c], y=1.0, pad=-14)
+            axs[c].set_title(cell_titles[c], y=1.0, pad=-14)
     for ax in axs:
         ax.label_outer()
     plt.draw()
