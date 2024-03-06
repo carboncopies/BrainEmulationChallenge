@@ -1,31 +1,14 @@
 #!/usr/bin/env python3
-# bs_vbp00_groundtruth_xi_sampleprep.py
-# Randal A. Koene, 20240202
+# xor_bs_groundtruth.py
+# Randal A. Koene, 20240306
 
 '''
-The ball-and-stick example is intended to provide the simplest in-silico case with the smallest
-number of variables to address while still demonstrating the full process and dependencies
-chain for whole brain emulation.
+The XOR ball-and-stick example uses extremely simple neuron representations in a
+meaningful logic circuit to produce expected functional output.
 
 This file implements an in-silico fully known ground-truth system.
 In this example file, we do this with a minimum of Python complexity,
 keeping the script as flat as possible and maximizing immediate use of NES calls.
-
-The idea here is to get this to achieve the same result as the Python prototype
-but try not to constrain the implementation by basing it hard on the prototype
-implementation. The method has the following steps:
-
-1) Express all the steps taken in the prototype as flat as possible, following
-   just 1 set of options for the prototype (e.g. only unirand distribution).
-2) Ensure that all of the NES interfaces and functions exist for that flat
-   version to work.
-3) Consider parts that should be easier or more flexible for the user (e.g.
-   just ask for 20 neurons instead of specifying each, or, being able to
-   choose unirand or aligned layout).
-4) Consider which of those parts should be build right into NES and which
-   into the Python support libraries.
-5) Build the first into NES.
-6) Build the second into the NES_interfaces modules.
 
 VBP process step 00: groundtruth
 WBE topic-level XI: sample preparation / preservation (in-silico)
@@ -38,7 +21,6 @@ from datetime import datetime
 from time import sleep
 
 import vbpcommon
-#import common.glb as glb
 from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
@@ -53,8 +35,6 @@ api_is_local=Args.Local
 
 randomseed = 12345
 np.random.seed(randomseed)
-num_nodes=20
-circuit_distribution='unirand'
 runtime_ms = 500.0
 savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
 figspecs = {
@@ -74,75 +54,74 @@ if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=Fa
 
 # 2. Init simulation
 
-sys_name='e0_bs'
+sys_name='xor_bs'
 bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
 
 INITTEXT1='''
-1. Defining a %s-neuron system:
-   a. Scale: The number of principal nodes.
-   b. Functional: The type of network arrangment
-      (aligned ball-and-stick).
-   c. Physical: A specific volume (a box region).
-   Defaults are applied to other parameters.
+1. Defining an XOR logic circuit composed of ball-and-stick
+   principal neurons and interneurons. The network and its
+   connectivity are specified explicitly.
+
+   The steps we take:
+   a. Define shapes for the neurons and place each specifically.
+   b. Define shapes for the connections and place them.
+   c. Create compartments.
+   d. Create principal neurons.
+   e. Create interneurons.
+   f. Create receptors for active connections.
+   g. Save the resulting neuronal circuit.
+
+   Circuit:
+
+   P_in0 (-45,-45) --> P_A0 (-15,-45) ----+
+                |                         |
+                +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
+                                                          P_out (45, 0)
+                +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
+                |                         |
+   P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+
+   Distances of 30 um are typical between somas in cortex.
 '''
 
 print(INITTEXT1 % str(num_nodes))
 
-# 3.1 Add either a uniform random or aligned circuit
+# 3.1 Define shapes for the neurons and place each specifically.
 
-circuit_id='BS NC'
-circuit_num_cells=num_nodes
+soma_radius_um = 5.0                # A typical radius for the soma of a human cortical pyramidal neuron.
 
-# 3.2 That circuit has the function and a box is the shape
-#     of a brain region:
+P_in0_pos = [-45,-45, 0]
+P_in1_pos = [-45, 45, 0]
+P_A0_pos  = [-15,-45, 0]
+I_A0_pos  = [-15,-15, 0]
+I_A1_pos  = [-15, 15, 0]
+P_A1_pos  = [-15, 45, 0]
+P_B0_pos  = [ 15,-15, 0]
+P_B1_pos  = [ 15, 15, 0]
+P_out_pos = [ 45,  0, 0]
 
-box_center = [0,0,0]
-box_dims = [20.0, 20.0, 2.0]
-box_rot = [0,0,0]
-box = bg_api.BGNES_box_create(
-            CenterPosition_um=box_center,
-            Dimensions_um=box_dims,
-            Rotation_rad=box_rot)
-
-region_id='BS'
-region_content=circuit_id
-region_shape=box.ID
-
-# 3.3 Init cells within circuit:
-
-if circuit_distribution != 'unirand':
-    print('Distribution %s not implemented.' % circuit_distribution)
-    exit(1)
-
-# 3.3.1 Find uniform random distributed soma positions that do not overlap:
-
-soma_radius_um = 0.5
-dist_threshold = 4*soma_radius_um*soma_radius_um
+soma_positions = [
+    P_in0_pos,
+    P_in1_pos,
+    P_A0_pos,
+    I_A0_pos,
+    I_A1_pos,
+    P_A1_pos,
+    P_B0_pos,
+    P_B1_pos,
+    P_out_pos,
+]
 
 somas = []
-soma_positions = []
-for n in range(circuit_num_cells):
-    need_position = True
-    while need_position:
-        xyz = np.random.uniform(-0.5, 0.5, 3)
-        xyz = xyz*np.array(box_dims) + np.array(box_center)
-        # 2. Check it isn't too close to other neurons already placed.
-        need_position = False
-        for soma_pos in soma_positions:
-            v = xyz - soma_pos
-            d_squared = v.dot(v)
-            if d_squared <= dist_threshold:
-                need_position = True
-                break
-    soma_positions.append(xyz)
+for xyz in soma_positions:
     soma = bg_api.BGNES_sphere_create(
                 radius_um=soma_radius_um,
                 center_um=xyz,)
     somas.append(soma)
 
-# 3.3.2 Create axons and direct them to neighboring cells:
+# 3.2 Create axons and direct them to neighboring cells:
 
 end0_radius_um = 0.1
 end1_radius_um = 0.1
