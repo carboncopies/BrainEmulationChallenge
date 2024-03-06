@@ -83,18 +83,26 @@ Similarity metrics must measure similarity in ways that matter to the goal of wh
 \subsection{From brain matter to stacks of image data}
 
 \comment{The first and foundational milestone for feasible whole brain emulation is an ability to acquire complete high resolution data from nervous systems up to the scale of the human brain.}{This only talks about the data as obtained via EM imaging, even though the challenge can also provide functional data. That may be okay, as this is still the part of the paper discussing the problem. Alternatively, we could be more general in our problem description.}
-There are now nanoscale morphology and connectome data sets available from a single sample for complete Drosophila brain and for multiple cubic millimeters of mouse brain.
-A new project has already been launched to obtain such a data set for an entire mouse brain.
-These are data sets that contain high resolution details for many connected brain regions, short- and long-distance connections in complete neural circuits.
-Identifiable features that correspond to specific neuron types, and more.
-There is a fair chance - if we knew what we were doing in terms of translation to model architecture and parameters and in terms of constraints and error correction - that existing data is enough to produce a working functional reconstruction of the fruit fly brain.
+
+\alert{REWRITE:} There are now nanoscale morphology and connectome data sets available from a single sample for complete Drosophila brain and for multiple cubic millimeters of mouse brain.
+
+\alert{REWRITE:} A new project has already been launched to obtain such a data set for an entire mouse brain.
+
+\alert{REWRITE:} These are data sets that contain high resolution details for many connected brain regions, short- and long-distance connections in complete neural circuits.
+
+\alert{REWRITE:} Identifiable features that correspond to specific neuron types, and more.
+
+\alert{REWRITE:} There is a fair chance - if we knew what we were doing in terms of translation to model architecture and parameters and in terms of constraints and error correction - that existing data is enough to produce a working functional reconstruction of the fruit fly brain.
 
 \subsection{From images to traced 3D objects}
 
-Advanced sample preparation and microscopy technology – using electron microscopes and, sometimes coregistered, light microscopes – were used to obtain stacks of images.
-Those are then stitched together and reconstructed to form a 3D visual representation consisting of high resolution voxels that measure mere nanometers on each side.
-Automated tracing algorithms, such as those developed at Google, are able to show the detailed morphology of neural cell bodies, axons, dendrites, synaptic spines, postsynaptic densities, glial cells, vasculature throughout a 3D reconstruction.
-This takes us from voxels to 3D objects, the first step in data processing, much as one might go from individual 1 ms voltage measurements to a voltage trace over time when the data collection instrument is an electrode, or from snapshots of luminescence to voltage traces over time when the data collection instrument is Calcium imaging.
+\alert{REWRITE:} Advanced sample preparation and microscopy technology – using electron microscopes and, sometimes coregistered, light microscopes – were used to obtain stacks of images.
+
+\alert{REWRITE:} Those are then stitched together and reconstructed to form a 3D visual representation consisting of high resolution voxels that measure mere nanometers on each side.
+
+\alert{REWRITE:} Automated tracing algorithms, such as those developed at Google, are able to show the detailed morphology of neural cell bodies, axons, dendrites, synaptic spines, postsynaptic densities, glial cells, vasculature throughout a 3D reconstruction.
+
+\alert{REWRITE:} This takes us from voxels to 3D objects, the first step in data processing, much as one might go from individual 1 ms voltage measurements to a voltage trace over time when the data collection instrument is an electrode, or from snapshots of luminescence to voltage traces over time when the data collection instrument is Calcium imaging.
 
 
 % =================================================================================
@@ -103,29 +111,23 @@ This takes us from voxels to 3D objects, the first step in data processing, much
 
 \section{Translation from brain data to model parameters}
 
-The goal is to reconstruct the working cells and neural circuits, able to process information and reproduce the cognitive behavior of the brain that was scanned.
+\alert{REWRITE:} The goal is to reconstruct the working cells and neural circuits, able to process information and reproduce the cognitive behavior of the brain that was scanned.
 
-Translating measurable, observable data to correct model architecture of functional model parameters is now the primary scientific challenge.
+\alert{REWRITE:} Translating measurable, observable data to correct model architecture of functional model parameters is now the primary scientific challenge.
 
-We had gone from voxels to 3D objects. Now we need to go from 3D objects to interacting sets of equations.
+\alert{REWRITE:} We had gone from voxels to 3D objects. Now we need to go from 3D objects to interacting sets of equations.
 
-Most of computational neuroscience is not used to this problem. More typically, models are constructed to test a largely correlational hypothesis.
+\alert{REWRITE:} A small number of leading research groups are reconfiguring their efforts towards this goal in a way that will obviously be paradigm changing in neuroscience.
 
-A controversial paper by the Kording lab pointed out that these typical methods cannot succeed at reverse engineering the brain any more than they could reverse engineer a microchip.
+\alert{REWRITE:} And some different methods are being tried.
 
-Finding a correlation between the activity of a transistor somewhere on a chip with the I/O behavior of that chip for a specific task is far from an explanation of how the chip works.
+\alert{REWRITE:} One is to measure components and to derive from that likely electrical properties.
 
-Still, a small number of leading research groups are reconfiguring their efforts towards this goal in a way that will obviously be paradigm changing in neuroscience.
+\alert{REWRITE:} Another is to train machine learning to recognize features by having coregistered Calcium imaging with structural scans.
 
-And some different methods are being tried.
+\alert{REWRITE:} Then there is the putative use of tags that could identify components by unique proteins.
 
-One is to measure components and to derive from that likely electrical properties.
-
-Another is to train machine learning to recognize features by having coregistered Calcium imaging with structural scans.
-
-Then there is the putative use of tags that could identify components by unique proteins.
-
-And in some cases, advances are attempted by using a rough identification of principal calls and interneurons to make circuit predictions (Shiu et al).
+\alert{REWRITE:} And in some cases, advances are attempted by using a rough identification of principal cells and interneurons to make circuit predictions (Shiu et al).
 
 \comment{ADD LIST OF PAPERS WITH CANDIDATE METHODS, FIRST POSSIBLE CONTESTANT:}{The idea here is that we already identify some of those who we hope will take the challenge and call them out. We may then take one or more of these and attempt them on our ground-truth systems ourselves as a demonstration.}
 \begin{itemize}
@@ -140,43 +142,41 @@ And in some cases, advances are attempted by using a rough identification of pri
 
 \section{Validation, verification and competitive improvement}
 
-In machine learning and artificial intelligence, it is understood that successfully training a system requires not just a training data set but also validation and verification stages, a way to measure the performance of the system.
+\alert{REWRITE:} In machine learning and artificial intelligence, it is understood that successfully training a system requires not just a training data set but also validation and verification stages, a way to measure the performance of the system.
 
-Standardized, well-understood challenges
+\alert{REWRITE:} Standardized, well-understood challenges
 
-AI algorithms → tested / compared on well known standard test sets (e.g. ImageNet)
+\alert{REWRITE:} AI algorithms → tested / compared on well known standard test sets (e.g. ImageNet)
 
-Well understood data sets, tuned to aims and requirement → thorough, fair, rapid feedback → rapid growth of neural reconstruction
+\alert{REWRITE:} Well understood data sets, tuned to aims and requirement → thorough, fair, rapid feedback → rapid growth of neural reconstruction
 
 
 
-Similarly, the performance of a resulting emulation, created using a candidate reconstruction procedure that includes system identification and translation of data to parameters needs to be testable.
+\alert{REWRITE:} Similarly, the performance of a resulting emulation, created using a candidate reconstruction procedure that includes system identification and translation of data to parameters needs to be testable.
 
-Without that, it is impossible to make claims about the correctness of the outcome or to compare different methods.
+\alert{REWRITE:} Without that, it is impossible to make claims about the correctness of the outcome or to compare different methods.
 
-Some metrics have been applied in functional neuroprosthetic methods, such as work by Dong Song and others on the hippocampal prosthesis, where the I/O of the emulation must match an envelope around recorded activity.
+\alert{REWRITE:} Some metrics have been applied in functional neuroprosthetic methods, such as work by Dong Song and others on the hippocampal prosthesis, where the I/O of the emulation must match an envelope around recorded activity.
 
-Here we run into a problem for structure to function translation.
+\alert{REWRITE:} Here we run into a problem for structure to function translation.
 
-No one knows what the circuits inside a Drosophila brain or a mouse brain are supposed to be. So, how do we know if the ones we reconstructed are right or wrong? How wrong? And where are the mistakes to correct?
+\alert{REWRITE:} No one knows what the circuits inside a Drosophila brain or a mouse brain are supposed to be. So, how do we know if the ones we reconstructed are right or wrong? How wrong? And where are the mistakes to correct?
 
-Sure, we have some idea of the external behavior of a fruit fly or a mouse. If the model is of a whole brain and the emulated animal runs at all and can still find its way through a maze then you’re probably fine. But that is incredibly unlikely in early models.
+\alert{REWRITE:} Sure, we have some idea of the external behavior of a fruit fly or a mouse. If the model is of a whole brain and the emulated animal runs at all and can still find its way through a maze then you’re probably fine. But that is incredibly unlikely in early models.
 
-More likely, the model does not run, or it runs, but produces no recognizable behavior. Then what?
+\alert{REWRITE:} More likely, the model does not run, or it runs, but produces no recognizable behavior. Then what?
 
-One cannot tell if there are hidden errors that produce a problematic evolution of the behavior of the reconstructed animal, errors that did not manifest in the experimental condition tested.
+\alert{REWRITE:} One cannot tell if there are hidden errors that produce a problematic evolution of the behavior of the reconstructed animal, errors that did not manifest in the experimental condition tested.
 
-Imagine that you were trying to reverse engineer and reconstruct a microchip, but you have no idea what the full set of I/O functions of the original chip are supposed to be. Worse, you may not even understand that it is using a binary code, that a specific number of channels together form symbols. If you then look at the microchip under a microscope and you use some method to convert what you see into conductivity equations, how would you know where to look for mistakes when it misbehaves?
+\alert{REWRITE:} Imagine that you were trying to reverse engineer and reconstruct a microchip, but you have no idea what the full set of I/O functions of the original chip are supposed to be. Worse, you may not even understand that it is using a binary code, that a specific number of channels together form symbols. If you then look at the microchip under a microscope and you use some method to convert what you see into conductivity equations, how would you know where to look for mistakes when it misbehaves?
 
-Develop serialized, standardized whole-brain emulation challenge (platforms: VBP + NES) - rigorous, trusted
+\alert{REWRITE:} Develop serialized, standardized whole-brain emulation challenge (platforms: VBP + NES) - rigorous, trusted
 
-In the fields of machine learning and artificial intelligence, it is commonplace that new algorithms are tested, compared, and prove themselves through their performance well understood standardized data sets, such as ImageNet and others.
+In the fields of machine learning and artificial intelligence, it is commonplace that new algorithms are tested, compared, and prove themselves through their performance on well understood standardized data sets, such as ImageNet~\cite{deng2009,russakovsky2015} and others. The nascent field of neural system reconstruction or brain emulation will grow rapidly through fair, thorough and rapid feedback as soon as there are solid and well understood challenge data sets, well tuned to aims and requirements.
 
-The nascent field of neural system reconstruction or brain emulation will grow rapidly through fair, thorough and rapid feedback as soon as there are solid and well understood challenge data sets, well tuned to aims and requirements.
+\alert{REWRITE:} This is something that an objective, rigorous and trusted neutral party, a team working at the Carboncopies Foundation can provide.
 
-This is something that an objective, rigorous and trusted neutral party, a team working at the Carboncopies Foundation can provide.
-
-Therefore, we decided that the first end-to-end project for our BrainGenix-NES and Virtual Brain Platforms is to develop a serialized and standardized whole-brain emulation challenge.
+\alert{REWRITE:} Therefore, we decided that the first end-to-end project for our BrainGenix-NES and Virtual Brain Platforms is to develop a serialized and standardized whole-brain emulation challenge.
 
 
 % =================================================================================
@@ -185,41 +185,41 @@ Therefore, we decided that the first end-to-end project for our BrainGenix-NES a
 
 \section{The challenge: Competing on fully known ground-truth systems}
 
-There are two essential components: 1 - success criteria expressed by validation metrics, 2 - fully known ground-truth systems needed for rigorous metrics and performance).
+\alert{REWRITE:} There are two essential components: 1 - success criteria expressed by validation metrics, 2 - fully known ground-truth systems needed for rigorous metrics and performance).
 
 \subsection{Fully known ground-truth systems}
 
-We provide brain data that was obtained from little brains, neural systems, for which we have the fully known ground-truth.
+\alert{REWRITE:} We provide brain data that was obtained from little brains, neural systems, for which we have the fully known ground-truth.
 
-Obviously, these fully known ground-truth systems cannot be fruit flies, mice, or even the nematode C.Elegans. After all, we actually need to know and understand the circuits within them.
+\alert{REWRITE:} Obviously, these fully known ground-truth systems cannot be fruit flies, mice, or even the nematode C.Elegans. After all, we actually need to know and understand the circuits within them.
 
-These are systems we have to create, and they come in two fundamentally different forms: In-silico and in-vitro.
+\alert{REWRITE:} These are systems we have to create, and they come in two fundamentally different forms: In-silico and in-vitro.
 
-In-vitro, we grow neural cell cultures on top of electrode arrays.
+\alert{REWRITE:} In-vitro, we grow neural cell cultures on top of electrode arrays.
 
-Their structure and connectivity is viewable under a microscope.
+\alert{REWRITE:} Their structure and connectivity is viewable under a microscope.
 
-The electrodes permit recording and stimulation of each neuron.
+\alert{REWRITE:} The electrodes permit recording and stimulation of each neuron.
 
-The system is fully knowable in functional terms.
+\alert{REWRITE:} The system is fully knowable in functional terms.
 
-In-silico, we develop simulated neuronal systems that give us even more degrees of freedom, precision control, testability and insight. Very useful for gradual increase of sophistication (see ladder of serialized challenges).
+\alert{REWRITE:} In-silico, we develop simulated neuronal systems that give us even more degrees of freedom, precision control, testability and insight. Very useful for gradual increase of sophistication (see ladder of serialized challenges).
 
 \subsection{Rigorous performance evaluation: Success criteria and validation metrics}
 
-A model presents and ideal, excluding some aspects of reality while including others, focusing on success criteria.
+\alert{REWRITE:} A model presents an ideal, excluding some aspects of reality while including others, focusing on success criteria.
 
-Emulation objectives were used to formulate success criteria for an emulation.
+\alert{REWRITE:} Emulation objectives were used to formulate success criteria for an emulation.
 
-Success criteria lead to corresponding validation metrics that are applied.
+\alert{REWRITE:} Success criteria lead to corresponding validation metrics that are applied.
 
-We started with 80 success criteria that were reduced by categorization into 25 significant to WBE.
+\alert{REWRITE:} We started with 80 success criteria that were reduced by categorization into 25 significant to WBE.
 
-From these we extract 8 initial success criteria applicable to small neural circuit reconstructions. We are building validation metrics for these.
+\alert{REWRITE:} From these we extract 8 initial success criteria applicable to small neural circuit reconstructions. We are building validation metrics for these.
 
-The challenge participant receives a score on each and detailed feedback about system functions found, missed or confabulated, and about the location and type of errors, which hopefully help to further improve methods.
+\alert{REWRITE:} The challenge participant receives a score on each and detailed feedback about system functions found, missed or confabulated, and about the location and type of errors, which hopefully help to further improve methods.
 
-WBE objectives → Success Criteria
+\alert{REWRITE:} WBE objectives → Success Criteria
 80 → 25 (cat.) → 8 initial
 Validation metrics
 Score + Feedback
@@ -238,18 +238,19 @@ Score + Feedback
 
 \section{Taking the challenge}
 
-A challenge participant proposes a new method that assumes that data was acquired in some particular way. For example, the participant may require co-registered Calcium imaging.
+\alert{REWRITE:} A challenge participant proposes a new method that assumes that data was acquired in some particular way. For example, the participant may require co-registered Calcium imaging.
 
-Because data acquisition requirements can be very specific (especially these early days) the team has to actively maintain the challenge, working with participants to provide the sort and format of data expected.
+\alert{REWRITE:} Because data acquisition requirements can be very specific (especially these early days) the team has to actively maintain the challenge, working with participants to provide the sort and format of data expected.
 
-The desired data acquisition approach is described to the whole-brian emulation challenge administering team. Physics applied. (See related work~\cite{aberra2018}.)
+\alert{REWRITE:} The desired data acquisition approach is described to the whole-brian emulation challenge administering team. Physics applied. (See related work~\cite{aberra2018}.)
 
-The team has or creates a set of fully known ground-truth systems.
+\alert{REWRITE:} The team has or creates a set of fully known ground-truth systems.
 
-The challenge admin team had a God’s Eye view of the system structure and function, and produces sets of acquired brain data. The ground-truth systems are not shared with the challenge participants. The participants receive the acquired data stack.
+\alert{REWRITE:} The challenge admin team has a God’s Eye view of the system structure and function, and produces sets of acquired brain data. The ground-truth systems are not shared with the challenge participants. The participants receive the acquired data stack.
 
-The participants then apply their proposed methods and reconstruct one or more candidate emulated systems.
-The challenge admin team then compares the structure and performance of each emulated system side by side with the corresponding ground-truth system.
+\alert{REWRITE:} The participants then apply their proposed methods and reconstruct one or more candidate emulated systems.
+
+\alert{REWRITE:} The challenge admin team then compares the structure and performance of each emulated system side by side with the corresponding ground-truth system.
 
 \begin{figure}
 	\centering
@@ -406,7 +407,7 @@ The simplified laboratory conditions reason is particularly useful, because this
 
 \subsection{In-silico experimental data acquisition (requirement X)}
 
-(Here: Describe the data acquisition set up with the previously prepared KGT system and running data acquisition simulations. Add reference to SW.)
+\alert{REWRITE:} Describe the data acquisition set up with the previously prepared KGT system and running data acquisition simulations. Add reference to SW.
 
 The steps of simulated data acquisition are:
 \begin{enumerate}
@@ -444,7 +445,7 @@ Similarly, a call to the \textit{attach\_calcium\_imaging()} member function is 
 
 Simulated electrode and calcium imaging devices record data while we run the model for a specified number of simulated milliseconds.
 
-(Here: put more about how those simulated devices generate the recorded data by using simulated physics.)
+\alert{REWRITE:} more about how those simulated devices generate the recorded data by using simulated physics.
 
 
 % Section about EM Rendering
@@ -481,13 +482,13 @@ Our approach involves three major steps. Firstly, we divide the volume into $n$ 
 
 \subsection{Collected data and post-processing (requirement VIII)}
 
-(Here: Describe what it means for the collected data to be the "relevant" brain data.)
+\alert{REWRITE:} Describe what it means for the collected data to be the "relevant" brain data.
 
-(Here: Describe the format of data obtained and how it may be post-processed for this simple experiment. Add reference to SW.)
+\alert{REWRITE:} Describe the format of data obtained and how it may be post-processed for this simple experiment. Add reference to SW.
 
 \subsection{Validation of candidate emulated systems using similarity and performance metrics based on success criteria for successful whole brain emulation (requirements I-III)}
 
-(Here: Describe similarity metrics that can be used in known ground-truth system and those that can be used in a broader category of systems, even biological brains. Explain that these will evolve as research proceeds from these most basic in-silico systems to more sophisticated systems.)
+\alert{REWRITE:} Describe similarity metrics that can be used in known ground-truth system and those that can be used in a broader category of systems, even biological brains. Explain that these will evolve as research proceeds from these most basic in-silico systems to more sophisticated systems.
 
 \subsubsection{Measuring similarity and performance (requirement III)}
 
@@ -501,11 +502,11 @@ Our approach involves three major steps. Firstly, we divide the volume into $n$ 
 
 \subsection{Using known ground-truth systems to develop methods for the identification of error sources and their correction}
 
-(Here: Describe an example of an error and how its cause is determined. Describe how the system identification and translation is adjusted and the outcome improved. Add reference to SW.)
+\alert{REWRITE:} Describe an example of an error and how its cause is determined. Describe how the system identification and translation is adjusted and the outcome improved. Add reference to SW.
 
 \subsection{Meeting success criteria (requirement II)}
 
-(Here: Describe this important relationship.)
+\alert{REWRITE:} Describe this important relationship.
 
 \subsection{Achieving a successful whole brain emulation for the ball-and-stick neural system (requirement I)}
 
@@ -517,19 +518,19 @@ Our approach involves three major steps. Firstly, we divide the volume into $n$ 
 
 \section{A ladder of serialized challenges}
 
-The challenge is not a single challenge system. It is a serialized ladder of challenges.
+\alert{REWRITE:} The challenge is not a single challenge system. It is a serialized ladder of challenges.
 
-A challenger should begin by trying proposed methods with the easiest challenge, then work their way up the ladder.
+\alert{REWRITE:} A challenger should begin by trying proposed methods with the easiest challenge, then work their way up the ladder.
 
-We can compare this with analogous challenges that have been used in the development of AI. For example, a first computer vision challenge might test the ability to distinguish clear images of bicycles from those of cars.
+\alert{REWRITE:} We can compare this with analogous challenges that have been used in the development of AI. For example, a first computer vision challenge might test the ability to distinguish clear images of bicycles from those of cars.
 
-Following computer vision challenges might add object rotations, occlusions, noise, etc.
+\alert{REWRITE:} Following computer vision challenges might add object rotations, occlusions, noise, etc.
 
-Challenges become progressively more realistic and progressively harder.
+\alert{REWRITE:} Challenges become progressively more realistic and progressively harder.
 
-We begin with 	very simple ground-truth systems that produce data sets much easier 	to interpret than real data sets.
+\alert{REWRITE:} We begin with very simple ground-truth systems that produce data sets much easier to interpret than real data sets.
 
-This can be as simple a 2, 10, 20 or 100 “ball-and-stick” neurons, where the system morphology is restricted to spheres for cell bodies and single cylinders for axons. No other object in the interstitial spaces, no glial cells, no vasculature. Identification of components should be relatively easy at that stage.
+This can be as simple as 2, 10, 20 or 100 “ball-and-stick” neurons, where the system morphology is restricted to spheres for cell bodies and single cylinders for axons. No other object in the interstitial spaces, no glial cells, no vasculature. Identification of components should be relatively easy at that stage.
 
 More sophistication is added if the challenger is able to handle the simplified case. The next stage might have multiple neuron types, might have dendrites with detailed branching and functional effects of dendritic computation that depend on the locations of synapses.
 
@@ -539,13 +540,11 @@ Beyond that, we may require not merely static circuit reconstruction, but also c
 
 When you want to test if a student understands and can work with fundamental concepts you let them solve some problems with spherical objects in a vacuum, you don’t immediately ask for orbits involving realistic, oddly shaped bodies.
 
-Mention how one would proceed on to the next more sophisticated step and towards working with real brain tissue for which there is no known ground-truth.
+\alert{REWRITE:} Mention how one would proceed on to the next more sophisticated step and towards working with real brain tissue for which there is no known ground-truth.
 
 \subsection{Real-world conditions and animal brains}
 
-At every level of sophistication, models and their components must have form (spatial definition) and function (activity definition).
-
-This ensures a link between structure and function, which realistic translation and system identification candidates will need to make use of.
+At every level of sophistication, models and their components must have form (spatial definition) and function (activity definition). This ensures a link between structure and function, which realistic translation and system identification candidates will need to make use of.
 
 Eventually, the sophistication of the in-silico ground-truth systems begins to approximate that of an in-vitro ground-truth system.
 
@@ -554,8 +553,6 @@ After successful validation with such systems the application of translation and
 E.g. slices of neural tissue.
 
 E.g. tiny animals, such as the C.Elegans nematode (Kording Lab focus).
-
-Prof. Kording’s lab will be providing preliminary peer review of our platform.
 
 \begin{enumerate}
 	\item form and function at each level of sophistication
@@ -580,23 +577,23 @@ Prof. Kording’s lab will be providing preliminary peer review of our platform.
 
 \section{Data, Code and Materials Availability Statement}
 
-(Here: Add links and DOIs to data, code and related materials.)
+\alert{REWRITE:} Add links and DOIs to data, code and related materials.
 
 \section{Authorship and Contributorship Statement}
 
-(Here: List who conceived the study, who designed the study and wrote the first draft of the manuscript. List other contributions. Mention if someone analysed data and revised the manuscript.)
+\alert{REWRITE:} List who conceived the study, who designed the study and wrote the first draft of the manuscript. List other contributions. Mention if someone analysed data and revised the manuscript.
 
 All authors approved the final version of the manuscript and agree to be accountable for all aspects of the work in ensuring that questions related to the accuracy or integrity of any part of the work are appropriately investigated and resolved.
 
 \section{Acknowledgements}
 
-(Here: Add acknowledgments if applicable. This can include an acknowledgment of early support provided to the project.)
+\alert{REWRITE:} Add acknowledgments if applicable. This can include an acknowledgment of early support provided to the project.
 
 \clearpage
 \appendix
 
 \section{Appendices etc.}
 
-(Here: Only if applicable.)
+\alert{REWRITE:} Only if applicable.
 
 \end{document}
