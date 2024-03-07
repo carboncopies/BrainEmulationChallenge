@@ -98,7 +98,8 @@ print(INITTEXT1)
 
 # 3.1 Define shapes for the neurons and place each specifically.
 
-soma_radius_um = 5.0                # A typical radius for the soma of a human cortical pyramidal neuron.
+principal_soma_radius_um = 20.0                # A typical radius for the soma of a human cortical pyramidal neuron 5-25 um.
+interneuron_soma_radius_um = 2.5               # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
 
 P_in0_pos = [-45,-45, 0]
 P_in1_pos = [-45, 45, 0]
@@ -110,25 +111,25 @@ P_B0_pos  = [ 15,-15, 0]
 P_B1_pos  = [ 15, 15, 0]
 P_out_pos = [ 45,  0, 0]
 
-soma_positions = {
-    'P_in0': P_in0_pos,
-    'P_in1': P_in1_pos,
-    'P_A0': P_A0_pos,
-    'I_A0': I_A0_pos,
-    'I_A1': I_A1_pos,
-    'P_A1': P_A1_pos,
-    'P_B0': P_B0_pos,
-    'P_B1': P_B1_pos,
-    'P_out': P_out_pos,
+soma_positions_and_radius = {
+    'P_in0': ( P_in0_pos, principal_soma_radius_um ),
+    'P_in1': ( P_in1_pos, principal_soma_radius_um ),
+    'P_A0': ( P_A0_pos, principal_soma_radius_um ),
+    'I_A0': ( I_A0_pos, interneuron_soma_radius_um ),
+    'I_A1': ( I_A1_pos, interneuron_soma_radius_um ),
+    'P_A1': ( P_A1_pos, principal_soma_radius_um ),
+    'P_B0': ( P_B0_pos, principal_soma_radius_um ),
+    'P_B1': ( P_B1_pos, principal_soma_radius_um ),
+    'P_out': ( P_out_pos, principal_soma_radius_um ),
 }
 
-neuron_names = list(soma_positions.keys())
+neuron_names = list(soma_positions_and_radius.keys())
 
 somas = {}
 for n in neuron_names:
     soma = bg_api.BGNES_sphere_create(
-                radius_um=soma_radius_um,
-                center_um=soma_positions[n],)
+                radius_um=soma_positions_and_radius[n][1],
+                center_um=soma_positions_and_radius[n][0],)
     somas[n] = soma
 
 # 3.2 Define shapes for the connections and place them
@@ -146,11 +147,11 @@ Pin1_PA1_start = list(np.array(P_in1_pos) + np.array([soma_radius_um, 0, 0]))
 Pin1_PA1_end   = list(np.array(P_A1_pos) + np.array([-soma_radius_um, 0, 0]))
 axon_ends['P_in1_P_A1'] = (Pin1_PA1_start, Pin1_PA1_end)
 
-Pin0_IA0_start = list(np.array(P_in0_pos) + np.array([soma_radius_um, 0, 0]))
+Pin0_IA0_start = list(0.5*(np.array(P_in0_pos) + np.array(I_A0_pos)) )
 Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-soma_radius_um, 0, 0]))
 axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_IA1_start = list(np.array(P_in1_pos) + np.array([soma_radius_um, 0, 0]))
+Pin1_IA1_start = list(0.5*(np.array(P_in1_pos) + np.array(I_A1_pos)) )
 Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-soma_radius_um, 0, 0]))
 axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 
