@@ -41,7 +41,7 @@ if Args.Local:
 randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
-savefolder = 'Renders/'+str(datetime.now()).replace(":", "_")
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -351,8 +351,8 @@ output_neurons = {
 
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
-PinPB_weight  = 0.8 # Greater weight means stronger PSP amplitude.
-PinIA_weight  = 1.0
+PinPB_weight  = 0.9 # Greater weight means stronger PSP amplitude.
+PinIA_weight  = 1.2
 #PAPB_weight   = 1.0
 IAPB_weight   = 1.2
 PBPout_weight = 1.0
