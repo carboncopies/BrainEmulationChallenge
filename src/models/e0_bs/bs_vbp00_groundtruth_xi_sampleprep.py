@@ -288,7 +288,7 @@ for n in range(circuit_num_cells):
 # 3.5 Set up an instant binary connection from cell 0 to cell 1
 
 AMPA_conductance = 40.0 #60 # nS
-weight = 1.0 # binary
+weight = 1.0 # only using binary here (Greater weight means stronger PSP amplitude.)
 
 connection_pattern_set = [
     ( 0, 1 ), # From cell 0 to cell 1.
@@ -317,6 +317,7 @@ for pattern in connection_pattern_set:
 
     # Set the total conductance through receptors at synapses at this connection:
     receptor_conductance = weight * AMPA_conductance
+    receptor_conductance = AMPA_conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
 
     # Build receptor form:
     receptor_box = bg_api.BGNES_box_create(

@@ -350,28 +350,28 @@ output_neurons = {
 # 3.6 Create receptors for active connections.
 
 AMPA_conductance = 40.0 #60 # nS
-GABA_conductance = -20.0 # nS
-weight = 1.0 # binary
+GABA_conductance = -40.0 # nS
+PinPB_weight  = 0.8 # Greater weight means stronger PSP amplitude.
+PinIA_weight  = 1.0
+#PAPB_weight   = 1.0
+IAPB_weight   = 1.2
+PBPout_weight = 1.0
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
 connection_pattern_set = {
-    #'P_in0_P_A0': ( 'P_A0', AMPA_conductance),
-    #'P_in1_P_A1': ( 'P_A1', AMPA_conductance),
-    #'P_in0_I_A0': ( 'I_A0', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
-    #'P_in1_I_A1': ( 'I_A1', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
-    'P_in0_P_A0': ( 'P_in0_P_A0', 'P_B0', AMPA_conductance),
-    'P_in1_P_A1': ( 'P_in1_P_A1', 'P_B1', AMPA_conductance),
-    'P_in0_I_A0': ( 'P_in0_P_A0', 'I_A0', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
-    'P_in1_I_A1': ( 'P_in1_P_A1', 'I_A1', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_in0_P_A0': ( 'P_in0_P_A0', 'P_B0', AMPA_conductance, PinPB_weight),
+    'P_in1_P_A1': ( 'P_in1_P_A1', 'P_B1', AMPA_conductance, PinPB_weight),
+    'P_in0_I_A0': ( 'P_in0_P_A0', 'I_A0', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_in1_I_A1': ( 'P_in1_P_A1', 'I_A1', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
 
     # 'P_A0_P_B0': ( 'P_A0_P_B0', 'P_B0', AMPA_conductance),
     # 'P_A1_P_B1': ( 'P_A1_P_B1', 'P_B1', AMPA_conductance),
 
-    'I_A0_P_B1': ( 'I_A0_P_B1', 'P_B1', GABA_conductance),
-    'I_A1_P_B0': ( 'I_A1_P_B0', 'P_B0', GABA_conductance),
+    'I_A0_P_B1': ( 'I_A0_P_B1', 'P_B1', GABA_conductance, IAPB_weight),
+    'I_A1_P_B0': ( 'I_A1_P_B0', 'P_B0', GABA_conductance, IAPB_weight),
 
-    'P_B0_P_out': ( 'P_B0_P_out', 'P_out', AMPA_conductance),
-    'P_B1_P_out': ( 'P_B1_P_out', 'P_out', AMPA_conductance),
+    'P_B0_P_out': ( 'P_B0_P_out', 'P_out', AMPA_conductance, PBPout_weight),
+    'P_B1_P_out': ( 'P_B1_P_out', 'P_out', AMPA_conductance,PBPout_weight),
 }
 
 receptor_functionals = []
@@ -379,7 +379,8 @@ receptor_morphologies = []
 for connection in connection_pattern_set.keys():
     # Set the total conductance through receptors at synapses at this connection:
     conductance = connection_pattern_set[connection][2]
-    receptor_conductance = weight * conductance
+    weight = connection_pattern_set[connection][3]
+    receptor_conductance = conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
     if receptor_conductance >= 0:
         print("Setting up a 'AMPA' connection for %s." % connection)
     else:
