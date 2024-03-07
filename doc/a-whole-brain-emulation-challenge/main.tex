@@ -11,6 +11,7 @@
 \usepackage{easyReview} % for \comment, \alert, etc.
 \usepackage{biblatex}
 \usepackage{authblk}
+\usepackage[shortlabels]{enumitem}
 \addbibresource{main.bib}
 
 % here we can set the page counter to the correct global page counter
@@ -541,6 +542,22 @@ Beyond that, we may require not merely static circuit reconstruction, but also c
 When you want to test if a student understands and can work with fundamental concepts you let them solve some problems with spherical objects in a vacuum, you don’t immediately ask for orbits involving realistic, oddly shaped bodies.
 
 \alert{REWRITE:} Mention how one would proceed on to the next more sophisticated step and towards working with real brain tissue for which there is no known ground-truth.
+
+\subsection{A level of ``minimal acceptable sophistication''}
+
+As one considers reverse engineering a data stack from an example ground-truth system, for example, an IF-neuron implementation of XOR logic, it is clear that one needs to be able to distinguish types of neurons. Principal neurons with excitatory AMPA synapses to targets, as well as interneurons with inhibitory GABA synapses onto targets are both needed for that example. There are morphological characteristics that can be used to distinguish such neurons in reconstructions from EM data.
+
+Simplifying, one might generate morphological representations in which all principal neurons have larger somas than interneurons, because human cortical principal cell somas typically have diameters of 10-50 um, while interneurons have diameters of 5-30 um. Allowing the overlapping diameters (10-30 um) introduces room for doubt during interpretation of morphology data.
+
+At a more sophisticated level of representation, the presence of detailed dendritic arborization would provide additional clues in terms of characteristic shape, distribution of proximal and distal connections, and more, with which to identify reliably. So, while the simplified morphological representation is intended to present an easier entry point with fewer variables at which to test core competencies of reverse engineering methods, without additional known rules for that simplified universe there can be unintended new difficulties.
+
+As with any simplified model of the world, such as a board game may be a simplification of a realistic battle, unintended uncertainties can be removed by providing additional in-universe ``rules''. For example, the overlapping diameter ranges could be disallowed. Or, EM data could include coloring that shows principal neurons in blue and interneurons in red. Alternatively, one might decide to skip levels of sophistication that lack characteristic detailing needed to avoid introducing new uncertainties, with a risk that the only levels detailed enough to provide all the clues needed for successful functional reconstruction are those as sophisticated as real-world data. Note competing considerations:
+
+\begin{enumerate}[a)]
+	\item Providing no unrealistic rules or expectations demands that challenge examples raise their detail level to the degree that provides all the clues needed to solve a specific example from its corresponding data stack. The onus is on the challenge developers to insure that this is so, with a potential downside that even the simplest examples are fairly sophisticated and contain a large number of variables. Resulting performance scores and identified error evaluations of submitted candidate emulations may be more complex, which might be a hurdle to iterative improvement at the early stages of developing a new system identification and translation method.
+	
+	\item At each level of sophistication, challenge examples come with a set of associated special rules (rules that are different than what we might expect in the real world). This means that a reverse engineering technique meant to be applied to real world data might need some adjustment to be applied to the example data stack. This might seem to give contestants more work to do. On the upside, this approach may permit better separtion and stepwise advancement along different dimensions of the core competencies of a suite of system identification and translation methods. For example, at the simplest level the data stack would not be intended to test the ability to identify a neuron type by its morphology, but instead would focus on a method's ability to capture the full graph structure of a system and to combine extracted system architecture with selections from a functional library.
+\end{enumerate}
 
 \subsection{Real-world conditions and animal brains}
 

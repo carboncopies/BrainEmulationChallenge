@@ -162,13 +162,13 @@ PA1_PB1_start  = list(np.array(P_A1_pos) + np.array([soma_radius_um, 0, 0]))
 PA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-soma_radius_um, 0, 0]))
 axon_ends['P_A1_P_B1'] = (PA1_PB1_start, PA1_PB1_end)
 
-IA0_PB0_start  = list(np.array(I_A0_pos) + np.array([soma_radius_um, 0, 0]))
-IA0_PB0_end    = list(np.array(P_B0_pos) + np.array([-soma_radius_um, 0, 0]))
-axon_ends['I_A0_P_B0'] = (IA0_PB0_start, IA0_PB0_end)
+IA0_PB1_start  = list(np.array(I_A0_pos) + np.array([soma_radius_um, 0, 0]))
+IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['I_A0_P_B1'] = (IA0_PB1_start, IA0_PB1_end)
 
-IA1_PB1_start  = list(np.array(I_A1_pos) + np.array([soma_radius_um, 0, 0]))
-IA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-soma_radius_um, 0, 0]))
-axon_ends['I_A1_P_B1'] = (IA1_PB1_start, IA1_PB1_end)
+IA1_PB0_start  = list(np.array(I_A1_pos) + np.array([soma_radius_um, 0, 0]))
+IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-soma_radius_um, 0, 0]))
+axon_ends['I_A1_P_B0'] = (IA1_PB0_start, IA1_PB0_end)
 
 PB0_Pout_start = list(np.array(P_B0_pos) + np.array([soma_radius_um, 0, 0]))
 PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-soma_radius_um, 0, 0]))
@@ -295,8 +295,8 @@ Pout = neuron_builder('P_out', 'P_out_axon')
 
 # 3.5 Create interneurons.
 
-IA0  = neuron_builder('I_A0', 'I_A0_P_B0')
-IA1  = neuron_builder('I_A1', 'I_A1_P_B1')
+IA0  = neuron_builder('I_A0', 'I_A0_P_B1')
+IA1  = neuron_builder('I_A1', 'I_A1_P_B0')
 
 cells = {
     'P_in0': Pin0,
@@ -344,26 +344,26 @@ connection_pattern_set = {
     #'P_in1_P_A1': ( 'P_A1', AMPA_conductance),
     #'P_in0_I_A0': ( 'I_A0', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
     #'P_in1_I_A1': ( 'I_A1', AMPA_conductance), # *** WILL NOT WORK, SEE ISSUE
-    'P_in0_P_A0': ( 'I_A0', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
-    'P_in1_P_A1': ( 'I_A1', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
-    'P_in0_P_A0': ( 'P_A0', AMPA_conductance), # *** AFTER, SO THAT THIS ONE TAKES
-    'P_in1_P_A1': ( 'P_A1', AMPA_conductance), # *** AFTER, SO THAT THIS ONE TAKES
+    'P_in0_P_A0': ( 'P_in0_P_A0', 'P_A0', AMPA_conductance),
+    'P_in1_P_A1': ( 'P_in1_P_A1', 'P_A1', AMPA_conductance),
+    'P_in0_I_A0': ( 'P_in0_P_A0', 'I_A0', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_in1_I_A1': ( 'P_in1_P_A1', 'I_A1', AMPA_conductance), # *** FAKING IT FOR FUNCTIONAL REASONS
 
-    'P_A0_P_B0': ( 'P_B0', AMPA_conductance),
-    'P_A1_P_B1': ( 'P_B1', AMPA_conductance),
+    'P_A0_P_B0': ( 'P_A0_P_B0', 'P_B0', AMPA_conductance),
+    'P_A1_P_B1': ( 'P_A1_P_B1', 'P_B1', AMPA_conductance),
 
-    'I_A0_P_B0': ( 'P_B0', GABA_conductance),
-    'I_A1_P_B1': ( 'P_B1', GABA_conductance),
+    'I_A0_P_B1': ( 'I_A0_P_B1', 'P_B1', GABA_conductance),
+    'I_A1_P_B0': ( 'I_A1_P_B0', 'P_B0', GABA_conductance),
 
-    'P_B0_P_out': ( 'P_out', AMPA_conductance),
-    'P_B1_P_out': ( 'P_out', AMPA_conductance),
+    'P_B0_P_out': ( 'P_B0_P_out', 'P_out', AMPA_conductance),
+    'P_B1_P_out': ( 'P_B1_P_out', 'P_out', AMPA_conductance),
 }
 
 receptor_functionals = []
 receptor_morphologies = []
 for connection in connection_pattern_set.keys():
     # Set the total conductance through receptors at synapses at this connection:
-    conductance = connection_pattern_set[connection][1]
+    conductance = connection_pattern_set[connection][2]
     receptor_conductance = weight * conductance
     if receptor_conductance >= 0:
         print("Setting up a 'AMPA' connection for %s." % connection)
@@ -371,10 +371,11 @@ for connection in connection_pattern_set.keys():
         print("Setting up a 'GABA' connection for %s." % connection)
 
     # Find the neurons:
-    to_cell = cells[connection_pattern_set[connection][0]]
+    from_axon = axon_compartments[connection_pattern_set[connection][0]]
+    to_cell = cells[connection_pattern_set[connection][1]]
 
     # Find the compartments:
-    from_compartment_id = axon_compartments[connection]
+    from_compartment_id = from_axon.ID
     to_compartment_id = to_cell.SomaID
     receptor_location = axon_ends[connection][1]
     print('Receptor loction: '+str(receptor_location))
