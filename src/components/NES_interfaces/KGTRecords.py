@@ -63,6 +63,11 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
         if cell_titles:
             #axs[c].title.set_text(cell_titles[c], y=1.0, pad=-14)
             axs[c].set_title(cell_titles[c], y=1.0, pad=-14)
+    for i in range(len(axs)):
+        if i==0:
+            axs[i].set(xlabel='t (ms)', ylabel='v_m (mV)')
+        else:
+            axs[i].set(xlabel='t (ms)')
     for ax in axs:
         ax.label_outer()
     plt.draw()
