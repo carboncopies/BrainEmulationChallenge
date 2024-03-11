@@ -399,9 +399,9 @@ if (Args.RenderVisualization):
 
 
     # Render In Circle Around Sim
-    Radius = 20
+    Radius = 50
     Steps = 50
-    ZHeight = 50
+    ZHeight = 70
 
     for Point in PointsInCircum(Radius, Steps):
 
