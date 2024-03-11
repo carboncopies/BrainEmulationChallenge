@@ -300,8 +300,8 @@ def neuron_builder_special(soma_name:str, axon_name:str):
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
 
-Pin0 = neuron_builder('P_in0', 'P_in0_P_A0') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
-Pin1 = neuron_builder('P_in1', 'P_in1_P_A1') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
+Pin0 = neuron_builder('P_in0', 'P_in0_P_B0') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
+Pin1 = neuron_builder('P_in1', 'P_in1_P_B1') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
 # PA0  = neuron_builder('P_A0', 'P_A0_P_B0')
 # PA1  = neuron_builder('P_A1', 'P_A1_P_B1')
 PB0  = neuron_builder_special('P_B0', 'P_B0_P_out')
@@ -359,8 +359,8 @@ PBPout_weight = 1.0
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
 connection_pattern_set = {
-    'P_in0_P_A0': ( 'P_in0_P_A0', 'P_B0', AMPA_conductance, PinPB_weight),
-    'P_in1_P_A1': ( 'P_in1_P_A1', 'P_B1', AMPA_conductance, PinPB_weight),
+    'P_in0_P_B0': ( 'P_in0_P_B0', 'P_B0', AMPA_conductance, PinPB_weight),
+    'P_in1_P_B1': ( 'P_in1_P_B1', 'P_B1', AMPA_conductance, PinPB_weight),
     'P_in0_I_A0': ( 'P_in0_P_A0', 'I_A0', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
     'P_in1_I_A1': ( 'P_in1_P_A1', 'I_A1', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
 
