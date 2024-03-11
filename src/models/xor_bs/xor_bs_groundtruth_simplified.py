@@ -103,10 +103,10 @@ interneuron_soma_radius_um = 5.                # A typical radius for the soma o
 
 P_in0_pos = [-45,-45, 0]
 P_in1_pos = [-45, 45, 0]
-P_A0_pos  = [-15,-45, 0]
+#P_A0_pos  = [-15,-45, 0]
 I_A0_pos  = [-15,-15, 0]
 I_A1_pos  = [-15, 15, 0]
-P_A1_pos  = [-15, 45, 0]
+#P_A1_pos  = [-15, 45, 0]
 P_B0_pos  = [ 15,-15, 0]
 P_B1_pos  = [ 15, 15, 0]
 P_out_pos = [ 45,  0, 0]
@@ -117,7 +117,7 @@ soma_positions_and_radius = {
     #'P_A0': ( P_A0_pos, principal_soma_radius_um ),
     'I_A0': ( I_A0_pos, interneuron_soma_radius_um ),
     'I_A1': ( I_A1_pos, interneuron_soma_radius_um ),
-    'P_A1': ( P_A1_pos, principal_soma_radius_um ),
+    #'P_A1': ( P_A1_pos, principal_soma_radius_um ),
     'P_B0': ( P_B0_pos, principal_soma_radius_um ),
     'P_B1': ( P_B1_pos, principal_soma_radius_um ),
     'P_out': ( P_out_pos, principal_soma_radius_um ),
@@ -139,20 +139,20 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 
 axon_ends = {}
 
-Pin0_PA0_start = list(np.array(P_in0_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pin0_PA0_end   = list(np.array(P_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_in0_P_A0'] = (Pin0_PA0_start, Pin0_PA0_end)
+Pin0_PB0_start = list(np.array(P_in0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Pin0_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_in0_P_B0'] = (Pin0_PB0_start, Pin0_PB0_end)
 
-Pin1_PA1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pin1_PA1_end   = list(np.array(P_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_in1_P_A1'] = (Pin1_PA1_start, Pin1_PA1_end)
+Pin1_PB1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Pin1_PB1_end   = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_in1_P_B1'] = (Pin1_PB1_start, Pin1_PB1_end)
 
-Pin0_IA0_start = list(0.5*(np.array(P_in0_pos) + np.array(I_A0_pos)) )
-Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+Pin0_IA0_start = list(0.5*(np.array(P_in0_pos) + np.array(P_B0_pos)) )
+Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
 axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_IA1_start = list(0.5*(np.array(P_in1_pos) + np.array(I_A1_pos)) )
-Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+Pin1_IA1_start = list(0.5*(np.array(P_in1_pos) + np.array(P_B1_pos)) )
+Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
 axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 
 # PA0_PB0_start  = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
@@ -164,15 +164,15 @@ axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 # axon_ends['P_A1_P_B1'] = (PA1_PB1_start, PA1_PB1_end)
 
 IA0_PB1_start  = list(np.array(I_A0_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
 axon_ends['I_A0_P_B1'] = (IA0_PB1_start, IA0_PB1_end)
 
 IA1_PB0_start  = list(np.array(I_A1_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
 axon_ends['I_A1_P_B0'] = (IA1_PB0_start, IA1_PB0_end)
 
-PB0_Pout_start = list(np.array(P_B0_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+PB0_Pout_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
 axon_ends['P_B0_P_out'] = (PB0_Pout_start, PB0_Pout_end)
 
 PB1_Pout_start = list(np.array(P_B1_pos) + np.array([principal_soma_radius_um, 0, 0]))
