@@ -139,20 +139,20 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 
 axon_ends = {}
 
-Pin0_PB0_start = list(np.array(P_in0_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pin0_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+Pin0_PB0_start = list(np.array(P_in0_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+Pin0_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in0_P_B0'] = (Pin0_PB0_start, Pin0_PB0_end)
 
-Pin1_PB1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pin1_PB1_end   = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+Pin1_PB1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+Pin1_PB1_end   = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in1_P_B1'] = (Pin1_PB1_start, Pin1_PB1_end)
 
-Pin0_IA0_start = list(0.25*(np.array(P_in0_pos) + np.array(P_B0_pos)) )
-Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+Pin0_IA0_start = list(0.25*(np.array(P_in0_pos) + np.array(P_B0_pos)) ) + [ end1_radius_um ]
+Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_IA1_start = list(0.25*(np.array(P_in1_pos) + np.array(P_B1_pos)) )
-Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+Pin1_IA1_start = list(0.25*(np.array(P_in1_pos) + np.array(P_B1_pos)) ) + [ end1_radius_um ]
+Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 
 # PA0_PB0_start  = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
@@ -163,24 +163,24 @@ axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 # PA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
 # axon_ends['P_A1_P_B1'] = (PA1_PB1_start, PA1_PB1_end)
 
-IA0_PB1_start  = list(np.array(I_A0_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+IA0_PB1_start  = list(np.array(I_A0_pos) + np.array([interneuron_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['I_A0_P_B1'] = (IA0_PB1_start, IA0_PB1_end)
 
-IA1_PB0_start  = list(np.array(I_A1_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+IA1_PB0_start  = list(np.array(I_A1_pos) + np.array([interneuron_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['I_A1_P_B0'] = (IA1_PB0_start, IA1_PB0_end)
 
-PB0_Pout_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+PB0_Pout_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_B0_P_out'] = (PB0_Pout_start, PB0_Pout_end)
 
-PB1_Pout_start = list(np.array(P_B1_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PB1_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+PB1_Pout_start = list(np.array(P_B1_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+PB1_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_B1_P_out'] = (PB1_Pout_start, PB1_Pout_end)
 
-Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0]))
+Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
+Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_out_axon'] = (Pout_start, Pout_end)
 
 axon_names = list(axon_ends.keys())
@@ -188,10 +188,10 @@ axon_names = list(axon_ends.keys())
 axons = {}
 for a in axon_names:
     axon = bg_api.BGNES_cylinder_create(
-                Point1Radius_um=end0_radius_um,
-                Point1Position_um=axon_ends[a][0],
-                Point2Radius_um=end1_radius_um,
-                Point2Position_um=axon_ends[a][1],)
+                Point1Radius_um=axon_ends[a][0][3],
+                Point1Position_um=axon_ends[a][0][0:3],
+                Point2Radius_um=axon_ends[a][1][3],
+                Point2Position_um=axon_ends[a][1][0:3],)
     axons[a] = axon
 
 # 3.3 Create compartments.
