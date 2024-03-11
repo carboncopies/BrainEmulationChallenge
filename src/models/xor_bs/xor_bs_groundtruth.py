@@ -147,11 +147,11 @@ Pin1_PA1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 
 Pin1_PA1_end   = list(np.array(P_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
 axon_ends['P_in1_P_A1'] = (Pin1_PA1_start, Pin1_PA1_end)
 
-Pin0_IA0_start = list(0.5*(np.array(P_in0_pos) + np.array(I_A0_pos)) )
+Pin0_IA0_start = list(0.5*(np.array(P_in0_pos) + np.array(P_A0_pos)) )
 Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
 axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_IA1_start = list(0.5*(np.array(P_in1_pos) + np.array(I_A1_pos)) )
+Pin1_IA1_start = list(0.5*(np.array(P_in1_pos) + np.array(P_A1_pos)) )
 Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
 axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 
