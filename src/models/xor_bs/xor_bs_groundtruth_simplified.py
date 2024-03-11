@@ -361,8 +361,8 @@ PBPout_weight = 1.0
 connection_pattern_set = {
     'P_in0_P_B0': ( 'P_in0_P_B0', 'P_B0', AMPA_conductance, PinPB_weight),
     'P_in1_P_B1': ( 'P_in1_P_B1', 'P_B1', AMPA_conductance, PinPB_weight),
-    'P_in0_I_A0': ( 'P_in0_P_A0', 'I_A0', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
-    'P_in1_I_A1': ( 'P_in1_P_A1', 'I_A1', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_in0_I_A0': ( 'P_in0_P_B0', 'I_A0', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_in1_I_A1': ( 'P_in1_P_B1', 'I_A1', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
 
     # 'P_A0_P_B0': ( 'P_A0_P_B0', 'P_B0', AMPA_conductance),
     # 'P_A1_P_B1': ( 'P_A1_P_B1', 'P_B1', AMPA_conductance),
