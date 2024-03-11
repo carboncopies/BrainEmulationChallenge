@@ -98,8 +98,8 @@ print(INITTEXT1)
 
 # 3.1 Define shapes for the neurons and place each specifically.
 
-principal_soma_radius_um = 20.0                # A typical radius for the soma of a human cortical pyramidal neuron 5-25 um.
-interneuron_soma_radius_um = 2.5               # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
+principal_soma_radius_um = 10.0                # A typical radius for the soma of a human cortical pyramidal neuron 5-25 um.
+interneuron_soma_radius_um = 5.                # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
 
 P_in0_pos = [-45,-45, 0]
 P_in1_pos = [-45, 45, 0]
