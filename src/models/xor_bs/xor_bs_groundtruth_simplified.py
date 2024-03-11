@@ -145,8 +145,10 @@ P_in0_axon_end_np = np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0,
 Pin0_PB0_end   = list(P_in0_axon_end_np) + [ end1_radius_um ]
 axon_ends['P_in0_P_B0'] = (Pin0_PB0_start, Pin0_PB0_end)
 
-Pin1_PB1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-Pin1_PB1_end   = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
+P_in1_axon_start_np = np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0])
+Pin1_PB1_start = list(P_in1_axon_start_np) + [ end0_radius_um ]
+P_in1_axon_end_np = np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])
+Pin1_PB1_end   = list(P_in1_axon_end_np) + [ end1_radius_um ]
 axon_ends['P_in1_P_B1'] = (Pin1_PB1_start, Pin1_PB1_end)
 
 Pin0_PB0_vec_np = P_in0_axon_end_np - P_in0_axon_start_np
@@ -156,7 +158,10 @@ Pin0_IA0_start = list(Pin0_branch_start_np) + [ end1_radius_um ]
 Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_IA1_start = list(np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0]) + 0.25*(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]) - np.array(P_in1_pos) - np.array([-principal_soma_radius_um, 0, 0])) ) + [ end1_radius_um ]
+Pin1_PB1_vec_np = P_in1_axon_end_np - P_in1_axon_start_np
+Pin0_branch_start_np = P_in1_axon_start_np + 0.25*Pin1_PB1_vec_np
+
+Pin1_IA1_start = list(Pin0_branch_start_np) + [ end1_radius_um ]
 Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
 axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
 
