@@ -128,7 +128,7 @@ points_3D_np['Pin1_IA1_rec'] = points_3D_np['I_A1_pos'] + np.array([-10, +5, 0])
 points_3D_np['Pin0_PB0_rec'] = points_3D_np['P_B0_pos'] + np.array([-10, -5, 0])
 points_3D_np['Pin1_PB1_rec'] = points_3D_np['P_B1_pos'] + np.array([-10, +5, 0])
 points_3D_np['IA0_PB1_rec'] = points_3D_np['P_B1_pos'] + np.array([-13, -5, 0])
-points_3D_np['IA1_PB0_rec'] = points_3D_np['P_B1_pos'] + np.array([-13, +5, 0])
+points_3D_np['IA1_PB0_rec'] = points_3D_np['P_B0_pos'] + np.array([-13, +5, 0])
 points_3D_np['PB0_Pout_rec'] = points_3D_np['P_out_pos'] + np.array([-15, -5, 0])
 points_3D_np['PB1_Pout_rec'] = points_3D_np['P_out_pos'] + np.array([-15, +5, 0])
 # Receptor: shapes and type
@@ -137,7 +137,7 @@ def set_connection_data(connection:str, pre:str, post:str, _type:str, weight:flo
         'pre': pre,
         'post': post,
         'shape': ( 'box',
-            list(points_3D_np[connection]),
+            points_3D_np[connection].tolist(),
             [0.1, 0.1, 0.1],
             [0.0, 0.0, 0.0],),
         'type': _type,
@@ -159,8 +159,8 @@ def set_neuron_soma(neuron:str, center:str, radius_um:float):
     neuron_build_data[neuron] = {}
     neuron_build_data[neuron]['soma'] = {}
     neuron_build_data[neuron]['soma']['shapes'] = []
-    neuron_build_data[neuron]['soma']['shapes'][0] = ( 'sphere',
-        list(points_3D_np[center]) + [ radius_um ],)
+    neuron_build_data[neuron]['soma']['shapes'].append( ( 'sphere',
+        points_3D_np[center].tolist() + [ radius_um ],) )
 
 def dendrite_root_start_np(center:str, radius_um:float):
     return points_3D_np[center] + np.array([-radius_um, 0, 0])
@@ -177,8 +177,8 @@ def set_neuron_dendrite_branch(neuron:str, startpoint:str, startradius_um:float,
     if 'shapes' not in neuron_build_data[neuron]['dendrites']:
         neuron_build_data[neuron]['dendrites']['shapes'] = []
     neuron_build_data[neuron]['dendrites']['shapes'].append( ( 'cylinder',
-        list(points_3D_np[startpoint]) + [ startradius_um ],
-        list(points_3D_np[endpoint]) + [ endradius_um ],) )
+        points_3D_np[startpoint].tolist() + [ startradius_um ],
+        points_3D_np[endpoint].tolist() + [ endradius_um ],) )
 
 def set_neuron_axon_branch(neuron:str, startpoint:str, startradius_um:float, endpoint:str, endradius_um:float):
     if 'axons' not in neuron_build_data[neuron]:
@@ -186,8 +186,8 @@ def set_neuron_axon_branch(neuron:str, startpoint:str, startradius_um:float, end
     if 'shapes' not in neuron_build_data[neuron]['axons']:
         neuron_build_data[neuron]['axons']['shapes'] = []
     neuron_build_data[neuron]['axons']['shapes'].append( ( 'cylinder',
-        list(points_3D_np[startpoint]) + [ startradius_um ],
-        list(points_3D_np[endpoint]) + [ endradius_um ],) )
+        points_3D_np[startpoint].tolist() + [ startradius_um ],
+        points_3D_np[endpoint].tolist() + [ endradius_um ],) )
 
 def branch_intersect_receptor_np(startpoint:str, receptorpoint:str, lengthmul:float):
     return points_3D_np[startpoint] + lengthmul*( points_3D_np[receptorpoint] - points_3D_np[startpoint] )
@@ -203,6 +203,8 @@ def dendrite_point_np(data):
         return dendrite_branch_deflected_np(data[1], data[2])
     elif op == 'intersect':
         return branch_intersect_receptor_np(data[1], data[2], data[3])
+    else:
+        raise Exception('Unknown dendrite_point_np op: '+str(op))
 
 def set_dendrite_branch_points_np(startpoint:str, startdata, endpoint:str, enddata):
     points_3D_np[startpoint] = dendrite_point_np(startdata)
@@ -218,6 +220,8 @@ def axon_point_np(data):
         return points_3D_np[data[1]]
     elif op == 'intersect':
         return branch_intersect_receptor_np(data[1], data[2], data[3])
+    else:
+        raise Exception('Unknown axon_point_np op: '+str(op))
 
 def set_axon_branch_points_np(startpoint:str, startdata, endpoint:str, enddata):
     points_3D_np[startpoint] = axon_point_np(startdata)
@@ -246,15 +250,15 @@ connection_build_data['Pin0_IA0_rec']['from_idx'] = 2 # Pin0_ax0_1_e
 # Pin1: soma: sphere
 set_neuron_soma('P_in1', 'P_in1_pos', principal_soma_radius_um)
 # Pin1: dendrites: points
-set_dendrite_branch_points_np('Pin1_den0_s', ['root', 'P_in1_pos', principal_soma_radius_um], 'Pin1_den1_e', ['deflected', 'Pin1_den0_s', -10])
+set_dendrite_branch_points_np('Pin1_den0_s', ['root', 'P_in1_pos', principal_soma_radius_um], 'Pin1_den0_e', ['deflected', 'Pin1_den0_s', -10])
 set_dendrite_branch_points_np('Pin1_den1_s', ['root', 'P_in1_pos', principal_soma_radius_um], 'Pin1_den1_e', ['deflected', 'Pin1_den1_s', +10])
 # Pin1: dendrites: cylinders
 set_neuron_dendrite_branch('P_in1', 'Pin1_den0_s', end0_radius_um, 'Pin1_den0_e', end1_radius_um)
 set_neuron_dendrite_branch('P_in1', 'Pin1_den1_s', end0_radius_um, 'Pin1_den1_e', end1_radius_um)
 # Pin1: axon: points
 set_axon_branch_points_np('Pin1_ax0_s', ['root', 'P_in1_pos', principal_soma_radius_um], 'Pin1_ax0_e', ['rootend', 'Pin1_ax0_s'])
-set_axon_branch_points_np('Pin1_ax0_0_s', ['copy', 'Pin1_ax0_e'], 'Pin1_ax0_0_e', ['interset', 'Pin1_ax0_0_s', 'Pin1_PB1_rec', 1.3])
-set_axon_branch_points_np('Pin1_ax0_1_s', ['copy', 'Pin1_ax0_e'], 'Pin1_ax0_1_e', ['interset', 'Pin1_ax0_1_s', 'Pin1_IA1_rec', 1.3])
+set_axon_branch_points_np('Pin1_ax0_0_s', ['copy', 'Pin1_ax0_e'], 'Pin1_ax0_0_e', ['intersect', 'Pin1_ax0_0_s', 'Pin1_PB1_rec', 1.3])
+set_axon_branch_points_np('Pin1_ax0_1_s', ['copy', 'Pin1_ax0_e'], 'Pin1_ax0_1_e', ['intersect', 'Pin1_ax0_1_s', 'Pin1_IA1_rec', 1.3])
 # Pin1: axon: cylinders
 set_neuron_axon_branch('P_in1', 'Pin1_ax0_s', end0_radius_um, 'Pin1_ax0_e', end1_radius_um)
 set_neuron_axon_branch('P_in1', 'Pin1_ax0_0_s', end1_radius_um, 'Pin1_ax0_0_e', end1_radius_um)
@@ -275,7 +279,7 @@ set_neuron_dendrite_branch('I_A0', 'IA0_den1_s', end0_radius_um, 'IA0_den1_e', e
 connection_build_data['Pin0_IA0_rec']['to_idx'] = 0 # IA0_den0_e
 # IA0: axon: points
 set_axon_branch_points_np('IA0_ax0_s', ['root', 'I_A0_pos', interneuron_soma_radius_um], 'IA0_ax0_e', ['rootend', 'IA0_ax0_s'])
-set_axon_branch_points_np('IA0_ax0_0_s', ['copy', 'IA0_ax0_e'], 'IA0_ax0_0_e', ['intersect', 'IA0_ax0_0_s', 'IA0_PB1_rec', 1.17])
+set_axon_branch_points_np('IA0_ax0_0_s', ['copy', 'IA0_ax0_e'], 'IA0_ax0_0_e', ['intersect', 'IA0_ax0_0_s', 'IA0_PB1_rec', 1.1])
 # IA0: axon: cylinders
 set_neuron_axon_branch('I_A0', 'IA0_ax0_s', end0_radius_um, 'IA0_ax0_e', end1_radius_um)
 set_neuron_axon_branch('I_A0', 'IA0_ax0_0_s', end1_radius_um, 'IA0_ax0_0_e', end1_radius_um)
@@ -285,7 +289,7 @@ connection_build_data['IA0_PB1_rec']['from_idx'] = 1 # IA0_ax0_0_e
 # IA1: soma: sphere
 set_neuron_soma('I_A1', 'I_A1_pos', interneuron_soma_radius_um)
 # IA1: dendrites: points
-set_dendrite_branch_points_np('IA1_den0_s', ['root', 'I_A1_pos', interneuron_soma_radius_um], 'IA1_den0_e', ['intersect', 'IA1_den1_s', 'Pin1_IA1_rec', 1.3])
+set_dendrite_branch_points_np('IA1_den0_s', ['root', 'I_A1_pos', interneuron_soma_radius_um], 'IA1_den0_e', ['intersect', 'IA1_den0_s', 'Pin1_IA1_rec', 1.3])
 set_dendrite_branch_points_np('IA1_den1_s', ['root', 'I_A1_pos', interneuron_soma_radius_um], 'IA1_den1_e', ['deflected', 'IA1_den1_s', -10])
 # IA1: dendrites: cylinders
 set_neuron_dendrite_branch('I_A1', 'IA1_den0_s', end0_radius_um, 'IA1_den0_e', end1_radius_um)
@@ -294,7 +298,7 @@ set_neuron_dendrite_branch('I_A1', 'IA1_den1_s', end0_radius_um, 'IA1_den1_e', e
 connection_build_data['Pin1_IA1_rec']['to_idx'] = 0 # IA1_den0_e
 # IA1: axon: points
 set_axon_branch_points_np('IA1_ax0_s', ['root', 'I_A1_pos', interneuron_soma_radius_um], 'IA1_ax0_e', ['rootend', 'IA1_ax0_s'])
-set_axon_branch_points_np('IA1_ax0_0_s', ['copy', 'IA1_ax0_e'], 'IA1_ax0_0_e', ['intersect', 'IA1_ax0_0_s', 'IA1_PB0_rec', 1.17])
+set_axon_branch_points_np('IA1_ax0_0_s', ['copy', 'IA1_ax0_e'], 'IA1_ax0_0_e', ['intersect', 'IA1_ax0_0_s', 'IA1_PB0_rec', 1.1])
 # IA1: axon: cylinders
 set_neuron_axon_branch('I_A1', 'IA1_ax0_s', end0_radius_um, 'IA1_ax0_e', end1_radius_um)
 set_neuron_axon_branch('I_A1', 'IA1_ax0_0_s', end1_radius_um, 'IA1_ax0_0_e', end1_radius_um)
@@ -314,7 +318,7 @@ connection_build_data['Pin0_PB0_rec']['to_idx'] = 0 # PB0_den0_e
 connection_build_data['IA1_PB0_rec']['to_idx'] = 1 # PB0_den1_e
 # PB0: axon: points
 set_axon_branch_points_np('PB0_ax0_s', ['root', 'P_B0_pos', principal_soma_radius_um], 'PB0_ax0_e', ['rootend', 'PB0_ax0_s'])
-set_axon_branch_points_np('PB0_ax0_0_s', ['copy', 'PB0_ax0_e'], 'PB0_ax0_0_e', ['intersect', 'PB0_ax0_0_s', 'PB0_Pout_rec', 1.17])
+set_axon_branch_points_np('PB0_ax0_0_s', ['copy', 'PB0_ax0_e'], 'PB0_ax0_0_e', ['intersect', 'PB0_ax0_0_s', 'PB0_Pout_rec', 1.1])
 # PB0: axon: cylinders
 set_neuron_axon_branch('P_B0', 'PB0_ax0_s', end0_radius_um, 'PB0_ax0_e', end1_radius_um)
 set_neuron_axon_branch('P_B0', 'PB0_ax0_0_s', end1_radius_um, 'PB0_ax0_0_e', end1_radius_um)
@@ -334,7 +338,7 @@ connection_build_data['Pin1_PB1_rec']['to_idx'] = 0 # PB1_den0_e
 connection_build_data['IA0_PB1_rec']['to_idx'] = 1 # PB1_den1_e
 # PB1: axon: points
 set_axon_branch_points_np('PB1_ax0_s', ['root', 'P_B1_pos', principal_soma_radius_um], 'PB1_ax0_e', ['rootend', 'PB1_ax0_s'])
-set_axon_branch_points_np('PB1_ax0_0_s', ['copy', 'PB1_ax0_e'], 'PB1_ax0_0_e', ['intersect', 'PB1_ax0_0_s', 'PB1_Pout_rec', 1.17])
+set_axon_branch_points_np('PB1_ax0_0_s', ['copy', 'PB1_ax0_e'], 'PB1_ax0_0_e', ['intersect', 'PB1_ax0_0_s', 'PB1_Pout_rec', 1.1])
 # PB1: axon: cylinders
 set_neuron_axon_branch('P_B1', 'PB1_ax0_s', end0_radius_um, 'PB1_ax0_e', end1_radius_um)
 set_neuron_axon_branch('P_B1', 'PB1_ax0_0_s', end1_radius_um, 'PB1_ax0_0_e', end1_radius_um)
@@ -358,6 +362,7 @@ set_axon_branch_points_np('Pout_ax0_s', ['root', 'P_out_pos', principal_soma_rad
 set_neuron_axon_branch('P_out', 'Pout_ax0_s', end0_radius_um, 'Pout_ax0_e', end1_radius_um)
 
 ### 3.2 Create SC shapes and compartments.
+print('Creating shapes and compartments...')
 
 neuron_names = list(neuron_build_data.keys())
 
@@ -366,7 +371,7 @@ def make_shape(shape_data:list):
     if shape_type == 'sphere':
         return bg_api.BGNES_sphere_create(
             radius_um=shape_data[1][3],
-            center_um=shape_data[1][0:3]),)
+            center_um=shape_data[1][0:3],)
     elif shape_type == 'cylinder':
         return bg_api.BGNES_cylinder_create(
             Point1Radius_um=shape_data[1][3],
@@ -404,7 +409,7 @@ for n in neuron_names:
             neuron_build_data[n][morph]['compartment_refs'].append(compartment_ref)
 
 # Update receptor data with actual compartment IDs
-for connection_data in connection_build_data:
+for connection_data in connection_build_data.values():
     pre_n = connection_data['pre']
     from_idx = connection_data['from_idx']
     post_n = connection_data['post']
@@ -413,6 +418,8 @@ for connection_data in connection_build_data:
     connection_data['to_ID'] = neuron_build_data[post_n]['dendrites']['compartment_refs'][to_idx].ID
 
 ### 3.3 Create neurons.
+
+print('Making neurons...')
 
 neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
@@ -450,12 +457,14 @@ for n in neuron_names:
 
 ### 3.4 Create receptors for active connections.
 
+print('Making receptors...')
+
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
 
 #receptor_functionals = []
 #receptor_morphologies = []
-for connection_data in connection_build_data:
+for connection_data in connection_build_data.values():
     # Set the total conductance through receptors at synapses at this connection:
     if connection_data['type'] == 'AMPA':
         conductance = AMPA_conductance
@@ -470,8 +479,6 @@ for connection_data in connection_build_data:
     #receptor_morphologies.append(receptor_box)
 
     # Build receptor function:
-    from_compartment_id = from_axon.ID
-    to_compartment_id = to_cell.SomaID
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=connection_data['from_ID'],
         DestinationCompartmentID=connection_data['to_ID'],
