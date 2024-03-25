@@ -168,7 +168,7 @@ print('Geometric center of simulation: '+str(geocenter))
 num_sites = 1
 sites_ratio = 0.1
 noise_level = 0
-end_position = np.array(geocenter) + np.array([0, 0, 5.0])
+end_position = np.array(geocenter) + np.array([0.0, 0.0, 5.0])
 
 rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
 for rec_site in range(1, num_sites):
