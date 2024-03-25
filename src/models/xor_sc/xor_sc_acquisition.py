@@ -39,19 +39,25 @@ Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
 Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Calcium imaging rendering")
+Parser.add_argument('-Electrodes', action='store_true', help="Place electrodes")
 Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
+Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
 Args = Parser.parse_args()
 
-
+#default:
+api_is_local=True
+if Args.Remote:
+    api_is_local=False
+if Args.Local:
+    api_is_local=True
 
 TotalElectrodes:int = 0;
 TotalCARenders:int = 0;
 TotalEMRenders:int = 0;
 
-
-api_is_local=Args.Local
 runtime_ms=500.0
-savefolder = './Renders/vbp_'+str(datetime.now().strftime("%F_%X")).replace(":", "_")
+#savefolder = './Renders/vbp_'+str(datetime.now().strftime("%F_%X")).replace(":", "_")
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -135,57 +141,83 @@ print(ACQSETUPTEXT1)
 
 # 3.1 Initialize spontaneous activity
 
-# Spontaneous activity can be turned on or off, a list of neurons can be
-# provided by ID, an empty list means "all" neurons.
-neuron_ids = [] # all
-spont_spike_interval_ms_mean = 280
-spont_spike_interval_ms_stdev = 140 # 0 means no spontaneous activity
+use_spontaneous_activity=False
+if use_spontaneous_activity:
 
-success = bg_api.BGNES_set_spontaneous_activity(
-    spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
-    spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
-    neuron_ids=neuron_ids)
+    # Spontaneous activity can be turned on or off, a list of neurons can be
+    # provided by ID, an empty list means "all" neurons.
+    neuron_ids = [] # all
+    spont_spike_interval_ms_mean = 280
+    spont_spike_interval_ms_stdev = 140 # 0 means no spontaneous activity
 
-if not success:
-    print('Failed to set up spontaneous activity.')
-    exit(1)
+    success = bg_api.BGNES_set_spontaneous_activity(
+        spont_spike_interval_ms_mean=spont_spike_interval_ms_mean,
+        spont_spike_interval_ms_stdev=spont_spike_interval_ms_stdev,
+        neuron_ids=neuron_ids)
 
-print('Spontaneous activity at each neuron successfully activated.')
+    if not success:
+        print('Failed to set up spontaneous activity.')
+        exit(1)
+
+    print('Spontaneous activity at each neuron successfully activated.')
+
 
 # 3.2 Initialize recording electrodes
 
-# 3.2.1 Find the geometric center of the system based on soma center locations
+if (Args.Electrodes):
 
-success, geocenter = bg_api.BGNES_get_geometric_center()
-if not success:
-    print('Failed to find geometric center of simulation.')
-    exit(1)
+    # NOTE: Copied these soma locations from the ground-truth script to
+    #       put electrodes fairly close to neurons for simplicity right now.
+    somacenters = {
+        'P_in0_pos': np.array([-45,-45, 0]),
+        'P_in1_pos': np.array([-45, 45, 0]),
+        'I_A0_pos': np.array([-15,-15, 0]),
+        'I_A1_pos': np.array([-15, 15, 0]),
+        'P_B0_pos': np.array([ 15,-45, 0]),
+        'P_B1_pos': np.array([ 15, 45, 0]),
+        'P_out_pos': np.array([ 45,  0, 0]),
+    }
 
-print('Geometric center of simulation: '+str(geocenter))
+    # 3.2.1 Find the geometric center of the system based on soma center locations
 
-# 3.2.2 Set up electrode parameters
+    success, geocenter = bg_api.BGNES_get_geometric_center()
+    if not success:
+        print('Failed to find geometric center of simulation.')
+        exit(1)
 
-num_sites = 1
-sites_ratio = 0.1
-noise_level = 0
-end_position = np.array(geocenter) + np.array([0, 0, 5.0])
+    print('Geometric center of simulation: '+str(geocenter))
 
-rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
-for rec_site in range(1, num_sites):
-    electrode_ratio = rec_site * sites_ratio
-    rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
+    # 3.2.2 Set up electrode parameters
 
-electrode_specs = {
-    'name': 'electrode_0',
-    'tip_position': geocenter,
-    'end_position': end_position.tolist(),
-    'sites': rec_sites_on_electrode,
-    'noise_level': noise_level,
-}
-set_of_electrode_specs = [ electrode_specs, ] # A single electrode.
-list_of_electrode_IDs = bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+    num_sites = 1
+    sites_ratio = 0.01
+    noise_level = 0
 
-print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
+    set_of_electrode_specs = []
+
+    for soma_name in somacenters:
+
+        tip_position = somacenters[soma_name] + np.array([35.0, 0.0, 0.0])
+        end_position = tip_position + np.array([0, 0, 2000.0]) # electrodes are typically a few mm to (sometimes a few cm) in length
+
+        rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
+        for rec_site in range(1, num_sites):
+            electrode_ratio = rec_site * sites_ratio
+            rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
+
+        electrode_specs = {
+            'name': 'electrode_'+soma_name,
+            'tip_position': tip_position.tolist(),
+            'end_position': end_position.tolist(),
+            'sites': rec_sites_on_electrode,
+            'noise_level': noise_level,
+        }
+        set_of_electrode_specs.append( electrode_specs )
+
+    success, list_of_electrode_IDs = bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+
+    print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
+    print('IDs are: '+str(list_of_electrode_IDs))
 
 # 3.3 Initialize calcium imaging
 
@@ -263,7 +295,7 @@ if (Args.RenderCA):
         F.write(json.dumps(CaJSON))
 
     os.makedirs(f"{savefolder}/CARegions/0")
-    CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+    ### Buggy: CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 
 
@@ -311,6 +343,7 @@ else:
         print('No Electrode recording data in instrument data.')
     else:
         electrode_data = instrument_data['Electrodes']
+        print('Creating graphs for electrodes: '+str(electrode_data.keys()))
         electrode_file_number = 0
         for electrode_name in electrode_data.keys():
             specific_electrode_data = electrode_data[electrode_name]
@@ -423,9 +456,9 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.1 # is actually um!!!!!
-    EMConfig.ImageWidth_px = 1024
-    EMConfig.ImageHeight_px = 1024
+    EMConfig.PixelResolution_nm = 1.0 # is actually um!!!!!
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
     EMConfig.SliceThickness_nm = 100 # This is currently not used.
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
