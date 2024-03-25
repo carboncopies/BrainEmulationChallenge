@@ -263,7 +263,7 @@ if (Args.RenderCA):
         F.write(json.dumps(CaJSON))
 
     os.makedirs(f"{savefolder}/CARegions/0")
-    CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+    #CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 
 
@@ -459,7 +459,7 @@ if (Args.RenderEM):
 
     print(" -- Reconstructing Image Stack")
     os.makedirs(f"{savefolder}/EMRegions/0")
-    StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=True)
+    StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
 
     TotalEMRenders += 1
 
