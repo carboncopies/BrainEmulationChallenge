@@ -57,7 +57,7 @@ TotalEMRenders:int = 0;
 
 runtime_ms=500.0
 #savefolder = './Renders/vbp_'+str(datetime.now().strftime("%F_%X")).replace(":", "_")
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -456,7 +456,7 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 1.0 # is actually um!!!!!
+    EMConfig.PixelResolution_nm = 0.25 # is actually um!!!!!
     EMConfig.ImageWidth_px = 512
     EMConfig.ImageHeight_px = 512
     EMConfig.SliceThickness_nm = 100 # This is currently not used.
@@ -466,8 +466,8 @@ if (Args.RenderEM):
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
 
-    BottomLeft_um = [-50,-50,-2]
-    TopRight_um = [50,50,2]
+    BottomLeft_um = [-75,-75,-2]
+    TopRight_um = [75,75,2]
     Rotation_rad = [0,0,0]
     VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
     VSDAEMInstance.QueueRenderOperation()

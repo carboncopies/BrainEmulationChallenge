@@ -1,17 +1,24 @@
 #!/usr/bin/env python3
-# xor_sc_groundtruth.py
-# Randal A. Koene, 20240311
+# xor_sc_emulation.py
+# Randal A. Koene, 20240325
 
 '''
 The XOR SimpleCompartmental example uses branching axons in a representation of a
 meaningful logic circuit to produce expected functional output.
 
-This file implements an in-silico fully known ground-truth system.
-In this example file, we do this with a minimum of Python complexity,
-keeping the script as flat as possible and maximizing immediate use of NES calls.
+This file implements a demonstration of an emulation specification, i.e. a
+neural circuit reconstruction submitted to the challenge.
 
-VBP process step 00: groundtruth
-WBE topic-level XI: sample preparation / preservation (in-silico)
+Here, we do not show the steps taken by the challenge participant to interpret
+the acquisition data stack and to derive from that the circuit architecture and
+parameter values.
+We show the step where the participant submits the resulting circuit, which is
+implemented in the VBP/NES environment for validation.
+For demonstration purposes, we create this implementation in the same manner as
+the ground-truth system, with a few changes to simulate reconstruction errors.
+
+VBP process step 03: emulation
+WBE topic-level ??: 
 '''
 
 scriptversion='0.0.1'
@@ -41,7 +48,7 @@ if Args.Local:
 randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-groundtruth'
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-emulation'
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -62,15 +69,17 @@ if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=Fa
 
 # 2. Init simulation
 
-sys_name='xor_sc'
+sys_name='em_xor_sc'
 bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
 
-INITTEXT1='''
-1. Defining an XOR logic circuit composed of SimpleCompartmental
-   principal neurons and interneurons. The network and its
-   connectivity are specified explicitly.
+INITTEXT1=r'''
+1. After analyzing the data stack obtained from the WBE challange,
+   we derived a system architecture from the identified connectome
+   and we set up parameter values according to our system identifiction
+   and translation method. Here is the model implementation of the
+   resulting circuit reconstruction.
 
    The steps we take:
    a. Define shapes for the neurons and place each specifically.
@@ -83,13 +92,16 @@ INITTEXT1='''
 
    Circuit:
 
-   P_in0 (-45,-45) -----------------------+ // note that P_A0 has been removed
-                |                         |
-                +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
-                                                          P_out (45, 0)
-                +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
-                |                         |
-   P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+        +------------ P_out (0, -45) ------------+
+        |               |         |              |
+        |               |         |              |
+        |     P_B0 (-15,-15)   P_B1 (15, -15)    |
+        |                    \/                  |
+        |                    /\                  |
+        |     I_A0 (-15, 15)   I_A1 (15, 15)     |
+        |      /                           \     |
+        |     /                             \    |
+   P_in0 (-45, 45)                         P_in1(45, 45)
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -113,13 +125,13 @@ connection_build_data = {}
 
 # Soma points
 points_3D_np = {
-    'P_in0_pos': np.array([-45,-45, 0]),
-    'P_in1_pos': np.array([-45, 45, 0]),
-    'I_A0_pos': np.array([-15,-15, 0]),
-    'I_A1_pos': np.array([-15, 15, 0]),
-    'P_B0_pos': np.array([ 15,-45, 0]),
-    'P_B1_pos': np.array([ 15, 45, 0]),
-    'P_out_pos': np.array([ 45,  0, 0]),
+    'P_in0_pos': np.array([-45, 45, 0]),
+    'P_in1_pos': np.array([ 45, 45, 0]),
+    'I_A0_pos' : np.array([-15, 15, 0]),
+    'I_A1_pos' : np.array([ 15, 15, 0]),
+    'P_B0_pos' : np.array([-15,-15, 0]),
+    'P_B1_pos' : np.array([ 15,-15, 0]),
+    'P_out_pos': np.array([ 0, -45, 0]),
 }
 
 # Receptor: points
@@ -527,8 +539,8 @@ response = bg_api.BGNES_set_specific_AP_times(
 response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
 
-with open(".SimulationHandle", "w") as f:
-    print(f"Saving simulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
+with open(".EmulationHandle", "w") as f:
+    print(f"Saving emulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
     f.write(response[0]['SavedSimName'])
 
 
