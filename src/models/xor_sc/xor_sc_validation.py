@@ -27,6 +27,8 @@ import os
 from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
+from NES_interfaces.Metrics_N1 import Metrics_N1
+
 import BrainGenix.NES as NES
 import BrainGenix
 from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
@@ -72,9 +74,9 @@ if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=Fa
 
 # 2.1 Request Loading
 sys_name=None
-with open(".EmulationHandle", "r") as f:
+with open(".SimulationHandle", "r") as f:
     sys_name = f.read()
-print(f"Loading emulation with handle '{sys_name}'")
+print(f"Loading simulation with handle '{sys_name}'")
 
 loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
 
@@ -111,46 +113,156 @@ bg_api.Simulation.Sim.ID = SimulationID
 
 print('New ID of loaded Simulation: '+str(SimulationID))
 
-# ----------------------------------------------------
+# 3. Load emulation network
 
-print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
+# 3.1 Request Loading
+sys_name=None
+with open(".EmulationHandle", "r") as f:
+    sys_name = f.read()
+print(f"Loading emulation with handle '{sys_name}'")
 
-# 5.1 Set record-all and record instruments
+loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
 
-t_max_ms=-1 # record forever
-bg_api.BGNES_simulation_recordall(t_max_ms)
-if not bg_api.BGNES_set_record_instruments(t_max_ms):
+print('Started Loading Task (%s) for Saved Emulation %s' % (str(loadingtaskID), str(sys_name)))
+
+# 3.2 Await Loading and set Emulation ID
+
+while True:
+    sleep(0.005)
+    response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+    if not isinstance(response_list, list):
+        print('Bad response format. Expected list of NESRequest responses.')
+        exit(1)
+    task_status_response = response_list[0]
+    if task_status_response['StatusCode'] != 0:
+        print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
+        exit(1)
+    if "TaskStatus" not in task_status_response:
+        print('No TaskStatus received.')
+        exit(1)
+    task_status = task_status_response['TaskStatus']
+    if task_status > 1:
+        print('Loading Task failed.')
+        exit(1)
+    if task_status == 0:
+        break
+
+print('Loading task completed successfully.')
+if "SimulationID" not in task_status_response:
+    print('Missing SimulationID.')
     exit(1)
+SimulationID = task_status_response["SimulationID"]
+bg_api.Simulation.Sim.ID = SimulationID
 
-# 5.2 Run for specified simulation time
-if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
-    exit(1)
+print('New ID of loaded Emulation: '+str(SimulationID))
 
-# if not calcium_specs['generate_during_sim']:
-#     glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
+# -- 4. Retrieve ground-truth simulation data to get structure
 
-# 5.3 Retrieve recordings and plot
+RPCpath = {
+	'compartment': 'Simulation/Compartments/SC/Create',
+	'neuron': 'Simulation/Neuron/SC/Create',
+	'receptor': 'Simulation/Receptor/Create',
+}
 
-recording_dict = bg_api.BGNES_get_recording()
-success, instrument_data = bg_api.BGNES_get_instrument_recordings()
-if not success:
-    exit(1)
+# A simplified System class used just for validation.
+class System:
+	def __init__(self, retrieved_file:list):
+		self.compartments = self.find_compartments(retrieved_file)
+		self.neurons = self.find_neurons(retrieved_file)
+		self.receptors = self.find_receptors(retrieved_file)
 
-if isinstance(recording_dict, dict):
-    if "StatusCode" in recording_dict:
-        if recording_dict["StatusCode"] != 0:
-            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
-        else:
-            if "Recording" not in recording_dict:
-                print('Missing "Recording" key.')
-            else:
-                if recording_dict["Recording"] is None:
-                    print('Recording is empty.')
-                else:
-                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
+	def find_compartments(self, retrieved_file:list):
+		RPC = RPCpath['compartment']
+		compartments = []
+		for NESrequest in retrieved_file:
+			if RPC in NESrequest:
+				compartments.append( NESrequest )
+		return compartments
 
-                    plot_recorded(
-                        savefolder=savefolder,
-                        data=recording_dict["Recording"],
-                        figspecs=figspecs,)
+	def find_neurons(self, retrieved_file:list):
+		RPC = RPCpath['neuron']
+		neurons = []
+		for NESrequest in retrieved_file:
+			if RPC in NESrequest:
+				neurons.append( NESrequest )
+		return neurons
 
+	def get_compartment(self, compartment_id:int)->dict:
+		if compartment_id >= len(self.compartments):
+			return None
+		return self.compartments[compartment_id]
+
+	def find_receptors(self, retrieved_file:list):
+		RPC = RPCpath['receptor']
+		receptors = []
+		for NESrequest in retrieved_file:
+			if RPC in NESrequest:
+				receptors.append( NESrequest )
+		return receptors
+
+	def get_neuron_by_compartment(self, compartment_id:int)->int:
+		RPC = RPCpath['neuron']
+		for i in range(len(self.neurons)):
+			if compartment_id in self.neurons[i][RPC]['SomaIDs']:
+				return i
+			if compartment_id in self.neurons[i][RPC]['DendriteIDs']:
+				return i
+			if compartment_id in self.neurons[i][RPC]['AxonIDs']:
+				return i
+		return None
+
+	def get_receptor_neurons(self, receptor_id:int)->tuple:
+		RPC = RPCpath['receptor']
+		if receptor_id >= len(self.receptors):
+			return None
+		#src_compartment = self.get_compartment(self.receptors[receptor_id][RPC]['SourceCompartmentID'])
+		#dst_compartment = self.get_compartment(self.receptors[receptor_id][RPC]['DestinationCompartmentID'])
+		src_compartment = self.receptors[receptor_id][RPC]['SourceCompartmentID']
+		dst_compartment = self.receptors[receptor_id][RPC]['DestinationCompartmentID']
+		src_neuron = self.get_neuron_by_compartment(src_compartment)
+		dst_neuron = self.get_neuron_by_compartment(dst_compartment)
+		return (src_neuron, dst_neuron)
+
+	def get_connectivity(self)->list:
+		RPC = RPCpath['receptor']
+		connectivity = []
+		for i in range(len(self.receptors)):
+			weight = self.receptors[i][RPC]['Conductance_nS']
+			connectivity.append( list(self.get_receptor_neurons(i)) + [ weight ] )
+		return connectivity
+
+	def get_all_neurons(self)->list:
+		return self.neurons
+
+# Let's assume that retrieval gives it back as a string of NES requests.
+
+with open('/home/randalk/src/BrainGenix-NES/Binaries/SavedSimulations/2024-03-26_11:16:57-xor_sc.NES', 'r') as f:
+	retrieved_file = json.load(f)
+
+print('Number of requests found in retrieved savefile: '+str(len(retrieved_file)))
+
+groundtruth = System(retrieved_file)
+
+print('Number of neurons in ground-truth: '+str(len(groundtruth.neurons)))
+print('Number of receptors in ground-truth: '+str(len(groundtruth.receptors)))
+
+print('Connectivity in ground-truth:'+str(groundtruth.get_connectivity()))
+
+# -- 5. Retrieve emuation data to get structure
+
+with open('/home/randalk/src/BrainGenix-NES/Binaries/SavedSimulations/2024-03-26_11:17:37-em_xor_sc.NES', 'r') as f:
+	retrieved_file = json.load(f)
+
+print('Number of requests found in retrieved savefile: '+str(len(retrieved_file)))
+
+emulation = System(retrieved_file)
+
+print('Number of neurons in circuit emulation: '+str(len(emulation.neurons)))
+print('Number of receptors in circuit emulation: '+str(len(emulation.receptors)))
+
+print('Connectivity in circuit emulation:'+str(emulation.get_connectivity()))
+
+# -- 6. Run structure comparison with Metrics N1
+
+metric_n1 = Metrics_N1(emulation, groundtruth)
+metric_n1.validate()
