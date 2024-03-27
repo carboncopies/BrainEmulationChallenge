@@ -12,7 +12,9 @@ and tuning of properties is sufficiently accurate.
 from .System import System
 import numpy as np
 import networkx as nx
-#import netrd
+# For netrd, see https://github.com/netsiphd/netrd
+# Set up with pip3 install
+import netrd
 
 
 class Metrics_N1:
@@ -108,25 +110,22 @@ class Metrics_N1:
         # deltacon_obj = netrd.distance.DeltaCon()
         # deltcacon_result = deltacon_obj.dist(G_KGT, G_Emulation)
 
-        #jaccard_obj = netrd.distance.JaccardDistance()
-        #jaccard_result = jaccard_obj.dist(G_KGT, G_Emulation)
+        jaccard_obj = netrd.distance.JaccardDistance()
+        jaccard_result = jaccard_obj.dist(G_KGT, G_Emulation)
 
-        #if G_KGT.number_of_nodes() == G_Emulation.number_of_nodes():
-        #    quantumJSD_obj = netrd.distance.QuantumJSD()
-        #    quantumJSD_result = quantumJSD_obj.dist(G_KGT, G_Emulation)
-        #    print(f"QuantumJSD: {quantumJSD_result}")
-
-
+        if G_KGT.number_of_nodes() == G_Emulation.number_of_nodes():
+            quantumJSD_obj = netrd.distance.QuantumJSD()
+            quantumJSD_result = quantumJSD_obj.dist(G_KGT, G_Emulation)
+            print(f"QuantumJSD: {quantumJSD_result}")
 
         #when nodes are the same vs when nodes are different
-
 
         print(f"Emulation Num Neurons: {emulation_num_neurons}")
         print(f"KGT Num Neurons: {kgt_num_neurons}")
         print(f"Absolute Difference: {num_neurons_difference}")
         print(f"Percentage Difference: {percentage_difference}")
         print(f"Edit Distance: {edit_distance_result}")
-        #print(f"Jaccard: {jaccard_result}")
+        print(f"Jaccard: {jaccard_result}")
 
 
 
