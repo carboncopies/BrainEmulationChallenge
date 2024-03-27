@@ -24,7 +24,7 @@ import json
 
 import vbpcommon
 import os
-from BrainGenix.BG_API import BG_API_Setup
+from BrainGenix.BG_API import Credentials, SimClient
 from NES_interfaces.KGTRecords import plot_recorded
 
 from NES_interfaces.Metrics_N1 import Metrics_N1
@@ -63,98 +63,102 @@ figspecs = {
 
 # 1. Init NES connection
 
-bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
-if api_is_local:
-    bg_api.set_local()
-if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
-    print('BG NES Interface access failed.')
-    exit(1)
+credentials = Credentials(user='Admonishing', passwd='Instruction')
+client = SimClient(credentials, api_is_local)
 
 # 2. Load ground-truth network
 
 # 2.1 Request Loading
-sys_name=None
+simulation_sys_name=None
 with open(".SimulationHandle", "r") as f:
-    sys_name = f.read()
-print(f"Loading simulation with handle '{sys_name}'")
+    simulation_sys_name = f.read()
 
-loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
+print(f"Retrieving simulation with handle '{simulation_sys_name}'")
 
-print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
+# loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
 
-# 2.2 Await Loading and set Simulation ID
+# print('Started Loading Task (%s) for Saved Simulation %s' % (str(loadingtaskID), str(sys_name)))
 
-while True:
-    sleep(0.005)
-    response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
-    if not isinstance(response_list, list):
-        print('Bad response format. Expected list of NESRequest responses.')
-        exit(1)
-    task_status_response = response_list[0]
-    if task_status_response['StatusCode'] != 0:
-        print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
-        exit(1)
-    if "TaskStatus" not in task_status_response:
-        print('No TaskStatus received.')
-        exit(1)
-    task_status = task_status_response['TaskStatus']
-    if task_status > 1:
-        print('Loading Task failed.')
-        exit(1)
-    if task_status == 0:
-        break
+# # 2.2 Await Loading and set Simulation ID
 
-print('Loading task completed successfully.')
-if "SimulationID" not in task_status_response:
-    print('Missing SimulationID.')
-    exit(1)
-SimulationID = task_status_response["SimulationID"]
-bg_api.Simulation.Sim.ID = SimulationID
+# while True:
+#     sleep(0.005)
+#     response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+#     if not isinstance(response_list, list):
+#         print('Bad response format. Expected list of NESRequest responses.')
+#         exit(1)
+#     task_status_response = response_list[0]
+#     if task_status_response['StatusCode'] != 0:
+#         print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
+#         exit(1)
+#     if "TaskStatus" not in task_status_response:
+#         print('No TaskStatus received.')
+#         exit(1)
+#     task_status = task_status_response['TaskStatus']
+#     if task_status > 1:
+#         print('Loading Task failed.')
+#         exit(1)
+#     if task_status == 0:
+#         break
 
-print('New ID of loaded Simulation: '+str(SimulationID))
+# print('Loading task completed successfully.')
+# if "SimulationID" not in task_status_response:
+#     print('Missing SimulationID.')
+#     exit(1)
+# SimulationID = task_status_response["SimulationID"]
+# bg_api.Simulation.Sim.ID = SimulationID
+
+# print('New ID of loaded Simulation: '+str(SimulationID))
+
+simulation_sys_path='./'+simulation_sys_name+'-simulation'
+client.Instance.DownloadSimulation(_SaveHandle=simulation_sys_name, _FilePath=simulation_sys_path)
 
 # 3. Load emulation network
 
 # 3.1 Request Loading
-sys_name=None
+emulation_sys_name=None
 with open(".EmulationHandle", "r") as f:
-    sys_name = f.read()
-print(f"Loading emulation with handle '{sys_name}'")
+    emulation_sys_name = f.read()
 
-loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
+print(f"Retrieving emulation with handle '{emulation_sys_name}'")
 
-print('Started Loading Task (%s) for Saved Emulation %s' % (str(loadingtaskID), str(sys_name)))
+# loadingtaskID = bg_api.BGNES_load(timestampedname=sys_name)
 
-# 3.2 Await Loading and set Emulation ID
+# print('Started Loading Task (%s) for Saved Emulation %s' % (str(loadingtaskID), str(sys_name)))
 
-while True:
-    sleep(0.005)
-    response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
-    if not isinstance(response_list, list):
-        print('Bad response format. Expected list of NESRequest responses.')
-        exit(1)
-    task_status_response = response_list[0]
-    if task_status_response['StatusCode'] != 0:
-        print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
-        exit(1)
-    if "TaskStatus" not in task_status_response:
-        print('No TaskStatus received.')
-        exit(1)
-    task_status = task_status_response['TaskStatus']
-    if task_status > 1:
-        print('Loading Task failed.')
-        exit(1)
-    if task_status == 0:
-        break
+# # 3.2 Await Loading and set Emulation ID
 
-print('Loading task completed successfully.')
-if "SimulationID" not in task_status_response:
-    print('Missing SimulationID.')
-    exit(1)
-SimulationID = task_status_response["SimulationID"]
-bg_api.Simulation.Sim.ID = SimulationID
+# while True:
+#     sleep(0.005)
+#     response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
+#     if not isinstance(response_list, list):
+#         print('Bad response format. Expected list of NESRequest responses.')
+#         exit(1)
+#     task_status_response = response_list[0]
+#     if task_status_response['StatusCode'] != 0:
+#         print('Checking task status failed, status code: '+str(task_status_response['StatusCode']))
+#         exit(1)
+#     if "TaskStatus" not in task_status_response:
+#         print('No TaskStatus received.')
+#         exit(1)
+#     task_status = task_status_response['TaskStatus']
+#     if task_status > 1:
+#         print('Loading Task failed.')
+#         exit(1)
+#     if task_status == 0:
+#         break
 
-print('New ID of loaded Emulation: '+str(SimulationID))
+# print('Loading task completed successfully.')
+# if "SimulationID" not in task_status_response:
+#     print('Missing SimulationID.')
+#     exit(1)
+# SimulationID = task_status_response["SimulationID"]
+# bg_api.Simulation.Sim.ID = SimulationID
+
+# print('New ID of loaded Emulation: '+str(SimulationID))
+
+emulation_sys_path='./'+emulation_sys_name+'-simulation'
+client.Instance.DownloadSimulation(_SaveHandle=emulation_sys_name, _FilePath=emulation_sys_path)
 
 # -- 4. Retrieve ground-truth simulation data to get structure
 
@@ -236,7 +240,7 @@ class System:
 
 # Let's assume that retrieval gives it back as a string of NES requests.
 
-with open('/home/randalk/src/BrainGenix-NES/Binaries/SavedSimulations/2024-03-26_11:16:57-xor_sc.NES', 'r') as f:
+with open(simulation_sys_path+'.NES', 'r') as f:
 	retrieved_file = json.load(f)
 
 print('Number of requests found in retrieved savefile: '+str(len(retrieved_file)))
@@ -250,7 +254,7 @@ print('Connectivity in ground-truth:'+str(groundtruth.get_connectivity()))
 
 # -- 5. Retrieve emuation data to get structure
 
-with open('/home/randalk/src/BrainGenix-NES/Binaries/SavedSimulations/2024-03-26_11:17:37-em_xor_sc.NES', 'r') as f:
+with open(emulation_sys_path+'.NES', 'r') as f:
 	retrieved_file = json.load(f)
 
 print('Number of requests found in retrieved savefile: '+str(len(retrieved_file)))
