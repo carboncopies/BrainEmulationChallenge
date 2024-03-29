@@ -164,7 +164,7 @@ if use_spontaneous_activity:
 
 # 3.2 Initialize recording electrodes
 
-if (Args.Electrodes):
+if (Args.Electrodes or Args.RenderEM):
 
     # NOTE: Copied these soma locations from the ground-truth script to
     #       put electrodes fairly close to neurons for simplicity right now.
