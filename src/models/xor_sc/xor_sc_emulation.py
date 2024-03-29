@@ -38,6 +38,11 @@ Parser.add_argument("-Local", action='store_true', help="Run on local NES server
 Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
 Args = Parser.parse_args()
 
+def event_occurs(prob:float)->bool:
+    return np.random.rand() <= prob
+
+prob_missed_receptor = 0.3
+
 #default:
 api_is_local=True
 if Args.Remote:
@@ -490,16 +495,19 @@ for connection_data in connection_build_data.values():
     receptor_box = make_shape(connection_data['shape'])
     #receptor_morphologies.append(receptor_box)
 
-    # Build receptor function:
-    receptor = bg_api.BGNES_BS_receptor_create(
-        SourceCompartmentID=connection_data['from_ID'],
-        DestinationCompartmentID=connection_data['to_ID'],
-        Conductance_nS=receptor_conductance,
-        TimeConstantRise_ms=neuron_tau_PSPr,
-        TimeConstantDecay_ms=neuron_tau_PSPd,
-        ReceptorMorphology=receptor_box.ID,
-    )
-    #receptor_functionals.append( (receptor, connection_data['post']) )
+    if event_occurs(prob_missed_receptor):
+        print('MISSED RECEPTOR')
+    else:
+        # Build receptor function:
+        receptor = bg_api.BGNES_BS_receptor_create(
+            SourceCompartmentID=connection_data['from_ID'],
+            DestinationCompartmentID=connection_data['to_ID'],
+            Conductance_nS=receptor_conductance,
+            TimeConstantRise_ms=neuron_tau_PSPr,
+            TimeConstantDecay_ms=neuron_tau_PSPd,
+            ReceptorMorphology=receptor_box.ID,
+        )
+        #receptor_functionals.append( (receptor, connection_data['post']) )
 
 STIMTEXT1='''
 Dynamic activity:

@@ -244,25 +244,27 @@ if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
 #     glb.bg_api.BGNES_calcium_imaging_record_aposteriori()
 
 if (Args.RenderCA):
-    VSDACAInstance.QueueRenderOperation()
-    VSDACAInstance.WaitForRender()
-    os.makedirs(f"{savefolder}/ChallengeOutput/CARegions/0/Data")
-    VSDACAInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/CARegions/0/Data", 10)
+    print('THIS EXAMPLE DOES NOT SUPPORT CALCIUM IMAGING (see the Readme.md).')
 
-    TotalCARenders += 1
+    # VSDACAInstance.QueueRenderOperation()
+    # VSDACAInstance.WaitForRender()
+    # os.makedirs(f"{savefolder}/ChallengeOutput/CARegions/0/Data")
+    # VSDACAInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/CARegions/0/Data", 10)
 
-    CaJSON:dict = {
-        "SheetThickness_um": CAConfig.NumVoxelsPerSlice * CAConfig.VoxelResolution_nm,
-        "ScanRegionBottomLeft_um": BottomLeftPos_um,
-        "ScanRegionTopRight_um": TopRightPos_um,
-        "SampleRotation_rad": SampleRotation_rad,
-        "IndicatorName": CAConfig.CalciumIndicator,
-        "ImageTimestep_ms": CAConfig.ImagingInterval_ms
-    }
-    with open(f"{savefolder}/ChallengeOutput/CARegions/0/Params.json", 'w') as F:
-        F.write(json.dumps(CaJSON))
+    # TotalCARenders += 1
 
-    os.makedirs(f"{savefolder}/CARegions/0")
+    # CaJSON:dict = {
+    #     "SheetThickness_um": CAConfig.NumVoxelsPerSlice * CAConfig.VoxelResolution_nm,
+    #     "ScanRegionBottomLeft_um": BottomLeftPos_um,
+    #     "ScanRegionTopRight_um": TopRightPos_um,
+    #     "SampleRotation_rad": SampleRotation_rad,
+    #     "IndicatorName": CAConfig.CalciumIndicator,
+    #     "ImageTimestep_ms": CAConfig.ImagingInterval_ms
+    # }
+    # with open(f"{savefolder}/ChallengeOutput/CARegions/0/Params.json", 'w') as F:
+    #     F.write(json.dumps(CaJSON))
+
+    # os.makedirs(f"{savefolder}/CARegions/0")
     #CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 

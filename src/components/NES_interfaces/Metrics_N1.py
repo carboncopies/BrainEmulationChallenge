@@ -39,7 +39,7 @@ class Metrics_N1:
         return connectivity_matrix
 
     def validate_accurate_system_identification(self):
-        print('Validating accurate system identification...')
+        print('\nValidating accurate system identification...\n')
         # TODO: Given that this is first of all intended to be used
         #       in the standardized WBE challenge, where the KGT
         #       is (at least initially) in-silico, it is possible to
@@ -98,6 +98,7 @@ class Metrics_N1:
                     G_Emulation.add_edge(i, j, weight=weight)
 
 
+        print('Calculating edit distance...')
         edit_distance_result = nx.graph_edit_distance(G_KGT, G_Emulation)
 
         # NetRD library metrics
@@ -110,29 +111,32 @@ class Metrics_N1:
         # deltacon_obj = netrd.distance.DeltaCon()
         # deltcacon_result = deltacon_obj.dist(G_KGT, G_Emulation)
 
+        print('Calculating Jaccard distance...')
         jaccard_obj = netrd.distance.JaccardDistance()
         jaccard_result = jaccard_obj.dist(G_KGT, G_Emulation)
 
+        print('Calculating Quantum JSD...')
         if G_KGT.number_of_nodes() == G_Emulation.number_of_nodes():
             quantumJSD_obj = netrd.distance.QuantumJSD()
             quantumJSD_result = quantumJSD_obj.dist(G_KGT, G_Emulation)
-            print(f"QuantumJSD: {quantumJSD_result}")
 
         #when nodes are the same vs when nodes are different
 
-        print(f"Emulation Num Neurons: {emulation_num_neurons}")
-        print(f"KGT Num Neurons: {kgt_num_neurons}")
-        print(f"Absolute Difference: {num_neurons_difference}")
+        print(f"\nEmulation Num Neurons: {emulation_num_neurons}")
+        print(f"KGT Num Neurons      : {kgt_num_neurons}")
+        print(f"Absolute Difference  : {num_neurons_difference}")
         print(f"Percentage Difference: {percentage_difference}")
-        print(f"Edit Distance: {edit_distance_result}")
-        print(f"Jaccard: {jaccard_result}")
+        print(f"\nEdit Distance        : {edit_distance_result}")
+        print(f"\nJaccard              : {jaccard_result}")
+        if G_KGT.number_of_nodes() == G_Emulation.number_of_nodes():
+            print(f"\nQuantumJSD           : {quantumJSD_result}")
 
 
 
 
 
     def validate_accurate_tuning(self):
-        print('Validating accurate tuning...')
+        print('\nValidating accurate tuning...')
 
     def validate(self):
         self.validate_accurate_system_identification()
