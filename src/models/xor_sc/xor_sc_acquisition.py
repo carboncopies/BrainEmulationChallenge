@@ -456,18 +456,18 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.25 # is actually um!!!!!
-    EMConfig.ImageWidth_px = 512
-    EMConfig.ImageHeight_px = 512
-    EMConfig.SliceThickness_nm = 100 # This is currently not used.
-    EMConfig.ScanRegionOverlap_percent = 0
+    EMConfig.PixelResolution_nm = 0.008 # is actually um!!!!!
+    EMConfig.ImageWidth_px = 1024
+    EMConfig.ImageHeight_px = 1024
+    EMConfig.SliceThickness_nm = 0.01 # actually um!
+    EMConfig.ScanRegionOverlap_percent = 10
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
 
-    BottomLeft_um = [-75,-75,-2]
-    TopRight_um = [75,75,2]
+    BottomLeft_um = [-75,-75,-40]
+    TopRight_um = [75,75,40]
     Rotation_rad = [0,0,0]
     VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
     VSDAEMInstance.QueueRenderOperation()
