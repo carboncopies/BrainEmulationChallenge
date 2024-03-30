@@ -138,7 +138,7 @@ def set_connection_data(connection:str, pre:str, post:str, _type:str, weight:flo
         'post': post,
         'shape': ( 'box',
             points_3D_np[connection].tolist(),
-            [0.1, 0.1, 0.1],
+            [0.1, 0.1, 0.1], # The receptors are represented by 100nm x 100nm x 100nm boxes.
             [0.0, 0.0, 0.0],),
         'type': _type,
         'weight': weight,
