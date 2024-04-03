@@ -122,6 +122,8 @@ points_3D_np = {
     'P_out_pos': np.array([ 45,  0, 0]),
 }
 
+receptorPSDlength_um = 0.2
+
 # Receptor: points
 points_3D_np['Pin0_IA0_rec'] = points_3D_np['I_A0_pos'] + np.array([-10, -5, 0])
 points_3D_np['Pin1_IA1_rec'] = points_3D_np['I_A1_pos'] + np.array([-10, +5, 0])
@@ -138,7 +140,7 @@ def set_connection_data(connection:str, pre:str, post:str, _type:str, weight:flo
         'post': post,
         'shape': ( 'box',
             points_3D_np[connection].tolist(),
-            [0.1, 0.1, 0.1], # The receptors are represented by 100nm x 100nm x 100nm boxes.
+            [receptorPSDlength_um, receptorPSDlength_um, receptorPSDlength_um], # The receptors are represented by 200nm x 200nm x 200nm boxes.
             [0.0, 0.0, 0.0],),
         'type': _type,
         'weight': weight,
