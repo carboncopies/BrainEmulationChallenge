@@ -13,6 +13,7 @@ import argparse
 import numpy as np
 import cv2
 import imageio
+from matplotlib import pyplot as plt
 
 Parser = argparse.ArgumentParser(description="Slice viewer")
 Parser.add_argument("-d", '--dirpath', help="Path of directory to parse")
@@ -110,7 +111,9 @@ else:
             else:
                 interpolation = 'cubic'
 
-maxcontrast = (input('Maximize contrast? (y/N)') == 'y')
+maxcontrast = (input('Maximize contrast? (y/N) ') == 'y')
+
+addnumbers = (input('Add image numbers? (y/N) ') == 'y')
 
 with open('.sliceviewer-dir','w') as f:
     json.dump({ 'dir': dirpath, 'sidesize': sidesize, 'overlap': overlap, 'interpolation': interpolation } ,f)
@@ -131,6 +134,10 @@ for fname in all_files:
 print('Number of slices     : '+str(len(slices)))
 print('Smallest slice number: '+str(min(slices)))
 print('Largest slice number : '+str(max(slices)))
+
+font = cv2.FONT_HERSHEY_SIMPLEX
+fontScale = 0.33
+fontColor = (0,0,0)
 
 def stitch_slice(show_slice_num:int, verbose=True, useoptions=False):
     show_slice = str(show_slice_num)
@@ -193,11 +200,13 @@ def stitch_slice(show_slice_num:int, verbose=True, useoptions=False):
     for fname in slice_images:
         p = fname.find('_X')
         u = fname.find('_', p+2)
-        x_loc = float(fname[p+2:u])
+        x_loc_str = fname[p+2:u]
+        x_loc = float(x_loc_str)
         x_idx = x_locs.index(x_loc)
         p = fname.find('_Y')
         u = fname.find('.png', p+2)
-        y_loc = float(fname[p+2:u])
+        y_loc_str = fname[p+2:u]
+        y_loc = float(y_loc_str)
         y_idx = y_locs.index(y_loc)
         #print('Next image position: (%d, %d)' % (x_idx, y_idx))
         x = x_idx*step_size
@@ -211,6 +220,11 @@ def stitch_slice(show_slice_num:int, verbose=True, useoptions=False):
         y_end = y+img_side_size
         #print('Target location: [%d:%d, %d:%d]' % (y, y_end, x, x_end))
         #im_stitched[y:y+img_side_size, x:x+img_side_size, :3] = im_resized
+        if useoptions:
+            if addnumbers:
+                text = '(%s, %s)' % (x_loc_str[:6], y_loc_str[:6])
+                textOrg = (10, img_side_size//2)
+                im_resized = cv2.putText(im_resized, text, textOrg, font, fontScale, color=fontColor)
         im_stitched[y:y+img_side_size, x:x+img_side_size] = im_resized
 
     if useoptions:
@@ -301,6 +315,23 @@ else:
 
 print('Slices with features from slice %d to slice %d' % (show_slice_num, last_with_features))
 
+def show_individual_images(slice_num:int):
+    show_slice = str(show_slice_num)
+    slice_images = set()
+    for fname in all_files:
+        p = fname.find('_Slice'+show_slice+'_')
+        if p >= 0:
+            slice_images.add(fname)
+
+    for fname in slice_images:
+        im = cv2.imread(dirpath+'/'+fname)
+        plt.title(fname)
+        plt.imshow(im)
+        plt.show()
+        # cv2.imshow(fname, im)
+        # cv2.waitKey(0)
+        # cv2.destroyAllWindows()
+
 while show_slice_num >= 0:
 
     im_stitched = stitch_slice(show_slice_num, useoptions=True)
@@ -318,18 +349,21 @@ while show_slice_num >= 0:
 
     ask_more = True
     while ask_more:
-        next_step = input('Show more or save? (Y/n/number/s) ')
+        next_step = input('Show more, save, or show individual images? (Y/n/number/s/i) ')
         if next_step == 's':
             cv2.imwrite('stitched-'+'%05d.jpg' % show_slice_num, im_stitched)
         else:
-            ask_more = False
-            if next_step == 'n':
-                break
-            try:
-                next_slice_num = int(next_step)
-                show_slice_unm = next_slice_num
-            except:
-                show_slice_num += 4
+            if next_step == 'i':
+                show_individual_images(show_slice_num)
+            else:
+                ask_more = False
+                if next_step == 'n':
+                    break
+                try:
+                    next_slice_num = int(next_step)
+                    show_slice_num = next_slice_num
+                except:
+                    show_slice_num += 4
     if next_step == 'n':
         break
 
