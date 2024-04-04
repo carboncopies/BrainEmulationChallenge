@@ -1,0 +1,33 @@
+{
+    "Model": "name-of-challenge-dataset",
+    "SubmissionAuthors": ["List", "Of", "Authors", "Contributing", "To", "Your", "Submission"],
+    "SubmissionFormatVersion": 1,
+    "Neurons": [
+        {
+            "Name": "A",
+            "Type": "principal",
+            "Position_um": [5.2, 3.6, 1.2],
+            "SomaRadius_um": 10.0
+        },
+        {
+            "Name": "B",
+            "Type": "interneuron",
+            "Position_um": [18.5, -5.6, -15.2],
+            "SomaRadius_um": 5.0
+        }
+    ],
+    "Connections": [
+        {
+            "Type": "AMPA",
+            "Weight": 0.5,
+            "From": "A",
+            "To": "B"
+        },
+        {
+            "Type": "GABA",
+            "Weight": 0.7,
+            "From": "B",
+            "To": "C"
+        }
+    ]
+}
