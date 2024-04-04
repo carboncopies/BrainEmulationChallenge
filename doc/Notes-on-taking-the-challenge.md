@@ -12,6 +12,87 @@ The participant works with high resolution microscopy data, primarily EM, and ha
 
 ### Participant inspects the EM data stack
 
+The detailed process is documented in a slide deck at https://docs.google.com/presentation/d/1AYN8wK_nefLtiEa6phz2c5jocO1DXzqfaLIpgLDgRKw/edit?usp=sharing
 
+The participants submits a model description as follows:
 
+```
+{
+	"model": "WBE-challenge-submission",
+	"neurons": [
+		{
+			"name": "A",
+			"type": "principal"
+		},
+		{
+			"name": "B",
+			"type": "principal"
+		},
+		{
+			"name": "C",
+			"type": "principal"
+		},
+		{
+			"name": "D",
+			"type": "principal"
+		},
+		{
+			"name": "E",
+			"type": "principal"
+		},
+		{
+			"name": "F",
+			"type": "interneuron"
+		},
+		{
+			"name": "G",
+			"type": "interneuron"
+		}
+	]
+	"connections": [
+		{
+			"type": "AMPA",
+			"weight": "1.0"
+			"from": "A",
+			"to": "E",
+		},
+		{
+			"type": "AMPA",
+			"weight": "1.0"
+			"from": "B",
+			"to": "D",
+		},
+		{
+			"type": "AMPA",
+			"weight": "1.0"
+			"from": "A",
+			"to": "F",
+		},
+		{
+			"type": "AMPA",
+			"weight": "1.0"
+			"from": "B",
+			"to": "G",
+		},
+		{
+			"type": "AMPA",
+			"weight": "1.0"
+			"from": "D",
+			"to": "C",
+		},
+		{
+			"type": "GABA",
+			"weight": "1.0"
+			"from": "F",
+			"to": "D",
+		},
+		{
+			"type": "GABA",
+			"weight": "1.0"
+			"from": "G",
+			"to": "E",
+		},
+	]
+}
+```
 
