@@ -1,77 +1,93 @@
 {
-	"model": "WBE-challenge-submission",
-	"neurons": [
+    "Model": "WeReconstructLLC-Submission-Level-1",
+    "SubmissionAuthors": ["Randal Koene", ],
+    "SubmissionFormatVersion": 1,
+    "Neurons": [
+        {
+            "Name": "A",
+            "Type": "principal",
+            "Position_um": [-45.0, -45.0, 0.0],
+            "SomaRadius_um": 7.0
+        },
+        {
+            "Name": "B",
+            "Type": "principal",
+            "Position_um": [-45.0, 45.0, 0.0],
+            "SomaRadius_um": 7.0
+        },
+        {
+            "Name": "C",
+            "Type": "principal",
+            "Position_um": [45.0, 0.0, 0.0],
+            "SomaRadius_um": 7.0
+        },
+        {
+            "Name": "D",
+            "Type": "principal",
+            "Position_um": [15.0, 45.0, 0.0],
+            "SomaRadius_um": 7.0
+        },
+        {
+            "Name": "E",
+            "Type": "principal",
+            "Position_um": [15.0, -45.0,0.0],
+            "SomaRadius_um": 7.0
+        },
+        {
+            "Name": "F",
+            "Type": "interneuron",
+            "Position_um": [-15.0, -15.0, 0.0],
+            "SomaRadius_um": 3.0
+        },
+        {
+            "Name": "G",
+            "Type": "interneuron",
+            "Position_um": [-15.0, 15.0, 0.0],
+            "SomaRadius_um": 3.0
+        }
+    ],
+    "Connections": [
 		{
-			"name": "A",
-			"type": "principal"
+			"Type": "AMPA",
+			"Weight": 1.0,
+			"From": "A",
+			"To": "E",
 		},
 		{
-			"name": "B",
-			"type": "principal"
+			"Type": "AMPA",
+			"Weight": 1.0,
+			"From": "B",
+			"To": "D",
 		},
 		{
-			"name": "C",
-			"type": "principal"
+			"Type": "AMPA",
+			"Weight": 1.0,
+			"From": "A",
+			"To": "F",
 		},
 		{
-			"name": "D",
-			"type": "principal"
+			"Type": "AMPA",
+			"Weight": 1.0,
+			"From": "B",
+			"To": "G",
 		},
 		{
-			"name": "E",
-			"type": "principal"
+			"Type": "AMPA",
+			"Weight": 1.0,
+			"From": "D",
+			"To": "C",
 		},
 		{
-			"name": "F",
-			"type": "interneuron"
+			"Type": "GABA",
+			"Weight": 1.0,
+			"From": "F",
+			"To": "D",
 		},
 		{
-			"name": "G",
-			"type": "interneuron"
-		}
-	],
-	"connections": [
-		{
-			"type": "AMPA",
-			"weight": "1.0",
-			"from": "A",
-			"to": "E",
-		},
-		{
-			"type": "AMPA",
-			"weight": "1.0",
-			"from": "B",
-			"to": "D",
-		},
-		{
-			"type": "AMPA",
-			"weight": "1.0",
-			"from": "A",
-			"to": "F",
-		},
-		{
-			"type": "AMPA",
-			"weight": "1.0",
-			"from": "B",
-			"to": "G",
-		},
-		{
-			"type": "AMPA",
-			"weight": "1.0",
-			"from": "D",
-			"to": "C",
-		},
-		{
-			"type": "GABA",
-			"weight": "1.0",
-			"from": "F",
-			"to": "D",
-		},
-		{
-			"type": "GABA",
-			"weight": "1.0",
-			"from": "G",
-			"to": "E",
+			"Type": "GABA",
+			"Weight": 1.0,
+			"From": "G",
+			"To": "E",
 		}
 	]
 }
