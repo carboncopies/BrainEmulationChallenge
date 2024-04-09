@@ -2,6 +2,7 @@
 
 echo "Checking remote submodules repositories for updates..."
 
-git submodule update --remote PythonClient
+cd ../PythonClient
+git pull
 
 echo "Done. Your submodules are up to date."
