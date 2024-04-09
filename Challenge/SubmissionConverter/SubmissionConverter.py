@@ -185,7 +185,7 @@ def Main(Args):
         ReceptorConfig = NES.Models.Connections.Receptor.Configuration
         ReceptorConfig.Name = "Receptor"
         ReceptorConfig.SourceCompartment = AxonsByID[Connection["From"]][0]
-        ReceptorConfig.DestinationCompartment = AxonsByID[Connection["To"]][0]
+        ReceptorConfig.DestinationCompartment = DendritesByID[Connection["To"]][0]
         if (Connection["Type"] == "AMPA"):
             Conductance = AMPA_conductance
         else:
