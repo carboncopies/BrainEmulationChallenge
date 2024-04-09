@@ -1,6 +1,6 @@
 {
     "Model": "WeReconstructLLC-Submission-Level-1",
-    "SubmissionAuthors": ["Randal Koene", ],
+    "SubmissionAuthors": ["Randal Koene" ],
     "SubmissionFormatVersion": 1,
     "Neurons": [
         {
@@ -51,43 +51,43 @@
 			"Type": "AMPA",
 			"Weight": 1.0,
 			"From": "A",
-			"To": "E",
+			"To": "E"
 		},
 		{
 			"Type": "AMPA",
 			"Weight": 1.0,
 			"From": "B",
-			"To": "D",
+			"To": "D"
 		},
 		{
 			"Type": "AMPA",
 			"Weight": 1.0,
 			"From": "A",
-			"To": "F",
+			"To": "F"
 		},
 		{
 			"Type": "AMPA",
 			"Weight": 1.0,
 			"From": "B",
-			"To": "G",
+			"To": "G"
 		},
 		{
 			"Type": "AMPA",
 			"Weight": 1.0,
 			"From": "D",
-			"To": "C",
+			"To": "C"
 		},
 		{
 			"Type": "GABA",
 			"Weight": 1.0,
 			"From": "F",
-			"To": "D",
+			"To": "D"
 		},
 		{
 			"Type": "GABA",
 			"Weight": 1.0,
 			"From": "G",
-			"To": "E",
+			"To": "E"
 		}
 	]
 }
