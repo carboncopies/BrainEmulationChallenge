@@ -27,7 +27,7 @@
             "Type": "GABA",
             "Weight": 0.7,
             "From": "B",
-            "To": "C"
+            "To": "A"
         }
     ]
 }
