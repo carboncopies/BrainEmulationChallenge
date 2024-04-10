@@ -2,6 +2,7 @@
 
 echo "Pushing and recursively pushing submodule commits as well..."
 
-git push --recurse-submodules=on-demand
+cd ../PythonClient
+git push
 
 echo "Done."
