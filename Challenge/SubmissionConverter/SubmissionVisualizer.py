@@ -168,15 +168,15 @@ if (Args.Electrodes or Args.RenderEM):
 
     # NOTE: Copied these soma locations from the ground-truth script to
     #       put electrodes fairly close to neurons for simplicity right now.
-    # somacenters = {
-    #     'P_in0_pos': np.array([-45,-45, 0]),
-    #     'P_in1_pos': np.array([-45, 45, 0]),
-    #     'I_A0_pos': np.array([-15,-15, 0]),
-    #     'I_A1_pos': np.array([-15, 15, 0]),
-    #     'P_B0_pos': np.array([ 15,-45, 0]),
-    #     'P_B1_pos': np.array([ 15, 45, 0]),
-    #     'P_out_pos': np.array([ 45,  0, 0]),
-    # }
+    somacenters = {
+        'P_in0_pos': np.array([-45,-45, 0]),
+        'P_in1_pos': np.array([-45, 45, 0]),
+        'I_A0_pos': np.array([-15,-15, 0]),
+        'I_A1_pos': np.array([-15, 15, 0]),
+        'P_B0_pos': np.array([ 15,-45, 0]),
+        'P_B1_pos': np.array([ 15, 45, 0]),
+        'P_out_pos': np.array([ 45,  0, 0]),
+    }
 
     # 3.2.1 Find the geometric center of the system based on soma center locations
 
@@ -195,18 +195,9 @@ if (Args.Electrodes or Args.RenderEM):
 
     set_of_electrode_specs = []
 
-    # Note that shank spacing on a 4-shank Neuropixels electrode is 250 um.
-    # See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8244810/
+    for soma_name in somacenters:
 
-    tip_positions = {
-        'A': np.array([0, 0, 0]),
-        'B': np.array([-200, -200, 0]),
-        'C': np.array([200, 200, 0]),
-    }
-
-    for soma_name in tip_positions:
-
-        tip_position = tip_positions[soma_name]
+        tip_position = somacenters[soma_name] + np.array([35.0, 0.0, 0.0])
         end_position = tip_position + np.array([0, 0, 2000.0]) # electrodes are typically a few mm to (sometimes a few cm) in length
 
         rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
