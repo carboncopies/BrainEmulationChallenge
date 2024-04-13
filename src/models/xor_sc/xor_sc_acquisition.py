@@ -29,6 +29,7 @@ from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 import BrainGenix
 from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
+from BrainGenix.Tools.NeuroglancerConverter import NeuroglancerConverter
 
 def PointsInCircum(r, n=100):
     return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
@@ -38,6 +39,7 @@ def PointsInCircum(r, n=100):
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
+Parser.add_argument("-Neuroglancer", action='store_true', help="Generate the neuroglancer verison of the dataset for EM images")
 Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Calcium imaging rendering")
 Parser.add_argument('-Electrodes', action='store_true', help="Place electrodes")
 Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
@@ -471,11 +473,11 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.020 # is actually um!!!!!
-    EMConfig.ImageWidth_px = 1024
-    EMConfig.ImageHeight_px = 1024
-    EMConfig.SliceThickness_nm = 0.04 # actually um!
-    EMConfig.ScanRegionOverlap_percent = 10
+    EMConfig.PixelResolution_nm = 0.05 # is actually um!!!!!
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
+    EMConfig.SliceThickness_nm = 0.2 # actually um!
+    EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
@@ -511,6 +513,10 @@ if (Args.RenderEM):
     print(" -- Reconstructing Image Stack")
     os.makedirs(f"{savefolder}/EMRegions/0")
     #StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+
+    if (Args.Neuroglancer):
+        NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
+
 
     TotalEMRenders += 1
 
