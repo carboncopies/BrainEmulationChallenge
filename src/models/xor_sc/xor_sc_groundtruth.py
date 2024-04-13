@@ -29,6 +29,9 @@ import argparse
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-Local", action='store_true', help="Run on local NES server")
 Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
+Parser.add_argument("-Address", default="api.braingenix.org", help="Remote server address")
+Parser.add_argument("-Port", default=443, help="Remote server port")
+Parser.add_argument("-NoHttps", action='store_true', help="Override to use https on remote server")
 Args = Parser.parse_args()
 
 #default:
@@ -37,6 +40,9 @@ if Args.Remote:
     api_is_local=False
 if Args.Local:
     api_is_local=True
+remote_https=True
+if Args.NoHttps:
+    remote_https=False
 
 randomseed = 12345
 np.random.seed(randomseed)
@@ -50,7 +56,7 @@ figspecs = {
 
 # 1. Init NES connection
 
-bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
+bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction', remote_host=Args.Address, remote_port=Args.Port, remote_https=remote_https)
 if api_is_local:
     bg_api.set_local()
     print('Running locally.')
@@ -122,7 +128,9 @@ points_3D_np = {
     'P_out_pos': np.array([ 45,  0, 0]),
 }
 
-receptorPSDlength_um = 0.2
+receptorPSDwidth_um = 0.1
+receptorPSDdepth_um = 0.1
+receptorPSDlength_um = 0.3 # This standard lenght is modulated by the specific weight.
 
 # Receptor: points
 points_3D_np['Pin0_IA0_rec'] = points_3D_np['I_A0_pos'] + np.array([-10, -5, 0])
@@ -135,12 +143,13 @@ points_3D_np['PB0_Pout_rec'] = points_3D_np['P_out_pos'] + np.array([-15, -5, 0]
 points_3D_np['PB1_Pout_rec'] = points_3D_np['P_out_pos'] + np.array([-15, +5, 0])
 # Receptor: shapes and type
 def set_connection_data(connection:str, pre:str, post:str, _type:str, weight:float):
+    psdlength = receptorPSDlength_um * weight # Reflect weight in size of PSD.
     connection_build_data[connection] = {
         'pre': pre,
         'post': post,
         'shape': ( 'box',
             points_3D_np[connection].tolist(),
-            [receptorPSDlength_um, receptorPSDlength_um, receptorPSDlength_um], # The receptors are represented by 200nm x 200nm x 200nm boxes.
+            [receptorPSDwidth_um, psdlength, receptorPSDdepth_um], # The receptors are represented by 200nm x 200nm x 200nm boxes.
             [0.0, 0.0, 0.0],),
         'type': _type,
         'weight': weight,

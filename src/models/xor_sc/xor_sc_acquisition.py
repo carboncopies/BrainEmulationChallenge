@@ -42,6 +42,9 @@ Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Ca
 Parser.add_argument('-Electrodes', action='store_true', help="Place electrodes")
 Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
 Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
+Parser.add_argument("-Address", default="api.braingenix.org", help="Remote server address")
+Parser.add_argument("-Port", default=443, help="Remote server port")
+Parser.add_argument("-NoHttps", action='store_true', help="Override to use https on remote server")
 Args = Parser.parse_args()
 
 #default:
@@ -50,6 +53,9 @@ if Args.Remote:
     api_is_local=False
 if Args.Local:
     api_is_local=True
+remote_https=True
+if Args.NoHttps:
+    remote_https=False
 
 TotalElectrodes:int = 0;
 TotalCARenders:int = 0;
@@ -66,7 +72,7 @@ figspecs = {
 
 # 1. Init NES connection
 
-bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
+bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction', remote_host=Args.Address, remote_port=Args.Port, remote_https=remote_https)
 if api_is_local:
     bg_api.set_local()
 if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=False):
@@ -482,7 +488,7 @@ if (Args.RenderEM):
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
     os.makedirs(f"{savefolder}/ChallengeOutput/EMRegions/0/Data")
-    NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0/Data")
+    NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", 20)
 
     
     # Generate EM JSON Info
@@ -501,7 +507,7 @@ if (Args.RenderEM):
 
     print(" -- Reconstructing Image Stack")
     os.makedirs(f"{savefolder}/EMRegions/0")
-    StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+    #StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
 
     TotalEMRenders += 1
 
