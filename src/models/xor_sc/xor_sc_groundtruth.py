@@ -121,8 +121,8 @@ connection_build_data = {}
 points_3D_np = {
     'P_in0_pos': np.array([-45,-45, 0]),
     'P_in1_pos': np.array([-45, 45, 0]),
-    'I_A0_pos': np.array([-15,-15, 0]),
-    'I_A1_pos': np.array([-15, 15, 0]),
+    'I_A0_pos': np.array([-15,-15, 5]),
+    'I_A1_pos': np.array([-15, 15, -5]),
     'P_B0_pos': np.array([ 15,-45, 0]),
     'P_B1_pos': np.array([ 15, 45, 0]),
     'P_out_pos': np.array([ 45,  0, 0]),
