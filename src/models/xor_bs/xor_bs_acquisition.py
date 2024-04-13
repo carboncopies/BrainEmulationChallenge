@@ -428,7 +428,7 @@ if (Args.RenderEM):
     EMConfig.PixelResolution_nm = 0.1 # is actually um!!!!!
     EMConfig.ImageWidth_px = 1024
     EMConfig.ImageHeight_px = 1024
-    EMConfig.SliceThickness_nm = 100 # This is currently not used.
+    EMConfig.SliceThickness_nm = 100
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
@@ -451,7 +451,10 @@ if (Args.RenderEM):
         'ScanRegionTopRight_um': TopRight_um,
         'SampleRotation_rad': Rotation_rad,
         'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
-        'SliceThickness_um': EMConfig.PixelResolution_nm,
+        'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
+        'XResolution_um': EMConfig.PixelResolution_nm,
+        'YResolution_um': EMConfig.PixelResolution_nm,
+        'ZResolution_um': EMConfig.SliceThickness_nm,
         'NumImagesX': NumImagesX,
         'NumImagesY': NumImagesY,
         'NumSlices': NumSlices

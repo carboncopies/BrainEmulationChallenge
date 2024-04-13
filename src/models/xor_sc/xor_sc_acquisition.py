@@ -497,7 +497,10 @@ if (Args.RenderEM):
         'ScanRegionTopRight_um': TopRight_um,
         'SampleRotation_rad': Rotation_rad,
         'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
-        'SliceThickness_um': EMConfig.PixelResolution_nm,
+        'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
+        'XResolution_um': EMConfig.PixelResolution_nm,
+        'YResolution_um': EMConfig.PixelResolution_nm,
+        'ZResolution_um': EMConfig.SliceThickness_nm,
         'NumImagesX': NumImagesX,
         'NumImagesY': NumImagesY,
         'NumSlices': NumSlices
