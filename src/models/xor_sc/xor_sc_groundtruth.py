@@ -89,13 +89,13 @@ INITTEXT1='''
 
    Circuit:
 
-   P_in0 (-45,-45) -----------------------+ // note that P_A0 has been removed
-                |                         |
-                +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
-                                                          P_out (45, 0)
-                +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
-                |                         |
-   P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+   P_in0 (-45,-45) ---------------------->P_B0 (15,-45) --+
+                |                        /                |
+                +----> I_A0 (-15,-15) + /                 |
+                                       X                  P_out (45, 0)
+                +----> I_A1 (-15, 15) + \                 |
+                |                        \                |
+   P_in1 (-45, 45) ---------------------->P_B1 (15, 45) --+
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -122,7 +122,7 @@ points_3D_np = {
     'P_in0_pos': np.array([-45,-45, 0]),
     'P_in1_pos': np.array([-45, 45, 0]),
     'I_A0_pos': np.array([-15,-15, 5]),
-    'I_A1_pos': np.array([-15, 15, -5]),
+    'I_A1_pos': np.array([-15, 15,-5]),
     'P_B0_pos': np.array([ 15,-45, 0]),
     'P_B1_pos': np.array([ 15, 45, 0]),
     'P_out_pos': np.array([ 45,  0, 0]),

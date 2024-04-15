@@ -97,10 +97,10 @@ INITTEXT1=r'''
 
    Circuit:
 
-        +------------ P_out (0, -45) ------------+
-        |               |         |              |
-        |               |         |              |
-        |     P_B0 (-15,-15)   P_B1 (15, -15)    |
+        +------------>P_out (0, -45)<------------+
+        |                                        |
+        |                                        |
+   P_B0 (-45,-15)<----------+  +--------->P_B1 (45, -15)
         |                    \/                  |
         |                    /\                  |
         |     I_A0 (-15, 15)   I_A1 (15, 15)     |
@@ -132,10 +132,10 @@ connection_build_data = {}
 points_3D_np = {
     'P_in0_pos': np.array([-45, 45, 0]),
     'P_in1_pos': np.array([ 45, 45, 0]),
-    'I_A0_pos' : np.array([-15, 15, 0]),
-    'I_A1_pos' : np.array([ 15, 15, 0]),
-    'P_B0_pos' : np.array([-15,-15, 0]),
-    'P_B1_pos' : np.array([ 15,-15, 0]),
+    'I_A0_pos' : np.array([-15, 15, 5]),
+    'I_A1_pos' : np.array([ 15, 15,-5]),
+    'P_B0_pos' : np.array([-45,-15, 0]),
+    'P_B1_pos' : np.array([ 45,-15, 0]),
     'P_out_pos': np.array([ 0, -45, 0]),
 }
 
