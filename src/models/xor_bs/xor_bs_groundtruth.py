@@ -365,6 +365,10 @@ receptor_morphologies = []
 for connection in connection_pattern_set.keys():
     # Set the total conductance through receptors at synapses at this connection:
     conductance = connection_pattern_set[connection][2]
+    if conductance == AMPA_conductance:
+        neurotransmitter = 'AMPA'
+    else:
+        neurotransmitter = 'GABA'
     weight = connection_pattern_set[connection][3]
     receptor_conductance = conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
     if receptor_conductance >= 0:
@@ -393,6 +397,7 @@ for connection in connection_pattern_set.keys():
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
+        Neurotransmitter=neurotransmitter,
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,

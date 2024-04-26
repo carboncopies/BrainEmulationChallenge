@@ -493,6 +493,7 @@ for connection_data in connection_build_data.values():
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=connection_data['from_ID'],
         DestinationCompartmentID=connection_data['to_ID'],
+        Neurotransmitter=connection_data['type'],
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
