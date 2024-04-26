@@ -330,6 +330,7 @@ for pattern in connection_pattern_set:
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
+        Neurotransmitter='AMPA',
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
