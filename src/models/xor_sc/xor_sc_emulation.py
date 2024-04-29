@@ -36,6 +36,9 @@ import argparse
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-Local", action='store_true', help="Run on local NES server")
 Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
+Parser.add_argument("-Address", default="api.braingenix.org", help="Remote server address")
+Parser.add_argument("-Port", default=443, help="Remote server port")
+Parser.add_argument("-NoHttps", action='store_true', help="Override to use https on remote server")
 Args = Parser.parse_args()
 
 def event_occurs(prob:float)->bool:
@@ -49,6 +52,9 @@ if Args.Remote:
     api_is_local=False
 if Args.Local:
     api_is_local=True
+remote_https=True
+if Args.NoHttps:
+    remote_https=False
 
 randomseed = 12345
 np.random.seed(randomseed)
@@ -62,7 +68,7 @@ figspecs = {
 
 # 1. Init NES connection
 
-bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction')
+bg_api = BG_API_Setup(user='Admonishing', passwd='Instruction', remote_host=Args.Address, remote_port=Args.Port, remote_https=remote_https)
 if api_is_local:
     bg_api.set_local()
     print('Running locally.')
