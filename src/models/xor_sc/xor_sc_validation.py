@@ -1,55 +1,63 @@
 #!/usr/bin/env python3
-# xor_sc_emulation.py
-# Randal A. Koene, 20240326
+# xor_sc_validation.py
+# Randal A. Koene, 20240429
 
 '''
-The XOR SimpleCompartmental example uses branching axons in a representation of a
-meaningful logic circuit to produce expected functional output.
+Validation of XOR SC emulation with ground-truth.
 
-This file implements a validation procedure for the resulting emulation.
-
-VBP process step 03: emulation validation
-WBE topic-level III: evolving similarity / performance metrics
 '''
 
 scriptversion='0.0.1'
 
-import matplotlib.pyplot as plt
-import numpy as np
 from datetime import datetime
 from time import sleep
 import argparse
-import math
 import json
 
 import vbpcommon
+#import common.glb as glb
 import os
-from BrainGenix.BG_API import Credentials, SimClient
-
-from NES_interfaces.Metrics_N1 import Metrics_N1
 
 import BrainGenix.NES as NES
 import BrainGenix
 
-from connectomes import get_connectomes
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
 
-Parser = argparse.ArgumentParser(description="vbp validation script")
-Parser.add_argument("-Local", action='store_true', help="Render remotely or on localhost")
-Parser.add_argument("-Remote", action='store_true', help="Run on remote NES server")
+# 1. Init NES connection
+
+# Handle Arguments for Host, Port, etc
+Parser = argparse.ArgumentParser(
+    description="BrainGenix-API Simple Python Validation Test Script"
+)
+Parser.add_argument(
+    "-Host", default="localhost", type=str, help="Host to connect to"
+)
+Parser.add_argument(
+    "-Port", default=8000, type=int, help="Port number to connect to"
+)
+Parser.add_argument(
+    "-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS"
+)
 Args = Parser.parse_args()
 
-runtime_ms=500.0
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-validation'
-figspecs = {
-    'figsize': (6,6),
-    'linewidth': 0.5,
-    'figext': 'pdf',
-}
+# Start Tests
+print("----------------------------")
+print("Starting BG-EVM Validation Test")
 
-groundtruth, emulation = get_connectomes(Args, user='Admonishing', passwd='Instruction')
+# Create Client Configuration For Local Simulation
+ClientCfg = NES.Client.Configuration()
+ClientCfg.Mode = NES.Client.Modes.Remote
+ClientCfg.Host = Args.Host
+ClientCfg.Port = Args.Port
+ClientCfg.UseHTTPS = Args.UseHTTPS
+ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
+ClientCfg.Username = "Admonishing"
+ClientCfg.Password = "Instruction"
 
-# -- Run structure comparison with Metrics N1
+# Create Client Instance
+print(" -- Creating Client Instance")
+ClientInstance = NES.Client.Client(ClientCfg)
 
-print('')
-metric_n1 = Metrics_N1(emulation, groundtruth)
-metric_n1.validate()
+assert ClientInstance.IsReady()
+
+
