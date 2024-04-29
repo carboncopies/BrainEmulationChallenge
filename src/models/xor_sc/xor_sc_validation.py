@@ -19,6 +19,7 @@ import vbpcommon
 import os
 
 import BrainGenix.NES as NES
+import BrainGenix.EVM as EVM
 import BrainGenix
 
 savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
@@ -60,4 +61,12 @@ ClientInstance = NES.Client.Client(ClientCfg)
 
 assert ClientInstance.IsReady()
 
+with open('./.SimulationHandle', 'r') as f:
+    KTGSaveNAme = f.read()
+
+with open('./.EmulationHandle', 'r') as f:
+    EMUSaveName = f.read()
+
+Result = EVM.Validation.SCValidation(ClientInstance, KTGSaveNAme, EMUSaveName)
+print(Result)
 
