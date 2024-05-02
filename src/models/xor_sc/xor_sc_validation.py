@@ -19,9 +19,13 @@ import vbpcommon
 import os
 
 import BrainGenix.NES as NES
+import BrainGenix.EVM as EVM
 import BrainGenix
 
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
+KGTSaveNameFile = './.SimulationHandle'
+EMUSaveNameFile = './.EmulationHandle'
+DataSaveFile = './.TestData'
+#savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
 
 # 1. Init NES connection
 
@@ -60,4 +64,13 @@ ClientInstance = NES.Client.Client(ClientCfg)
 
 assert ClientInstance.IsReady()
 
+with open(KGTSaveNameFile, 'r') as f:
+    KGTSaveName = f.read()
+with open(EMUSaveNameFile, 'r') as f:
+    EMUSaveName = f.read()
+with open(DataSaveFile, 'r') as f:
+    TestDataJSON = json.load(f)
 
+Results = EVM.Validation.SCValidation(ClientInstance, KGTSaveName, EMUSaveName, TestDataJSON)
+
+print(Results)
