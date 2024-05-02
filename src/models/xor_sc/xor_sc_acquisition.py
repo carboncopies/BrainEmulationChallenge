@@ -47,6 +47,7 @@ Parser.add_argument("-Remote", action='store_true', help="Run on remote NES serv
 Parser.add_argument("-Address", default="api.braingenix.org", help="Remote server address")
 Parser.add_argument("-Port", default=443, help="Remote server port")
 Parser.add_argument("-NoHttps", action='store_true', help="Override to use https on remote server")
+Parser.add_argument("-NoDownloadEM", action="store_true", help="Disable downloading of EM Images")
 Args = Parser.parse_args()
 
 #default:
@@ -99,7 +100,7 @@ while True:
     sleep(0.005)
     response_list = bg_api.BGNES_get_manager_task_status(taskID=loadingtaskID)
     if not isinstance(response_list, list):
-        print('Bad response format. Expected list of NESRequest responses.')
+        print('Bad response format. NoDownloadEMExpected list of NESRequest responses.')
         exit(1)
     task_status_response = response_list[0]
     if task_status_response['StatusCode'] != 0:
@@ -480,6 +481,12 @@ if (Args.RenderEM):
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
+    EMConfig.ImageNoiseIntensity = 130
+    EMConfig.BorderThickness_um = 0.0275
+    EMConfig.GuassianBlurSigma = 1.25
+    EMConfig.BorderThickness_um = 0.3
+    EMConfig.PostBlurNoisePasses = 1
+    EMConfig.PreBlurNoisePasses = 0
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
 
@@ -490,32 +497,40 @@ if (Args.RenderEM):
     VSDAEMInstance.QueueRenderOperation()
     VSDAEMInstance.WaitForRender()
     os.makedirs(f"{savefolder}/ChallengeOutput/EMRegions/0/Data")
-    NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", 20)
 
-    
-    # Generate EM JSON Info
-    EMInfoJSON:dict = {
-        'ScanRegionBottomLeft_um': BottomLeft_um,
-        'ScanRegionTopRight_um': TopRight_um,
-        'SampleRotation_rad': Rotation_rad,
-        'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
-        'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
-        'XResolution_um': EMConfig.PixelResolution_nm,
-        'YResolution_um': EMConfig.PixelResolution_nm,
-        'ZResolution_um': EMConfig.SliceThickness_nm,
-        'NumImagesX': NumImagesX,
-        'NumImagesY': NumImagesY,
-        'NumSlices': NumSlices
-    }
-    with open(f"{savefolder}/ChallengeOutput/EMRegions/0/Params.json", 'w') as F:
-        F.write(json.dumps(EMInfoJSON))
+    if (not Args.NoDownloadEM):
+        NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", 20)
 
-    print(" -- Reconstructing Image Stack")
-    os.makedirs(f"{savefolder}/EMRegions/0")
-    #StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+
+        # Generate EM JSON Info
+        EMInfoJSON:dict = {
+            'ScanRegionBottomLeft_um': BottomLeft_um,
+            'ScanRegionTopRight_um': TopRight_um,
+            'SampleRotation_rad': Rotation_rad,
+            'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
+            'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
+            'XResolution_um': EMConfig.PixelResolution_nm,
+            'YResolution_um': EMConfig.PixelResolution_nm,
+            'ZResolution_um': EMConfig.SliceThickness_nm,
+            'NumImagesX': NumImagesX,
+            'NumImagesY': NumImagesY,
+            'NumSlices': NumSlices
+        }
+        with open(f"{savefolder}/ChallengeOutput/EMRegions/0/Params.json", 'w') as F:
+            F.write(json.dumps(EMInfoJSON))
+
+        print(" -- Reconstructing Image Stack")
+        os.makedirs(f"{savefolder}/EMRegions/0")
+        #StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+
+    # if (Args.Neuroglancer):
+        # NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
 
     if (Args.Neuroglancer):
-        NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
+        VSDAEMInstance.PrepareNeuroglancerDataset()
+        VSDAEMInstance.WaitForConversion()
+        print(f"Dataset Handle: {VSDAEMInstance.GetDatasetHandle()}")
+        print(f"URL: {VSDAEMInstance.GetNeuroglancerDatasetURL()}")
 
 
     TotalEMRenders += 1
