@@ -535,6 +535,10 @@ t_soma_fire_ms = [
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
+# Save for use in validation script
+with open('.TestData', 'w') as f:
+    json.dump(t_soma_fire_ms, f)
+
 response = bg_api.BGNES_set_specific_AP_times(
     TimeNeuronPairs=t_soma_fire_ms,
 )
