@@ -535,16 +535,14 @@ t_soma_fire_ms = [
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
-# Save for use in validation script
-with open('.TestData', 'w') as f:
-    json.dump(t_soma_fire_ms, f)
-
 response = bg_api.BGNES_set_specific_AP_times(
     TimeNeuronPairs=t_soma_fire_ms,
 )
 
+# Save for use in validation script
 t_soma_file_ms.append((runtime_ms, -1)) # Signals maximum runfor time.
-
+with open('.TestData', 'w') as f:
+    json.dump(t_soma_fire_ms, f)
 
 with open(".SimulationHandle", "w") as f:
     print(f"Saving simulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
