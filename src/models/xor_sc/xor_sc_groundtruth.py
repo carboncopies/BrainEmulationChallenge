@@ -501,6 +501,15 @@ for connection_data in connection_build_data.values():
     )
     #receptor_functionals.append( (receptor, connection_data['post']) )
 
+# 3.5 Save the ground-truth system.
+#     Saving this after setting up specific stimulation so that it is included
+#     when loading in following scripts.
+
+response = bg_api.BGNES_save()
+print('Saved simulation: '+str(response))
+
+# 4. Init experiment
+
 STIMTEXT1='''
 Dynamic activity:
 
@@ -517,8 +526,6 @@ spiking sequences:
   1 1 = (300.0, P_in0), (300.0, P_in1)
 '''
 
-# 4. Init experiment
-
 print(STIMTEXT1)
 t_soma_fire_ms = [
     (100.0, cells['P_in0'].ID),
@@ -532,17 +539,12 @@ response = bg_api.BGNES_set_specific_AP_times(
     TimeNeuronPairs=t_soma_fire_ms,
 )
 
-# 4.1 Save the ground-truth system.
-#     Saving this after setting up specific stimulation so that it is included
-#     when loading in following scripts.
+t_soma_file_ms.append((runtime_ms, -1)) # Signals maximum runfor time.
 
-response = bg_api.BGNES_save()
-print('Saved simulation: '+str(response))
 
 with open(".SimulationHandle", "w") as f:
     print(f"Saving simulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
     f.write(response[0]['SavedSimName'])
-
 
 # 5. Run experiment
 
