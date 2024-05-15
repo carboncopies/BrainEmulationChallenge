@@ -19,6 +19,7 @@ scriptversion='0.0.1'
 import numpy as np
 from datetime import datetime
 from time import sleep
+import json
 
 import vbpcommon
 from BrainGenix.BG_API import BG_API_Setup
@@ -507,6 +508,7 @@ for connection_data in connection_build_data.values():
 
 response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
+savedsimname = response[0]['SavedSimName']
 
 # 4. Init experiment
 
@@ -545,8 +547,8 @@ with open('.TestData', 'w') as f:
     json.dump(t_soma_fire_ms, f)
 
 with open(".SimulationHandle", "w") as f:
-    print(f"Saving simulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
-    f.write(response[0]['SavedSimName'])
+    print(f"Saving simulation handle '{savedsimname}' to '.SimulationHandle'")
+    f.write(savedsimname)
 
 # 5. Run experiment
 

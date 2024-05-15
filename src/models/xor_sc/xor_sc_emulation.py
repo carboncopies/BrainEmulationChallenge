@@ -522,6 +522,8 @@ for connection_data in connection_build_data.values():
 
 response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
+savedsimname = response[0]['SavedSimName']
+
 
 # 4. Init experiment
 
@@ -555,8 +557,8 @@ response = bg_api.BGNES_set_specific_AP_times(
 )
 
 with open(".EmulationHandle", "w") as f:
-    print(f"Saving emulation handle '{response[0]['SavedSimName']}' to '.SimulationHandle'")
-    f.write(response[0]['SavedSimName'])
+    print(f"Saving emulation handle '{savedsimname}' to '.SimulationHandle'")
+    f.write(savedsimname)
 
 
 # 5. Run experiment
