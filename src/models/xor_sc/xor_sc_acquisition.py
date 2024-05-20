@@ -277,8 +277,8 @@ CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made 
 VSDACAInstance = bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
 
-BottomLeftPos_um = [-10,-10, -1]
-TopRightPos_um = [10,10,1]
+BottomLeftPos_um = [-60,-60, -6]
+TopRightPos_um = [60,60,6]
 SampleRotation_rad = [0,0,0]
 
 VSDACAInstance.DefineScanRegion(BottomLeftPos_um, TopRightPos_um, SampleRotation_rad)
