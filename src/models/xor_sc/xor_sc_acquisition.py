@@ -149,10 +149,10 @@ confounding factors.
 print(ACQSETUPTEXT1)
 
 t_soma_fire_ms = [
-    (100.0, cells['P_in0'].ID),
-    (200.0, cells['P_in1'].ID),
-    (300.0, cells['P_in0'].ID),
-    (300.0, cells['P_in1'].ID),
+    (100.0, 0),
+    (200.0, 1),
+    (300.0, 0),
+    (300.0, 1),
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
