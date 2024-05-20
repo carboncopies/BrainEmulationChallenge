@@ -148,6 +148,20 @@ confounding factors.
 
 print(ACQSETUPTEXT1)
 
+t_soma_fire_ms = [
+    (100.0, cells['P_in0'].ID),
+    (200.0, cells['P_in1'].ID),
+    (300.0, cells['P_in0'].ID),
+    (300.0, cells['P_in1'].ID),
+]
+print('Directed somatic firing: '+str(t_soma_fire_ms))
+
+response = bg_api.BGNES_set_specific_AP_times(
+    TimeNeuronPairs=t_soma_fire_ms,
+)
+t_max_ms=-1 # record forever
+bg_api.BGNES_simulation_recordall(t_max_ms)
+
 # 3.1 Initialize spontaneous activity
 
 use_spontaneous_activity=False
