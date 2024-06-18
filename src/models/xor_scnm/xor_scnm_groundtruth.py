@@ -77,7 +77,7 @@ neuron_IPSP = 870.0 # nA
 
 segments = netmorph_to_segments(Args.NmSource)
 
-print('Got %d segments. Converting each to shape and compartment (this may take a while)...')
+print('Got %d segments. Converting each to shape and compartment (this may take a while)...' % len(segments))
 
 neuron_compartments = {}
 
