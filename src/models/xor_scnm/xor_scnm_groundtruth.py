@@ -71,8 +71,13 @@ neuron_Vrest_mV = -60.0
 neuron_Vact_mV = -50.0
 neuron_Vahp_mV = -20.0
 neuron_tau_AHP_ms = 30.0
+neuron_tau_PSPr = 5.0
+neuron_tau_PSPd = 25.0
+neuron_IPSP = 870.0 # nA
 
 segments = netmorph_to_segments(Args.NmSource)
+
+print('Got %d segments. Converting each to shape and compartment (this may take a while)...')
 
 neuron_compartments = {}
 
