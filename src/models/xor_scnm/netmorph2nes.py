@@ -79,7 +79,7 @@ class vec3d:
         self.x = source.x
         self.y = source.y
         self.z = source.z
-    def point()->list:
+    def point(self)->list:
         return [ self.x, self.y, self.z ]
 
 class segment:
