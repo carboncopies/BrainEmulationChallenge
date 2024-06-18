@@ -152,3 +152,7 @@ response = bg_api.BGNES_save()
 print('Saved simulation: '+str(response))
 savedsimname = response[0]['SavedSimName']
 
+with open(".SimulationHandle", "w") as f:
+    print(f"Saving simulation handle '{savedsimname}' to '.SimulationHandle'")
+    f.write(savedsimname)
+
