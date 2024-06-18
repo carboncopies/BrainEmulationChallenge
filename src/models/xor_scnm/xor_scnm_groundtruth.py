@@ -12,7 +12,7 @@ import json
 import vbpcommon
 from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
-from netmorph2nes import netmorph_to_segments
+from netmorph2nes import netmorph_to_somas_and_segments
 
 
 import argparse
@@ -75,11 +75,40 @@ neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
 neuron_IPSP = 870.0 # nA
 
-segments = netmorph_to_segments(Args.NmSource)
+somas, segments = netmorph_to_somas_and_segments(Args.NmSource)
 
-print('Got %d segments. Converting each to shape and compartment (this may take a while)...' % len(segments))
+print('Got %d somas and %d segments. Converting each to shape and compartment (this may take a while)...' % (len(somas), len(segments)))
 
 neuron_compartments = {}
+
+for soma in somas:
+
+    neuron_label = soma.label
+    radius = soma.radius
+    center = soma.point()
+
+    if neuron_label not in neuron_compartments:
+        neuron_compartments[neuron_label] = {
+            'dendrite': [],
+            'axon': [],
+            'soma': [],
+        }
+
+    shape_ref = bg_api.BGNES_sphere_create(
+        radius_um=radius,
+        center_um=center,)
+
+    compartment_ref = bg_api.BGNES_SC_compartment_create(
+        ShapeID=shape_ref.ID,
+        MembranePotential_mV=neuron_Vm_mV,
+        RestingPotential_mV=neuron_Vrest_mV,
+        SpikeThreshold_mV=neuron_Vact_mV,
+        DecayTime_ms=neuron_tau_AHP_ms,
+        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+
+    neuron_compartments[neuron_label]['soma'].append(compartment_ref)
+
+print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
 
 for segment in segments:
     start_point = segment.start.point()
@@ -112,7 +141,7 @@ for segment in segments:
 
     neuron_compartments[neuron_label][fiberstructure_type].append(compartment_ref)
 
-print('Found %d segments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
+print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
 
 ### 3.3 Create neurons.
 

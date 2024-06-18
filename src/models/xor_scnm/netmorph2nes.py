@@ -2,7 +2,7 @@
 #
 # Randal A. Koene, 20240617
 
-modelname = 'nesvbp_202406151142'
+modelname = '/home/randalk/src/nnmodels/netmorph/examples/nesvbp/nesvbp_202406181110'
 
 datafiles = [
     'bifurcationnodes',
@@ -105,13 +105,38 @@ def make_segments(data:dict)->list:
             segments.append(segment(parentdata, nodedata))
     return segments
 
-def netmorph_to_segments(modelname:str)->list:
+class soma:
+    def __init__(self, data:dict, idx:int):
+        keyslist = list(data.keys())
+        self.idx = data[keyslist[0]][idx]
+        self.label = data[keyslist[1]][idx]
+        self.type = data[keyslist[2]][idx]
+        self.region = data[keyslist[3]][idx]
+        self.x = data[keyslist[4]][idx]
+        self.y = data[keyslist[5]][idx]
+        self.z = data[keyslist[6]][idx]
+        self.radius = data[keyslist[7]][idx]
+    def point(self)->list:
+        return [ self.x, self.y, self.z ]
+
+def make_somas(data:dict)->list:
+    somas = []
+    neurondata = data['neurons']
+    numneurons = len(neurondata[list(neurondata.keys())[0]])
+    for idx in range(numneurons):
+        neuron_soma = soma(neurondata, idx)
+        somas.append(neuron_soma)
+    return somas
+
+def netmorph_to_somas_and_segments(modelname:str)->tuple:
     filenames = make_filenames(modelname)
     data = load_netmorph_data(filenames)
     segments = make_segments(data)
-    return segments
+    somas = make_somas(data)
+    return somas, segments
 
 if __name__ == '__main__':
     print('Loading data from netmorph output files into dict of dict of lists...')
-    segments = netmorph_to_segments(modelname)
+    somas, segments = netmorph_to_somas_and_segments(modelname)
+    print('Found %d somas.' % len(somas))
     print('Found %d segments.' % len(segments))
