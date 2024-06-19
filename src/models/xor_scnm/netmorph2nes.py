@@ -49,9 +49,11 @@ class nodedata:
         self.somaneuron_label = dataline[6]
         if len(dataline)>8:
             self.parent_idx = int(dataline[7])
-            self.t_genesis = float(dataline[8])
+            self.diameter = float(dataline[8])
+            self.t_genesis = float(dataline[9])
         else:
             self.parent_idx = None
+            self.diameter = None
             self.t_genesis = float(dataline[7])
 
 def load_data_from_file(dfile:str, filenames:dict)->dict:
@@ -86,8 +88,16 @@ class segment:
     def __init__(self, node1:nodedata, node2:nodedata):
         self.start = vec3d(node1)
         self.end = vec3d(node2)
-        self.startradius = 1.0
-        self.endradius = 1.0
+        self.startradius = node1.diameter/2.0
+        self.endradius = node2.diameter/2.0
+        if self.startradius is None:
+            self.startradius = self.endradius
+        if self.endradius is None:
+            self.endradius = self.startradius
+        if self.startradius == 0.0:
+            self.startradius = 0.5
+        if self.endradius == 0.0:
+            self.endradius = 0.5
         self.data = node2
 
 # Use the bifurcationnodes, continuationnodes, growthcones and rootnodes
