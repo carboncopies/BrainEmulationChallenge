@@ -86,6 +86,7 @@ for soma in somas:
     neuron_label = soma.label
     radius = soma.radius
     center = soma.point()
+    print("radius %s center %s" % (str(radius), str(center))
 
     if neuron_label not in neuron_compartments:
         neuron_compartments[neuron_label] = {
