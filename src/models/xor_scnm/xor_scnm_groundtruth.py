@@ -81,35 +81,35 @@ print('Got %d somas and %d segments. Converting each to shape and compartment (t
 
 neuron_compartments = {}
 
-for soma in somas:
+# for soma in somas:
 
-    neuron_label = soma.label
-    radius = soma.radius
-    center = soma.point()
-    print("radius %s center %s" % (str(radius), str(center)))
+#     neuron_label = soma.label
+#     radius = soma.radius
+#     center = soma.point()
+#     print("radius %s center %s" % (str(radius), str(center)))
 
-    if neuron_label not in neuron_compartments:
-        neuron_compartments[neuron_label] = {
-            'dendrite': [],
-            'axon': [],
-            'soma': [],
-        }
+#     if neuron_label not in neuron_compartments:
+#         neuron_compartments[neuron_label] = {
+#             'dendrite': [],
+#             'axon': [],
+#             'soma': [],
+#         }
 
-    shape_ref = bg_api.BGNES_sphere_create(
-        radius_um=radius,
-        center_um=center,)
+#     shape_ref = bg_api.BGNES_sphere_create(
+#         radius_um=radius,
+#         center_um=center,)
 
-    compartment_ref = bg_api.BGNES_SC_compartment_create(
-        ShapeID=shape_ref.ID,
-        MembranePotential_mV=neuron_Vm_mV,
-        RestingPotential_mV=neuron_Vrest_mV,
-        SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+#     compartment_ref = bg_api.BGNES_SC_compartment_create(
+#         ShapeID=shape_ref.ID,
+#         MembranePotential_mV=neuron_Vm_mV,
+#         RestingPotential_mV=neuron_Vrest_mV,
+#         SpikeThreshold_mV=neuron_Vact_mV,
+#         DecayTime_ms=neuron_tau_AHP_ms,
+#         AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
 
-    neuron_compartments[neuron_label]['soma'].append(compartment_ref)
+#     neuron_compartments[neuron_label]['soma'].append(compartment_ref)
 
-print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
+# print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
 
 for segment in segments:
     start_point = segment.start.point()
