@@ -88,12 +88,14 @@ class segment:
     def __init__(self, node1:nodedata, node2:nodedata):
         self.start = vec3d(node1)
         self.end = vec3d(node2)
-        self.startradius = node1.diameter/2.0
-        self.endradius = node2.diameter/2.0
+        self.startradius = node1.diameter
+        self.endradius = node2.diameter
         if self.startradius is None:
             self.startradius = self.endradius
         if self.endradius is None:
             self.endradius = self.startradius
+        self.startradius /= 2.0
+        self.endradius /= 2.0
         if self.startradius == 0.0:
             self.startradius = 0.5
         if self.endradius == 0.0:
