@@ -120,14 +120,14 @@ def make_segments(data:dict)->list:
 class soma:
     def __init__(self, data:dict, idx:int):
         keyslist = list(data.keys())
-        self.idx = data[keyslist[0]][idx]
+        self.idx = int(data[keyslist[0]][idx])
         self.label = data[keyslist[1]][idx]
         self.type = data[keyslist[2]][idx]
         self.region = data[keyslist[3]][idx]
-        self.x = data[keyslist[4]][idx]
-        self.y = data[keyslist[5]][idx]
-        self.z = data[keyslist[6]][idx]
-        self.radius = data[keyslist[7]][idx]
+        self.x = float(data[keyslist[4]][idx])
+        self.y = float(data[keyslist[5]][idx])
+        self.z = float(data[keyslist[6]][idx])
+        self.radius = float(data[keyslist[7]][idx])
     def point(self)->list:
         return [ self.x, self.y, self.z ]
 
