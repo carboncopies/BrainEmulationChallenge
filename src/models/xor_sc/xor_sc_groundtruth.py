@@ -110,8 +110,8 @@ interneuron_soma_radius_um = 3.0               # A typical radius for the soma o
 
 ### Axon and Dendrite start and end sizes
 
-end0_radius_um = 0.75 # Typical radius at the axon hillock of a pyramidal neuron in human cortex.
-end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neurons in human cortex.
+end0_radius_um = 1.25 # Typical radius at the axon hillock of a pyramidal neuron in human cortex.
+end1_radius_um = 0.75  # Typical radius of distal axon segments of pyramidal neurons in human cortex.
 
 ### Relevant 3D points (as numpy arrays) for the build. See image ...
 

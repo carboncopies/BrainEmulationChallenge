@@ -148,20 +148,6 @@ confounding factors.
 
 print(ACQSETUPTEXT1)
 
-t_soma_fire_ms = [
-    (100.0, 0),
-    (200.0, 1),
-    (300.0, 0),
-    (300.0, 1),
-]
-print('Directed somatic firing: '+str(t_soma_fire_ms))
-
-response = bg_api.BGNES_set_specific_AP_times(
-    TimeNeuronPairs=t_soma_fire_ms,
-)
-t_max_ms=-1 # record forever
-bg_api.BGNES_simulation_recordall(t_max_ms)
-
 # 3.1 Initialize spontaneous activity
 
 use_spontaneous_activity=False
@@ -260,12 +246,12 @@ calcium_specs = {
 }
 
 CAConfig = NES.VSDA.Calcium.Configuration()
-CAConfig.BrightnessAmplification = 8.0
-CAConfig.AttenuationPerUm = 0.002
-CAConfig.VoxelResolution_nm = 0.05 # This is actually um!!!!!!!!!!!
+CAConfig.BrightnessAmplification = 3.0
+CAConfig.AttenuationPerUm = 0.01
+CAConfig.VoxelResolution_nm = 0.025 # This is actually um!!!!!!!!!!!
 CAConfig.ImageWidth_px = 1024
 CAConfig.ImageHeight_px = 1024
-CAConfig.NumVoxelsPerSlice = 64
+CAConfig.NumVoxelsPerSlice = 16
 CAConfig.ScanRegionOverlap_percent = 0
 CAConfig.FlourescingNeuronIDs = []
 CAConfig.NumPixelsPerVoxel_px = 1
@@ -277,8 +263,8 @@ CAConfig.ImagingInterval_ms = 10.0   # Interval at which CCD snapshots are made 
 VSDACAInstance = bg_api.Simulation.Sim.AddVSDACa(CAConfig)
 
 
-BottomLeftPos_um = [-60,-60, -6]
-TopRightPos_um = [60,60,6]
+BottomLeftPos_um = [-10,-10, -1]
+TopRightPos_um = [10,10,1]
 SampleRotation_rad = [0,0,0]
 
 VSDACAInstance.DefineScanRegion(BottomLeftPos_um, TopRightPos_um, SampleRotation_rad)
@@ -327,7 +313,7 @@ if (Args.RenderCA):
         F.write(json.dumps(CaJSON))
 
     os.makedirs(f"{savefolder}/CARegions/0")
-    CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+    ### Buggy: CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
 
 
@@ -486,68 +472,115 @@ if (Args.RenderVisualization):
 if (Args.RenderEM):
     print("\nRendering EM image stack to disk\n")
 
-    # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
-    EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.05 # is actually um!!!!!
+    Configs:list = []
+
+    # Setup Configs
+    EMConfig = NES.VSDA.EM.KrapMicroscope()
+    EMConfig.PixelResolution_um = 0.05
     EMConfig.ImageWidth_px = 512
     EMConfig.ImageHeight_px = 512
-    EMConfig.SliceThickness_nm = 0.2 # actually um!
+    EMConfig.SliceThickness_um = 0.2
     EMConfig.ScanRegionOverlap_percent = 0
     EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
     EMConfig.NumPixelsPerVoxel_px = 1
-    EMConfig.ImageNoiseIntensity = 130
     EMConfig.BorderThickness_um = 0.0275
-    EMConfig.GuassianBlurSigma = 1.25
     EMConfig.BorderThickness_um = 0.3
-    EMConfig.PostBlurNoisePasses = 1
-    EMConfig.PreBlurNoisePasses = 0
-    VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
+    EMConfig.InterferencePatternXScale_um = 2
+    Configs.append(EMConfig)
+
+    EMConfig = NES.VSDA.EM.Configuration()
+    EMConfig.PixelResolution_um = 0.05
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
+    EMConfig.SliceThickness_um = 0.2
+    EMConfig.ScanRegionOverlap_percent = 0
+    EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
+    EMConfig.NumPixelsPerVoxel_px = 1
+    EMConfig.BorderThickness_um = 0.0275
+    EMConfig.BorderThickness_um = 0.3
+    EMConfig.InterferencePatternXScale_um = 2
+    Configs.append(EMConfig)
+
+    EMConfig = NES.VSDA.EM.KrapMicroscope()
+    EMConfig.PixelResolution_um = 0.05
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
+    EMConfig.SliceThickness_um = 0.2
+    EMConfig.ScanRegionOverlap_percent = 0
+    EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
+    EMConfig.NumPixelsPerVoxel_px = 1
+    EMConfig.BorderThickness_um = 0.0275
+    EMConfig.BorderThickness_um = 0.3
+    EMConfig.InterferencePatternXScale_um = 2
+    EMConfig.TearingEnabled = True
+    Configs.append(EMConfig)
+
+    EMConfig = NES.VSDA.EM.Configuration()
+    EMConfig.PixelResolution_um = 0.05
+    EMConfig.ImageWidth_px = 512
+    EMConfig.ImageHeight_px = 512
+    EMConfig.SliceThickness_um = 0.2
+    EMConfig.ScanRegionOverlap_percent = 0
+    EMConfig.MicroscopeFOV_deg = 50 # This is currently not used.
+    EMConfig.NumPixelsPerVoxel_px = 1
+    EMConfig.BorderThickness_um = 0.0275
+    EMConfig.BorderThickness_um = 0.3
+    EMConfig.EnableInterferencePattern = False
+    Configs.append(EMConfig)
+
+    for i in range(len(Configs)):
+
+        EMConfig = Configs[i]
+
+        # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
+
+        VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
 
-    BottomLeft_um = [-75,-75,-20]
-    TopRight_um = [75,75,20]
-    Rotation_rad = [0,0,0]
-    VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
-    VSDAEMInstance.QueueRenderOperation()
-    VSDAEMInstance.WaitForRender()
-    os.makedirs(f"{savefolder}/ChallengeOutput/EMRegions/0/Data")
+        BottomLeft_um = [-75,-75,-20]
+        TopRight_um = [75,75,20]
+        Rotation_rad = [0,0,0]
+        VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
+        VSDAEMInstance.QueueRenderOperation()
+        VSDAEMInstance.WaitForRender()
+        os.makedirs(f"{savefolder}/ChallengeOutput/EMRegions/{i}/Data")
 
-    if (not Args.NoDownloadEM):
-        NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", 20)
-
-
-        # Generate EM JSON Info
-        EMInfoJSON:dict = {
-            'ScanRegionBottomLeft_um': BottomLeft_um,
-            'ScanRegionTopRight_um': TopRight_um,
-            'SampleRotation_rad': Rotation_rad,
-            'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
-            'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
-            'XResolution_um': EMConfig.PixelResolution_nm,
-            'YResolution_um': EMConfig.PixelResolution_nm,
-            'ZResolution_um': EMConfig.SliceThickness_nm,
-            'NumImagesX': NumImagesX,
-            'NumImagesY': NumImagesY,
-            'NumSlices': NumSlices
-        }
-        with open(f"{savefolder}/ChallengeOutput/EMRegions/0/Params.json", 'w') as F:
-            F.write(json.dumps(EMInfoJSON))
-
-        print(" -- Reconstructing Image Stack")
-        os.makedirs(f"{savefolder}/EMRegions/0")
-        #StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
-
-    # if (Args.Neuroglancer):
-        # NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
-
-    if (Args.Neuroglancer):
-        VSDAEMInstance.PrepareNeuroglancerDataset()
-        VSDAEMInstance.WaitForConversion()
-        print(f"Dataset Handle: {VSDAEMInstance.GetDatasetHandle()}")
-        print(f"URL: {VSDAEMInstance.GetNeuroglancerDatasetURL()}")
+        if (not Args.NoDownloadEM):
+            NumImagesX, NumImagesY, NumSlices = VSDAEMInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/EMRegions/{i}/Data", 20)
 
 
-    TotalEMRenders += 1
+            # Generate EM JSON Info
+            EMInfoJSON:dict = {
+                'ScanRegionBottomLeft_um': BottomLeft_um,
+                'ScanRegionTopRight_um': TopRight_um,
+                'SampleRotation_rad': Rotation_rad,
+                'Overlap_percent': EMConfig.ScanRegionOverlap_percent,
+                'SliceThickness_um': EMConfig.SliceThickness_nm, # We are modeling FIBSEM, this is the same as ZResolution_um.
+                'XResolution_um': EMConfig.PixelResolution_nm,
+                'YResolution_um': EMConfig.PixelResolution_nm,
+                'ZResolution_um': EMConfig.SliceThickness_nm,
+                'NumImagesX': NumImagesX,
+                'NumImagesY': NumImagesY,
+                'NumSlices': NumSlices
+            }
+            with open(f"{savefolder}/ChallengeOutput/EMRegions/{i}/Params.json", 'w') as F:
+                F.write(json.dumps(EMInfoJSON))
+
+            print(" -- Reconstructing Image Stack")
+            os.makedirs(f"{savefolder}/EMRegions/{i}")
+            StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+
+        # if (Args.Neuroglancer):
+            # NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
+
+        if (Args.Neuroglancer):
+            VSDAEMInstance.PrepareNeuroglancerDataset()
+            VSDAEMInstance.WaitForConversion()
+            print(f"Dataset Handle: {VSDAEMInstance.GetDatasetHandle()}")
+            print(f"URL: {VSDAEMInstance.GetNeuroglancerDatasetURL()}")
+
+
+        TotalEMRenders += 1
 
 
 # ----------------------------------------------------
