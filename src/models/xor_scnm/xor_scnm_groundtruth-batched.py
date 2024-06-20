@@ -125,7 +125,7 @@ for idx in range(len(somas)):
     compartment_res = bg_api.BGNES_NES_Common(
         ReqFunc="Simulation/Compartments/SC/Create",
         ReqParams={
-            "ShapeID": ShapeIDs[idx],
+            "ShapeID": shapeIDs[idx],
             "MembranePotential_mV": neuron_Vm_mV,
             "SpikeThreshold_mV": neuron_Vact_mV,
             "DecayTime_ms": neuron_tau_AHP_ms,
