@@ -142,7 +142,7 @@ def make_somas(data:dict)->list:
 
 class synapse:
     def __init__(self, data:dict, idx:int):
-        keylist = list(data.keys())
+        keyslist = list(data.keys())
         self.idx = int(data[keyslist[0]][idx])
         self.type = data[keyslist[1]][idx]
         self.presyn_x = float(data[keyslist[2]][idx])
