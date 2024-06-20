@@ -145,6 +145,7 @@ soma_compartment_IDs = get_IDs(bg_api.BGNES_NESRequest(),'CompartmentID')
 
 for idx in range(len(somas)):
     neuron_label = somas[idx].label
+    print('Soma %d has neuron label %s.' % (idx, neuron_label))
 
     if neuron_label not in neuron_compartments:
         neuron_compartments[neuron_label] = {
