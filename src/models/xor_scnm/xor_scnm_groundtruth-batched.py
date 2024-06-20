@@ -105,6 +105,8 @@ for soma in somas:
     if shape_res != "batched":
         exit(1)
 
+print('Created soma shapes. Now building soma compartments...')
+
 # 3. b) Make the NES call and collect all the sphere IDs
 
 def get_IDs(responses:list, idtype:str)->list:
@@ -160,6 +162,8 @@ print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(ne
 
 # 3. e) Collect and batch soma cylinder builds
 
+print('Creating neurite shapes...')
+
 for segment in segments:
     start_point = segment.start.point()
     end_point = segment.end.point()
@@ -187,6 +191,8 @@ for segment in segments:
 # 3. f) Make the NES call and collect all the cylinder IDs
 
 shapeIDs = get_IDs(bg_api.BGNES_NESRequest(),'ShapeID')
+
+print('Built neurite shapes. Now building neurite compartments...')
 
 # 3. g) Collect and batch neurite compartment builds
 
