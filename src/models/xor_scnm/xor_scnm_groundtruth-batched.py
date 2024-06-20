@@ -117,7 +117,7 @@ def get_IDs(responses:list, idtype:str)->list:
             IDs.append(response[idtype])
     return IDs
 
-shapeIDs = get_shapeIDs(bg_api.BGNES_NESRequest(),'ShapeID')
+shapeIDs = get_IDs(bg_api.BGNES_NESRequest(),'ShapeID')
 
 # 3. c) Collect and batch soma compartment builds
 
@@ -141,7 +141,7 @@ for idx in range(len(somas)):
 
 # 3. d) Make the NES call and collect all the soma compartment IDs
 
-soma_compartment_IDs = get_shapeIDs(bg_api.BGNES_NESRequest(),'CompartmentID')
+soma_compartment_IDs = get_IDs(bg_api.BGNES_NESRequest(),'CompartmentID')
 
 for idx in range(len(somas)):
     neuron_label = somas[idx].label
