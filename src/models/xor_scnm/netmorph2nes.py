@@ -140,15 +140,46 @@ def make_somas(data:dict)->list:
         somas.append(neuron_soma)
     return somas
 
-def netmorph_to_somas_and_segments(modelname:str)->tuple:
+class synapse:
+    def __init__(self, data:dict, idx:int):
+        keylist = list(data.keys())
+        self.idx = int(data[keyslist[0]][idx])
+        self.type = data[keyslist[1]][idx]
+        self.presyn_x = float(data[keyslist[2]][idx])
+        self.presyn_y = float(data[keyslist[3]][idx])
+        self.presyn_z = float(data[keyslist[4]][idx])
+        self.postsyn_x = float(data[keyslist[5]][idx])
+        self.postsyn_y = float(data[keyslist[6]][idx])
+        self.postsyn_z = float(data[keyslist[7]][idx])
+        self.preaxon_piece = data[keyslist[8]][idx]
+        self.postdendrite_piece = data[keyslist[9]][idx]
+        self.presyn_neuron = data[keyslist[10]][idx]
+        self.postsyn_neuron = data[keyslist[11]][idx]
+        self.t_synaptogenesis = data[keyslist[12]][idx]
+        self.basalapical = data[keyslist[13]][idx]
+    def postsyn_receptor_point()->list:
+        return [self.postsyn_x, self.postsyn_y, self.postsyn_z]
+
+def make_synapses(data:dict)->list:
+    synapses = []
+    synapsedata = data['synapses']
+    numsynapses = len(synapsedata[list(synapsedata.keys())[0]])
+    for idx in range(numsynapses):
+        syn = synapse(synapsedata, idx)
+        synapses.append(syn)
+    return synapses
+
+def netmorph_to_somas_segments_synapses(modelname:str)->tuple:
     filenames = make_filenames(modelname)
     data = load_netmorph_data(filenames)
     segments = make_segments(data)
     somas = make_somas(data)
-    return somas, segments
+    synapses = make_synapses(data)
+    return somas, segments, synapses
 
 if __name__ == '__main__':
     print('Loading data from netmorph output files into dict of dict of lists...')
-    somas, segments = netmorph_to_somas_and_segments(modelname)
+    somas, segments, synapses = netmorph_to_somas_segments_synapses(modelname)
     print('Found %d somas.' % len(somas))
     print('Found %d segments.' % len(segments))
+    print('Found %d synapses.' % len(synapses))

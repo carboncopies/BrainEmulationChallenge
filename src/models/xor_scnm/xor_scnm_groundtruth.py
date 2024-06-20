@@ -12,7 +12,7 @@ import json
 import vbpcommon
 from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
-from netmorph2nes import netmorph_to_somas_and_segments
+from netmorph2nes import netmorph_to_somas_segments_synapses
 
 
 import argparse
@@ -75,9 +75,9 @@ neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
 neuron_IPSP = 870.0 # nA
 
-somas, segments = netmorph_to_somas_and_segments(Args.NmSource)
+somas, segments, synapses = netmorph_to_somas_segments_synapses(Args.NmSource)
 
-print('Got %d somas and %d segments. Converting each to shape and compartment (this may take a while)...' % (len(somas), len(segments)))
+print('Got %d somas, %d segments and %d synapses. Converting each to shape and compartment (this may take a while)...' % (len(somas), len(segments), len(synapses)))
 
 neuron_compartments = {}
 
@@ -111,6 +111,8 @@ for soma in somas:
 
 print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
 
+comp_label2id = {}
+
 for segment in segments:
     start_point = segment.start.point()
     end_point = segment.end.point()
@@ -138,9 +140,12 @@ for segment in segments:
         RestingPotential_mV=neuron_Vrest_mV,
         SpikeThreshold_mV=neuron_Vact_mV,
         DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+        name=str(segment.data.fiberpiece_label),) # *** Note: Not immediately clear if data (from node2) will map to presyn/postsyn compartments.
 
     neuron_compartments[neuron_label][fiberstructure_type].append(compartment_ref)
+
+    comp_label2id[compartment_ref.Name] = compartment_ref.ID
 
 print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
 
@@ -165,14 +170,54 @@ for neuron_label in neuron_compartments:
         PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
         PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+        name=str(neuron_label),
     )
 
 ### 3.4 Create receptors for active connections.
 
 print('Making receptors...')
 
-AMPA_conductance = 40.0 #60 # nS
-GABA_conductance = -40.0 # nS
+conductances_nS = {
+    'AMPAR': 40.0,
+    'NMDAR': 60.0,
+    'GABAR': -40.0,
+}
+
+receptorPSDwidth_um = 0.1
+receptorPSDdepth_um = 0.1
+receptorPSDlength_um = 0.3
+
+connection_data_weight = 1.0
+
+for synapse in synapses:
+    # Set the total conductance through receptors at synapses at this connection:
+    conductance = conductances_nS[synapse.type]
+    receptor_conductance = conductance / connection_data_weight # Divided by weight to avoid counter-intuitive weight interpretation.
+    print("Setting up '%s' receptor for connection from %s to %s." % (synapse.type, synapse.presyn_neuron, synapse.postsyn_neuron))
+
+    psdlength = receptorPSDlength_um * connection_data_weight
+
+    center_position = synpase.postsyn_receptor_point()
+    dimensions = [receptorPSDwidth_um, psdlength, receptorPSDdepth_um]
+    rotations = [ 0.0, 0.0, 0.0 ]
+
+    # Build receptor form:
+    print('Receptor loction: '+str(center_position))
+    receptor_box = bg_api.BGNES_box_create(
+        CenterPosition_um=center_position,
+        Dimensions_um=dimensions,
+        Rotation_rad=rotations,)
+
+    # Build receptor function:
+    receptor = bg_api.BGNES_BS_receptor_create(
+        SourceCompartmentID=comp_label2id[synapse.preaxon_piece],
+        DestinationCompartmentID=comp_label2id[synapse.postdendrite_piece],
+        Neurotransmitter=synapse.type[:-1],
+        Conductance_nS=receptor_conductance,
+        TimeConstantRise_ms=neuron_tau_PSPr,
+        TimeConstantDecay_ms=neuron_tau_PSPd,
+        ReceptorMorphology=receptor_box.ID,
+    )
 
 # 3.5 Save the ground-truth system.
 #     Saving this after setting up specific stimulation so that it is included
