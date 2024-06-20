@@ -158,17 +158,65 @@ for idx in range(len(somas)):
 
 print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
 
-exit(0)
-
-comp_label2id = {}
+# 3. e) Collect and batch soma cylinder builds
 
 for segment in segments:
     start_point = segment.start.point()
     end_point = segment.end.point()
     start_radius = segment.startradius
     end_radius = segment.endradius
-    neuron_label = segment.data.somaneuron_label
-    fiberstructure_type = segment.data.fiberstructure_type
+
+    shape_res = bg_api.BGNES_NES_Common(
+        ReqFunc="Simulation/Geometry/Cylinder/Create",
+        ReqParams={
+            "Point1Radius_um": start_radius,
+            "Point1PosX_um": start_point[0],
+            "Point1PosY_um": start_point[1],
+            "Point1PosZ_um": start_point[2],
+            "Point2Radius_um": end_radius,
+            "Point2PosX_um": end_point[0],
+            "Point2PosY_um": end_point[1],
+            "Point2PosZ_um": end_point[2],
+            "Name": bg_api.generate_autoname('cylinder-'),
+            "SimulationID": bg_api.get_SimID(),
+        },
+        batch_it=True)
+    if shape_res != "batched":
+        exit(1)
+
+# 3. f) Make the NES call and collect all the cylinder IDs
+
+shapeIDs = get_IDs(bg_api.BGNES_NESRequest(),'ShapeID')
+
+# 3. g) Collect and batch neurite compartment builds
+
+for idx in range(len(segments)):
+    compartment_res = bg_api.BGNES_NES_Common(
+        ReqFunc="Simulation/Compartments/SC/Create",
+        ReqParams={
+            "ShapeID": shapeIDs[idx],
+            "MembranePotential_mV": neuron_Vm_mV,
+            "SpikeThreshold_mV": neuron_Vact_mV,
+            "DecayTime_ms": neuron_tau_AHP_ms,
+            "RestingPotential_mV": neuron_Vrest_mV,
+            "AfterHyperpolarizationAmplitude_mV": neuron_Vahp_mV,
+            "Name": str(segments[idx].data.fiberpiece_label),# bg_api.generate_autoname('compartment-'),
+            "SimulationID": bg_api.get_SimID(),
+        },
+        batch_it=True)
+    if shape_res != "batched":
+        exit(1)
+
+# 3. h) Make the NES call and collect all the neurite compartment IDs
+
+neurite_compartment_IDs = get_IDs(bg_api.BGNES_NESRequest(),'CompartmentID')
+
+comp_label2id = {}
+
+for idx in range(len(segments)):
+    neuron_label = segments[idx].data.somaneuron_label
+    fiberstructure_type = segments[idx].data.fiberstructure_type
+    #print('Soma %d has neuron label %s.' % (idx, neuron_label))
 
     if neuron_label not in neuron_compartments:
         neuron_compartments[neuron_label] = {
@@ -177,26 +225,15 @@ for segment in segments:
             'soma': [],
         }
 
-    shape_ref = bg_api.BGNES_cylinder_create(
-        Point1Radius_um=start_radius,
-        Point1Position_um=start_point,
-        Point2Radius_um=end_radius,
-        Point2Position_um=end_point,)
+    neuron_compartments[neuron_label][fiberstructure_type].append(neurite_compartment_IDs[idx])
 
-    compartment_ref = bg_api.BGNES_SC_compartment_create(
-        ShapeID=shape_ref.ID,
-        MembranePotential_mV=neuron_Vm_mV,
-        RestingPotential_mV=neuron_Vrest_mV,
-        SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
-        name=str(segment.data.fiberpiece_label),) # *** Note: Not immediately clear if data (from node2) will map to presyn/postsyn compartments.
+    name = str(segments[idx].data.fiberpiece_label)
 
-    neuron_compartments[neuron_label][fiberstructure_type].append(compartment_ref)
-
-    comp_label2id[compartment_ref.Name] = compartment_ref.ID
+    comp_label2id[name] = neurite_compartment_IDs[idx]
 
 print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
+
+exit(0)
 
 ### 3.3 Create neurons.
 
