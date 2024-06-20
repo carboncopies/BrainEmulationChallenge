@@ -458,14 +458,14 @@ def write_electrode_output(
 if (Args.RenderVisualization):
     print("rendering visualization of neural network\n")
     VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
-    VisualizerJob.ImageWidth_px = 2048
-    VisualizerJob.ImageHeight_px = 2048
+    VisualizerJob.ImageWidth_px = 4096
+    VisualizerJob.ImageHeight_px = 4096
 
 
     # Render In Circle Around Sim
-    Radius = 50
+    Radius = 120
     Steps = 10
-    ZHeight = 70
+    ZHeight = 25
 
     for Point in PointsInCircum(Radius, Steps):
 
