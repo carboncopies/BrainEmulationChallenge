@@ -87,8 +87,6 @@ neuron_compartments = {}
 # 3. a) Collect and batch soma sphere builds
 
 for soma in somas:
-
-    neuron_label = soma.label
     radius = soma.radius
     center = soma.point()
     print("radius %s center %s" % (str(radius), str(center)))
@@ -109,20 +107,44 @@ for soma in somas:
 
 # 3. b) Make the NES call and collect all the sphere IDs
 
-shape_responses = bg_api.BGNES_NESRequest()
-print(str(shape_responses))
-exit(0)
+def get_IDs(responses:list, idtype:str)->list:
+    IDs = []
+    for response in responses:
+        if response['StatusCode'] != 0:
+            print('ERROR: NES returned a bad status code. Here were the responses: '+str(responses))
+            exit(1)
+        if idtype in response:
+            IDs.append(response[idtype])
+    return IDs
+
+shapeIDs = get_shapeIDs(bg_api.BGNES_NESRequest(),'ShapeID')
 
 # 3. c) Collect and batch soma compartment builds
 
+for idx in range(len(somas)):
+    compartment_res = bg_api.BGNES_NES_Common(
+        ReqFunc="Simulation/Compartments/SC/Create",
+        ReqParams={
+            "ShapeID": ShapeIDs[idx],
+            "MembranePotential_mV": neuron_Vm_mV,
+            "SpikeThreshold_mV": neuron_Vact_mV,
+            "DecayTime_ms": neuron_tau_AHP_ms,
+            "RestingPotential_mV": neuron_Vrest_mV,
+            "AfterHyperpolarizationAmplitude_mV": neuron_Vahp_mV,
+            "Name": bg_api.generate_autoname('compartment-'),
+            "SimulationID": bg_api.get_SimID(),
+        },
+        batch_it=True)
+    if shape_res != "batched":
+        exit(1)
+
+
 # 3. d) Make the NES call and collect all the soma compartment IDs
 
-for soma in somas:
+soma_compartment_IDs = get_shapeIDs(bg_api.BGNES_NESRequest(),'CompartmentID')
 
-    neuron_label = soma.label
-    radius = soma.radius
-    center = soma.point()
-    print("radius %s center %s" % (str(radius), str(center)))
+for idx in range(len(somas)):
+    neuron_label = somas[idx].label
 
     if neuron_label not in neuron_compartments:
         neuron_compartments[neuron_label] = {
@@ -131,21 +153,11 @@ for soma in somas:
             'soma': [],
         }
 
-    shape_ref = bg_api.BGNES_sphere_create(
-        radius_um=radius,
-        center_um=center,)
-
-    compartment_ref = bg_api.BGNES_SC_compartment_create(
-        ShapeID=shape_ref.ID,
-        MembranePotential_mV=neuron_Vm_mV,
-        RestingPotential_mV=neuron_Vrest_mV,
-        SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
-
-    neuron_compartments[neuron_label]['soma'].append(compartment_ref)
+    neuron_compartments[neuron_label]['soma'].append(soma_compartment_IDs[idx])
 
 print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
+
+exit(0)
 
 comp_label2id = {}
 
