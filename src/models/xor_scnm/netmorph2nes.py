@@ -142,6 +142,7 @@ def make_somas(data:dict)->list:
 
 class synapse:
     def __init__(self, data:dict, idx:int):
+        print('Importing synpase number %d.' % idx)
         keyslist = list(data.keys())
         self.idx = int(data[keyslist[0]][idx])
         self.type = data[keyslist[1]][idx]
