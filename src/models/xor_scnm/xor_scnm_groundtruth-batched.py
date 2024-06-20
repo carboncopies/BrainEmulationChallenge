@@ -231,7 +231,7 @@ for idx in range(len(segments)):
 
     comp_label2id[name] = neurite_compartment_IDs[idx]
 
-print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments))
+print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
 
 exit(0)
 
