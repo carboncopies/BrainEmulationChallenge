@@ -233,8 +233,6 @@ for idx in range(len(segments)):
 
 print('Made %d segment compartments belonging to %d neurons.' % (len(segments), len(neuron_compartments)))
 
-exit(0)
-
 
 ### 3.3 Create neurons.
 
