@@ -144,6 +144,8 @@ class synapse:
     def __init__(self, data:dict, idx:int):
         print('Importing synpase number %d.' % idx)
         keyslist = list(data.keys())
+        print(str(keyslist))
+        print(len(keyslist))
         self.idx = int(data[keyslist[0]][idx])
         self.type = data[keyslist[1]][idx]
         self.presyn_x = float(data[keyslist[2]][idx])
