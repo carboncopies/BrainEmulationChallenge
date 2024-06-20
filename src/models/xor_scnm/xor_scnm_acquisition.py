@@ -503,8 +503,14 @@ if (Args.RenderEM):
     VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
 
 
-    BottomLeft_um = [-75,-75,-20]
-    TopRight_um = [75,75,20]
+    # Get bounding box for rendering
+    BottomLeft_um, TopRight_um = bg_api.Simulation.Sim.GetBoundingBox()
+
+    BottomLeft_um = [BottomLeft_um[0]/5, BottomLeft_um[1]/5, BottomLeft_um[2]/5]
+    TopRight_um = [TopRight_um[0]/5, TopRight_um[1]/5, TopRight_um[2]/5]
+
+    # BottomLeft_um = [-75,-75,-20]
+    # TopRight_um = [75,75,20]
     Rotation_rad = [0,0,0]
     VSDAEMInstance.DefineScanRegion(BottomLeft_um, TopRight_um, Rotation_rad)
     VSDAEMInstance.QueueRenderOperation()
