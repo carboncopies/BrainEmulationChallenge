@@ -197,7 +197,7 @@ for synapse in synapses:
 
     psdlength = receptorPSDlength_um * connection_data_weight
 
-    center_position = synpase.postsyn_receptor_point()
+    center_position = synapse.postsyn_receptor_point()
     dimensions = [receptorPSDwidth_um, psdlength, receptorPSDdepth_um]
     rotations = [ 0.0, 0.0, 0.0 ]
 
