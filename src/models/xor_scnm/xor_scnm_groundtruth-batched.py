@@ -112,8 +112,12 @@ print('Created soma shapes. Now building soma compartments...')
 def get_IDs(responses:list, idtype:str)->list:
     IDs = []
     for response in responses:
-        if response['StatusCode'] != 0:
-            print('ERROR: NES returned a bad status code. Here were the responses: '+str(responses))
+        if isinstance(response, dict):
+            if response['StatusCode'] != 0:
+                print('ERROR: NES returned a bad status code. Here were the responses: '+str(responses))
+                exit(1)
+        else:
+            print('ERROR: NES returned a response that is not a dict. Here were the responses: '+str(responses))
             exit(1)
         if idtype in response:
             IDs.append(response[idtype])
