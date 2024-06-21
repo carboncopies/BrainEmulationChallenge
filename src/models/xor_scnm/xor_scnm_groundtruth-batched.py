@@ -246,9 +246,9 @@ print('Making neurons...')
 
 cells = {}
 for neuron_label in neuron_compartments:
-    SomaIDs = [ compartment.ID for compartment in neuron_compartments[neuron_label]['soma'] ]
-    DendriteIDs = [ compartment.ID for compartment in neuron_compartments[neuron_label]['dendrite'] ]
-    AxonIDs = [ compartment.ID for compartment in neuron_compartments[neuron_label]['axon'] ]
+    SomaIDs = [ compartmentID for compartmentID in neuron_compartments[neuron_label]['soma'] ]
+    DendriteIDs = [ compartmentID for compartmentID in neuron_compartments[neuron_label]['dendrite'] ]
+    AxonIDs = [ compartmentID for compartmentID in neuron_compartments[neuron_label]['axon'] ]
     cells[neuron_label] = bg_api.BGNES_SC_neuron_create(
         SomaIDs=SomaIDs,
         DendriteIDs=DendriteIDs,
