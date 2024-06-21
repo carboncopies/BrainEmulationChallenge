@@ -462,10 +462,14 @@ if (Args.RenderVisualization):
     VisualizerJob.ImageHeight_px = 4096
 
 
+    ## ONLY SHOW NEURON 0, DISABLE OTHERS (EXCEPT FOR THEIR SOMA) ##
+    VisualizerJob.Optional_VisibleNeuronIDs = [0] 
+
+
     # Render In Circle Around Sim
-    Radius = 120
+    Radius = 150
     Steps = 10
-    ZHeight = 25
+    ZHeight = -20
 
     for Point in PointsInCircum(Radius, Steps):
 
