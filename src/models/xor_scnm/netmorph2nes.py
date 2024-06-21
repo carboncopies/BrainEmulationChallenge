@@ -158,7 +158,7 @@ class synapse:
         self.postsyn_neuron = data[keyslist[11]][idx]
         self.t_synaptogenesis = data[keyslist[12]][idx]
         self.basalapical = data[keyslist[13]][idx]
-    def postsyn_receptor_point()->list:
+    def postsyn_receptor_point(self)->list:
         return [self.postsyn_x, self.postsyn_y, self.postsyn_z]
 
 def make_synapses(data:dict)->list:
