@@ -458,24 +458,24 @@ def write_electrode_output(
 if (Args.RenderVisualization):
     print("rendering visualization of neural network\n")
     VisualizerJob = BrainGenix.NES.Visualizer.Configuration()
-    VisualizerJob.ImageWidth_px = 4096
+    VisualizerJob.ImageWidth_px = 8192
     VisualizerJob.ImageHeight_px = 4096
 
 
     ## ONLY SHOW NEURON 0, DISABLE OTHERS (EXCEPT FOR THEIR SOMA) ##
-    VisualizerJob.Optional_VisibleNeuronIDs = [0] 
+    # VisualizerJob.Optional_VisibleNeuronIDs = [1] 
 
 
     # Render In Circle Around Sim
-    Radius = 150
+    Radius = 500
     Steps = 10
-    ZHeight = -20
+    ZHeight = -550
 
     for Point in PointsInCircum(Radius, Steps):
 
         VisualizerJob.CameraFOVList_deg.append(110)
         VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
-        VisualizerJob.CameraLookAtPositionList_um.append([0, 0, ZHeight])
+        VisualizerJob.CameraLookAtPositionList_um.append([0, 0, -1000])
 
     Visualizer = bg_api.Simulation.Sim.SetupVisualizer()
     Visualizer.GenerateVisualization(VisualizerJob)
