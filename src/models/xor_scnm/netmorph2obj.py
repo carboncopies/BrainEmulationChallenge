@@ -33,49 +33,42 @@ CUBE_HEADER = '''# netmorph_output.obj
 
 '''
 
-CUBE_TOP = '''o cube
+CUBE_TOP = '''o cube%s
 mtllib cube.mtl
 '''
 
-CUBE_EXTRAS = '''
-vt 0.000000 0.000000
-vt 1.000000 0.000000
-vt 0.000000 1.000000
-vt 1.000000 1.000000
-
+FACES = '''
 vn 0.000000 0.000000 1.000000
 vn 0.000000 1.000000 0.000000
 vn 0.000000 0.000000 -1.000000
 vn 0.000000 -1.000000 0.000000
 vn 1.000000 0.000000 0.000000
 vn -1.000000 0.000000 0.000000
-
-g cube
-usemtl cube
-s 1
-f 1/1/1 2/2/1 3/3/1
-f 3/3/1 2/2/1 4/4/1
-s 2
-f 3/1/2 4/2/2 5/3/2
-f 5/3/2 4/2/2 6/4/2
-s 3
-f 5/4/3 6/3/3 7/2/3
-f 7/2/3 6/3/3 8/1/3
-s 4
-f 7/1/4 8/2/4 1/3/4
-f 1/3/4 8/2/4 2/4/4
-s 5
-f 2/1/5 8/2/5 4/3/5
-f 4/3/5 8/2/5 6/4/5
-s 6
-f 7/1/6 1/2/6 5/3/6
-f 5/3/6 1/2/6 3/4/6
 '''
+
+CUBE_EXTRAS = '''
+usemtl cube
+s off
+'''
+
+face_lines = [
+    [(0,0), (1,0), (2,0), (3,0)],
+    [(4,1), (7,1), (6,1), (5,1)],
+    [(0,2), (4,2), (5,2), (1,2)],
+    [(1,3), (5,3), (6,3), (2,3)],
+    [(2,4), (6,4), (7,4), (3,4)],
+    [(4,5), (0,5), (3,5), (7,5)],
+]
+
+
 
 obj_data = CUBE_HEADER
 
+cube_num = 0
+face_start = 1
+vertex_start = 1
 for soma in somas:
-    cube_data = CUBE_TOP
+    cube_data = CUBE_TOP % str(cube_num)
 
     v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius])
     v2 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, soma.radius])
@@ -91,9 +84,26 @@ for soma in somas:
     for v in vertices:
         cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
 
+    cube_data += FACES
+
     cube_data += CUBE_EXTRAS
 
+    faces = ''
+    for i in range(6):
+        faceline = 'f '
+        for j in range(4):
+            faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])
+        faces += faceline+'\n'
+    cube_data += faces
+
+
+    
+
     obj_data += cube_data
+
+    cube_num += 1
+    vertex_start += 8
+    face_start += 6
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)
