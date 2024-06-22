@@ -107,7 +107,7 @@ for segment in segments:
     v2 = segment.end
     obj_data += 'v %.3f %.3f %.3f\n' % (v1.x, v1.y, v1.z)
     obj_data += 'v %.3f %.3f %.3f\n' % (v2.x, v2.y, v2.z)
-    obj_data += 'l %d %d' % (vertex_start, vertex_start+1)
+    obj_data += 'l %d %d\n' % (vertex_start, vertex_start+1)
 
     vertex_start += 2
 
