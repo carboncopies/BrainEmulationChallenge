@@ -60,8 +60,6 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
-
-
 obj_data = CUBE_HEADER
 
 cube_num = 0
@@ -96,14 +94,22 @@ for soma in somas:
         faces += faceline+'\n'
     cube_data += faces
 
-
-    
-
     obj_data += cube_data
 
     cube_num += 1
     vertex_start += 8
     face_start += 6
+
+obj_data += '\n'
+
+for segment in segments:
+    v1 = segment.start
+    v2 = segment.end
+    obj_data += 'v %.3f %.3f %.3f\n' % (v1[0], v1[1], v1[2])
+    obj_data += 'v %.3f %.3f %.3f\n' % (v2[0], v2[1], v2[2])
+    obj_data += 'l %d %d' % (vertex_start, vertex_start+1)
+
+    vertex_start += 2
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)
