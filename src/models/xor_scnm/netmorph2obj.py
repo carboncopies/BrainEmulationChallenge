@@ -89,7 +89,7 @@ for soma in somas:
     vertices = ( v1, v2, v3, v4, v5, v6, v7, v8 )
 
     for v in vertices:
-        cube_data += 'v %.3f %.3f %.3f\n' % list(v)
+        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
 
     cube_data += CUBE_EXTRAS
 
