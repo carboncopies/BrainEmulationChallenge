@@ -92,7 +92,7 @@ for soma in somas:
     for i in range(6):
         faceline = 'f '
         for j in range(4):
-            faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])
+            faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])+' '
         faces += faceline+'\n'
     cube_data += faces
 
