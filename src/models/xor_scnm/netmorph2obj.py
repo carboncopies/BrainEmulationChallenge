@@ -138,11 +138,11 @@ def add_soma_pyramid(cube_num: int, vertex_start:int, face_start:int, soma, cent
     vertices = ( v1, v2, v3, v4, v5 )
 
     for v in vertices:
-        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
+        pyramid_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
 
-    cube_data += FACES
+    pyramid_data += FACES
 
-    cube_data += CUBE_EXTRAS
+    pyramid_data += CUBE_EXTRAS
 
     faces = ''
     for i in range(6):
@@ -150,12 +150,12 @@ def add_soma_pyramid(cube_num: int, vertex_start:int, face_start:int, soma, cent
         for j in range(4):
             faceline += str(vertex_start+pyramid_face_lines[i][j])+' '
         faces += faceline+'\n'
-    cube_data += faces
+    pyramid_data += faces
 
     vertex_start += 5
     face_start += 6
 
-    return vertex_start, face_start, cube_data
+    return vertex_start, face_start, pyramid_data
 
 def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
 
