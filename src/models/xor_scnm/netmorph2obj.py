@@ -14,6 +14,8 @@ import json
 
 from netmorph2nes import netmorph_to_somas_segments_synapses
 
+obj_path = 'test.obj'
+blend_path = 'test.blend'
 
 import argparse
 Parser = argparse.ArgumentParser(description="Netmorph to Wavefront OBJ file")
@@ -66,6 +68,10 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
+soma_obj_names = []
+axon_obj_names = []
+dendite_obj_names = []
+
 def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, vertex_start:int, center:np.array)->tuple:
     neurite_segments = ''
     for segment in segments:
@@ -89,6 +95,7 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
     face_start = 1
     vertex_start = 1
     for soma in somas:
+        soma_obj_names.append('soma'+str(cube_num))
         cube_data = CUBE_TOP % str(cube_num)
 
         v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius]) - center
@@ -122,10 +129,12 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
         vertex_start += 8
         face_start += 6
 
+        axon_obj_names.append('axon'+str(cube_num))
         obj_data += AXON_TOP % str(cube_num)
         vertex_start, neurite_segments = add_neuron_neurites(soma.label, 'axon', segments, vertex_start, center)
         obj_data += '\n' + neurite_segments
 
+        dendrite_obj_names.append('dendrites'+str(cube_num))
         obj_data += DENDRITES_TOP % str(cube_num)
         vertex_start, neurite_segments = add_neuron_neurites(soma.label, 'dendrite', segments, vertex_start, center)
         obj_data += '\n' + neurite_segments
@@ -143,6 +152,17 @@ def find_center_of_mass(somas:list)->np.array:
 
 center = find_center_of_mass(somas)
 obj_data = make_Wavefront_OBJ(somas, segments, center)
+
+blender_obj_data = {
+    'obj_path': obj_path,
+    'axons': axon_obj_names,
+    'dendrites': dendrite_obj_names,
+    'somas': soma_obj_names,
+    'blend_path': blend_path,
+}
+
+with open('obj_data.json', 'w') as f:
+    json.dump(blender_obj_data, f)
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)
