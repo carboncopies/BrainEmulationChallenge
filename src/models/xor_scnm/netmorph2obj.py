@@ -120,6 +120,8 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
         vertex_start, neurite_segments = add_neuron_neurites(soma.label, segments, vertex_start, center)
         obj_data += '\n' + neurite_segments
 
+    return obj_data
+
 def find_center_of_mass(somas:list)->np.array:
     center = np.array([0.0,0.0,0.0])
     for soma in somas:
