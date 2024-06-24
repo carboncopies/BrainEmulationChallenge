@@ -119,7 +119,6 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
 
         obj_data += cube_data
 
-        cube_num += 1
         vertex_start += 8
         face_start += 6
 
@@ -130,6 +129,8 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
         obj_data += DENDRITES_TOP % str(cube_num)
         vertex_start, neurite_segments = add_neuron_neurites(soma.label, 'dendrite', segments, vertex_start, center)
         obj_data += '\n' + neurite_segments
+
+        cube_num += 1
 
     return obj_data
 
