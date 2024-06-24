@@ -60,6 +60,19 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
+def add_neuron_neurites(neuron_label:str, segments:list, vertex_start:int)->tuple:
+    neurite_segments = ''
+    for segment in segments:
+        if segment.data.somaneuron_label == neuron_label:
+            v1 = segment.start
+            v2 = segment.end
+            neurite_segments += 'v %.3f %.3f %.3f\n' % (v1.x, v1.y, v1.z)
+            neurite_segments += 'v %.3f %.3f %.3f\n' % (v2.x, v2.y, v2.z)
+            neurite_segments += 'l %d %d\n' % (vertex_start, vertex_start+1)
+
+            vertex_start += 2
+    return vertex_start, neurite_segments
+
 obj_data = CUBE_HEADER
 
 cube_num = 0
@@ -100,16 +113,8 @@ for soma in somas:
     vertex_start += 8
     face_start += 6
 
-obj_data += '\n'
-
-for segment in segments:
-    v1 = segment.start
-    v2 = segment.end
-    obj_data += 'v %.3f %.3f %.3f\n' % (v1.x, v1.y, v1.z)
-    obj_data += 'v %.3f %.3f %.3f\n' % (v2.x, v2.y, v2.z)
-    obj_data += 'l %d %d\n' % (vertex_start, vertex_start+1)
-
-    vertex_start += 2
+    vertex_start, neurite_segments = add_neuron_neurites(soma.label, segments, vertex_start)
+    obj_data += '\n' + neurite_segments
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)
