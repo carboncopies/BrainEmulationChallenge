@@ -96,7 +96,7 @@ def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, verte
             vertex_start += 2
     return vertex_start, neurite_segments
 
-def add_soma_cube(vertex_start:int, face_start:int, soma, center:np.array)->tuple:
+def add_soma_cube(cube_num: int, vertex_start:int, face_start:int, soma, center:np.array)->tuple:
     cube_data = CUBE_TOP % str(cube_num)
 
     v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius]) - center
@@ -126,7 +126,7 @@ def add_soma_cube(vertex_start:int, face_start:int, soma, center:np.array)->tupl
 
     return vertex_start, face_start, cube_data
 
-def add_soma_pyramid(vertex_start:int, face_start:int, soma, center:np.array)->tuple:
+def add_soma_pyramid(cube_num: int, vertex_start:int, face_start:int, soma, center:np.array)->tuple:
     pyramid_data = CUBE_TOP % str(cube_num)
 
     v1 = np.array([0.0, 0.0, 0.0])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
@@ -167,9 +167,9 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
     for soma in somas:
         soma_obj_names.append('soma'+str(cube_num))
 
-        #vertex_start, face_start, soma_data = add_soma_cube(vertex_start, face_start, soma, center)
+        #vertex_start, face_start, soma_data = add_soma_cube(cube_num, vertex_start, face_start, soma, center)
 
-        vertex_start, face_start, soma_data = add_soma_pyramid(vertex_start, face_start, soma, center)
+        vertex_start, face_start, soma_data = add_soma_pyramid(cube_num, vertex_start, face_start, soma, center)
 
         obj_data += soma_data
 
