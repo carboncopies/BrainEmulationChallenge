@@ -147,7 +147,7 @@ def add_soma_pyramid(cube_num: int, vertex_start:int, face_start:int, soma, cent
     faces = ''
     for i in range(6):
         faceline = 'f '
-        for j in range(4):
+        for j in range(3):
             faceline += str(vertex_start+pyramid_face_lines[i][j])+' '
         faces += faceline+'\n'
     pyramid_data += faces
