@@ -33,8 +33,14 @@ CUBE_HEADER = '''# netmorph_output.obj
 
 '''
 
-CUBE_TOP = '''o cube%s
+CUBE_TOP = '''o soma%s
 mtllib cube.mtl
+'''
+
+DENDRITES_TOP = '''o dendrites%s
+'''
+
+AXON_TOP = '''o axon%s
 '''
 
 FACES = '''
@@ -60,10 +66,10 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
-def add_neuron_neurites(neuron_label:str, segments:list, vertex_start:int, center:np.array)->tuple:
+def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, vertex_start:int, center:np.array)->tuple:
     neurite_segments = ''
     for segment in segments:
-        if segment.data.somaneuron_label == neuron_label:
+        if segment.data.somaneuron_label == neuron_label and segment.data.fiberstructure_type==neurite_type:
             v1 = segment.start
             v1 = np.array([v1.x, v1.y, v1.z]) - center
             v2 = segment.end
@@ -117,7 +123,12 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
         vertex_start += 8
         face_start += 6
 
-        vertex_start, neurite_segments = add_neuron_neurites(soma.label, segments, vertex_start, center)
+        obj_data += AXON_TOP % str(cube_num)
+        vertex_start, neurite_segments = add_neuron_neurites(soma.label, 'axon', segments, vertex_start, center)
+        obj_data += '\n' + neurite_segments
+
+        obj_data += DENDRITES_TOP % str(cube_num)
+        vertex_start, neurite_segments = add_neuron_neurites(soma.label, 'dendrite', segments, vertex_start, center)
         obj_data += '\n' + neurite_segments
 
     return obj_data
