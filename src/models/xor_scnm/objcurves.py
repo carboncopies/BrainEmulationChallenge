@@ -50,11 +50,11 @@ bpy.ops.wm.obj_import(filepath=filepath)
 bpy.ops.object.convert(target='CURVE')
 
 axon_objects = get_blender_objects(axons_list)
-dendtite_objects = get_blender_objects(dendrites_list)
+dendrite_objects = get_blender_objects(dendrites_list)
 soma_objects = get_blender_objects(somas_list)
 
 set_bevel_depths(axon_objects, 0.1)
-set_bevel_depths(dendite_objects, 0.1)
+set_bevel_depths(dendrite_objects, 0.1)
 
 delete_default_cube()
 

@@ -68,6 +68,15 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
+pyramid_face_lines = [
+    [3, 0, 1],
+    [2, 3, 1],
+    [4, 1, 0],
+    [3, 4, 0],
+    [2, 4, 3],
+    [4, 2, 1],
+]
+
 soma_obj_names = []
 axon_obj_names = []
 dendrite_obj_names = []
@@ -87,6 +96,67 @@ def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, verte
             vertex_start += 2
     return vertex_start, neurite_segments
 
+def add_soma_cube(vertex_start:int, face_start:int, soma, center:np.array)->tuple:
+    cube_data = CUBE_TOP % str(cube_num)
+
+    v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius]) - center
+    v2 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, soma.radius]) - center
+    v3 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, soma.radius]) - center
+    v4 = np.array(soma.point()) + np.array([soma.radius, soma.radius, soma.radius]) - center
+    v5 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, -soma.radius]) - center
+    v6 = np.array(soma.point()) + np.array([soma.radius, soma.radius, -soma.radius]) - center
+    v7 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+    v8 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, -soma.radius]) - center
+
+    vertices = ( v1, v2, v3, v4, v5, v6, v7, v8 )
+
+    for v in vertices:
+        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
+
+    faces = ''
+    for i in range(6):
+        faceline = 'f '
+        for j in range(4):
+            faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])+' '
+        faces += faceline+'\n'
+    cube_data += faces
+
+    vertex_start += 8
+    face_start += 6
+
+    return vertex_start, face_start, cube_data
+
+def add_soma_pyramid(vertex_start:int, face_start:int, soma, center:np.array)->tuple:
+    pyramid_data = CUBE_TOP % str(cube_num)
+
+    v1 = np.array([0.0, 0.0, 0.0])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+    v2 = np.array([1.0, 0.0, 0.0])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+    v3 = np.array([1.0, 1.0, 0.0])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+    v4 = np.array([0.0, 1.0, 0.0])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+    v5 = np.array([0.5, 0.5, 1.6])*2.0*soma.radius + np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+
+    vertices = ( v1, v2, v3, v4, v5 )
+
+    for v in vertices:
+        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
+
+    cube_data += FACES
+
+    cube_data += CUBE_EXTRAS
+
+    faces = ''
+    for i in range(6):
+        faceline = 'f '
+        for j in range(4):
+            faceline += str(vertex_start+pyramid_face_lines[i][j])+' '
+        faces += faceline+'\n'
+    cube_data += faces
+
+    vertex_start += 5
+    face_start += 6
+
+    return vertex_start, face_start, cube_data
+
 def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
 
     obj_data = CUBE_HEADER
@@ -96,38 +166,12 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
     vertex_start = 1
     for soma in somas:
         soma_obj_names.append('soma'+str(cube_num))
-        cube_data = CUBE_TOP % str(cube_num)
 
-        v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius]) - center
-        v2 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, soma.radius]) - center
-        v3 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, soma.radius]) - center
-        v4 = np.array(soma.point()) + np.array([soma.radius, soma.radius, soma.radius]) - center
-        v5 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, -soma.radius]) - center
-        v6 = np.array(soma.point()) + np.array([soma.radius, soma.radius, -soma.radius]) - center
-        v7 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
-        v8 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, -soma.radius]) - center
+        #vertex_start, face_start, soma_data = add_soma_cube(vertex_start, face_start, soma, center)
 
-        vertices = ( v1, v2, v3, v4, v5, v6, v7, v8 )
+        vertex_start, face_start, soma_data = add_soma_pyramid(vertex_start, face_start, soma, center)
 
-        for v in vertices:
-            cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
-
-        cube_data += FACES
-
-        cube_data += CUBE_EXTRAS
-
-        faces = ''
-        for i in range(6):
-            faceline = 'f '
-            for j in range(4):
-                faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])+' '
-            faces += faceline+'\n'
-        cube_data += faces
-
-        obj_data += cube_data
-
-        vertex_start += 8
-        face_start += 6
+        obj_data += soma_data
 
         axon_obj_names.append('axon'+str(cube_num))
         obj_data += AXON_TOP % str(cube_num)
