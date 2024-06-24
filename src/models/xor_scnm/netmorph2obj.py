@@ -60,61 +60,75 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
-def add_neuron_neurites(neuron_label:str, segments:list, vertex_start:int)->tuple:
+def add_neuron_neurites(neuron_label:str, segments:list, vertex_start:int, center:np.array)->tuple:
     neurite_segments = ''
     for segment in segments:
         if segment.data.somaneuron_label == neuron_label:
             v1 = segment.start
+            v1 = np.array([v1.x, v1.y, v1.z]) - center
             v2 = segment.end
-            neurite_segments += 'v %.3f %.3f %.3f\n' % (v1.x, v1.y, v1.z)
-            neurite_segments += 'v %.3f %.3f %.3f\n' % (v2.x, v2.y, v2.z)
+            v2 = np.array([v2.x, v2.y, v2.z]) - center
+            neurite_segments += 'v %.3f %.3f %.3f\n' % (v1[0], v1[1], v1[2])
+            neurite_segments += 'v %.3f %.3f %.3f\n' % (v2[0], v2[1], v2[2])
             neurite_segments += 'l %d %d\n' % (vertex_start, vertex_start+1)
 
             vertex_start += 2
     return vertex_start, neurite_segments
 
-obj_data = CUBE_HEADER
+def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
 
-cube_num = 0
-face_start = 1
-vertex_start = 1
-for soma in somas:
-    cube_data = CUBE_TOP % str(cube_num)
+    obj_data = CUBE_HEADER
 
-    v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius])
-    v2 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, soma.radius])
-    v3 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, soma.radius])
-    v4 = np.array(soma.point()) + np.array([soma.radius, soma.radius, soma.radius])
-    v5 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, -soma.radius])
-    v6 = np.array(soma.point()) + np.array([soma.radius, soma.radius, -soma.radius])
-    v7 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius])
-    v8 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, -soma.radius])
+    cube_num = 0
+    face_start = 1
+    vertex_start = 1
+    for soma in somas:
+        cube_data = CUBE_TOP % str(cube_num)
 
-    vertices = ( v1, v2, v3, v4, v5, v6, v7, v8 )
+        v1 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, soma.radius]) - center
+        v2 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, soma.radius]) - center
+        v3 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, soma.radius]) - center
+        v4 = np.array(soma.point()) + np.array([soma.radius, soma.radius, soma.radius]) - center
+        v5 = np.array(soma.point()) + np.array([-soma.radius, soma.radius, -soma.radius]) - center
+        v6 = np.array(soma.point()) + np.array([soma.radius, soma.radius, -soma.radius]) - center
+        v7 = np.array(soma.point()) + np.array([-soma.radius, -soma.radius, -soma.radius]) - center
+        v8 = np.array(soma.point()) + np.array([soma.radius, -soma.radius, -soma.radius]) - center
 
-    for v in vertices:
-        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
+        vertices = ( v1, v2, v3, v4, v5, v6, v7, v8 )
 
-    cube_data += FACES
+        for v in vertices:
+            cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
 
-    cube_data += CUBE_EXTRAS
+        cube_data += FACES
 
-    faces = ''
-    for i in range(6):
-        faceline = 'f '
-        for j in range(4):
-            faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])+' '
-        faces += faceline+'\n'
-    cube_data += faces
+        cube_data += CUBE_EXTRAS
 
-    obj_data += cube_data
+        faces = ''
+        for i in range(6):
+            faceline = 'f '
+            for j in range(4):
+                faceline += str(vertex_start+face_lines[i][j][0])+'//'+str(face_start+face_lines[i][j][1])+' '
+            faces += faceline+'\n'
+        cube_data += faces
 
-    cube_num += 1
-    vertex_start += 8
-    face_start += 6
+        obj_data += cube_data
 
-    vertex_start, neurite_segments = add_neuron_neurites(soma.label, segments, vertex_start)
-    obj_data += '\n' + neurite_segments
+        cube_num += 1
+        vertex_start += 8
+        face_start += 6
+
+        vertex_start, neurite_segments = add_neuron_neurites(soma.label, segments, vertex_start, center)
+        obj_data += '\n' + neurite_segments
+
+def find_center_of_mass(somas:list)->np.array:
+    center = np.array([0.0,0.0,0.0])
+    for soma in somas:
+        center += np.array(soma.point())
+    center = center/float(len(somas))
+    return center
+
+center = find_center_of_mass(somas)
+obj_data = make_Wavefront_OBJ(somas, segments, center)
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)
