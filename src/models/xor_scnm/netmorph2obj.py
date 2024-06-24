@@ -68,8 +68,8 @@ def add_neuron_neurites(neuron_label:str, segments:list, vertex_start:int, cente
             v1 = np.array([v1.x, v1.y, v1.z]) - center
             v2 = segment.end
             v2 = np.array([v2.x, v2.y, v2.z]) - center
-            neurite_segments += 'v %.3f %.3f %.3f\n' % (v1[0], v1[1], v1[2])
-            neurite_segments += 'v %.3f %.3f %.3f\n' % (v2[0], v2[1], v2[2])
+            neurite_segments += 'v %.3f %.3f %.3f 1.0 0.0 0.0\n' % (v1[0], v1[1], v1[2])
+            neurite_segments += 'v %.3f %.3f %.3f 1.0 0.0 0.0\n' % (v2[0], v2[1], v2[2])
             neurite_segments += 'l %d %d\n' % (vertex_start, vertex_start+1)
 
             vertex_start += 2
