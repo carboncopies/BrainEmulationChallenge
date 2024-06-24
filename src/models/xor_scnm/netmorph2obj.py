@@ -70,7 +70,7 @@ face_lines = [
 
 soma_obj_names = []
 axon_obj_names = []
-dendite_obj_names = []
+dendrite_obj_names = []
 
 def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, vertex_start:int, center:np.array)->tuple:
     neurite_segments = ''
