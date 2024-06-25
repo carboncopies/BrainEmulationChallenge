@@ -54,6 +54,15 @@ vn 1.000000 0.000000 0.000000
 vn -1.000000 0.000000 0.000000
 '''
 
+SIMPLE_CUBE_FACES = '''
+vn 0.000000 -1.000000 0.000000
+vn 0.000000 1.000000 0.000000
+vn 1.000000 0.000000 0.000000
+vn -0.000000 0.000000 1.000000
+vn -1.000000 -0.000000 -0.000000
+vn 0.000000 0.000000 -1.000000
+'''
+
 CUBE_EXTRAS = '''
 usemtl cube
 s off
@@ -68,6 +77,19 @@ face_lines = [
     [(4,5), (0,5), (3,5), (7,5)],
 ]
 
+f 2/1/1 3/2/1 4/3/1
+f 8/1/2 7/4/2 6/5/2
+f 5/6/3 6/7/3 2/8/3
+f 6/8/4 7/5/4 3/4/4
+f 3/9/5 7/10/5 8/11/5
+f 1/12/6 4/13/6 8/11/6
+f 1/4/1 2/1/1 4/3/1
+f 5/14/2 8/1/2 6/5/2
+f 1/12/3 5/6/3 2/8/3
+f 2/12/4 6/8/4 3/4/4
+f 4/13/5 3/9/5 8/11/5
+f 5/6/6 1/12/6 8/11/6
+
 pyramid_face_lines = [
     [3, 0, 1],
     [2, 3, 1],
@@ -75,6 +97,32 @@ pyramid_face_lines = [
     [3, 4, 0],
     [2, 4, 3],
     [4, 2, 1],
+]
+
+simple_cube_lines = [
+    [ 1.0, -1.0, -1.0 ],
+    [ 1.0, -1.0, 1.0 ],
+    [ -1.0, -1.0, 1.0 ],
+    [ -1.0, -1.0, -1.0 ],
+    [ 1.0, 1.0, -1.0 ],
+    [ 1.0, 1.0, 1.0 ],
+    [ -1.0, 1.0, 1.0 ],
+    [ -1.0, 1.0, -1.0 ],
+]
+
+two_sided_cube_faces = [
+    [1, 2, 3],
+    [7, 6, 5],
+    [4, 5, 1],
+    [5, 6, 2],
+    [2, 6, 7],
+    [0, 3, 7],
+    [0, 1, 3],
+    [4, 7, 5],
+    [0, 4, 1],
+    [1, 5, 2],
+    [3, 2, 7],
+    [4, 0, 7],
 ]
 
 soma_obj_names = []
@@ -95,6 +143,29 @@ def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, verte
 
             vertex_start += 2
     return vertex_start, neurite_segments
+
+def add_simple_cube(obj_name:str, vertex_start:int, face_start:int, radius:float, location:np.array, center:np.array)->tuple:
+    cube_data = obj_name
+
+    vertices = []
+    for simple_cube_line in simple_cube_lines:
+        vertices.append( np.array(simple_cube_line)*radius + location - center )
+
+    for v in vertices:
+        cube_data += 'v %.3f %.3f %.3f\n' % (v[0], v[1], v[2])
+
+    faces = ''
+    for i in range(len(two_sided_cube_faces)):
+        faceline = 'f '
+        for j in range(3):
+            faceline += str(vertex_start+two_sided_cube_faces[i][j])+' '
+        faces += faceline+'\n'
+    cube_data += faces
+
+    vertex_start += len(vertices)
+    face_start += len(two_sided_cube_faces)
+
+    return vertex_start, face_start, cube_data
 
 def add_soma_cube(cube_num: int, vertex_start:int, face_start:int, soma, center:np.array)->tuple:
     cube_data = CUBE_TOP % str(cube_num)
@@ -184,6 +255,17 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
         obj_data += '\n' + neurite_segments
 
         cube_num += 1
+
+
+    for synapse in synapses:
+        receptor_loc = np.array(synapse.postsyn_receptor_point())
+        spine_loc = np.array(synapse.presyn_spine_point())
+
+        synapse_size = np.linalg.norm(receptor_loc - spine_loc)
+
+        vertex_start, face_start, synapse_data = add_simple_cube('synapse'+str(synapse.idx), vertex_start, face_start, synapse_size/2.0, receptor_loc, center)
+
+        obj_data += '\n' + synapse_data
 
     return obj_data
 

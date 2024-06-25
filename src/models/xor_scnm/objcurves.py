@@ -39,6 +39,13 @@ def delete_default_cube():
 	# 4. Delete it    
 	bpy.ops.object.delete()
 
+def add_material_for_object(blender_object, object_name:str, color:tuple):
+	#create new material with name of object
+    new_mat = bpy.data.materials.new(object_name)
+    #add new material to object
+    blender_object.data.materials.append(new_mat)
+    new_mat.diffuse_color = color
+
 filepath, axons_list, dendrites_list, somas_list, blendpath = get_object_info()
 
 # Note: After importing, all objects are automatically selected
@@ -55,6 +62,16 @@ soma_objects = get_blender_objects(somas_list)
 
 set_bevel_depths(axon_objects, 0.1)
 set_bevel_depths(dendrite_objects, 0.1)
+
+for i in range(len(axons_list)):
+	axon_name = axons_list[i]
+	axon_object = axon_objects[i]
+	add_material_for_object(axon_object, axon_name, (0.0, 1.0, 0.0, 1.0))
+
+for i in range(len(dendrites_list)):
+	dendrite_name = dendrites_list[i]
+	dendrite_object = dendrite_objects[i]
+	add_material_for_object(dendrite_object, axon_name, (0.0, 0.0, 1.0, 1.0))
 
 delete_default_cube()
 

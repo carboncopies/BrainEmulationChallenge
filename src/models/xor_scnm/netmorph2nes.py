@@ -160,6 +160,8 @@ class synapse:
         self.basalapical = data[keyslist[13]][idx]
     def postsyn_receptor_point(self)->list:
         return [self.postsyn_x, self.postsyn_y, self.postsyn_z]
+    def presyn_spine_point(self)->list:
+        return [self.presyn_x, self.presyn_y, self.presyn_z]
 
 def make_synapses(data:dict)->list:
     synapses = []
