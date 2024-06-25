@@ -128,6 +128,7 @@ two_sided_cube_faces = [
 soma_obj_names = []
 axon_obj_names = []
 dendrite_obj_names = []
+synapse_obj_names = []
 
 def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, vertex_start:int, center:np.array)->tuple:
     neurite_segments = ''
@@ -263,6 +264,7 @@ def make_Wavefront_OBJ(somas:list, segments:list, center:np.array)->str:
 
         synapse_size = np.linalg.norm(receptor_loc - spine_loc)
 
+        synapse_obj_names.append('synapse'+str(synapse.idx))
         vertex_start, face_start, synapse_data = add_simple_cube('synapse'+str(synapse.idx), vertex_start, face_start, synapse_size/2.0, receptor_loc, center)
 
         obj_data += '\n' + synapse_data
@@ -284,6 +286,7 @@ blender_obj_data = {
     'axons': axon_obj_names,
     'dendrites': dendrite_obj_names,
     'somas': soma_obj_names,
+    'synapses': synapse_obj_names;
     'blend_path': blend_path,
 }
 
