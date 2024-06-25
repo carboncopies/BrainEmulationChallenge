@@ -286,7 +286,7 @@ blender_obj_data = {
     'axons': axon_obj_names,
     'dendrites': dendrite_obj_names,
     'somas': soma_obj_names,
-    'synapses': synapse_obj_names;
+    'synapses': synapse_obj_names,
     'blend_path': blend_path,
 }
 
