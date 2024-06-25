@@ -44,6 +44,7 @@ def add_material_for_object(blender_object, object_name:str, color:tuple):
 	#create new material with name of object
     new_mat = bpy.data.materials.new(object_name)
     #add new material to object
+    blender_object.data.materials.clear()
     blender_object.data.materials.append(new_mat)
     new_mat.diffuse_color = color
 
