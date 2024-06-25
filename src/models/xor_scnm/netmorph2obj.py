@@ -145,7 +145,7 @@ def add_neuron_neurites(neuron_label:str, neurite_type:str, segments:list, verte
     return vertex_start, neurite_segments
 
 def add_simple_cube(obj_name:str, vertex_start:int, face_start:int, radius:float, location:np.array, center:np.array)->tuple:
-    cube_data = obj_name+'\n'
+    cube_data = 'o '+obj_name+'\n'
 
     vertices = []
     for simple_cube_line in simple_cube_lines:
