@@ -20,6 +20,8 @@ blend_path = 'test.blend'
 import argparse
 Parser = argparse.ArgumentParser(description="Netmorph to Wavefront OBJ file")
 Parser.add_argument("-NmSource", default='../../../../../src/nnmodels/netmorph/examples/nesvbp/nesvbp_202406151142', help="Netmorph source files trunk")
+Parser.add_argument("-AxonBevDepth", default='0.1', help="Axons bevel depth")
+Parser.add_argument("-DendriteBevDepth", default='0.1', help="Dendrites bevel depth")
 Args = Parser.parse_args()
 
 print('Collecting segments from Netmorph output files...')
@@ -288,6 +290,8 @@ blender_obj_data = {
     'somas': soma_obj_names,
     'synapses': synapse_obj_names,
     'blend_path': blend_path,
+    'axonbevdepth': float(Args.AxonBevDepth),
+    'denditebevdepth': float(Args.DendriteBevDepth),
 }
 
 with open('obj_data.json', 'w') as f:

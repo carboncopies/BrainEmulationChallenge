@@ -19,7 +19,9 @@ def get_object_info()->tuple:
 	somas_list = obj_data['somas']
 	synapses_list = obj_data['synapses']
 	blendpath = obj_data['blend_path']
-	return filepath, axons_list, dendrites_list, somas_list, synapses_list, blendpath
+	axonbevdepth = obj_data['axonbevdepth']
+	dendritebevdepth = obj_data['dendritebevdepth']
+	return filepath, axons_list, dendrites_list, somas_list, synapses_list, blendpath, axonbevdepth, dendritebevdepth
 
 def get_blender_objects(names_list:list)->list:
 	blender_objects = []
@@ -48,7 +50,7 @@ def add_material_for_object(blender_object, object_name:str, color:tuple):
     blender_object.data.materials.append(new_mat)
     new_mat.diffuse_color = color
 
-filepath, axons_list, dendrites_list, somas_list, synapses_list, blendpath = get_object_info()
+filepath, axons_list, dendrites_list, somas_list, synapses_list, blendpath, axonbevdepth, dendritebevdepth = get_object_info()
 
 # Note: After importing, all objects are automatically selected
 # so that converting to curves converts all of the lines to
@@ -63,8 +65,8 @@ dendrite_objects = get_blender_objects(dendrites_list)
 soma_objects = get_blender_objects(somas_list)
 synapses_objects = get_blender_objects(synapses_list)
 
-set_bevel_depths(axon_objects, 0.1)
-set_bevel_depths(dendrite_objects, 0.1)
+set_bevel_depths(axon_objects, axonbevdepth)
+set_bevel_depths(dendrite_objects, dendritebevdepth)
 
 for i in range(len(axons_list)):
 	axon_name = axons_list[i]
