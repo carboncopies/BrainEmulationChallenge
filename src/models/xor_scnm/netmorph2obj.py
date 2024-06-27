@@ -291,7 +291,7 @@ blender_obj_data = {
     'synapses': synapse_obj_names,
     'blend_path': blend_path,
     'axonbevdepth': float(Args.AxonBevDepth),
-    'denditebevdepth': float(Args.DendriteBevDepth),
+    'dendritebevdepth': float(Args.DendriteBevDepth),
 }
 
 with open('obj_data.json', 'w') as f:
