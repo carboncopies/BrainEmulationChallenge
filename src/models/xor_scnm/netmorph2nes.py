@@ -131,17 +131,19 @@ class soma:
     def point(self)->list:
         return [ self.x, self.y, self.z ]
 
-def make_somas(data:dict)->list:
+def make_somas(data:dict)->tuple:
     somas = []
+    somasdict = {}
     neurondata = data['neurons']
     numneurons = len(neurondata[list(neurondata.keys())[0]])
     for idx in range(numneurons):
         neuron_soma = soma(neurondata, idx)
         somas.append(neuron_soma)
-    return somas
+        somasdict[neuron_soma.label] = neuron_soma
+    return somas, somasdict
 
 class synapse:
-    def __init__(self, data:dict, idx:int):
+    def __init__(self, data:dict, idx:int, somasdict:dict):
         print('Importing synapse number %d.' % idx)
         keyslist = list(data.keys())
         self.idx = int(data[keyslist[0]][idx])
@@ -158,17 +160,20 @@ class synapse:
         self.postsyn_neuron = data[keyslist[11]][idx]
         self.t_synaptogenesis = data[keyslist[12]][idx]
         self.basalapical = data[keyslist[13]][idx]
+
+        self.presyn_soma = somasdict[self.presyn_neuron]
+        self.postsyn_soma = somasdict[self.postsyn_neuron]
     def postsyn_receptor_point(self)->list:
         return [self.postsyn_x, self.postsyn_y, self.postsyn_z]
     def presyn_spine_point(self)->list:
         return [self.presyn_x, self.presyn_y, self.presyn_z]
 
-def make_synapses(data:dict)->list:
+def make_synapses(data:dict, somasdict:dict)->list:
     synapses = []
     synapsedata = data['synapses']
     numsynapses = len(synapsedata[list(synapsedata.keys())[0]])
     for idx in range(numsynapses):
-        syn = synapse(synapsedata, idx)
+        syn = synapse(synapsedata, idx, somasdict)
         synapses.append(syn)
     return synapses
 
@@ -176,13 +181,14 @@ def netmorph_to_somas_segments_synapses(modelname:str)->tuple:
     filenames = make_filenames(modelname)
     data = load_netmorph_data(filenames)
     segments = make_segments(data)
-    somas = make_somas(data)
-    synapses = make_synapses(data)
+    somas, somasdict = make_somas(data)
+    synapses = make_synapses(data, somasdict)
     return somas, segments, synapses
 
 class neuron:
-    def __init__(self, _label:str):
+    def __init__(self, _label:str, _region:str):
         self.label = _label
+        self.region = _region
         self.pre = set()
         self.post = set()
         self.shown = False
@@ -192,9 +198,9 @@ class connectome:
         self.neuron_dict = {}
         for syn in synapse_list:
             if syn.presyn_neuron not in self.neuron_dict:
-                self.neuron_dict[syn.presyn_neuron] = neuron(syn.presyn_neuron)
+                self.neuron_dict[syn.presyn_neuron] = neuron(syn.presyn_neuron, syn.presyn_soma.region)
             if syn.postsyn_neuron not in self.neuron_dict:
-                self.neuron_dict[syn.postsyn_neuron] = neuron(syn.postsyn_neuron)
+                self.neuron_dict[syn.postsyn_neuron] = neuron(syn.postsyn_neuron, syn.postsyn_soma.region)
             presyn = self.neuron_dict[syn.presyn_neuron]
             postsyn = self.neuron_dict[syn.postsyn_neuron]
             presyn.post.add(postsyn.label)
@@ -211,7 +217,7 @@ class connectome:
     def show_connections(self, nkey:str, prestr:str='')->str:
         if nkey not in self.neuron_dict:
             return ''
-        outstr = prestr + self.neuron_dict[nkey].label + '\n'
+        outstr = prestr + self.neuron_dict[key].region+':'+self.neuron_dict[nkey].label + '\n'
         prestr += '    '
         self.neuron_dict[nkey].shown = True
         for postkey in self.neuron_dict[nkey].post:
