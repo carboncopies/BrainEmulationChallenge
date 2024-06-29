@@ -300,7 +300,7 @@ with open('obj_data.json', 'w') as f:
 theconnectome = connectome(synapses)
 theinputs = theconnectome.inputs()
 for theinput in theinputs:
-    print(theconnectome.show_connections(theinput))
+    print(theconnectome.show_connections_depth(theinput))
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)

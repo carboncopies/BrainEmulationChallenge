@@ -224,6 +224,15 @@ class connectome:
             if not self.neuron_dict[postkey].shown:
                 outstr += self.show_connections(postkey, prestr)
         return outstr
+    def show_connections_depth(self, nkey:str, depth=0, prestr:str='')->str:
+        if nkey not in self.neuron_dict:
+            return ''
+        outstr = prestr + self.neuron_dict[nkey].region+':'+self.neuron_dict[nkey].label +'('+str(len(self.neuron_dict[nkey].post))+')\n'
+        prestr += '    '
+        for postkey in self.neuron_dict[nkey].post:
+            if depth < 5:
+                outstr += self.show_connections_depth(postkey, depth+1, prestr)
+        return outstr
 
 if __name__ == '__main__':
     print('Loading data from netmorph output files into dict of dict of lists...')
