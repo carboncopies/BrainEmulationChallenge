@@ -210,7 +210,7 @@ class connectome:
         outstr = prestr + self.neuron_dict[nkey].label + '\n'
         prestr += '    '
         for postkey in self.neuron_dict[nkey].post:
-            outstr += show_connections(postkey, prestr)
+            outstr += self.show_connections(postkey, prestr)
         return outstr
 
 if __name__ == '__main__':
