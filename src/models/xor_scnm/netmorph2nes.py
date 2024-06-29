@@ -185,6 +185,7 @@ class neuron:
         self.label = _label
         self.pre = set()
         self.post = set()
+        self.shown = False
 
 class connectome:
     def __init__(self, synapse_list:list):
@@ -204,13 +205,18 @@ class connectome:
             if len(self.neuron_dict[nkey].pre)==0:
                 theinputs.append(nkey)
         return theinputs
+    def clear_shown(self):
+        for nkey in self.neuron_dict:
+            self.neuron_dict[nkey].shown = False
     def show_connections(self, nkey:str, prestr:str='')->str:
         if nkey not in self.neuron_dict:
             return ''
         outstr = prestr + self.neuron_dict[nkey].label + '\n'
         prestr += '    '
+        self.neuron_dict[nkey].shown = True
         for postkey in self.neuron_dict[nkey].post:
-            outstr += self.show_connections(postkey, prestr)
+            if not self.neuron_dict[postkey].shown:
+                outstr += self.show_connections(postkey, prestr)
         return outstr
 
 if __name__ == '__main__':
