@@ -12,7 +12,7 @@ from datetime import datetime
 from time import sleep
 import json
 
-from netmorph2nes import netmorph_to_somas_segments_synapses
+from netmorph2nes import netmorph_to_somas_segments_synapses, connectome
 
 obj_path = 'test.obj'
 blend_path = 'test.blend'
@@ -296,6 +296,11 @@ blender_obj_data = {
 
 with open('obj_data.json', 'w') as f:
     json.dump(blender_obj_data, f)
+
+theconnectome = connectome(synapses)
+theinputs = theconnectome.inputs()
+for theinput in theinputs:
+    print(theconnectome.show_connections(theinput))
 
 with open('test.obj', 'w') as f:
     f.write(obj_data)

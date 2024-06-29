@@ -5,6 +5,7 @@
 # when conversion was carried out.
 
 import bpy
+from mathutils import *
 import json
 
 def get_object_info()->tuple:
@@ -84,5 +85,15 @@ for i in range(len(synapses_list)):
 	add_material_for_object(synapse_object, synapse_name, (1.0, 0.0, 0.0, 1.0))
 
 delete_default_cube()
+
+for area in bpy.context.screen.areas:
+	if area.type == 'VIEW_3D':
+		region = area.spaces[0].region_3d
+		region.view_matrix = Matrix((
+			( 0.4166,  0.9091, -0.0000,   -0.3976),
+			(-0.5049,  0.2314,  0.8316,    3.8098),
+			( 0.7560, -0.3464,  0.5554, -549.8699),
+			( 0.0000,  0.0000,  0.0000,    1.0000)
+			))
 
 bpy.ops.wm.save_as_mainfile(filepath=blendpath)

@@ -180,6 +180,39 @@ def netmorph_to_somas_segments_synapses(modelname:str)->tuple:
     synapses = make_synapses(data)
     return somas, segments, synapses
 
+class neuron:
+    def __init__(self, _label:str):
+        self.label = _label
+        self.pre = set()
+        self.post = set()
+
+class connectome:
+    def __init__(self, synapse_list:list):
+        self.neuron_dict = {}
+        for syn in synapse_list:
+            if syn.presyn_neuron not in self.neuron_dict:
+                self.neuron_dict[syn.presyn_neuron] = neuron(syn.presyn_neuron)
+            if syn.postsyn_neuron not in self.neuron_dict:
+                self.neuron_dict[syn.postsyn_neuron] = neuron(syn.postsyn_neuron)
+            presyn = self.neuron_dict[syn.presyn_neuron]
+            postsyn = self.neuron_dict[syn.postsyn_neuron]
+            presyn.post.add(postsyn.label)
+            postsyn.pre.add(presyn.label)
+    def inputs(self)->list:
+        theinputs = []
+        for nkey in self.neuron_dict:
+            if len(self.neuron_dict[nkey].pre)==0:
+                theinputs.append(nkey)
+        return theinputs
+    def show_connections(self, nkey:str, prestr:str='')->str:
+        if nkey not in self.neuron_dict:
+            return ''
+        outstr = prestr + self.neuron_dict[nkey].label + '\n'
+        prestr += '    '
+        for postkey in self.neuron_dict[nkey].post:
+            outstr += show_connections(postkey, prestr)
+        return outstr
+
 if __name__ == '__main__':
     print('Loading data from netmorph output files into dict of dict of lists...')
     somas, segments, synapses = netmorph_to_somas_segments_synapses(modelname)
