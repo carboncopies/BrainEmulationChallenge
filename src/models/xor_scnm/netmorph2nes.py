@@ -224,14 +224,14 @@ class connectome:
             if not self.neuron_dict[postkey].shown:
                 outstr += self.show_connections(postkey, prestr)
         return outstr
-    def show_connections_depth(self, nkey:str, depth=0, prestr:str='')->str:
+    def show_connections_depth(self, nkey:str, maxdepth:int, depth=0, prestr:str='')->str:
         if nkey not in self.neuron_dict:
             return ''
         outstr = prestr + self.neuron_dict[nkey].region+':'+self.neuron_dict[nkey].label +'('+str(len(self.neuron_dict[nkey].post))+')\n'
         prestr += '    '
         for postkey in self.neuron_dict[nkey].post:
-            if depth < 5:
-                outstr += self.show_connections_depth(postkey, depth+1, prestr)
+            if depth < maxdepth:
+                outstr += self.show_connections_depth(postkey, maxdepth, depth+1, prestr)
         return outstr
 
 if __name__ == '__main__':
