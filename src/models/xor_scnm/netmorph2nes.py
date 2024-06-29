@@ -217,7 +217,7 @@ class connectome:
     def show_connections(self, nkey:str, prestr:str='')->str:
         if nkey not in self.neuron_dict:
             return ''
-        outstr = prestr + self.neuron_dict[key].region+':'+self.neuron_dict[nkey].label + '\n'
+        outstr = prestr + self.neuron_dict[nkey].region+':'+self.neuron_dict[nkey].label + '\n'
         prestr += '    '
         self.neuron_dict[nkey].shown = True
         for postkey in self.neuron_dict[nkey].post:
