@@ -14,7 +14,7 @@ Current neuroscience research relies on correlational studies, which are indirec
 
 ## The Solution
 
-[![Autoassociative Memory Region](https://videos.carboncopies.org/media/original/thumbnails/user/tliao/a2b048e69c3f4ea0875c311f22a175dc.Autoassociative-Growing.mp4_UAErCF4.jpg)(https://videos.carboncopies.org/embed?m=JhUaaxbC5)]
+[![Autoassociative Memory Region](https://videos.carboncopies.org/media/original/thumbnails/user/tliao/a2b048e69c3f4ea0875c311f22a175dc.Autoassociative-Growing.mp4_UAErCF4.jpg)](https://videos.carboncopies.org/embed?m=JhUaaxbC5)
 
 We propose creating a multi-tiered training data set generated from carefully crafted in-silico models of virtual "ground-truth" brain tissue. This approach has been successful in artificial intelligence, where standardized data sets and challenges have driven algorithmic improvements.
 
