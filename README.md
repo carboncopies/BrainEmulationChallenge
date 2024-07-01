@@ -26,6 +26,13 @@ Our challenge series consists of successively more sophisticated data sets, each
 
 To participate in the challenge, please review the challenge levels and associated data sets on our website. Implement your analysis and translation methods on the provided data sets and submit your results.
 
+## Dependencies
+
+This project is built on the BrainGenix platform for WBE research. We specifically use the following components from BrainGenix:
+ - [NES](https://gitlab.braingenix.org/carboncopies/BrainGenix-NES)
+ - [API](https://gitlab.braingenix.org/carboncopies/BrainGenix-API)
+
+
 ## License
 
 This project is licensed under the AGPLV3 license.
