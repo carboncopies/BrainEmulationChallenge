@@ -2,6 +2,8 @@
 
 ## Overview
 
+
+
 <iframe width="560" height="315" src="https://videos.carboncopies.org/embed?m=yY1QRzTQA" frameborder="0" allowfullscreen></iframe>
 
 The Brain Emulation Challenge aims to accelerate neural circuit reconstruction and brain emulation by creating standardized reference brains with fully understood circuit structure and functional representations. With the advent of high-throughput electron microscopy (EM), expansion microscopy (ExM), Calcium and voltage imaging, and co-registered combinations of these techniques, we can now acquire high-resolution data sets that span multiple brain regions or entire small animal brains.
@@ -12,7 +14,7 @@ Current neuroscience research relies on correlational studies, which are indirec
 
 ## The Solution
 
-<iframe width="560" height="315" src="https://videos.carboncopies.org/embed?m=JhUaaxbC5" frameborder="0" allowfullscreen></iframe>
+[![Autoassociative Memory Region](https://videos.carboncopies.org/media/original/thumbnails/user/tliao/a2b048e69c3f4ea0875c311f22a175dc.Autoassociative-Growing.mp4_UAErCF4.jpg)(https://videos.carboncopies.org/embed?m=JhUaaxbC5)]
 
 We propose creating a multi-tiered training data set generated from carefully crafted in-silico models of virtual "ground-truth" brain tissue. This approach has been successful in artificial intelligence, where standardized data sets and challenges have driven algorithmic improvements.
 
