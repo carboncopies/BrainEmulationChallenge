@@ -22,6 +22,12 @@ We propose creating a multi-tiered training data set generated from carefully cr
 
 Our challenge series consists of successively more sophisticated data sets, each with associated abstractions and simplifications. By gradually increasing the complexity of the data sets, we can aid testing and improvement of analysis and translation methods. For more information on the challenge levels, please visit our website at https://braingenix.org/Challenge/Overview/.
 
+Why take the brain emulation challenge? Why take a challenge that is providing virtual brain data from generated neural tissue?
+
+If your system identification and reconstruction method successfully discovers the neural circuit and translates its meaningful cognitive function, which was hidden in the data your method analyzed, and about which we know everything, for which we can verify and validate exactly how well the reconstructed result performs a specific function, then we have much stronger reason to believe claims about reconstructions and discovered function from unknown biological neural tissue.
+
+It is a way to test qualitatively and quantitatively if a proposed method can indeed discover and extract what it is meant to find, establishing trust that it is able to deliver a specific and correct working model based on collected brain data.
+
 ## Getting Started
 
 To participate in the challenge, please review the challenge levels and associated data sets on our website. Implement your analysis and translation methods on the provided data sets and submit your results.
