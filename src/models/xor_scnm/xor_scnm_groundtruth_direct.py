@@ -22,6 +22,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-modelfile", type=str, help="File to read model instructions from")
+Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model to save")
 Args = Parser.parse_args()
 
 modelcontent = 'kjhskdjfhkjhs'
@@ -57,9 +58,6 @@ MySim = ClientInstance.CreateSimulation(SimulationCfg)
 
 MySim.Netmorph_RunAndWait(modelcontent)
 
-savedsimname = ClientInstance.SaveSimulation(MySim)
-print('Saved simulation: '+str(savedsimname))
+MySim.ModelSave(Args.modelname)
 
-with open(".SimulationHandle", "w") as f:
-    print(f"Saving simulation handle '{savedsimname}' to '.SimulationHandle'")
-    f.write(savedsimname)
+print(" -- Neuronal Circuit Model saved as "+Args.modelname)
