@@ -451,7 +451,7 @@ if (Args.RenderVisualization):
         VisualizerJob.CameraPositionList_um.append([Point[0], Point[1], ZHeight])
         VisualizerJob.CameraLookAtPositionList_um.append([0, 0, -1000])
 
-    Visualizer = bg_api.Simulation.Sim.SetupVisualizer()
+    Visualizer = MySim.SetupVisualizer()
     Visualizer.GenerateVisualization(VisualizerJob)
 
 
