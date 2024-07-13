@@ -161,69 +161,69 @@ print("Loaded neuronal circuit model "+Args.modelname)
 
 # ---- WILL PROBABLY BREAK ABOUT HERE
 
-if (Args.Electrodes or Args.RenderEM):
+# if (Args.Electrodes or Args.RenderEM):
 
-    # NOTE: Copied these soma locations from the ground-truth script to
-    #       put electrodes fairly close to neurons for simplicity right now.
-    # somacenters = {
-    #     'P_in0_pos': np.array([-45,-45, 0]),
-    #     'P_in1_pos': np.array([-45, 45, 0]),
-    #     'I_A0_pos': np.array([-15,-15, 0]),
-    #     'I_A1_pos': np.array([-15, 15, 0]),
-    #     'P_B0_pos': np.array([ 15,-45, 0]),
-    #     'P_B1_pos': np.array([ 15, 45, 0]),
-    #     'P_out_pos': np.array([ 45,  0, 0]),
-    # }
+#     # NOTE: Copied these soma locations from the ground-truth script to
+#     #       put electrodes fairly close to neurons for simplicity right now.
+#     # somacenters = {
+#     #     'P_in0_pos': np.array([-45,-45, 0]),
+#     #     'P_in1_pos': np.array([-45, 45, 0]),
+#     #     'I_A0_pos': np.array([-15,-15, 0]),
+#     #     'I_A1_pos': np.array([-15, 15, 0]),
+#     #     'P_B0_pos': np.array([ 15,-45, 0]),
+#     #     'P_B1_pos': np.array([ 15, 45, 0]),
+#     #     'P_out_pos': np.array([ 45,  0, 0]),
+#     # }
 
-    # 3.2.1 Find the geometric center of the system based on soma center locations
+#     # 3.2.1 Find the geometric center of the system based on soma center locations
 
-    success, geocenter = bg_api.BGNES_get_geometric_center()
-    if not success:
-        print('Failed to find geometric center of simulation.')
-        exit(1)
+#     success, geocenter = bg_api.BGNES_get_geometric_center()
+#     if not success:
+#         print('Failed to find geometric center of simulation.')
+#         exit(1)
 
-    print('Geometric center of simulation: '+str(geocenter))
+#     print('Geometric center of simulation: '+str(geocenter))
 
-    # 3.2.2 Set up electrode parameters
+#     # 3.2.2 Set up electrode parameters
 
-    num_sites = 1
-    sites_ratio = 0.01
-    noise_level = 0
+#     num_sites = 1
+#     sites_ratio = 0.01
+#     noise_level = 0
 
-    set_of_electrode_specs = []
+#     set_of_electrode_specs = []
 
-    # Note that shank spacing on a 4-shank Neuropixels electrode is 250 um.
-    # See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8244810/
+#     # Note that shank spacing on a 4-shank Neuropixels electrode is 250 um.
+#     # See https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8244810/
 
-    tip_positions = {
-        'A': np.array([0, 0, 0]),
-        'B': np.array([-200, -200, 0]),
-        'C': np.array([200, 200, 0]),
-    }
+#     tip_positions = {
+#         'A': np.array([0, 0, 0]),
+#         'B': np.array([-200, -200, 0]),
+#         'C': np.array([200, 200, 0]),
+#     }
 
-    for soma_name in tip_positions:
+#     for soma_name in tip_positions:
 
-        tip_position = tip_positions[soma_name]
-        end_position = tip_position + np.array([0, 0, 2000.0]) # electrodes are typically a few mm to (sometimes a few cm) in length
+#         tip_position = tip_positions[soma_name]
+#         end_position = tip_position + np.array([0, 0, 2000.0]) # electrodes are typically a few mm to (sometimes a few cm) in length
 
-        rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
-        for rec_site in range(1, num_sites):
-            electrode_ratio = rec_site * sites_ratio
-            rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
+#         rec_sites_on_electrode = [ [0, 0, 0], ] # Only one site at the tip.
+#         for rec_site in range(1, num_sites):
+#             electrode_ratio = rec_site * sites_ratio
+#             rec_sites_on_electrode.append( [0, 0, electrode_ratio] )
 
-        electrode_specs = {
-            'name': 'electrode_'+soma_name,
-            'tip_position': tip_position.tolist(),
-            'end_position': end_position.tolist(),
-            'sites': rec_sites_on_electrode,
-            'noise_level': noise_level,
-        }
-        set_of_electrode_specs.append( electrode_specs )
+#         electrode_specs = {
+#             'name': 'electrode_'+soma_name,
+#             'tip_position': tip_position.tolist(),
+#             'end_position': end_position.tolist(),
+#             'sites': rec_sites_on_electrode,
+#             'noise_level': noise_level,
+#         }
+#         set_of_electrode_specs.append( electrode_specs )
 
-    success, list_of_electrode_IDs = bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
+#     success, list_of_electrode_IDs = bg_api.BGNES_attach_recording_electrodes(set_of_electrode_specs)
 
-    print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
-    print('IDs are: '+str(list_of_electrode_IDs))
+#     print('Attached %s recording electrodes.' % str(len(list_of_electrode_IDs)))
+#     print('IDs are: '+str(list_of_electrode_IDs))
 
 # 3.3 Initialize calcium imaging
 
