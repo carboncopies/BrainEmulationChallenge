@@ -484,8 +484,8 @@ if (Args.RenderEM):
     # Get bounding box for rendering
     BottomLeft_um, TopRight_um = MySim.GetBoundingBox()
 
-    BottomLeft_um = [BottomLeft_um[0]/50, BottomLeft_um[1]/50, BottomLeft_um[2]/50]
-    TopRight_um = [TopRight_um[0]/50, TopRight_um[1]/50, TopRight_um[2]/50]
+    BottomLeft_um = [BottomLeft_um[0]/15, BottomLeft_um[1]/15, BottomLeft_um[2]/15]
+    TopRight_um = [TopRight_um[0]/15, TopRight_um[1]/15, TopRight_um[2]/15]
 
     # BottomLeft_um = [-75,-75,-20]
     # TopRight_um = [75,75,20]
