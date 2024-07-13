@@ -164,7 +164,7 @@ for idx in range(len(somas)):
 
 print('Made %d soma compartments belonging to %d neurons.' % (len(somas), len(neuron_compartments)))
 
-# 3. e) Collect and batch soma cylinder builds
+# 3. e) Collect and batch neurite cylinder builds
 
 print('Creating neurite shapes...')
 

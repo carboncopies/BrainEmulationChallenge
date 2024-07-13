@@ -478,11 +478,11 @@ if (Args.RenderEM):
     EMConfig.BorderThickness_um = 0.3
     EMConfig.PostBlurNoisePasses = 1
     EMConfig.PreBlurNoisePasses = 0
-    VSDAEMInstance = bg_api.Simulation.Sim.AddVSDAEM(EMConfig)
+    VSDAEMInstance = MySim.AddVSDAEM(EMConfig)
 
 
     # Get bounding box for rendering
-    BottomLeft_um, TopRight_um = bg_api.Simulation.Sim.GetBoundingBox()
+    BottomLeft_um, TopRight_um = MySim.GetBoundingBox()
 
     BottomLeft_um = [BottomLeft_um[0]/5, BottomLeft_um[1]/5, BottomLeft_um[2]/5]
     TopRight_um = [TopRight_um[0]/5, TopRight_um[1]/5, TopRight_um[2]/5]
