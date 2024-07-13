@@ -465,7 +465,7 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-    EMConfig.PixelResolution_nm = 0.05 # is actually um!!!!!
+    EMConfig.PixelResolution_nm = 0.5 # is actually um!!!!!
     EMConfig.ImageWidth_px = 512
     EMConfig.ImageHeight_px = 512
     EMConfig.SliceThickness_nm = 0.2 # actually um!
@@ -484,8 +484,8 @@ if (Args.RenderEM):
     # Get bounding box for rendering
     BottomLeft_um, TopRight_um = MySim.GetBoundingBox()
 
-    BottomLeft_um = [BottomLeft_um[0]/15, BottomLeft_um[1]/15, BottomLeft_um[2]/15]
-    TopRight_um = [TopRight_um[0]/15, TopRight_um[1]/15, TopRight_um[2]/15]
+    BottomLeft_um = [BottomLeft_um[0]/5, BottomLeft_um[1]/5, BottomLeft_um[2]/5]
+    TopRight_um = [TopRight_um[0]/5, TopRight_um[1]/5, TopRight_um[2]/5]
 
     # BottomLeft_um = [-75,-75,-20]
     # TopRight_um = [75,75,20]
