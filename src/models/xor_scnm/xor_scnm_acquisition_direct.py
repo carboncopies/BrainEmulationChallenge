@@ -478,6 +478,7 @@ if (Args.RenderEM):
     EMConfig.BorderThickness_um = 0.3
     EMConfig.PostBlurNoisePasses = 1
     EMConfig.PreBlurNoisePasses = 0
+    EMConfig.TearingEnabled = False
     VSDAEMInstance = MySim.AddVSDAEM(EMConfig)
 
 
