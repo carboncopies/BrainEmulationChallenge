@@ -45,6 +45,8 @@ Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Ca
 Parser.add_argument('-Electrodes', action='store_true', help="Place electrodes")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
+Parser.add_argument("-Resolution_um", default=0.05, type=float, help="Resolution in microns of each voxel")
+Parser.add_argument("-SubdivideSize", default=5, type=int, help="Amount to subdivide region in, 1 is full size, 2 is half size, etc.")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-NoDownloadEM", action="store_true", help="Disable downloading of EM Images")
 Args = Parser.parse_args()
@@ -465,8 +467,8 @@ if (Args.RenderEM):
 
     # A receptor is located at [-5.06273255 -0.20173953 -0.02163604] -- zooming in on that for some tweaking
     EMConfig = NES.VSDA.EM.Configuration()
-#    EMConfig.PixelResolution_nm = 0.025 # is actually um!!!!!
-    EMConfig.PixelResolution_nm = 0.1 # is actually um!!!!!
+    EMConfig.PixelResolution_nm = Args.Resolution_um # is actually um!!!!!
+#    EMConfig.PixelResolution_nm = 0.1 # is actually um!!!!!
 #    EMConfig.PixelResolution_nm = 0.3 # is actually um!!!!!
     EMConfig.ImageWidth_px = 512
     EMConfig.ImageHeight_px = 512
@@ -487,8 +489,10 @@ if (Args.RenderEM):
     # Get bounding box for rendering
     BottomLeft_um, TopRight_um = MySim.GetBoundingBox()
 
-    BottomLeft_um = [BottomLeft_um[0]/5, BottomLeft_um[1]/5, BottomLeft_um[2]/5]
-    TopRight_um = [TopRight_um[0]/5, TopRight_um[1]/5, TopRight_um[2]/5]
+    SubdivideSize = Args.SubdivideSize
+
+    BottomLeft_um = [BottomLeft_um[0]/SubdivideSize, BottomLeft_um[1]/SubdivideSize, BottomLeft_um[2]/SubdivideSize]
+    TopRight_um = [TopRight_um[0]/SubdivideSize, TopRight_um[1]/SubdivideSize, TopRight_um[2]/SubdivideSize]
 
     # BottomLeft_um = [-75,-75,-20]
     # TopRight_um = [75,75,20]
