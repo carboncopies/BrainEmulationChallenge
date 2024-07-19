@@ -345,6 +345,7 @@ candidate_synapses=true;
 
 fibrediameter=true;
 neurite_diameter_model=rall;
+ndm.d_max=10.0;
 
 # SIMULATION RUNTIME AND SAMPLING PARAMETERS
 # Data is collected at intervals of 4320 seconds.
