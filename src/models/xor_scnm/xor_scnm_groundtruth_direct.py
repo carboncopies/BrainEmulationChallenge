@@ -11,6 +11,7 @@ import numpy as np
 from datetime import datetime
 from time import sleep
 import json
+import base64
 
 import vbpcommon
 from BrainGenix.BG_API import NES
@@ -84,3 +85,11 @@ MySim.Netmorph_RunAndWait(modelcontent)
 MySim.ModelSave(Args.modelname)
 
 print(" -- Neuronal Circuit Model saved as "+Args.modelname)
+
+if Args.DoBlend:
+    print(" -- Getting Gzipped Blender file to netmorph-net.blend")
+    FileBytes = MySim.Netmorph_GetFile('net.obj.blend.gz')
+    with open('netmorph-net.blend', 'wb') as f:
+        f.write(base64.decodebytes(FileBytes))
+
+print(" -- Done.")
