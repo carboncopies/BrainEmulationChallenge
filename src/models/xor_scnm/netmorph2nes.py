@@ -57,6 +57,7 @@ class nodedata:
             self.t_genesis = float(dataline[7])
 
 def load_data_from_file(dfile:str, filenames:dict)->dict:
+    print('Loading '+filenames[dfile])
     with open(filenames[dfile], 'r') as f:
         content = f.read()
     lines = content.split('\n')
