@@ -70,6 +70,7 @@ MySim.ModelLoad(Args.modelname)
 
 print("Loaded neuronal circuit model "+Args.modelname)
 
-
+response = MySim.GetConnectome()
+print(response)
 
 print(" -- Done.")
