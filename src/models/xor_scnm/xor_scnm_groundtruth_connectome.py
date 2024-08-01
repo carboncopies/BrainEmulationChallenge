@@ -71,6 +71,27 @@ MySim.ModelLoad(Args.modelname)
 print("Loaded neuronal circuit model "+Args.modelname)
 
 response = MySim.GetAbstractConnectome(Sparse=True)
-print(response)
+
+PrePostNumReceptors = response['PrePostNumReceptors']
+Regions = response['Regions']
+
+def RegionByNeuronID(NeuronID:int)->str:
+    for reg in list(Regions.keys()):
+        if NeuronID in Regions[reg]:
+            return reg
+    return 'unknown'
+
+PreRegions = {}
+for preidx, postidx, reccnt in PrePostNumReceptors:
+    prereg = RegionByNeuronID(preidx)
+    postreg = RegionByNeuronID(postidx)
+    if prereg not in PreRegions:
+        PreRegions[prereg] = {}
+    if postreg not in PreRegions[prereg]:
+        PreRegions[prereg][postreg] = 1
+    else:
+        PreRegions[prereg][postreg] += 1
+
+print(PreRegions)
 
 print(" -- Done.")
