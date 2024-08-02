@@ -77,6 +77,10 @@ response = MySim.GetAbstractConnectome(Sparse=True)
 PrePostNumReceptors = response['PrePostNumReceptors']
 # Regions and the neurons in them:
 Regions = response['Regions']
+# Neuron types:
+NeuronTypes = response['Types']
+
+print("Neuron types: "+str(NeuronTypes))
 
 def RegionByNeuronID(NeuronID:int)->str:
     for reg in list(Regions.keys()):
@@ -337,10 +341,25 @@ SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
 SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
 PyrOut.add(PyrOutGroup[0])
 
+def NeuronTypeStr(NeuronID:int)->str:
+    if NeuronTypes[NeuronID]==1:
+        return 'pyr'
+    elif NeuronTypes[NeuronID]==2:
+        return 'int'
+    else:
+        return 'unknown'
+
 print("Connectome pre-post pairs for both branches of the XOR:")
 for i in range(len(PrePostPairs)):
     pre, post = PrePostPairs[i]
-    print('  %s: %s %d -> %s %d' % (XORInput[i], Neuron2RegionMap[pre],pre,Neuron2RegionMap[post],post))
+    print('  %s: %s %d (%s) -> %s %d (%s)' % (
+        XORInput[i],
+        Neuron2RegionMap[pre],
+        pre,
+        NeuronTypeStr(pre),
+        Neuron2RegionMap[post],
+        post,
+        NeuronTypeStr(post)))
 
 # Set connections as per the intentions expressed in PrePostPairs:
 PreSynList = []
