@@ -103,14 +103,30 @@ for reg in Regions:
     for n in Regions[reg]:
         Neuron2RegionMap[n] = reg
 
-print(Neuron2RegionMap)
-
 # Active connections in reservoir:
 Neuron2Neuron = PrePostNumReceptors.copy()
 for i in range(len(Neuron2Neuron)):
     Neuron2Neuron[i][2] = 1
 
+def ActiveInputsTo(NeuronID:int)->list:
+    res = []
+    for pre, post, active in Neuron2Neuron:
+        if active>0 and post==NueronID:
+            res.append(pre)
+    return res
+
+def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
+    res = []
+    activeinputs = ActiveInputsTo(NeuronID)
+    for pre in activeinputs:
+        if Neuron2RegionMap[pre]==SourceRegion:
+            res.append(pre)
+    return res
+
 # Neurons that appear in PyrOut:
+for n in Regions['PyrOut']:
+    frompyrmid = ConnectionsFrom('PyrMid', n)
+    print('%d: %s' % (n, str(frompyrmid)))
 
 print(Neuron2Neuron)
 
