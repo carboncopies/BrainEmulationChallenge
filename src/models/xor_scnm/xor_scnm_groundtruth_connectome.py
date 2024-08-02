@@ -103,16 +103,48 @@ for reg in Regions:
     for n in Regions[reg]:
         Neuron2RegionMap[n] = reg
 
+def SetAll(TheList:list, Value:int):
+    for i in range(len(TheList)):
+        TheList[i][2] = Value
+
+def SetOneByPost(TheList:list, PostID:int, Value:int):
+    for i in range(len(TheList)):
+        if TheList[i][1]==PostID:
+            TheList[i][2] = Value
+
+def SetOneByPre(TheList:list, PreID:int, Value:int):
+    for i in range(len(TheList)):
+        if TheList[i][0]==PreID:
+            TheList[i][2] = Value
+
+def PostIs(TheList:list, PostID:int)->int:
+    for i in range(len(TheList)):
+        if TheList[i][1]==PostID:
+            return TheList[i][2]
+    return 0
+
+def PreIs(TheList:list, PreID:int)->int:
+    for i in range(len(TheList)):
+        if TheList[i][0]==PreID:
+            return TheList[i][2]
+    return 0
+
 # Active connections in reservoir:
 Neuron2Neuron = PrePostNumReceptors.copy()
-for i in range(len(Neuron2Neuron)):
-    Neuron2Neuron[i][2] = 1
+SetAll(Neuron2Neuron, 1)
 
 def ActiveInputsTo(NeuronID:int)->list:
     res = []
     for pre, post, active in Neuron2Neuron:
         if active>0 and post==NeuronID:
             res.append(pre)
+    return res
+
+def ActiveOutputsFrom(NeuronID:int)->list:
+    res = []
+    for pre, post, active in Neuron2Neuron:
+        if active>0 and pre==NeuronID:
+            res.append(post)
     return res
 
 def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
@@ -123,11 +155,46 @@ def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
             res.append(pre)
     return res
 
-# Neurons that appear in PyrOut:
+def Eliminate(NeuronID:int):
+    SetOneByPost(Neuron2Neuron, NeuronID, 0)
+
+# Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
 for n in Regions['PyrOut']:
     frompyrmid = ConnectionsFrom('PyrMid', n)
-    print('%d: %s' % (n, str(frompyrmid)))
+    if len(frompyrmid)<2:
+        Eliminate(n)
+    else:
+        print('%d: %s' % (n, str(frompyrmid)))
 
-print(Neuron2Neuron)
+def PreRecurse(TrackerFlags:list, NeuronID:int):
+    SetOneByPost(TrackerFlags, NeuronID, 1)
+    inp = ActiveInputsTo(NeuronID)
+    for i in inp:
+        if PostIs(TrackerFlags, i)==0:
+            PreRecurse(TrackerFlags, i)
+
+def PostRecurse(TrackerFlags:list, NeuronID:int):
+    SetOneByPre(TrackerFlags, NeuronID, 1)
+    out = ActiveOutputsFrom(NeuronID)
+    for o in out:
+        if PreIs(TrackerFlags, o)==0:
+            PostRecurse(TrackerFlags, o)
+
+N2NFromOutput = Neuron2Neuron.copy()
+SetAll(N2NFromOutput, 0)
+# Set flags for all neurons reachable from active PyrOut neurons:
+for n in Regions['PyrOut']:
+    if PostIs(Neuron2Neuron, n)>0:
+        PreRecurse(N2NFromOutput, n)
+N2NFromInput = Neuron2Neuron.copy()
+SetAll(N2NFromInput, 0)
+# Set flags for all neurons reachable from active PyrIn neurons:
+for n in Regions['PyrIn']:
+    if PreIs(Neuron2Neuron, n)>0:
+        PostRecurse(N2NFromInput, n)
+
+print(N2NFromOutput)
+print(N2NFromInput)
+
 
 print(" -- Done.")
