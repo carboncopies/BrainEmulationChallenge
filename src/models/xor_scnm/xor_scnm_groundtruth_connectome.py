@@ -111,7 +111,6 @@ def SetOneByPost(TheList:list, PostID:int, Value:int):
     for i in range(len(TheList)):
         if TheList[i][1]==PostID:
             TheList[i][2] = Value
-            print('setting')
 
 def SetOneByPre(TheList:list, PreID:int, Value:int):
     for i in range(len(TheList)):
@@ -186,6 +185,7 @@ SetAll(N2NFromOutput, 0)
 # Set flags for all neurons reachable from active PyrOut neurons:
 for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
+        print('doing')
         PreRecurse(N2NFromOutput, n)
 N2NFromInput = Neuron2Neuron.copy()
 SetAll(N2NFromInput, 0)
