@@ -19,6 +19,7 @@ from datetime import datetime
 from time import sleep
 import json
 import base64
+import copy
 
 import vbpcommon
 from BrainGenix.BG_API import NES
@@ -130,7 +131,7 @@ def PreIs(TheList:list, PreID:int)->int:
     return 0
 
 # Active connections in reservoir:
-Neuron2Neuron = PrePostNumReceptors.deepcopy()
+Neuron2Neuron = copy.deepcopy(PrePostNumReceptors)
 SetAll(Neuron2Neuron, 1)
 
 def ActiveInputsTo(NeuronID:int)->list:
@@ -181,7 +182,7 @@ def PostRecurse(TrackerFlags:list, NeuronID:int):
             PostRecurse(TrackerFlags, o)
 
 #print(Neuron2Neuron)
-N2NFromOutput = Neuron2Neuron.deepcopy()
+N2NFromOutput = copy.deepcopy(Neuron2Neuron)
 SetAll(N2NFromOutput, 0)
 #print(Neuron2Neuron)
 # Set flags for all neurons reachable from active PyrOut neurons:
@@ -189,7 +190,7 @@ for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
         print('doing')
         PreRecurse(N2NFromOutput, n)
-N2NFromInput = Neuron2Neuron.deepcopy()
+N2NFromInput = copy.deepcopy(Neuron2Neuron)
 SetAll(N2NFromInput, 0)
 # Set flags for all neurons reachable from active PyrIn neurons:
 for n in Regions['PyrIn']:
