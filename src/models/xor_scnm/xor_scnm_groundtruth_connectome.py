@@ -111,7 +111,7 @@ for i in range(len(Neuron2Neuron)):
 def ActiveInputsTo(NeuronID:int)->list:
     res = []
     for pre, post, active in Neuron2Neuron:
-        if active>0 and post==NueronID:
+        if active>0 and post==NeuronID:
             res.append(pre)
     return res
 
