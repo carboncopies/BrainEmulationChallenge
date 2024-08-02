@@ -329,7 +329,7 @@ MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
 print("Updated model connectome accordingly.")
 
 # Let's test the update:
-response = MySim.GetAbstractConnectome(Sparse=True)
+response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
 
 print(response)
 
