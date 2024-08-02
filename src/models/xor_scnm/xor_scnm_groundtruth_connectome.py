@@ -306,4 +306,31 @@ PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
 
 print("Connectome pre-post pairs for both branches of the XOR: %s" % str(PrePostPairs))
 
+# Set connections as per the intentions expressed in PrePostPairs:
+PreSynList = []
+PostSynList = []
+ConductanceList = []
+for pre, post, active in Neuron2Neuron:
+    if (pre, post) in PrePostPairs:
+        # Set this to a specific strength:
+        PreSynList.append(pre)
+        PostSynList.append(post)
+        if Neuron2RegionMap[pre]=="Int":
+            ConductanceList.append(-40.0) # AMPA 40.0, GABA -40.0
+        else:
+            ConductanceList.append(40.0) # AMPA 40.0, GABA -40.0
+    else:
+        # Set this to zero:
+        PreSynList.append(pre)
+        PostSynList.append(post)
+        ConductanceList.append(0.0)
+MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+
+print("Updated model connectome accordingly.")
+
+# Let's test the update:
+response = MySim.GetAbstractConnectome(Sparse=True)
+
+print(response)
+
 print(" -- Done.")
