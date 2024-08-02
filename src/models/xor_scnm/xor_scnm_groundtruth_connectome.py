@@ -180,8 +180,10 @@ def PostRecurse(TrackerFlags:list, NeuronID:int):
         if PreIs(TrackerFlags, o)==0:
             PostRecurse(TrackerFlags, o)
 
+print(Neuron2Neuron)
 N2NFromOutput = Neuron2Neuron.copy()
 SetAll(N2NFromOutput, 0)
+print(Neuron2Neuron)
 # Set flags for all neurons reachable from active PyrOut neurons:
 for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
@@ -194,8 +196,8 @@ for n in Regions['PyrIn']:
     if PreIs(Neuron2Neuron, n)>0:
         PostRecurse(N2NFromInput, n)
 
-print(N2NFromOutput)
-print(N2NFromInput)
+#print(N2NFromOutput)
+#print(N2NFromInput)
 
 
 print(" -- Done.")
