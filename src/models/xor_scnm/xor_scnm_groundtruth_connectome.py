@@ -181,10 +181,8 @@ def PostRecurse(TrackerFlags:list, NeuronID:int):
         if PreIs(TrackerFlags, o)==0:
             PostRecurse(TrackerFlags, o)
 
-#print(Neuron2Neuron)
 N2NFromOutput = copy.deepcopy(Neuron2Neuron)
 SetAll(N2NFromOutput, 0)
-#print(Neuron2Neuron)
 # Set flags for all neurons reachable from active PyrOut neurons:
 for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
@@ -196,9 +194,18 @@ SetAll(N2NFromInput, 0)
 for n in Regions['PyrIn']:
     if PreIs(Neuron2Neuron, n)>0:
         PostRecurse(N2NFromInput, n)
+# Keep only those that are reachable in both directions:
+for idx in range(len(Neuron2Neuron)):
+    if N2NFromOutput[idx][2]==0 or N2NFromInput[idx][2]==0:
+        Neuron2Neuron[idx][2]=0
 
-print(N2NFromOutput)
-print(N2NFromInput)
+def NumActive()->int:
+    num = 0;
+    for pre, post, active in Neuron2Neuron:
+        if active>0:
+            num += 1
+    return num
 
+print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
 
 print(" -- Done.")
