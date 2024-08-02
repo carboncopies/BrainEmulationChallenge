@@ -304,7 +304,9 @@ for n in pyrout:
 PrePostPairs.append( (pyrmid0, PyrOutGroup[0]) )
 PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
 
-print("Connectome pre-post pairs for both branches of the XOR: %s" % str(PrePostPairs))
+print("Connectome pre-post pairs for both branches of the XOR:")
+for pre, post in PrePostPairs:
+    print('  %s %d -> %s %d' % (Neuron2RegionMap[pre],pre,Neuron2RegionMap[post],post))
 
 # Set connections as per the intentions expressed in PrePostPairs:
 PreSynList = []
