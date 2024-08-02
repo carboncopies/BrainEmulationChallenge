@@ -289,7 +289,7 @@ def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:set, NotIntID:
 
 PrePostPairs = []
 XORInput = []
-def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str)
+def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str):
     PrePostPairs.append( (PreSynID, PostSynID) )
     XORInput.append(IOlabel)
 
