@@ -275,13 +275,17 @@ def FindIntAndInDifferent(PyrMidID:int, NotPyrInID:int)->tuple:
                 return mi, ii
 
 # For the first side of the XOR connectome:
+XORInput = []
 PrePostPairs = []
 pyrmid0 = pyrmid_from_pyrin_and_not_int[0]
 pyrin0 = ConnectionsFrom('PyrIn', pyrmid0)[0]
 pyrint1, pyrin1 = FindIntAndInDifferent(pyrmid0, pyrin0)
 PrePostPairs.append( (pyrin0, pyrmid0) )
+XORInput.append('InA')
 PrePostPairs.append( (pyrint1, pyrmid0) )
+XORInput.append('...')
 PrePostPairs.append( (pyrin1, pyrint1) )
+XORInput.append('InB')
 
 # For the second side of the XOR connectome:
 pyrmid1 = pyrmid_from_pyrin_and_not_int[1]
@@ -291,8 +295,11 @@ for mi in midin:
         pyrin1 = mi
 pyrint0, pyrin0 = FindIntAndInDifferent(pyrmid1, pyrin1)
 PrePostPairs.append( (pyrin1, pyrmid1) )
+XORInput.append('InB')
 PrePostPairs.append( (pyrint0, pyrmid1) )
+XORInput.append('...')
 PrePostPairs.append( (pyrin0, pyrint0) )
+XORInput.append('InA')
 
 # Find the PyrOut that receives from both PyrMid neurons:
 PyrOutGroup = []
@@ -302,11 +309,14 @@ for n in pyrout:
     if pyrmid0 in frommid and pyrmid1 in frommid:
         PyrOutGroup.append(n)
 PrePostPairs.append( (pyrmid0, PyrOutGroup[0]) )
+XORInput.append('Out')
 PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
+XORInput.append('Out')
 
 print("Connectome pre-post pairs for both branches of the XOR:")
-for pre, post in PrePostPairs:
-    print('  %s %d -> %s %d' % (Neuron2RegionMap[pre],pre,Neuron2RegionMap[post],post))
+for i in range(len(PrePostPairs)):
+    pre, post = PrePostPairs[i]
+    print('  %s: %s %d -> %s %d' % (XORInput[i], Neuron2RegionMap[pre],pre,Neuron2RegionMap[post],post))
 
 # Set connections as per the intentions expressed in PrePostPairs:
 PreSynList = []
