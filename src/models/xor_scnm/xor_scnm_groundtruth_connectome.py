@@ -130,7 +130,7 @@ def PreIs(TheList:list, PreID:int)->int:
     return 0
 
 # Active connections in reservoir:
-Neuron2Neuron = PrePostNumReceptors.copy()
+Neuron2Neuron = PrePostNumReceptors.deepcopy()
 SetAll(Neuron2Neuron, 1)
 
 def ActiveInputsTo(NeuronID:int)->list:
@@ -180,24 +180,24 @@ def PostRecurse(TrackerFlags:list, NeuronID:int):
         if PreIs(TrackerFlags, o)==0:
             PostRecurse(TrackerFlags, o)
 
-print(Neuron2Neuron)
-N2NFromOutput = Neuron2Neuron.copy()
+#print(Neuron2Neuron)
+N2NFromOutput = Neuron2Neuron.deepcopy()
 SetAll(N2NFromOutput, 0)
-print(Neuron2Neuron)
+#print(Neuron2Neuron)
 # Set flags for all neurons reachable from active PyrOut neurons:
 for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
         print('doing')
         PreRecurse(N2NFromOutput, n)
-N2NFromInput = Neuron2Neuron.copy()
+N2NFromInput = Neuron2Neuron.deepcopy()
 SetAll(N2NFromInput, 0)
 # Set flags for all neurons reachable from active PyrIn neurons:
 for n in Regions['PyrIn']:
     if PreIs(Neuron2Neuron, n)>0:
         PostRecurse(N2NFromInput, n)
 
-#print(N2NFromOutput)
-#print(N2NFromInput)
+print(N2NFromOutput)
+print(N2NFromInput)
 
 
 print(" -- Done.")
