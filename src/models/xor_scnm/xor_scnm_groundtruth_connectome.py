@@ -266,38 +266,42 @@ print("Usable connections remaining after eliminating connections through other 
 for n in pyrmid_from_pyrin_and_not_int:
     print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
 
-def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:int)->tuple:
+def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:list)->tuple:
     midint = ConnectionsFrom('Int', PyrMidID)
     for mi in midint:
         intinp = ConnectionsFrom('PyrIn', mi)
         for ii in intinp:
-            if ii != NotPyrInID:
+            if ii not in NotPyrInID:
                 return mi, ii
     print('Found nothing...')
     exit(1)
 
-def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:int, NotIntID:int)->tuple:
+def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:list, NotIntID:int)->tuple:
     midint = ConnectionsFrom('Int', PyrMidID)
     for mi in midint:
         if mi != NotIntID:
             intinp = ConnectionsFrom('PyrIn', mi)
             for ii in intinp:
-                if ii != NotPyrInID:
+                if ii not in NotPyrInID:
                     return mi, ii
     print('Found nothing...')
     exit(1)
 
 # For the first side of the XOR connectome:
 XORInput = []
+PyrInA = [] # The set of neurons representing XOR input A
+PyrInB = [] # The set of neurons representing XOR input B
 PrePostPairs = []
 pyrmid0 = pyrmid_from_pyrin_and_not_int[0]
 pyrin0 = ConnectionsFrom('PyrIn', pyrmid0)[0]
-pyrint1, pyrin1 = FindIntAndInWithDifferentPyrIn(pyrmid0, pyrin0)
+pyrint1, pyrin1 = FindIntAndInWithDifferentPyrIn(pyrmid0, PyrInA)
 PrePostPairs.append( (pyrin0, pyrmid0) )
+PyrInA.append(pyrin0)
 XORInput.append('InA')
 PrePostPairs.append( (pyrint1, pyrmid0) )
 XORInput.append('...')
 PrePostPairs.append( (pyrin1, pyrint1) )
+PyrInB.append(pyrin1)
 XORInput.append('InB')
 
 # For the second side of the XOR connectome:
@@ -306,7 +310,9 @@ midin = ConnectionsFrom('PyrIn', pyrmid1)
 for mi in midin:
     if mi != pyrin0:
         pyrin1 = mi
-pyrint0, pyrin0 = FindIntAndInWithDifferentPyrInAndInt(pyrmid1, pyrin1, pyrint1)
+PyrInB.append(pyrin1)
+pyrint0, pyrin0 = FindIntAndInWithDifferentPyrInAndInt(pyrmid1, PyrInB, pyrint1)
+PyrInA.append(pyrin0)
 PrePostPairs.append( (pyrin1, pyrmid1) )
 XORInput.append('InB')
 PrePostPairs.append( (pyrint0, pyrmid1) )
