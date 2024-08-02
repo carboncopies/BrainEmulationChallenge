@@ -72,7 +72,9 @@ print("Loaded neuronal circuit model "+Args.modelname)
 
 response = MySim.GetAbstractConnectome(Sparse=True)
 
+# Neuron-to-neuron connections:
 PrePostNumReceptors = response['PrePostNumReceptors']
+# Regions and the neurons in them:
 Regions = response['Regions']
 
 def RegionByNeuronID(NeuronID:int)->str:
@@ -92,6 +94,14 @@ for preidx, postidx, reccnt in PrePostNumReceptors:
     else:
         PreRegions[prereg][postreg] += 1
 
+print("Region-to-region connections in resevoirs:")
 print(PreRegions)
+
+# Active connections in reservoir:
+Neuron2Neuron = PrePostNumReceptors.copy()
+for i in range(len(Neuron2Neuron)):
+    Neuron2Neuron[i][2] = 1
+
+print(Neuron2Neuron)
 
 print(" -- Done.")
