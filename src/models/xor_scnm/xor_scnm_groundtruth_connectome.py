@@ -97,10 +97,20 @@ for preidx, postidx, reccnt in PrePostNumReceptors:
 print("Region-to-region connections in resevoirs:")
 print(PreRegions)
 
+# Make neuron to region map (assuming only one region per neuron):
+Neuron2RegionMap = {}
+for reg in Regions:
+    for n in Regions[reg]:
+        Neuron2RegionMap[n] = reg
+
+print(Neuron2RegionMap)
+
 # Active connections in reservoir:
 Neuron2Neuron = PrePostNumReceptors.copy()
 for i in range(len(Neuron2Neuron)):
     Neuron2Neuron[i][2] = 1
+
+# Neurons that appear in PyrOut:
 
 print(Neuron2Neuron)
 
