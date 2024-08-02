@@ -266,7 +266,7 @@ print("Usable connections remaining after eliminating connections through other 
 for n in pyrmid_from_pyrin_and_not_int:
     print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
 
-def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:list)->tuple:
+def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:set)->tuple:
     midint = ConnectionsFrom('Int', PyrMidID)
     for mi in midint:
         intinp = ConnectionsFrom('PyrIn', mi)
@@ -276,7 +276,7 @@ def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:list)->tuple:
     print('Found nothing...')
     exit(1)
 
-def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:list, NotIntID:int)->tuple:
+def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:set, NotIntID:int)->tuple:
     midint = ConnectionsFrom('Int', PyrMidID)
     for mi in midint:
         if mi != NotIntID:
@@ -287,52 +287,55 @@ def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:list, NotIntID
     print('Found nothing...')
     exit(1)
 
-# For the first side of the XOR connectome:
-XORInput = []
-PyrInA = [] # The set of neurons representing XOR input A
-PyrInB = [] # The set of neurons representing XOR input B
-PyrOut = [] # The set of neurons representing XOR output
 PrePostPairs = []
-pyrmid0 = pyrmid_from_pyrin_and_not_int[0]
-pyrin0 = ConnectionsFrom('PyrIn', pyrmid0)[0]
-pyrint1, pyrin1 = FindIntAndInWithDifferentPyrIn(pyrmid0, PyrInA)
-PrePostPairs.append( (pyrin0, pyrmid0) )
-PyrInA.append(pyrin0)
-XORInput.append('InA')
-PrePostPairs.append( (pyrint1, pyrmid0) )
-XORInput.append('...')
-PrePostPairs.append( (pyrin1, pyrint1) )
-PyrInB.append(pyrin1)
-XORInput.append('InB')
+XORInput = []
+def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str)
+    PrePostPairs.append( (PreSynID, PostSynID) )
+    XORInput.append(IOlabel)
+
+# For the first side of the XOR connectome:
+
+PyrInA = set() # The set of neurons representing XOR input A
+PyrInB = set() # The set of neurons representing XOR input B
+PyrOut = set() # The set of neurons representing XOR output
+
+pyrmidA = pyrmid_from_pyrin_and_not_int[0]
+pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
+SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
+PyrInA.add(pyrinA_0)
+
+pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
+SpecifyConnection(pyrintB, pyrmidA, '...')
+
+SpecifyConnection(pyrinB_0, pyrintB, 'InB')
+PyrInB.add(pyrinB_0)
 
 # For the second side of the XOR connectome:
-pyrmid1 = pyrmid_from_pyrin_and_not_int[1]
-midin = ConnectionsFrom('PyrIn', pyrmid1)
+
+pyrmidB = pyrmid_from_pyrin_and_not_int[1]
+midin = ConnectionsFrom('PyrIn', pyrmidB)
 for mi in midin:
-    if mi != pyrin0:
-        pyrin1 = mi
-PyrInB.append(pyrin1)
-pyrint0, pyrin0 = FindIntAndInWithDifferentPyrInAndInt(pyrmid1, PyrInB, pyrint1)
-PyrInA.append(pyrin0)
-PrePostPairs.append( (pyrin1, pyrmid1) )
-XORInput.append('InB')
-PrePostPairs.append( (pyrint0, pyrmid1) )
-XORInput.append('...')
-PrePostPairs.append( (pyrin0, pyrint0) )
-XORInput.append('InA')
+    if mi not in PyrInA:
+        pyrinB_1 = mi
+SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
+PyrInB.add(pyrinB_1)
+
+pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
+SpecifyConnection(pyrintA, pyrmidB, '...')
+
+SpecifyConnection(pyrinA_1, pyrintA, 'InA')
+PyrInA.add(pyrinA_1)
 
 # Find the PyrOut that receives from both PyrMid neurons:
 PyrOutGroup = []
 pyrout = Regions['PyrOut']
 for n in pyrout:
     frommid = ConnectionsFrom('PyrMid', n)
-    if pyrmid0 in frommid and pyrmid1 in frommid:
+    if pyrmidA in frommid and pyrmidB in frommid:
         PyrOutGroup.append(n)
-PrePostPairs.append( (pyrmid0, PyrOutGroup[0]) )
-XORInput.append('Out')
-PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
-XORInput.append('Out')
-PyrOut.append(PyrOutGroup[0])
+SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
+SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
+PyrOut.add(PyrOutGroup[0])
 
 print("Connectome pre-post pairs for both branches of the XOR:")
 for i in range(len(PrePostPairs)):
@@ -371,9 +374,9 @@ print("Saving modified model on server as: "+tunedmodelname)
 MySim.ModelSave(tunedmodelname)
 
 XORInOutIdentifiers = {
-    'InA': PyrInA,
-    'InB': PyrInB,
-    'Out': PyrOut,
+    'InA': list(PyrInA),
+    'InB': list(PyrInB),
+    'Out': list(PyrOut),
 }
 tunedIOIDsfile=tunedmodelname+'-IOIDs.json'
 with open(tunedIOIDsfile, 'w') as f:
