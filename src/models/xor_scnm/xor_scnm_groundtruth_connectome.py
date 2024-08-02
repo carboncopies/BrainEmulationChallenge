@@ -291,6 +291,7 @@ def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:list, NotIntID
 XORInput = []
 PyrInA = [] # The set of neurons representing XOR input A
 PyrInB = [] # The set of neurons representing XOR input B
+PyrOut = [] # The set of neurons representing XOR output
 PrePostPairs = []
 pyrmid0 = pyrmid_from_pyrin_and_not_int[0]
 pyrin0 = ConnectionsFrom('PyrIn', pyrmid0)[0]
@@ -331,6 +332,7 @@ PrePostPairs.append( (pyrmid0, PyrOutGroup[0]) )
 XORInput.append('Out')
 PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
 XORInput.append('Out')
+PyrOut.append(PyrOutGroup[0])
 
 print("Connectome pre-post pairs for both branches of the XOR:")
 for i in range(len(PrePostPairs)):
@@ -362,6 +364,20 @@ print("Updated model connectome accordingly.")
 # Let's test the update:
 response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
 
-print(response)
+print("Updated connectome: "+str(response))
+
+tunedmodelname = Args.modelname+"-tuned"
+print("Saving modified model on server as: "+tunedmodelname)
+MySim.ModelSave(tunedmodelname)
+
+XORInOutIdentifiers = {
+    'InA': PyrInA,
+    'InB': PyrInB,
+    'Out': PyrOut,
+}
+tunedIOIDsfile=tunedmodelname+'-IOIDs.json'
+with open(tunedIOIDsfile, 'w') as f:
+    json.dump(XORInOutIdentifiers, f)
+print("Saved XOR I/O neuron identifiers in "+tunedIOIDsfile)
 
 print(" -- Done.")

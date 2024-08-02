@@ -37,7 +37,7 @@ def PointsInCircum(r, n=100):
 
 
 Parser = argparse.ArgumentParser(description="vbp script")
-Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model prevoiusly saved")
+Parser.add_argument("-modelname", default="xor_scnm-tuned", type=str, help="Name of neuronal circuit model prevoiusly saved")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
 Parser.add_argument("-Neuroglancer", action='store_true', help="Generate the neuroglancer verison of the dataset for EM images")
@@ -78,7 +78,13 @@ SimulationCfg.Name = "From Netmorph"
 SimulationCfg.Seed = 0
 MySim = ClientInstance.CreateSimulation(SimulationCfg)
 
+# 2. Load previously saved neuronal circuit model
 
+MySim.ModelLoad(Args.modelname)
+
+print("Loaded neuronal circuit model "+Args.modelname)
+
+# 2.3 Prepare model for data acquisition
 
 TotalElectrodes:int = 0;
 TotalCARenders:int = 0;
@@ -91,17 +97,6 @@ figspecs = {
     'linewidth': 0.5,
     'figext': 'pdf',
 }
-
-
-# 2. Load previously saved neuronal circuit model
-
-MySim.ModelLoad(Args.modelname)
-
-print("Loaded neuronal circuit model "+Args.modelname)
-
-# 2.3 Show model
-
-# (add call here)
 
 # 3. Initialize functional data acquisition
 
@@ -122,13 +117,13 @@ print("Loaded neuronal circuit model "+Args.modelname)
 
 # print(ACQSETUPTEXT1)
 
-# t_soma_fire_ms = [
-#     (100.0, 0),
-#     (200.0, 1),
-#     (300.0, 0),
-#     (300.0, 1),
-# ]
-# print('Directed somatic firing: '+str(t_soma_fire_ms))
+t_soma_fire_ms = [
+    (100.0, 0),
+    (200.0, 1),
+    (300.0, 0),
+    (300.0, 1),
+]
+print('Directed somatic firing: '+str(t_soma_fire_ms))
 
 # response = bg_api.BGNES_set_specific_AP_times(
 #     TimeNeuronPairs=t_soma_fire_ms,
