@@ -85,7 +85,7 @@ MySim.ModelLoad(Args.modelname)
 print("Loaded neuronal circuit model "+Args.modelname)
 
 with open(Args.modelname+'-IOIDs.json', 'r') as f:
-    XORInOutIdentifiers = json.laod(f)
+    XORInOutIdentifiers = json.load(f)
 print('Loaded XOR I/O neuron identifiers.')
 
 # 2.3 Prepare model for data acquisition
