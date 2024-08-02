@@ -84,6 +84,10 @@ MySim.ModelLoad(Args.modelname)
 
 print("Loaded neuronal circuit model "+Args.modelname)
 
+with open(Args.modelname+'-IOIDs.json', 'r') as f:
+    XORInOutIdentifiers = json.laod(f)
+print('Loaded XOR I/O neuron identifiers.')
+
 # 2.3 Prepare model for data acquisition
 
 TotalElectrodes:int = 0;
@@ -117,19 +121,28 @@ figspecs = {
 
 # print(ACQSETUPTEXT1)
 
-t_soma_fire_ms = [
-    (100.0, 0),
-    (200.0, 1),
-    (300.0, 0),
-    (300.0, 1),
-]
+t_soma_fire_ms = []
+def SpikeInputNeuronsAt(InputID:str, t_ms:float):
+    for n in XORInOutIdentifiers[InputID]:
+        t_soma_fire_ms.append( (t_ms, n) )
+
+t_test_ms = {
+    'XOR_10': 100.0,
+    'XOR_01': 200.0,
+    'XOR_11': 300.0,
+}
+# The 0 0 case is not explicitly tested.
+# Add 1 0 XOR test case.
+SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
+# Add 0 1 XOR test case.
+SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
+# Add 1 1 XOR test case.
+SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
+SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
+
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
-# response = bg_api.BGNES_set_specific_AP_times(
-#     TimeNeuronPairs=t_soma_fire_ms,
-# )
-# t_max_ms=-1 # record forever
-# bg_api.BGNES_simulation_recordall(t_max_ms)
+MySim.SetSpecificAPTimes(TimeNeuronPairs=t_soma_fire_ms)
 
 # 3.1 Initialize spontaneous activity
 
@@ -266,16 +279,17 @@ print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runti
 
 # 5.1 Set record-all and record instruments
 
-# t_max_ms=-1 # record forever
-# bg_api.BGNES_simulation_recordall(t_max_ms)
-# if not bg_api.BGNES_set_record_instruments(t_max_ms):
-#     exit(1)
+t_max_ms=-1 # record forever
+MySim.RecordAll(_MaxRecordTime_ms=t_max_ms)
 
-# # 5.2 Run for specified simulation time
-# if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
-#     exit(1)
+#MySim.SetRecordInstruments(_MaxRecordTime_ms=t_max_ms)
 
+# 5.2 Run for specified simulation time
+MySim.RunAndWait(Runtime_ms=runtime_ms, timeout_s=100.0)
 
+# 5.3 Retrieve recordings and plot
+
+# 5.3.1 Carry out post-run Calcium Imaging
 
 if (Args.RenderCA):
     VSDACAInstance.QueueRenderOperation()
@@ -299,35 +313,33 @@ if (Args.RenderCA):
     os.makedirs(f"{savefolder}/CARegions/0")
     ### Buggy: CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
+# 5.3.2 Collect God-mode recording of neural activity
 
+recording_dict = MySim.GetRecording()
 
-# 5.3 Retrieve recordings and plot
+if isinstance(recording_dict, dict):
+    if "StatusCode" in recording_dict:
+        if recording_dict["StatusCode"] != 0:
+            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
+        else:
+            if "Recording" not in recording_dict:
+                print('Missing "Recording" key.')
+            else:
+                if recording_dict["Recording"] is None:
+                    print('Recording is empty.')
+                else:
+                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
 
-# recording_dict = bg_api.BGNES_get_recording()
-# success, instrument_data = bg_api.BGNES_get_instrument_recordings()
-# if not success:
-#     exit(1)
+                    plot_recorded(
+                        savefolder=savefolder,
+                        data=recording_dict["Recording"],
+                        figspecs=figspecs,)
 
-# if isinstance(recording_dict, dict):
-#     if "StatusCode" in recording_dict:
-#         if recording_dict["StatusCode"] != 0:
-#             print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
-#         else:
-#             if "Recording" not in recording_dict:
-#                 print('Missing "Recording" key.')
-#             else:
-#                 if recording_dict["Recording"] is None:
-#                     print('Recording is empty.')
-#                 else:
-#                     print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
+# 5.3.3 Collect activity-dendendent recordings
 
-#                     plot_recorded(
-#                         savefolder=savefolder,
-#                         data=recording_dict["Recording"],
-#                         figspecs=figspecs,)
+#instrument_data = MySim.GetInstrumentRecordings()
 
-#                     # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
-
+                   # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
 def write_electrode_output(
     folder:str,
     electrode_number:int,
