@@ -111,6 +111,7 @@ def SetOneByPost(TheList:list, PostID:int, Value:int):
     for i in range(len(TheList)):
         if TheList[i][1]==PostID:
             TheList[i][2] = Value
+            print('setting')
 
 def SetOneByPre(TheList:list, PreID:int, Value:int):
     for i in range(len(TheList)):
