@@ -156,14 +156,17 @@ def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
             res.append(pre)
     return res
 
-def Eliminate(NeuronID:int):
+def EliminateByPost(NeuronID:int):
     SetOneByPost(Neuron2Neuron, NeuronID, 0)
+
+def EliminateByPre(NeuronID:int):
+    SetOneByPre(Neuron2Neuron, NeuronID, 0)
 
 # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
 for n in Regions['PyrOut']:
     frompyrmid = ConnectionsFrom('PyrMid', n)
     if len(frompyrmid)<2:
-        Eliminate(n)
+        EliminateByPost(n)
     else:
         print('%d: %s' % (n, str(frompyrmid)))
 
@@ -228,11 +231,16 @@ def Intersection(NeuronsA:list, NeuronsB:list)->list:
             res.append(n)
     return res
 
+# Eliminate connections with PyrMid neurons that do not have input from both PyrIn and Int:
 pyrmid = Regions['PyrMid']
 pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
 pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
 pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
-
 print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
+for n in pyrmid:
+    if n not in pyrmid_from_pyrin_and_int:
+        EliminateByPost(n)
+        EliminateByPre(n)
+print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
 
 print(" -- Done.")
