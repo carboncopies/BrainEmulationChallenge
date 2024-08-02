@@ -262,4 +262,8 @@ for n in pyrmid:
         EliminateByPre(n)
 print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
 
+# Let's take a look at what we still have:
+for n in pyrmid_from_pyrin_and_not_int:
+    print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
+
 print(" -- Done.")
