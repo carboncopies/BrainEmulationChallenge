@@ -186,7 +186,6 @@ SetAll(N2NFromOutput, 0)
 # Set flags for all neurons reachable from active PyrOut neurons:
 for n in Regions['PyrOut']:
     if PostIs(Neuron2Neuron, n)>0:
-        print('doing')
         PreRecurse(N2NFromOutput, n)
 N2NFromInput = copy.deepcopy(Neuron2Neuron)
 SetAll(N2NFromInput, 0)
@@ -207,5 +206,33 @@ def NumActive()->int:
     return num
 
 print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
+
+def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
+    inp = ActiveInputsTo(NeuronID)
+    for i in inp:
+        if Neuron2RegionMap[i]==Reg:
+            return True
+    return False
+
+def SubsetByInput(Neurons:list, Reg:str)->list:
+    res = []
+    for n in Neurons:
+        if HasInputFromRegion(n, Reg):
+            res.append(n)
+    return res
+
+def Intersection(NeuronsA:list, NeuronsB:list)->list:
+    res = []
+    for n in NeuronsA:
+        if n in NeuronsB:
+            res.append(n)
+    return res
+
+pyrmid = Regions['PyrMid']
+pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
+pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
+pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
+
+print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
 
 print(" -- Done.")
