@@ -266,4 +266,44 @@ print("Usable connections remaining after eliminating connections through other 
 for n in pyrmid_from_pyrin_and_not_int:
     print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
 
+def FindIntAndInDifferent(PyrMidID:int, NotPyrInID:int)->tuple:
+    midint = ConnectionsFrom('Int', PyrMidID)
+    for mi in midint:
+        intinp = ConnectionsFrom('PyrIn', mi)
+        for ii in intinp:
+            if ii != NotPyrInID:
+                return mi, ii
+
+# For the first side of the XOR connectome:
+PrePostPairs = []
+pyrmid0 = pyrmid_from_pyrin_and_not_int[0]
+pyrin0 = ConnectionsFrom('PyrIn', pyrmid0)[0]
+pyrint1, pyrin1 = FindIntAndInDifferent(pyrmid0, pyrin0)
+PrePostPairs.append( (pyrin0, pyrmid0) )
+PrePostPairs.append( (pyrint1, pyrmid0) )
+PrePostPairs.append( (pyrin1, pyrint1) )
+
+# For the second side of the XOR connectome:
+pyrmid1 = pyrmid_from_pyrin_and_not_int[1]
+midin = ConnectionsFrom('PyrIn', pyrmid1)
+for mi in midin:
+    if mi != pyrin0:
+        pyrin1 = mi
+pyrint0, pyrin0 = FindIntAndInDifferent(pyrmid1, pyrin1)
+PrePostPairs.append( (pyrin1, pyrmid1) )
+PrePostPairs.append( (pyrint0, pyrmid1) )
+PrePostPairs.append( (pyrin0, pyrint0) )
+
+# Find the PyrOut that receives from both PyrMid neurons:
+PyrOutGroup = []
+pyrout = Regions['PyrOut']
+for n in pyrout:
+    frommid = ConnectionsFrom('PyrMid', n)
+    if pyrmid0 in frommid and pyrmid1 in frommid:
+        PyrOutGroup.append(n)
+PrePostPairs.append( (pyrmid0, PyrOutGroup[0]) )
+PrePostPairs.append( (pyrmid1, PyrOutGroup[0]) )
+
+print("Connectome pre-post pairs for both branches of the XOR: %s" % str(PrePostPairs))
+
 print(" -- Done.")
