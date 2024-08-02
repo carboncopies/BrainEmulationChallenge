@@ -243,4 +243,23 @@ for n in pyrmid:
         EliminateByPre(n)
 print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
 
+# Eliminate connections with PyrMid neurons that do not have inputs that can creata A and not B:
+pyrmid_from_pyrin_and_not_int = []
+for n in pyrmid_from_pyrin_and_int:
+    frompyrin = ConnectionsFrom('PyrIn', n)
+    fromint = ConnectionsFrom('Int', n)
+    fromint_frompyrin = []
+    for pre in fromint:
+        fromint_frompyrin += ConnectionsFrom('PyrIn', pre)
+    for pre in fromint_frompyrin:
+        if pre not in frompyrin:
+            pyrmid_from_pyrin_and_not_int.append(n)
+            break
+print("List of neurons in PyrMid creating PyrIn and not-Int connections: %s" % str(pyrmid_from_pyrin_and_not_int))
+for n in pyrmid:
+    if n not in pyrmid_from_pyrin_and_not_int:
+        EliminateByPost(n)
+        EliminateByPre(n)
+print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
+
 print(" -- Done.")
