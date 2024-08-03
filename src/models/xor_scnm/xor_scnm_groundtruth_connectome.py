@@ -361,6 +361,13 @@ for i in range(len(PrePostPairs)):
         post,
         NeuronTypeStr(post)))
 
+# Weights previously used in the tuned ball-and-stick example:
+WeightsPrePost = {
+    'PyrIn': { 'Int': 1.2, 'PyrMid': 0.9 },
+    'Int': { 'PyrMid': 1.2 },
+    'PyrMid': { 'PyrOut': 1.0 },
+}
+
 # Set connections as per the intentions expressed in PrePostPairs:
 PreSynList = []
 PostSynList = []
@@ -370,10 +377,13 @@ for pre, post, active in Neuron2Neuron:
         # Set this to a specific strength:
         PreSynList.append(pre)
         PostSynList.append(post)
-        if Neuron2RegionMap[pre]=="Int":
-            ConductanceList.append(-40.0) # AMPA 40.0, GABA -40.0
+        PreSynReg = Neuron2RegionMap[pre]
+        PostSynReg = Neuron2RegionMap[post]
+        Weight = WeightsPrePost[PreSynReg][PostSynReg]
+        if PreSynReg=="Int":
+            ConductanceList.append(-40.0/Weight) # AMPA 40.0, GABA -40.0
         else:
-            ConductanceList.append(40.0) # AMPA 40.0, GABA -40.0
+            ConductanceList.append(40.0/Weight) # AMPA 40.0, GABA -40.0
     else:
         # Set this to zero:
         PreSynList.append(pre)
