@@ -36,6 +36,7 @@ Parser.add_argument("-Port", default=8000, type=int, help="Port number to connec
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-modelfile", type=str, help="File to read model instructions from")
 Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model to save")
+Parser.add_argument("-growdays", type=int, help="Number of days Netmorph growth")
 Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
@@ -62,10 +63,16 @@ outattr_make_full_blend=true;
 blender_exec_path=%s;
 '''
 
+GROWDAYS = '''
+days=%d;
+'''
+
 if Args.DoOBJ:
     modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
 if Args.DoBlend:
     modelcontent += NETMORPH_BLEND % Args.BlendExec
+if Args.growdays:
+    modelcontent += GROWDAYS % Args.growdays
 
 # Create Client Configuration For Local Simulation
 print(" -- Creating Client Configuration For Local Simulation")
