@@ -70,17 +70,20 @@ MySim = ClientInstance.CreateSimulation(SimulationCfg)
 MySim.ModelLoad(Args.modelname)
 
 print("Loaded neuronal circuit model "+Args.modelname)
+print('')
 
 response = MySim.GetAbstractConnectome(Sparse=True)
 
 # Neuron-to-neuron connections:
 PrePostNumReceptors = response['PrePostNumReceptors']
+print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
 # Regions and the neurons in them:
 Regions = response['Regions']
+print("Regions: "+str(Regions))
 # Neuron types:
 NeuronTypes = response['Types']
-
 print("Neuron types: "+str(NeuronTypes))
+print('')
 
 def RegionByNeuronID(NeuronID:int)->str:
     for reg in list(Regions.keys()):
@@ -107,6 +110,7 @@ Neuron2RegionMap = {}
 for reg in Regions:
     for n in Regions[reg]:
         Neuron2RegionMap[n] = reg
+print("Neuron to Region map: "+str(Neuron2RegionMap))
 
 def SetAll(TheList:list, Value:int):
     for i in range(len(TheList)):
@@ -167,12 +171,14 @@ def EliminateByPre(NeuronID:int):
     SetOneByPre(Neuron2Neuron, NeuronID, 0)
 
 # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
+print("PyrOut neurons with >1 connections from PyrMid:")
 for n in Regions['PyrOut']:
     frompyrmid = ConnectionsFrom('PyrMid', n)
     if len(frompyrmid)<2:
         EliminateByPost(n)
     else:
         print('%d: %s' % (n, str(frompyrmid)))
+print("Neuron to Neuron after eliminating PyrOut neurons with <2 connections from PyrMid: "+str(Neuron2Neuron))
 
 def PreRecurse(TrackerFlags:list, NeuronID:int):
     SetOneByPost(TrackerFlags, NeuronID, 1)
@@ -206,13 +212,23 @@ for idx in range(len(Neuron2Neuron)):
         Neuron2Neuron[idx][2]=0
 
 def NumActive()->int:
-    num = 0;
+    num = 0
     for pre, post, active in Neuron2Neuron:
         if active>0:
             num += 1
     return num
 
+def PrintActive()->str:
+    active_str = ''
+    num = 0
+    for pre, post, active in Neuron2Neuron:
+        if active>0:
+            active_str += '[%s -> %s], ' % (pre, post)
+    return active_str
+
 print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
+print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
+print('')
 
 def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
     inp = ActiveInputsTo(NeuronID)
@@ -237,8 +253,11 @@ def Intersection(NeuronsA:list, NeuronsB:list)->list:
 
 # Eliminate connections with PyrMid neurons that do not have input from both PyrIn and Int:
 pyrmid = Regions['PyrMid']
+print('PyrMid neurons: '+str(pyrmid))
 pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
+print('PyrMid neurons from PyrIn: '+str(pyrmid_from_pyrin))
 pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
+print('PyrMid neurons from Int: '+str(pyrmid_from_int))
 pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
 print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
 for n in pyrmid:
@@ -246,8 +265,10 @@ for n in pyrmid:
         EliminateByPost(n)
         EliminateByPre(n)
 print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
+print("Neuron to Neuron remaining: "+PrintActive())
+print('')
 
-# Eliminate connections with PyrMid neurons that do not have inputs that can creata A and not B:
+# Eliminate connections with PyrMid neurons that do not have inputs that can create A and not B:
 pyrmid_from_pyrin_and_not_int = []
 for n in pyrmid_from_pyrin_and_int:
     frompyrin = ConnectionsFrom('PyrIn', n)
@@ -265,6 +286,8 @@ for n in pyrmid:
         EliminateByPost(n)
         EliminateByPre(n)
 print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
+print("Neuron to Neuron remaining: "+PrintActive())
+print('')
 
 # Let's take a look at what we still have:
 for n in pyrmid_from_pyrin_and_not_int:
@@ -303,43 +326,45 @@ PyrInA = set() # The set of neurons representing XOR input A
 PyrInB = set() # The set of neurons representing XOR input B
 PyrOut = set() # The set of neurons representing XOR output
 
-pyrmidA = pyrmid_from_pyrin_and_not_int[0]
-pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
-SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
-PyrInA.add(pyrinA_0)
+if len(pyrmid_from_pyrin_and_not_int) > 0:
+    pyrmidA = pyrmid_from_pyrin_and_not_int[0]
+    pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
+    SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
+    PyrInA.add(pyrinA_0)
 
-pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
-SpecifyConnection(pyrintB, pyrmidA, '...')
+    pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
+    SpecifyConnection(pyrintB, pyrmidA, '...')
 
-SpecifyConnection(pyrinB_0, pyrintB, 'InB')
-PyrInB.add(pyrinB_0)
+    SpecifyConnection(pyrinB_0, pyrintB, 'InB')
+    PyrInB.add(pyrinB_0)
 
 # For the second side of the XOR connectome:
 
-pyrmidB = pyrmid_from_pyrin_and_not_int[1]
-midin = ConnectionsFrom('PyrIn', pyrmidB)
-for mi in midin:
-    if mi not in PyrInA:
-        pyrinB_1 = mi
-SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
-PyrInB.add(pyrinB_1)
+if len(pyrmid_from_pyrin_and_not_int) > 1:
+    pyrmidB = pyrmid_from_pyrin_and_not_int[1]
+    midin = ConnectionsFrom('PyrIn', pyrmidB)
+    for mi in midin:
+        if mi not in PyrInA:
+            pyrinB_1 = mi
+    SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
+    PyrInB.add(pyrinB_1)
 
-pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
-SpecifyConnection(pyrintA, pyrmidB, '...')
+    pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
+    SpecifyConnection(pyrintA, pyrmidB, '...')
 
-SpecifyConnection(pyrinA_1, pyrintA, 'InA')
-PyrInA.add(pyrinA_1)
+    SpecifyConnection(pyrinA_1, pyrintA, 'InA')
+    PyrInA.add(pyrinA_1)
 
-# Find the PyrOut that receives from both PyrMid neurons:
-PyrOutGroup = []
-pyrout = Regions['PyrOut']
-for n in pyrout:
-    frommid = ConnectionsFrom('PyrMid', n)
-    if pyrmidA in frommid and pyrmidB in frommid:
-        PyrOutGroup.append(n)
-SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
-SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
-PyrOut.add(PyrOutGroup[0])
+    # Find the PyrOut that receives from both PyrMid neurons:
+    PyrOutGroup = []
+    pyrout = Regions['PyrOut']
+    for n in pyrout:
+        frommid = ConnectionsFrom('PyrMid', n)
+        if pyrmidA in frommid and pyrmidB in frommid:
+            PyrOutGroup.append(n)
+    SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
+    SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
+    PyrOut.add(PyrOutGroup[0])
 
 def NeuronTypeStr(NeuronID:int)->str:
     if NeuronTypes[NeuronID]==1:
@@ -391,12 +416,12 @@ for pre, post, active in Neuron2Neuron:
         ConductanceList.append(0.0)
 MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
 
-print("Updated model connectome accordingly.")
+print("\nUpdated model connectome accordingly.")
 
 # Let's test the update:
 response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
 
-print("Updated connectome: "+str(response))
+print("\nUpdated connectome: "+str(response))
 
 tunedmodelname = Args.modelname+"-tuned"
 print("Saving modified model on server as: "+tunedmodelname)
