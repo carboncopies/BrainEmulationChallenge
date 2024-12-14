@@ -28,6 +28,8 @@ import base64
 import vbpcommon
 from BrainGenix.BG_API import NES
 
+DEFAULT_MODELNAME='test_neurite_diameters'
+
 import argparse
 # Handle Arguments for Host, Port, etc
 Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
@@ -35,7 +37,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-modelfile", type=str, help="File to read model instructions from")
-Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model to save")
+Parser.add_argument("-modelname", default=DEFAULT_MODELNAME, type=str, help="Name of neuronal circuit model to save")
 Parser.add_argument("-growdays", type=int, help="Number of days Netmorph growth")
 Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
