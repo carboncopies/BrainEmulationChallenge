@@ -110,7 +110,7 @@ MySim.ModelSave(Args.modelname)
 print(" -- Neuronal Circuit Model saved as "+Args.modelname)
 
 FileBytes = MySim.Netmorph_GetFile('report')
-print(FileBytes.decode())
+print(base64.decodebytes(FileBytes).decode())
 #ReportLog = MySim.Netmorph_GetLogBuffers()
 #print(ReportLog)
 
