@@ -101,7 +101,7 @@ SimulationCfg.Name = "From Netmorph"
 SimulationCfg.Seed = 0
 MySim = ClientInstance.CreateSimulation(SimulationCfg)
 
-MySim.Netmorph_SetLogBuffers('report')
+MySim.Netmorph_SetLogBuffers('progress')
 
 MySim.Netmorph_RunAndWait(modelcontent)
 
@@ -109,10 +109,10 @@ MySim.ModelSave(Args.modelname)
 
 print(" -- Neuronal Circuit Model saved as "+Args.modelname)
 
-FileBytes = MySim.Netmorph_GetFile('report')
-print(base64.decodebytes(FileBytes).decode())
-#ReportLog = MySim.Netmorph_GetLogBuffers()
-#print(ReportLog)
+#FileBytes = MySim.Netmorph_GetFile('report')
+#print(base64.decodebytes(FileBytes).decode())
+ReportLog = MySim.Netmorph_GetLogBuffers()
+print(ReportLog)
 
 if Args.DoBlend:
     print(" -- Getting Gzipped Blender file to netmorph-net.blend.gz")
