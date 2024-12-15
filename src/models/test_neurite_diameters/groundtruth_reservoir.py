@@ -118,6 +118,10 @@ diam_data_start = NetmorphReport.find('Soma and Neurite Root diameters:')
 if diam_data_start>=0:
     diam_data_end = NetmorphReport.find('---', diam_data_start)
     print(NetmorphReport[diam_data_start:diam_data_end])
+diam_data_start = NetmorphReport.find('Terminal fiber segment diameters:')
+if diam_data_start>=0:
+    diam_data_end = NetmorphReport.find('---', diam_data_start)
+    print(NetmorphReport[diam_data_start:diam_data_end])
 
 if Args.PullNetmorphLogs:
     print('\nBuffered Netmorph Progress Log:')
