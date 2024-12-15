@@ -24,6 +24,7 @@ from datetime import datetime
 from time import sleep
 import json
 import base64
+import statistics
 
 import vbpcommon
 from BrainGenix.BG_API import NES
@@ -127,8 +128,24 @@ if diam_data_start>=0:
     TerminalDiametersJSON = NetmorphReport[diam_data_start:diam_data_end]
     TerminalDiameters = json.loads(TerminalDiametersJSON)
 
-print(SomaRootDiameters)
-print(TerminalDiameters)
+somadiameters = [SomaRootDiameters[neuron_id]['soma'] for neuron_id in SomaRootDiameters]
+print('Soma diameters             : %.3f min, %.3f max, %.3f median' % (statistics.min(somadiameters), statistics.max(somadiameters), statistics.median(somadiameters)))
+axonrootdiameters = []
+for neuron_id in SomaRootDiameters:
+    axonrootdiameters += SomaRootDiameters[neuron_id]['axons']
+print('Axon root diameters        : %.3f min, %.3f max, %.3f median' % (statistics.min(axonrootdiameters), statistics.max(axonrootdiameters), statistics.median(axonrootdiameters)))
+dendriterootdiameters = []
+for neuron_id in SomaRootDiameters:
+    dendriterootdiameters += SomaRootDiameters[neuron_id]['dendrites']
+print('Dendrite root diameters    : %.3f min, %.3f max, %.3f median' % (statistics.min(dendriterootdiameters), statistics.max(dendriterootdiameters), statistics.median(dendriterootdiameters)))
+axonterminaldiameters = []
+for neuron_id in TerminalDiameters:
+    axonterminaldiameters += TerminalDiameters[neuron_id]['axons']
+print('Axon terminal diameters    : %.3f min, %.3f max, %.3f median' % (statistics.min(axonterminaldiameters), statistics.max(axonterminaldiameters), statistics.median(axonterminaldiameters)))
+dendriteterminaldiameters = []
+for neuron_id in TerminalDiameters:
+    dendriteterminaldiameters += TerminalDiameters[neuron_id]['dendrites']
+print('Dendrite terminal diameters: %.3f min, %.3f max, %.3f median' % (statistics.min(dendriterootdiameters), statistics.max(dendriterootdiameters), statistics.median(dendriterootdiameters)))
 
 if Args.PullNetmorphLogs:
     print('\nBuffered Netmorph Progress Log:')
