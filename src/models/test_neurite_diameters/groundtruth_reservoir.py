@@ -116,12 +116,19 @@ FileBytes = MySim.Netmorph_GetFile('report')
 NetmorphReport = base64.decodebytes(FileBytes).decode()
 diam_data_start = NetmorphReport.find('Soma and Neurite Root diameters:')
 if diam_data_start>=0:
+    diam_data_start = NetmorphReport.find('\n', diam_data_start)+1
     diam_data_end = NetmorphReport.find('---', diam_data_start)
-    print(NetmorphReport[diam_data_start:diam_data_end])
+    SomaRootDiametersJSON = NetmorphReport[diam_data_start:diam_data_end]
+    SomaRootDiameters = json.loads(SomaRootDiametersJSON)
 diam_data_start = NetmorphReport.find('Terminal fiber segment diameters:')
 if diam_data_start>=0:
+    diam_data_start = NetmorphReport.find('\n', diam_data_start)+1
     diam_data_end = NetmorphReport.find('---', diam_data_start)
-    print(NetmorphReport[diam_data_start:diam_data_end])
+    TerminalDiametersJSON = NetmorphReport[diam_data_start:diam_data_end]
+    TerminalDiameters = json.loads(TerminalDiametersJSON)
+
+print(SomaRootDiameters)
+print(TerminalDiameters)
 
 if Args.PullNetmorphLogs:
     print('\nBuffered Netmorph Progress Log:')
