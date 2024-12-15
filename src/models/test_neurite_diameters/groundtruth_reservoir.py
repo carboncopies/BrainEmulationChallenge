@@ -43,6 +43,8 @@ Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should pr
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
+
+Parser.add_argument("-PullNetmorphLogs", default=False, type=bool, help="Pull Netmorph Buffered Logs")
 Args = Parser.parse_args()
 
 if Args.DoBlend:
@@ -101,7 +103,8 @@ SimulationCfg.Name = "From Netmorph"
 SimulationCfg.Seed = 0
 MySim = ClientInstance.CreateSimulation(SimulationCfg)
 
-MySim.Netmorph_SetLogBuffers('progress')
+if Args.PullNetmorphLogs:
+    MySim.Netmorph_SetLogBuffers('progress')
 
 MySim.Netmorph_RunAndWait(modelcontent)
 
@@ -110,10 +113,16 @@ MySim.ModelSave(Args.modelname)
 print(" -- Neuronal Circuit Model saved as "+Args.modelname)
 
 FileBytes = MySim.Netmorph_GetFile('report')
-print(base64.decodebytes(FileBytes).decode())
+NetmorphReport = base64.decodebytes(FileBytes).decode()
+diam_data_start = NetmorphReport.find('Soma and Neurite Root diameters:')
+if diam_data_start>=0:
+    diam_data_end = NetmorphReport.find('---', diam_data_start)
+    print(NetmorphReport[diam_data_start:diam_data_end])
 
-NetmorophLogData = MySim.Netmorph_GetLogBuffers()
-print(NetmorophLogData['progress'])
+if Args.PullNetmorphLogs:
+    print('\nBuffered Netmorph Progress Log:')
+    NetmorphLogData = MySim.Netmorph_GetLogBuffers()
+    print(NetmorphLogData['LogBuffers']['progress'])
 
 if Args.DoBlend:
     print(" -- Getting Gzipped Blender file to netmorph-net.blend.gz")
