@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!../../../venv/bin/python
 # xor_bs_acquisition.py
 # Randal A. Koene, 20240618
 

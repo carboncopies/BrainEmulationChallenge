@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!../../../venv/bin/python
 # xor_scnm_groundtruth_reservoir.py
 # Randal A. Koene, 20240731
 
