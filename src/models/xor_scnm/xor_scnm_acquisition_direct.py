@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!../../../venv/bin/python
 # xor_bs_acquisition.py
 # Randal A. Koene, 20240618
 
@@ -490,9 +490,11 @@ if (Args.RenderEM):
     EMConfig.PostBlurNoisePasses = 1
     EMConfig.PreBlurNoisePasses = 0
     EMConfig.TearingEnabled = False
-    EMConfig.GenerateImageNoise = False
-    EMConfig.EnableGaussianBlur = False
-    EMConfig.EnableInterferencePattern = False
+    EMConfig.RenderBorders = True
+    EMConfig.GeneratePerlinNoise = True
+#    EMConfig.GenerateImageNoise = False
+#    EMConfig.EnableGaussianBlur = False
+#    EMConfig.EnableInterferencePattern = False
     VSDAEMInstance = MySim.AddVSDAEM(EMConfig)
 
 

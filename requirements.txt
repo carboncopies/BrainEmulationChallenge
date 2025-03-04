@@ -1,0 +1,7 @@
+requests_futures
+matplotlib
+tqdm
+yaspin
+imageio
+pandas
+joblib
