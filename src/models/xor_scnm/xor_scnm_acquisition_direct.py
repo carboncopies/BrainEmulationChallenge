@@ -546,8 +546,8 @@ if (Args.RenderEM):
         VSDAEMInstance.PrepareNeuroglancerDataset()
         VSDAEMInstance.WaitForConversion()
         print(f"Dataset Handle: {VSDAEMInstance.GetDatasetHandle()}")
-        print(f"URL: {VSDAEMInstance.GetNeuroglancerDatasetURL()}")
-
+        NeuroglancerURL = VSDAEMInstance.GetNeuroglancerDatasetURL()
+        print(f"URL: {NeuroglancerURL}")
 
     TotalEMRenders += 1
 
@@ -563,3 +563,21 @@ if (Args.RenderEM):
 # }
 # with open(f"{savefolder}/ChallengeOutput/Index.json", 'w') as F:
 #     F.write(json.dumps(OutputData))
+
+# Update the local Simulations Database
+SimsDatabase = {}
+try:
+    with open('./SimsDatabase.json', 'r') as f:
+        SimsDatabase = json.load(f)
+except:
+    pass
+SimsDatabase[MySim.ID] = {
+    "ID": MySim.ID,
+}
+if Args.Neuroglancer and NeuroglancerURL:
+    SimsDatabase[MySim.ID]["NeuroglancerURL"] = NeuroglancerURL
+try:
+    with open('./SimsDatabase.json', 'w') as f:
+        json.dump(SimsDatabase, f)
+except Exception as e:
+    print('Failed to update the SimDatabase: '+str(e))
