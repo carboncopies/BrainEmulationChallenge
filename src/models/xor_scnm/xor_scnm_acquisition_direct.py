@@ -545,7 +545,8 @@ if (Args.RenderEM):
     if (Args.Neuroglancer):
         VSDAEMInstance.PrepareNeuroglancerDataset()
         VSDAEMInstance.WaitForConversion()
-        print(f"Dataset Handle: {VSDAEMInstance.GetDatasetHandle()}")
+        DatasetHandle = VSDAEMInstance.GetDatasetHandle()
+        print(f"Dataset Handle: {DatasetHandle}")
         NeuroglancerURL = VSDAEMInstance.GetNeuroglancerDatasetURL()
         print(f"URL: {NeuroglancerURL}")
 
@@ -571,11 +572,14 @@ try:
         SimsDatabase = json.load(f)
 except:
     pass
-SimsDatabase[MySim.ID] = {
-    "ID": MySim.ID,
-}
-if Args.Neuroglancer and NeuroglancerURL:
-    SimsDatabase[MySim.ID]["NeuroglancerURL"] = NeuroglancerURL
+if Args.modelname not in SimsDatabase:
+    SimsDatabase[Args.modelname] = {}
+if MySim.ID not in SimsDatabase[Args.modelname]:
+    SimsDatabase[Args.modelname][MySim.ID] = {}
+if Args.Neuroglancer and DatasetHandle and NeuroglancerURL:
+    if "Neuroglancer" not in SimsDatabase[Args.modelname][MySim.ID]:
+        SimsDatabase[Args.modelname][MySim.ID]["Neuroglancer"] = {}
+    SimsDatabase[Args.modelname][MySim.ID]["Neuroglancer"][DatasetHandle] = NeuroglancerURL
 try:
     with open('./SimsDatabase.json', 'w') as f:
         json.dump(SimsDatabase, f)
