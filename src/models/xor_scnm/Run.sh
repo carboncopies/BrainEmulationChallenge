@@ -52,6 +52,8 @@ while getopts ":s:r:f:m:x:" opt; do
 done
 shift $((OPTIND -1))
 
+modelname="$USER-$modelname"
+
 echo "Using:"
 echo "  execute-at: $executeat"
 echo "  subdivide : $subdivide"
