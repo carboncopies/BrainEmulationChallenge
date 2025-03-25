@@ -99,7 +99,12 @@ SimulationCfg.Name = "From Netmorph"
 SimulationCfg.Seed = 0
 MySim = ClientInstance.CreateSimulation(SimulationCfg)
 
-MySim.Netmorph_RunAndWait(modelcontent)
+RunResponse = MySim.Netmorph_RunAndWait(modelcontent)
+if not RunResponse["Success"]:
+    print(" -- Netmorph reservoir build failed with status response: "+str(RunResponse["NetmorphStatus"]))
+    exit(1)
+
+print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
 
 MySim.ModelSave(Args.modelname)
 
