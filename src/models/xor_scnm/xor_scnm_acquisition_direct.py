@@ -10,32 +10,30 @@ VBP process step 01: double-blind data acquisition
 WBE topic-level X: data acquisition (in-silico)
 '''
 
-scriptversion='0.0.1'
+scriptversion='0.1.0'
 
-import matplotlib.pyplot as plt
-import numpy as np
+#import matplotlib.pyplot as plt
+#import numpy as np
 from datetime import datetime
-from time import sleep
+#from time import sleep
 import argparse
 import math
 import json
-
-import vbpcommon
-#import common.glb as glb
 import os
-from BrainGenix.BG_API import BG_API_Setup
-from NES_interfaces.KGTRecords import plot_recorded
 
+import vbpcommon as vbp
+#from BrainGenix.BG_API import BG_API_Setup
+#from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 import BrainGenix
 from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
-from BrainGenix.Tools.NeuroglancerConverter import NeuroglancerConverter
+#from BrainGenix.Tools.NeuroglancerConverter import NeuroglancerConverter
 
 def PointsInCircum(r, n=100):
     return [(math.cos(2*math.pi/n*x)*r,math.sin(2*math.pi/n*x)*r) for x in range(0,n+1)]
 
 
-
+# Handle Arguments for Host, Port, etc
 Parser = argparse.ArgumentParser(description="vbp script")
 Parser.add_argument("-modelname", default="xor_scnm-tuned", type=str, help="Name of neuronal circuit model prevoiusly saved")
 Parser.add_argument("-simID", default=None, type=int, help="Re-process an active simulation by ID (finds corresponding modelname)")
@@ -50,35 +48,10 @@ Parser.add_argument("-Resolution_um", default=0.05, type=float, help="Resolution
 Parser.add_argument("-SubdivideSize", default=5, type=int, help="Amount to subdivide region in, 1 is full size, 2 is half size, etc.")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-NoDownloadEM", action="store_true", help="Disable downloading of EM Images")
+Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Args = Parser.parse_args()
 
-# 1. Instantiate new simulation
-
-# Create Client Configuration For Local Simulation
-print(" -- Creating Client Configuration For Local Simulation")
-ClientCfg = NES.Client.Configuration()
-ClientCfg.Mode = NES.Client.Modes.Remote
-ClientCfg.Host = Args.Host
-ClientCfg.Port = Args.Port
-ClientCfg.UseHTTPS = Args.UseHTTPS
-ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
-ClientCfg.Username = "Admonishing"
-ClientCfg.Password = "Instruction"
-
-# Create Client Instance
-print(" -- Creating Client Instance")
-ClientInstance = NES.Client.Client(ClientCfg)
-
-assert(ClientInstance.IsReady())
-
-if not Args.simID:
-    # Create A New Simulation
-    print(" -- Creating Simulation")
-    SimulationCfg = NES.Simulation.Configuration()
-    SimulationCfg.Name = "From Netmorph"
-    SimulationCfg.Seed = 0
-    MySim = ClientInstance.CreateSimulation(SimulationCfg)
-else:
+if Args.simID:
     # Re-attach to existing Simulation and find corresponding modelname in SimsDatabase.json
     # Notes:
     # - This is not the same as loading a saved simulation from a file containing all
@@ -103,29 +76,94 @@ else:
     if not foundID:
         print('Sorry... Simulation with ID %s not found in SimsDatabase.json.' % str(Args.simID))
         exit(1)
-    print(" -- Re-processing active (in-memory) Simulation")
-    SimulationCfg = NES.Simulation.Configuration()
-    SimulationCfg.Name = "From Netmorph"
-    SimulationCfg.Seed = 0
-    MySim = ClientInstance.CreateSimulation(SimulationCfg, _Create=False)
-    MySim.ID = int(Args.simID)
 
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
-TotalEMRenders:int = 0
+
+# Initialize data collection for entry in DB file
+DBdata = vbp.InitExpDB(
+    Args.ExpsDB,
+    'acquisition',
+    scriptversion,
+    _initIN = {
+        'modelname': Args.modelname,
+        'simID': str(Args.simID),
+        'resolution_um':  Args.Resolution_um,
+        'subdivide': Args.SubdivideSize,
+    },
+    _initOUT = {
+    })
+
+
+# Find I/O IDs corresponding with the modelname
+DBconnectome = vbp.GetMostRecentDBEntryOUT(DBdata, 'connectome', Args.modelname, exit_on_error=True)
+if 'IOIDs' not in DBconnectome:
+    vbp.ErrorExit(DBdata, 'Experiments database error: Missing IOIDs in most recent entry for modelname '+str(Args.modelname))
+XORInOutIdentifiers = DBconnectome['IOIDs']
+print('Loaded XOR I/O neuron identifiers.')
+
+
+# Create Client Configuration For Local Simulation
+print(" -- Creating Client Configuration For Local Simulation")
+ClientCfg = NES.Client.Configuration()
+ClientCfg.Mode = NES.Client.Modes.Remote
+ClientCfg.Host = Args.Host
+ClientCfg.Port = Args.Port
+ClientCfg.UseHTTPS = Args.UseHTTPS
+ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
+ClientCfg.Username = "Admonishing"
+ClientCfg.Password = "Instruction"
+
+
+# Create Client Instance
+print(" -- Creating Client Instance")
+try:
+    ClientInstance = NES.Client.Client(ClientCfg)
+    if not ClientInstance.IsReady():
+        vbp.ErrorExit(DBdata, 'NES.Client error: not ready')
+except Exception as e:
+    vbp.ErrorExit(DBdata, 'NES.Client error: '+str(e))
+
 
 if not Args.simID:
-    # 2. Load previously saved neuronal circuit model
+    # Create A New Simulation
+    print(" -- Creating Simulation")
+    SimulationCfg = NES.Simulation.Configuration()
+    SimulationCfg.Name = "Netmorph-"+Args.modelname
+    SimulationCfg.Seed = 0
+    try:
+        MySim = ClientInstance.CreateSimulation(SimulationCfg)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: Failed to create simulation')
+else:
+    # Reconnect to Simulation in NES memory
+    print(" -- Re-processing active (in-memory) Simulation")
+    SimulationCfg = NES.Simulation.Configuration()
+    SimulationCfg.Name = "Netmorph-"+Args.modelname
+    SimulationCfg.Seed = 0
+    try:
+        MySim = ClientInstance.CreateSimulation(SimulationCfg, _Create=False)
+        MySim.ID = int(Args.simID)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: Failed to reconnect to simulation '+str(Args.simID))
 
-    MySim.ModelLoad(Args.modelname)
 
-    print("Loaded neuronal circuit model "+Args.modelname)
+# Prepare front-end output folder
+savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
+vbp.AddOutputToDB(DBdata, 'output_folder', savefolder)
 
-    with open(Args.modelname+'-IOIDs.json', 'r') as f:
-        XORInOutIdentifiers = json.load(f)
-    print('Loaded XOR I/O neuron identifiers.')
+TotalEMRenders:int = 0
 
-    # 2.3 Prepare model for data acquisition
 
+if not Args.simID:
+    # Load previously saved neuronal circuit model
+    try:
+        MySim.ModelLoad(Args.modelname)
+        print("Loaded neuronal circuit model "+Args.modelname)
+        print('')
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: model load failed')
+
+
+    # Prepare model for data acquisition
     TotalElectrodes:int = 0
     TotalCARenders:int = 0
 
@@ -135,25 +173,22 @@ if not Args.simID:
         'linewidth': 0.5,
         'figext': 'pdf',
     }
+    vbp.AddOutputToDB(DBdata, 'runtime_ms', runtime_ms)
+    print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
 
-    # 3. Initialize functional data acquisition
+    # Initialize functional data acquisition
 
-    # ACQSETUPTEXT1='''
-    # Simulated functional data acquisition:
     # Two types of simulated functional recording methods are
     # set up, an electrode and a calcium imaging microscope.
     # Calcium imaging is slower and may reflect a summation
     # of signals (Wei et al., 2019).
-
+    #
     # Model activity is elicited by spontaneous activity.
-
+    #
     # Simulated functional recording involves the application
     # of simulated physics to generate data derived from a
     # combination of model neuronal activity and simulated
     # confounding factors.
-    # '''
-
-    # print(ACQSETUPTEXT1)
 
     t_soma_fire_ms = []
     def SpikeInputNeuronsAt(InputID:str, t_ms:float):
@@ -173,12 +208,15 @@ if not Args.simID:
     # Add 1 1 XOR test case.
     SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
     SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
-
+    vbp.AddOutputToDB(DBdata, 't_soma_fire_ms', t_soma_fire_ms)
     print('Directed somatic firing: '+str(t_soma_fire_ms))
 
-    MySim.SetSpecificAPTimes(TimeNeuronPairs=t_soma_fire_ms)
+    try:
+        MySim.SetSpecificAPTimes(TimeNeuronPairs=t_soma_fire_ms)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: Failed to set specific spike times')
 
-    # 3.1 Initialize spontaneous activity
+    # Initialize spontaneous activity
 
     # use_spontaneous_activity=False
     # if use_spontaneous_activity:
@@ -201,7 +239,7 @@ if not Args.simID:
     #     print('Spontaneous activity at each neuron successfully activated.')
 
 
-    # 3.2 Initialize recording electrodes
+    # Initialize recording electrodes
 
     # ---- WILL PROBABLY BREAK ABOUT HERE
 
@@ -309,27 +347,46 @@ if not Args.simID:
 
     # ----------------------------------------------------
 
-    print('\nRunning functional data acquisition for %.1f milliseconds...\n' % runtime_ms)
 
-    # 5.1 Set record-all and record instruments
+    # Set record-all and record instruments
+    t_max_ms=-1 # record for the entire runtime
+    vbp.AddOutputToDB(DBdata, 't_record_max_ms', t_max_ms)
 
-    t_max_ms=-1 # record forever
-    MySim.RecordAll(_MaxRecordTime_ms=t_max_ms)
+    try:
+        MySim.RecordAll(_MaxRecordTime_ms=t_max_ms)
+    except:
+        vbp.ErrorToDB(DBdata, 'NES error: Failed to set RecordAll')
 
     #MySim.SetRecordInstruments(_MaxRecordTime_ms=t_max_ms)
 
-    # 5.2 Run for specified simulation time
-    MySim.RunAndWait(Runtime_ms=runtime_ms, timeout_s=100.0)
 
-    # 5.3 Retrieve recordings and plot
+    # Run for specified simulation time
+    try:
+        MySim.RunAndWait(Runtime_ms=runtime_ms, timeout_s=100.0)
+    except:
+        vbp.ErrorToDB(DBdata, 'NES error: RunAndWait dynamic simulation failed')
 
-    # 5.3.1 Carry out post-run Calcium Imaging
+    # Retrieve recordings and plot
+
+    # Carry out post-run Calcium Imaging
 
     if (Args.RenderCA):
-        VSDACAInstance.QueueRenderOperation()
-        VSDACAInstance.WaitForRender()
-        os.makedirs(f"{savefolder}/ChallengeOutput/CARegions/0/Data")
-        VSDACAInstance.SaveImageStack(f"{savefolder}/ChallengeOutput/CARegions/0/Data", 10)
+        try:
+            VSDACAInstance.QueueRenderOperation()
+            VSDACAInstance.WaitForRender()
+
+            CAimagesfolder = f"{savefolder}/ChallengeOutput/CARegions/0/Data"
+            CAparamsfile = f"{savefolder}/ChallengeOutput/CARegions/0/Params.json"
+            vbp.AddOutputToDB(DBdata, 'CAimagesfolder', CAimagesfolder)
+            vbp.AddOutputToDB(DBdata, 'CAparamsfile', CAparamsfile)
+        except:
+            vbp.ErrorToDB(DBdata, 'NES error: Failed to render CA images')
+
+        try:
+            os.makedirs(CAimagesfolder)
+            VSDACAInstance.SaveImageStack(CAimagesfolder, 10)
+        except:
+            vbp.ErrorToDB(DBdata, 'NES error: Failed to retrieve CA images to '+str(CAimagesfolder))
 
         TotalCARenders += 1
 
@@ -341,39 +398,29 @@ if not Args.simID:
             "IndicatorName": CAConfig.CalciumIndicator,
             "ImageTimestep_ms": CAConfig.ImagingInterval_ms
         }
-        with open(f"{savefolder}/ChallengeOutput/CARegions/0/Params.json", 'w') as F:
-            F.write(json.dumps(CaJSON))
+        try:
+            with open(CAparamsfile, 'w') as F:
+                F.write(json.dumps(CaJSON))
+        except:
+            vbp.ErrorToDB(DBdata, 'File error: Failed to write CA parameters to '+str(CAparamsfile))
 
         os.makedirs(f"{savefolder}/CARegions/0")
         ### Buggy: CaImagingStackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/CARegions/0/Data", f"{savefolder}/CARegions/0", borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
 
-    # 5.3.2 Collect God-mode recording of neural activity
+    # Collect God-mode recording of neural activity
+    try:
+        recording_dict = MySim.GetRecording()
 
-    recording_dict = MySim.GetRecording()
+        if not vbp.PlotAndStoreRecordedActivity(recording_dict, savefolder, figspecs):
+            vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
+    except:
+        vbp.ErrorToDB(DBdata, 'NES error: Failed to retrieve recorded activity')
 
-    if isinstance(recording_dict, dict):
-        if "StatusCode" in recording_dict:
-            if recording_dict["StatusCode"] != 0:
-                print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
-            else:
-                if "Recording" not in recording_dict:
-                    print('Missing "Recording" key.')
-                else:
-                    if recording_dict["Recording"] is None:
-                        print('Recording is empty.')
-                    else:
-                        print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
-
-                        plot_recorded(
-                            savefolder=savefolder,
-                            data=recording_dict["Recording"],
-                            figspecs=figspecs,)
-
-    # 5.3.3 Collect activity-dendendent recordings
+    # Collect activity-dendendent recordings
 
     #instrument_data = MySim.GetInstrumentRecordings()
 
-                    # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
+    # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
     def write_electrode_output(
         folder:str,
         electrode_number:int,
@@ -468,6 +515,7 @@ if not Args.simID:
 
 # ----------------------------------------------------
 
+==> GOT TO HERE
 
 # ----------------------------------------------------
 # Now, we render the visualized model optionally
@@ -628,3 +676,8 @@ try:
         json.dump(SimsDatabase, f)
 except Exception as e:
     print('Failed to update the SimDatabase: '+str(e))
+
+# Update experiments database file with results
+vbp.UpdateExpsDB(DBdata)
+
+print(" -- Done.")
