@@ -43,7 +43,7 @@ Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should pr
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
-Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=float, help="Path to experiments database JSON file")
+Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Args = Parser.parse_args()
 
 if Args.DoBlend:
@@ -146,7 +146,7 @@ try:
     MySim.ModelSave(Args.modelname)
     print(" -- Neuronal Circuit Model saved as "+Args.modelname)
 except:
-    vbp.ErrorExit(DBdata, 'NES error: model save failed')
+    vbp.ErrorExit(DBdata, 'NES error: Model save failed')
 
 # Retrieve gzipped Blender file if one was requested
 if Args.DoBlend:

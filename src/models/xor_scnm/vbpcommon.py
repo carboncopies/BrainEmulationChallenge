@@ -8,6 +8,31 @@ from pathlib import Path
 
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
+from NES_interfaces.KGTRecords import plot_recorded
+
+def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
+    if not isinstance(recording_dict, dict):
+        print('Error: Recorded activity is not a dict')
+        return False
+    if "StatusCode" not in recording_dict:
+        print('Error: Missing StatusCode in recorded activity dict')
+        return False
+    try:
+        assert(recording_dict["StatusCode"] == 0)
+        print('Keys in activity record: '+str(list(recording_dict["Recording"].keys())))
+    except Exception as e:
+        print('Error: Recorded activity content not usable: '+str(e))
+        return False
+    try:
+        plot_recorded(
+            savefolder=savefolder,
+            data=recording_dict["Recording"],
+            figspecs=figspecs,)
+    except Exception as e:
+        print('Error: Failed to plot and store recorded acticity: '+str(e))
+        return False
+    return True
+
 def InitExpDB(_ExpsDB:str, _DBkey:str, _scriptversion:str, _initIN:dict, _initOUT:dict)->dict:
     _initIN['scriptversion'] = _DBkey+'-'+_scriptversion,
     _initIN['datetime'] = datetime.now().strftime('%Y%m%d%H%M%S'),
@@ -47,30 +72,45 @@ def WaitToLockDB(DBdata:dict)->bool:
 
 # Waits until no one else is using the experiments database file
 # by checking if a lock file is present. Then, locks access by
-# making a lock file. Then reads the current database and adds
+# making a lock file. Then reads the current database and returns
+# the data.
+# If no database file was found returns empty data.
+# If a file error occurs returns None.
+# The lock file is removed if a file error occurred.
+# Otherwise, the lock file is removed if keeplock is False.
+def LoadExpsDB(DBdata:dict, keeplock=False)->dict:
+    WaitToLockDB(DBdata)
+    if not os.path.exists(DBdata['dbfile']):
+        if not keeplock:
+            UnlockDB(DBdata)
+        return {}
+    try:
+        with open(DBdata['dbfile'], 'r') as f:
+            DBcontent = json.load(f)
+            if not keeplock:
+                UnlockDB(DBdata)
+            return DBcontent
+    except Exception:
+        UnlockDB(DBdata)
+        print('Error: Unable to read experiments database file '+DBdata['dbfile'])
+        return None
+
+# Loads the current database with LoadExpsDB() and adds
 # the new entry and saves the updated data to the database.
 # Finally, unlocks the database file by removing the lock file.
 def UpdateExpsDB(DBdata:dict)->bool:
-    WaitToLockDB(DBdata)
-    if os.path.exists(DBdata['dbfile']):
-        try:
-            with open(DBdata['dbfile'], 'r') as f:
-                DBcontent = json.load(f)
-        except Exception as e:
-            UnlockDB(DBdata)
-            print('Error: Unable to read experiments database file '+DBdata['dbfile'])
-            return False
-    else:
-        DBcontent = {}
+    DBcontent = LoadExpsDB(DBdata, keeplock=True)
+    if DBcontent is None:
+        return False
     
     if DBdata['key'] not in DBcontent:
-        DBdata['key'] = []
+        DBcontent[DBdata['key']] = []
 
     DBcontent[DBdata['key']].append(DBdata['entry'])
 
     try:
         with open(DBdata['dbfile'], 'w') as f:
-            json.dump(DBcontent, f)
+            json.dump(DBcontent, f, indent=2)
     except Exception as e:
         UnlockDB(DBdata)
         print('Error: Unable to write updated experiments database to file '+DBdata['dbfile'])
@@ -88,3 +128,39 @@ def ErrorExit(DBdata:dict, errmsg:str):
     ErrorToDB(DBdata, errmsg)
     UpdateExpsDB(DBdata)
     exit(1)
+
+def ExitOrReturn(DBdata:dict, exit_on_error:bool, errmsg:str, returnvalue=None):
+    if exit_on_error:
+        ErrorExit(DBdata, errmsg)
+    else:
+        return returnvalue
+
+def GetMostRecentDBEntry(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
+    DBcontent = LoadExpsDB(DBdata)
+    if DBcontent is None:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: File read error')
+    if len(DBcontent) = 0:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database is empty')
+    if key not in DBcontent:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Key %s not in database' % str(key))
+    try:
+        for DBentry in reversed(DBcontent[key]):
+            if DBentry['IN']['modelname'] == modelname:
+                return DBentry
+    except Exception as e:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: '+str(e))
+    return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: modelname %s not in database' % str(modelname))
+
+def GetMostRecentDBEntryIN(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
+    DBentry = GetMostRecentDBEntry(DBdata, key, modelname, exit_on_error)
+    if DBentry is None:
+        return None
+    return DBentry['IN']
+
+def GetMostRecentDBEntryOUT(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
+    DBentry = GetMostRecentDBEntry(DBdata, key, modelname, exit_on_error)
+    if DBentry is None:
+        return None
+    if 'OUT' not in DBentry:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: '+str(e))
+    return DBentry['OUT']
