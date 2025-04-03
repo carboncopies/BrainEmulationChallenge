@@ -45,6 +45,9 @@ def InitExpDB(_ExpsDB:str, _DBkey:str, _scriptversion:str, _initIN:dict, _initOU
         }
     }
 
+def AddInputToDB(DBdata:dict, inkey:str, indata):
+    DBdata['entry']['IN'][inkey] = indata
+
 def AddOutputToDB(DBdata:dict, outkey:str, outdata):
     DBdata['entry']['OUT'][outkey] = outdata
 
