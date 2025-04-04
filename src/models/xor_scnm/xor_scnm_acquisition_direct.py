@@ -39,7 +39,10 @@ Parser.add_argument("-modelname", default="xor_scnm-tuned", type=str, help="Name
 Parser.add_argument("-simID", default=None, type=int, help="Re-process an active simulation by ID (finds corresponding modelname)")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
-Parser.add_argument("-Neuroglancer", action='store_true', help="Generate the neuroglancer verison of the dataset for EM images")
+Parser.add_argument("-Segmentation", action='store_true', help="Generate EM segmentation images (e.g. for Neuroglancer)")
+Parser.add_argument("-Neuroglancer", action='store_true', help="Generate the Neuroglancer verison of the dataset for EM images")
+Parser.add_argument("-NeuroglancerURLBase", default=None, type=str, help="Force a different URL base for the generated Neuroglancer URL")
+Parser.add_argument("-Meshes", action='store_true', help="Generate Mesh data for Neuroglancer")
 Parser.add_argument("-RenderCA", action='store_true', help="Enable or disable Calcium imaging rendering")
 Parser.add_argument('-Electrodes', action='store_true', help="Place electrodes")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
@@ -599,6 +602,10 @@ if (Args.RenderEM):
 #    EMConfig.EnableGaussianBlur = False
 #    EMConfig.EnableInterferencePattern = False
 
+    EMConfig.GenerateSegmentation = Args.Segmentation
+    EMConfig.GenerateMeshes = Args.Meshes
+
+
     EMerror = False
     try:
         VSDAEMInstance = MySim.AddVSDAEM(EMConfig)
@@ -650,7 +657,9 @@ if (Args.RenderEM):
                 'Tearing': EMConfig.TearingEnabled,
                 'PerlinNoise': EMConfig.GeneratePerlinNoise,
                 'InterferencePattern': EMConfig.EnableInterferencePattern,
-            }
+            },
+            'EM_Segmentation': EMConfig.GenerateSegmentation,
+            'EM_Meshes': EMConfig.GenerateMeshes,
         })
 
         # Run EM rendering
@@ -713,7 +722,7 @@ if (Args.RenderEM):
                 VSDAEMInstance.WaitForConversion()
                 DatasetHandle = VSDAEMInstance.GetDatasetHandle()
                 print(f"Dataset Handle: {DatasetHandle}")
-                NeuroglancerURL = VSDAEMInstance.GetNeuroglancerDatasetURL()
+                NeuroglancerURL = VSDAEMInstance.GetNeuroglancerDatasetURL(_ForceURLBase=Args.NeuroglancerURLBase)
                 print(f"URL: {NeuroglancerURL}")
                 vbp.AddOutputToDB(DBdata, 'NeuroglancerDataHandle', DatasetHandle)
                 vbp.AddOutputToDB(DBdata, 'NeuroglancerURL', NeuroglancerURL)
