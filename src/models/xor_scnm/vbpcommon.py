@@ -138,32 +138,38 @@ def ExitOrReturn(DBdata:dict, exit_on_error:bool, errmsg:str, returnvalue=None):
     else:
         return returnvalue
 
-def GetMostRecentDBEntry(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
+def GetMostRecentDBEntry(DBdata:dict, key:str, modelfromIN:bool, modelname:str, exit_on_error=True)->dict:
     DBcontent = LoadExpsDB(DBdata)
     if DBcontent is None:
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: File read error')
-    if len(DBcontent) = 0:
+    if len(DBcontent) == 0:
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database is empty')
     if key not in DBcontent:
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Key %s not in database' % str(key))
     try:
+        if modelfromIN:
+            INorOUT = 'IN'
+        else:
+            INorOUT = 'OUT'
         for DBentry in reversed(DBcontent[key]):
-            if DBentry['IN']['modelname'] == modelname:
+            if DBentry[INorOUT]['modelname'] == modelname:
                 return DBentry
     except Exception as e:
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: '+str(e))
     return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: modelname %s not in database' % str(modelname))
 
-def GetMostRecentDBEntryIN(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
-    DBentry = GetMostRecentDBEntry(DBdata, key, modelname, exit_on_error)
+def GetMostRecentDBEntryIN(DBdata:dict, key:str, modelfromIN:bool, modelname:str, exit_on_error=True)->dict:
+    DBentry = GetMostRecentDBEntry(DBdata, key, modelfromIN, modelname, exit_on_error)
     if DBentry is None:
         return None
+    if 'IN' not in DBentry:
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: missing IN')
     return DBentry['IN']
 
-def GetMostRecentDBEntryOUT(DBdata:dict, key:str, modelname:str, exit_on_error=True)->dict:
-    DBentry = GetMostRecentDBEntry(DBdata, key, modelname, exit_on_error)
+def GetMostRecentDBEntryOUT(DBdata:dict, key:str, modelfromIN:bool, modelname:str, exit_on_error=True)->dict:
+    DBentry = GetMostRecentDBEntry(DBdata, key, modelfromIN, modelname, exit_on_error)
     if DBentry is None:
         return None
     if 'OUT' not in DBentry:
-        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: '+str(e))
+        return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: missing OUT')
     return DBentry['OUT']

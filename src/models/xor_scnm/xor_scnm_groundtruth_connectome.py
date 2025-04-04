@@ -461,6 +461,7 @@ except:
 tunedmodelname = Args.modelname+"-tuned"
 try:
     MySim.ModelSave(tunedmodelname)
+    vbp.AddOutputToDB(DBdata,'modelname', tunedmodelname)
     print("Saved modified model on server as: "+tunedmodelname)
 except:
     vbp.ErrorExit(DBdata, 'NES error: Model save failed')
