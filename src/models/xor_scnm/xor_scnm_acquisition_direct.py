@@ -97,7 +97,7 @@ DBdata = vbp.InitExpDB(
 ### ========================================= ###
 
 # Find I/O IDs corresponding with the modelname
-DBconnectome = vbp.GetMostRecentDBEntryOUT(DBdata, 'connectome', Args.modelname, exit_on_error=True)
+DBconnectome = vbp.GetMostRecentDBEntryOUT(DBdata, 'connectome', False, Args.modelname, exit_on_error=True)
 if 'IOIDs' not in DBconnectome:
     vbp.ErrorExit(DBdata, 'Experiments database error: Missing IOIDs in most recent entry for modelname '+str(Args.modelname))
 XORInOutIdentifiers = DBconnectome['IOIDs']
@@ -150,7 +150,7 @@ else:
 
 
 # Prepare front-end output folder
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")+'-acquisition'
+savefolder = 'output/'+datetime.now().strftime('%Y%m%d%H%M%S.%f')+'-acquisition'
 vbp.AddOutputToDB(DBdata, 'output_folder', savefolder)
 
 TotalEMRenders:int = 0
@@ -636,7 +636,7 @@ if (Args.RenderEM):
             'EM_Image_px': [ EMConfig.ImageWidth_px, EMConfig.ImageHeight_px ],
             'EM_Thickness_um': EMConfig.SliceThickness_nm,
             'EM_Overlap_pct': EMConfig.ScanRegionOverlap_percent,
-            'EM_FOV_deg': EMConfig.MicroscopeFOV_deg = 50,
+            'EM_FOV_deg': EMConfig.MicroscopeFOV_deg,
             'EM_px_per_voxel': EMConfig.NumPixelsPerVoxel_px,
             'EM_Border_um': EMConfig.BorderThickness_um,
             'EM_Border': EMConfig.RenderBorders,
