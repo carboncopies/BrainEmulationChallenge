@@ -127,8 +127,8 @@ fi
 
 if [ "$simID" = "" ]; then
   # Acquire data sets
-  ./xor_scnm_acquisition_direct.py $host $port -modelname "$modelname-tuned" -RenderEM -NoDownloadEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./xor_scnm_acquisition_direct.py $host $port -modelname "$modelname-tuned" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 else
   # Acquire data sets by rerunning a simulation that is still in NES server memory
-  ./xor_scnm_acquisition_direct.py $host $port -simID "$simID" -RenderEM -NoDownloadEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./xor_scnm_acquisition_direct.py $host $port -simID "$simID" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 fi
