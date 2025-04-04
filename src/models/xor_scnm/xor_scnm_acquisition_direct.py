@@ -50,7 +50,7 @@ Parser.add_argument("-Port", default=8000, type=int, help="Port number to connec
 Parser.add_argument("-Resolution_um", default=0.05, type=float, help="Resolution in microns of each voxel")
 Parser.add_argument("-SubdivideSize", default=5, type=int, help="Amount to subdivide region in, 1 is full size, 2 is half size, etc.")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
-Parser.add_argument("-NoDownloadEM", action="store_true", help="Disable downloading of EM Images")
+Parser.add_argument("-DownloadEM", action="store_true", help="Enable downloading of EM Images")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Args = Parser.parse_args()
 
@@ -672,7 +672,7 @@ if (Args.RenderEM):
             EMerror = True
 
 
-        if not Args.NoDownloadEM and not EMerror:
+        if Args.DownloadEM and not EMerror:
             # Retrieve EM data to front-end
             EMoutput_folder = f"{savefolder}/ChallengeOutput/EMRegions/0/Data"
             EMparams_file = f"{savefolder}/ChallengeOutput/EMRegions/0/Params.json"
