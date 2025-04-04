@@ -529,6 +529,14 @@ if (Args.RenderEM):
 #    EMConfig.GenerateImageNoise = False
 #    EMConfig.EnableGaussianBlur = False
 #    EMConfig.EnableInterferencePattern = False
+
+    ## TO ENABLE OR DISABLE SEGMENTATION AND MESHING USE THESE VALUES!!!
+
+    #EMConfig.GenerateSegmentation = True
+
+    #EMConfig.GenerateMeshes = True
+
+
     VSDAEMInstance = MySim.AddVSDAEM(EMConfig)
 
 
