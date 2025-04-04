@@ -41,7 +41,7 @@ usage() {
 }
 
 # Parse command line arguments
-while getopts "R:s:r:f:m:x:nSMF:i:" opt; do
+while getopts "Rs:r:f:m:x:nSMF:i:" opt; do
   case ${opt} in
     R )
       host="-Host $Rhost"
