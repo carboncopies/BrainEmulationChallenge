@@ -12,19 +12,21 @@
 # The available connections are analyzed with the aim to tune
 # and prune them to the desired functional connectome.
 
-scriptversion='0.0.1'
+scriptversion='0.1.0'
 
-import numpy as np
-from datetime import datetime
+#import numpy as np
+#from datetime import datetime
 from time import sleep
 import json
-import base64
+#import base64
 import copy
+import argparse
+#import os
 
-import vbpcommon
+import vbpcommon as vbp
 from BrainGenix.BG_API import NES
 
-import argparse
+
 # Handle Arguments for Host, Port, etc
 Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
@@ -35,10 +37,23 @@ Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should pr
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
+Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Args = Parser.parse_args()
 
 if Args.DoBlend:
     Args.DoOBJ = True
+
+# Initialize data collection for entry in DB file
+DBdata = vbp.InitExpDB(
+    Args.ExpsDB,
+    'connectome',
+    scriptversion,
+    _initIN = {
+        'modelname': Args.modelname,
+    },
+    _initOUT = {
+    })
+
 
 # Create Client Configuration For Local Simulation
 print(" -- Creating Client Configuration For Local Simulation")
@@ -51,28 +66,42 @@ ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
 ClientCfg.Username = "Admonishing"
 ClientCfg.Password = "Instruction"
 
+
 # Create Client Instance
 print(" -- Creating Client Instance")
-ClientInstance = NES.Client.Client(ClientCfg)
-
-assert(ClientInstance.IsReady())
+try:
+    ClientInstance = NES.Client.Client(ClientCfg)
+    if not ClientInstance.IsReady():
+        vbp.ErrorExit(DBdata, 'NES.Client error: not ready')
+except Exception as e:
+    vbp.ErrorExit(DBdata, 'NES.Client error: '+str(e))
 
 
 # Create A New Simulation
 print(" -- Creating Simulation")
 SimulationCfg = NES.Simulation.Configuration()
-SimulationCfg.Name = "From Netmorph"
+SimulationCfg.Name = "Netmorph-"+Args.modelname
 SimulationCfg.Seed = 0
-MySim = ClientInstance.CreateSimulation(SimulationCfg)
+try:
+    MySim = ClientInstance.CreateSimulation(SimulationCfg)
+except:
+    vbp.ErrorExit(DBdata, 'NES error: Failed to create simulation')
+
 
 # Load previously generated model
+try:
+    MySim.ModelLoad(Args.modelname)
+    print("Loaded neuronal circuit model "+Args.modelname)
+    print('')
+except:
+    vbp.ErrorExit(DBdata, 'NES error: model load failed')
 
-MySim.ModelLoad(Args.modelname)
 
-print("Loaded neuronal circuit model "+Args.modelname)
-print('')
-
-response = MySim.GetAbstractConnectome(Sparse=True)
+# Get connectome
+try:
+    response = MySim.GetAbstractConnectome(Sparse=True)
+except:
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
 
 # Neuron-to-neuron connections:
 PrePostNumReceptors = response['PrePostNumReceptors']
@@ -414,27 +443,39 @@ for pre, post, active in Neuron2Neuron:
         PreSynList.append(pre)
         PostSynList.append(post)
         ConductanceList.append(0.0)
-MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+try:
+    MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+    print("\nUpdated model connectome accordingly.")
+except:
+    vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
 
-print("\nUpdated model connectome accordingly.")
 
 # Let's test the update:
-response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
+try:
+    response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
+    print("\nUpdated connectome: "+str(response))
+except:
+    vbp.ErrorToDB(DBdata, 'NES error: Failed to receive connectome after tuning')
 
-print("\nUpdated connectome: "+str(response))
-
+# Save tuned model at the NES server
 tunedmodelname = Args.modelname+"-tuned"
-print("Saving modified model on server as: "+tunedmodelname)
-MySim.ModelSave(tunedmodelname)
+try:
+    MySim.ModelSave(tunedmodelname)
+    vbp.AddOutputToDB(DBdata,'modelname', tunedmodelname)
+    print("Saved modified model on server as: "+tunedmodelname)
+except:
+    vbp.ErrorExit(DBdata, 'NES error: Model save failed')
 
+# Add Input-Ouput identifiers to results
 XORInOutIdentifiers = {
     'InA': list(PyrInA),
     'InB': list(PyrInB),
     'Out': list(PyrOut),
 }
-tunedIOIDsfile=tunedmodelname+'-IOIDs.json'
-with open(tunedIOIDsfile, 'w') as f:
-    json.dump(XORInOutIdentifiers, f)
-print("Saved XOR I/O neuron identifiers in "+tunedIOIDsfile)
+vbp.AddOutputToDB(DBdata, 'IOIDs', XORInOutIdentifiers)
+print("Saved XOR I/O neuron identifiers in "+Args.ExpsDB)
+
+# Update experiments database file with results
+vbp.UpdateExpsDB(DBdata)
 
 print(" -- Done.")
