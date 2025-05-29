@@ -3,6 +3,9 @@ import psutil
 import datetime
 import threading
 import os
+import json
+
+import argparser
 
 # SOURCE OF THE CODE for display_usage:
 # https://www.youtube.com/watch?v=rdxt6ntfX24
@@ -66,6 +69,16 @@ class ResourceMonitor:
         if self.thread:
             self.thread.join(timeout=2.0)
 
+        # Write self.data to json file in self.output_dir
+        print(f"Writing data to {self.output_dir}/data.json")
+
+        try:
+            os.makedirs(self.output_dir, exist_ok=True)
+        except:
+            pass
+        with open(self.output_dir + "/data.json", 'w') as f:
+            json.dump(self.data, f, indent=4)
+
         print(f"\nResource monitoring stopped. Data collected: {len(self.data['timestamp'])} samples")
     
     def _monitor_resources(self):
@@ -127,18 +140,17 @@ def test_resource_monitor():
     monitor.start()
     
     # Simulate some work
-    print("Simulating CPU load for 5 seconds...")
-    for _ in range(5):
-        # Create some CPU load
-        for _ in range(1000000):
-            _ = 1 + 1
-        
-        # Create some disk IO
-        with open("test_file.txt", "w") as f:
-            f.write("A" * 1000000)
-        
-        time.sleep(1)
-    
+    print("Simulating work... Press Ctrl+C to stop.")
+     
+
+    while True:
+        try:
+            time.sleep(0.1) 
+        except KeyboardInterrupt:
+            print(F"User requested exit with keyboard interrupt")
+            break
+
+
     # Stop monitoring
     monitor.stop()
     
