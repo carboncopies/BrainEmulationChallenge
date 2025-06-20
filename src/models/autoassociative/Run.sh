@@ -143,18 +143,18 @@ echo "  forceURLbase: $forceURLbase"
 
 if [ "$executeat" = "r" ]; then
 # Use Netmorph to build the reservoir
-./xor_scnm_groundtruth_reservoir.py $host $port -modelfile "$modelfile" -modelname "$modelname"
+./autoassociative_reservoir.py $host $port -modelfile "$modelfile" -modelname "$modelname"
 fi
 
 if [ "$executeat" = "r" -o "$executeat" = "c" ]; then
 # Tune the synapses in the reservoir
-./xor_scnm_groundtruth_connectome.py $host $port -modelname "$modelname"
+./autoassociative_connectome.py $host $port -modelname "$modelname"
 fi
 
 if [ "$simID" = "" ]; then
   # Acquire data sets
-  ./xor_scnm_acquisition_direct.py $host $port -modelname "$modelname-tuned" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./autoassociative_direct.py $host $port -modelname "$modelname-tuned" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 else
   # Acquire data sets by rerunning a simulation that is still in NES server memory
-  ./xor_scnm_acquisition_direct.py $host $port -simID "$simID" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./autoassociative_direct.py $host $port -simID "$simID" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 fi

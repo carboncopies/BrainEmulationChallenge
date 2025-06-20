@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
-# xor_bs_acquisition.py
-# Randal A. Koene, 20240618
+# autoassociative_acquisition.py
+# Randal A. Koene, 20250620
 
 '''
 This version makes a new simulation but uses neuronal circiut model data

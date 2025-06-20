@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
-# xor_scnm_groundtruth_reservoir.py
-# Randal A. Koene, 20240731
+# autoassociative_reservoir.py
+# Randal A. Koene, 20250620
 
 # This script is STEP 1 in the creation of realistic
 # ground-truth virtual tissue containing an intended
@@ -12,7 +12,7 @@
 # regions.
 #
 # For example, call this with the nesvbp-xor-res-sep-targets
-# script: ./xor_scnm_groundtruth_reservoir.py -modelfile nesvbp-xor-res-sep-targets
+# script: ./autoassociative_reservoir.py -modelfile nesvbp-autoassociative
 #
 # The ModelSave API function is called to ensure that the resulting
 # NES Simulation model is stored in a rapid binary format on the server.
@@ -37,7 +37,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-modelfile", type=str, help="File to read model instructions from")
-Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model to save")
+Parser.add_argument("-modelname", default="autoassociative", type=str, help="Name of neuronal circuit model to save")
 Parser.add_argument("-growdays", type=int, help="Number of days Netmorph growth")
 Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")

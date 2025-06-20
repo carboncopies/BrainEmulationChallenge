@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
-# xor_scnm_groundtruth_connectome.py
-# Randal A. Koene, 20240731
+# autoassociative_connectome.py
+# Randal A. Koene, 20250620
 
 # This script is STEP 2 in the creation of realistic
 # ground-truth virtual tissue containing an intended
