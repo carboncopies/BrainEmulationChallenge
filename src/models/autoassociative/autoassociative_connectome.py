@@ -199,6 +199,17 @@ def EliminateByPost(NeuronID:int):
 def EliminateByPre(NeuronID:int):
     SetOneByPre(Neuron2Neuron, NeuronID, 0)
 
+# Eliminate from our working set those Neurons that appear in In
+# but have no connections from other Neurons in In:
+print('Neurons in In population with >0 connections from other In neurons:')
+for n in Regions['In']:
+    frompyrmid = ConnectionsFrom('In', n)
+    if len(frompyrmid)<1:
+        EliminateByPost(n)
+    else:
+        print('%d: %s' % (n, str(frompyrmid)))
+print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
+
 # --- UP TO HERE THIS SHOULD BE REUSABLE AS IS
 
 # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
