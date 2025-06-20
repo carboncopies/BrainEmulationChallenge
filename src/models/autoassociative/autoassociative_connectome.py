@@ -32,7 +32,7 @@ Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test 
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
-Parser.add_argument("-modelname", default="xor_scnm", type=str, help="Name of neuronal circuit model to save")
+Parser.add_argument("-modelname", default="autoassociative", type=str, help="Name of neuronal circuit model to save")
 Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
@@ -198,6 +198,8 @@ def EliminateByPost(NeuronID:int):
 
 def EliminateByPre(NeuronID:int):
     SetOneByPre(Neuron2Neuron, NeuronID, 0)
+
+# --- UP TO HERE THIS SHOULD BE REUSABLE AS IS
 
 # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
 print("PyrOut neurons with >1 connections from PyrMid:")

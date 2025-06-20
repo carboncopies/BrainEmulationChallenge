@@ -35,7 +35,7 @@ def PointsInCircum(r, n=100):
 
 # Handle Arguments for Host, Port, etc
 Parser = argparse.ArgumentParser(description="vbp script")
-Parser.add_argument("-modelname", default="xor_scnm-tuned", type=str, help="Name of neuronal circuit model prevoiusly saved")
+Parser.add_argument("-modelname", default="autoassociative-tuned", type=str, help="Name of neuronal circuit model prevoiusly saved")
 Parser.add_argument("-simID", default=None, type=int, help="Re-process an active simulation by ID (finds corresponding modelname)")
 Parser.add_argument("-RenderVisualization", action='store_true', help="Enable or disable visualization")
 Parser.add_argument("-RenderEM", action='store_true', help="Enable or disable em stack rendering")
