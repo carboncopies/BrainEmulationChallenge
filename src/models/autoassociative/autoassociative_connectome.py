@@ -209,6 +209,7 @@ for n in Regions['In']:
     else:
         print('%d: %s' % (n, str(frompyrmid)))
 print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
+print("Number of connections: "+str(len(Neuron2Neuron)))
 
 # --- UP TO HERE THIS SHOULD BE REUSABLE AS IS
 
