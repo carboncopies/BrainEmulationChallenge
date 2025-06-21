@@ -99,12 +99,12 @@ DBdata = vbp.InitExpDB(
 ### Retrieve Model                            ###
 ### ========================================= ###
 
-# Find I/O IDs corresponding with the modelname
+# Find pattern IDs corresponding with the modelname
 DBconnectome = vbp.GetMostRecentDBEntryOUT(DBdata, 'connectome', False, Args.modelname, exit_on_error=True)
 if 'IOIDs' not in DBconnectome:
     vbp.ErrorExit(DBdata, 'Experiments database error: Missing IOIDs in most recent entry for modelname '+str(Args.modelname))
-XORInOutIdentifiers = DBconnectome['IOIDs']
-print('Loaded XOR I/O neuron identifiers.')
+PatternIdentifiers = DBconnectome['IOIDs']
+print('Loaded pattern identifiers.')
 
 
 # Create Client Configuration For Local Simulation
@@ -202,22 +202,20 @@ if not Args.simID:
 
     t_soma_fire_ms = []
     def SpikeInputNeuronsAt(InputID:str, t_ms:float):
-        for n in XORInOutIdentifiers[InputID]:
+        for n in PatternIdentifiers[InputID]:
             t_soma_fire_ms.append( (t_ms, n) )
 
     t_test_ms = {
-        'XOR_10': 100.0,
-        'XOR_01': 200.0,
-        'XOR_11': 300.0,
+        'A': 100.0,
+        'B': 200.0,
+        'C': 300.0,
     }
-    # The 0 0 case is not explicitly tested.
-    # Add 1 0 XOR test case.
-    SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
-    # Add 0 1 XOR test case.
-    SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
-    # Add 1 1 XOR test case.
-    SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
-    SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
+    # Cue A.
+    SpikeInputNeuronsAt('A', t_test_ms['A'])
+    # Cue B.
+    SpikeInputNeuronsAt('B', t_test_ms['B'])
+    # Cue C.
+    SpikeInputNeuronsAt('C', t_test_ms['C'])
     print('Directed somatic firing: '+str(t_soma_fire_ms))
 
     try:
@@ -548,7 +546,7 @@ if (Args.RenderVisualization):
     # Render In Circle Around Sim
     Radius = 500
     Steps = 10
-    ZHeight = -550
+    ZHeight = -300 # see where In.centerZ is defined in nesvbp-autoassociative
 
     for Point in PointsInCircum(Radius, Steps):
 
