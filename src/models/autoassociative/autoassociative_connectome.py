@@ -497,7 +497,7 @@ PatternIdentifiers = {
     'B': [ 14, 15, 16, ],
     'C': [ 17, 18, 19, 20, ],
 }
-vbp.AddOutputToDB(DBdata, 'IOIDs', XORInOutIdentifiers)
+vbp.AddOutputToDB(DBdata, 'IOIDs', PatternIdentifiers)
 print("Saved autoassociative pattern identifiers in "+Args.ExpsDB)
 
 # # Add Input-Ouput identifiers to results
