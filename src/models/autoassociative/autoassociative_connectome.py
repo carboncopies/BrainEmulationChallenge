@@ -213,46 +213,47 @@ print("Number of connections: "+str(len(Neuron2Neuron)))
 
 # --- UP TO HERE THIS SHOULD BE REUSABLE AS IS
 
-# Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
-print("PyrOut neurons with >1 connections from PyrMid:")
-for n in Regions['PyrOut']:
-    frompyrmid = ConnectionsFrom('PyrMid', n)
-    if len(frompyrmid)<2:
-        EliminateByPost(n)
-    else:
-        print('%d: %s' % (n, str(frompyrmid)))
-print("Neuron to Neuron after eliminating PyrOut neurons with <2 connections from PyrMid: "+str(Neuron2Neuron))
+# # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
+# print("PyrOut neurons with >1 connections from PyrMid:")
+# for n in Regions['PyrOut']:
+#     frompyrmid = ConnectionsFrom('PyrMid', n)
+#     if len(frompyrmid)<2:
+#         EliminateByPost(n)
+#     else:
+#         print('%d: %s' % (n, str(frompyrmid)))
+# print("Neuron to Neuron after eliminating PyrOut neurons with <2 connections from PyrMid: "+str(Neuron2Neuron))
 
-def PreRecurse(TrackerFlags:list, NeuronID:int):
-    SetOneByPost(TrackerFlags, NeuronID, 1)
-    inp = ActiveInputsTo(NeuronID)
-    for i in inp:
-        if PostIs(TrackerFlags, i)==0:
-            PreRecurse(TrackerFlags, i)
-
-def PostRecurse(TrackerFlags:list, NeuronID:int):
-    SetOneByPre(TrackerFlags, NeuronID, 1)
-    out = ActiveOutputsFrom(NeuronID)
-    for o in out:
-        if PreIs(TrackerFlags, o)==0:
-            PostRecurse(TrackerFlags, o)
-
-N2NFromOutput = copy.deepcopy(Neuron2Neuron)
-SetAll(N2NFromOutput, 0)
-# Set flags for all neurons reachable from active PyrOut neurons:
-for n in Regions['PyrOut']:
-    if PostIs(Neuron2Neuron, n)>0:
-        PreRecurse(N2NFromOutput, n)
-N2NFromInput = copy.deepcopy(Neuron2Neuron)
-SetAll(N2NFromInput, 0)
-# Set flags for all neurons reachable from active PyrIn neurons:
-for n in Regions['PyrIn']:
-    if PreIs(Neuron2Neuron, n)>0:
-        PostRecurse(N2NFromInput, n)
-# Keep only those that are reachable in both directions:
-for idx in range(len(Neuron2Neuron)):
-    if N2NFromOutput[idx][2]==0 or N2NFromInput[idx][2]==0:
-        Neuron2Neuron[idx][2]=0
+# # Exclude Neurons not reachable from both PyrOut and PyrIn:
+# def PreRecurse(TrackerFlags:list, NeuronID:int):
+#     SetOneByPost(TrackerFlags, NeuronID, 1)
+#     inp = ActiveInputsTo(NeuronID)
+#     for i in inp:
+#         if PostIs(TrackerFlags, i)==0:
+#             PreRecurse(TrackerFlags, i)
+#
+# def PostRecurse(TrackerFlags:list, NeuronID:int):
+#     SetOneByPre(TrackerFlags, NeuronID, 1)
+#     out = ActiveOutputsFrom(NeuronID)
+#     for o in out:
+#         if PreIs(TrackerFlags, o)==0:
+#             PostRecurse(TrackerFlags, o)
+#
+# N2NFromOutput = copy.deepcopy(Neuron2Neuron)
+# SetAll(N2NFromOutput, 0)
+# # Set flags for all neurons reachable from active PyrOut neurons:
+# for n in Regions['PyrOut']:
+#     if PostIs(Neuron2Neuron, n)>0:
+#         PreRecurse(N2NFromOutput, n)
+# N2NFromInput = copy.deepcopy(Neuron2Neuron)
+# SetAll(N2NFromInput, 0)
+# # Set flags for all neurons reachable from active PyrIn neurons:
+# for n in Regions['PyrIn']:
+#     if PreIs(Neuron2Neuron, n)>0:
+#         PostRecurse(N2NFromInput, n)
+# # Keep only those that are reachable in both directions:
+# for idx in range(len(Neuron2Neuron)):
+#     if N2NFromOutput[idx][2]==0 or N2NFromInput[idx][2]==0:
+#         Neuron2Neuron[idx][2]=0
 
 def NumActive()->int:
     num = 0
@@ -273,195 +274,205 @@ print("There are %d usable connections on input-to-output paths (out of %d)." % 
 print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
 print('')
 
-def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
-    inp = ActiveInputsTo(NeuronID)
-    for i in inp:
-        if Neuron2RegionMap[i]==Reg:
-            return True
-    return False
+# def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
+#     inp = ActiveInputsTo(NeuronID)
+#     for i in inp:
+#         if Neuron2RegionMap[i]==Reg:
+#             return True
+#     return False
+#
+# def SubsetByInput(Neurons:list, Reg:str)->list:
+#     res = []
+#     for n in Neurons:
+#         if HasInputFromRegion(n, Reg):
+#             res.append(n)
+#     return res
+#
+# def Intersection(NeuronsA:list, NeuronsB:list)->list:
+#     res = []
+#     for n in NeuronsA:
+#         if n in NeuronsB:
+#             res.append(n)
+#     return res
+#
+# # Eliminate connections with PyrMid neurons that do not have input from both PyrIn and Int:
+# pyrmid = Regions['PyrMid']
+# print('PyrMid neurons: '+str(pyrmid))
+# pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
+# print('PyrMid neurons from PyrIn: '+str(pyrmid_from_pyrin))
+# pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
+# print('PyrMid neurons from Int: '+str(pyrmid_from_int))
+# pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
+# print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
+# for n in pyrmid:
+#     if n not in pyrmid_from_pyrin_and_int:
+#         EliminateByPost(n)
+#         EliminateByPre(n)
+# print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
+# print("Neuron to Neuron remaining: "+PrintActive())
+# print('')
+#
+# # Eliminate connections with PyrMid neurons that do not have inputs that can create A and not B:
+# pyrmid_from_pyrin_and_not_int = []
+# for n in pyrmid_from_pyrin_and_int:
+#     frompyrin = ConnectionsFrom('PyrIn', n)
+#     fromint = ConnectionsFrom('Int', n)
+#     fromint_frompyrin = []
+#     for pre in fromint:
+#         fromint_frompyrin += ConnectionsFrom('PyrIn', pre)
+#     for pre in fromint_frompyrin:
+#         if pre not in frompyrin:
+#             pyrmid_from_pyrin_and_not_int.append(n)
+#             break
+# print("List of neurons in PyrMid creating PyrIn and not-Int connections: %s" % str(pyrmid_from_pyrin_and_not_int))
+# for n in pyrmid:
+#     if n not in pyrmid_from_pyrin_and_not_int:
+#         EliminateByPost(n)
+#         EliminateByPre(n)
+# print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
+# print("Neuron to Neuron remaining: "+PrintActive())
+# print('')
+#
+# # Let's take a look at what we still have:
+# for n in pyrmid_from_pyrin_and_not_int:
+#     print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
+#
+# def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:set)->tuple:
+#     midint = ConnectionsFrom('Int', PyrMidID)
+#     for mi in midint:
+#         intinp = ConnectionsFrom('PyrIn', mi)
+#         for ii in intinp:
+#             if ii not in NotPyrInID:
+#                 return mi, ii
+#     print('Found nothing...')
+#     exit(1)
+#
+# def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:set, NotIntID:int)->tuple:
+#     midint = ConnectionsFrom('Int', PyrMidID)
+#     for mi in midint:
+#         if mi != NotIntID:
+#             intinp = ConnectionsFrom('PyrIn', mi)
+#             for ii in intinp:
+#                 if ii not in NotPyrInID:
+#                     return mi, ii
+#     print('Found nothing...')
+#     exit(1)
+#
+# PrePostPairs = []
+# XORInput = []
+# def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str):
+#     PrePostPairs.append( (PreSynID, PostSynID) )
+#     XORInput.append(IOlabel)
+#
+# # For the first side of the XOR connectome:
+#
+# PyrInA = set() # The set of neurons representing XOR input A
+# PyrInB = set() # The set of neurons representing XOR input B
+# PyrOut = set() # The set of neurons representing XOR output
+#
+# if len(pyrmid_from_pyrin_and_not_int) > 0:
+#     pyrmidA = pyrmid_from_pyrin_and_not_int[0]
+#     pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
+#     SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
+#     PyrInA.add(pyrinA_0)
+#
+#     pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
+#     SpecifyConnection(pyrintB, pyrmidA, '...')
+#
+#     SpecifyConnection(pyrinB_0, pyrintB, 'InB')
+#     PyrInB.add(pyrinB_0)
+#
+# # For the second side of the XOR connectome:
+#
+# if len(pyrmid_from_pyrin_and_not_int) > 1:
+#     pyrmidB = pyrmid_from_pyrin_and_not_int[1]
+#     midin = ConnectionsFrom('PyrIn', pyrmidB)
+#     for mi in midin:
+#         if mi not in PyrInA:
+#             pyrinB_1 = mi
+#     SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
+#     PyrInB.add(pyrinB_1)
+#
+#     pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
+#     SpecifyConnection(pyrintA, pyrmidB, '...')
+#
+#     SpecifyConnection(pyrinA_1, pyrintA, 'InA')
+#     PyrInA.add(pyrinA_1)
+#
+#     # Find the PyrOut that receives from both PyrMid neurons:
+#     PyrOutGroup = []
+#     pyrout = Regions['PyrOut']
+#     for n in pyrout:
+#         frommid = ConnectionsFrom('PyrMid', n)
+#         if pyrmidA in frommid and pyrmidB in frommid:
+#             PyrOutGroup.append(n)
+#     SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
+#     SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
+#     PyrOut.add(PyrOutGroup[0])
+#
+# def NeuronTypeStr(NeuronID:int)->str:
+#     if NeuronTypes[NeuronID]==1:
+#         return 'pyr'
+#     elif NeuronTypes[NeuronID]==2:
+#         return 'int'
+#     else:
+#         return 'unknown'
+#
+# print("Connectome pre-post pairs for both branches of the XOR:")
+# for i in range(len(PrePostPairs)):
+#     pre, post = PrePostPairs[i]
+#     print('  %s: %s %d (%s) -> %s %d (%s)' % (
+#         XORInput[i],
+#         Neuron2RegionMap[pre],
+#         pre,
+#         NeuronTypeStr(pre),
+#         Neuron2RegionMap[post],
+#         post,
+#         NeuronTypeStr(post)))
+#
+#
+# # Weights previously used in the tuned ball-and-stick example:
+# WeightsPrePost = {
+#     'PyrIn': { 'Int': 1.2, 'PyrMid': 0.9 },
+#     'Int': { 'PyrMid': 1.2 },
+#     'PyrMid': { 'PyrOut': 1.0 },
+# }
+#
+# # Set connections as per the intentions expressed in PrePostPairs:
+# PreSynList = []
+# PostSynList = []
+# ConductanceList = []
+# for pre, post, active in Neuron2Neuron:
+#     if (pre, post) in PrePostPairs:
+#         # Set this to a specific strength:
+#         PreSynList.append(pre)
+#         PostSynList.append(post)
+#         PreSynReg = Neuron2RegionMap[pre]
+#         PostSynReg = Neuron2RegionMap[post]
+#         Weight = WeightsPrePost[PreSynReg][PostSynReg]
+#         if PreSynReg=="Int":
+#             ConductanceList.append(-40.0/Weight) # AMPA 40.0, GABA -40.0
+#         else:
+#             ConductanceList.append(40.0/Weight) # AMPA 40.0, GABA -40.0
+#     else:
+#         # Set this to zero:
+#         PreSynList.append(pre)
+#         PostSynList.append(post)
+#         ConductanceList.append(0.0)
 
-def SubsetByInput(Neurons:list, Reg:str)->list:
-    res = []
-    for n in Neurons:
-        if HasInputFromRegion(n, Reg):
-            res.append(n)
-    return res
+# Instead of what was done to set up the Spiking XOR, for the
+# autoassociative memory example, we can now imprint some stored
+# patterns with a prerequisite cue-size. Alternatively, this can
+# be entrained in NES.
 
-def Intersection(NeuronsA:list, NeuronsB:list)->list:
-    res = []
-    for n in NeuronsA:
-        if n in NeuronsB:
-            res.append(n)
-    return res
 
-# Eliminate connections with PyrMid neurons that do not have input from both PyrIn and Int:
-pyrmid = Regions['PyrMid']
-print('PyrMid neurons: '+str(pyrmid))
-pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
-print('PyrMid neurons from PyrIn: '+str(pyrmid_from_pyrin))
-pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
-print('PyrMid neurons from Int: '+str(pyrmid_from_int))
-pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
-print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
-for n in pyrmid:
-    if n not in pyrmid_from_pyrin_and_int:
-        EliminateByPost(n)
-        EliminateByPre(n)
-print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
-print("Neuron to Neuron remaining: "+PrintActive())
-print('')
 
-# Eliminate connections with PyrMid neurons that do not have inputs that can create A and not B:
-pyrmid_from_pyrin_and_not_int = []
-for n in pyrmid_from_pyrin_and_int:
-    frompyrin = ConnectionsFrom('PyrIn', n)
-    fromint = ConnectionsFrom('Int', n)
-    fromint_frompyrin = []
-    for pre in fromint:
-        fromint_frompyrin += ConnectionsFrom('PyrIn', pre)
-    for pre in fromint_frompyrin:
-        if pre not in frompyrin:
-            pyrmid_from_pyrin_and_not_int.append(n)
-            break
-print("List of neurons in PyrMid creating PyrIn and not-Int connections: %s" % str(pyrmid_from_pyrin_and_not_int))
-for n in pyrmid:
-    if n not in pyrmid_from_pyrin_and_not_int:
-        EliminateByPost(n)
-        EliminateByPre(n)
-print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
-print("Neuron to Neuron remaining: "+PrintActive())
-print('')
 
-# Let's take a look at what we still have:
-for n in pyrmid_from_pyrin_and_not_int:
-    print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
-
-def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:set)->tuple:
-    midint = ConnectionsFrom('Int', PyrMidID)
-    for mi in midint:
-        intinp = ConnectionsFrom('PyrIn', mi)
-        for ii in intinp:
-            if ii not in NotPyrInID:
-                return mi, ii
-    print('Found nothing...')
-    exit(1)
-
-def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:set, NotIntID:int)->tuple:
-    midint = ConnectionsFrom('Int', PyrMidID)
-    for mi in midint:
-        if mi != NotIntID:
-            intinp = ConnectionsFrom('PyrIn', mi)
-            for ii in intinp:
-                if ii not in NotPyrInID:
-                    return mi, ii
-    print('Found nothing...')
-    exit(1)
-
-PrePostPairs = []
-XORInput = []
-def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str):
-    PrePostPairs.append( (PreSynID, PostSynID) )
-    XORInput.append(IOlabel)
-
-# For the first side of the XOR connectome:
-
-PyrInA = set() # The set of neurons representing XOR input A
-PyrInB = set() # The set of neurons representing XOR input B
-PyrOut = set() # The set of neurons representing XOR output
-
-if len(pyrmid_from_pyrin_and_not_int) > 0:
-    pyrmidA = pyrmid_from_pyrin_and_not_int[0]
-    pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
-    SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
-    PyrInA.add(pyrinA_0)
-
-    pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
-    SpecifyConnection(pyrintB, pyrmidA, '...')
-
-    SpecifyConnection(pyrinB_0, pyrintB, 'InB')
-    PyrInB.add(pyrinB_0)
-
-# For the second side of the XOR connectome:
-
-if len(pyrmid_from_pyrin_and_not_int) > 1:
-    pyrmidB = pyrmid_from_pyrin_and_not_int[1]
-    midin = ConnectionsFrom('PyrIn', pyrmidB)
-    for mi in midin:
-        if mi not in PyrInA:
-            pyrinB_1 = mi
-    SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
-    PyrInB.add(pyrinB_1)
-
-    pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
-    SpecifyConnection(pyrintA, pyrmidB, '...')
-
-    SpecifyConnection(pyrinA_1, pyrintA, 'InA')
-    PyrInA.add(pyrinA_1)
-
-    # Find the PyrOut that receives from both PyrMid neurons:
-    PyrOutGroup = []
-    pyrout = Regions['PyrOut']
-    for n in pyrout:
-        frommid = ConnectionsFrom('PyrMid', n)
-        if pyrmidA in frommid and pyrmidB in frommid:
-            PyrOutGroup.append(n)
-    SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
-    SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
-    PyrOut.add(PyrOutGroup[0])
-
-def NeuronTypeStr(NeuronID:int)->str:
-    if NeuronTypes[NeuronID]==1:
-        return 'pyr'
-    elif NeuronTypes[NeuronID]==2:
-        return 'int'
-    else:
-        return 'unknown'
-
-print("Connectome pre-post pairs for both branches of the XOR:")
-for i in range(len(PrePostPairs)):
-    pre, post = PrePostPairs[i]
-    print('  %s: %s %d (%s) -> %s %d (%s)' % (
-        XORInput[i],
-        Neuron2RegionMap[pre],
-        pre,
-        NeuronTypeStr(pre),
-        Neuron2RegionMap[post],
-        post,
-        NeuronTypeStr(post)))
-
-# Weights previously used in the tuned ball-and-stick example:
-WeightsPrePost = {
-    'PyrIn': { 'Int': 1.2, 'PyrMid': 0.9 },
-    'Int': { 'PyrMid': 1.2 },
-    'PyrMid': { 'PyrOut': 1.0 },
-}
-
-# Set connections as per the intentions expressed in PrePostPairs:
-PreSynList = []
-PostSynList = []
-ConductanceList = []
-for pre, post, active in Neuron2Neuron:
-    if (pre, post) in PrePostPairs:
-        # Set this to a specific strength:
-        PreSynList.append(pre)
-        PostSynList.append(post)
-        PreSynReg = Neuron2RegionMap[pre]
-        PostSynReg = Neuron2RegionMap[post]
-        Weight = WeightsPrePost[PreSynReg][PostSynReg]
-        if PreSynReg=="Int":
-            ConductanceList.append(-40.0/Weight) # AMPA 40.0, GABA -40.0
-        else:
-            ConductanceList.append(40.0/Weight) # AMPA 40.0, GABA -40.0
-    else:
-        # Set this to zero:
-        PreSynList.append(pre)
-        PostSynList.append(post)
-        ConductanceList.append(0.0)
-try:
-    MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
-    print("\nUpdated model connectome accordingly.")
-except:
-    vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
+# try:
+#     MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+#     print("\nUpdated model connectome accordingly.")
+# except:
+#     vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
 
 
 # Let's test the update:
@@ -480,14 +491,23 @@ try:
 except:
     vbp.ErrorExit(DBdata, 'NES error: Model save failed')
 
-# Add Input-Ouput identifiers to results
-XORInOutIdentifiers = {
-    'InA': list(PyrInA),
-    'InB': list(PyrInB),
-    'Out': list(PyrOut),
+# Note: The result here should actually be a set of overlapping patterns.
+PatternIdentifiers = {
+    'A': [ 11, 12, 13, ],
+    'B': [ 14, 15, 16, ],
+    'C': [ 17, 18, 19, 20, ],
 }
 vbp.AddOutputToDB(DBdata, 'IOIDs', XORInOutIdentifiers)
-print("Saved XOR I/O neuron identifiers in "+Args.ExpsDB)
+print("Saved autoassociative pattern identifiers in "+Args.ExpsDB)
+
+# # Add Input-Ouput identifiers to results
+# XORInOutIdentifiers = {
+#     'InA': list(PyrInA),
+#     'InB': list(PyrInB),
+#     'Out': list(PyrOut),
+# }
+# vbp.AddOutputToDB(DBdata, 'IOIDs', XORInOutIdentifiers)
+# print("Saved XOR I/O neuron identifiers in "+Args.ExpsDB)
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
