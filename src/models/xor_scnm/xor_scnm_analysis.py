@@ -9,6 +9,10 @@ import subprocess
 import signal
 import sys
 import shutil
+import pandas as pd
+import plotly.graph_objects as go
+import plotly.express as px
+from plotly.subplots import make_subplots
 
 class ResourceMonitor:
     def __init__(self, output_dir=None, interval=0.5):
@@ -286,8 +290,8 @@ class ResourceMonitor:
             os.replace(temp_path, final_path)
         except Exception as e:
             print(f"\rWarning: Periodic save failed: {e}", end="")
-    
-    @classmethod
+
+    @classmethod    
     def aggregate_runs_to_csv(cls, base_output_dir, output_filename="aggregated_results.csv"):
         """
         Aggregates all run data from subdirectories into a single CSV file.
@@ -347,7 +351,148 @@ class ResourceMonitor:
                     print(f"Error processing {data_file}: {e}")
         
         print(f"Aggregation complete. CSV saved to {csv_path}")
-    # end of class ResourceMonitor    
+
+    @staticmethod
+    def create_simple_graphs(csv_file_path, output_dir=None):
+        """
+        Create simple interactive graphs from CSV data.
+        """
+        try:
+            import pandas as pd
+            import plotly.graph_objects as go
+            from plotly.subplots import make_subplots
+            import os
+        except ImportError:
+            print("Error: Install required packages with: pip install pandas plotly")
+            return
+
+        # Read CSV
+        try:
+            df = pd.read_csv(csv_file_path)
+            print(f"Loaded data: {len(df)} rows")
+        except Exception as e:
+            print(f"Error reading CSV: {e}")
+            return
+
+        # Set output directory
+        if output_dir is None:
+            output_dir = os.path.dirname(csv_file_path)
+        
+        # Convert timestamp to relative time
+        df['relative_time'] = df.groupby('run_id')['timestamp'].transform(lambda x: x - x.min())
+        
+        # Get unique runs
+        runs = df['run_id'].unique()
+        print(f"Found runs: {runs}")
+        
+        # Create simple 2x2 dashboard
+        fig = make_subplots(
+            rows=2, cols=2,
+            subplot_titles=('CPU Usage (%)', 'Memory Usage (%)', 
+                        'Disk Read Bytes', 'Disk Write Bytes')
+        )
+        
+        # Color palette
+        colors = ['red', 'blue', 'green', 'orange', 'purple', 'brown', 'pink', 'gray']
+        
+        for i, run in enumerate(runs):
+            run_data = df[df['run_id'] == run]
+            color = colors[i % len(colors)]
+            
+            # CPU Usage
+            fig.add_trace(
+                go.Scatter(
+                    x=run_data['relative_time'],
+                    y=run_data['cpu_percent'],
+                    mode='lines',
+                    name=f'{run}',
+                    line=dict(color=color),
+                    legendgroup=run
+                ),
+                row=1, col=1
+            )
+            
+            # Memory Usage
+            fig.add_trace(
+                go.Scatter(
+                    x=run_data['relative_time'],
+                    y=run_data['memory_percent'],
+                    mode='lines',
+                    name=f'{run}',
+                    line=dict(color=color),
+                    legendgroup=run,
+                    showlegend=False
+                ),
+                row=1, col=2
+            )
+            
+            # Disk Read
+            fig.add_trace(
+                go.Scatter(
+                    x=run_data['relative_time'],
+                    y=run_data['disk_io_read_bytes'],
+                    mode='lines',
+                    name=f'{run}',
+                    line=dict(color=color),
+                    legendgroup=run,
+                    showlegend=False
+                ),
+                row=2, col=1
+            )
+            
+            # Disk Write
+            fig.add_trace(
+                go.Scatter(
+                    x=run_data['relative_time'],
+                    y=run_data['disk_io_write_bytes'],
+                    mode='lines',
+                    name=f'{run}',
+                    line=dict(color=color),
+                    legendgroup=run,
+                    showlegend=False
+                ),
+                row=2, col=2
+            )
+        
+        # Update axis labels
+        fig.update_xaxes(title_text="Time (seconds)", row=1, col=1)
+        fig.update_xaxes(title_text="Time (seconds)", row=1, col=2)
+        fig.update_xaxes(title_text="Time (seconds)", row=2, col=1)
+        fig.update_xaxes(title_text="Time (seconds)", row=2, col=2)
+        
+        fig.update_yaxes(title_text="CPU Usage (%)", row=1, col=1)
+        fig.update_yaxes(title_text="Memory Usage (%)", row=1, col=2)
+        fig.update_yaxes(title_text="Read Bytes/sec", row=2, col=1)
+        fig.update_yaxes(title_text="Write Bytes/sec", row=2, col=2)
+        
+        # Update layout
+        fig.update_layout(
+            title="Performance Summary Dashboard",
+            height=600,
+            showlegend=True,
+            hovermode='x unified'
+        )
+        
+        # Save the graph
+        output_path = os.path.join(output_dir, "performance_summary.html")
+        fig.write_html(output_path)
+        print(f"Graph saved to: {output_path}")
+        
+        # Create summary stats table
+        summary = df.groupby('run_id').agg({
+            'cpu_percent': ['mean', 'max'],
+            'memory_percent': ['mean', 'max'],
+            'disk_io_read_bytes': 'sum',
+            'disk_io_write_bytes': 'sum'
+        }).round(2)
+        
+        # Save summary as CSV
+        summary_path = os.path.join(output_dir, "run_summary.csv")
+        summary.to_csv(summary_path)
+        print(f"Summary saved to: {summary_path}")
+        
+        return output_path
+       # end of class ResourceMonitor    
 
 def test_saving():
     """Test that the monitor can save data correctly"""
@@ -395,178 +540,184 @@ def main():
     parser.add_argument('--output', type=str, default=None, help='Output directory for monitoring data')
     parser.add_argument('--interval', type=float, default=0.5, help='Monitoring interval in seconds')
     parser.add_argument('--runs', type=int, default=5, help='Number of runs to execute')
+    parser.add_argument('--argumentfile', type=str, default=None, help='Path to txt file with each set of arguments you wish to run, comma separated, followed by newline (\\n)')
     args = parser.parse_args()
 
     original_dir = os.getcwd()
     print(f"Original working directory: {original_dir}")
 
-    # Base output directory
-    if args.output:
-        base_output_dir = os.path.abspath(args.output)
+    # Load argument file
+    ArgList = [["-x a","-s","40"]] # Default arglist values
+    ArgumentFilePath = args.argumentfile
+    if (ArgumentFilePath):
+        with open(ArgumentFilePath, "r") as File:
+            ArgList = File.read().split("\n")
+        for i in range(len(ArgList)):
+            ArgList[i] = ArgList[i].split(",")
+        
+        print(f"Loaded Argument List, Parsed {len(ArgList)} ")
+        print(f"double checking arList: {ArgList}")
     else:
-        timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-        base_output_dir = os.path.join(original_dir, f"resource_monitor_{timestamp}")
+        print(f"No argument file path provided, defaulting to: {ArgList}")
 
-    script_full_path = os.path.abspath(args.run_script)
-    print(f"Run script will be: {script_full_path}")
+    for ArgRunIndex in range(len(ArgList)):
+        if args.output:
+            base_output_dir = os.path.abspath(f"{args.output}{ArgList[ArgRunIndex]}")
+        else:
+            timestamp = datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+            script_name = '_'.join(ArgList[ArgRunIndex])
+            base_output_dir = os.path.join(original_dir, f"{script_name}")
 
-    for run_number in range(1, args.runs + 1):
-        print(f"\n{'='*60}\nSTARTING RUN {run_number} of {args.runs}\n{'='*60}")
-        
-        # THOROUGH CLEANUP BEFORE EACH RUN
-        print("Performing pre-run cleanup...")
-        
-        # 1. Clean up any existing directories first
-        renders_path = os.path.join(os.path.dirname(args.nes_binary), "Renders")
-        datasets_path = os.path.join(os.path.dirname(args.nes_binary), "NueroglancerDatasets")
-        
-        for cleanup_path in [renders_path, datasets_path]:
-            if os.path.exists(cleanup_path):
-                try:
-                    shutil.rmtree(cleanup_path)
-                    print(f"Pre-cleanup: Deleted directory: {cleanup_path}")
-                except Exception as e:
-                    print(f"Warning: Could not delete {cleanup_path}: {e}")
+        script_full_path = os.path.abspath(args.run_script)
+        print(f"Run script will be: {script_full_path}")
 
-        # Replace the problematic section in your main() function:
+        CurrentArguments = ArgList[ArgRunIndex]
 
-        # 2. Kill any existing processes that might interfere
-        binary_name = os.path.basename(args.nes_binary)
-        script_name = os.path.basename(script_full_path)
+        print(f"Running Run.sh with Arguments: {CurrentArguments}")
 
-        try:
-            # Be more specific with process killing to avoid killing ourselves
-            # Kill processes by exact executable name, not just pattern matching
+        for run_number in range(1, args.runs + 1):
+            print(f"\n{'='*60}\nSTARTING RUN {run_number} of {args.runs}\n{'='*60}")
+            print("Performing pre-run cleanup...")
             
-            # For NES binary - kill by exact process name
-            result1 = subprocess.run(['pgrep', '-x', binary_name], capture_output=True, text=True)
-            if result1.returncode == 0:
-                pids = result1.stdout.strip().split('\n')
-                for pid in pids:
-                    if pid:
-                        try:
-                            subprocess.run(['kill', '-TERM', pid], check=False)
-                            print(f"Terminated NES process PID: {pid}")
-                        except:
-                            pass
+            # Clean up any existing directories first
+            renders_path = os.path.join(os.path.dirname(args.nes_binary), "Renders")
+            datasets_path = os.path.join(os.path.dirname(args.nes_binary), "NueroglancerDatasets")
             
-            # For script - be careful not to kill ourselves
-            result2 = subprocess.run(['pgrep', '-f', f'{script_name}.*-x a.*-s.*-n'], capture_output=True, text=True)
-            if result2.returncode == 0:
-                pids = result2.stdout.strip().split('\n')
-                for pid in pids:
-                    if pid and pid != str(os.getpid()):  # Don't kill ourselves
-                        try:
-                            subprocess.run(['kill', '-TERM', pid], check=False)
-                            print(f"Terminated script process PID: {pid}")
-                        except:
-                            pass
-            
-            print("Process cleanup completed")
-            time.sleep(2)  # Wait for processes to fully terminate
-            
-        except Exception as e:
-            print(f"Warning during process cleanup: {e}") 
-        
-        # 4. Wait for system to stabilize
-        print("Waiting for system to stabilize...")
-        time.sleep(3)
-        
-        # Unique output directory for each run
-        output_dir = os.path.join(base_output_dir, f"run_{run_number:02d}")
-        print(f"Output directory will be: {output_dir}")
-
-        monitor = ResourceMonitor(output_dir=output_dir, interval=args.interval)
-        process = None
-        RunScript = None
-
-        try:
-            # FRESH START FOR EACH RUN
-            print("Starting fresh processes...")
-            
-            # Start NES binary
-            binary_dir = os.path.dirname(args.nes_binary)
-            os.chdir(binary_dir)
-            
-            process = subprocess.Popen([f"./{binary_name}"])
-            print(f"Started NES process with PID: {process.pid}")
-
-            # Wait longer for NES to fully initialize
-            print("Waiting for NES to fully initialize...")
-            time.sleep(3)  # Increased from 1 to 3 seconds
-
-            # Start Run script
-            script_dir = os.path.dirname(script_full_path)
-            os.chdir(script_dir)
-            print(f"Starting script: {script_name}")
-
-            RunScript = subprocess.Popen([f"./{script_name}", "-x a", "-s", "5", "-n", "-S", "-M"])
-            print(f"Started script process with PID: {RunScript.pid}")
-
-            # Start monitoring ONLY after both processes are running
-            print("Starting resource monitoring...")
-            monitor.start()
-
-            # Wait for RunScript to complete
-            while RunScript.poll() is None:
-                time.sleep(0.1)
-            print(f"Script completed with return code: {RunScript.returncode}")
-
-        except KeyboardInterrupt:
-            print("\nKeyboard interrupt received. Stopping...")
-            break
-        except Exception as e:
-            print(f"Error during run {run_number}: {e}")
-        finally:
-            print(f"Cleaning up run {run_number}...")
-            
-            # Change back to original directory
-            os.chdir(original_dir)
-
-            # Stop monitoring first
-            monitor.stop()
-
-            # Terminate processes more aggressively
-            if process and process.poll() is None:
-                print("Terminating NES binary...")
-                try:
-                    process.send_signal(signal.SIGTERM)  # Try SIGTERM first
-                    process.wait(timeout=3.0)
-                except subprocess.TimeoutExpired:
-                    print("Force killing NES binary...")
-                    process.kill()
-                    process.wait(timeout=1.0)
-
-            if RunScript and RunScript.poll() is None:
-                print("Terminating Run Script...")
-                try:
-                    RunScript.send_signal(signal.SIGTERM)  # Try SIGTERM first
-                    RunScript.wait(timeout=3.0)
-                except subprocess.TimeoutExpired:
-                    print("Force killing Run Script...")
-                    RunScript.kill()
-                    RunScript.wait(timeout=1.0)
-
-            # Clean up output directories
             for cleanup_path in [renders_path, datasets_path]:
                 if os.path.exists(cleanup_path):
                     try:
                         shutil.rmtree(cleanup_path)
-                        print(f"Post-cleanup: Deleted directory: {cleanup_path}")
+                        print(f"Pre-cleanup: Deleted directory: {cleanup_path}")
                     except Exception as e:
                         print(f"Warning: Could not delete {cleanup_path}: {e}")
 
-            print(f"Run {run_number} cleanup completed")
+            # Kill any existing processes that might interfere
+            binary_name = os.path.basename(args.nes_binary)
+            script_name = os.path.basename(script_full_path)
 
-        # Wait longer between runs to ensure complete cleanup
-        if run_number < args.runs:
-            print(f"Waiting 10 seconds before starting run {run_number + 1}...")
-            time.sleep(10)  # Increased from 5 to 10 seconds
+            try:
+                # For NES binary - kill by exact process name
+                process.kill()
+                RunScript.kill()
+                
+                print("Process cleanup completed")
+                time.sleep(2)  # Wait for processes to fully terminate
+                
+            except Exception as e:
+                print(f"Warning during process cleanup: {e}") 
+            
+            # Wait for system to stabilize
+            print("Waiting for system to stabilize...")
+            time.sleep(3)
+            
+            # Unique output directory for each run
+            output_dir = os.path.join(base_output_dir, f"run_{run_number:02d}")
+            print(f"Output directory will be: {output_dir}")
 
-    print(f"\n{'='*60}\nALL {args.runs} RUNS COMPLETED\n{'='*60}")
-    print(f"Data saved in: {base_output_dir}")
+            monitor = ResourceMonitor(output_dir=output_dir, interval=args.interval)
+            process = None
+            RunScript = None
 
-    ResourceMonitor.aggregate_runs_to_csv(base_output_dir)
+            try:
+                # FRESH START FOR EACH RUN
+                print("Starting fresh processes...")
+                
+                # Start NES binary
+                binary_dir = os.path.dirname(args.nes_binary)
+                os.chdir(binary_dir)
+                
+                process = subprocess.Popen([f"./{binary_name}"])
+                print(f"Started NES process with PID: {process.pid}")
+
+                # Wait longer for NES to fully initialize
+                print("Waiting for NES to fully initialize...")
+                time.sleep(3)  
+
+                # Start Run script
+                script_dir = os.path.dirname(script_full_path)
+                os.chdir(script_dir)
+                print(f"Starting script: {script_name}")
+                
+                RunList = [f"./{script_name}"] + CurrentArguments
+                RunScript = subprocess.Popen(RunList)
+                print(f"Started script process with PID: {RunScript.pid}")
+
+                # Start monitoring ONLY after both processes are running
+                print("Starting resource monitoring...")
+                monitor.start()
+
+                # Wait for RunScript to complete
+                while RunScript.poll() is None:
+                    time.sleep(0.1)
+                print(f"Script completed with return code: {RunScript.returncode}")
+            except KeyboardInterrupt:
+                print("\nKeyboard interrupt received. Stopping...")
+                break
+            except Exception as e:
+                print(f"Error during run {run_number}: {e}")
+            finally:
+                print(f"Cleaning up run {run_number}...")
+                
+                # Change back to original directory
+                os.chdir(original_dir)
+
+                # Stop monitoring first
+                monitor.stop()
+
+                # Terminate processes more aggressively
+                if process and process.poll() is None:
+                    print("Terminating NES binary...")
+                    try:
+                        process.send_signal(signal.SIGTERM)  
+                        process.wait(timeout=3.0)
+                    except subprocess.TimeoutExpired:
+                        print("Force killing NES binary...")
+                        process.kill()
+                        process.wait(timeout=1.0)
+
+                if RunScript and RunScript.poll() is None:
+                    print("Terminating Run Script...")
+                    try:
+                        RunScript.send_signal(signal.SIGTERM)  
+                        RunScript.wait(timeout=3.0)
+                    except subprocess.TimeoutExpired:
+                        print("Force killing Run Script...")
+                        RunScript.kill()
+                        RunScript.wait(timeout=1.0)
+
+                # Clean up output directories
+                for cleanup_path in [renders_path, datasets_path]:
+                    if os.path.exists(cleanup_path):
+                        try:
+                            shutil.rmtree(cleanup_path)
+                            print(f"Post-cleanup: Deleted directory: {cleanup_path}")
+                        except Exception as e:
+                            print(f"Warning: Could not delete {cleanup_path}: {e}")
+
+                print(f"Run {run_number} cleanup completed")
+
+            # Wait longer between runs to ensure complete cleanup
+            if run_number < args.runs:
+                print(f"Waiting 10 seconds before starting run {run_number + 1}...")
+                time.sleep(10)  
+
+        print(f"\n{'='*60}\nALL {args.runs} RUNS COMPLETED\n{'='*60}")
+        print(f"Data saved in: {base_output_dir}")
+
+        csv_path = os.path.join(base_output_dir, "aggregated_results.csv")
+        ResourceMonitor.aggregate_runs_to_csv(base_output_dir)
+
+        # Create interactive graphs
+        if os.path.exists(csv_path):
+            print("Creating simple performance graph...")
+            try:
+                ResourceMonitor.create_simple_graphs(csv_path, base_output_dir)
+            except Exception as e:
+                print(f"Error creating graphs: {e}")
+                import traceback
+                traceback.print_exc()
+        else:
+            print(f"Warning: CSV file not found at {csv_path}")
 
 # Run the test if called with --test
 if __name__ == "__main__":
