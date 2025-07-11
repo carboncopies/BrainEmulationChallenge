@@ -28,7 +28,7 @@ import argparse
 #import os
 
 import vbpcommon as vbp
-from BrainGenix.BG_API import NES
+from BrainGenix import NES
 
 
 # Handle Arguments for Host, Port, etc
