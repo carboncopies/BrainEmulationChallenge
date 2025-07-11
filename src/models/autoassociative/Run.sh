@@ -153,8 +153,8 @@ fi
 
 if [ "$simID" = "" ]; then
   # Acquire data sets
-  ./autoassociative_direct.py $host $port -modelname "$modelname-tuned" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./autoassociative_acquisition.py $host $port -modelname "$modelname-tuned" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 else
   # Acquire data sets by rerunning a simulation that is still in NES server memory
-  ./autoassociative_direct.py $host $port -simID "$simID" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
+  ./autoassociative_acquisition.py $host $port -simID "$simID" -RenderEM -SubdivideSize "$subdivide" $neuroglancer $segmentation $meshes $forceURLbase -Resolution_um "$resolution"
 fi
