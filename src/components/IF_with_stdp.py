@@ -1,12 +1,15 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import time
+
+start_time = time.time()
 
 # Simulation parameters
 dt = 1.0  # ms
 #T = 950
 T = 4000
-time = np.arange(0, T, dt)
-n_steps = len(time)
+t_samples = np.arange(0, T, dt)
+n_steps = len(t_samples)
 
 burst_drive = False # default: False
 compact_burst_driver = True # default: True
@@ -62,14 +65,31 @@ def compute_normalization(tau_rise, tau_decay):
     norm = np.exp(-t_peak / tau_decay) - np.exp(-t_peak / tau_rise)
     return norm
 
-def g_norm(t, spike_times, tau_rise, tau_decay, norm, onset_delay):
-    """Compute total synaptic conductance at time t from all spikes."""
+def g_norm(t, spike_times, tau_rise, tau_decay, norm, onset_delay, spike_dt_delta=1000, history_delta=0.001):
+    """
+    Compute total synaptic conductance at time t from all spikes.
+    The history_delta enables a reduction of computational load by
+    breaking out of the sum when the contributions become remote
+    and inconsequential. Defaults to 0.001. Only applies when
+    spike_dt > spike_dt_delta, so that the short-circuit is not
+    triggered during onset of a current. Defaults to 1000 ms.
+    Set history_delta=0 and spike_dt_delta=inf to deactivate this.
+
+    Also, we could use something like precalculating kernels for
+    all contributors with dt bins and then a convolution, which
+    would ultimately save expensive calculations.
+    """
+    t -= onset_delay
+    history_delta *= norm
     gnorm = 0
-    for ts in spike_times:
-        spike_dt = t - (ts+onset_delay)
+    for ts in reversed(spike_times):
+        spike_dt = t - ts
         if spike_dt >= 0:
-            gnorm += (np.exp(-spike_dt / tau_decay) - np.exp(-spike_dt / tau_rise)) / norm
-    return gnorm
+            g_norm_contribution = np.exp(-spike_dt / tau_decay) - np.exp(-spike_dt / tau_rise)
+            if spike_dt>spike_dt_delta and g_norm_contribution < history_delta:
+                return gnorm / norm
+            gnorm += g_norm_contribution
+    return gnorm / norm
 
 class PreSyn:
     def __init__(self,
@@ -238,42 +258,54 @@ class IF_neuron:
         self.presyn = presyn
 
     def spike(self, i, t):
+        # Spike logging
+        self.spike_train[i] = True
+        self.last_spike_idx = i
+        self.t_last_spike = t
+        self.t_postspikes.append(self.t_last_spike)
+
+        # Membrane potential reset
         if classical_IF:
             self.Vm = self.V_reset
         else:
             if spike_option == 'no-reset':
                 self.V_reset = self.Vm # Remember value before AP (this might be weird)
             self.Vm = self.V_spike_depol
-        self.spike_train[i] = True
-        self.last_spike_idx = i
-        self.t_last_spike = t
-        self.t_postspikes.append(self.t_last_spike)
         self.reset_done = False # only used for 'reset-after' and 'no-reset'
 
+        # Threshold effects
+        # a. nonlinear hard-cap
         if with_fatigue_threshold:
             self.fatigue += 1
-
-        if self.ADP_saturation_model != 'clip': # ADP resource availability model
-            self.a_ADP -= self.ADP_depletion
-
-        # Adaptive threshold models sodium channel inactivation
+        # b. Adaptive threshold models sodium channel inactivation
         self.h_spike -= self.dh_spike # *** What happens if this is allowed to go below 0?
-
+        # c. Dynamic threshold floor
         if with_dynamic_threshold_floor:
             self.V_th_floor += self.delta_floor_per_spike
+
+        # ADP saturation
+        if self.ADP_saturation_model != 'clip': # ADP resource availability model
+            self.a_ADP -= self.ADP_depletion
 
         # STDP
         if with_stdp:
             for p in self.presyn:
                 p.stdp_update(t)
 
-    def update(self, i, t):
+    def check_spiking(self, i, t, V_th_adaptive):
+        if len(self.force_spikes) > 0:
+            if t >= self.force_spikes[0]:
+                self.spike(i, self.force_spikes[0])
+                self.force_spikes.pop(0)
+                return
 
-        # Hard-cap nonlinear spiking fatigue threshold.
+        if with_fatigue_threshold and (self.fatigue > self.fatigue_threshold):
+            return
 
-        if with_fatigue_threshold:
-            self.fatigue -= dt / self.tau_fatigue_recovery
-            self.fatigue = max(self.fatigue, 0.0)
+        if self.Vm >= V_th_adaptive:
+            self.spike(i, t)
+
+    def update_conductances(self, i, t):
 
         # Update PSP conductances.
 
@@ -302,133 +334,117 @@ class IF_neuron:
             self.a_ADP = max(0.0, min(1.0, self.a_ADP)) # clamp [0,1]
             self.g_ADP[i] = self.a_ADP * g_ADP_linear
 
-        # (Forward-Euler method:) Total current from component currents.
+    def update_currents(self, i):
+        I = (
+            self.g_fAHP[i] * (self.Vm - self.E_AHP) +
+            self.g_sAHP[i] * (self.Vm - self.E_AHP) +
+            self.g_ADP[i] * (self.Vm - self.E_ADP)
+        )
 
-        if not use_exponential_Euler:
-            I = (
-                self.g_fAHP[i] * (self.Vm - self.E_AHP) +
-                self.g_sAHP[i] * (self.Vm - self.E_AHP) +
-                self.g_ADP[i] * (self.Vm - self.E_ADP)
-            )
+        for p in self.presyn:
+            I += p.g[i] * (self.Vm - p.E)
 
-            for p in self.presyn:
-                I += p.g[i] * (self.Vm - p.E)
+        return I
 
-        if classical_IF:
-            # Classical IF V_reset clamp during absolute refractory period.
+    def update_membrane_potential_forward_Euler(self, I):
+        dV = (-(self.Vm - self.V_rest) + self.R_m * (-I)) * dt / self.tau_m
+        self.dV[i] = dV
+        self.Vm = self.Vm + dV
+        return dV
 
-            if t < (self.t_last_spike+self.refractory_period):
+    def update_membrane_potential_exponential_Euler_Rm(self, i):
+        # (Exponential Euler tau_m/Rm:) Membrane potential update.
+        tau_eff = self.tau_m / (1 + self.R_m * (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn])))
+        # V_inf is in mV, because these are all nS*mV / nS
+        V_inf = (self.g_fAHP[i] * self.E_AHP + self.g_sAHP[i] * self.E_AHP + self.g_ADP[i] * self.E_ADP + sum([p.g[i] * p.E for p in self.presyn]) + (1 / self.R_m) * self.V_rest) / \
+            (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) + (1 / self.R_m))
+        self.Vm = V_inf + (self.Vm - V_inf) * np.exp(-dt / tau_eff)
+
+    def update_membrane_potential_exponential_Euler_Cm(self, i):
+        # (Exponential Euler tau_eff/Cm:) Membrane potential update.
+        g_total = self.g_L + self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) # nS
+        E_total = (self.g_L * self.V_rest
+            + self.g_fAHP[i] * self.E_AHP
+            + self.g_sAHP[i] * self.E_AHP
+            + self.g_ADP[i] * self.E_ADP
+            + sum([p.g[i] * p.E for p in self.presyn])
+            ) / g_total # mV
+        tau_eff = self.C_m / g_total # pF/nS=ms (or pF*GΩ=ms)
+        self.Vm = E_total + (self.Vm - E_total) * np.exp(-dt / tau_eff)
+
+    def update_adaptive_threshold(self):
+        self.h_spike += dt * (1 - self.h_spike)/self.tau_h
+        if with_dynamic_threshold_floor:
+            self.V_th_floor -= dt * (self.V_th_floor - self.V_th) / self.tau_floor_decay
+        V_th_adaptive = max(
+            self.V_th + self.dV_th * (1 - self.h_spike),
+            self.V_th_floor
+        )
+        self.V_th_adaptive[i] = V_th_adaptive
+        return V_th_adaptive
+
+    def update_with_classical_reset_clamp(self, i, t):
+        I = self.update_currents(i)
+
+        if t < (self.t_last_spike+self.refractory_period):
+            self.Vm = self.V_reset
+            return
+
+        dV = self.update_membrane_potential_forward_Euler(I)
+
+        V_th_adaptive = self.update_adaptive_threshold()
+
+        # Check possible spiking:
+        self.check_spiking(i, t, V_th_adaptive)
+
+    def update_with_reset_options(self, i, t):
+        # (Option:) Spike onset drives membrane potential below threshold.
+
+        if spike_option == 'reset-onset':
+            if (self.last_spike_idx+1) == i:
                 self.Vm = self.V_reset
-                return
 
-            # (Forward Euler:) Membrane potential update.
+        if use_exponential_Euler:
+            if not Cm_option:
 
-            dV = (-(self.Vm - self.V_rest) + self.R_m * (-I)) * dt / self.tau_m
-            self.dV[i] = dV
-            self.Vm = self.Vm + dV
-
-            # Adaptive threshold update.
-
-            self.h_spike += dt * (1 - self.h_spike)/self.tau_h
-            if with_dynamic_threshold_floor:
-                self.V_th_floor -= dt * (self.V_th_floor - self.V_th) / self.tau_floor_decay
-            V_th_adaptive = max(
-                self.V_th + self.dV_th * (1 - self.h_spike),
-                self.V_th_floor
-            )
-            self.V_th_adaptive[i] = V_th_adaptive
-
-            # Check possible spiking:
-
-            if len(self.force_spikes) > 0:
-                if t >= self.force_spikes[0]:
-                    self.spike(i, self.force_spikes[0])
-                    self.force_spikes.pop(0)
-                    return
-
-            if with_fatigue_threshold and (self.fatigue > self.fatigue_threshold):
-                return
-
-            if self.Vm >= V_th_adaptive:
-                self.spike(i, t)
-
-            # Completed update.
-
-        else:
-            # (Option:) Spike onset drives membrane potential below threshold.
-
-            if spike_option == 'reset-onset':
-                if (self.last_spike_idx+1) == i:
-                    self.Vm = self.V_reset
-
-            if use_exponential_Euler:
-                if not Cm_option:
-
-                    # (Exponential Euler tau_m/Rm:) Membrane potential update.
-
-                    tau_eff = self.tau_m / (1 + self.R_m * (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn])))
-                    # V_inf is in mV, because these are all nS*mV / nS
-                    V_inf = (self.g_fAHP[i] * self.E_AHP + self.g_sAHP[i] * self.E_AHP + self.g_ADP[i] * self.E_ADP + sum([p.g[i] * p.E for p in self.presyn]) + (1 / self.R_m) * self.V_rest) / \
-                        (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) + (1 / self.R_m))
-
-                    self.Vm = V_inf + (self.Vm - V_inf) * np.exp(-dt / tau_eff)
-                else:
-
-                    # (Exponential Euler tau_eff/Cm:) Membrane potential update.
-
-                    g_total = self.g_L + self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) # nS
-                    E_total = (self.g_L * self.V_rest
-                        + self.g_fAHP[i] * self.E_AHP
-                        + self.g_sAHP[i] * self.E_AHP
-                        + self.g_ADP[i] * self.E_ADP
-                        + sum([p.g[i] * p.E for p in self.presyn])
-                        ) / g_total # mV
-                    tau_eff = self.C_m / g_total # pF/nS=ms (or pF*GΩ=ms)
-                    self.Vm = E_total + (self.Vm - E_total) * np.exp(-dt / tau_eff)
-
-                dV = 0 # just for the 'reset-after' option
+                self.update_membrane_potential_exponential_Euler_Rm(i)
 
             else:
 
-                # (Forward Euler:) Membrane potential update.
+                self.update_membrane_potential_exponential_Euler_Cm(i)
 
-                dV = (-(self.Vm - self.V_rest) + self.R_m * (-I)) * dt / self.tau_m
-                self.dV[i] = dV
+            dV = 0 # just for the 'reset-after' option
 
-                self.Vm = self.Vm + dV
+        else:
+            I = self.update_currents(i)
 
-            # Adaptive threshold update.
+            dV = self.update_membrane_potential_forward_Euler(I)
 
-            self.h_spike += dt * (1 - self.h_spike)/self.tau_h
-            if with_dynamic_threshold_floor:
-                self.V_th_floor -= dt * (self.V_th_floor - self.V_th) / self.tau_floor_decay
-            V_th_adaptive = max(
-                self.V_th + self.dV_th * (1 - self.h_spike),
-                self.V_th_floor
-            )
-            self.V_th_adaptive[i] = V_th_adaptive
+        V_th_adaptive = self.update_adaptive_threshold()
 
-            if t >= (self.t_last_spike+self.refractory_period):
+        if t >= (self.t_last_spike+self.refractory_period):
 
-                # (Option:) Drive membrane potential below threshold after absolute refractory period.
+            # (Option:) Drive membrane potential below threshold after absolute refractory period.
 
-                if spike_option != 'reset-onset' and not self.reset_done:
-                    self.Vm = self.V_reset + dV # *** not yet adapted to exponential Euler
-                    self.reset_done = True
+            if spike_option != 'reset-onset' and not self.reset_done:
+                self.Vm = self.V_reset + dV # *** not specifically adapted to exponential Euler
+                self.reset_done = True
 
-                # Check possible spiking:
+            # Check possible spiking:
+            self.check_spiking(i, t, V_th_adaptive)
 
-                if len(self.force_spikes) > 0:
-                    if t >= self.force_spikes[0]:
-                        self.spike(i, self.force_spikes[0])
-                        self.force_spikes.pop(0)
-                        return
+    def update(self, i, t):
+        # Hard-cap nonlinear spiking fatigue threshold.
+        if with_fatigue_threshold:
+            self.fatigue -= dt / self.tau_fatigue_recovery
+            self.fatigue = max(self.fatigue, 0.0)
 
-                if with_fatigue_threshold and (self.fatigue > self.fatigue_threshold):
-                    return
+        self.update_conductances(i, t)
 
-                if self.Vm >= V_th_adaptive:
-                    self.spike(i, t)
+        if classical_IF:
+            self.update_with_classical_reset_clamp(i, t)
+        else:
+            self.update_with_reset_options(i, t)
 
 
 initial_weights_and_Erev = {
@@ -586,41 +602,45 @@ for i in range(0, n_steps): # 1 is the necessary start here, because we need to 
 
     t += dt
 
+end_time = time.time()
+elapsed_time = end_time - start_time
+print(f"Simulation time: {elapsed_time:.4f} seconds")
+
 # Plotting
 fig, axs = plt.subplots(5, 1, figsize=(12, 12), sharex=True) # was 2 and (12, 7)
 
-axs[0].plot(time, PyrOut.V, label="PyrOut Membrane Voltage (mV)")
+axs[0].plot(t_samples, PyrOut.V, label="PyrOut Membrane Voltage (mV)")
 if not use_exponential_Euler:
-    axs[0].plot(time, PyrOut.dV, label="PyrOut dV (mV)")
-axs[0].scatter(time[PyrOut.spike_train], PyrOut.V[PyrOut.spike_train], color='red', label='Spikes', zorder=5)
-axs[0].plot(time, PyrOut.V_th_adaptive, color='gray', linestyle='--', label="Adaptive Threshold (mV)")
+    axs[0].plot(t_samples, PyrOut.dV, label="PyrOut dV (mV)")
+axs[0].scatter(t_samples[PyrOut.spike_train], PyrOut.V[PyrOut.spike_train], color='red', label='Spikes', zorder=5)
+axs[0].plot(t_samples, PyrOut.V_th_adaptive, color='gray', linestyle='--', label="Adaptive Threshold (mV)")
 axs[0].set_ylabel("Voltage (mV)")
 axs[0].legend()
 axs[0].grid(True)
 
 for p in PyrOut.presyn:
-    axs[1].plot(time, p.g, label=p.receptor, alpha=0.8)
+    axs[1].plot(t_samples, p.g, label=p.receptor, alpha=0.8)
 
-axs[1].plot(time, PyrOut.g_fAHP, label="fAHP", linestyle='--', alpha=0.8)
-axs[1].plot(time, PyrOut.g_sAHP, label="sAHP", linestyle='--', alpha=0.8)
-axs[1].plot(time, PyrOut.g_ADP, label="ADP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.g_fAHP, label="fAHP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.g_sAHP, label="sAHP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.g_ADP, label="ADP", linestyle='--', alpha=0.8)
 axs[1].set_ylabel("Conductance (nS)")
 axs[1].set_xlabel("Time (ms)")
 axs[1].legend()
 axs[1].grid(True)
 
-axs[2].plot(time, synref_w, label="PyrIn to PyrOut Weight")
+axs[2].plot(t_samples, synref_w, label="PyrIn to PyrOut Weight")
 axs[2].set_ylabel("Weight")
 axs[2].legend()
 axs[2].grid(True)
 
-axs[3].plot(time, PyrIn.V, label="PyrIn Membrane Voltage (mV)")
+axs[3].plot(t_samples, PyrIn.V, label="PyrIn Membrane Voltage (mV)")
 axs[3].axhline(PyrIn.V_th, color='gray', linestyle='--', label='Threshold')
 axs[3].set_ylabel("Voltage (mV)")
 axs[3].legend()
 axs[3].grid(True)
 
-axs[4].plot(time, IntIn.V, label="IntIn Membrane Voltage (mV)")
+axs[4].plot(t_samples, IntIn.V, label="IntIn Membrane Voltage (mV)")
 axs[4].axhline(IntIn.V_th, color='gray', linestyle='--', label='Threshold')
 axs[4].set_ylabel("Voltage (mV)")
 axs[4].legend()
