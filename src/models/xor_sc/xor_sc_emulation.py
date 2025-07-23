@@ -28,7 +28,7 @@ from datetime import datetime
 from time import sleep
 
 import vbpcommon
-from BrainGenix.BG_API import BG_API_Setup
+from BrainGenix import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 

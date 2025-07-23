@@ -23,7 +23,7 @@ import json
 import vbpcommon
 #import common.glb as glb
 import os
-from BrainGenix.BG_API import BG_API_Setup
+from BrainGenix import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 
 import BrainGenix.NES as NES

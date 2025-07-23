@@ -24,7 +24,7 @@ import json
 
 import vbpcommon
 import os
-from BrainGenix.BG_API import Credentials, SimClient
+from BrainGenix import Credentials, SimClient
 
 from NES_interfaces.Metrics_N1 import Metrics_N1
 

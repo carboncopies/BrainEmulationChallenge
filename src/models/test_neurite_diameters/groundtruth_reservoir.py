@@ -26,7 +26,7 @@ import json
 import base64
 
 import vbpcommon
-from BrainGenix.BG_API import NES
+from BrainGenix import NES
 
 import argparse
 # Handle Arguments for Host, Port, etc
