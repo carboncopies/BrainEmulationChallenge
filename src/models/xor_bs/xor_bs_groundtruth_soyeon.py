@@ -93,14 +93,14 @@ INITTEXT1='''
 
 
 
-   P_in_A (-45, -45)------------------------+
+   P_inA (-45, -45)------------------------+
                    |                        |
                    +                        +
-                   ----> I_A (-15, -15) ----> P_out (15, -15)
+                   ----> IA (-15, -15) ----> P_out (15, -15)
                    +                        +
                    |                        |
-   P_in_B (-45, -45)------------------------+
-   
+   P_inB (-45, 45)------------------------+
+
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -122,6 +122,12 @@ P_B0_pos  = [ 15,-15, 0]
 P_B1_pos  = [ 15, 15, 0]
 P_out_pos = [ 45,  0, 0]
 
+# simplified model (soyeon)
+P_inA_pos = [-45, -45, 0]
+P_inB_pos = [-45, 45, 0]
+IA_pos = [-15, -15, 0]
+P_out0_pos = [15, -15, 0]
+
 soma_positions_and_radius = {
     'P_in0': ( P_in0_pos, principal_soma_radius_um ),
     'P_in1': ( P_in1_pos, principal_soma_radius_um ),
@@ -134,7 +140,18 @@ soma_positions_and_radius = {
     'P_out': ( P_out_pos, principal_soma_radius_um ),
 }
 
+# simplified model (soyeon)
+soma_positions_and_radius_soyeon = {
+    'P_inA': ( P_inA_pos, principal_soma_radius_um ),
+    'P_inB': ( P_inB_pos, principal_soma_radius_um ),
+    'IA': ( IA_pos, interneuron_soma_radius_um ),
+    'P_out': ( P_out0_pos, principal_soma_radius_um ),
+}
+
 neuron_names = list(soma_positions_and_radius.keys())
+
+# simplified model (soyeon)
+neuron_names_soyeon = list(soma_positions_and_radius_soyeon.keys())
 
 somas = {}
 for n in neuron_names:
@@ -142,6 +159,7 @@ for n in neuron_names:
                 radius_um=soma_positions_and_radius[n][1],
                 center_um=soma_positions_and_radius[n][0],)
     somas[n] = soma
+
 
 # 3.2 Define shapes for the connections and place them
 
@@ -196,6 +214,43 @@ axon_ends['P_out_axon'] = (Pout_start, Pout_end)
 
 axon_names = list(axon_ends.keys())
 
+
+# simplified model (soyeon)
+# 'P_inA'
+# 'P_inB'
+# 'IA'
+# 'P_out'
+
+axon_ends_soyeon = {}
+
+P_inA_IA_start_soyeon = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+P_inA_IA_end_soyeon   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends_soyeon['P_inA_IA'] = (P_inA_IA_start_soyeon, P_inA_IA_end_soyeon)
+
+P_inB_IA_start_soyeon = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+P_inB_IA_end_soyeon = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends_soyeon['P_inB_IA'] = (P_inB_IA_start_soyeon, P_inB__IA_end_soyeon)
+
+IA_P_out_start_soyeon = list(np.array(IA_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
+IA_P_out_end_soyeon   = list(np.array(P_out0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends_soyeon['IA_P_out'] = (IA_P_out_start_soyeon, IA_P_out_end_soyeon)
+
+P_inA_P_out_start_soyeon = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+P_inA_P_out_end_soyeon = list(np.array(P_out0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends_soyeon['P_inA_P_out'] = (P_inA_P_out_start_soyeon, P_inA_P_out_end_soyeon)
+
+P_inB_P_out_start_soyeon = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+P_inB_P_out_end_soyeon = list(np.array(P_out0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends_soyeon['P_inB_P_out'] = (P_inB_P_out_start_soyeon, P_inB_P_out_end_soyeon)
+
+P_out_start_soyeon = list(np.array(P_out0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+P_out_end_soyeon = list(np.array(P_out0_pos) + np.array([30.0, 0, 0]))
+axon_ends_soyeon['P_out_axon'] = (P_out_start_soyeon, P_out_end_soyeon)
+
+axon_names_soyeon = list(axon_ends_soyeon.keys())
+
+
+
 axons = {}
 for a in axon_names:
     axon = bg_api.BGNES_cylinder_create(
@@ -204,6 +259,17 @@ for a in axon_names:
                 Point2Radius_um=end1_radius_um,
                 Point2Position_um=axon_ends[a][1],)
     axons[a] = axon
+
+# simplified model (soyeon)
+axons_soyeon = {}
+for a in axon_names_soyeon:
+    axon = bg_api.BGNES_cylinder_create(
+                Point1Radius_um=end0_radius_um,
+                Point1Position_um=axon_ends_soyeon[a][0],
+                Point2Radius_um=end1_radius_um,
+                Point2Position_um=axon_ends_soyeon[a][1],)
+    axons_soyeon[a] = axon
+
 
 # 3.3 Create compartments.
 
@@ -234,6 +300,31 @@ for a in axon_names:
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     axon_compartments[a] = compartment
+
+
+# simplified model (soyeon)
+soma_compartments_soyeon = {}
+for n in neuron_names_soyeon:
+    compartment = bg_api.BGNES_BS_compartment_create(
+                    ShapeID=somas[n].ID,
+                    MembranePotential_mV=neuron_Vm_mV,
+                    RestingPotential_mV=neuron_Vrest_mV,
+                    SpikeThreshold_mV=neuron_Vact_mV,
+                    DecayTime_ms=neuron_tau_AHP_ms,
+                    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+    soma_compartments_soyeon[n] = compartment
+
+axon_compartments_soyeon = {}
+for a in axon_names_soyeon:
+    compartment = bg_api.BGNES_BS_compartment_create(
+                    ShapeID=axons[a].ID,
+                    MembranePotential_mV=neuron_Vm_mV,
+                    RestingPotential_mV=neuron_Vrest_mV,
+                    SpikeThreshold_mV=neuron_Vact_mV,
+                    DecayTime_ms=neuron_tau_AHP_ms,
+                    AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
+    axon_compartments_soyeon[a] = compartment
+
 
 # 3.4 Create principal neurons.
 
@@ -297,6 +388,21 @@ def neuron_builder(soma_name:str, axon_name:str):
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
 
+# simplified model (soyeon)
+def neuron_builder_soyeon(soma_name:str, axon_name:str):
+    return bg_api.BGNES_BS_neuron_create(
+        Soma=soma_compartments_soyeon[soma_name].ID, 
+        Axon=axon_compartments_soyeon[axon_name].ID,
+        MembranePotential_mV=neuron_Vm_mV,
+        RestingPotential_mV=neuron_Vrest_mV,
+        SpikeThreshold_mV=neuron_Vact_mV,
+        DecayTime_ms=neuron_tau_AHP_ms,
+        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr,
+        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+        PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+    )
+
 Pin0 = neuron_builder('P_in0', 'P_in0_P_A0') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
 Pin1 = neuron_builder('P_in1', 'P_in1_P_A1') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
 PA0  = neuron_builder('P_A0', 'P_A0_P_B0')
@@ -304,6 +410,16 @@ PA1  = neuron_builder('P_A1', 'P_A1_P_B1')
 PB0  = neuron_builder('P_B0', 'P_B0_P_out')
 PB1  = neuron_builder('P_B1', 'P_B1_P_out')
 Pout = neuron_builder('P_out', 'P_out_axon')
+
+# simplified model (soyeon)
+# PinA_soyeon = neuron_builder_soyeon('P_inA', 'P_inA_IA')
+# PinB_soyeon = neuron_builder_soyeon('P_inB', 'P_inB_IA')
+# PinAout_soyeon = neuron_builder_soyeon('P_inA', 'P_inA_P_out')
+# PinBout_soyeon = neuron_builder_soyeon('P_inB', 'P_inB_P_out')
+PinA_IA = neuron_builder_soyeon('P_inA', 'P_inA_IA')
+PinA_Pout = neuron_builder_soyeon('P_inA', 'P_inA_P_out')
+IA_soyeon = neuron_builder_soyeon('IA', 'IA_P_out')
+Pout_soyeon = neuron_builder_soyeon('P_out', 'P_out_axon')
 
 # 3.5 Create interneurons.
 
@@ -325,7 +441,6 @@ cells = {
     'I_A0': IA0,
     'I_A1': IA1,
 }
-
 input_neurons = {
     'P_in0': Pin0,
     'P_in1': Pin1,
@@ -344,6 +459,27 @@ output_neurons = {
     'P_out': Pout,
 }
 
+
+# simplified model (Soyeon)
+cells_soyeon = {
+    'P_inA': PinA_soyeon,
+    'P_inB': PinB_soyeon,
+    
+    'IA': IA_soyeon,
+    'P_out': Pout_soyeon,
+}
+input_neurons_soyeon = {
+    'P_inA': PinA_soyeon,
+    'P_inB': PinB_soyeon,
+}
+layerA_neurons_soyeon = {
+    'IA': IA_soyeon,
+}
+output_neurons_soyeon = {
+    'P_out': Pout_soyeon,
+}
+
+
 # 3.6 Create receptors for active connections.
 
 AMPA_conductance = 40.0 #60 # nS
@@ -353,6 +489,26 @@ PinIA_weight  = 1.0
 PAPB_weight   = 1.0
 IAPB_weight   = 1.0
 PBPout_weight = 1.0
+
+
+# simplified model (soyeon)
+AMPA_conductance = 40.0  # nS
+GABA_conductance_soyeon = -60.0
+
+# Circuit:
+
+# P_in0 (-45,-45) --> P_A0 (-15,-45) ----+
+#             |                         |
+#             +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
+#                                                         P_out (45, 0)
+#             +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
+#             |                         |
+# P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+
+# 'P_inA'
+# 'P_inB'
+# 'IA'
+# 'P_out'
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
 connection_pattern_set = {
@@ -369,6 +525,15 @@ connection_pattern_set = {
 
     'P_B0_P_out': ( 'P_B0_P_out', 'P_out', AMPA_conductance, PBPout_weight),
     'P_B1_P_out': ( 'P_B1_P_out', 'P_out', AMPA_conductance, PBPout_weight),
+}
+
+# simplified model (soyeon)
+connection_pattern_set_soyeon = {
+    'P_inA_IA': ('P_inA_IA', 'IA', AMPA_conductance, 1.0),
+    'P_inB_IA': ('P_inB_IA', 'IA', AMPA_conductance, 1.0),
+    'IA_P_out': ('IA_P_out', 'P_out', GABA_conductance_soyeon, 1.5),
+    'P_inA_P_out': ('P_inA_P_out', 'P_out', AMPA_conductance, 1.0),
+    'P_inB_P_out': ('P_inB_P_out', 'P_out', AMPA_conductance, 1.0),
 }
 
 receptor_functionals = []
@@ -415,6 +580,33 @@ for connection in connection_pattern_set.keys():
         ReceptorMorphology=receptor_box.ID,
     )
     receptor_functionals.append( (receptor, to_cell) )
+
+# simplified model (soyeon)
+for connection in connection_pattern_set_soyeon.keys():
+    conductance = connection_pattern_set_soyeon[connection][2]
+    neurotransmitter = 'AMPA' if conductance >= 0 else 'GABA'
+    weight = connection_pattern_set_soyeon[connection][3]
+    receptor_conductance = conductance / weight
+    
+    from_axon = axons_soyeon[connection_pattern_set_soyeon[connection][0]]
+    to_cell = cells_soyeon[connection_pattern_set_soyeon[connection][1]]
+    
+    receptor_box = bg_api.BGNES_box_create(
+        CenterPosition_um=axon_ends_soyeon[connection][1],
+        Dimensions_um=[0.1,0.1,0.1],
+        Rotation_rad=[0,0,0],
+    )
+    
+    receptor = bg_api.BGNES_BS_receptor_create(
+        SourceCompartmentID=from_axon.ID,
+        DestinationCompartmentID=to_cell.SomaID,
+        Neurotransmitter=neurotransmitter,
+        Conductance_nS=receptor_conductance,
+        TimeConstantRise_ms=neuron_tau_PSPr,
+        TimeConstantDecay_ms=neuron_tau_PSPd,
+        ReceptorMorphology=receptor_box.ID,
+    )
+    receptor_functionals.append((receptor, to_cell))
 
 # 3.7 Save the ground-truth system.
 
