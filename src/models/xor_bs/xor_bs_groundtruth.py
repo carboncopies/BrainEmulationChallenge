@@ -41,7 +41,8 @@ if Args.Local:
 randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
-savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
+# savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
+savefolder = '/home/skim/output'
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -469,6 +470,7 @@ def find_cell_with_id(id:int)->str:
     return ''
 
 recording_dict = bg_api.BGNES_get_recording()
+
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
         if recording_dict["StatusCode"] != 0:
