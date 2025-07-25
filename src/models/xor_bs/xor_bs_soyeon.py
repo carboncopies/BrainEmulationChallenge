@@ -397,6 +397,17 @@ for connection in connection_pattern_set.keys():
 #             Rotation_rad=[0,0,0],)
 #     receptor_morphologies.append(receptor_box)
 
+#     receptor = bg_api.BGNES_BS_receptor_create(
+#         SourceCompartmentID=from_compartment_id,
+#         DestinationCompartmentID=to_compartment_id,
+#         Neurotransmitter=neurotransmitter,
+#         Conductance_nS=receptor_conductance,
+#         TimeConstantRise_ms=neuron_tau_PSPr,
+#         TimeConstantDecay_ms=neuron_tau_PSPd,
+#         ReceptorMorphology=receptor_box.ID,
+#     )
+#     receptor_functionals.append( (receptor, to_cell) )
+
 #     # printing receptors before creating them:
 #     print(f"From ID: {from_compartment_id}, To ID: {to_compartment_id}")
 
