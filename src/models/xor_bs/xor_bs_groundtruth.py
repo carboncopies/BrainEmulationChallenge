@@ -42,7 +42,7 @@ randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
 # savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
-savefolder = '/home/skim/output'
+savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,

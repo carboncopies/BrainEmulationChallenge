@@ -42,7 +42,7 @@ randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
 # savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
-savefolder = '/home/skim/output'
+savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -84,13 +84,11 @@ INITTEXT1='''
 
    Circuit:
 
-   P_in0 (-45,-45) --> P_A0 (-15,-45) ----+
-                |                         |
-                +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
-                                                          P_out (45, 0)
-                +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
-                |                         |
-   P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+    P_inA (-45, -45)----------------------+
+                    |                     |
+                    +-> IA (-15, -15) --> P_out (15, -15)
+                    |                     |
+    P_inB (-45, 45)-----------------------+
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -371,6 +369,9 @@ input_neurons = {
     'P_inA': PinA,
     'P_inB': PinB,
 }
+LayerA_neurons = {
+    'IA': IA,
+}
 output_neurons = {
     'P_out': Pout,
 }
@@ -378,7 +379,7 @@ output_neurons = {
 # 3.6 Create receptors for active connections.
 
 AMPA_conductance = 40.0 #60 # nS
-GABA_conductance = 40.0 # nS
+GABA_conductance = -40.0 # nS
 PinPA_weight  = 1.0 # Greater weight means stronger PSP amplitude.
 PinIA_weight  = 1.0
 PAPB_weight   = 1.0
@@ -415,84 +416,116 @@ connection_pattern_set = {
 
 receptor_functionals = []
 receptor_morphologies = []
-# for connection in connection_pattern_set.keys():
-#     # Set the total conductance through receptors at synapses at this connection:
-#     conductance = connection_pattern_set[connection][2]
-#     if conductance == AMPA_conductance:
-#         neurotransmitter = 'AMPA'
-#     else:
-#         neurotransmitter = 'GABA'
-#     weight = connection_pattern_set[connection][3]
-#     receptor_conductance = conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
-#     if receptor_conductance >= 0:
-#         print("Setting up a 'AMPA' connection for %s." % connection)
-#     else:
-#         print("Setting up a 'GABA' connection for %s." % connection)
-
-#     # Find the neurons:
-#     from_axon = axon_compartments[connection_pattern_set[connection][0]]
-#     to_cell = cells[connection_pattern_set[connection][1]]
-
-#     # Find the compartments:
-#     from_compartment_id = from_axon.ID
-#     to_compartment_id = to_cell.SomaID
-#     receptor_location = axon_ends[connection][1]
-#     print('Receptor loction: '+str(receptor_location))
-
-#     # Build receptor form:
-#     receptor_box = bg_api.BGNES_box_create(
-#             CenterPosition_um=receptor_location,
-#             Dimensions_um=[0.1,0.1,0.1],
-#             Rotation_rad=[0,0,0],)
-#     receptor_morphologies.append(receptor_box)
-
-#     # Build receptor function:
-#     receptor = bg_api.BGNES_BS_receptor_create(
-#         SourceCompartmentID=from_compartment_id,
-#         DestinationCompartmentID=to_compartment_id,
-#         Neurotransmitter=neurotransmitter,
-#         Conductance_nS=receptor_conductance,
-#         TimeConstantRise_ms=neuron_tau_PSPr,
-#         TimeConstantDecay_ms=neuron_tau_PSPd,
-#         ReceptorMorphology=receptor_box.ID,
-#     )
-#     receptor_functionals.append( (receptor, to_cell) )
 for connection in connection_pattern_set.keys():
+
+    # skips connections that aren't working... this results in incomplete circuit and inaccurate output. 
+    if connection in ['P_inA_IA', 'P_inB_IA']:
+        print(f"Skipping connection {connection} due to likely NES restriction.")
+        continue
+
+    # Set the total conductance through receptors at synapses at this connection:
     conductance = connection_pattern_set[connection][2]
+    if conductance == AMPA_conductance:
+        neurotransmitter = 'AMPA'
+    else:
+        neurotransmitter = 'GABA'
     weight = connection_pattern_set[connection][3]
-    receptor_conductance = conductance / weight
-    
-    # Determine neurotransmitter type
-    is_gaba = (connection in ['IA_P_out'])  # List all GABAergic connections
-    neurotransmitter = 1 if is_gaba else 0  # 0=AMPA, 1=GABA
-    
-    print(f"Setting up {'GABA' if is_gaba else 'AMPA'} connection for {connection}")
-    
+    receptor_conductance = conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
+    if receptor_conductance >= 0:
+        print("Setting up a 'AMPA' connection for %s." % connection)
+    else:
+        print("Setting up a 'GABA' connection for %s." % connection)
+
+    # Find the neurons:
     from_axon = axon_compartments[connection_pattern_set[connection][0]]
     to_cell = cells[connection_pattern_set[connection][1]]
+
+    # Find the compartments:
+    from_compartment_id = from_axon.ID
+    to_compartment_id = to_cell.SomaID
+    receptor_location = axon_ends[connection][1]
+    print('Receptor loction: '+str(receptor_location))
+
     
+
+    # Build receptor form:
     receptor_box = bg_api.BGNES_box_create(
-        CenterPosition_um=axon_ends[connection][1],
-        Dimensions_um=[0.1,0.1,0.1],
-        Rotation_rad=[0,0,0],
-    )
+            CenterPosition_um=receptor_location,
+            Dimensions_um=[0.1,0.1,0.1],
+            Rotation_rad=[0,0,0],)
     receptor_morphologies.append(receptor_box)
-    
+
+    # printing receptors before creating them:
+    print(f"From ID: {from_compartment_id}, To ID: {to_compartment_id}")
+
+
+    # Build receptor function:
+
+    print("Attempting to create receptor with config:", {
+        'SourceCompartmentID': from_compartment_id,
+        'DestinationCompartmentID': to_compartment_id,
+        'Neurotransmitter': neurotransmitter,
+        'Conductance_nS': receptor_conductance,
+        'TimeConstantRise_ms': neuron_tau_PSPr,
+        'TimeConstantDecay_ms': neuron_tau_PSPd,
+        'ReceptorMorphology': receptor_box.ID,
+    })
     receptor = bg_api.BGNES_BS_receptor_create(
-        SourceCompartmentID=from_axon.ID,
-        DestinationCompartmentID=to_cell.SomaID,
+        SourceCompartmentID=from_compartment_id,
+        DestinationCompartmentID=to_compartment_id,
         Neurotransmitter=neurotransmitter,
         Conductance_nS=receptor_conductance,
         TimeConstantRise_ms=neuron_tau_PSPr,
         TimeConstantDecay_ms=neuron_tau_PSPd,
         ReceptorMorphology=receptor_box.ID,
     )
+
+    receptor_functionals.append( (receptor, to_cell) )
+
+    # if not receptor or 'ReceptorID' not in receptor:
+    #     raise RuntimeError(f"Failed to create receptor for {connection}: {receptor}")
+
+
+# *** ATTEMPTS CREATING RECEPTORS AT MOST 3 TIMES UNTIL GIVING UP
+# for connection in connection_pattern_set.keys():
+#     conductance = connection_pattern_set[connection][2]
+#     weight = connection_pattern_set[connection][3]
+#     receptor_conductance = abs(conductance) / weight
+#     is_gaba = (connection == 'IA_P_out')
+#     neurotransmitter = 1 if is_gaba else 0  # 0=AMPA, 1=GABA
+
+#     from_axon = axon_compartments[connection_pattern_set[connection][0]]
+#     to_cell = cells[connection_pattern_set[connection][1]]
     
-    if not receptor or 'ReceptorID' not in receptor:
-        print(f"ERROR: Failed to create receptor for {connection}")
-        continue
-        
-    receptor_functionals.append((receptor, to_cell))
+#     receptor_box = bg_api.BGNES_box_create(
+#         CenterPosition_um=axon_ends[connection][1],
+#         Dimensions_um=[0.1,0.1,0.1],
+#         Rotation_rad=[0,0,0],
+#     )
+
+#     for attempt in range(3):  # Try 3 times
+#         try:
+#             print(f"Attempt {attempt+1} for {connection}")
+#             receptor = bg_api.BGNES_BS_receptor_create(
+#                 SourceCompartmentID=from_axon.ID,
+#                 DestinationCompartmentID=to_cell.SomaID,
+#                 Neurotransmitter=neurotransmitter,
+#                 Conductance_nS=receptor_conductance,
+#                 TimeConstantRise_ms=neuron_tau_PSPr,
+#                 TimeConstantDecay_ms=neuron_tau_PSPd,
+#                 ReceptorMorphology=receptor_box.ID,
+#             )
+            
+#             if hasattr(receptor, 'ID'):
+#                 print(f"Success! Receptor ID: {receptor.ID}")
+#                 receptor_functionals.append((receptor, to_cell))
+#                 break
+                
+#         except Exception as e:
+#             print(f"Failed attempt {attempt+1}: {str(e)}")
+#             if attempt == 2:
+#                 print("Giving up on this receptor")
+#             time.sleep(0.1)  # Short delay before retry
 
 # 3.7 Save the ground-truth system.
 
