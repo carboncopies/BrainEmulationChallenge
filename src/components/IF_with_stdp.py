@@ -28,6 +28,7 @@ if burst_drive:
 long_regular_input = True # Otherwise a single input from PyrIn and one from IntIn
 simulate_recurrent_inhibition = True # but from only a single interneuron!
 
+with_explicit_voltage_gating = True # default: True
 with_adp = True # Applies to pyramidal neurons
 with_stdp = True # Applies to AMPA receptors onto pyramidal neurons
 clipping_AHP_and_ADP = True # default: True
@@ -44,12 +45,16 @@ if classical_IF:
 spike_option = 'no-reset' # 'reset-onset', 'reset-after', 'no-reset'
 
 class Netmorph_Syn:
-    def __init__(self, n_from, n_to, receptor, quantity, g_rec_peak, tau_rise, tau_decay, hilloc_distance, velocity, syn_delay):
+    def __init__(self, n_from, n_to, receptor, PSD_area_um2, g_rec_peak, tau_rise, tau_decay, hilloc_distance, velocity, syn_delay, voltage_gated):
         self.n_from = n_from
         self.n_to = n_to
         self.receptor = receptor
-        self.quantity = quantity
+        self.quantity = int(PSD_area_um2 / 0.0086)
+        self.voltage_gated = voltage_gated
         self.g_rec_peak = g_rec_peak # nS (nano Siemens)
+        if self.voltage_gated:
+            # Adjusted to achieve desired g_peak with voltage-gated Mg2++ block modulation
+            self.g_rec_peak *= 5.0
         self.tau_rise = tau_rise
         self.tau_decay = tau_decay
         self.hilloc_distance = hilloc_distance # um
@@ -105,28 +110,46 @@ class PreSyn:
         A_pos,
         A_neg,
         tau_pos,
-        tau_neg
+        tau_neg,
+        voltage_gated
         ):
         self.source = source # neuron reference
         self.receptor = receptor # receptor type string
+
         self.tau_rise = tau_rise # ms
         self.tau_decay = tau_decay # ms
         self.E = E # mV
-        self.g_peak = g_peak
+        self.g_peak = g_peak # Also considered g_peak_max (weight=1.0) for cumulative effect of multiple high-frequency PSPs
         self.weight = weight
         self.onset_delay = onset_delay # ms
+        self.voltage_gated = voltage_gated
+        self.g = 0.0
+
         self.STDP_type = STDP_type
         self.A_pos = A_pos
         self.A_neg = A_neg
         self.tau_pos = tau_pos
         self.tau_neg = tau_neg
-        self.g = np.zeros(n_steps)
+
         self.norm = compute_normalization(self.tau_rise, self.tau_decay) # Pre-calculate normalization
+        print('g_peak_%s: %s' % (self.receptor, str(self.g_peak)))
         print('norm_%s: %s' % (self.receptor, str(self.norm)))
 
-    def update(self, i, t):
+        self.g_k = np.zeros(n_steps) # In the C++ implementation, we probably don't record these
+
+    # Effect of voltage-gated Mg2+ block.
+    def B_NMDA(self, V, Mg=1.0):
+        gamma = 0.33  # per mM
+        beta = 0.062  # per mV
+        return 1 / (1 + gamma * Mg * np.exp(-beta * V))
+
+    def update(self, i, t, Vm):
         syn_times = self.source.t_postspikes
-        self.g[i] = self.weight * self.g_peak * g_norm(t, syn_times, self.tau_rise, self.tau_decay, self.norm, self.onset_delay)
+        if self.voltage_gated:
+            self.g = min(self.g_peak, self.B_NMDA(Vm) * self.weight * self.g_peak * g_norm(t, syn_times, self.tau_rise, self.tau_decay, self.norm, self.onset_delay))
+        else:
+            self.g = min(self.g_peak, self.weight * self.g_peak * g_norm(t, syn_times, self.tau_rise, self.tau_decay, self.norm, self.onset_delay))
+        self.g_k[i] = self.g
 
     def stdp_update(self, t):
         """
@@ -185,12 +208,14 @@ class IF_neuron:
         self.g_peak_fAHP = 3.0  # 1-5 nS
         self.g_peak_fAHP_max = 5 # 3-6 nS in pyramidal neurons
         self.Kd_fAHP = 1.5 # 1.5-3 nS half-activation constant for sigmoidal AHP saturation model
+        self.g_fAHP = 0.0
 
         # Slow after-hyperpolarization
         self.tau_rise_sAHP, self.tau_decay_sAHP = 30, 300 # 20-50 ms, 150-1000 ms typical in pyramidal neurons
         self.g_peak_sAHP = 1.0 # 0.5-3 nS (was 0.5)
         self.g_peak_sAHP_max = 2.0 # 0.5-2.5 nS in pyramidal neurons (was 0.5)
         self.Kd_sAHP = 0.3 # 0.3-1 nS half-activation constant for sigmoidal AHP saturation model
+        self.g_sAHP = 0.0
 
         if clipping_AHP_and_ADP:
             self.AHP_saturation_model = 'clip' # 'clip' or sigmoidal saturation model
@@ -214,6 +239,7 @@ class IF_neuron:
         self.tau_recovery_ADP = 300 # for resource availability mode, 200-600 ms for slow ADP recovery times
         self.ADP_depletion = 0.3 # 0.2-0.4 per spike, ADP resource availability model
         self.a_ADP = 1.0
+        self.g_ADP = 0.0
 
         if clipping_AHP_and_ADP:
             self.ADP_saturation_model = 'clip' # 'clip' or resource availability model
@@ -237,13 +263,15 @@ class IF_neuron:
         self.t_postspikes = []
 
         # Recordings
-        self.g_fAHP = np.zeros(n_steps) # Also referenced during calculations
-        self.g_sAHP = np.zeros(n_steps) # Also referenced during calculations
-        self.g_ADP = np.zeros(n_steps) # Also referenced during calculations
+        self.samples = {
+            'fAHP': np.zeros(n_steps), # In C++, we probably will not record this.
+            'sAHP': np.zeros(n_steps), # In C++, we probably will not record this.
+            'ADP': np.zeros(n_steps), # In C++, we probably will not record this.
+            'Vm': np.zeros(n_steps),
+            'dV': np.zeros(n_steps), # In C++, we probably will not record this.
+            'V_th_adaptive': np.zeros(n_steps), # In C++, we probably will not record this.
+        }
         self.spike_train = np.zeros(n_steps, dtype=bool) # Also referenced during calculations
-        self.V = np.zeros(n_steps)
-        self.dV = np.zeros(n_steps)
-        self.V_th_adaptive = np.zeros(n_steps)
 
         # Pre-calculate normalizations
         self.norm_fAHP = compute_normalization(self.tau_rise_fAHP, self.tau_decay_fAHP)
@@ -310,64 +338,64 @@ class IF_neuron:
         # Update PSP conductances.
 
         for p in self.presyn:
-            p.update(i, t)
+            p.update(i, t, self.Vm)
 
         # Update fAHP, sAHP, ADP conductances.
 
         g_fAHP_linear = self.g_peak_fAHP * g_norm(t, self.t_postspikes, self.tau_rise_fAHP, self.tau_decay_fAHP, self.norm_fAHP, 0)
         if self.AHP_saturation_model == 'clip':
-            self.g_fAHP[i] = min(g_fAHP_linear, self.g_peak_fAHP_max)
+            self.g_fAHP = min(g_fAHP_linear, self.g_peak_fAHP_max)
         else:
-            self.g_fAHP[i] = self.g_peak_fAHP_max * (g_fAHP_linear / (g_fAHP_linear + self.Kd_fAHP))
+            self.g_fAHP = self.g_peak_fAHP_max * (g_fAHP_linear / (g_fAHP_linear + self.Kd_fAHP))
 
         g_sAHP_linear = self.g_peak_sAHP * g_norm(t, self.t_postspikes, self.tau_rise_sAHP, self.tau_decay_sAHP, self.norm_sAHP, 0)
         if self.AHP_saturation_model == 'clip':
-            self.g_sAHP[i] = min(g_sAHP_linear, self.g_peak_sAHP_max)
+            self.g_sAHP = min(g_sAHP_linear, self.g_peak_sAHP_max)
         else:
-            self.g_sAHP[i] = self.g_peak_sAHP_max * (g_sAHP_linear / (g_sAHP_linear + self.Kd_sAHP))
+            self.g_sAHP = self.g_peak_sAHP_max * (g_sAHP_linear / (g_sAHP_linear + self.Kd_sAHP))
 
         g_ADP_linear = self.g_peak_ADP * g_norm(t, self.t_postspikes, self.tau_rise_ADP, self.tau_decay_ADP, self.norm_ADP, 0)
         if self.ADP_saturation_model == 'clip':
-            self.g_ADP[i] = min(g_ADP_linear, self.g_peak_ADP_max)
+            self.g_ADP = min(g_ADP_linear, self.g_peak_ADP_max)
         else:
             self.a_ADP = self.a_ADP + (1 - self.a_ADP) * dt / self.tau_recovery_ADP
             self.a_ADP = max(0.0, min(1.0, self.a_ADP)) # clamp [0,1]
-            self.g_ADP[i] = self.a_ADP * g_ADP_linear
+            self.g_ADP = self.a_ADP * g_ADP_linear
 
     def update_currents(self, i):
         I = (
-            self.g_fAHP[i] * (self.Vm - self.E_AHP) +
-            self.g_sAHP[i] * (self.Vm - self.E_AHP) +
-            self.g_ADP[i] * (self.Vm - self.E_ADP)
+            self.g_fAHP * (self.Vm - self.E_AHP) +
+            self.g_sAHP * (self.Vm - self.E_AHP) +
+            self.g_ADP * (self.Vm - self.E_ADP)
         )
 
         for p in self.presyn:
-            I += p.g[i] * (self.Vm - p.E)
+            I += p.g * (self.Vm - p.E)
 
         return I
 
     def update_membrane_potential_forward_Euler(self, I):
         dV = (-(self.Vm - self.V_rest) + self.R_m * (-I)) * dt / self.tau_m
-        self.dV[i] = dV
+        self.samples['dV'][i] = dV
         self.Vm = self.Vm + dV
         return dV
 
     def update_membrane_potential_exponential_Euler_Rm(self, i):
         # (Exponential Euler tau_m/Rm:) Membrane potential update.
-        tau_eff = self.tau_m / (1 + self.R_m * (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn])))
+        tau_eff = self.tau_m / (1 + self.R_m * (self.g_fAHP + self.g_sAHP + self.g_ADP + sum([p.g for p in self.presyn])))
         # V_inf is in mV, because these are all nS*mV / nS
-        V_inf = (self.g_fAHP[i] * self.E_AHP + self.g_sAHP[i] * self.E_AHP + self.g_ADP[i] * self.E_ADP + sum([p.g[i] * p.E for p in self.presyn]) + (1 / self.R_m) * self.V_rest) / \
-            (self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) + (1 / self.R_m))
+        V_inf = (self.g_fAHP * self.E_AHP + self.g_sAHP * self.E_AHP + self.g_ADP * self.E_ADP + sum([p.g * p.E for p in self.presyn]) + (1 / self.R_m) * self.V_rest) / \
+            (self.g_fAHP + self.g_sAHP + self.g_ADP + sum([p.g for p in self.presyn]) + (1 / self.R_m))
         self.Vm = V_inf + (self.Vm - V_inf) * np.exp(-dt / tau_eff)
 
     def update_membrane_potential_exponential_Euler_Cm(self, i):
         # (Exponential Euler tau_eff/Cm:) Membrane potential update.
-        g_total = self.g_L + self.g_fAHP[i] + self.g_sAHP[i] + self.g_ADP[i] + sum([p.g[i] for p in self.presyn]) # nS
+        g_total = self.g_L + self.g_fAHP + self.g_sAHP + self.g_ADP + sum([p.g for p in self.presyn]) # nS
         E_total = (self.g_L * self.V_rest
-            + self.g_fAHP[i] * self.E_AHP
-            + self.g_sAHP[i] * self.E_AHP
-            + self.g_ADP[i] * self.E_ADP
-            + sum([p.g[i] * p.E for p in self.presyn])
+            + self.g_fAHP * self.E_AHP
+            + self.g_sAHP * self.E_AHP
+            + self.g_ADP * self.E_ADP
+            + sum([p.g * p.E for p in self.presyn])
             ) / g_total # mV
         tau_eff = self.C_m / g_total # pF/nS=ms (or pF*GΩ=ms)
         self.Vm = E_total + (self.Vm - E_total) * np.exp(-dt / tau_eff)
@@ -380,7 +408,7 @@ class IF_neuron:
             self.V_th + self.dV_th * (1 - self.h_spike),
             self.V_th_floor
         )
-        self.V_th_adaptive[i] = V_th_adaptive
+        self.samples['V_th_adaptive'][i] = V_th_adaptive
         return V_th_adaptive
 
     def update_with_classical_reset_clamp(self, i, t):
@@ -446,6 +474,12 @@ class IF_neuron:
         else:
             self.update_with_reset_options(i, t)
 
+    def record(self, i):
+        self.samples['Vm'][i] = self.Vm
+        self.samples['fAHP'][i] = self.g_fAHP
+        self.samples['sAHP'][i] = self.g_sAHP
+        self.samples['ADP'][i] = self.g_ADP
+
 
 initial_weights_and_Erev = {
     'AMPA': [ 0.5, 0 ],
@@ -497,9 +531,13 @@ neurons[PyrOut.id] = PyrOut
 
 # Synapses by receptor type as per Netmorph data
 # Making plenty of synapses, so that we can reach the typical 10-50 coactive synapses needed to drive from rest to firing.
-nmsyn_PyrIn_PyrOut_AMPA = [Netmorph_Syn(PyrIn, PyrOut, 'AMPA', 50, 20e-3, tau_rise=0.5, tau_decay=3, hilloc_distance=100, velocity=1, syn_delay=1.0) for i in range(21)]
-nmsyn_PyrIn_PyrOut_NMDA = [Netmorph_Syn(PyrIn, PyrOut, 'NMDA', 10, 50e-3/2, tau_rise=2, tau_decay=100, hilloc_distance=100, velocity=1, syn_delay=1.0) for i in range(21)] # 50 pS adjusted for open-probability
-nmsyn_IntIn_PyrOut_AMPA = [Netmorph_Syn(IntIn, PyrOut, 'GABA', 10, 80e-3, tau_rise=0.5, tau_decay=10, hilloc_distance=100, velocity=1, syn_delay=1.0) for i in range(21)] # maybe g_peak here should be 30e-3 instead of 80e-3
+if with_explicit_voltage_gating:
+    NMDA_g_rec_peak = 50e-3 # 50 pS intended peak at average open receptor gated fraction
+else:
+    NMDA_g_rec_peak = 50e-3/2 # Adjusted to account for the absence of voltage-gated modulation
+nmsyn_PyrIn_PyrOut_AMPA = [Netmorph_Syn(PyrIn, PyrOut, 'AMPA', 0.83*60*0.0086, 20e-3, tau_rise=0.5, tau_decay=3, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(21)]
+nmsyn_PyrIn_PyrOut_NMDA = [Netmorph_Syn(PyrIn, PyrOut, 'NMDA', 0.17*60*0.0086, NMDA_g_rec_peak, tau_rise=2, tau_decay=100, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=with_explicit_voltage_gating) for i in range(21)]
+nmsyn_IntIn_PyrOut_AMPA = [Netmorph_Syn(IntIn, PyrOut, 'GABA', 10*0.0086, 80e-3, tau_rise=0.5, tau_decay=10, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(21)] # maybe g_peak here should be 30e-3 instead of 80e-3
 nmsyn = nmsyn_PyrIn_PyrOut_AMPA + nmsyn_PyrIn_PyrOut_NMDA + nmsyn_IntIn_PyrOut_AMPA
 
 
@@ -545,9 +583,12 @@ for n_id in neurons:
             receptor_tau_rise = []
             receptor_tau_decay = []
             total_g_peak = 0
+            voltage_gated = False
             for s in n_nmsyn[receptor][source_id]:
                 g_peak = s.quantity * s.g_rec_peak
                 total_g_peak += g_peak
+                if s.voltage_gated:
+                    voltage_gated = True
                 receptor_onset_delay.append(s.onset_delay)
                 receptor_tau_rise.append(s.tau_rise)
                 receptor_tau_decay.append(s.tau_decay)
@@ -574,6 +615,7 @@ for n_id in neurons:
                 A_neg=receptor_STDP[receptor][1],
                 tau_pos=receptor_STDP[receptor][2],
                 tau_neg=receptor_STDP[receptor][3],
+                voltage_gated=voltage_gated
                 ))
             if n_id == 'PyrOut' and receptor == 'AMPA' and source_id == 'PyrIn':
                 SynRef = presyn_by_neuron[n_id][-1]
@@ -592,11 +634,13 @@ synref_w = np.zeros(n_steps)
 for i in range(0, n_steps): # 1 is the necessary start here, because we need to use V[0] as V[i-1] in update
 
     PyrIn.update(i, t)
-    PyrIn.V[i] = PyrIn.Vm
+    PyrIn.record(i)
+
     IntIn.update(i, t)
-    IntIn.V[i] = IntIn.Vm
+    IntIn.record(i)
+
     PyrOut.update(i, t)
-    PyrOut.V[i] = PyrOut.Vm
+    PyrOut.record(i)
 
     synref_w[i] = SynRef.weight
 
@@ -609,21 +653,21 @@ print(f"Simulation time: {elapsed_time:.4f} seconds")
 # Plotting
 fig, axs = plt.subplots(5, 1, figsize=(12, 12), sharex=True) # was 2 and (12, 7)
 
-axs[0].plot(t_samples, PyrOut.V, label="PyrOut Membrane Voltage (mV)")
+axs[0].plot(t_samples, PyrOut.samples['Vm'], label="PyrOut Membrane Voltage (mV)")
 if not use_exponential_Euler:
-    axs[0].plot(t_samples, PyrOut.dV, label="PyrOut dV (mV)")
-axs[0].scatter(t_samples[PyrOut.spike_train], PyrOut.V[PyrOut.spike_train], color='red', label='Spikes', zorder=5)
-axs[0].plot(t_samples, PyrOut.V_th_adaptive, color='gray', linestyle='--', label="Adaptive Threshold (mV)")
+    axs[0].plot(t_samples, PyrOut.samples['dV'], label="PyrOut dV (mV)")
+axs[0].scatter(t_samples[PyrOut.spike_train], PyrOut.samples['Vm'][PyrOut.spike_train], color='red', label='Spikes', zorder=5)
+axs[0].plot(t_samples, PyrOut.samples['V_th_adaptive'], color='gray', linestyle='--', label="Adaptive Threshold (mV)")
 axs[0].set_ylabel("Voltage (mV)")
 axs[0].legend()
 axs[0].grid(True)
 
 for p in PyrOut.presyn:
-    axs[1].plot(t_samples, p.g, label=p.receptor, alpha=0.8)
+    axs[1].plot(t_samples, p.g_k, label='g_'+p.receptor, alpha=0.8)
 
-axs[1].plot(t_samples, PyrOut.g_fAHP, label="fAHP", linestyle='--', alpha=0.8)
-axs[1].plot(t_samples, PyrOut.g_sAHP, label="sAHP", linestyle='--', alpha=0.8)
-axs[1].plot(t_samples, PyrOut.g_ADP, label="ADP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.samples['fAHP'], label="g_fAHP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.samples['sAHP'], label="g_sAHP", linestyle='--', alpha=0.8)
+axs[1].plot(t_samples, PyrOut.samples['ADP'], label="g_ADP", linestyle='--', alpha=0.8)
 axs[1].set_ylabel("Conductance (nS)")
 axs[1].set_xlabel("Time (ms)")
 axs[1].legend()
@@ -634,13 +678,13 @@ axs[2].set_ylabel("Weight")
 axs[2].legend()
 axs[2].grid(True)
 
-axs[3].plot(t_samples, PyrIn.V, label="PyrIn Membrane Voltage (mV)")
+axs[3].plot(t_samples, PyrIn.samples['Vm'], label="PyrIn Membrane Voltage (mV)")
 axs[3].axhline(PyrIn.V_th, color='gray', linestyle='--', label='Threshold')
 axs[3].set_ylabel("Voltage (mV)")
 axs[3].legend()
 axs[3].grid(True)
 
-axs[4].plot(t_samples, IntIn.V, label="IntIn Membrane Voltage (mV)")
+axs[4].plot(t_samples, IntIn.samples['Vm'], label="IntIn Membrane Voltage (mV)")
 axs[4].axhline(IntIn.V_th, color='gray', linestyle='--', label='Threshold')
 axs[4].set_ylabel("Voltage (mV)")
 axs[4].legend()
