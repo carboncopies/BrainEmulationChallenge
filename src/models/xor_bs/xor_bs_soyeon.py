@@ -182,6 +182,7 @@ for n in neuron_names:
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     soma_compartments[n] = compartment
+    print('Made neuron compartment with ID %d with soma shape ID %d' % (compartment.ID, somas[n].ID))
 
 axon_compartments = {}
 for a in axon_names:
@@ -193,6 +194,7 @@ for a in axon_names:
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     axon_compartments[a] = compartment
+    print('Made axon compartment with ID %d with axon shape ID %d' % (compartment.ID, axons[a].ID))
 
 # 3.4 Create principal neurons.
 
@@ -266,6 +268,11 @@ PinA = neuron_builder('P_inA', 'P_inA_P_out')
 PinB = neuron_builder('P_inB', 'P_inB_P_out')
 IA = neuron_builder('IA', 'IA_P_out')
 Pout = neuron_builder('P_out', 'P_out_axon')
+
+print('Neuron PinA has ID %d' % PinA.ID)
+print('Neuron PinB has ID %d' % PinB.ID)
+print('Neuron IA has ID %d' % IA.ID)
+print('Neuron Pout has ID %d' % Pout.ID)
 
 # 3.5 Create interneurons.
 
@@ -344,8 +351,10 @@ for connection in connection_pattern_set.keys():
             Dimensions_um=[0.1,0.1,0.1],
             Rotation_rad=[0,0,0],)
     receptor_morphologies.append(receptor_box)
+    print('Created receptor box with ID %d' % receptor_box.ID)
 
     # Build receptor function:
+    print('Creating receptor from ID %d to ID %d with shape %d' % (from_compartment_id, to_compartment_id, receptor_box.ID))
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
@@ -356,6 +365,8 @@ for connection in connection_pattern_set.keys():
         ReceptorMorphology=receptor_box.ID,
     )
     receptor_functionals.append( (receptor, to_cell) )
+
+print('Completed network model build.')
 
 # *** SKIPS CONNECTIONS THAT DONT WORK
 # receptor_functionals = []
