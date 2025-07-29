@@ -245,6 +245,7 @@ neuron_IPSP = 870.0 # nA
 #neuron_t_spont_next = -1
 
 def neuron_builder(soma_name:str, axon_name:str):
+    print('Createing neuron with soma ID %d and axon ID %d' % (soma_compartments[soma_name].ID, axon_compartments[axon_name].ID))
     return bg_api.BGNES_BS_neuron_create(
         Soma=soma_compartments[soma_name].ID, 
         Axon=axon_compartments[axon_name].ID,
