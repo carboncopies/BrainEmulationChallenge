@@ -42,7 +42,7 @@ randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
 # savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
-savefolder = '/home/skim/output'
+savefolder = '/home/johnjose/output'
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -101,10 +101,15 @@ INITTEXT1='''
     P_inB (-45, 45)-----------------------+
 
 
+
+    xor(x,y,z) -------> or (x',y',z') -------> out
+                         |
+          cin full adder  (a,b,c)----+
+
    Distances of 30 um are typical between somas in cortex.
 '''
 
-print(INITTEXT1)
+#print(INITTEXT1)
 
 # 3.1 Define shapes for the neurons and place each specifically.
 
@@ -147,6 +152,7 @@ soma_positions_and_radius_soyeon = {
     'P_out': ( P_out0_pos, principal_soma_radius_um ),
 }
 
+#print('Creating somas for the following neurons:' , soma_positions_and_radius_soyeon)
 # neuron_names = list(soma_positions_and_radius.keys())
 # somas = {}
 # for n in neuron_names:
@@ -166,7 +172,7 @@ for n in neuron_names_soyeon:
     somas[n] = soma
 
 
-
+#print('Created somas for the following neurons:' , somas)
 
 # 3.2 Define shapes for the connections and place them
 
@@ -258,6 +264,7 @@ axon_names_soyeon = list(axon_ends_soyeon.keys())
 
 
 
+#print('Creating axons for the following connections and its details :' , axon_ends_soyeon)
 # axons = {}
 # for a in axon_names:
 #     axon = bg_api.BGNES_cylinder_create(
@@ -321,6 +328,8 @@ for n in neuron_names_soyeon:
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     soma_compartments_soyeon[n] = compartment
 
+#print('Creating compartments for the following neurons:' , soma_compartments_soyeon)    
+
 axon_compartments_soyeon = {}
 for a in axon_names_soyeon:
     compartment = bg_api.BGNES_BS_compartment_create(
@@ -332,6 +341,7 @@ for a in axon_names_soyeon:
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     axon_compartments_soyeon[a] = compartment
 
+#print('\n\n\nCreating compartments for the following axons:' , axon_compartments_soyeon)
 
 # 3.4 Create principal neurons.
 
@@ -428,6 +438,8 @@ PinB_soyeon = neuron_builder_soyeon('P_inB', 'P_inB_IA')
 PinA_Pout = neuron_builder_soyeon('P_inA', 'P_inA_P_out')
 IA_soyeon = neuron_builder_soyeon('IA', 'IA_P_out')
 Pout_soyeon = neuron_builder_soyeon('P_out', 'P_out_axon')
+
+print('Creating principal neurons for the following neurons:' , PinA_soyeon, PinB_soyeon, IA_soyeon, Pout_soyeon)
 
 # 3.5 Create interneurons.
 
@@ -609,7 +621,7 @@ for connection in connection_pattern_set_soyeon.keys():
         # Print debug information
         print(f"Creating receptor for connection: {connection}")
         print(f"From axon ID: {from_axon.ID}")
-        print(f"To cell soma ID: {to_cell.SomaID}")
+        print(f"To cell soma ID: {to_cell.SomaID}\n\n")
         
         receptor = bg_api.BGNES_BS_receptor_create(
             SourceCompartmentID=from_axon.ID,
