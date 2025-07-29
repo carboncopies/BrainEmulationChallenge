@@ -84,11 +84,11 @@ INITTEXT1='''
 
    Circuit:
 
-    P_inA (-45, -45)----------------------+
+    P_inA (-45, -45)--- P_A0 (-15, -45) --+
                     |                     |
                     +-> IA (-15, -15) --> P_out (15, -15)
                     |                     |
-    P_inB (-45, 45)-----------------------+
+    P_inB (-45, 45)---- P_A1 (-15, 45) ---+
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -105,11 +105,17 @@ P_inB_pos = [-45, 45, 0]
 IA_pos = [-15, -15, 0]
 P_out_pos = [15, -15, 0]
 
+P_A0_pos = [-15, -45, 0]
+P_A1_pos = [-15, 45, 0]
+
 soma_positions_and_radius = {
     'P_inA': ( P_inA_pos, principal_soma_radius_um ),
     'P_inB': ( P_inB_pos, principal_soma_radius_um ),
     'IA': ( IA_pos, principal_soma_radius_um ),
     'P_out': ( P_out_pos, interneuron_soma_radius_um ),
+
+    'P_A0': (P_A0_pos, principal_soma_radius_um),
+    'P_A1': (P_A1_pos, principal_soma_radius_um),
 }
 
 neuron_names = list(soma_positions_and_radius.keys())
@@ -129,13 +135,22 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 axon_ends = {}
 
 # defining start and end positions of axons. 
-PinA_Pout_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_inA_P_out'] = (PinA_Pout_start, PinA_Pout_end)
+# PinA_Pout_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+# PinA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+# axon_ends['P_inA_P_out'] = (PinA_Pout_start, PinA_Pout_end)
 
-PinB_Pout_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinB_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_inB_P_out'] = (PinB_Pout_start, PinB_Pout_end)
+# PinB_Pout_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+# PinB_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+# axon_ends['P_inB_P_out'] = (PinB_Pout_start, PinB_Pout_end)
+
+PinA_PA0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PA0_end   = list(np.array(P_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_inA_P_A0'] = (PinA_PA0_start, PinA_PA0_end)
+
+PinB_PA1_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PA1_end   = list(np.array(P_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_inB_P_A1'] = (PinB_PA1_start, PinB_PA1_end)
+
 
 PinA_IA_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
 PinA_IA_end   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
@@ -152,6 +167,15 @@ axon_ends['IA_P_out'] = (IA_Pout_start, IA_Pout_end)
 Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0]))
 Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0]))
 axon_ends['P_out_axon'] = (Pout_start, Pout_end)
+
+
+PA0_Pout_start = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PA0_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_A0_P_out'] = (PinA_PA0_start, PinA_PA0_end)
+
+PA1_Pout_start = list(np.array(P_A1_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PA1_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_A1_P_out'] = (PA1_Pout_start, PinB_PA1_end)
 
 axon_names = list(axon_ends.keys())
 
@@ -265,21 +289,32 @@ def neuron_builder(soma_name:str, axon_name:str):
 # other axons are established separately through the receptor definition that links axons to somas. 
 # when a neuron is "fired", its output branches to all axons it's connected to through when axons were defined.
 
-PinA = neuron_builder('P_inA', 'P_inA_P_out')
-PinB = neuron_builder('P_inB', 'P_inB_P_out')
+# PinA = neuron_builder('P_inA', 'P_inA_P_out')
+# PinB = neuron_builder('P_inB', 'P_inB_P_out')
+PinA = neuron_builder('P_inA', 'P_inA_P_A0')
+PinB = neuron_builder('P_inB', 'P_inB_P_A1')
+
 IA = neuron_builder('IA', 'IA_P_out')
+
+PA0 = neuron_builder('P_A0', 'P_A0_P_out')
+PA1 = neuron_builder('P_A1', 'P_A1_P_out')
+
 Pout = neuron_builder('P_out', 'P_out_axon')
 
-print('Neuron PinA has ID %d' % PinA.ID)
-print('Neuron PinB has ID %d' % PinB.ID)
-print('Neuron IA has ID %d' % IA.ID)
-print('Neuron Pout has ID %d' % Pout.ID)
+# print('Neuron PinA has ID %d' % PinA.ID)
+# print('Neuron PinB has ID %d' % PinB.ID)
+# print('Neuron IA has ID %d' % IA.ID)
+# print('Neuron Pout has ID %d' % Pout.ID)
 
 # 3.5 Create interneurons.
 
 cells = {
     'P_inA': PinA,
     'P_inB': PinB,
+
+    'P_A0': PA0,
+    'P_A1': PA1,
+
     'IA': IA,
     'P_out': Pout,
 }
@@ -289,6 +324,9 @@ input_neurons = {
     'P_inB': PinB,
 }
 LayerA_neurons = {
+    'P_A0': PA0,
+    'P_A1': PA1,
+
     'IA': IA,
 }
 output_neurons = {
@@ -299,24 +337,44 @@ output_neurons = {
 
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
-PinPA_weight  = 1.0 # Greater weight means stronger PSP amplitude.
-PinIA_weight  = 1.0
-PAPB_weight   = 1.0
-IAPB_weight   = 1.0
-PBPout_weight = 1.0
 
-created_count = 0
-failed_count = 0
+# P_inA_P_out_weight = 1.0 # Greater weight means stronger PSP amplitude.
+# P_inB_P_out_weight = 1.0
+P_inA_P_A0_weight = 1.0
+P_inB_P_A1_weight = 1.0
+
+P_A0_P_out_weight = 1.0
+P_A1_P_out_weight = 1.0
+
+P_inA_IA_weight = 0.6
+P_inB_IA_weight = 0.6
+
+IA_Pout_weight = 2.3
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
 # defining how neurons should interact with each other. 
 # need this for all connections within a circuit (all axons)
+
+
+    # P_inA (-45, -45)--- P_A0 (-15, -45) --+
+    #                 |                     |
+    #                 +-> IA (-15, -15) --> P_out (15, -15)
+    #                 |                     |
+    # P_inB (-45, 45)---- P_A1 (-15, 45) ---+
+
 connection_pattern_set = {
-    'P_inA_P_out': ( 'P_inA_P_out', 'P_out', AMPA_conductance, PinPA_weight),
-    'P_inB_P_out': ( 'P_inB_P_out', 'P_out', AMPA_conductance, PAPB_weight),
-    'P_inA_IA':    ( 'P_inA_IA', 'IA', AMPA_conductance, PinIA_weight),
-    'P_inB_IA':    ( 'P_inB_IA', 'IA', AMPA_conductance, IAPB_weight),
-    'IA_P_out':    ( 'IA_P_out', 'P_out', GABA_conductance, PBPout_weight),
+    # 'P_inA_P_out': ( 'P_inA_P_out', 'P_out', AMPA_conductance, P_inA_P_out_weight),
+    # 'P_inB_P_out': ( 'P_inB_P_out', 'P_out', AMPA_conductance, P_inB_P_out_weight),
+    'P_inA_P_A0':  ( 'P_inA_P_A0', 'P_A0', AMPA_conductance, P_inA_P_A0_weight),
+    'P_inB_P_A1':  ( 'P_inB_P_A1', 'P_A1', AMPA_conductance, P_inB_P_A1_weight),
+
+    'P_inA_IA':    ( 'P_inA_P_A0', 'IA', AMPA_conductance, P_inA_IA_weight),
+    'P_inB_IA':    ( 'P_inB_P_A1', 'IA', AMPA_conductance, P_inB_IA_weight),
+
+    'P_A0_P_out':  ( 'P_A0_P_out', 'P_out', AMPA_conductance, P_A0_P_out_weight),
+    'P_A1_P_out':  ( 'P_A1_P_out', 'P_out', AMPA_conductance, P_A1_P_out_weight),
+
+    'IA_P_out':    ( 'IA_P_out', 'P_out', GABA_conductance, IA_Pout_weight),
 }
 
 # *** ORIGINAL CONNECTION MAKING ALGORITHM:
@@ -446,48 +504,6 @@ print('Completed network model build.')
 #     )
 
 #     receptor_functionals.append( (receptor, to_cell) )
-
-
-# *** ATTEMPTS CREATING RECEPTORS AT MOST 3 TIMES UNTIL GIVING UP
-# for connection in connection_pattern_set.keys():
-#     conductance = connection_pattern_set[connection][2]
-#     weight = connection_pattern_set[connection][3]
-#     receptor_conductance = abs(conductance) / weight
-#     is_gaba = (connection == 'IA_P_out')
-#     neurotransmitter = 1 if is_gaba else 0  # 0=AMPA, 1=GABA
-
-#     from_axon = axon_compartments[connection_pattern_set[connection][0]]
-#     to_cell = cells[connection_pattern_set[connection][1]]
-    
-#     receptor_box = bg_api.BGNES_box_create(
-#         CenterPosition_um=axon_ends[connection][1],
-#         Dimensions_um=[0.1,0.1,0.1],
-#         Rotation_rad=[0,0,0],
-#     )
-
-#     for attempt in range(3):  # Try 3 times
-#         try:
-#             print(f"Attempt {attempt+1} for {connection}")
-#             receptor = bg_api.BGNES_BS_receptor_create(
-#                 SourceCompartmentID=from_axon.ID,
-#                 DestinationCompartmentID=to_cell.SomaID,
-#                 Neurotransmitter=neurotransmitter,
-#                 Conductance_nS=receptor_conductance,
-#                 TimeConstantRise_ms=neuron_tau_PSPr,
-#                 TimeConstantDecay_ms=neuron_tau_PSPd,
-#                 ReceptorMorphology=receptor_box.ID,
-#             )
-            
-#             if hasattr(receptor, 'ID'):
-#                 print(f"Success! Receptor ID: {receptor.ID}")
-#                 receptor_functionals.append((receptor, to_cell))
-#                 break
-                
-#         except Exception as e:
-#             print(f"Failed attempt {attempt+1}: {str(e)}")
-#             if attempt == 2:
-#                 print("Giving up on this receptor")
-#             time.sleep(0.1)  # Short delay before retry
 
 # 3.7 Save the ground-truth system.
 
