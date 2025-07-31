@@ -620,6 +620,16 @@ for n_id in neurons:
             if n_id == 'PyrOut' and receptor == 'AMPA' and source_id == 'PyrIn':
                 SynRef = presyn_by_neuron[n_id][-1]
 
+# When not building this from Netmorph, but simply by using AddLIFCReceptor
+# the composition of abstract functional receptor data is as follows for
+# each unique combination of Pre-Post-ReceptorType:
+#
+#   g_peak = sum(g_peak_i)
+#   tau_rise = median(tau_rise_i)
+#   tau_decay = median(tau_decay_i)
+#   weight = sum(weight_i*g_peak_i)/g_peak
+#   onset_delay = median(onset_delay_i)
+
 # Now, we can set up the accumulated connections for each neuron
 
 for n_id in presyn_by_neuron:

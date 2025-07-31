@@ -46,6 +46,8 @@ ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
 
 SimulationCfg, MySim = NewSimulation('LIFCtest')
 
+MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True)
+
 PyrIn = {}
 IntIn = {}
 PyrOut = {}
@@ -120,7 +122,7 @@ def makeNeuron(
 	Cfg.RefractoryPeriod_ms = 2
 	Cfg.SpikeDepolarization_mV = 30
 
-	Cfg.UpdateMethod = 'ExpEuler'
+	Cfg.UpdateMethod = 'ExpEulerCm'
 	Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
 
 	Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
@@ -154,7 +156,7 @@ def makeNeuron(
 	Cfg.AdaptiveThresholdDiffPerSpike = 0.2
 	Cfg.AdaptiveTresholdRecoveryTime_ms = 50
 	Cfg.AdaptiveThresholdDiffPotential_mV = 10
-	Cfg.AdaptiveThresholdFloor_mV = Vth
+	Cfg.AdaptiveThresholdFloor_mV = Vth # 0 means not applied
 	Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
 	Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
 
