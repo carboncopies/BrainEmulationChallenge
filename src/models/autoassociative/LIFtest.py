@@ -55,11 +55,11 @@ IntIn = {}
 PyrOut = {}
 
 def makeSphere(name, radius, center):
-	SphereCfg = NES.Shapes.Sphere.Configuration()
-	SphereCfg.Name = name
-	SphereCfg.Radius_um = radius
-	SphereCfg.Center_um = center
-	return MySim.AddSphere(SphereCfg)
+    SphereCfg = NES.Shapes.Sphere.Configuration()
+    SphereCfg.Name = name
+    SphereCfg.Radius_um = radius
+    SphereCfg.Center_um = center
+    return MySim.AddSphere(SphereCfg)
 
 # Create spheres for 2 principal neurons and 1 interneuron
 PyrIn['soma'] = makeSphere('PyrIn_Soma', 10, [0, -30, 0])
@@ -67,13 +67,13 @@ IntIn['soma'] = makeSphere('IntIn_Soma', 5, [0, 30, 0])
 PyrOut['soma'] = makeSphere('PyrOut_Soma', 10, [100, 0, 0])
 
 def makeCylinder(name, point1, point2, radius1, radius2):
-	CylinderCfg = NES.Shapes.Cylinder.Configuration()
-	CylinderCfg.Name = name
-	CylinderCfg.Point1Position_um = point1
-	CylinderCfg.Point2Position_um = point2
-	CylinderCfg.Point1Radius_um = radius1
-	CylinderCfg.Point2Radius_um = radius2
-	return MySim.AddCylinder(CylinderCfg)
+    CylinderCfg = NES.Shapes.Cylinder.Configuration()
+    CylinderCfg.Name = name
+    CylinderCfg.Point1Position_um = point1
+    CylinderCfg.Point2Position_um = point2
+    CylinderCfg.Point1Radius_um = radius1
+    CylinderCfg.Point2Radius_um = radius2
+    return MySim.AddCylinder(CylinderCfg)
 
 # Create cylinders for dendrite and axons
 PyrOut['dendrite'] = makeCylinder('PyrOut_Dendrite', [50, 0, 0], [95, 0, 0], 2, 3)
@@ -82,16 +82,16 @@ IntIn['axon'] = makeCylinder('IntIn_Axon', [2.5, 30, 0], [50, 0, 0], 3, 2)
 
 # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
 def makeCompartment(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
-	Cfg = NES.Models.Compartments.LIFC.Configuration()
-	Cfg.Name = name
-	Cfg.RestingPotential_mV = Vrest
-	Cfg.ResetPotential_mV = Vreset
-	Cfg.SpikeThreshold_mV = Vth
-	Cfg.MembraneResistance_MOhm = R_m
-	Cfg.MembraneCapacitance_pF = C_m
-	Cfg.AfterHyperpolarizationAmplitude_mV = E_AHP
-	Cfg.Shape = shapeID
-	return MySim.AddLIFCCompartment(Cfg)
+    Cfg = NES.Models.Compartments.LIFC.Configuration()
+    Cfg.Name = name
+    Cfg.RestingPotential_mV = Vrest
+    Cfg.ResetPotential_mV = Vreset
+    Cfg.SpikeThreshold_mV = Vth
+    Cfg.MembraneResistance_MOhm = R_m
+    Cfg.MembraneCapacitance_pF = C_m
+    Cfg.AfterHyperpolarizationAmplitude_mV = E_AHP
+    Cfg.Shape = shapeID
+    return MySim.AddLIFCCompartment(Cfg)
 
 # Create compartments for somas, dendrites and axons
 PyrIn['soma_comp'] = makeCompartment('PyrIn_Soma_LIFC', -70, -55, -50, 100, 100, -90, PyrIn['soma'].ID)
@@ -102,13 +102,13 @@ PyrOut['soma_comp'] = makeCompartment('PyrOut_Soma_LIFC', -70, -55, -50, 100, 10
 PyrOut['dendrite_comp'] = makeCompartment('PyrOut_Dendrite_LIFC', -70, -55, -50, 100, 100, -90, PyrOut['dendrite'].ID)
 
 def makeNeuron(
-	name, SomaIDs, DendriteIDs, AxonIDs,
-	Vrest, Vreset, Vth, R_m, C_m,
-	E_AHP,
-	tau_rise_fAHP, tau_decay_fAHP, g_peak_fAHP, g_peak_fAHP_max, Kd_fAHP,
-	tau_rise_sAHP, tau_decay_sAHP, g_peak_sAHP, g_peak_sAHP_max, Kd_sAHP,
-	E_ADP, tau_rise_ADP, tau_decay_ADP, g_peak_ADP,
-	):
+    name, SomaIDs, DendriteIDs, AxonIDs,
+    Vrest, Vreset, Vth, R_m, C_m,
+    E_AHP,
+    tau_rise_fAHP, tau_decay_fAHP, g_peak_fAHP, g_peak_fAHP_max, Kd_fAHP,
+    tau_rise_sAHP, tau_decay_sAHP, g_peak_sAHP, g_peak_sAHP_max, Kd_sAHP,
+    E_ADP, tau_rise_ADP, tau_decay_ADP, g_peak_ADP,
+    ):
     Cfg = NES.Models.Neurons.LIFC.Configuration()
     Cfg.Name = name
 
@@ -116,79 +116,79 @@ def makeNeuron(
     Cfg.DendriteIDs = DendriteIDs
     Cfg.AxonIDs = AxonIDs
 
-	Cfg.RestingPotential_mV = Vrest
-	Cfg.ResetPotential_mV = Vreset
-	Cfg.SpikeThreshold_mV = Vth
-	Cfg.MembraneResistance_MOhm = R_m
-	Cfg.MembraneCapacitance_pF = C_m
-	Cfg.RefractoryPeriod_ms = 2
-	Cfg.SpikeDepolarization_mV = 30
+    Cfg.RestingPotential_mV = Vrest
+    Cfg.ResetPotential_mV = Vreset
+    Cfg.SpikeThreshold_mV = Vth
+    Cfg.MembraneResistance_MOhm = R_m
+    Cfg.MembraneCapacitance_pF = C_m
+    Cfg.RefractoryPeriod_ms = 2
+    Cfg.SpikeDepolarization_mV = 30
 
-	Cfg.UpdateMethod = 'ExpEulerCm'
-	Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
+    Cfg.UpdateMethod = 'ExpEulerCm'
+    Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
 
-	Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
+    Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
 
-	Cfg.FastAfterHyperpolarizationRise_ms = tau_rise_fAHP
-	Cfg.FastAfterHyperpolarizationDecay_ms = tau_decay_fAHP
-	Cfg.FastAfterHyperpolarizationPeakConductance_nS = g_peak_fAHP
-	Cfg.FastAfterHyperpolarizationMaxPeakConductance_nS = g_peak_fAHP_max
-	Cfg.FastAfterHyperpolarizationHalfActConstant = Kd_fAHP
+    Cfg.FastAfterHyperpolarizationRise_ms = tau_rise_fAHP
+    Cfg.FastAfterHyperpolarizationDecay_ms = tau_decay_fAHP
+    Cfg.FastAfterHyperpolarizationPeakConductance_nS = g_peak_fAHP
+    Cfg.FastAfterHyperpolarizationMaxPeakConductance_nS = g_peak_fAHP_max
+    Cfg.FastAfterHyperpolarizationHalfActConstant = Kd_fAHP
 
-	Cfg.SlowAfterHyperpolarizationRise_ms = tau_rise_sAHP
-	Cfg.SlowAfterHyperpolarizationDecay_ms = tau_decay_sAHP
-	Cfg.SlowAfterHyperpolarizationPeakConductance_nS = g_peak_sAHP
-	Cfg.SlowAfterHyperpolarizationMaxPeakConductance_nS = g_peak_sAHP_max
-	Cfg.SlowAfterHyperpolarizationHalfActConstant = Kd_sAHP
+    Cfg.SlowAfterHyperpolarizationRise_ms = tau_rise_sAHP
+    Cfg.SlowAfterHyperpolarizationDecay_ms = tau_decay_sAHP
+    Cfg.SlowAfterHyperpolarizationPeakConductance_nS = g_peak_sAHP
+    Cfg.SlowAfterHyperpolarizationMaxPeakConductance_nS = g_peak_sAHP_max
+    Cfg.SlowAfterHyperpolarizationHalfActConstant = Kd_sAHP
 
-	Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
+    Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
 
-	Cfg.FatigueThreshold = 300 # 0 means not applied
-	Cfg.FatigueRecoveryTime_ms = 1000
+    Cfg.FatigueThreshold = 300 # 0 means not applied
+    Cfg.FatigueRecoveryTime_ms = 1000
 
-	Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
-	Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
-	Cfg.AfterDepolarizationDecay_ms = tau_decay_ADP
-	Cfg.AfterDepolarizationPeakConductance_nS = g_peak_ADP
-	Cfg.AfterDepolarizationSaturationMultiplier = 2.0
-	Cfg.AfterDepolarizationRecoveryTime_ms = 300
-	Cfg.AfterDepolarizationDepletion = 0.3
-	Cfg.AfterDepolarizationSaturationModel = 'clip' # 'clip', 'resource'
+    Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
+    Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
+    Cfg.AfterDepolarizationDecay_ms = tau_decay_ADP
+    Cfg.AfterDepolarizationPeakConductance_nS = g_peak_ADP
+    Cfg.AfterDepolarizationSaturationMultiplier = 2.0
+    Cfg.AfterDepolarizationRecoveryTime_ms = 300
+    Cfg.AfterDepolarizationDepletion = 0.3
+    Cfg.AfterDepolarizationSaturationModel = 'clip' # 'clip', 'resource'
 
-	Cfg.AdaptiveThresholdDiffPerSpike = 0.2
-	Cfg.AdaptiveTresholdRecoveryTime_ms = 50
-	Cfg.AdaptiveThresholdDiffPotential_mV = 10
-	Cfg.AdaptiveThresholdFloor_mV = Vth # 0 means not applied
-	Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
-	Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
+    Cfg.AdaptiveThresholdDiffPerSpike = 0.2
+    Cfg.AdaptiveTresholdRecoveryTime_ms = 50
+    Cfg.AdaptiveThresholdDiffPotential_mV = 10
+    Cfg.AdaptiveThresholdFloor_mV = Vth # 0 means not applied
+    Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
+    Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
 
-	neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
+    neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
 
 # Create neurons
 PyrIn['neuron'] = makeNeuron(
-	'PyrIn_Neuron', [PyrIn['soma_comp'].ID], [], [PyrIn['axon_comp'].ID],
-	-70, -55, -50, 100, 100,
-	-90,
-	2.5, 30, 3.0, 5.0, 1.5,
-	30, 300, 1.0, 2.0, 0.3,
-	-20, 20, 200, 0.3)
+    'PyrIn_Neuron', [PyrIn['soma_comp'].ID], [], [PyrIn['axon_comp'].ID],
+    -70, -55, -50, 100, 100,
+    -90,
+    2.5, 30, 3.0, 5.0, 1.5,
+    30, 300, 1.0, 2.0, 0.3,
+    -20, 20, 200, 0.3)
 IntIn['neuron'] = makeNeuron(
-	'IntIn_Neuron', [IntIn['soma_comp'].ID], [], [IntIn['axon_comp'].ID],
-	-70, -55, -50, 100, 100,
-	-90,
-	2.5, 30, 3.0, 5.0, 1.5,
-	30, 300, 0, 0, 0.3,
-	-20, 20, 200, 0)
+    'IntIn_Neuron', [IntIn['soma_comp'].ID], [], [IntIn['axon_comp'].ID],
+    -70, -55, -50, 100, 100,
+    -90,
+    2.5, 30, 3.0, 5.0, 1.5,
+    30, 300, 0, 0, 0.3,
+    -20, 20, 200, 0)
 PyrOut['neuron'] = makeNeuron(
-	'PyrOut_Neuron', [PyrOut['soma_comp'].ID], [PyrOut['dendrite_comp'].ID], [],
-	-70, -55, -50, 100, 100,
-	-90,
-	2.5, 30, 3.0, 5.0, 1.5,
-	30, 300, 1.0, 2.0, 0.3,
-	-20, 20, 200, 0.3)
+    'PyrOut_Neuron', [PyrOut['soma_comp'].ID], [PyrOut['dendrite_comp'].ID], [],
+    -70, -55, -50, 100, 100,
+    -90,
+    2.5, 30, 3.0, 5.0, 1.5,
+    30, 300, 1.0, 2.0, 0.3,
+    -20, 20, 200, 0.3)
 
 def makeBox(name, center, dimensions, rotation):
-	BoxCfg = NES.Shapes.Box.Configuration()
+    BoxCfg = NES.Shapes.Box.Configuration()
     BoxCfg.Name = name
     BoxCfg.CenterPosition_um = center
     BoxCfg.Dimensions_um = dimensions
@@ -196,12 +196,12 @@ def makeBox(name, center, dimensions, rotation):
     return MySim.AddBox(BoxCfg)
 
 def makePreSynReceptor(
-	name, sourcecompID, destcompID, receptortype,
-	E, tau_rise, tau_decay, g_peak, weight, onset_delay,
-	STDP_type, A_pos, A_neg, tau_pos, tau_neg,
-	voltage_gated,
-	shapeID):
-	Cfg = NES.Models.Connections.LIFCReceptor.Configuration()
+    name, sourcecompID, destcompID, receptortype,
+    E, tau_rise, tau_decay, g_peak, weight, onset_delay,
+    STDP_type, A_pos, A_neg, tau_pos, tau_neg,
+    voltage_gated,
+    shapeID):
+    Cfg = NES.Models.Connections.LIFCReceptor.Configuration()
     Cfg.Name = name
     Cfg.SourceCompartment = sourcecompID
     Cfg.DestinationCompartment = destcompID
@@ -236,25 +236,25 @@ g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21
 g_peak_GABA = int(10*0.0086/0.0086)*80e-3*21
 onset_delay = 1.0 + (100*1e-6)/1
 Synapses['PyrInPyrOut_AMPA'] = makePrePostReceptor(
-	'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-	'AMPA',
-	0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay,
-	'Hebbian', 0.01, 0.01, 20.0, 20.0,
-	False,
-	Synapses['PyrInPyrOut'].ID)
+    'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+    'AMPA',
+    0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay,
+    'Hebbian', 0.01, 0.01, 20.0, 20.0,
+    False,
+    Synapses['PyrInPyrOut'].ID)
 Synapses['PyrInPyrOut_NMDA'] = makePrePostReceptor(
-	'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-	'NMDA',
-	0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay,
-	'None', 0, 0, 0, 0,
-	True,
-	Synapses['PyrInPyrOut'].ID)
+    'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+    'NMDA',
+    0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay,
+    'None', 0, 0, 0, 0,
+    True,
+    Synapses['PyrInPyrOut'].ID)
 Synapses['IntInPyrOut_GABA'] = makePrePostReceptor('IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-	'GABA',
-	-70, 0.5, 10, g_peak_GABA, 0.5, onset_delay,
-	'None', 0, 0, 0, 0,
-	False,
-	Synapses['IntInPyrOut'].ID)
+    'GABA',
+    -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay,
+    'None', 0, 0, 0, 0,
+    False,
+    Synapses['IntInPyrOut'].ID)
 
 # Set stimulation times
 T = 4000
