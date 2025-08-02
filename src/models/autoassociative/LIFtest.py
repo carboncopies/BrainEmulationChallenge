@@ -45,7 +45,7 @@ DBdata = vbp.InitExpDB(
 
 ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
 
-SimulationCfg, MySim = NewSimulation('LIFCtest')
+SimulationCfg, MySim = vbp.NewSimulation('LIFCtest')
 
 MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
 MySim.SetSTDP(_DoSTDP=Args.STDP)
@@ -102,7 +102,7 @@ PyrOut['soma_comp'] = makeCompartment('PyrOut_Soma_LIFC', -70, -55, -50, 100, 10
 PyrOut['dendrite_comp'] = makeCompartment('PyrOut_Dendrite_LIFC', -70, -55, -50, 100, 100, -90, PyrOut['dendrite'].ID)
 
 def makeNeuron(
-	name, somaIDs, DendriteIDs, AxonIDs,
+	name, SomaIDs, DendriteIDs, AxonIDs,
 	Vrest, Vreset, Vth, R_m, C_m,
 	E_AHP,
 	tau_rise_fAHP, tau_decay_fAHP, g_peak_fAHP, g_peak_fAHP_max, Kd_fAHP,
@@ -116,7 +116,7 @@ def makeNeuron(
     Cfg.DendriteIDs = DendriteIDs
     Cfg.AxonIDs = AxonIDs
 
-    Cfg.RestingPotential_mV = Vrest
+	Cfg.RestingPotential_mV = Vrest
 	Cfg.ResetPotential_mV = Vreset
 	Cfg.SpikeThreshold_mV = Vth
 	Cfg.MembraneResistance_MOhm = R_m
@@ -162,7 +162,7 @@ def makeNeuron(
 	Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
 	Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
 
-    neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
+	neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
 
 # Create neurons
 PyrIn['neuron'] = makeNeuron(
