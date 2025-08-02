@@ -274,4 +274,5 @@ MySim.RunAndWait(Runtime_ms=T, timeout_s=100.0)
 
 recording_dict = MySim.GetRecording()
 
-print(recording_dict)
+if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
