@@ -46,7 +46,7 @@ ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
 
 SimulationCfg, MySim = NewSimulation('LIFCtest')
 
-MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True)
+MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
 
 PyrIn = {}
 IntIn = {}
