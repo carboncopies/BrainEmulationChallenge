@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # full_adder_bs.py
-# Randal A. Koene, 20240306
+# Soyeon Kim, 20250801
 
 '''
 The XOR ball-and-stick example uses extremely simple neuron representations in a
