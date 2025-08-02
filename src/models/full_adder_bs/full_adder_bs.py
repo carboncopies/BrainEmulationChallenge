@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# xor_bs_groundtruth.py
+# full_adder_bs.py
 # Randal A. Koene, 20240306
 
 '''
@@ -12,6 +12,40 @@ keeping the script as flat as possible and maximizing immediate use of NES calls
 
 VBP process step 00: groundtruth
 WBE topic-level XI: sample preparation / preservation (in-silico)
+'''
+
+'''
+Full adder circuit:
+
+                   +-----------------------------------------------------------------+
+                   |                                                                 |
+                   +------------------------------------------+----+                 |
+                   |                                          |    |                 |
+    Cin (-60,30)---+    +----------------------+            +------+> I_C0 (30,30)---+--> Sum (60,30)
+                        |                      |            | |                      
+    P_inA (-60,0)-------+--+> I_A0 (-30,0)-----+> P_B0 (0,0)+ | +---> P_C0 (30,0)----+
+                        |  |                   |            | | |                    | 
+    P_inB (-60,-30)--+-----+-------------------+            +-+-|---> P_C1 (30,-30)--+--> Cout (60,-30)
+                     |  |                                       |                      
+                     |  +---------------------------------------+                  
+                     |                                          |   
+                     +------------------------------------------+  
+
+For now, we're looking just at the connections involving P_inA, P_inB, I_A0, and P_B0, that forms 
+an XOR gate. 
+
+Just the XOR gate we're looking at:
+
+P_inA -------+-----------+
+             |           |
+             +-> I_A0 ---+-> P_B0
+             |           |
+P_inB -------+-----------+
+
+All three signals to P_B0 should preferably arrive at the same time so that P_B0 does not fire when I_A0 fires.
+With 
+
+
 '''
 
 scriptversion='0.0.1'
@@ -40,7 +74,7 @@ if Args.Local:
 
 randomseed = 12345
 np.random.seed(randomseed)
-runtime_ms = 500.0
+runtime_ms = 1000.0
 # savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
 savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
 figspecs = {
@@ -63,7 +97,7 @@ if not bg_api.BGNES_QuickStart(scriptversion, versionmustmatch=False, verbose=Fa
 
 # 2. Init simulation
 
-sys_name='xor_bs'
+sys_name='full_adder_bs'
 bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
@@ -84,25 +118,19 @@ INITTEXT1='''
 
    Circuit:
 
-   
-                +-----------> P_A0 (-30,90)-----> P_B0 (0,90)-------> P_C0 (30,90)-----+
-                |                                                                      |
-                +-----------> P_A1 (-30,60)-----> P_B1 (0,60)------+                   |
-                |                                                  |                   |
-    Cin (-60,30)+----+  +---> P_A2 (-30,30)----+                   |                   +> Sum (60,30)
-                     |  |                      |                   |                   |
-    P_inA (-60,0)-------+--+> I_A0 (-30,0)-----+> P_B2 (0,0)+------+> I_C0 (30,30)-----+
-                     |  |  |                   |            |         
-    P_inB (-60,-30)+-------+> P_A3 (-30,-30----+            |   +---> P_C1 (30,0)------+> Cout (60,-30)
-                   | |  |                                   +---|--+                   |
-                   | |  +---> P_A4 (-30,-60)----> P_B3 (0,-60)--+  +> P_C2 (30,-60)----+
-                   | |                                          |  |
-                   +--------> P_A5 (-30,-90)----> P_B4 (0,-90)--+  |
-                     |                                             |
-                     +------> P_A6 (-30,-120)---> P_B5 (0,-120)----+
-
-
-
+                   +-----------------------------------------------------------------+
+                   |                                                                 |
+                   +------------------------------------------+----+                 |
+                   |                                          |    |                 |
+    Cin (-60,30)---+    +----------------------+            +------+> I_C0 (30,30)---+--> Sum (60,30)
+                        |                      |            | |                      
+    P_inA (-60,0)-------+--+> I_A0 (-30,0)-----+> P_B0 (0,0)+ | +---> P_C0 (30,0)----+
+                        |  |                   |            | | |                    | 
+    P_inB (-60,-30)--+-----+-------------------+            +-+-|---> P_C1 (30,-30)--+--> Cout (60,-30)
+                     |  |                                       |                      
+                     |  +---------------------------------------+                  
+                     |                                          |   
+                     +------------------------------------------+  
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -114,22 +142,37 @@ print(INITTEXT1)
 principal_soma_radius_um = 10.0                # A typical radius for the soma of a human cortical pyramidal neuron 5-25 um.
 interneuron_soma_radius_um = 5.0               # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
 
-P_inA_pos = [-45, -45, 0]
-P_inB_pos = [-45, 45, 0]
-IA_pos = [-15, -15, 0]
-P_out_pos = [15, -15, 0]
+Cin_pos   = [-60, 30, 0]
+P_inA_pos = [-60,  0, 0]
+P_inB_pos = [-60,-30, 0]
 
-P_A0_pos = [-15, -45, 0]
-P_A1_pos = [-15, 45, 0]
+I_A0_pos =  [-30,  0, 0]
+
+P_B0_pos =  [0, 0, 0]
+
+I_C0_pos =  [30, 30, 0]
+P_C0_pos =  [30, 90, 0]
+P_C1_pos =  [30,  0, 0]
+
+Sum_pos =   [60, 30, 0]
+Cout_pos =  [60,-30, 0]
+ 
 
 soma_positions_and_radius = {
+    'Cin':   ( Cin_pos, principal_soma_radius_um ),
     'P_inA': ( P_inA_pos, principal_soma_radius_um ),
     'P_inB': ( P_inB_pos, principal_soma_radius_um ),
-    'IA': ( IA_pos, principal_soma_radius_um ),
-    'P_out': ( P_out_pos, interneuron_soma_radius_um ),
 
-    'P_A0': (P_A0_pos, principal_soma_radius_um),
-    'P_A1': (P_A1_pos, principal_soma_radius_um),
+    'I_A0':  ( I_A0_pos, interneuron_soma_radius_um ),
+
+    'P_B0':  ( P_B0_pos, principal_soma_radius_um ),
+
+    'I_C0':  ( I_C0_pos, interneuron_soma_radius_um ),
+    'P_C0':  ( P_C0_pos, principal_soma_radius_um ),
+    'P_C1':  ( P_C1_pos, principal_soma_radius_um ),
+    
+    'Sum':   ( Sum_pos, principal_soma_radius_um ),
+    'Cout':  ( Cout_pos, principal_soma_radius_um ),
 }
 
 neuron_names = list(soma_positions_and_radius.keys())
@@ -148,48 +191,85 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 
 axon_ends = {}
 
+
 # defining start and end positions of axons. 
-# PinA_Pout_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PinA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_inA_P_out'] = (PinA_Pout_start, PinA_Pout_end)
 
-# PinB_Pout_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PinB_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_inB_P_out'] = (PinB_Pout_start, PinB_Pout_end)
+# to layer A
+PinA_IA0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['PinA_IA0'] = (PinA_IA0_start, PinA_IA0_end)
 
-PinA_PA0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinA_PA0_end   = list(np.array(P_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_inA_P_A0'] = (PinA_PA0_start, PinA_PA0_end)
+PinB_IA0_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['PinB_IA0'] = (PinB_IA0_start, PinB_IA0_end)
 
-PinB_PA1_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinB_PA1_end   = list(np.array(P_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_inB_P_A1'] = (PinB_PA1_start, PinB_PA1_end)
+# to layer B
+IA0_PB0_start = list(np.array(I_A0_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
+IA0_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['IA0_PB0'] = (IA0_PB0_start, IA0_PB0_end)
 
+PinA_PB0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PinA_PB0'] = (PinA_PB0_start, PinA_PB0_end)
 
-PinA_IA_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinA_IA_end   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
-axon_ends['P_inA_IA'] = (PinA_IA_start, PinA_IA_end)
+PinB_PB0_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PB0_end   = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PinB_PB0'] = (PinB_PB0_start, PinB_PB0_end)
 
-PinB_IA_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinB_IA_end   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
-axon_ends['P_inB_IA'] = (PinB_IA_start, PinB_IA_end)
+# to layer C
+PB0_IC0_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PB0_IC0_end   = list(np.array(I_C0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['PB0_IC0'] = (PB0_IC0_start, PB0_IC0_end)
 
-IA_Pout_start = list(np.array(IA_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
-IA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['IA_P_out'] = (IA_Pout_start, IA_Pout_end)
+PB0_PC1_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PB0_PC1_end   = list(np.array(P_C1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PB0_PC1'] = (PB0_PC1_start, PB0_PC1_end)
 
-Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0]))
-Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0]))
-axon_ends['P_out_axon'] = (Pout_start, Pout_end)
+Cin_IC0_start = list(np.array(Cin_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Cin_IC0_end   = list(np.array(I_C0_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['Cin_IC0'] = (Cin_IC0_start, Cin_IC0_end)
 
+Cin_PC1_start = list(np.array(Cin_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Cin_PC1_end   = list(np.array(P_C1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['Cin_PC1'] = (Cin_PC1_start, Cin_PC1_end)
 
-PA0_Pout_start = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinA_PA0_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_A0_P_out'] = (PinA_PA0_start, PinA_PA0_end)
+PinA_PC0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PC0_end   = list(np.array(P_C0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PinA_PC0'] = (PinA_PC0_start, PinA_PC0_end)
 
-PA1_Pout_start = list(np.array(P_A1_pos) + np.array([principal_soma_radius_um, 0, 0]))
-PinB_PA1_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-axon_ends['P_A1_P_out'] = (PA1_Pout_start, PinB_PA1_end)
+PinB_PC0_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PC0_end   = list(np.array(P_C0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PinB_PC0'] = (PinB_PC0_start, PinB_PC0_end)
+
+# to output layer
+IC0_Sum_start = list(np.array(I_C0_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
+IC0_Sum_end   = list(np.array(Sum_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['IC0_Sum'] = (IC0_Sum_start, IC0_Sum_end)
+
+PC0_Cout_start = list(np.array(P_C0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PC0_Cout_end   = list(np.array(Cout_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PC0_Cout'] = (PC0_Cout_start, PC0_Cout_end)
+
+PC1_Cout_start = list(np.array(P_C1_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PC1_Cout_end   = list(np.array(Cout_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PC1_Cout'] = (PC1_Cout_start, PC1_Cout_end)
+
+PB0_Sum_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PB0_Sum_end   = list(np.array(Sum_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['PB0_Sum'] = (PB0_Sum_start, PB0_Sum_end)
+
+Cin_Sum_start = list(np.array(Cin_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Cin_Sum_end   = list(np.array(Sum_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['Cin_Sum'] = (Cin_Sum_start, Cin_Sum_end)
+
+# last layer (as far as my understanding, need this as a soma always requires an axon when using neuron builder)
+Sum_start = list(np.array(Sum_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Sum_end =   list(np.array(Sum_pos) + np.array([30.0, 0, 0]))
+axon_ends['Sum_axon'] = (Sum_start, Sum_end)
+
+Cout_start = list(np.array(Cout_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Cout_end =   list(np.array(Cout_pos) + np.array([30.0, 0, 0]))
+axon_ends['Cout_axon'] = (Cout_start, Cout_end)
 
 axon_names = list(axon_ends.keys())
 
@@ -282,6 +362,8 @@ neuron_IPSP = 870.0 # nA
 #neuron_tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
 #neuron_t_spont_next = -1
 
+# delay = 200
+
 def neuron_builder(soma_name:str, axon_name:str):
     print('Createing neuron with soma ID %d and axon ID %d' % (soma_compartments[soma_name].ID, axon_compartments[axon_name].ID))
     return bg_api.BGNES_BS_neuron_create(
@@ -297,23 +379,36 @@ def neuron_builder(soma_name:str, axon_name:str):
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
 
-# neuron consists of a soma and an axon. 
-# you're simply pairing a soma and an axon to make all connections needed to form a desired circuit.
-# but here, you 're only defining one axon (as the "official" axon; typically the longest one) per neuron.
-# other axons are established separately through the receptor definition that links axons to somas. 
-# when a neuron is "fired", its output branches to all axons it's connected to through when axons were defined.
+def neuron_builder_special(soma_name:str, axon_name:str):
+    return bg_api.BGNES_BS_neuron_create(
+        Soma=soma_compartments[soma_name].ID, 
+        Axon=axon_compartments[axon_name].ID,
+        MembranePotential_mV=neuron_Vm_mV,
+        RestingPotential_mV=neuron_Vrest_mV,
+        SpikeThreshold_mV=neuron_Vact_mV,
+        DecayTime_ms=neuron_tau_AHP_ms,
+        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
+        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr + 200,
+        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+        PostsynapticPotentialAmplitude_nA=neuron_IPSP,
+    )
 
-# PinA = neuron_builder('P_inA', 'P_inA_P_out')
-# PinB = neuron_builder('P_inB', 'P_inB_P_out')
-PinA = neuron_builder('P_inA', 'P_inA_P_A0')
-PinB = neuron_builder('P_inB', 'P_inB_P_A1')
+Cin = neuron_builder('Cin', 'Cin_IC0')
+PinA = neuron_builder('P_inA', 'PinA_IA0')
+PinB = neuron_builder('P_inB', 'PinB_IA0')
 
-IA = neuron_builder('IA', 'IA_P_out')
+IA0 = neuron_builder('I_A0', 'IA0_PB0')
+# IA0 = neuron_builder_special('I_A0', 'IA0_PB0')
 
-PA0 = neuron_builder('P_A0', 'P_A0_P_out')
-PA1 = neuron_builder('P_A1', 'P_A1_P_out')
+# PB0 = neuron_builder_special('P_B0', 'PB0_IC0')
+PB0 = neuron_builder('P_B0', 'PB0_IC0')
 
-Pout = neuron_builder('P_out', 'P_out_axon')
+IC0 = neuron_builder_special('I_C0', 'IC0_Sum')
+PC0 = neuron_builder_special('P_C0', 'PC0_Cout')
+PC1 = neuron_builder_special('P_C1', 'PC1_Cout')
+
+Sum = neuron_builder_special('Sum', 'Sum_axon')
+Cout = neuron_builder_special('Cout', 'Cout_axon')
 
 # print('Neuron PinA has ID %d' % PinA.ID)
 # print('Neuron PinB has ID %d' % PinB.ID)
@@ -323,28 +418,41 @@ Pout = neuron_builder('P_out', 'P_out_axon')
 # 3.5 Create interneurons.
 
 cells = {
+    'Cin': Cin,
     'P_inA': PinA,
     'P_inB': PinB,
 
-    'P_A0': PA0,
-    'P_A1': PA1,
+    'I_A0': IA0,
 
-    'IA': IA,
-    'P_out': Pout,
+    'P_B0': PB0,
+    
+    'I_C0': IC0,
+    'P_C0': PC0,
+    'P_C1': PC1,
+
+    'Sum': Sum,
+    'Cout': Cout,
 }
 
 input_neurons = {
+    'Cin': Cin,
     'P_inA': PinA,
     'P_inB': PinB,
 }
 LayerA_neurons = {
-    'P_A0': PA0,
-    'P_A1': PA1,
-
-    'IA': IA,
+    'I_A0': IA0,
+}
+LayerB_neurons = {
+    'P_B0': PB0,
+}
+LayerC_neurons = {
+    'I_C0': IC0,
+    'P_C0': PC0,
+    'P_C1': PC1,   
 }
 output_neurons = {
-    'P_out': Pout,
+    'Sum': Sum,
+    'Cout': Cout,
 }
 
 # 3.6 Create receptors for active connections.
@@ -352,35 +460,42 @@ output_neurons = {
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
 
-# P_inA_P_out_weight = 1.0 # Greater weight means stronger PSP amplitude.
-# P_inB_P_out_weight = 1.0
-P_inA_P_A0_weight = 1.0
-P_inB_P_A1_weight = 1.0
+# normal weights: 
+weight = 1.0
 
-P_A0_P_out_weight = 1.0
-P_A1_P_out_weight = 1.0
-
-P_inA_IA_weight = 0.6
-P_inB_IA_weight = 0.6
-
-IA_Pout_weight = 2.3
+# interneurons for XOR logic:
+Pin_IA_weight = 0.5 
+Pin_PB0_weight = 0.9    
+IA0_PB0_weight = 2.0    
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
 # defining how neurons should interact with each other. 
 # need this for all connections within a circuit (all axons)
 
 connection_pattern_set = {
+    'Cin_IC0': ( 'Cin_IC0', 'I_C0', AMPA_conductance, weight ),
+    'Cin_PC1': ( 'Cin_IC0', 'P_C1', AMPA_conductance, weight ),
+    'Cin_Sum': ( 'Cin_IC0', 'Sum', AMPA_conductance, weight ),
 
-    'P_inA_P_A0':  ( 'P_inA_P_A0', 'P_A0', AMPA_conductance, P_inA_P_A0_weight),
-    'P_inB_P_A1':  ( 'P_inB_P_A1', 'P_A1', AMPA_conductance, P_inB_P_A1_weight),
+    'PinA_IA0': ( 'PinA_IA0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
+    'PinA_PB0': ( 'PinA_IA0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
+    'PinA_PC0': ( 'PinA_IA0', 'P_C0', AMPA_conductance, weight ),
 
-    'P_inA_IA':    ( 'P_inA_P_A0', 'IA', AMPA_conductance, P_inA_IA_weight),
-    'P_inB_IA':    ( 'P_inB_P_A1', 'IA', AMPA_conductance, P_inB_IA_weight),
+    'PinB_IA0': ( 'PinB_IA0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
+    'PinB_PB0': ( 'PinB_IA0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
+    'PinB_PC0': ( 'PinB_IA0', 'P_C0', AMPA_conductance, weight ),
 
-    'P_A0_P_out':  ( 'P_A0_P_out', 'P_out', AMPA_conductance, P_A0_P_out_weight),
-    'P_A1_P_out':  ( 'P_A1_P_out', 'P_out', AMPA_conductance, P_A1_P_out_weight),
+    'IA0_PB0': ( 'IA0_PB0', 'P_B0', GABA_conductance, IA0_PB0_weight ),
 
-    'IA_P_out':    ( 'IA_P_out', 'P_out', GABA_conductance, IA_Pout_weight),
+    'PB0_IC0': ( 'PB0_IC0', 'I_C0', AMPA_conductance, weight ),
+    'PB0_PC1': ( 'PB0_IC0', 'P_C1', AMPA_conductance, weight ),
+    'PB0_Sum': ( 'PB0_IC0', 'Sum', AMPA_conductance, weight ),
+
+    'IC0_Sum': ( 'IC0_Sum', 'Sum', GABA_conductance, weight ),
+
+    'PC0_Cout': ( 'PC0_Cout', 'Cout', AMPA_conductance, weight ),
+
+    'PC1_Cout': ( 'PC1_Cout', 'Cout', AMPA_conductance, weight ),
 }
 
 # *** ORIGINAL CONNECTION MAKING ALGORITHM:
@@ -464,6 +579,27 @@ spiking sequences:
 print(STIMTEXT1)
 
 t_soma_fire_ms = [
+    # full adder test
+    # (100.0, cells['Cin'].ID),
+
+    # (200.0, cells['P_inB'].ID),
+
+    # (300.0, cells['P_inB'].ID),
+    # (300.0, cells['Cin'].ID),
+
+    # (400.0, cells['P_inA'].ID),
+
+    # (500.0, cells['P_inA'].ID),
+    # (500.0, cells['Cin'].ID),
+
+    # (600.0, cells['P_inA'].ID),
+    # (600.0, cells['P_inB'].ID),
+
+    # (700.0, cells['P_inA'].ID),
+    # (700.0, cells['P_inB'].ID),
+    # (700.0, cells['Cin'].ID),
+
+    # xor test
     (100.0, cells['P_inA'].ID),
     (200.0, cells['P_inB'].ID),
     (300.0, cells['P_inA'].ID),

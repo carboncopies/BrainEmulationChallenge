@@ -41,7 +41,8 @@ if Args.Local:
 randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 500.0
-savefolder = 'output/'+str(datetime.now()).replace(":", "_")
+# savefolder = 'output/'+str(datetime.now()).replace(":", "_")
+savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
@@ -85,9 +86,9 @@ INITTEXT1='''
 
    P_in0 (-45,-45) -----------------------+ // note that P_A0 has been removed
                 |                         |
-                +----> I_A0 (-15,-15) --> P_B0 (15,-15) --+
-                                                          P_out (45, 0)
-                +----> I_A1 (-15, 15) --> P_B1 (15, 15) --+
+                +----> I_A0 (-15,-15) \ > P_B0 (15,-15) --+
+                                       X                   P_out (45, 0)
+                +----> I_A1 (-15, 15) / > P_B1 (15, 15) --+
                 |                         |
    P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
 
@@ -316,6 +317,8 @@ Pin1 = neuron_builder('P_in1', 'P_in1_P_B1') # *** DO WE NEED TO WORRY ABOUT THE
 # PA1  = neuron_builder('P_A1', 'P_A1_P_B1')
 PB0  = neuron_builder_special('P_B0', 'P_B0_P_out')
 PB1  = neuron_builder_special('P_B1', 'P_B1_P_out')
+# PB0  = neuron_builder('P_B0', 'P_B0_P_out')
+# PB1  = neuron_builder('P_B1', 'P_B1_P_out')
 Pout = neuron_builder('P_out', 'P_out_axon')
 
 # 3.5 Create interneurons.
