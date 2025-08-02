@@ -176,7 +176,7 @@ def GetMostRecentDBEntryOUT(DBdata:dict, key:str, modelfromIN:bool, modelname:st
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: missing OUT')
     return DBentry['OUT']
 
-def ClientFromArgs(Args):
+def ClientFromArgs(DBdata:dict, Args):
     # Create Client Configuration For Local Simulation
     print(" -- Creating Client Configuration For Local Simulation")
     ClientCfg = NES.Client.Configuration()
@@ -199,7 +199,7 @@ def ClientFromArgs(Args):
 
     return ClientCfg, ClientInstance
 
-def NewSimulation(Name:str, Seed=0):
+def NewSimulation(DBdata:dict, ClientInstance, Name, Seed=0):
     # Create A New Simulation
     print(" -- Creating Simulation")
     SimulationCfg = NES.Simulation.Configuration()

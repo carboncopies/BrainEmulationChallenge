@@ -31,6 +31,7 @@ Parser.add_argument("-Port", default=8000, type=int, help="Port number to connec
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-STDP", default=False, type=bool, help="Enable STDP")
+Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -43,9 +44,9 @@ DBdata = vbp.InitExpDB(
     _initOUT = {
     })
 
-ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
+ClientCfg, ClientInstance = vbp.ClientFromArgs(DBdata, Args)
 
-SimulationCfg, MySim = vbp.NewSimulation('LIFCtest')
+SimulationCfg, MySim = vbp.NewSimulation(DBdata, ClientInstance, 'LIFCtest', Seed=Args.Seed)
 
 MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
 MySim.SetSTDP(_DoSTDP=Args.STDP)
@@ -162,7 +163,7 @@ def makeNeuron(
     Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
     Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
 
-    neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
+    return MySim.AddLIFCNeuron(Cfg)
 
 # Create neurons
 PyrIn['neuron'] = makeNeuron(
@@ -224,7 +225,7 @@ def makePreSynReceptor(
     Cfg.voltage_gated = voltage_gated
 
     Cfg.ReceptorMorphology = shapeID
-    receptor = self.Simulation.Sim.AddLIFCReceptor(Cfg)
+    return MySim.AddLIFCReceptor(Cfg)
 
 Synapses = {}
 # Create receptors as determined in IF_with_stdp.py
@@ -235,26 +236,29 @@ g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*21
 g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21
 g_peak_GABA = int(10*0.0086/0.0086)*80e-3*21
 onset_delay = 1.0 + (100*1e-6)/1
-Synapses['PyrInPyrOut_AMPA'] = makePrePostReceptor(
+Synapses['PyrInPyrOut_AMPA'] = makePreSynReceptor(
     'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'AMPA',
     0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay,
     'Hebbian', 0.01, 0.01, 20.0, 20.0,
     False,
     Synapses['PyrInPyrOut'].ID)
-Synapses['PyrInPyrOut_NMDA'] = makePrePostReceptor(
+Synapses['PyrInPyrOut_NMDA'] = makePreSynReceptor(
     'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'NMDA',
     0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay,
     'None', 0, 0, 0, 0,
     True,
     Synapses['PyrInPyrOut'].ID)
-Synapses['IntInPyrOut_GABA'] = makePrePostReceptor('IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+Synapses['IntInPyrOut_GABA'] = makePreSynReceptor(
+    'IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'GABA',
     -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay,
     'None', 0, 0, 0, 0,
     False,
     Synapses['IntInPyrOut'].ID)
+
+MySim.ModelSave('LIFtest')
 
 # Set stimulation times
 T = 4000
