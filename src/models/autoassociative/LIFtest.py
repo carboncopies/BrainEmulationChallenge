@@ -30,6 +30,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
+Parser.add_argument("-STDP", default=False, type=bool, help="Enable STDP")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -47,6 +48,7 @@ ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
 SimulationCfg, MySim = NewSimulation('LIFCtest')
 
 MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
+MySim.SetSTDP(_DoSTDP=Args.STDP)
 
 PyrIn = {}
 IntIn = {}
