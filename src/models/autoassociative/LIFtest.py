@@ -304,34 +304,48 @@ NMDAQuantityPerSynapse = int(NMDAChannelsProportion*PyrInPyrOut_Area_um2/0.0086)
 GABAQuantityPerSynapse = int(GABAChannelsProportion*IntInPyrOut_Area_um2/0.0086)
 
 # Calculated in AddNetmorphLIFCReceptor
-g_peak_AMPA = AMPAQuantityPerSynapse*g_rec_peak_AMPA*NUMPyrInPyrOut
-g_peak_NMDA = NMDAQuantityPerSynapse*g_rec_peak_NMDA*NUMPyrInPyrOut
-g_peak_GABA = GABAQuantityPerSynapse*g_rec_peak_GABA*NUMIntInPyrOut
+g_peak_AMPA = AMPAQuantityPerSynapse*g_rec_peak_AMPA #*NUMPyrInPyrOut
+g_peak_NMDA = NMDAQuantityPerSynapse*g_rec_peak_NMDA #*NUMPyrInPyrOut
+g_peak_GABA = GABAQuantityPerSynapse*g_rec_peak_GABA #*NUMIntInPyrOut
 onset_delay_AMPA = PyrInPyrOut_syndelay + (PyrInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
 onset_delay_NMDA = PyrInPyrOut_syndelay + (PyrInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
 onset_delay_GABA = IntInPyrOut_syndelay + (IntInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
 
-Synapses['PyrInPyrOut_AMPA'] = makePreSynReceptor(
-    'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-    'AMPA',
-    0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay_AMPA,
-    'Hebbian', 0.01, 0.01, 20.0, 20.0,
-    False,
-    Synapses['PyrInPyrOut'].ID)
-Synapses['PyrInPyrOut_NMDA'] = makePreSynReceptor(
-    'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-    'NMDA',
-    0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay_NMDA,
-    'None', 0, 0, 0, 0,
-    True,
-    Synapses['PyrInPyrOut'].ID)
-Synapses['IntInPyrOut_GABA'] = makePreSynReceptor(
-    'IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
-    'GABA',
-    -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay_GABA,
-    'None', 0, 0, 0, 0,
-    False,
-    Synapses['IntInPyrOut'].ID)
+Synapses['PyrInPyrOut_AMPA'] = []
+Synapses['PyrInPyrOut_NMDA'] = []
+Synapses['IntInPyrOut_GABA'] = []
+
+for s in range(NUMPyrInPyrOut):
+    Synapses['PyrInPyrOut_AMPA'].append(
+        makePreSynReceptor(
+            'PyrInPyrOut_AMPA_%2d' % s, PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+            'AMPA',
+            0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay_AMPA,
+            'Hebbian', 0.01, 0.01, 20.0, 20.0,
+            False,
+            Synapses['PyrInPyrOut'].ID)
+        )
+    Synapses['PyrInPyrOut_NMDA'].append(
+        makePreSynReceptor(
+            'PyrInPyrOut_NMDA_%2d' % s, PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+            'NMDA',
+            0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay_NMDA,
+            'None', 0, 0, 0, 0,
+            True,
+            Synapses['PyrInPyrOut'].ID)
+        )
+
+for s in range(NUMIntInPyrOut):
+    Synapses['IntInPyrOut_GABA'].append(
+        makePreSynReceptor(
+            'IntInPyrOut_GABA_%2d' % s, IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+            'GABA',
+            -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay_GABA,
+            'None', 0, 0, 0, 0,
+            False,
+            Synapses['IntInPyrOut'].ID)
+        )
+
 print('Made LIFC Receptors')
 
 MySim.ModelSave('LIFtest')
