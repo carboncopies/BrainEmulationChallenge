@@ -31,6 +31,7 @@ Parser.add_argument("-Port", default=8000, type=int, help="Port number to connec
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-STDP", default=False, type=bool, help="Enable STDP")
+Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -43,12 +44,14 @@ DBdata = vbp.InitExpDB(
     _initOUT = {
     })
 
-ClientCfg, ClientInstance = vbp.ClientFromArgs(Args)
+ClientCfg, ClientInstance = vbp.ClientFromArgs(DBdata, Args)
 
-SimulationCfg, MySim = vbp.NewSimulation('LIFCtest')
+SimulationCfg, MySim = vbp.NewSimulation(DBdata, ClientInstance, 'LIFCtest', Seed=Args.Seed)
+print('Simulation created')
 
 MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
 MySim.SetSTDP(_DoSTDP=Args.STDP)
+print('Options specified')
 
 PyrIn = {}
 IntIn = {}
@@ -65,6 +68,7 @@ def makeSphere(name, radius, center):
 PyrIn['soma'] = makeSphere('PyrIn_Soma', 10, [0, -30, 0])
 IntIn['soma'] = makeSphere('IntIn_Soma', 5, [0, 30, 0])
 PyrOut['soma'] = makeSphere('PyrOut_Soma', 10, [100, 0, 0])
+print('Made Spheres')
 
 def makeCylinder(name, point1, point2, radius1, radius2):
     CylinderCfg = NES.Shapes.Cylinder.Configuration()
@@ -79,6 +83,7 @@ def makeCylinder(name, point1, point2, radius1, radius2):
 PyrOut['dendrite'] = makeCylinder('PyrOut_Dendrite', [50, 0, 0], [95, 0, 0], 2, 3)
 PyrIn['axon'] = makeCylinder('PyrIn_Axon', [5, -30, 0], [50, 0, 0], 3, 2)
 IntIn['axon'] = makeCylinder('IntIn_Axon', [2.5, 30, 0], [50, 0, 0], 3, 2)
+print('Made Cylinders')
 
 # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
 def makeCompartment(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
@@ -100,6 +105,7 @@ IntIn['soma_comp'] = makeCompartment('IntIn_Soma_LIFC', -70, -55, -50, 100, 100,
 IntIn['axon_comp'] = makeCompartment('IntIn_Axon_LIFC', -70, -55, -50, 100, 100, -90, IntIn['axon'].ID)
 PyrOut['soma_comp'] = makeCompartment('PyrOut_Soma_LIFC', -70, -55, -50, 100, 100, -90, PyrOut['soma'].ID)
 PyrOut['dendrite_comp'] = makeCompartment('PyrOut_Dendrite_LIFC', -70, -55, -50, 100, 100, -90, PyrOut['dendrite'].ID)
+print('Made Compartments')
 
 def makeNeuron(
     name, SomaIDs, DendriteIDs, AxonIDs,
@@ -162,7 +168,7 @@ def makeNeuron(
     Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
     Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
 
-    neuron = self.Simulation.Sim.AddLIFCNeuron(Cfg)
+    return MySim.AddLIFCNeuron(Cfg)
 
 # Create neurons
 PyrIn['neuron'] = makeNeuron(
@@ -177,8 +183,8 @@ IntIn['neuron'] = makeNeuron(
     -70, -55, -50, 100, 100,
     -90,
     2.5, 30, 3.0, 5.0, 1.5,
-    30, 300, 0, 0, 0.3, # No sAHP at interneurons
-    -20, 20, 200, 0) # No ADP at interneurons
+    30, 300, 0, 0, 0.3,
+    -20, 20, 200, 0)
 PyrOut['neuron'] = makeNeuron(
     'PyrOut_Neuron', [PyrOut['soma_comp'].ID], [PyrOut['dendrite_comp'].ID], [],
     -70, -55, -50, 100, 100,
@@ -186,6 +192,7 @@ PyrOut['neuron'] = makeNeuron(
     2.5, 30, 3.0, 5.0, 1.5,
     30, 300, 1.0, 2.0, 0.3,
     -20, 20, 200, 0.3)
+print('Made LIFC Neurons')
 
 def makeBox(name, center, dimensions, rotation):
     BoxCfg = NES.Shapes.Box.Configuration()
@@ -224,53 +231,63 @@ def makePreSynReceptor(
     Cfg.voltage_gated = voltage_gated
 
     Cfg.ReceptorMorphology = shapeID
-    receptor = self.Simulation.Sim.AddLIFCReceptor(Cfg)
+    return MySim.AddLIFCReceptor(Cfg)
 
 Synapses = {}
 # Create receptors as determined in IF_with_stdp.py
 Synapses['PyrInPyrOut'] = makeBox('PyrInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 Synapses['IntInPyrOut'] = makeBox('IntInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
+print('Made Boxes')
 
-NUMPyrInPyrOut = 32
-NUMIntInPyrOut = 21
-
-g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*NUMPyrInPyrOut
-g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*NUMPyrInPyrOut
-g_peak_GABA = int(10*0.0086/0.0086)*80e-3*NUMIntInPyrOut
+g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*21 #35 # was *21
+g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21 #35 # was *21
+g_peak_GABA = int(10*0.0086/0.0086)*80e-3*21
 onset_delay = 1.0 + (100*1e-6)/1
-Synapses['PyrInPyrOut_AMPA'] = makePrePostReceptor(
+Synapses['PyrInPyrOut_AMPA'] = makePreSynReceptor(
     'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'AMPA',
     0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay,
     'Hebbian', 0.01, 0.01, 20.0, 20.0,
     False,
     Synapses['PyrInPyrOut'].ID)
-Synapses['PyrInPyrOut_NMDA'] = makePrePostReceptor(
+Synapses['PyrInPyrOut_NMDA'] = makePreSynReceptor(
     'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'NMDA',
     0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay,
     'None', 0, 0, 0, 0,
     True,
     Synapses['PyrInPyrOut'].ID)
-Synapses['IntInPyrOut_GABA'] = makePrePostReceptor('IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
+Synapses['IntInPyrOut_GABA'] = makePreSynReceptor(
+    'IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'GABA',
     -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay,
     'None', 0, 0, 0, 0,
     False,
     Synapses['IntInPyrOut'].ID)
+print('Made LIFC Receptors')
+
+MySim.ModelSave('LIFtest')
+print('Model saved')
 
 # Set stimulation times
-T = 8000
+T = 4000
 PyrIn_t_in = np.array([(t+1)*100 for t in range(int(0.75*T/100))])
-IntIn_t_in = PyrIn_t_in+3
+IntIn_t_in = PyrIn_t_in+10 # was +3
 timeneuronpairs_list = [(t, PyrIn['neuron'].ID) for t in PyrIn_t_in.tolist()]
 timeneuronpairs_list += [(t, IntIn['neuron'].ID) for t in IntIn_t_in.tolist()]
 MySim.SetSpecificAPTimes(timeneuronpairs_list)
+print('Simulation stimulation specified')
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
 MySim.RunAndWait(Runtime_ms=T, timeout_s=100.0)
+print('Functional stimulation completed')
 
 recording_dict = MySim.GetRecording()
+print('Recorded data retrieved')
 
-print(recording_dict)
+if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
+print('Data plot saved as PDF')
+
+print('Done')
