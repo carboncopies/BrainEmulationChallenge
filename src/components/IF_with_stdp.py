@@ -55,7 +55,7 @@ if classical_IF:
 
 with_explicit_voltage_gating = True # default: True
 with_adp = True # Applies to pyramidal neurons
-with_stdp = False # Applies to AMPA receptors onto pyramidal neurons
+with_stdp = True # Applies to AMPA receptors onto pyramidal neurons
 clipping_AHP_and_ADP = True # default: True
 with_dynamic_threshold_floor = True # default: True
 with_fatigue_threshold = True # default: False
@@ -294,6 +294,8 @@ class IF_neuron:
         self.t_last_spike = -1000
         self.t_postspikes = []
 
+        self.T_ = -1.0
+
         # Recordings
         self.samples = {
             'fAHP': np.zeros(n_steps), # In C++, we probably will not record this.
@@ -309,6 +311,19 @@ class IF_neuron:
         self.norm_fAHP = compute_normalization(self.tau_rise_fAHP, self.tau_decay_fAHP)
         self.norm_sAHP = compute_normalization(self.tau_rise_sAHP, self.tau_decay_sAHP)
         self.norm_ADP = compute_normalization(self.tau_rise_ADP, self.tau_decay_ADP)
+
+        print('g_peak_fAHP: '+str(self.g_peak_fAHP))
+        print('tau_rise_fAHP: '+str(self.tau_rise_fAHP))
+        print('tau_decay_fAHP: '+str(self.tau_decay_fAHP))
+
+        print('g_peak_sAHP: '+str(self.g_peak_sAHP))
+        print('tau_rise_sAHP: '+str(self.tau_rise_sAHP))
+        print('tau_decay_sAHP: '+str(self.tau_decay_sAHP))
+
+        print('g_peak_ADP: '+str(self.g_peak_ADP))
+        print('tau_rise_ADP: '+str(self.tau_rise_ADP))
+        print('tau_decay_ADP: '+str(self.tau_decay_ADP))
+
         print('norm_fAHP: '+str(self.norm_fAHP))
         print('norm_sAHP: '+str(self.norm_sAHP))
         print('norm_ADP: '+str(self.norm_ADP))
@@ -422,7 +437,8 @@ class IF_neuron:
 
     def update_membrane_potential_exponential_Euler_Cm(self, i):
         # (Exponential Euler tau_eff/Cm:) Membrane potential update.
-        g_total = self.g_L + self.g_fAHP + self.g_sAHP + self.g_ADP + sum([p.g for p in self.presyn]) # nS
+        sum_g = sum([p.g for p in self.presyn])
+        g_total = self.g_L + self.g_fAHP + self.g_sAHP + self.g_ADP + sum_g # nS
         E_total = (self.g_L * self.V_rest
             + self.g_fAHP * self.E_AHP
             + self.g_sAHP * self.E_AHP
@@ -505,6 +521,8 @@ class IF_neuron:
             self.update_with_classical_reset_clamp(i, t)
         else:
             self.update_with_reset_options(i, t)
+
+        self.T_ = t
 
     def record(self, i):
         self.samples['Vm'][i] = self.Vm
