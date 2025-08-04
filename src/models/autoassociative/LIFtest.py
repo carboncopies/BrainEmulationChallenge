@@ -233,37 +233,102 @@ def makePreSynReceptor(
     Cfg.ReceptorMorphology = shapeID
     return MySim.AddLIFCReceptor(Cfg)
 
+def makeNetmorphPreSynReceptor(
+    name, sourcecompID, destcompID, receptortype, E,
+    tau_rise, tau_decay, g_rec_peak, quantity,
+    hilloc_distance, velocity, syn_delay, voltage_gated,
+    weight, STDP_type, A_pos, A_neg, tau_pos, tau_neg,
+    shapeID):
+    Cfg = NES.Models.Connections.NetmorphLIFCReceptor.Configuration()
+    Cfg.Name = name
+    Cfg.SourceCompartment = sourcecompID
+    Cfg.DestinationCompartment = destcompID
+
+    Cfg.Neurotransmitter = receptortype
+    Cfg.ReversalPotential_mV = E
+    Cfg.PSPRise_ms = tau_rise
+    Cfg.PSPDecay_ms = tau_decay
+    Cfg.ReceptorPeakConductance_nS = g_rec_peak
+    Cfg.ReceptorQuantity = quantity
+
+    Cfg.HillocDistance_um = hilloc_distance
+    Cfg.Velocity_mps = velocity
+    Cfg.SynapticDelay_ms = syn_delay
+    Cfg.voltage_gated = voltage_gated
+
+    Cfg.Weight = weight
+    Cfg.STDP_Method = STDP_type # 'Hebbian', 'Anti-Hebbian', 'None'
+    Cfg.STDP_A_pos = A_pos
+    Cfg.STDP_A_neg = A_neg
+    Cfg.STDP_Tau_pos = tau_pos
+    Cfg.STDP_Tau_neg = tau_neg
+
+    Cfg.ReceptorMorphology = shapeID
+    return MySim.AddNetmorphLIFCReceptor(Cfg)
+
 Synapses = {}
 # Create receptors as determined in IF_with_stdp.py
 Synapses['PyrInPyrOut'] = makeBox('PyrInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 Synapses['IntInPyrOut'] = makeBox('IntInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 print('Made Boxes')
 
+# Morphology info: Number of synapses, e.g. typically generated in Netmorph
 NUMPyrInPyrOut = 32
 NUMIntInPyrOut = 21
 
-g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*NUMPyrInPyrOut
-g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*NUMPyrInPyrOut
-g_peak_GABA = int(10*0.0086/0.0086)*80e-3*NUMIntInPyrOut
-onset_delay = 1.0 + (100*1e-6)/1
+# Steps that typically happen in Netmorph to NES conversion
+#   These can happen in a number of ways.
+#   Morphology info: Should correspond to PSD area at Netmorph generated synapse
+PyrInPyrOut_Area_um2 = 60*0.0086
+IntInPyrOut_Area_um2 = 10*0.0086
+
+PyrInPyrOut_Hilloc_Distance_um = 100
+IntInPyrOut_Hilloc_Distance_um = 100
+
+#   Functional info: Proportions of receptor channels where they coreside at a synapse
+AMPAChannelsProportion = 0.83
+NMDAChannelsProportion = 0.17
+GABAChannelsProportion = 1.00
+
+g_rec_peak_AMPA = 20e-3 # nS
+g_rec_peak_NMDA = 50e-3 # nS
+g_rec_peak_GABA = 80e-3 # nS
+
+propagation_velocity = 1.0 # m/s
+PyrInPyrOut_syndelay = 1.0 # ms
+IntInPyrOut_syndelay = 1.0 # ms
+
+#   This conversion should precede calling AddNetmorphLIFCReceptor
+AMPAQuantityPerSynapse = int(AMPAChannelsProportion*PyrInPyrOut_Area_um2/0.0086)
+NMDAQuantityPerSynapse = int(NMDAChannelsProportion*PyrInPyrOut_Area_um2/0.0086)
+GABAQuantityPerSynapse = int(GABAChannelsProportion*IntInPyrOut_Area_um2/0.0086)
+
+# Calculated in AddNetmorphLIFCReceptor
+g_peak_AMPA = AMPAQuantityPerSynapse*g_rec_peak_AMPA*NUMPyrInPyrOut
+g_peak_NMDA = NMDAQuantityPerSynapse*g_rec_peak_NMDA*NUMPyrInPyrOut
+g_peak_GABA = GABAQuantityPerSynapse*g_rec_peak_GABA*NUMIntInPyrOut
+onset_delay_AMPA = PyrInPyrOut_syndelay + (PyrInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
+onset_delay_NMDA = PyrInPyrOut_syndelay + (PyrInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
+onset_delay_GABA = IntInPyrOut_syndelay + (IntInPyrOut_Hilloc_Distance_um*1e-6/propagation_velocity)
+
 Synapses['PyrInPyrOut_AMPA'] = makePreSynReceptor(
     'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'AMPA',
-    0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay,
+    0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay_AMPA,
     'Hebbian', 0.01, 0.01, 20.0, 20.0,
     False,
     Synapses['PyrInPyrOut'].ID)
 Synapses['PyrInPyrOut_NMDA'] = makePreSynReceptor(
     'PyrInPyrOut_NMDA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'NMDA',
-    0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay,
+    0, 2.0, 100, g_peak_NMDA, 0.5, onset_delay_NMDA,
     'None', 0, 0, 0, 0,
     True,
     Synapses['PyrInPyrOut'].ID)
 Synapses['IntInPyrOut_GABA'] = makePreSynReceptor(
     'IntInPyrOut_GABA', IntIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
     'GABA',
-    -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay,
+    -70, 0.5, 10, g_peak_GABA, 0.5, onset_delay_GABA,
     'None', 0, 0, 0, 0,
     False,
     Synapses['IntInPyrOut'].ID)

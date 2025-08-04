@@ -66,10 +66,14 @@ with_fatigue_threshold = True # default: False
 spike_option = 'no-reset' # 'reset-onset', 'reset-after', 'no-reset'
 
 class Netmorph_Syn:
-    def __init__(self, n_from, n_to, receptor, PSD_area_um2, g_rec_peak, tau_rise, tau_decay, hilloc_distance, velocity, syn_delay, voltage_gated):
+    def __init__(self, n_from, n_to, receptor,
+        PSD_area_um2, g_rec_peak, tau_rise, tau_decay,
+        hilloc_distance, velocity, syn_delay, voltage_gated):
+
         self.n_from = n_from
         self.n_to = n_to
         self.receptor = receptor
+
         self.quantity = int(PSD_area_um2 / 0.0086)
         self.voltage_gated = voltage_gated
         self.g_rec_peak = g_rec_peak # nS (nano Siemens)
