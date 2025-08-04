@@ -7,17 +7,16 @@ start_time = time.time()
 # Simulation parameters
 dt = 1.0  # ms
 #T = 950
-T = 4000
+T = 8000
 t_samples = np.arange(0, T, dt)
 n_steps = len(t_samples)
 
+NUMPyrInPyrOut = 32
+NUMIntInPyrOut = 21
+
+# Stimulation related options
 burst_drive = False # default: False
 compact_burst_driver = True # default: True
-compact_driver_spikes = 10
-long_driver_spikes = 200
-
-Cm_option = True # default: True
-use_exponential_Euler = True # default: True
 
 quantal_trigger = False # input just enough to trigger a spike
 
@@ -28,16 +27,38 @@ if burst_drive:
 long_regular_input = True # Otherwise a single input from PyrIn and one from IntIn
 simulate_recurrent_inhibition = True # but from only a single interneuron!
 
-with_explicit_voltage_gating = True # default: True
-with_adp = True # Applies to pyramidal neurons
-with_stdp = True # Applies to AMPA receptors onto pyramidal neurons
-clipping_AHP_and_ADP = True # default: True
-with_dynamic_threshold_floor = True # default: True
-with_fatigue_threshold = True # default: False
+tau_sim_rec_inhibition = 3
+tau_sim_async_inhibition = 150
 
+compact_driver_spikes = 10
+compact_spacing_ms = 5
+non_compact_spacing_ms = 10
+long_driver_spikes = 200
+regular_spacing_ms = 100
+if burst_drive:
+    if compact_burst_driver:
+        t_in = np.array([(t+1)*compact_spacing_ms for t in range(compact_driver_spikes)])
+    else:
+        t_in = np.array([(t+1)*non_compact_spacing_ms for t in range(long_driver_spikes)])
+else:
+    if long_regular_input:
+        t_in = np.array([(t+1)*regular_spacing_ms for t in range(int(0.75*T/regular_spacing_ms))])
+    else:
+        t_in = np.array([regular_spacing_ms])
+
+# Model related options
+Cm_option = True # default: True
+use_exponential_Euler = True # default: True
 classical_IF = False # default: False
 if classical_IF:
     use_exponential_Euler = False
+
+with_explicit_voltage_gating = True # default: True
+with_adp = True # Applies to pyramidal neurons
+with_stdp = False # Applies to AMPA receptors onto pyramidal neurons
+clipping_AHP_and_ADP = True # default: True
+with_dynamic_threshold_floor = True # default: True
+with_fatigue_threshold = True # default: False
 
 # reset-after works fairly well right now
 # reset-onset is just about as good
@@ -52,9 +73,13 @@ class Netmorph_Syn:
         self.quantity = int(PSD_area_um2 / 0.0086)
         self.voltage_gated = voltage_gated
         self.g_rec_peak = g_rec_peak # nS (nano Siemens)
-        if self.voltage_gated:
-            # Adjusted to achieve desired g_peak with voltage-gated Mg2++ block modulation
-            self.g_rec_peak *= 5.0
+        # *** Commenting out the following, because this can be introduced as needed
+        #     and as makes biological sense through g_rec_peak.
+        #     g_rec_peak should represent the peak conductance through a ion channel
+        #     (when not blocked).
+        # if self.voltage_gated:
+        #     # Adjusted to achieve desired g_peak with voltage-gated Mg2++ block modulation
+        #     self.g_rec_peak *= 5.0
         self.tau_rise = tau_rise
         self.tau_decay = tau_decay
         self.hilloc_distance = hilloc_distance # um
@@ -132,8 +157,14 @@ class PreSyn:
         self.tau_neg = tau_neg
 
         self.norm = compute_normalization(self.tau_rise, self.tau_decay) # Pre-calculate normalization
+        print('\nReceptor: %s' % str(self.receptor))
         print('g_peak_%s: %s' % (self.receptor, str(self.g_peak)))
         print('norm_%s: %s' % (self.receptor, str(self.norm)))
+        print('tau_rise: %s' % str(self.tau_rise))
+        print('tau_decay: %s' % str(self.tau_decay))
+        print('weight: %s' % str(self.weight))
+        print('onset_delay: %s' % str(self.onset_delay))
+        print('voltage_gated: %s' % str(self.voltage_gated))
 
         self.g_k = np.zeros(n_steps) # In the C++ implementation, we probably don't record these
 
@@ -182,6 +213,7 @@ class IF_neuron:
     def __init__(self, neuron_id, force_spikes, presyn):
 
         self.id = neuron_id
+        print('\nNeuron %s' % str(self.id))
 
         self.force_spikes = force_spikes
 
@@ -499,27 +531,15 @@ receptor_STDP = {
 
 # Neurons as per Netmorph data
 neurons = {}
-#PyrIn = IF_neuron(neuron_id='PyrIn', force_spikes=[100, 200, 300, 400], presyn=[])
-
-if burst_drive:
-    if compact_burst_driver:
-        t_in = np.array([(t+1)*5 for t in range(compact_driver_spikes)])
-    else:
-        t_in = np.array([(t+1)*10 for t in range(long_driver_spikes)])
-else:
-    if long_regular_input:
-        t_in = np.array([(t+1)*100 for t in range(int(0.75*T/100))])
-    else:
-        t_in = np.array([100])
 
 PyrIn = IF_neuron(neuron_id='PyrIn', force_spikes=t_in.tolist(), presyn=[])
 neurons[PyrIn.id] = PyrIn
 
 if include_inhibition:
     if simulate_recurrent_inhibition:
-        IntIn = IF_neuron(neuron_id='IntIn', force_spikes=(t_in+3).tolist(), presyn=[])
+        IntIn = IF_neuron(neuron_id='IntIn', force_spikes=(t_in+tau_sim_rec_inhibition).tolist(), presyn=[])
     else:
-        IntIn = IF_neuron(neuron_id='IntIn', force_spikes=(t_in+150).tolist(), presyn=[])
+        IntIn = IF_neuron(neuron_id='IntIn', force_spikes=(t_in+tau_sim_async_inhibition).tolist(), presyn=[])
 else:
     IntIn = IF_neuron(neuron_id='IntIn', force_spikes=[], presyn=[])
 IntIn.g_peak_sAHP = 0.0 # no slow AHP for interneurons
@@ -530,14 +550,24 @@ PyrOut = IF_neuron(neuron_id='PyrOut', force_spikes=[], presyn=[])
 neurons[PyrOut.id] = PyrOut
 
 # Synapses by receptor type as per Netmorph data
-# Making plenty of synapses, so that we can reach the typical 10-50 coactive synapses needed to drive from rest to firing.
+#   Making plenty of synapses, so that we can reach the typical 10-50 coactive
+#   synapses needed to drive from rest to firing.
 if with_explicit_voltage_gating:
     NMDA_g_rec_peak = 50e-3 # 50 pS intended peak at average open receptor gated fraction
 else:
     NMDA_g_rec_peak = 50e-3/2 # Adjusted to account for the absence of voltage-gated modulation
-nmsyn_PyrIn_PyrOut_AMPA = [Netmorph_Syn(PyrIn, PyrOut, 'AMPA', 0.83*60*0.0086, 20e-3, tau_rise=0.5, tau_decay=3, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(21)]
-nmsyn_PyrIn_PyrOut_NMDA = [Netmorph_Syn(PyrIn, PyrOut, 'NMDA', 0.17*60*0.0086, NMDA_g_rec_peak, tau_rise=2, tau_decay=100, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=with_explicit_voltage_gating) for i in range(21)]
-nmsyn_IntIn_PyrOut_AMPA = [Netmorph_Syn(IntIn, PyrOut, 'GABA', 10*0.0086, 80e-3, tau_rise=0.5, tau_decay=10, hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(21)] # maybe g_peak here should be 30e-3 instead of 80e-3
+nmsyn_PyrIn_PyrOut_AMPA = [
+    Netmorph_Syn(PyrIn, PyrOut, 'AMPA',
+        0.83*60*0.0086, 20e-3, tau_rise=0.5, tau_decay=3,
+        hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(NUMPyrInPyrOut)]
+nmsyn_PyrIn_PyrOut_NMDA = [
+    Netmorph_Syn(PyrIn, PyrOut, 'NMDA',
+        0.17*60*0.0086, NMDA_g_rec_peak, tau_rise=2, tau_decay=100,
+        hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=with_explicit_voltage_gating) for i in range(NUMPyrInPyrOut)]
+nmsyn_IntIn_PyrOut_AMPA = [
+    Netmorph_Syn(IntIn, PyrOut, 'GABA',
+        10*0.0086, 80e-3, tau_rise=0.5, tau_decay=10,
+        hilloc_distance=100, velocity=1, syn_delay=1.0, voltage_gated=False) for i in range(NUMIntInPyrOut)] # maybe g_peak here should be 30e-3 instead of 80e-3
 nmsyn = nmsyn_PyrIn_PyrOut_AMPA + nmsyn_PyrIn_PyrOut_NMDA + nmsyn_IntIn_PyrOut_AMPA
 
 
@@ -574,6 +604,8 @@ for n_id in neurons:
     nmsyn_by_neuron[n_id] = n_nmsyn
 
 # Steps 4-5
+# The following is done in NES via LIFCReceptorData when use_abstract_LIF_receptors
+# is true in Simulation.
 presyn_by_neuron = {} # collected by neuron by receptor type and by source
 for n_id in neurons:
     n_nmsyn = nmsyn_by_neuron[n_id]
@@ -635,7 +667,7 @@ for n_id in neurons:
 for n_id in presyn_by_neuron:
     neurons[n_id].set_presyn(presyn_by_neuron[n_id])
 
-print('Number of PyrIn Forced spikes: %d' % len(PyrIn.force_spikes))
+print('\nNumber of PyrIn Forced spikes: %d' % len(PyrIn.force_spikes))
 print('Number of IntIn Forced spikes: %d' % len(IntIn.force_spikes))
 
 # Simulation loop

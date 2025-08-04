@@ -177,8 +177,8 @@ IntIn['neuron'] = makeNeuron(
     -70, -55, -50, 100, 100,
     -90,
     2.5, 30, 3.0, 5.0, 1.5,
-    30, 300, 0, 0, 0.3,
-    -20, 20, 200, 0)
+    30, 300, 0, 0, 0.3, # No sAHP at interneurons
+    -20, 20, 200, 0) # No ADP at interneurons
 PyrOut['neuron'] = makeNeuron(
     'PyrOut_Neuron', [PyrOut['soma_comp'].ID], [PyrOut['dendrite_comp'].ID], [],
     -70, -55, -50, 100, 100,
@@ -231,9 +231,12 @@ Synapses = {}
 Synapses['PyrInPyrOut'] = makeBox('PyrInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 Synapses['IntInPyrOut'] = makeBox('IntInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 
-g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*21
-g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21
-g_peak_GABA = int(10*0.0086/0.0086)*80e-3*21
+NUMPyrInPyrOut = 32
+NUMIntInPyrOut = 21
+
+g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*NUMPyrInPyrOut
+g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*NUMPyrInPyrOut
+g_peak_GABA = int(10*0.0086/0.0086)*80e-3*NUMIntInPyrOut
 onset_delay = 1.0 + (100*1e-6)/1
 Synapses['PyrInPyrOut_AMPA'] = makePrePostReceptor(
     'PyrInPyrOut_AMPA', PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
@@ -257,7 +260,7 @@ Synapses['IntInPyrOut_GABA'] = makePrePostReceptor('IntInPyrOut_GABA', IntIn['ax
     Synapses['IntInPyrOut'].ID)
 
 # Set stimulation times
-T = 4000
+T = 8000
 PyrIn_t_in = np.array([(t+1)*100 for t in range(int(0.75*T/100))])
 IntIn_t_in = PyrIn_t_in+3
 timeneuronpairs_list = [(t, PyrIn['neuron'].ID) for t in PyrIn_t_in.tolist()]
