@@ -239,8 +239,8 @@ Synapses['PyrInPyrOut'] = makeBox('PyrInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0
 Synapses['IntInPyrOut'] = makeBox('IntInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
 print('Made Boxes')
 
-g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*21
-g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21
+g_peak_AMPA = int(0.83*60*0.0086/0.0086)*20e-3*21 #35 # was *21
+g_peak_NMDA = int(0.17*60*0.0086/0.0086)*50e-3*21 #35 # was *21
 g_peak_GABA = int(10*0.0086/0.0086)*80e-3*21
 onset_delay = 1.0 + (100*1e-6)/1
 Synapses['PyrInPyrOut_AMPA'] = makePreSynReceptor(
@@ -272,7 +272,7 @@ print('Model saved')
 # Set stimulation times
 T = 4000
 PyrIn_t_in = np.array([(t+1)*100 for t in range(int(0.75*T/100))])
-IntIn_t_in = PyrIn_t_in+3
+IntIn_t_in = PyrIn_t_in+10 # was +3
 timeneuronpairs_list = [(t, PyrIn['neuron'].ID) for t in PyrIn_t_in.tolist()]
 timeneuronpairs_list += [(t, IntIn['neuron'].ID) for t in IntIn_t_in.tolist()]
 MySim.SetSpecificAPTimes(timeneuronpairs_list)
