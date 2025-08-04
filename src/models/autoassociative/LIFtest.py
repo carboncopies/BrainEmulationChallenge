@@ -33,6 +33,8 @@ Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to 
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
 Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
 Parser.add_argument("-Reload", action="store_true", help="Reload saved model")
+Parser.add_argument("-Burst", action="store_true", help="Burst input")
+Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -403,8 +405,20 @@ T = 8000
 tau_sim_rec_inhibition = 3
 regular_spacing_ms = 100
 
-PyrIn_t_in = np.array([(t+1)*regular_spacing_ms for t in range(int(0.75*T/regular_spacing_ms))])
+compact_driver_spikes = 10
+compact_spacing_ms = 5
+long_driver_spikes = 200
+non_compact_spacing_ms = 10
+
+if Args.Burst:
+    if Args.Long:
+        PyrIn_t_in = np.array([(t+1)*non_compact_spacing_ms for t in range(long_driver_spikes)])
+    else:
+        PyrIn_t_in = np.array([(t+1)*compact_spacing_ms for t in range(compact_driver_spikes)])
+else:
+    PyrIn_t_in = np.array([(t+1)*regular_spacing_ms for t in range(int(0.75*T/regular_spacing_ms))])
 IntIn_t_in = PyrIn_t_in+tau_sim_rec_inhibition
+
 timeneuronpairs_list = [(t, PyrIn['neuron'].ID) for t in PyrIn_t_in.tolist()]
 timeneuronpairs_list += [(t, IntIn['neuron'].ID) for t in IntIn_t_in.tolist()]
 MySim.SetSpecificAPTimes(timeneuronpairs_list)
