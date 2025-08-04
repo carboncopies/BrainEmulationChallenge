@@ -54,16 +54,24 @@ MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be call
 MySim.SetSTDP(_DoSTDP=Args.STDP)
 print('Options specified')
 
+PyrIn = {}
+IntIn = {}
+PyrOut = {}
+
 if Args.Reload:
 
     MySim.ModelLoad('LIFtest')
     print('Reloaded LIFC Receptors')
 
-else:
+    class NeuronStub:
+        def __init__(self, _ID):
+            self.ID = _ID
+    
+    PyrIn['neuron'] = NeuronStub(0)
+    IntIn['neuron'] = NeuronStub(1)
+    PyrOut['neuron'] = NeuronStub(2)
 
-    PyrIn = {}
-    IntIn = {}
-    PyrOut = {}
+else:
 
     def makeSphere(name, radius, center):
         SphereCfg = NES.Shapes.Sphere.Configuration()
