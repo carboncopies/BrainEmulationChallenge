@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
-# xor_scnm_groundtruth_reservoir.py
-# Randal A. Koene, 20240731
+# xor_lifcnm_groundtruth_reservoir.py
+# Randal A. Koene, 20250804
 
 # This script is STEP 1 in the creation of realistic
 # ground-truth virtual tissue containing an intended
@@ -10,9 +10,6 @@
 # Netmorph on Netmorph script to grow a reservoir of
 # connections between pyramidal cell and interneuron
 # regions.
-#
-# For example, call this with the nesvbp-xor-res-sep-targets
-# script: ./xor_scnm_groundtruth_reservoir.py -modelfile nesvbp-xor-res-sep-targets
 #
 # The ModelSave API function is called to ensure that the resulting
 # NES Simulation model is stored in a rapid binary format on the server.
@@ -134,7 +131,7 @@ except:
 
 
 # Run Netmorph
-RunResponse = MySim.Netmorph_RunAndWait(modelcontent)
+RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
 if not RunResponse["Success"]:
     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
