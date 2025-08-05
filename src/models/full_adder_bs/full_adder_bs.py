@@ -388,14 +388,14 @@ def neuron_builder_special(soma_name:str, axon_name:str):
         SpikeThreshold_mV=neuron_Vact_mV,
         DecayTime_ms=neuron_tau_AHP_ms,
         AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
-        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr + 200,
-        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
+        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr + 50,
+        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd + 50,
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
 
 Cin = neuron_builder('Cin', 'Cin_IC0')
-PinA = neuron_builder('P_inA', 'PinA_IA0')
-PinB = neuron_builder('P_inB', 'PinB_IA0')
+PinA = neuron_builder_special('P_inA', 'PinA_PB0')
+PinB = neuron_builder_special('P_inB', 'PinB_PB0')
 
 IA0 = neuron_builder('I_A0', 'IA0_PB0')
 # IA0 = neuron_builder_special('I_A0', 'IA0_PB0')
@@ -477,13 +477,13 @@ connection_pattern_set = {
     'Cin_PC1': ( 'Cin_IC0', 'P_C1', AMPA_conductance, weight ),
     'Cin_Sum': ( 'Cin_IC0', 'Sum', AMPA_conductance, weight ),
 
-    'PinA_IA0': ( 'PinA_IA0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
-    'PinA_PB0': ( 'PinA_IA0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
-    'PinA_PC0': ( 'PinA_IA0', 'P_C0', AMPA_conductance, weight ),
+    'PinA_IA0': ( 'PinA_PB0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
+    'PinA_PB0': ( 'PinA_PB0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
+    'PinA_PC0': ( 'PinA_PB0', 'P_C0', AMPA_conductance, weight ),
 
-    'PinB_IA0': ( 'PinB_IA0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
-    'PinB_PB0': ( 'PinB_IA0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
-    'PinB_PC0': ( 'PinB_IA0', 'P_C0', AMPA_conductance, weight ),
+    'PinB_IA0': ( 'PinB_PB0', 'I_A0', AMPA_conductance, Pin_IA_weight ),
+    'PinB_PB0': ( 'PinB_PB0', 'P_B0', AMPA_conductance, Pin_PB0_weight ),
+    'PinB_PC0': ( 'PinB_PB0', 'P_C0', AMPA_conductance, weight ),
 
     'IA0_PB0': ( 'IA0_PB0', 'P_B0', GABA_conductance, IA0_PB0_weight ),
 
