@@ -34,7 +34,7 @@ usage() {
     echo "  -s  subdivide size (default 10)"
     echo "  -r  resolution (default 0.1 um)"
     echo "  -f  model file name (default nesvbp-xor-res-sep-targets)"
-    echo "  -m  model name (default xor_scnm)"
+    echo "  -m  model name (default xor_lifcnm)"
     echo "  -n  Generate Neuroglancer data"
     echo "  -S  Generate segmentation files"
     echo "  -M  Generate mesh files"
