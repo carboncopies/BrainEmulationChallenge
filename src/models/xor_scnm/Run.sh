@@ -22,6 +22,10 @@ forceURLbase=""
 usage() {
     echo "Usage: $0 [-R] [-x execute-at] [-s subdivide] [-r resolution] [-f modelfile] [-m modelname] [-n] [-S] [-M] [-F baseURL] [-i simID]"
     echo "  -R  running locally to remote API server at $Rhost:$Rport"
+    echo "      Note that you can also use this option when running the"
+    echo "      front-end on the remote server. It will then produce a"
+    echo "      URL that you can use on a local browser to view"
+    echo "      generated Neuroglancer output."
     echo "  -x  start executing at step (default r)"
     echo "      options are:"
     echo "        r - reservoir generation (Netmorph)"
@@ -37,8 +41,31 @@ usage() {
     echo "  -F  Force URL base of Neuroglancer URL (only needed if running"
     echo "      this script on remote API server but browsing locally)"
     echo "  -i  reconnect with simID and (re)run acquisition"
+    echo ""
+    echo "Examples:"
+    echo ""
+    echo "  ./Run.sh -R"
+    echo "  Carries out reservoir generation, connectome tuning and data acquisition."
+    echo "  Assumes API calls to remote server."
+    echo ""
+    echo "  ./Run.sh -a"
+    echo "  Reuses previously generated reservoir and connectome models. Carries out"
+    echo "  only data acquisition."
+    echo ""
+    echo "  ./Run.sh -f different-output"
+    echo "  As above, but stores models with as 'different-output', not overwriting"
+    echo "  the default 'xor_scnm' models."
+    echo ""
+    echo "  ./Run.sh -R -n -S -M"
+    echo "  Carries out reservoir generation, connectome tuning, data acquisition, and"
+    echo "  then also converts to Neuroglancer image format, adds Segmentation files"
+    echo "  for Neuroglancer and Mesh files for Neuroglancer."
+    echo "  Assumes API calls to remote server, so that a URL is returned that can"
+    echo "  be used to view the resulting data in Neuroglancer on your local browser."
+
     exit 1
 }
+
 
 # Parse command line arguments
 while getopts "Rs:r:f:m:x:nSMF:i:" opt; do
