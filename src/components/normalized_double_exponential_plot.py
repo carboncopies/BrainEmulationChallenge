@@ -10,9 +10,12 @@ def compute_normalization(tau_rise, tau_decay):
     return norm
 
 # 1) define your parameter ranges
-spike_dts   = np.linspace(0.1, 5.0, 25)   # e.g. 0.1–5 ms
-tau_rises   = np.linspace(0.5, 5.0, 25)   # e.g. 0.5–5 ms
-tau_decays  = np.linspace(1.0, 10.0, 25)  # e.g. 1–10 ms
+# spike_dts   = np.linspace(0.1, 5.0, 25)   # e.g. 0.1–5 ms
+# tau_rises   = np.linspace(0.5, 5.0, 25)   # e.g. 0.5–5 ms
+# tau_decays  = np.linspace(1.0, 10.0, 25)  # e.g. 1–10 ms
+spike_dts   = np.linspace(1.0, 200.0, 50)   # e.g. 0.1–5 ms
+tau_rises   = np.linspace(1.0, 50.0, 25)   # e.g. 0.5–5 ms
+tau_decays  = np.linspace(1.5, 100.5, 25)  # e.g. 1–10 ms
 
 # 2) build a 3D grid of all combinations
 SD, TR, TD = np.meshgrid(spike_dts, tau_rises, tau_decays, indexing='ij')
@@ -28,7 +31,9 @@ g_norm = np.exp(-sd/td) - np.exp(-sd/tr)
 out = g_norm / norm
 
 # 5) mask out any invalid points (e.g. tau_rise == tau_decay)
-valid = tr != td
+#valid = tr != td
+#valid = tr < td
+valid = out > 0.9
 sd = sd[valid]
 tr = tr[valid]
 td = td[valid]
@@ -38,17 +43,21 @@ out = out[valid]
 fig = plt.figure(figsize=(8,6))
 ax = fig.add_subplot(111, projection='3d')
 
-sc = ax.scatter(tr, td, sd,
-                c=out,
-                cmap='viridis',
-                marker='o',
-                s=20,
-                alpha=0.8)
+# sc = ax.scatter(sd, tr, td,
+#                 c=out,
+#                 cmap='viridis',
+#                 marker='o',
+#                 s=20,
+#                 alpha=0.8)
+#sc = ax.scatter(sd, tr, td, c=out, cmap='viridis', s=50 * np.abs(out), alpha=0.6)
+out2 = np.abs(10*(out-0.9))
+sc = ax.scatter(sd, tr, td, c=out2, cmap='viridis', s=50 * out2, alpha=0.6)
+#sc = ax.scatter(sd, tr, td, c='blue', s=50 * np.abs(10*(out-0.9)), alpha=0.6)
 
 fig.colorbar(sc, ax=ax, label='normalized PSP amplitude')
-ax.set_xlabel('tau_rise (ms)')
-ax.set_ylabel('tau_decay (ms)')
-ax.set_zlabel('spike_dt (ms)')
+ax.set_ylabel('tau_rise (ms)')
+ax.set_zlabel('tau_decay (ms)')
+ax.set_xlabel('spike_dt (ms)')
 ax.set_title('Output landscape vs. spike_dt, tau_rise & tau_decay')
 
 plt.tight_layout()
