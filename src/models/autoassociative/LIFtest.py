@@ -285,16 +285,16 @@ else:
         return MySim.AddNetmorphLIFCReceptor(Cfg)
 
     Synapses = {}
-    # Create receptors as determined in IF_with_stdp.py
+    #   Create receptors as determined in IF_with_stdp.py
     Synapses['PyrInPyrOut'] = makeBox('PyrInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
     Synapses['IntInPyrOut'] = makeBox('IntInPyrOut', [50, 0, 0], [0.1,0.1,0.1], [0,0,0])
     print('Made Boxes')
 
-    # Morphology info: Number of synapses, e.g. typically generated in Netmorph
+    #   Morphology info: Number of synapses, e.g. typically generated in Netmorph
     NUMPyrInPyrOut = 32
     NUMIntInPyrOut = 21
 
-    # Steps that typically happen in Netmorph to NES conversion
+    #   Steps that typically happen in Netmorph to NES conversion
     #   These can happen in a number of ways.
     #   Morphology info: Should correspond to PSD area at Netmorph generated synapse
     PyrInPyrOut_Area_um2 = 60*0.0086
