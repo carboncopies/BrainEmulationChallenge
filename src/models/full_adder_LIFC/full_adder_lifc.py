@@ -37,7 +37,7 @@ import os
 
 import vbpcommon as vbp
 # from BrainGenix.BG_API import BG_API_Setup
-# from NES_interfaces.KGTRecords import plot_recorded
+from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 import BrainGenix
 
@@ -541,16 +541,7 @@ MySim.RecordAll(-1)
 MySim.RunAndWait(Runtime_ms=T, timeout_s=100.0)
 print('Functional stimulation completed')
 
-recording_dict = MySim.GetRecording()
-print('Recorded data retrieved')
-
 savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
-
-# if not vbp.PlotAndStoreRecordedActivity(recording_dict, savefolder, { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
-    # vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
-# print('Data plot saved as PDF')
-
-print('Done')
 
 cells = {
     'Cin': neurons['Cin'],
@@ -632,12 +623,11 @@ if isinstance(recording_dict, dict):
             
             # Generate plot
             print(f"\nGenerating plot in {savefolder}")
-            vbp.PlotAndStoreRecordedActivity(
-                recording_dict,
-                savefolder=savefolder,
-                # data=recording,
-                figspecs={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', },
-                cell_titles=sorted_neuron_names
+            plot_recorded(
+                savefolder,
+                recording_dict['Recording'],
+                { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', },
+                sorted_neuron_names
             )
         else:
             print("Error: No neuron data in recording")
