@@ -37,7 +37,7 @@ import os
 
 import vbpcommon as vbp
 # from BrainGenix.BG_API import BG_API_Setup
-#from NES_interfaces.KGTRecords import plot_recorded
+# from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 import BrainGenix
 
@@ -48,7 +48,7 @@ Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disab
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
 Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
-Parser.add_argument("-Reload", actions="store_true", help="Reload saved model")
+Parser.add_argument("-Reload", action="store_true", help="Reload saved model")
 Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Args = Parser.parse_args()
@@ -546,11 +546,28 @@ print('Recorded data retrieved')
 
 savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
 
-if not vbp.PlotAndStoreRecordedActivity(recording_dict, savefolder, { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
-    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
-print('Data plot saved as PDF')
+# if not vbp.PlotAndStoreRecordedActivity(recording_dict, savefolder, { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+    # vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
+# print('Data plot saved as PDF')
 
 print('Done')
+
+cells = {
+    'Cin': neurons['Cin'],
+    'P_inA': neurons['P_inA'],
+    'P_inB': neurons['P_inB'],
+
+    'I_A0': neurons['I_A0'],
+
+    'P_B0': neurons['P_B0'],
+    
+    'I_C0': neurons['I_C0'],
+    'P_C0': neurons['P_C0'],
+    'P_C1': neurons['P_C1'],
+
+    'Sum': neurons['Sum'],
+    'Cout': neurons['Cout'],
+}
 
 
 # 5.3 Retrieve recordings and plot
@@ -565,7 +582,7 @@ def find_cell_with_id(id:int) -> str:
     print(f"Warning: No matching neuron found for ID: {id}")
     return ''
 
-recording_dict = bg_api.BGNES_get_recording()
+recording_dict = MySim.GetRecording()
 print("\nRaw recording keys:", list(recording_dict.keys()))
 
 if isinstance(recording_dict, dict):
@@ -615,10 +632,11 @@ if isinstance(recording_dict, dict):
             
             # Generate plot
             print(f"\nGenerating plot in {savefolder}")
-            plot_recorded(
+            vbp.PlotAndStoreRecordedActivity(
+                recording_dict,
                 savefolder=savefolder,
-                data=recording,
-                figspecs=figspecs,
+                # data=recording,
+                figspecs={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', },
                 cell_titles=sorted_neuron_names
             )
         else:

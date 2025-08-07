@@ -12,7 +12,8 @@ import BrainGenix.NES as NES
 from NES_interfaces.KGTRecords import plot_recorded
 
 
-def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
+def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict, cell_titles:list)->bool:
+    # print(recording_dict)
     if not isinstance(recording_dict, dict):
         print('Error: Recorded activity is not a dict')
         return False
@@ -29,7 +30,8 @@ def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:d
         plot_recorded(
             savefolder=savefolder,
             data=recording_dict["Recording"],
-            figspecs=figspecs,)
+            figspecs=figspecs,
+            cell_titles=cell_titles,)
     except Exception as e:
         print('Error: Failed to plot and store recorded acticity: '+str(e))
         return False
