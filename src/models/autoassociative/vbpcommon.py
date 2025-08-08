@@ -9,8 +9,8 @@ from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
 import BrainGenix.NES as NES
-from NES_interfaces.KGTRecords import plot_recorded
 
+from NES_interfaces.KGTRecords import extract_t_Vm, save_t_Vm_pickled, plot_t_Vm
 
 def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
     if not isinstance(recording_dict, dict):
@@ -26,10 +26,12 @@ def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:d
         print('Error: Recorded activity content not usable: '+str(e))
         return False
     try:
-        plot_recorded(
-            savefolder=savefolder,
-            data=recording_dict["Recording"],
-            figspecs=figspecs,)
+        t_ms, Vm_cells = extract_t_Vm(data=recording_dict["Recording"])
+        if not t_ms:
+            print('plot_recorded Error: No data to plot.')
+            return False
+        save_t_Vm_pickled(t_ms, Vm_cells, savefolder)
+        plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs)
     except Exception as e:
         print('Error: Failed to plot and store recorded acticity: '+str(e))
         return False

@@ -61,6 +61,8 @@ PyrIn = {}
 IntIn = {}
 PyrOut = {}
 
+numneurons = 8 # for Autoassociative option
+
 if Args.Reload:
 
     MySim.ModelLoad('LIFtest')
@@ -91,6 +93,14 @@ else:
         CylinderCfg.Point1Radius_um = radius1
         CylinderCfg.Point2Radius_um = radius2
         return MySim.AddCylinder(CylinderCfg)
+
+    def makeBox(name, center, dimensions, rotation):
+        BoxCfg = NES.Shapes.Box.Configuration()
+        BoxCfg.Name = name
+        BoxCfg.CenterPosition_um = center
+        BoxCfg.Dimensions_um = dimensions
+        BoxCfg.Rotation_rad = rotation
+        return MySim.AddBox(BoxCfg)
 
     # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
     def makeCompartment(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
@@ -168,14 +178,6 @@ else:
 
         return MySim.AddLIFCNeuron(Cfg)
 
-    def makeBox(name, center, dimensions, rotation):
-        BoxCfg = NES.Shapes.Box.Configuration()
-        BoxCfg.Name = name
-        BoxCfg.CenterPosition_um = center
-        BoxCfg.Dimensions_um = dimensions
-        BoxCfg.Rotation_rad = rotation
-        return MySim.AddBox(BoxCfg)
-
     def makePreSynReceptor(
         name, sourcecompID, destcompID, receptortype,
         E, tau_rise, tau_decay, g_peak, weight, onset_delay,
@@ -201,6 +203,7 @@ else:
         Cfg.STDP_A_neg = A_neg
         Cfg.STDP_Tau_pos = tau_pos
         Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = -4.0
 
         Cfg.voltage_gated = voltage_gated
 
@@ -236,6 +239,7 @@ else:
         Cfg.STDP_A_neg = A_neg
         Cfg.STDP_Tau_pos = tau_pos
         Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = -4.0
 
         Cfg.ReceptorMorphology = shapeID
         return MySim.AddNetmorphLIFCReceptor(Cfg)
@@ -269,44 +273,53 @@ else:
 
     if Args.Autoassociative:
 
-        numneurons = 8
         Neurons = {}
         for n in range(numneurons):
             Neurons[n] = {}
 
-        # Make cell body spheres
+        # Remember: Shapes are just 3D objects.
+        #           They do not specify an associated cell.
+        #           Compartments are linked to a shape, but they also
+        #           do not specify an associated cell yet when created.
+        # Make cell body spheres and compartments
         for n in range(numneurons):
             Neurons[n]['xyz'] = [0, n*60, 0]
             Neurons[n]['soma'] = makeSphere('%d_Soma' % n, 10, Neurons[n]['xyz'])
-        print('Made Spheres')
+            Neurons[n]['soma_comp'] = makeCompartment('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['soma'].ID)
+        print('Made cell body spheres and compartments')
 
-        # Make apical dendrite cylinders
+        # Make apical dendrite cylinders and compartments
         for n in range(numneurons):
             Neurons[n]['dendrite'] = makeCylinder('%d_Dendrite' % n, [-50, Neurons[n]['xyz'][1], 0], [-5, Neurons[n]['xyz'][1], 0], 2, 3)
+            Neurons[n]['dendrite_comp'] = makeCompartment('%d_Dendrite_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['dendrite'].ID)
+        print('Made apical dendrite cylinders and compartments')
 
-        # Make axon cylinders
+        # Make axon cylinders and compartments
         for n in range(numneurons):
             Neurons[n]['axon'] = []
+            Neurons[n]['axon_comp'] = []
             for m in range(numneurons):
                 if n != m:
                     cyl = makeCylinder('%d_%d_Axon' % (n, m), [5, Neurons[n]['xyz'][1], 0], [-50, Neurons[m]['xyz'][1], 0], 3, 2)
+                    comp = makeCompartment('%d_%d_Axon_LIFC' % (n, m), -70, -55, -50, 100, 100, -90, cyl.ID)
                     Neurons[n]['axon'].append(cyl)
-        print('Made Cylinders')
+                    Neurons[n]['axon_comp'].append(comp)
+                else: # Adding these so that we can reference by (n, m) neuron indices.
+                    Neurons[n]['axon'].append(None)
+                    Neurons[n]['axon_comp'].append(None)
+        print('Made axon cylinders and compartments')
 
-        # Create compartments
-        for n in range(numneurons):
-            Neurons[n]['soma_comp'] = makeCompartment('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['soma'].ID)
-            Neurons[n]['dendrite_comp'] = makeCompartment('%d_Dendrite_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['dendrite'].ID)
-            Neurons[n]['axon_comp'] = []
-            for m in range(len(Neurons[n]['axon'])):
-                comp = makeCompartment('%d_%d_Axon_LIFC' % (n, m), -70, -55, -50, 100, 100, -90, Neurons[n]['axon'][m].ID)
-                Neurons[n]['axon_comp'].append(comp)
-        print('Made Compartments')
-
+        # Remember: Here, compartments become associted with cells, but
+        #           these are for 3D object association and do not yet
+        #           specify functional connections.
         # Create neurons
         for n in range(numneurons):
+            axons_compartments = []
+            for axon_comp in Neurons[n]['axon_comp']:
+                if axon_comp:
+                    axons_compartments.append(axon_comp.ID)
             Neurons[n]['neuron'] = makeNeuron(
-                    '%d_Neuron' % n, [ Neurons[n]['soma_comp'].ID ], [ Neurons[n]['dendrite_comp'].ID ], [ neur.ID for neur in Neurons[n]['axon_comp'] ],
+                    '%d_Neuron' % n, [ Neurons[n]['soma_comp'].ID ], [ Neurons[n]['dendrite_comp'].ID ], axons_compartments,
                     -70, -55, -50, 100, 100,
                     -90,
                     2.5, 30, 3.0, 5.0, 1.5,
@@ -314,44 +327,48 @@ else:
                     -20, 20, 200, 0.3)
         print('Made LIFC Neurons')
 
+        SUPERSYNAPSES=4
+
         Synapses = {}
         for n in range(numneurons):
             Synapses[n] = {}
 
-        # Create boxes
-        for n in range(numneurons):
-            Synapses[n]['synapse'] = []
-            for m in range(len(Neurons[n]['axon'])):
-                syn = makeBox('%d_%d_Synapse' % (n, m), [-50, Neurons[m]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
-                Synapses[n]['synapse'].append(syn)
-        print('Made Boxes')
+        # Remember: This is where actual functional connections are established.
+        # Create boxes and receptors
+        for source in range(numneurons):
+            Synapses[source]['synapse'] = []
+            Synapses[source]['AMPA'] = []
+            Synapses[source]['NMDA'] = []
+            for destination in range(numneurons):
+                if source != destination:
+                    syn = makeBox('%d_%d_Synapse' % (source, destination), [-50, Neurons[destination]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
+                    source_comp_id = Neurons[source]['axon_comp'][destination].ID # requires full matrix
+                    dest_comp_id = Neurons[destination]['dendrite_comp'].ID # requires full matrix
+                    ampa = makeNetmorphPreSynReceptor(
+                        '%d_%d_AMPA' % (source, destination), source_comp_id, dest_comp_id, 'AMPA', 0,
+                        0.5, 3.0, g_rec_peak_AMPA, AMPAQuantityPerSynapse*SUPERSYNAPSES,
+                        PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
+                        0.5, 'Hebbian', 0.027, 0.02, 7.0, 7.0,
+                        syn.ID)
+                    
+                    nmda = makeNetmorphPreSynReceptor(
+                        '%d_%d_NMDA' % (source, destination), source_comp_id, dest_comp_id, 'NMDA', 0,
+                        2.0, 100, g_rec_peak_NMDA, NMDAQuantityPerSynapse*SUPERSYNAPSES,
+                        PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, True,
+                        0.5, 'None', 0, 0, 0, 0,
+                        syn.ID)
+                    Synapses[source]['synapse'].append(syn)
+                    Synapses[source]['AMPA'].append(ampa)
+                    Synapses[source]['NMDA'].append(nmda)
+                else: # Adding these so that we can reference by (n, m) neuron indices.
+                    Synapses[source]['synapse'].append(None)
+                    Synapses[source]['AMPA'].append(None)
+                    Synapses[source]['NMDA'].append(None)
 
-        # Create receptors
-        for n in range(numneurons):
-            Synapses[n]['AMPA'] = []
-            Synapses[n]['NMDA'] = []
-            for m in range(len(Neurons[n]['axon'])):
-                ampa = makeNetmorphPreSynReceptor(
-                    '%d_%d_AMPA' % (n, m), Neurons[n]['axon_comp'][m].ID, Neurons[m]['dendrite_comp'].ID, 'AMPA', 0,
-                    0.5, 3.0, g_rec_peak_AMPA, AMPAQuantityPerSynapse,
-                    PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
-                    0.5, 'Hebbian', 0.01, 0.01, 20.0, 20.0,
-                    Synapses[n]['synapse'][m].ID)
-                Synapses[n]['AMPA'].append(ampa)
-                nmda = makeNetmorphPreSynReceptor(
-                    '%d_%d_NMDA' % (n, m), Neurons[n]['axon_comp'][m].ID, Neurons[m]['dendrite_comp'].ID, 'NMDA', 0,
-                    2.0, 100, g_rec_peak_NMDA, NMDAQuantityPerSynapse,
-                    PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, True,
-                    0.5, 'None', 0, 0, 0, 0,
-                    Synapses[n]['synapse'][m].ID)
-                Synapses[n]['NMDA'].append(nmda)
-
+        print('Made boxes and LIFC Receptors')
 
         MySim.ModelSave('LIFtest')
         print('Model saved')
-
-        print('Made LIFC Receptors')
-
 
     else:
 
@@ -422,7 +439,7 @@ else:
                         'PyrInPyrOut_AMPA_%2d' % s, PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID, 'AMPA', 0,
                         0.5, 3.0, g_rec_peak_AMPA, AMPAQuantityPerSynapse,
                         PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
-                        0.5, 'Hebbian', 0.01, 0.01, 20.0, 20.0,
+                        0.5, 'Hebbian', 0.027, 0.02, 7.0, 7.0,
                         Synapses['PyrInPyrOut'].ID)
                     )
                 Synapses['PyrInPyrOut_NMDA'].append(
@@ -457,7 +474,7 @@ else:
                         'PyrInPyrOut_AMPA_%2d' % s, PyrIn['axon_comp'].ID, PyrOut['dendrite_comp'].ID,
                         'AMPA',
                         0, 0.5, 3.0, g_peak_AMPA, 0.5, onset_delay_AMPA,
-                        'Hebbian', 0.01, 0.01, 20.0, 20.0,
+                        'Hebbian', 0.027, 0.02, 7.0, 7.0,
                         False,
                         Synapses['PyrInPyrOut'].ID)
                     )
@@ -482,20 +499,42 @@ else:
                         Synapses['IntInPyrOut'].ID)
                     )
 
+        print('Made LIFC Receptors')
+
         MySim.ModelSave('LIFtest')
         print('Model saved')
-
-        print('Made LIFC Receptors')
 
 
 if Args.Autoassociative:
 
-    # Set stimulation times
-    T = 8000
+    response = MySim.GetAbstractConnectome(Sparse=True)
+    print(response)
 
-    pattern = [ 1 for n in range(numneurons) ]
-    t_stim = [ i*70.0 for i in range(int(T/70.0)) ]
-    timeneuronpairs_list = [ (t, Neurons[n]['neuron'].ID) if pattern[n]==1 for n in range(numneurons) for t in t_stim ]
+    # Set stimulation times
+    T = 80000
+
+    training_pattern = [ 1 for n in range(numneurons) ]
+    testing_pattern = [ 1 for n in range(numneurons // 2) ] + [ 0 for n in range(numneurons // 2) ]
+    print('Training pattern:')
+    print(training_pattern)
+    print('Testing pattern:')
+    print(testing_pattern)
+
+    training_stim = [ i*70.0 for i in range(8) ]
+    repeats = T // 1600
+
+    timeneuronpairs_list = []
+    for n in range(numneurons):
+        if training_pattern[n]==1:
+            for r in range(repeats):
+                t_list = [ (t+1600*r, n) for t in training_stim ] # Neurons[n]['neuron'].ID
+                timeneuronpairs_list += t_list
+
+    for n in range(numneurons):
+        if testing_pattern[n]==1:
+            for r in range(repeats):
+                t_list = [ (t+1600*r+800, n) for t in training_stim ] # Neurons[n]['neuron'].ID
+                timeneuronpairs_list += t_list
 
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
