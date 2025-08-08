@@ -62,6 +62,7 @@ IntIn = {}
 PyrOut = {}
 
 numneurons = 8 # for Autoassociative option
+numinterneurons = 3 # for Autoassociative option
 
 if Args.Reload:
 
@@ -274,8 +275,11 @@ else:
     if Args.Autoassociative:
 
         Neurons = {}
+        Interneurons = {}
         for n in range(numneurons):
             Neurons[n] = {}
+        for n in range(numinterneurons):
+            Interneurons[n] = {}
 
         # Remember: Shapes are just 3D objects.
         #           They do not specify an associated cell.
@@ -288,11 +292,23 @@ else:
             Neurons[n]['soma_comp'] = makeCompartment('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['soma'].ID)
         print('Made cell body spheres and compartments')
 
+        for n in range(numinterneurons):
+            Interneurons[n]['xyz'] = [100, n*60, 0]
+            Interneurons[n]['soma'] = makeSphere('%d_Soma' % n, 5, Interneurons[n]['xyz'])
+            Interneurons[n]['soma_comp'] = makeCompartment('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Interneurons[n]['soma'].ID)
+        print('Made interneuron body spheres and compartments')
+
         # Make apical dendrite cylinders and compartments
         for n in range(numneurons):
             Neurons[n]['dendrite'] = makeCylinder('%d_Dendrite' % n, [-50, Neurons[n]['xyz'][1], 0], [-5, Neurons[n]['xyz'][1], 0], 2, 3)
             Neurons[n]['dendrite_comp'] = makeCompartment('%d_Dendrite_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['dendrite'].ID)
         print('Made apical dendrite cylinders and compartments')
+
+        # Make interneuron dendrite cylinders and compartments
+        for n in range(numinterneurons):
+            Interneurons[n]['dendrite'] = makeCylinder('%d_Dendrite' % n, [50, Interneurons[n]['xyz'][1], 0], [97.5, Interneurons[n]['xyz'][1], 0], 2, 3)
+            Interneurons[n]['dendrite_comp'] = makeCompartment('%d_Dendrite_LIFC' % n, -70, -55, -50, 100, 100, -90, Interneurons[n]['dendrite'].ID)
+        print('Made interneuron dendrite cylinders and compartments')
 
         # Make axon cylinders and compartments
         for n in range(numneurons):
@@ -309,6 +325,28 @@ else:
                     Neurons[n]['axon_comp'].append(None)
         print('Made axon cylinders and compartments')
 
+        # Make interneuron axon cylinders and compartments from interneurons to principal neurons
+        for n in range(numinterneurons):
+            Interneurons[n]['axon'] = []
+            Interneurons[n]['axon_comp'] = []
+            for m in range(numneurons):
+                cyl = makeCylinder('%d_%d_Axon' % (n, m), [102.5, Interneurons[n]['xyz'][1], 0], [-50, Neurons[m]['xyz'][1], 0], 3, 2)
+                comp = makeCompartment('%d_%d_Axon_LIFC' % (n, m), -70, -55, -50, 100, 100, -90, cyl.ID)
+                Interneurons[n]['axon'].append(cyl)
+                Interneurons[n]['axon_comp'].append(comp)
+        print('Made interneuron axon cylinders and compartments to principal neurons')
+
+        # Make interneuron axon cylinders and compartments from principal neurons to interneurons
+        for n in range(numneurons):
+            Neurons[n]['axontoInt'] = []
+            Neurons[n]['axon_comptoInt'] = []
+            for m in range(numinterneurons):
+                cyl = makeCylinder('%d_%d_Axon' % (n, m), [5, Neurons[n]['xyz'][1], 0], [50, Interneurons[m]['xyz'][1], 0], 3, 2)
+                comp = makeCompartment('%d_%d_Axon_LIFC' % (n, m), -70, -55, -50, 100, 100, -90, cyl.ID)
+                Neurons[n]['axontoInt'].append(cyl)
+                Neurons[n]['axon_comptoInt'].append(comp)
+        print('Made axon cylinders and compartments to interneurons')
+
         # Remember: Here, compartments become associted with cells, but
         #           these are for 3D object association and do not yet
         #           specify functional connections.
@@ -316,6 +354,9 @@ else:
         for n in range(numneurons):
             axons_compartments = []
             for axon_comp in Neurons[n]['axon_comp']:
+                if axon_comp:
+                    axons_compartments.append(axon_comp.ID)
+            for axon_comp in Neurons[n]['axon_comptoInt']:
                 if axon_comp:
                     axons_compartments.append(axon_comp.ID)
             Neurons[n]['neuron'] = makeNeuron(
@@ -327,7 +368,22 @@ else:
                     -20, 20, 200, 0.3)
         print('Made LIFC Neurons')
 
+        for n in range(numinterneurons):
+            axons_compartments = []
+            for axon_comp in Interneurons[n]['axon_comp']:
+                if axon_comp:
+                    axons_compartments.append(axon_comp.ID)
+            Interneurons[n]['neuron'] = makeNeuron(
+                    '%d_Neuron' % n, [ Interneurons[n]['soma_comp'].ID ], [ Interneurons[n]['dendrite_comp'].ID ], axons_compartments,
+                    -70, -55, -50, 100, 100,
+                    -90,
+                    2.5, 30, 3.0, 5.0, 1.5,
+                    30, 300, 0, 0, 0.3,
+                    -20, 20, 200, 0)
+        print('Made LIFC Interneurons')
+
         SUPERSYNAPSES=4
+        SUPERSYNAPSESONINT=8
 
         Synapses = {}
         for n in range(numneurons):
@@ -366,6 +422,43 @@ else:
                     Synapses[source]['NMDA'].append(None)
 
         print('Made boxes and LIFC Receptors')
+
+        IntSynapses = {}
+        for n in range(numinterneurons):
+            IntSynapses[n] = {}
+
+        # Interneurons are connected from every principal neuron and to every principal neuron
+        for source in range(numinterneurons):
+            IntSynapses[source]['synapse'] = []
+            IntSynapses[source]['GABA'] = []
+            for destination in range(numneurons):
+                syn = makeBox('%d_%d_Synapse' % (source, destination), [-50, Neurons[destination]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
+                source_comp_id = Interneurons[source]['axon_comp'][destination].ID # requires full matrix
+                dest_comp_id = Neurons[destination]['dendrite_comp'].ID # requires full matrix
+                gaba = makeNetmorphPreSynReceptor(
+                    '%d_%d_GABA' % (source, destination), source_comp_id, dest_comp_id, 'GABA', -70,
+                    0.5, 10.0, g_rec_peak_GABA, GABAQuantityPerSynapse*SUPERSYNAPSES,
+                    IntInPyrOut_Hilloc_Distance_um, propagation_velocity, IntInPyrOut_syndelay, False,
+                    0.5, 'None', 0, 0, 0, 0,
+                    syn.ID)
+                IntSynapses[source]['synapse'].append(syn)
+                IntSynapses[source]['GABA'].append(gaba)
+        print('Made Interneuron synapse boxes and LIFC Receptors onto principal neurons')
+
+        for source in range(numneurons):
+            Synapses[source]['AMPAonInt'] = []
+            for destination in range(numinterneurons):
+                syn = makeBox('%d_%d_Synapse' % (source, destination), [50, Interneurons[destination]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
+                source_comp_id = Neurons[source]['axon_comptoInt'][destination].ID # requires full matrix
+                dest_comp_id = Interneurons[destination]['dendrite_comp'].ID # requires full matrix
+                ampa = makeNetmorphPreSynReceptor(
+                    '%d_%d_AMPA' % (source, destination), source_comp_id, dest_comp_id, 'AMPA', 0,
+                    0.5, 3.0, g_rec_peak_AMPA, AMPAQuantityPerSynapse*SUPERSYNAPSESONINT,
+                    PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
+                    1.0, 'None', 0, 0, 0, 0,
+                    syn.ID)
+        print('Made synapse boxes and LIFC Receptors from principal neurons onto interneurons')
+
 
         MySim.ModelSave('LIFtest')
         print('Model saved')
