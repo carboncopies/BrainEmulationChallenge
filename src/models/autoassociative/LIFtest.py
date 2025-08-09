@@ -36,6 +36,7 @@ Parser.add_argument("-Reload", action="store_true", help="Reload saved model")
 Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Parser.add_argument("-Autoassociative", action="store_true", help="Autoassociative network")
+Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -54,6 +55,7 @@ SimulationCfg, MySim = vbp.NewSimulation(DBdata, ClientInstance, 'LIFCtest', See
 print('Simulation created')
 
 MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
+MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
 MySim.SetSTDP(_DoSTDP=Args.STDP)
 print('Options specified')
 
@@ -140,7 +142,7 @@ else:
         Cfg.SpikeDepolarization_mV = 30
 
         Cfg.UpdateMethod = 'ExpEulerCm'
-        Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
+        Cfg.ResetMethod = 'After' # Both 'ToVm' and 'After' work well here # 'ToVm', 'Onset', 'After'
 
         Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
 
@@ -336,6 +338,21 @@ else:
                 Interneurons[n]['axon_comp'].append(comp)
         print('Made interneuron axon cylinders and compartments to principal neurons')
 
+        # Make internueron axon cylinders and compartments from interneurons to interneurons
+        for n in range(numinterneurons):
+            Interneurons[n]['axontoInt'] = []
+            Interneurons[n]['axon_comptoInt'] = []
+            for m in range(numinterneurons):
+                if n != m:
+                    cyl = makeCylinder('%d_%d_Axon' % (n, m), [102.5, Interneurons[n]['xyz'][1], 0], [50, Interneurons[m]['xyz'][1], 0], 3, 2)
+                    comp = makeCompartment('%d_%d_Axon_LIFC' % (n, m), -70, -55, -50, 100, 100, -90, cyl.ID)
+                    Interneurons[n]['axontoInt'].append(cyl)
+                    Interneurons[n]['axon_comptoInt'].append(comp)
+                else:
+                    Interneurons[n]['axontoInt'].append(None)
+                    Interneurons[n]['axon_comptoInt'].append(None)
+        print('Made interneuron axon cylinders and compartments to interneurons')
+
         # Make interneuron axon cylinders and compartments from principal neurons to interneurons
         for n in range(numneurons):
             Neurons[n]['axontoInt'] = []
@@ -373,6 +390,9 @@ else:
             for axon_comp in Interneurons[n]['axon_comp']:
                 if axon_comp:
                     axons_compartments.append(axon_comp.ID)
+            for axon_comp in Interneurons[n]['axon_comptoInt']:
+                if axon_comp:
+                    axons_compartments.append(axon_comp.ID)
             Interneurons[n]['neuron'] = makeNeuron(
                     '%d_Neuron' % n, [ Interneurons[n]['soma_comp'].ID ], [ Interneurons[n]['dendrite_comp'].ID ], axons_compartments,
                     -70, -55, -50, 100, 100,
@@ -384,6 +404,7 @@ else:
 
         SUPERSYNAPSES=4
         SUPERSYNAPSESONINT=8
+        SUPERSYNAPSESFROMINT=20
 
         Synapses = {}
         for n in range(numneurons):
@@ -437,7 +458,7 @@ else:
                 dest_comp_id = Neurons[destination]['dendrite_comp'].ID # requires full matrix
                 gaba = makeNetmorphPreSynReceptor(
                     '%d_%d_GABA' % (source, destination), source_comp_id, dest_comp_id, 'GABA', -70,
-                    0.5, 10.0, g_rec_peak_GABA, GABAQuantityPerSynapse*SUPERSYNAPSES,
+                    0.5, 10.0, g_rec_peak_GABA, GABAQuantityPerSynapse*SUPERSYNAPSESFROMINT,
                     IntInPyrOut_Hilloc_Distance_um, propagation_velocity, IntInPyrOut_syndelay, False,
                     0.5, 'None', 0, 0, 0, 0,
                     syn.ID)
@@ -445,7 +466,26 @@ else:
                 IntSynapses[source]['GABA'].append(gaba)
         print('Made Interneuron synapse boxes and LIFC Receptors onto principal neurons')
 
+        for source in range(numinterneurons):
+            IntSynapses[source]['synapseonInt'] = []
+            IntSynapses[source]['GABAonInt'] = []
+            for destination in range(numinterneurons):
+                if source != destination:
+                    syn = makeBox('%d_%d_Synapse' % (source, destination), [50, Interneurons[destination]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
+                    source_comp_id = Interneurons[source]['axon_comptoInt'][destination].ID # requires full matrix
+                    dest_comp_id = Interneurons[destination]['dendrite_comp'].ID # requires full matrix
+                    gaba = makeNetmorphPreSynReceptor(
+                        '%d_%d_GABA' % (source, destination), source_comp_id, dest_comp_id, 'GABA', -70,
+                        0.5, 10.0, g_rec_peak_GABA, GABAQuantityPerSynapse*SUPERSYNAPSESFROMINT,
+                        IntInPyrOut_Hilloc_Distance_um, propagation_velocity, IntInPyrOut_syndelay, False,
+                        0.5, 'None', 0, 0, 0, 0,
+                        syn.ID)
+                    IntSynapses[source]['synapseonInt'].append(syn)
+                    IntSynapses[source]['GABAonInt'].append(gaba)
+        print('Made Interneuron synapse boxes and LIFC Receptors onto interneurons')
+
         for source in range(numneurons):
+            Synapses[source]['synapseonInt'] = []
             Synapses[source]['AMPAonInt'] = []
             for destination in range(numinterneurons):
                 syn = makeBox('%d_%d_Synapse' % (source, destination), [50, Interneurons[destination]['xyz'][1], 0], [0.1,0.1,0.1], [0,0,0])
@@ -457,6 +497,8 @@ else:
                     PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
                     1.0, 'None', 0, 0, 0, 0,
                     syn.ID)
+            Synapses[source]['synapseonInt'].append(syn)
+            Synapses[source]['AMPAonInt'].append(ampa)
         print('Made synapse boxes and LIFC Receptors from principal neurons onto interneurons')
 
 
@@ -662,11 +704,14 @@ else:
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
-MySim.RunAndWait(Runtime_ms=T, timeout_s=100.0)
+MySim.RunAndWait(Runtime_ms=T, Dt_ms=Args.Dt, timeout_s=100.0)
 print('Functional stimulation completed')
 
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
+
+#with open('output/raw.json', 'w') as f:
+#    json.dump(recording_dict, f)
 
 if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
