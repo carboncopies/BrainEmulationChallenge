@@ -53,7 +53,26 @@ def extract_t_Vm(data:dict)->tuple:
         return None, None
     return t_ms, Vm_cells
 
-def save_t_Vm_pickled(t_ms, Vm_cells, savefolder: str):
+def extract_spiketimes(data:dict)->list:
+    spikes_cells = []
+    # Find largest ID in the data:
+    maxID = 0
+    for neuron_id in data:
+        if int(neuron_id)>maxID:
+            maxID = int(neuron_id)
+    # Find neurons in order:
+    for n_id in range(0, maxID+1):
+        neuron_id = str(n_id)
+        if neuron_id in data:
+            if 'tSpike_ms' not in data[neuron_id]:
+                print('Missing tSpike_ms at neuron '+str(neuron_id))
+            else:
+                spikes_cells.append(data[neuron_id]['tSpike_ms'])
+    if len(spikes_cells)<1:
+        return None
+    return spikes_cells
+
+def save_t_Vm_pickled(t_ms, Vm_cells, savefolder: str, spikes_cells=None):
     if not isdir(savefolder):
         makedirs(savefolder)
     try:

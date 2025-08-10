@@ -161,7 +161,7 @@ else:
         Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
 
         Cfg.FatigueThreshold = 300 # 0 means not applied
-        Cfg.FatigueRecoveryTime_ms = 1000
+        Cfg.FatigueRecoveryTime_ms = 150 # 1000
 
         Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
         Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
@@ -709,11 +709,15 @@ print('Functional stimulation completed')
 
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
+spikes_dict = MySim.GetSpikeTimes()
+print('Spike times retrieved')
 
 #with open('output/raw.json', 'w') as f:
 #    json.dump(recording_dict, f)
+#with open('output/spikes.json', 'w') as f:
+#    json.dump(spikes_dict, f)
 
-if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, spikes_dict):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
 print('Data plot saved as PDF')
 
