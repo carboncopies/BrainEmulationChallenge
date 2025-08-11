@@ -46,13 +46,14 @@ def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:d
             print('extract_t_Vm Error: No data to plot.')
             return False
 
+        spikes_cells=None
         if spikes_dict:
             spikes_cells = extract_spiketimes(data=spikes_dict["SpikeTimes"])
             if not spikes_cells:
                 print('extract_spiketimes Error: No spikes.')
 
         save_t_Vm_pickled(t_ms, Vm_cells, savefolder, spikes_cells)
-        plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs)
+        plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs, spikes_cells=spikes_cells)
     except Exception as e:
         print('Error: Failed to plot and store recorded acticity: '+str(e))
         return False

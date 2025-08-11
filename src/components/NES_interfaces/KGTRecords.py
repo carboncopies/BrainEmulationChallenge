@@ -77,11 +77,11 @@ def save_t_Vm_pickled(t_ms, Vm_cells, savefolder: str, spikes_cells=None):
         makedirs(savefolder)
     try:
         with open(savefolder+'/groundtruth-Vm.pkl', 'wb') as f:
-            pickle.dump({'t_ms': t_ms, 'Vm_cells': Vm_cells}, f)
+            pickle.dump({'t_ms': t_ms, 'Vm_cells': Vm_cells, 'spikes_cells': spikes_cells}, f)
     except:
         print('save_t_Vm_pickled Error: Unable to store data in '+savefolder+'/groundtruth-Vm.pkl')
 
-def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
+def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None, spikes_cells:list=None):
     fig = plt.figure(figsize=figspecs['figsize'])
     gs = fig.add_gridspec(len(Vm_cells),1, hspace=0)
     axs = gs.subplots(sharex=True, sharey=True)
@@ -92,6 +92,15 @@ def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'l
         # else:
         #   ax = fig.add_subplot(gs[c], sharex=ax)
         axs[c].plot(t_ms, Vm_cells[c], linewidth=figspecs['linewidth'])
+        if spikes_cells:
+            try:
+                axs[c].scatter(
+                    spikes_cells[c],
+                    [ 30.0 for i in range(len(spikes_cells[c])) ],
+                    s=[ 0.01 for i in range(len(spikes_cells[c])) ],
+                    color='red', zorder=5, marker='.') # , label='Spikes'
+            except Exception as e:
+                print('Spike plotting error: '+str(e))
         if cell_titles:
             #axs[c].title.set_text(cell_titles[c], y=1.0, pad=-14)
             axs[c].set_title(cell_titles[c], y=1.0, pad=-14)
