@@ -12,7 +12,7 @@ import BrainGenix.NES as NES
 
 from NES_interfaces.KGTRecords import extract_t_Vm, extract_spiketimes, save_t_Vm_pickled, plot_t_Vm, plot_weights
 
-def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:str, figspecs:dict, receptor='AMPA', conductance=False)->bool:
+def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:str, figspecs:dict, receptor='AMPA', usematrix='weights')->bool:
     import numpy as np
 
     if not isinstance(connections_dict, dict):
@@ -41,17 +41,22 @@ def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:st
 
         targets = connections_dict['ConnectionTargets']
         types = connections_dict['ConnectionTypes']
-        if conductance:
+        if usematrix=='conductance':
             weights = connections_dict['ConnectionGPeakSum']
-        else:
+        elif usematrix=='weights':
             weights = connections_dict['ConnectionWeights']
+        else:
+            weights = connections_dict['NumReceptors']
 
+        total = 0
         for pre in range(numneurons):
             for i in range(len(weights[pre])):
                 if types[pre][i] == type_id:
                     post = targets[pre][i]
                     weightmatrix[pre][post] += weights[pre][i]
+                    total += weights[pre][i]
 
+        print('Total %s: %d' % (usematrix, total))
         plot_weights(weightmatrix, savefolder, nameappend, figspecs)
         return True
     except Exception as e:

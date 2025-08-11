@@ -779,6 +779,8 @@ else:
 connections_before_dict = MySim.GetConnectome()
 if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before_conductance', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, usematrix='conductance'):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity conductance')
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
@@ -802,5 +804,7 @@ print('Data plot saved as PDF')
 connections_after_dict = MySim.GetConnectome()
 if not vbp.PlotAndStoreConnections(connections_after_dict, 'output', 'after', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+if not vbp.PlotAndStoreConnections(connections_after_dict, 'output', 'after_conductance', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, usematrix='conductance'):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity conductance')
 
 print('Done')

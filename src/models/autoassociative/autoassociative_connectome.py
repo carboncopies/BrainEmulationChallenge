@@ -14,7 +14,7 @@
 
 scriptversion='0.1.0'
 
-#import numpy as np
+import numpy as np
 #from datetime import datetime
 from time import sleep
 import json
@@ -25,6 +25,11 @@ import argparse
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
+
+from sys import path
+from pathlib import Path
+path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
+from NES_interfaces.KGTRecords import plot_weights
 
 
 # Handle Arguments for Host, Port, etc
@@ -53,6 +58,17 @@ DBdata = vbp.InitExpDB(
     },
     _initOUT = {
     })
+
+FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
+
+PATTERNSIZE=8
+CUESIZE=4
+
+# The following requisite combined peak conductance available
+# between each pre-post pair of pyramidal neurons was derived
+# from results in LIFtest.py.
+RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
+PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / CUESIZE
 
 
 # Create Client Configuration For Local Simulation
@@ -97,11 +113,50 @@ except:
     vbp.ErrorExit(DBdata, 'NES error: model load failed')
 
 
+# Get and plot connectome to have insight into what the reservoir makes available
+try:
+    connections_before_dict = MySim.GetConnectome()
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_weights', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_conductance', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, usematrix='conductance'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_numreceptors', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, usematrix='numreceptors'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+except:
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+
+def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
+    numneurons = len(connections_dict["ConnectionGPeakSum"])
+    # Find pyramidal neurons
+    types = connections_dict['ConnectionTypes']
+    pyramidal = []
+    for pre in range(numneurons):
+        for i in range(len(types[pre])):
+            if types[pre][i] == 1: # AMPA
+                pyramidal.append(pre)
+                break
+    # Get pyramidal prepost combined AMPA peak conductances
+    targets = connections_dict['ConnectionTargets']
+    gpeaksummatrix = np.zeros((numneurons, numneurons))
+    gpeaksum = connections_dict['ConnectionGPeakSum']
+    for pre in pyramidal:
+        for i in range(len(gpeaksum[pre])):
+            if types[pre][i] == 1: # AMPA
+                post = targets[pre][i]
+                gpeaksummatrix[pre][post] += gpeaksum[pre][i]
+    return pyramidal, gpeaksummatrix
+
+pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
+proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
+attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
+plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
+print('Number of pre-post pyramidal connections at target g_sum_peak: %d' % int(attargetgpeaksum.sum()))
+
 # Get connectome
 try:
     response = MySim.GetAbstractConnectome(Sparse=True)
 except:
-    vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model abstract connectome')
 
 # Neuron-to-neuron connections:
 PrePostNumReceptors = response['PrePostNumReceptors']
