@@ -36,6 +36,7 @@ Parser.add_argument("-Reload", action="store_true", help="Reload saved model")
 Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Parser.add_argument("-Autoassociative", action="store_true", help="Autoassociative network")
+Parser.add_argument("-Patterns", default=1, type=int, help="Number of patterns")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-T", type=float, help="Simulation time in ms")
 Args = Parser.parse_args()
@@ -64,8 +65,10 @@ PyrIn = {}
 IntIn = {}
 PyrOut = {}
 
-numneurons = 8 # for Autoassociative option
-numinterneurons = 3 # for Autoassociative option
+# For Autoassociative option
+numpatterns = Args.Patterns
+numneurons = 8*numpatterns
+numinterneurons = 3
 
 if Args.Reload:
 
@@ -89,6 +92,13 @@ else:
         SphereCfg.Center_um = center
         return MySim.AddSphere(SphereCfg)
 
+    def makeSphereConfig(name, radius, center):
+        SphereCfg = NES.Shapes.Sphere.Configuration()
+        SphereCfg.Name = name
+        SphereCfg.Radius_um = radius
+        SphereCfg.Center_um = center
+        return SphereCfg
+
     def makeCylinder(name, point1, point2, radius1, radius2):
         CylinderCfg = NES.Shapes.Cylinder.Configuration()
         CylinderCfg.Name = name
@@ -108,6 +118,18 @@ else:
 
     # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
     def makeCompartment(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
+        Cfg = NES.Models.Compartments.LIFC.Configuration()
+        Cfg.Name = name
+        Cfg.RestingPotential_mV = Vrest
+        Cfg.ResetPotential_mV = Vreset
+        Cfg.SpikeThreshold_mV = Vth
+        Cfg.MembraneResistance_MOhm = R_m
+        Cfg.MembraneCapacitance_pF = C_m
+        Cfg.AfterHyperpolarizationAmplitude_mV = E_AHP
+        Cfg.Shape = shapeID
+        return MySim.AddLIFCCompartment(Cfg)
+
+    def makeCompartmentConfig(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
         Cfg = NES.Models.Compartments.LIFC.Configuration()
         Cfg.Name = name
         Cfg.RestingPotential_mV = Vrest
@@ -162,7 +184,7 @@ else:
         Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
 
         Cfg.FatigueThreshold = 300 # 0 means not applied
-        Cfg.FatigueRecoveryTime_ms = 150 # 1000
+        Cfg.FatigueRecoveryTime_ms = 70 # 150 # 1000
 
         Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
         Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
@@ -293,6 +315,20 @@ else:
             Neurons[n]['xyz'] = [0, n*60, 0]
             Neurons[n]['soma'] = makeSphere('%d_Soma' % n, 10, Neurons[n]['xyz'])
             Neurons[n]['soma_comp'] = makeCompartment('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['soma'].ID)
+
+        # configs = []
+        # for n in range(numneurons):
+        #     Neurons[n]['xyz'] = [0, n*60, 0]
+        #     configs.append(makeSphereConfig('%d_Soma' % n, 10, Neurons[n]['xyz']))
+        # response = MySim.AddSpheres(configs)
+        # for n in range(numneurons):
+        #     Neurons[n]['soma'] = response[n].ID
+        # configs = []
+        # for n in range(numneurons):
+        #     configs.append(makeCompartmentConfig('%d_Soma_LIFC' % n, -70, -55, -50, 100, 100, -90, Neurons[n]['soma'].ID))
+        # response = MySim.AddLIFCCompartments(configs)
+        # for n in range(numneurons):
+        #     Neurons[n]['soma_comp'] = response[n].ID
         print('Made cell body spheres and compartments')
 
         for n in range(numinterneurons):
@@ -403,7 +439,9 @@ else:
                     -20, 20, 200, 0)
         print('Made LIFC Interneurons')
 
-        SUPERSYNAPSES=4
+        INITIALAMPAWEIGHT=0.1
+        # The "SUPERSYNAPSES*" can be interpreted as having multiple synapses between pre- and post-synaptic pairs.
+        SUPERSYNAPSES=7
         SUPERSYNAPSESONINT=8
         SUPERSYNAPSESFROMINT=20
 
@@ -426,7 +464,7 @@ else:
                         '%d_%d_AMPA' % (source, destination), source_comp_id, dest_comp_id, 'AMPA', 0,
                         0.5, 3.0, g_rec_peak_AMPA, AMPAQuantityPerSynapse*SUPERSYNAPSES,
                         PyrInPyrOut_Hilloc_Distance_um, propagation_velocity, PyrInPyrOut_syndelay, False,
-                        0.5, 'Hebbian', 0.027, 0.02, 7.0, 7.0,
+                        INITIALAMPAWEIGHT, 'Hebbian', 0.027, 0.02, 7.0, 7.0,
                         syn.ID)
                     
                     nmda = makeNetmorphPreSynReceptor(
@@ -646,30 +684,65 @@ if Args.Autoassociative:
     # Set stimulation times
     T = 80000
     if Args.T:
-        T = Args.T
+        T = int(Args.T)
 
-    training_pattern = [ 1 for n in range(numneurons) ]
-    testing_pattern = [ 1 for n in range(numneurons // 2) ] + [ 0 for n in range(numneurons // 2) ]
-    print('Training pattern:')
-    print(training_pattern)
-    print('Testing pattern:')
-    print(testing_pattern)
+    STIMINTERVAL = 70.0
+    REPEATSPERBATCH = 4
 
-    training_stim = [ i*70.0 for i in range(8) ]
-    repeats = T // 1600
+    pattern_neurons = []
+    for p in range(numpatterns):
+        patt_n = [ 8*p + n for n in range(8) ]
+        pattern_neurons.append(patt_n)
+    print('Pattern neurons:')
+    print(pattern_neurons)
+
+    cue_neurons = []
+    for p in range(numpatterns):
+        cue_n = [ 8*p + n for n in range(4) ]
+        cue_neurons.append(cue_n)
+    print('Cue neurons:')
+    print(cue_neurons)
+
+    #training_pattern = [ 1 for n in range(numneurons) ]
+    #testing_pattern = [ 1 for n in range(numneurons // 2) ] + [ 0 for n in range(numneurons // 2) ]
+    #print('Training pattern:')
+    #print(training_pattern)
+    #print('Testing pattern:')
+    #print(testing_pattern)
+
+    training_stim = [ i*STIMINTERVAL for i in range(numpatterns*REPEATSPERBATCH) ]
+    batchduration = STIMINTERVAL*numpatterns*REPEATSPERBATCH
+    batchinterval = batchduration + 100
+    repeatinterval = 2*batchinterval
+    repeats = int(T // repeatinterval)
 
     timeneuronpairs_list = []
     for n in range(numneurons):
-        if training_pattern[n]==1:
-            for r in range(repeats):
-                t_list = [ (t+1600*r, n) for t in training_stim ] # Neurons[n]['neuron'].ID
-                timeneuronpairs_list += t_list
+        for r in range(repeats):
+            for s in range(len(training_stim)):
+                p = s % numpatterns
+                if n in pattern_neurons[p]:
+                    timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r, n) )
 
     for n in range(numneurons):
-        if testing_pattern[n]==1:
-            for r in range(repeats):
-                t_list = [ (t+1600*r+800, n) for t in training_stim ] # Neurons[n]['neuron'].ID
-                timeneuronpairs_list += t_list
+        for r in range(repeats):
+            for s in range(len(training_stim)):
+                p = s % numpatterns
+                if n in cue_neurons[p]:
+                    timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r+batchinterval, n)  )
+
+    # timeneuronpairs_list = []
+    # for n in range(numneurons):
+    #     if training_pattern[n]==1:
+    #         for r in range(repeats):
+    #             t_list = [ (t+1600*r, n) for t in training_stim ] # Neurons[n]['neuron'].ID
+    #             timeneuronpairs_list += t_list
+
+    # for n in range(numneurons):
+    #     if testing_pattern[n]==1:
+    #         for r in range(repeats):
+    #             t_list = [ (t+1600*r+800, n) for t in training_stim ] # Neurons[n]['neuron'].ID
+    #             timeneuronpairs_list += t_list
 
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
@@ -679,7 +752,7 @@ else:
     # Set stimulation times
     T = 8000
     if Args.T:
-        T = Args.T
+        T = int(Args.T)
 
     tau_sim_rec_inhibition = 3
     regular_spacing_ms = 100
@@ -706,7 +779,6 @@ else:
 connections_before_dict = MySim.GetConnectome()
 if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
-#print(connections_before_dict)
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
@@ -730,6 +802,5 @@ print('Data plot saved as PDF')
 connections_after_dict = MySim.GetConnectome()
 if not vbp.PlotAndStoreConnections(connections_after_dict, 'output', 'after', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
-#print(connections_after_dict)
 
 print('Done')
