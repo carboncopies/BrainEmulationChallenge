@@ -130,11 +130,16 @@ def animate_subset(cell_indices:list):
     if len(cell_indices) == 1:
         axs = [axs]  # make iterable
 
+    t_ms_interval = t_ms[IDX_START:IDX_END]
+    Vm_cells_interval = []
+    for i in range(len(Vm_cells)):
+        Vm_cells_interval.append(Vm_cells[i][IDX_START:IDX_END])
+
     lines = []
     for i, idx in enumerate(cell_indices):
         line, = axs[i].plot([], [], label=str(idx), color=colors[i])
-        axs[i].set_xlim(t_ms[IDX_START], t_ms[IDX_END-1])
-        axs[i].set_ylim(min(Vm_cells[idx]), max(Vm_cells[idx]))
+        axs[i].set_xlim(t_ms_interval[0], t_ms_interval[-1])
+        axs[i].set_ylim(min(Vm_cells_interval[idx]), max(Vm_cells_interval[idx]))
         axs[i].legend()
         axs[i].grid(True)
         lines.append(line)
@@ -149,11 +154,11 @@ def animate_subset(cell_indices:list):
 
     def update(frame):
         for line, idx in zip(lines, cell_indices):
-            line.set_data(t_ms[IDX_START:frame*FRAMES_SIZE], Vm_cells[idx][IDX_START:frame*FRAMES_SIZE])
+            line.set_data(t_ms_interval[:frame*FRAMES_SIZE], Vm_cells_interval[idx][:frame*FRAMES_SIZE])
         return lines
 
     print('Generating animation')
-    ani = FuncAnimation(fig, update, frames=IDX_END//FRAMES_SIZE, init_func=init,
+    ani = FuncAnimation(fig, update, frames=len(t_ms_interval)//FRAMES_SIZE, init_func=init,
                         interval=ANIMATE_INTERVAL, blit=True, repeat=False)
 
     # Save animation if requested
