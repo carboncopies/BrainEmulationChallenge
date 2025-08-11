@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
 # autoassociative_connectome.py
-# Randal A. Koene, 20250620
+# Randal A. Koene, 20250620, 20250811
 
 # This script is STEP 2 in the creation of realistic
 # ground-truth virtual tissue containing an intended

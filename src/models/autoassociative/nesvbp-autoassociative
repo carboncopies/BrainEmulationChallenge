@@ -59,8 +59,8 @@ regions=In;
 # 3D appearance of each region
 In.shape=disc;
 In.neurons=0;
-In.pyramidal=10;
-In.interneuron=0;
+In.pyramidal=16;
+In.interneuron=16;
 In.minneuronseparation=10;
 In.centerZ=-300;
 In.shape.radius=50;

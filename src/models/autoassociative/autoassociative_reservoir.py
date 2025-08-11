@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
 # autoassociative_reservoir.py
-# Randal A. Koene, 20250620
+# Randal A. Koene, 20250620, 20250811
 
 # This script is STEP 1 in the creation of realistic
 # ground-truth virtual tissue containing an intended
@@ -44,6 +44,7 @@ Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should 
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
+Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve")
 Args = Parser.parse_args()
 
 if Args.DoBlend:
@@ -77,6 +78,11 @@ else:
 
 
 # Modify Netmorph model content based on overrides
+ARCHITECTURE_MODIFY = '''
+In.pyramidal=%d;
+In.interneurons=%d;
+'''
+
 NETMORPH_OBJ = '''
 outattr_make_full_OBJ=true;
 outattr_OBJ_bevdepth_axon=%.1f;
@@ -92,6 +98,7 @@ GROWDAYS = '''
 days=%d;
 '''
 
+modelcontent += ARCHITECTURE_MODIFY % (8*Args.Patterns, 8*Args.Patterns)
 if Args.DoOBJ:
     modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
 if Args.DoBlend:
@@ -134,7 +141,7 @@ except:
 
 
 # Run Netmorph
-RunResponse = MySim.Netmorph_RunAndWait(modelcontent)
+RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
 if not RunResponse["Success"]:
     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
