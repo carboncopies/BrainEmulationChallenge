@@ -17,6 +17,8 @@ Parser = argparse.ArgumentParser(description="Visualize recorded data from acqui
 Parser.add_argument("-f", type=str, help="Data file path")
 Parser.add_argument("-t1", type=str, help="Start time")
 Parser.add_argument("-t2", type=str, help="End time")
+Parser.add_argument("-x", default=18, type=float, help="Figure width (inches)")
+Parser.add_argument("-y", default=12, type=float, help="Figure height (inches)")
 Parser.add_argument("--animate", action="store_true", help="Animate the plots over time")
 Parser.add_argument("-framesize", default=100, type=int, help="Number of time points per frame")
 Parser.add_argument("--save", type=str, help="Save animation to file (mp4 or gif)")
@@ -41,7 +43,7 @@ spikes_cells = data_dict['spikes_cells']
 
 SPIKE_PLOT_LEVEL=30.0
 
-FIGSIZE=(8, 6) # (18, 12)
+FIGSIZE=(Args.x, Args.y)
 MP4FPS=50
 GIFFPS=15
 ANIMATE_INTERVAL=1 # 20

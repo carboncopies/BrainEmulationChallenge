@@ -37,6 +37,7 @@ Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Parser.add_argument("-Autoassociative", action="store_true", help="Autoassociative network")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
+Parser.add_argument("-T", type=float, help="Simulation time in ms")
 Args = Parser.parse_args()
 
 # Initialize data collection for entry in DB file
@@ -642,11 +643,10 @@ else:
 
 if Args.Autoassociative:
 
-    response = MySim.GetAbstractConnectome(Sparse=True)
-    print(response)
-
     # Set stimulation times
     T = 80000
+    if Args.T:
+        T = Args.T
 
     training_pattern = [ 1 for n in range(numneurons) ]
     testing_pattern = [ 1 for n in range(numneurons // 2) ] + [ 0 for n in range(numneurons // 2) ]
@@ -678,6 +678,8 @@ else:
 
     # Set stimulation times
     T = 8000
+    if Args.T:
+        T = Args.T
 
     tau_sim_rec_inhibition = 3
     regular_spacing_ms = 100
@@ -701,6 +703,10 @@ else:
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
 
+connections_before_dict = MySim.GetConnectome()
+if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+#print(connections_before_dict)
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
@@ -720,5 +726,10 @@ print('Spike times retrieved')
 if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }, spikes_dict):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
 print('Data plot saved as PDF')
+
+connections_after_dict = MySim.GetConnectome()
+if not vbp.PlotAndStoreConnections(connections_after_dict, 'output', 'after', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+#print(connections_after_dict)
 
 print('Done')
