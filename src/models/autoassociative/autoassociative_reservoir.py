@@ -108,6 +108,7 @@ FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
 PATTERNSIZE=8
 CUESIZE=4
+EMBEDMULTIPLE=2
 
 # The following requisite combined peak conductance available
 # between each pre-post pair of pyramidal neurons was derived
@@ -115,7 +116,7 @@ CUESIZE=4
 RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
 PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / CUESIZE
 
-modelcontent += ARCHITECTURE_MODIFY % (8*Args.Patterns, 8*Args.Patterns)
+modelcontent += ARCHITECTURE_MODIFY % (EMBEDMULTIPLE*PATTERNSIZE*Args.Patterns, PATTERNSIZE*Args.Patterns)
 if Args.DoOBJ:
     modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
 if Args.DoBlend:

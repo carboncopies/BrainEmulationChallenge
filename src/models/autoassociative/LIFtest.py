@@ -703,13 +703,6 @@ if Args.Autoassociative:
     print('Cue neurons:')
     print(cue_neurons)
 
-    #training_pattern = [ 1 for n in range(numneurons) ]
-    #testing_pattern = [ 1 for n in range(numneurons // 2) ] + [ 0 for n in range(numneurons // 2) ]
-    #print('Training pattern:')
-    #print(training_pattern)
-    #print('Testing pattern:')
-    #print(testing_pattern)
-
     training_stim = [ i*STIMINTERVAL for i in range(numpatterns*REPEATSPERBATCH) ]
     batchduration = STIMINTERVAL*numpatterns*REPEATSPERBATCH
     batchinterval = batchduration + 100
@@ -730,19 +723,6 @@ if Args.Autoassociative:
                 p = s % numpatterns
                 if n in cue_neurons[p]:
                     timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r+batchinterval, n)  )
-
-    # timeneuronpairs_list = []
-    # for n in range(numneurons):
-    #     if training_pattern[n]==1:
-    #         for r in range(repeats):
-    #             t_list = [ (t+1600*r, n) for t in training_stim ] # Neurons[n]['neuron'].ID
-    #             timeneuronpairs_list += t_list
-
-    # for n in range(numneurons):
-    #     if testing_pattern[n]==1:
-    #         for r in range(repeats):
-    #             t_list = [ (t+1600*r+800, n) for t in training_stim ] # Neurons[n]['neuron'].ID
-    #             timeneuronpairs_list += t_list
 
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
