@@ -404,6 +404,7 @@ else:
         Cfg.STDP_A_neg = A_neg
         Cfg.STDP_Tau_pos = tau_pos
         Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = 0.01
 
         Cfg.voltage_gated = voltage_gated
 
@@ -439,6 +440,7 @@ else:
         Cfg.STDP_A_neg = A_neg
         Cfg.STDP_Tau_pos = tau_pos
         Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = 0.01
 
         Cfg.ReceptorMorphology = shapeID
         return MySim.AddNetmorphLIFCReceptor(Cfg)
@@ -447,35 +449,36 @@ else:
     Synapses = {}
     
     # Define connection patterns based on full adder circuit
-    weight = 1.0
-    xor1_input_weight = 0.5
-    xor2_input_weight = 0.3
-    input_to_xor = 0.5
-    xor_interneuron_weight = 0.7
+    to_I = 0.7
+    I_to_xor = 2.0
+    to_xor = 0.8
+
+    to_and = 0.5
+    to_or = 1.0
     
     connection_patterns = {
-        'Cin_IC0': (neurons['Cin'], neurons['I_C0'], 'AMPA', 0, 0.5, 6.0, 20, xor2_input_weight, 5.0, 'None', 0, 0, 0, 0, False),
-        'Cin_PC1': (neurons['Cin'], neurons['P_C1'], 'AMPA', 0, 0.5, 3.0, 20, 0.3, 1.0, 'None', 0, 0, 0, 0, False),
-        'Cin_Sum': (neurons['Cin'], neurons['Sum'], 'AMPA', 0, 0.5, 6.0, 20, 0.6, 30.0, 'None', 0, 0, 0, 0, False),
+        'Cin_IC0': (neurons['Cin'], neurons['I_C0'], 'AMPA', 0, 0.5, 6.0, 20, to_I, 5.0, 'None', 0, 0, 0, 0, False),
+        'Cin_PC1': (neurons['Cin'], neurons['P_C1'], 'AMPA', 0, 0.5, 3.0, 20, to_and, 10.0, 'None', 0, 0, 0, 0, False),
+        'Cin_Sum': (neurons['Cin'], neurons['Sum'], 'AMPA', 0, 0.5, 6.0, 20, to_xor, 30.0, 'None', 0, 0, 0, 0, False),
         
-        'PinA_IA0': (neurons['P_inA'], neurons['I_A0'], 'AMPA', 0, 0.5, 3.0, 20, xor1_input_weight, 0.0, 'None', 0, 0, 0, 0, False),
-        'PinA_PB0': (neurons['P_inA'], neurons['P_B0'], 'AMPA', 0, 0.5, 6.0, 20, weight, 10.0, 'None', 0, 0, 0, 0, False),
-        'PinA_PC0': (neurons['P_inA'], neurons['P_C0'], 'AMPA', 0, 0.5, 3.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
+        'PinA_IA0': (neurons['P_inA'], neurons['I_A0'], 'AMPA', 0, 0.5, 3.0, 20, to_I, 0.0, 'None', 0, 0, 0, 0, False),
+        'PinA_PB0': (neurons['P_inA'], neurons['P_B0'], 'AMPA', 0, 0.5, 5.0, 20, to_xor, 6.0, 'None', 0, 0, 0, 0, False),
+        'PinA_PC0': (neurons['P_inA'], neurons['P_C0'], 'AMPA', 0, 0.5, 3.0, 20, to_and, 1.0, 'None', 0, 0, 0, 0, False),
         
-        'PinB_IA0': (neurons['P_inB'], neurons['I_A0'], 'AMPA', 0, 0.5, 3.0, 20, xor1_input_weight, 0.0, 'None', 0, 0, 0, 0, False),
-        'PinB_PB0': (neurons['P_inB'], neurons['P_B0'], 'AMPA', 0, 0.5, 6.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
-        'PinB_PC0': (neurons['P_inB'], neurons['P_C0'], 'AMPA', 0, 0.5, 3.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
+        'PinB_IA0': (neurons['P_inB'], neurons['I_A0'], 'AMPA', 0, 0.5, 3.0, 20, to_I, 0.0, 'None', 0, 0, 0, 0, False),
+        'PinB_PB0': (neurons['P_inB'], neurons['P_B0'], 'AMPA', 0, 0.5, 5.0, 20, to_xor, 6.0, 'None', 0, 0, 0, 0, False),
+        'PinB_PC0': (neurons['P_inB'], neurons['P_C0'], 'AMPA', 0, 0.5, 3.0, 20, to_and, 1.0, 'None', 0, 0, 0, 0, False),
         
-        'IA0_PB0': (neurons['I_A0'], neurons['P_B0'], 'GABA', -70, 0.5, 10, 40, xor_interneuron_weight, 0.0, 'None', 0, 0, 0, 0, False),
+        'IA0_PB0': (neurons['I_A0'], neurons['P_B0'], 'GABA', -70, 0.5, 13, 40, I_to_xor, 0.0, 'None', 0, 0, 0, 0, False),
         
-        'PB0_IC0': (neurons['P_B0'], neurons['I_C0'], 'AMPA', 0, 0.5, 3.0, 20, xor2_input_weight, 1.0, 'None', 0, 0, 0, 0, False),
-        'PB0_PC1': (neurons['P_B0'], neurons['P_C1'], 'AMPA', 0, 0.5, 3.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
-        'PB0_Sum': (neurons['P_B0'], neurons['Sum'], 'AMPA', 0, 0.5, 6.0, 20, input_to_xor, 10.0, 'None', 0, 0, 0, 0, False),
+        'PB0_IC0': (neurons['P_B0'], neurons['I_C0'], 'AMPA', 0, 0.5, 3.0, 20, to_I, 1.0, 'None', 0, 0, 0, 0, False),
+        'PB0_PC1': (neurons['P_B0'], neurons['P_C1'], 'AMPA', 0, 0.5, 3.0, 20, to_and, 0.0, 'None', 0, 0, 0, 0, False),
+        'PB0_Sum': (neurons['P_B0'], neurons['Sum'], 'AMPA', 0, 0.5, 6.0, 20, to_xor, 10.0, 'None', 0, 0, 0, 0, False),
         
-        'IC0_Sum': (neurons['I_C0'], neurons['Sum'], 'GABA', -70, 0.1, 10, 40, 1.0, 0.0, 'None', 0, 0, 0, 0, False),
+        'IC0_Sum': (neurons['I_C0'], neurons['Sum'], 'GABA', -70, 0.1, 10, 40, I_to_xor, 0.0, 'None', 0, 0, 0, 0, False),
         
-        'PC0_Cout': (neurons['P_C0'], neurons['Cout'], 'AMPA', 0, 0.5, 3.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
-        'PC1_Cout': (neurons['P_C1'], neurons['Cout'], 'AMPA', 0, 0.5, 3.0, 20, weight, 1.0, 'None', 0, 0, 0, 0, False),
+        'PC0_Cout': (neurons['P_C0'], neurons['Cout'], 'AMPA', 0, 0.5, 3.0, 20, to_or, 10.0, 'None', 0, 0, 0, 0, False),
+        'PC1_Cout': (neurons['P_C1'], neurons['Cout'], 'AMPA', 0, 0.5, 3.0, 20, to_or, 1.0, 'None', 0, 0, 0, 0, False),
     }
     
     # Create synapse boxes and receptors
@@ -621,8 +624,8 @@ print("\nRaw recording keys:", list(recording_dict.keys()))
 
 if isinstance(recording_dict, dict):
     # Export data to csv
-    df = pd.DataFrame(recording_dict)
-    df.to_csv('data.csv'+str(datetime.now()).replace(":", "_"), index=False)
+    # df = pd.DataFrame(recording_dict)
+    # df.to_csv('data'+str(datetime.now()).replace(":", "_")+'.csv', index=False)
 
     if "StatusCode" in recording_dict:
         print(f"API Status Code: {recording_dict['StatusCode']}")

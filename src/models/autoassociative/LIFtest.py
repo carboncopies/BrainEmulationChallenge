@@ -280,6 +280,7 @@ else:
         Cfg.STDP_A_neg = A_neg
         Cfg.STDP_Tau_pos = tau_pos
         Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = 0.01
 
         Cfg.ReceptorMorphology = shapeID
         return MySim.AddNetmorphLIFCReceptor(Cfg)

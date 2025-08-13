@@ -13,6 +13,9 @@ from PIL import Image
 from os.path import isdir
 from os import makedirs
 
+import datetime
+import pandas as pd
+
 def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
     if 't_ms' not in data:
         raise Exception('plot_recorded: Missing t_ms record.')
@@ -71,6 +74,30 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
     for ax in axs:
         ax.label_outer()
     plt.draw()
+
+    all_data = []
+
+    
+    
+
+    for i in range(len(Vm_cells)):
+        all_data.append(Vm_cells[i])
+
+    all_data.append(t_ms)
+    
+    df = pd.DataFrame(all_data)
+
+    df = df.T
+
+    # print(df)
+
+    cell = pd.DataFrame(cell_titles)
+
+    cell = cell.T
+
+    df = pd.concat([cell, df], ignore_index=True)
+
+    df.to_csv(savefolder+'data.csv', index=False)
 
     if not isdir(savefolder):
         makedirs(savefolder)
