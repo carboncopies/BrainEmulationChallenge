@@ -1,31 +1,41 @@
 #!../../../venv/bin/python
 # LIFtest.py
-# Randal A. Koene, 20250724
+# Soyeon Kim, 20250813
 
 '''
 This script tests the LIFCNeuron NES class.
 The intention is to achieve the same functional response as in the
 components/IF_with_stdp.py script.
+
+
+Full adder circuit:
+
+                   +-----------------------------------------------------------------+
+                   |                                                                 |
+                   +------------------------------------------+----+                 |
+                   |                                        +-|----|-----------------+
+    Cin (-60,30)---+    +----------------------+            +------+> I_C0 (30,30)---+--> Sum (60,30)
+                        |                      |            | |                      
+    P_inA (-60,0)-------+--+> I_A0 (-30,0)-----+> P_B0 (0,0)+ | +---> P_C0 (30,0)----+
+                        |  |                   |            | | |                    | 
+    P_inB (-60,-30)--+-----+-------------------+            +-+-|---> P_C1 (30,-30)--+--> Cout (60,-30)
+                     |  |                                       |                      
+                     |  +---------------------------------------+                  
+                     |                                          |   
+                     +------------------------------------------+  
+
 '''
 
 scriptversion='0.1.0'
 
-#import matplotlib.pyplot as plt
 import numpy as np
 from datetime import datetime
-#from time import sleep
 import argparse
-import math
-import json
-import os
 
 import vbpcommon as vbp
-#from BrainGenix.BG_API import BG_API_Setup
 from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
-import BrainGenix
 
-import pandas as pd
 
 Parser = argparse.ArgumentParser(description="LIFCNeuron test script")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
@@ -623,10 +633,6 @@ recording_dict = MySim.GetRecording()
 print("\nRaw recording keys:", list(recording_dict.keys()))
 
 if isinstance(recording_dict, dict):
-    # Export data to csv
-    # df = pd.DataFrame(recording_dict)
-    # df.to_csv('data'+str(datetime.now()).replace(":", "_")+'.csv', index=False)
-
     if "StatusCode" in recording_dict:
         print(f"API Status Code: {recording_dict['StatusCode']}")
         

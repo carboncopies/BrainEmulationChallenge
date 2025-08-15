@@ -135,13 +135,6 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 axon_ends = {}
 
 # defining start and end positions of axons. 
-# PinA_Pout_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PinA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_inA_P_out'] = (PinA_Pout_start, PinA_Pout_end)
-
-# PinB_Pout_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PinB_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_inB_P_out'] = (PinB_Pout_start, PinB_Pout_end)
 
 PinA_PA0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
 PinA_PA0_end   = list(np.array(P_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
@@ -264,8 +257,6 @@ for a in axon_names:
 neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
 neuron_IPSP = 870.0 # nA
-#neuron_tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
-#neuron_t_spont_next = -1
 
 def neuron_builder(soma_name:str, axon_name:str):
     print('Createing neuron with soma ID %d and axon ID %d' % (soma_compartments[soma_name].ID, axon_compartments[axon_name].ID))
@@ -288,8 +279,6 @@ def neuron_builder(soma_name:str, axon_name:str):
 # other axons are established separately through the receptor definition that links axons to somas. 
 # when a neuron is "fired", its output branches to all axons it's connected to through when axons were defined.
 
-# PinA = neuron_builder('P_inA', 'P_inA_P_out')
-# PinB = neuron_builder('P_inB', 'P_inB_P_out')
 PinA = neuron_builder('P_inA', 'P_inA_P_A0')
 PinB = neuron_builder('P_inB', 'P_inB_P_A1')
 
@@ -338,8 +327,6 @@ output_neurons = {
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
 
-# P_inA_P_out_weight = 1.0 # Greater weight means stronger PSP amplitude.
-# P_inB_P_out_weight = 1.0
 P_inA_P_A0_weight = 1.0
 P_inB_P_A1_weight = 1.0
 
@@ -355,16 +342,7 @@ IA_Pout_weight = 2.3
 # defining how neurons should interact with each other. 
 # need this for all connections within a circuit (all axons)
 
-
-    # P_inA (-45, -45)--- P_A0 (-15, -45) --+
-    #                 |                     |
-    #                 +-> IA (-15, -15) --> P_out (15, -15)
-    #                 |                     |
-    # P_inB (-45, 45)---- P_A1 (-15, 45) ---+
-
 connection_pattern_set = {
-    # 'P_inA_P_out': ( 'P_inA_P_out', 'P_out', AMPA_conductance, P_inA_P_out_weight),
-    # 'P_inB_P_out': ( 'P_inB_P_out', 'P_out', AMPA_conductance, P_inB_P_out_weight),
     'P_inA_P_A0':  ( 'P_inA_P_A0', 'P_A0', AMPA_conductance, P_inA_P_A0_weight),
     'P_inB_P_A1':  ( 'P_inB_P_A1', 'P_A1', AMPA_conductance, P_inB_P_A1_weight),
 
@@ -427,83 +405,6 @@ for connection in connection_pattern_set.keys():
 
 print('Completed network model build.')
 
-# *** SKIPS CONNECTIONS THAT DONT WORK
-# receptor_functionals = []
-# receptor_morphologies = []
-# for connection in connection_pattern_set.keys():
-
-#     # skips connections that aren't working... this results in incomplete circuit and inaccurate output. 
-#     if connection in ['P_inA_IA', 'P_inB_IA']:
-#         print(f"Skipping connection {connection} due to likely NES restriction.")
-#         continue
-
-#     # Set the total conductance through receptors at synapses at this connection:
-#     conductance = connection_pattern_set[connection][2]
-#     if conductance == AMPA_conductance:
-#         neurotransmitter = 'AMPA'
-#     else:
-#         neurotransmitter = 'GABA'
-#     weight = connection_pattern_set[connection][3]
-#     receptor_conductance = conductance / weight # Divided by weight to avoid counter-intuitive weight interpretation.
-#     if receptor_conductance >= 0:
-#         print("Setting up a 'AMPA' connection for %s." % connection)
-#     else:
-#         print("Setting up a 'GABA' connection for %s." % connection)
-
-#     # Find the neurons:
-#     from_axon = axon_compartments[connection_pattern_set[connection][0]]
-#     to_cell = cells[connection_pattern_set[connection][1]]
-
-#     # Find the compartments:
-#     from_compartment_id = from_axon.ID
-#     to_compartment_id = to_cell.SomaID
-#     receptor_location = axon_ends[connection][1]
-#     print('Receptor loction: '+str(receptor_location))
-
-#     # Build receptor form:
-#     receptor_box = bg_api.BGNES_box_create(
-#             CenterPosition_um=receptor_location,
-#             Dimensions_um=[0.1,0.1,0.1],
-#             Rotation_rad=[0,0,0],)
-#     receptor_morphologies.append(receptor_box)
-
-#     receptor = bg_api.BGNES_BS_receptor_create(
-#         SourceCompartmentID=from_compartment_id,
-#         DestinationCompartmentID=to_compartment_id,
-#         Neurotransmitter=neurotransmitter,
-#         Conductance_nS=receptor_conductance,
-#         TimeConstantRise_ms=neuron_tau_PSPr,
-#         TimeConstantDecay_ms=neuron_tau_PSPd,
-#         ReceptorMorphology=receptor_box.ID,
-#     )
-#     receptor_functionals.append( (receptor, to_cell) )
-
-#     # printing receptors before creating them:
-#     print(f"From ID: {from_compartment_id}, To ID: {to_compartment_id}")
-
-
-#     # Build receptor function:
-
-#     print("Attempting to create receptor with config:", {
-#         'SourceCompartmentID': from_compartment_id,
-#         'DestinationCompartmentID': to_compartment_id,
-#         'Neurotransmitter': neurotransmitter,
-#         'Conductance_nS': receptor_conductance,
-#         'TimeConstantRise_ms': neuron_tau_PSPr,
-#         'TimeConstantDecay_ms': neuron_tau_PSPd,
-#         'ReceptorMorphology': receptor_box.ID,
-#     })
-#     receptor = bg_api.BGNES_BS_receptor_create(
-#         SourceCompartmentID=from_compartment_id,
-#         DestinationCompartmentID=to_compartment_id,
-#         Neurotransmitter=neurotransmitter,
-#         Conductance_nS=receptor_conductance,
-#         TimeConstantRise_ms=neuron_tau_PSPr,
-#         TimeConstantDecay_ms=neuron_tau_PSPd,
-#         ReceptorMorphology=receptor_box.ID,
-#     )
-
-#     receptor_functionals.append( (receptor, to_cell) )
 
 # 3.7 Save the ground-truth system.
 
@@ -526,9 +427,9 @@ We use this to test the XOR logic by running the input
 spiking sequences:
 
   0 0 = (no spikes for the first 100 ms)
-  1 0 = (100.0, P_in0)
-  0 1 = (200.0, P_in1)
-  1 1 = (300.0, P_in0), (300.0, P_in1)
+  1 0 = (100.0, P_inA)
+  0 1 = (200.0, P_inB)
+  1 1 = (300.0, P_inA), (300.0, P_inB)
 '''
 
 # 4. Init experiment

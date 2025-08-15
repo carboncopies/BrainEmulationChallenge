@@ -77,26 +77,17 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
 
     all_data = []
 
-    
-    
-
     for i in range(len(Vm_cells)):
         all_data.append(Vm_cells[i])
 
     all_data.append(t_ms)
-    
     df = pd.DataFrame(all_data)
-
     df = df.T
-
-    # print(df)
-
+    
     cell = pd.DataFrame(cell_titles)
-
     cell = cell.T
 
     df = pd.concat([cell, df], ignore_index=True)
-
     df.to_csv(savefolder+'data.csv', index=False)
 
     if not isdir(savefolder):
