@@ -5,20 +5,22 @@
 Utility functions used with known ground-truth recorded data.
 '''
 
-import numpy as np
+#import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.colors import ListedColormap
-import matplotlib.gridspec as gridspec
-from PIL import Image
+#from matplotlib.colors import ListedColormap
+#import matplotlib.gridspec as gridspec
+#from PIL import Image
 from os.path import isdir
 from os import makedirs
 
 import datetime
 import pandas as pd
+import pickle
 
-def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
+def extract_t_Vm(data:dict)->tuple:
     if 't_ms' not in data:
-        raise Exception('plot_recorded: Missing t_ms record.')
+        print('extract_t_Vm Error: Missing t_ms record.')
+        return None, None
 
     # Get the list of time points:
     t_ms = data['t_ms']
@@ -50,9 +52,20 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
                 else:
                     Vm_cells.append(data[neuron_id]['Vm_mV'])
     else:
-        print('Missing cells membrane potential data.')
-        return
+        print('extract_t_Vm Error: Missing cells membrane potential data.')
+        return None, None
+    return t_ms, Vm_cells
 
+def save_t_Vm_pickled(t_ms, Vm_cells, savefolder: str):
+    if not isdir(savefolder):
+        makedirs(savefolder)
+    try:
+        with open(savefolder+'/groundtruth-Vm.pkl', 'wb') as f:
+            pickle.dump({'t_ms': t_ms, 'Vm_cells': Vm_cells}, f)
+    except:
+        print('save_t_Vm_pickled Error: Unable to store data in '+savefolder+'/groundtruth-Vm.pkl')
+
+def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
     fig = plt.figure(figsize=figspecs['figsize'])
     gs = fig.add_gridspec(len(Vm_cells),1, hspace=0)
     axs = gs.subplots(sharex=True, sharey=True)
@@ -93,4 +106,16 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
     if not isdir(savefolder):
         makedirs(savefolder)
 
-    plt.savefig(savefolder+'/groundtruth-Vm.'+figspecs['figext'], dpi=300)
+    try:
+        plt.savefig(savefolder+'/groundtruth-Vm.'+figspecs['figext'], dpi=300)
+    except:
+        print('plot_t_Vm Error: Unable to store plot in '+savefolder+'/groundtruth-Vm')
+
+def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
+
+    t_ms, Vm_cells = extract_t_Vm(data)
+    if not t_ms:
+        print('plot_recorded Error: No data to plot.')
+        return
+
+    plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs, cell_titles)
