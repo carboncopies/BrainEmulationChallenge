@@ -597,7 +597,7 @@ print('Functional stimulation completed')
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
 
-savefolder = '/home/skim/BrainGenix/output/'+str(datetime.now()).replace(":", "_")
+savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
 
 cells = {
     'Cin': neurons['Cin'],

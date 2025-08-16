@@ -31,10 +31,8 @@ Full adder circuit:
                      |                                          |   
                      +------------------------------------------+  
 
-For now, we're looking just at the connections involving P_inA, P_inB, I_A0, and P_B0, that forms 
-an XOR gate. 
 
-Just the XOR gate we're looking at:
+Looking just at the first XOR logic:
 
 P_inA -------+-----------+
              |           |
@@ -43,7 +41,6 @@ P_inA -------+-----------+
 P_inB -------+-----------+
 
 All three signals to P_B0 should preferably arrive at the same time so that P_B0 does not fire when I_A0 fires.
-With 
 
 
 '''
@@ -75,8 +72,7 @@ if Args.Local:
 randomseed = 12345
 np.random.seed(randomseed)
 runtime_ms = 1000.0
-# savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
-savefolder = '/home/skim/output/output'+str(datetime.now()).replace(":", "_")
+savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
 figspecs = {
     'figsize': (6,6),
     'linewidth': 0.5,
