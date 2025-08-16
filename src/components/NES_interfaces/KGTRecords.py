@@ -122,6 +122,15 @@ def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'l
     except:
         print('plot_t_Vm Error: Unable to store plot in '+filepath)
 
+def save_connections_pickled(connectionmatrix, savefolder: str, nameappend:str):
+    if not isdir(savefolder):
+        makedirs(savefolder)
+    try:
+        with open(savefolder+'/connections'+nameappend+'.pkl', 'wb') as f:
+            pickle.dump(connectionmatrix, f)
+    except:
+        print('save_connections_pickled Error: Unable to store data in '+savefolder+'/connections'+nameappend+'.pkl')
+
 def plot_weights(weightmatrix, savefolder: str, nameappend:str, figspecs:dict={'figsize':(6,6),'linewidth':0.5, 'figext': 'pdf'}, vmin=None, vmax=None, cmap='viridis'):
     import numpy as np
 

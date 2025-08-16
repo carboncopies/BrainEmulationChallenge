@@ -10,7 +10,7 @@ path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
 import BrainGenix.NES as NES
 
-from NES_interfaces.KGTRecords import extract_t_Vm, extract_spiketimes, save_t_Vm_pickled, plot_t_Vm, plot_weights
+from NES_interfaces.KGTRecords import extract_t_Vm, extract_spiketimes, save_t_Vm_pickled, plot_t_Vm, save_connections_pickled, plot_weights
 
 def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:str, figspecs:dict, receptor='AMPA', usematrix='weights')->bool:
     import numpy as np
@@ -57,6 +57,7 @@ def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:st
                     total += weights[pre][i]
 
         print('Total %s: %d' % (usematrix, total))
+        save_connections_pickled(weightmatrix, savefolder, nameappend)
         plot_weights(weightmatrix, savefolder, nameappend, figspecs)
         return True
     except Exception as e:
