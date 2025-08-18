@@ -123,6 +123,14 @@ except:
     vbp.ErrorExit(DBdata, 'NES error: model load failed')
 
 
+# Get cell positions to verify model structure
+try:
+    cell_positions = MySim.GetSomaPositions()
+except:
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model cell positions')
+
+print(cell_positions)
+
 # Get and plot connectome to have insight into what the reservoir makes available
 try:
     connections_before_dict = MySim.GetConnectome()
@@ -132,6 +140,10 @@ try:
         vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
     if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_numreceptors', FIGSPECS, usematrix='numreceptors'):
         vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_GABA_conductance', FIGSPECS, receptor='GABA', usematrix='conductance'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+
 except:
     vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
 
