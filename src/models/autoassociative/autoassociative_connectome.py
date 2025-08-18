@@ -22,6 +22,9 @@ import json
 import copy
 import argparse
 #import os
+from os.path import isdir
+from os import makedirs
+import pickle
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
@@ -129,7 +132,13 @@ try:
 except:
     vbp.ErrorExit(DBdata, 'NES error: failed to receive model cell positions')
 
-print(cell_positions)
+if not isdir('output'):
+    makedirs('output')
+try:
+    with open('output/cell_positions.pkl', 'wb') as f:
+        pickle.dump(cell_positions, f)
+except:
+    print('Error: Unable to store data in output/cell_positions.pkl')
 
 # Get and plot connectome to have insight into what the reservoir makes available
 try:
