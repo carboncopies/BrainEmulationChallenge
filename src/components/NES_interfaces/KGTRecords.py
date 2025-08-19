@@ -12,6 +12,9 @@ import matplotlib.pyplot as plt
 #from PIL import Image
 from os.path import isdir
 from os import makedirs
+
+# import datetime
+# import pandas as pd
 import pickle
 
 def extract_t_Vm(data:dict)->tuple:
@@ -84,6 +87,19 @@ def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'l
     for ax in axs:
         ax.label_outer()
     plt.draw()
+
+    # exporting data to csv
+
+    # all_data = []
+    # for i in range(len(Vm_cells)):
+    #     all_data.append(Vm_cells[i])
+    # all_data.append(t_ms)
+    # df = pd.DataFrame(all_data)
+    # df = df.T
+    # cell = pd.DataFrame(cell_titles)
+    # cell = cell.T
+    # df = pd.concat([cell, df], ignore_index=True)
+    # df.to_csv(savefolder+'data.csv', index=False)
 
     if not isdir(savefolder):
         makedirs(savefolder)

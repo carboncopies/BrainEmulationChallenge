@@ -575,7 +575,9 @@ print('Functional stimulation completed')
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
 
-if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
+savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
+
+if not vbp.PlotAndStoreRecordedActivity(recording_dict, savefolder, { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
 print('Data plot saved as PDF')
 
