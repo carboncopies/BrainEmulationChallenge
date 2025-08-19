@@ -1,5 +1,5 @@
 #!../../../venv/bin/python
-# LIFtest.py
+# full_adder_lifc.py
 # Soyeon Kim, 20250813
 
 '''
@@ -48,6 +48,8 @@ Parser.add_argument("-Reload", action="store_true", help="Reload saved model")
 Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Args = Parser.parse_args()
+
+print(f"Args: {Args}")
 
 # Initialize data collection for entry in DB file
 DBdata = vbp.InitExpDB(
@@ -597,7 +599,8 @@ print('Functional stimulation completed')
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
 
-savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
+# savefolder = '/tmp/vbp_'+str(datetime.now()).replace(":", "_")
+savefolder = 'home/skim/output'
 
 cells = {
     'Cin': neurons['Cin'],
