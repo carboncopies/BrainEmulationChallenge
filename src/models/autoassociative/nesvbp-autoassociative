@@ -13,6 +13,7 @@ days=20;
 dt=100;
 randomseed=20240628;
 enable_completion_requirements=false;
+use_soma_detailing=true;
 
 # SOMA INITIALIZATION PARAMETERS
 
@@ -63,7 +64,7 @@ In.pyramidal=16;
 In.interneuron=16;
 In.minneuronseparation=10;
 In.centerZ=-300;
-In.shape.radius=50;
+In.shape.radius=100;
 In.shape.thickness=20;
 
 # REGION SPECIFIC AND NEURON TYPE SPECIFIC MODEL PARAMETERS
