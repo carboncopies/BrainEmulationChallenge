@@ -60,6 +60,174 @@ class Scalable_LIFC:
 
         self.savefolder = '/home/skim/BrainGenix/output/output_'+str(datetime.now()).replace(":", "_")
 
+    def makeSphere(self, name, radius, center):
+        SphereCfg = NES.Shapes.Sphere.Configuration()
+        SphereCfg.Name = name
+        SphereCfg.Radius_um = radius
+        SphereCfg.Center_um = center
+        return self.MySim.AddSphere(SphereCfg)
+    
+    def makeCylinder(self, name, point1, point2, radius1, radius2):
+        CylinderCfg = NES.Shapes.Cylinder.Configuration()
+        CylinderCfg.Name = name
+        CylinderCfg.Point1Position_um = point1
+        CylinderCfg.Point2Position_um = point2
+        CylinderCfg.Point1Radius_um = radius1
+        CylinderCfg.Point2Radius_um = radius2
+        return self.MySim.AddCylinder(CylinderCfg)
+
+     # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
+    def makeCompartment(self, name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
+        Cfg = NES.Models.Compartments.LIFC.Configuration()
+        Cfg.Name = name
+        Cfg.RestingPotential_mV = Vrest
+        Cfg.ResetPotential_mV = Vreset
+        Cfg.SpikeThreshold_mV = Vth
+        Cfg.MembraneResistance_MOhm = R_m
+        Cfg.MembraneCapacitance_pF = C_m
+        Cfg.AfterHyperpolarizationAmplitude_mV = E_AHP
+        Cfg.Shape = shapeID
+        return self.MySim.AddLIFCCompartment(Cfg)
+
+    def makeNeuron(
+        self, 
+        name, SomaIDs, DendriteIDs, AxonIDs,
+        Vrest, Vreset, Vth, R_m, C_m,
+        E_AHP,
+        tau_rise_fAHP, tau_decay_fAHP, g_peak_fAHP, g_peak_fAHP_max, Kd_fAHP,
+        tau_rise_sAHP, tau_decay_sAHP, g_peak_sAHP, g_peak_sAHP_max, Kd_sAHP,
+        E_ADP, tau_rise_ADP, tau_decay_ADP, g_peak_ADP,
+        ):
+        Cfg = NES.Models.Neurons.LIFC.Configuration()
+        Cfg.Name = name
+
+        Cfg.SomaIDs = SomaIDs
+        Cfg.DendriteIDs = DendriteIDs
+        Cfg.AxonIDs = AxonIDs
+
+        Cfg.RestingPotential_mV = Vrest
+        Cfg.ResetPotential_mV = Vreset
+        Cfg.SpikeThreshold_mV = Vth
+        Cfg.MembraneResistance_MOhm = R_m
+        Cfg.MembraneCapacitance_pF = C_m
+        Cfg.RefractoryPeriod_ms = 2
+        Cfg.SpikeDepolarization_mV = 30
+
+        Cfg.UpdateMethod = 'ExpEulerCm'
+        Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
+
+        Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
+
+        Cfg.FastAfterHyperpolarizationRise_ms = tau_rise_fAHP
+        Cfg.FastAfterHyperpolarizationDecay_ms = tau_decay_fAHP
+        Cfg.FastAfterHyperpolarizationPeakConductance_nS = g_peak_fAHP
+        Cfg.FastAfterHyperpolarizationMaxPeakConductance_nS = g_peak_fAHP_max
+        Cfg.FastAfterHyperpolarizationHalfActConstant = Kd_fAHP
+
+        Cfg.SlowAfterHyperpolarizationRise_ms = tau_rise_sAHP
+        Cfg.SlowAfterHyperpolarizationDecay_ms = tau_decay_sAHP
+        Cfg.SlowAfterHyperpolarizationPeakConductance_nS = g_peak_sAHP
+        Cfg.SlowAfterHyperpolarizationMaxPeakConductance_nS = g_peak_sAHP_max
+        Cfg.SlowAfterHyperpolarizationHalfActConstant = Kd_sAHP
+
+        Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
+
+        Cfg.FatigueThreshold = 300 # 0 means not applied
+        Cfg.FatigueRecoveryTime_ms = 1000
+
+        Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
+        Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
+        Cfg.AfterDepolarizationDecay_ms = tau_decay_ADP
+        Cfg.AfterDepolarizationPeakConductance_nS = g_peak_ADP
+        Cfg.AfterDepolarizationSaturationMultiplier = 2.0
+        Cfg.AfterDepolarizationRecoveryTime_ms = 300
+        Cfg.AfterDepolarizationDepletion = 0.3
+        Cfg.AfterDepolarizationSaturationModel = 'clip' # 'clip', 'resource'
+
+        Cfg.AdaptiveThresholdDiffPerSpike = 0.2
+        Cfg.AdaptiveTresholdRecoveryTime_ms = 50
+        Cfg.AdaptiveThresholdDiffPotential_mV = 10
+        Cfg.AdaptiveThresholdFloor_mV = Vth # 0 means not applied
+        Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
+        Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
+
+        return self.MySim.AddLIFCNeuron(Cfg)
+
+    def makeBox(self, name, center, dimensions, rotation):
+        BoxCfg = NES.Shapes.Box.Configuration()
+        BoxCfg.Name = name
+        BoxCfg.CenterPosition_um = center
+        BoxCfg.Dimensions_um = dimensions
+        BoxCfg.Rotation_rad = rotation
+        return self.MySim.AddBox(BoxCfg)
+
+    def makePreSynReceptor(
+        self, name, sourcecompID, destcompID, receptortype,
+        E, tau_rise, tau_decay, g_peak, weight, onset_delay,
+        STDP_type, A_pos, A_neg, tau_pos, tau_neg,
+        voltage_gated,
+        shapeID):
+        Cfg = NES.Models.Connections.LIFCReceptor.Configuration()
+        Cfg.Name = name
+        Cfg.SourceCompartment = sourcecompID
+        Cfg.DestinationCompartment = destcompID
+
+        Cfg.Neurotransmitter = receptortype
+
+        Cfg.ReversalPotential_mV = E
+        Cfg.PSPRise_ms = tau_rise
+        Cfg.PSPDecay_ms = tau_decay
+        Cfg.PeakConductance_nS = g_peak
+        Cfg.Weight = weight
+        Cfg.OnsetDelay_ms = onset_delay
+
+        Cfg.STDP_Method = STDP_type # 'Hebbian', 'Anti-Hebbian', 'None'
+        Cfg.STDP_A_pos = A_pos
+        Cfg.STDP_A_neg = A_neg
+        Cfg.STDP_Tau_pos = tau_pos
+        Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = 0.01
+
+        Cfg.voltage_gated = voltage_gated
+
+        Cfg.ReceptorMorphology = shapeID
+        return self.MySim.AddLIFCReceptor(Cfg)
+
+    def makeNetmorphPreSynReceptor(
+        self, name, sourcecompID, destcompID, receptortype, E,
+        tau_rise, tau_decay, g_rec_peak, quantity,
+        hilloc_distance, velocity, syn_delay, voltage_gated,
+        weight, STDP_type, A_pos, A_neg, tau_pos, tau_neg,
+        shapeID):
+        Cfg = NES.Models.Connections.NetmorphLIFCReceptor.Configuration()
+        Cfg.Name = name
+        Cfg.SourceCompartment = sourcecompID
+        Cfg.DestinationCompartment = destcompID
+
+        Cfg.Neurotransmitter = receptortype
+        Cfg.ReversalPotential_mV = E
+        Cfg.PSPRise_ms = tau_rise
+        Cfg.PSPDecay_ms = tau_decay
+        Cfg.ReceptorPeakConductance_nS = g_rec_peak
+        Cfg.ReceptorQuantity = quantity
+
+        Cfg.HillocDistance_um = hilloc_distance
+        Cfg.Velocity_mps = velocity
+        Cfg.SynapticDelay_ms = syn_delay
+        Cfg.voltage_gated = voltage_gated
+
+        Cfg.Weight = weight
+        Cfg.STDP_Method = STDP_type # 'Hebbian', 'Anti-Hebbian', 'None'
+        Cfg.STDP_A_pos = A_pos
+        Cfg.STDP_A_neg = A_neg
+        Cfg.STDP_Tau_pos = tau_pos
+        Cfg.STDP_Tau_neg = tau_neg
+        Cfg.STDP_Shift = 0.01
+
+        Cfg.ReceptorMorphology = shapeID
+        return self.MySim.AddNetmorphLIFCReceptor(Cfg)
+    
+    
     def full_adder(self):
 
         # Define full adder circuit neuron positions
@@ -122,29 +290,13 @@ class Scalable_LIFC:
                 neurons[name] = NeuronStub(i)
 
         else:
-
-            def makeSphere(name, radius, center):
-                SphereCfg = NES.Shapes.Sphere.Configuration()
-                SphereCfg.Name = name
-                SphereCfg.Radius_um = radius
-                SphereCfg.Center_um = center
-                return self.MySim.AddSphere(SphereCfg)
-
             # Create spheres for all neurons
             somas = {}
             for name, pos in neuron_positions.items():
-                somas[name] = makeSphere(f'{name}_Soma', neuron_radii[name], pos)
+                somas[name] = self.makeSphere(f'{name}_Soma', neuron_radii[name], pos)
             print('Made Spheres')
 
-            def makeCylinder(name, point1, point2, radius1, radius2):
-                CylinderCfg = NES.Shapes.Cylinder.Configuration()
-                CylinderCfg.Name = name
-                CylinderCfg.Point1Position_um = point1
-                CylinderCfg.Point2Position_um = point2
-                CylinderCfg.Point1Radius_um = radius1
-                CylinderCfg.Point2Radius_um = radius2
-                return self.MySim.AddCylinder(CylinderCfg)
-
+            
             # Create cylinders for axons - define all connections
             axons = {}
             
@@ -189,105 +341,33 @@ class Scalable_LIFC:
                         end_neuron = neuron_name
                 
                 if start_neuron and end_neuron:
-                    axons[name] = makeCylinder(f'{name}_Axon', start_pos, end_pos, 2, 1)
+                    axons[name] = self.makeCylinder(f'{name}_Axon', start_pos, end_pos, 2, 1)
                 else:
                     # For output axons, use the start position
-                    axons[name] = makeCylinder(f'{name}_Axon', start_pos, end_pos, 2, 1)
+                    axons[name] = self.makeCylinder(f'{name}_Axon', start_pos, end_pos, 2, 1)
             
             print('Made Cylinders')
 
-            # NOTE: A number of parameters inherited from SCNeuron are automatically set in NES for LIFCNeuron.
-            def makeCompartment(name, Vrest, Vreset, Vth, R_m, C_m, E_AHP, shapeID):
-                Cfg = NES.Models.Compartments.LIFC.Configuration()
-                Cfg.Name = name
-                Cfg.RestingPotential_mV = Vrest
-                Cfg.ResetPotential_mV = Vreset
-                Cfg.SpikeThreshold_mV = Vth
-                Cfg.MembraneResistance_MOhm = R_m
-                Cfg.MembraneCapacitance_pF = C_m
-                Cfg.AfterHyperpolarizationAmplitude_mV = E_AHP
-                Cfg.Shape = shapeID
-                return self.MySim.AddLIFCCompartment(Cfg)
+           
 
             # Create compartments for somas, dendrites and axons
             soma_compartments = {}
             axon_compartments = {}
             
             for name, pos in neuron_positions.items():
-                soma_compartments[name] = makeCompartment(f'{name}_Soma_LIFC', -70, -55, -50, 100, 100, -90, somas[name].ID)
+                soma_compartments[name] = self.makeCompartment(f'{name}_Soma_LIFC', -70, -55, -50, 100, 100, -90, somas[name].ID)
             
             for name, axon in axons.items():
-                axon_compartments[name] = makeCompartment(f'{name}_Axon_LIFC', -70, -55, -50, 100, 100, -90, axon.ID)
+                axon_compartments[name] = self.makeCompartment(f'{name}_Axon_LIFC', -70, -55, -50, 100, 100, -90, axon.ID)
             
             print('Made Compartments')
 
-            def makeNeuron(
-                name, SomaIDs, DendriteIDs, AxonIDs,
-                Vrest, Vreset, Vth, R_m, C_m,
-                E_AHP,
-                tau_rise_fAHP, tau_decay_fAHP, g_peak_fAHP, g_peak_fAHP_max, Kd_fAHP,
-                tau_rise_sAHP, tau_decay_sAHP, g_peak_sAHP, g_peak_sAHP_max, Kd_sAHP,
-                E_ADP, tau_rise_ADP, tau_decay_ADP, g_peak_ADP,
-                ):
-                Cfg = NES.Models.Neurons.LIFC.Configuration()
-                Cfg.Name = name
-
-                Cfg.SomaIDs = SomaIDs
-                Cfg.DendriteIDs = DendriteIDs
-                Cfg.AxonIDs = AxonIDs
-
-                Cfg.RestingPotential_mV = Vrest
-                Cfg.ResetPotential_mV = Vreset
-                Cfg.SpikeThreshold_mV = Vth
-                Cfg.MembraneResistance_MOhm = R_m
-                Cfg.MembraneCapacitance_pF = C_m
-                Cfg.RefractoryPeriod_ms = 2
-                Cfg.SpikeDepolarization_mV = 30
-
-                Cfg.UpdateMethod = 'ExpEulerCm'
-                Cfg.ResetMethod = 'ToVm' # 'ToVm', 'Onset', 'After'
-
-                Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
-
-                Cfg.FastAfterHyperpolarizationRise_ms = tau_rise_fAHP
-                Cfg.FastAfterHyperpolarizationDecay_ms = tau_decay_fAHP
-                Cfg.FastAfterHyperpolarizationPeakConductance_nS = g_peak_fAHP
-                Cfg.FastAfterHyperpolarizationMaxPeakConductance_nS = g_peak_fAHP_max
-                Cfg.FastAfterHyperpolarizationHalfActConstant = Kd_fAHP
-
-                Cfg.SlowAfterHyperpolarizationRise_ms = tau_rise_sAHP
-                Cfg.SlowAfterHyperpolarizationDecay_ms = tau_decay_sAHP
-                Cfg.SlowAfterHyperpolarizationPeakConductance_nS = g_peak_sAHP
-                Cfg.SlowAfterHyperpolarizationMaxPeakConductance_nS = g_peak_sAHP_max
-                Cfg.SlowAfterHyperpolarizationHalfActConstant = Kd_sAHP
-
-                Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
-
-                Cfg.FatigueThreshold = 300 # 0 means not applied
-                Cfg.FatigueRecoveryTime_ms = 1000
-
-                Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
-                Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
-                Cfg.AfterDepolarizationDecay_ms = tau_decay_ADP
-                Cfg.AfterDepolarizationPeakConductance_nS = g_peak_ADP
-                Cfg.AfterDepolarizationSaturationMultiplier = 2.0
-                Cfg.AfterDepolarizationRecoveryTime_ms = 300
-                Cfg.AfterDepolarizationDepletion = 0.3
-                Cfg.AfterDepolarizationSaturationModel = 'clip' # 'clip', 'resource'
-
-                Cfg.AdaptiveThresholdDiffPerSpike = 0.2
-                Cfg.AdaptiveTresholdRecoveryTime_ms = 50
-                Cfg.AdaptiveThresholdDiffPotential_mV = 10
-                Cfg.AdaptiveThresholdFloor_mV = Vth # 0 means not applied
-                Cfg.AdaptiveThresholdFloorDeltaPerSpike_mV = 1.0
-                Cfg.AdaptiveThresholdFloorRecoveryTime_ms = 500
-
-                return self.MySim.AddLIFCNeuron(Cfg)
+            
 
             # Create neurons with appropriate axon connections
             
             # Input neurons
-            self.neurons['Cin'] = makeNeuron(
+            self.neurons['Cin'] = self.makeNeuron(
                 'Cin_Neuron', [soma_compartments['Cin'].ID], [], [axon_compartments['Cin_IC0'].ID, axon_compartments['Cin_PC1'].ID, axon_compartments['Cin_Sum'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -295,7 +375,7 @@ class Scalable_LIFC:
                 30, 300, 1.0, 2.0, 0.3,
                 -20, 20, 200, 0.3)
             
-            self.neurons['P_inA'] = makeNeuron(
+            self.neurons['P_inA'] = self.makeNeuron(
                 'P_inA_Neuron', [soma_compartments['P_inA'].ID], [], [axon_compartments['PinA_IA0'].ID, axon_compartments['PinA_PB0'].ID, axon_compartments['PinA_PC0'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -303,7 +383,7 @@ class Scalable_LIFC:
                 30, 300, 1.0, 2.0, 0.3,
                 -20, 20, 200, 0.3)
             
-            self.neurons['P_inB'] = makeNeuron(
+            self.neurons['P_inB'] = self.makeNeuron(
                 'P_inB_Neuron', [soma_compartments['P_inB'].ID], [], [axon_compartments['PinB_IA0'].ID, axon_compartments['PinB_PB0'].ID, axon_compartments['PinB_PC0'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -312,7 +392,7 @@ class Scalable_LIFC:
                 -20, 20, 200, 0.3)
             
             # Layer A interneuron
-            self.neurons['I_A0'] = makeNeuron(
+            self.neurons['I_A0'] = self.makeNeuron(
                 'I_A0_Neuron', [soma_compartments['I_A0'].ID], [], [axon_compartments['IA0_PB0'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -321,7 +401,7 @@ class Scalable_LIFC:
                 -20, 20, 200, 0)
             
             # Layer B principal neuron
-            self.neurons['P_B0'] = makeNeuron(
+            self.neurons['P_B0'] = self.makeNeuron(
                 'P_B0_Neuron', [soma_compartments['P_B0'].ID], [], [axon_compartments['PB0_IC0'].ID, axon_compartments['PB0_PC1'].ID, axon_compartments['PB0_Sum'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -330,7 +410,7 @@ class Scalable_LIFC:
                 -20, 20, 200, 0.3)
             
             # Layer C neurons
-            self.neurons['I_C0'] = makeNeuron(
+            self.neurons['I_C0'] = self.makeNeuron(
                 'I_C0_Neuron', [soma_compartments['I_C0'].ID], [], [axon_compartments['IC0_Sum'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -338,7 +418,7 @@ class Scalable_LIFC:
                 30, 300, 0, 0, 0.3,
                 -20, 20, 200, 0)
             
-            self.neurons['P_C0'] = makeNeuron(
+            self.neurons['P_C0'] = self.makeNeuron(
                 'P_C0_Neuron', [soma_compartments['P_C0'].ID], [], [axon_compartments['PC0_Cout'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -346,7 +426,7 @@ class Scalable_LIFC:
                 30, 300, 1.0, 2.0, 0.3,
                 -20, 20, 200, 0.3)
             
-            self.neurons['P_C1'] = makeNeuron(
+            self.neurons['P_C1'] = self.makeNeuron(
                 'P_C1_Neuron', [soma_compartments['P_C1'].ID], [], [axon_compartments['PC1_Cout'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -355,7 +435,7 @@ class Scalable_LIFC:
                 -20, 20, 200, 0.3)
             
             # Output neurons
-            self.neurons['Sum'] = makeNeuron(
+            self.neurons['Sum'] = self.makeNeuron(
                 'Sum_Neuron', [soma_compartments['Sum'].ID], [], [axon_compartments['Sum_out'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -363,7 +443,7 @@ class Scalable_LIFC:
                 30, 300, 1.0, 2.0, 0.3,
                 -20, 20, 200, 0.3)
             
-            self.neurons['Cout'] = makeNeuron(
+            self.neurons['Cout'] = self.makeNeuron(
                 'Cout_Neuron', [soma_compartments['Cout'].ID], [], [axon_compartments['Cout_out'].ID],
                 -70, -55, -50, 100, 100,
                 -90,
@@ -373,79 +453,9 @@ class Scalable_LIFC:
             
             print('Made LIFC Neurons')
 
-            def makeBox(name, center, dimensions, rotation):
-                BoxCfg = NES.Shapes.Box.Configuration()
-                BoxCfg.Name = name
-                BoxCfg.CenterPosition_um = center
-                BoxCfg.Dimensions_um = dimensions
-                BoxCfg.Rotation_rad = rotation
-                return self.MySim.AddBox(BoxCfg)
+            
 
-            def makePreSynReceptor(
-                name, sourcecompID, destcompID, receptortype,
-                E, tau_rise, tau_decay, g_peak, weight, onset_delay,
-                STDP_type, A_pos, A_neg, tau_pos, tau_neg,
-                voltage_gated,
-                shapeID):
-                Cfg = NES.Models.Connections.LIFCReceptor.Configuration()
-                Cfg.Name = name
-                Cfg.SourceCompartment = sourcecompID
-                Cfg.DestinationCompartment = destcompID
-
-                Cfg.Neurotransmitter = receptortype
-
-                Cfg.ReversalPotential_mV = E
-                Cfg.PSPRise_ms = tau_rise
-                Cfg.PSPDecay_ms = tau_decay
-                Cfg.PeakConductance_nS = g_peak
-                Cfg.Weight = weight
-                Cfg.OnsetDelay_ms = onset_delay
-
-                Cfg.STDP_Method = STDP_type # 'Hebbian', 'Anti-Hebbian', 'None'
-                Cfg.STDP_A_pos = A_pos
-                Cfg.STDP_A_neg = A_neg
-                Cfg.STDP_Tau_pos = tau_pos
-                Cfg.STDP_Tau_neg = tau_neg
-                Cfg.STDP_Shift = 0.01
-
-                Cfg.voltage_gated = voltage_gated
-
-                Cfg.ReceptorMorphology = shapeID
-                return self.MySim.AddLIFCReceptor(Cfg)
-
-            def makeNetmorphPreSynReceptor(
-                name, sourcecompID, destcompID, receptortype, E,
-                tau_rise, tau_decay, g_rec_peak, quantity,
-                hilloc_distance, velocity, syn_delay, voltage_gated,
-                weight, STDP_type, A_pos, A_neg, tau_pos, tau_neg,
-                shapeID):
-                Cfg = NES.Models.Connections.NetmorphLIFCReceptor.Configuration()
-                Cfg.Name = name
-                Cfg.SourceCompartment = sourcecompID
-                Cfg.DestinationCompartment = destcompID
-
-                Cfg.Neurotransmitter = receptortype
-                Cfg.ReversalPotential_mV = E
-                Cfg.PSPRise_ms = tau_rise
-                Cfg.PSPDecay_ms = tau_decay
-                Cfg.ReceptorPeakConductance_nS = g_rec_peak
-                Cfg.ReceptorQuantity = quantity
-
-                Cfg.HillocDistance_um = hilloc_distance
-                Cfg.Velocity_mps = velocity
-                Cfg.SynapticDelay_ms = syn_delay
-                Cfg.voltage_gated = voltage_gated
-
-                Cfg.Weight = weight
-                Cfg.STDP_Method = STDP_type # 'Hebbian', 'Anti-Hebbian', 'None'
-                Cfg.STDP_A_pos = A_pos
-                Cfg.STDP_A_neg = A_neg
-                Cfg.STDP_Tau_pos = tau_pos
-                Cfg.STDP_Tau_neg = tau_neg
-                Cfg.STDP_Shift = 0.01
-
-                Cfg.ReceptorMorphology = shapeID
-                return self.MySim.AddNetmorphLIFCReceptor(Cfg)
+            
 
             # Create synapses for all connections
             Synapses = {}
@@ -512,13 +522,13 @@ class Scalable_LIFC:
                     continue
                 
                 synapse_pos = neuron_positions[target_neuron_name]
-                Synapses[connection_name] = makeBox(connection_name, synapse_pos, [0.1,0.1,0.1], [0,0,0])
+                Synapses[connection_name] = self.makeBox(connection_name, synapse_pos, [0.1,0.1,0.1], [0,0,0])
                 
                 # Create receptor
                 source_comp = axon_compartments[connection_name].ID
                 dest_comp = soma_compartments[target_neuron_name].ID
                 
-                makePreSynReceptor(
+                self.makePreSynReceptor(
                     f'{connection_name}_Receptor', source_comp, dest_comp, neurotransmitter,
                     E, tau_rise, tau_decay, g_peak, weight, onset_delay,
                     STDP_type, A_pos, A_neg, tau_pos, tau_neg,
