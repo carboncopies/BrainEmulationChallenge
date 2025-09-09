@@ -8,6 +8,8 @@ from pathlib import Path
 
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
+import BrainGenix.NES as NES
+
 from NES_interfaces.KGTRecords import extract_t_Vm, save_t_Vm_pickled, plot_t_Vm
 
 def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
@@ -175,3 +177,39 @@ def GetMostRecentDBEntryOUT(DBdata:dict, key:str, modelfromIN:bool, modelname:st
     if 'OUT' not in DBentry:
         return ExitOrReturn(DBdata, exit_on_error, 'Experiments database error: Database format is corrupted: missing OUT')
     return DBentry['OUT']
+
+def ClientFromArgs(DBdata:dict, Args):
+    # Create Client Configuration For Local Simulation
+    print(" -- Creating Client Configuration For Local Simulation")
+    ClientCfg = NES.Client.Configuration()
+    ClientCfg.Mode = NES.Client.Modes.Remote
+    ClientCfg.Host = Args.Host
+    ClientCfg.Port = Args.Port
+    ClientCfg.UseHTTPS = Args.UseHTTPS
+    ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
+    ClientCfg.Username = "Admonishing"
+    ClientCfg.Password = "Instruction"
+
+    # Create Client Instance
+    print(" -- Creating Client Instance")
+    try:
+        ClientInstance = NES.Client.Client(ClientCfg)
+        if not ClientInstance.IsReady():
+            ErrorExit(DBdata, 'NES.Client error: not ready')
+    except Exception as e:
+        ErrorExit(DBdata, 'NES.Client error: '+str(e))
+
+    return ClientCfg, ClientInstance
+
+def NewSimulation(DBdata:dict, ClientInstance, Name, Seed=0):
+    # Create A New Simulation
+    print(" -- Creating Simulation")
+    SimulationCfg = NES.Simulation.Configuration()
+    SimulationCfg.Name = Name
+    SimulationCfg.Seed = Seed
+    try:
+        MySim = ClientInstance.CreateSimulation(SimulationCfg)
+    except:
+        ErrorExit(DBdata, 'NES error: Failed to create simulation')
+
+    return SimulationCfg, MySim

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-# xor_bs_groundtruth.py
-# Randal A. Koene, 20240306
+# xor_bs_simplied.py
+# Soyeon Kim, 20250802
 
 '''
 The XOR ball-and-stick example uses extremely simple neuron representations in a
@@ -83,13 +83,11 @@ INITTEXT1='''
 
    Circuit:
 
-   P_in0 (-45,-45) -----------------------+ // note that P_A0 has been removed
-                |                         |
-                +----> I_A0 (-15,-15) \ > P_B0 (15,-15) --+
-                                       X                   P_out (45, 0)
-                +----> I_A1 (-15, 15) / > P_B1 (15, 15) --+
-                |                         |
-   P_in1 (-45, 45) --> P_A1 (-15, 45) ----+
+    P_inA (-45, -45)--- P_A0 (-15, -45) --+
+                    |                     |
+                    +-> IA (-15, -15) --> P_out (15, -15)
+                    |                     |
+    P_inB (-45, 45)---- P_A1 (-15, 45) ---+
 
    Distances of 30 um are typical between somas in cortex.
 '''
@@ -99,28 +97,24 @@ print(INITTEXT1)
 # 3.1 Define shapes for the neurons and place each specifically.
 
 principal_soma_radius_um = 10.0                # A typical radius for the soma of a human cortical pyramidal neuron 5-25 um.
-interneuron_soma_radius_um = 5.                # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
+interneuron_soma_radius_um = 5.0               # A typical radius for the soma of a human cortical interneuron 2.5-15 um.
 
-P_in0_pos = [-45,-45, 0]
-P_in1_pos = [-45, 45, 0]
-#P_A0_pos  = [-15,-45, 0]
-I_A0_pos  = [-15,-15, 0]
-I_A1_pos  = [-15, 15, 0]
-#P_A1_pos  = [-15, 45, 0]
-P_B0_pos  = [ 15,-15, 0]
-P_B1_pos  = [ 15, 15, 0]
-P_out_pos = [ 45,  0, 0]
+P_inA_pos = [-45, -45, 0]
+P_inB_pos = [-45, 45, 0]
+IA_pos = [-15, -15, 0]
+P_out_pos = [15, -15, 0]
+
+P_A0_pos = [-15, -45, 0]
+P_A1_pos = [-15, 45, 0]
 
 soma_positions_and_radius = {
-    'P_in0': ( P_in0_pos, principal_soma_radius_um ),
-    'P_in1': ( P_in1_pos, principal_soma_radius_um ),
-    #'P_A0': ( P_A0_pos, principal_soma_radius_um ),
-    'I_A0': ( I_A0_pos, interneuron_soma_radius_um ),
-    'I_A1': ( I_A1_pos, interneuron_soma_radius_um ),
-    #'P_A1': ( P_A1_pos, principal_soma_radius_um ),
-    'P_B0': ( P_B0_pos, principal_soma_radius_um ),
-    'P_B1': ( P_B1_pos, principal_soma_radius_um ),
+    'P_inA': ( P_inA_pos, principal_soma_radius_um ),
+    'P_inB': ( P_inB_pos, principal_soma_radius_um ),
+    'IA': ( IA_pos, interneuron_soma_radius_um ),
     'P_out': ( P_out_pos, principal_soma_radius_um ),
+
+    'P_A0': (P_A0_pos, principal_soma_radius_um),
+    'P_A1': (P_A1_pos, principal_soma_radius_um),
 }
 
 neuron_names = list(soma_positions_and_radius.keys())
@@ -139,58 +133,39 @@ end1_radius_um = 0.3  # Typical radius of distal axon segments of pyramidal neur
 
 axon_ends = {}
 
-P_in0_axon_start_np = np.array(P_in0_pos) + np.array([principal_soma_radius_um, 0, 0])
-Pin0_PB0_start = list(P_in0_axon_start_np) + [ end0_radius_um ]
-P_in0_axon_end_np = np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0])
-Pin0_PB0_end   = list(P_in0_axon_end_np) + [ end1_radius_um ]
-axon_ends['P_in0_P_B0'] = (Pin0_PB0_start, Pin0_PB0_end)
+# defining start and end positions of axons. 
 
-P_in1_axon_start_np = np.array(P_in1_pos) + np.array([principal_soma_radius_um, 0, 0])
-Pin1_PB1_start = list(P_in1_axon_start_np) + [ end0_radius_um ]
-P_in1_axon_end_np = np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])
-Pin1_PB1_end   = list(P_in1_axon_end_np) + [ end1_radius_um ]
-axon_ends['P_in1_P_B1'] = (Pin1_PB1_start, Pin1_PB1_end)
+PinA_PA0_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PA0_end   = list(np.array(P_A0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_inA_P_A0'] = (PinA_PA0_start, PinA_PA0_end)
 
-Pin0_PB0_vec_np = P_in0_axon_end_np - P_in0_axon_start_np
-Pin0_branch_start_np = P_in0_axon_start_np + 0.25*Pin0_PB0_vec_np
+PinB_PA1_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PA1_end   = list(np.array(P_A1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_inB_P_A1'] = (PinB_PA1_start, PinB_PA1_end)
 
-Pin0_IA0_start = list(Pin0_branch_start_np) + [ end1_radius_um ]
-Pin0_IA0_end   = list(np.array(I_A0_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['P_in0_I_A0'] = (Pin0_IA0_start, Pin0_IA0_end)
 
-Pin1_PB1_vec_np = P_in1_axon_end_np - P_in1_axon_start_np
-Pin0_branch_start_np = P_in1_axon_start_np + 0.25*Pin1_PB1_vec_np
+PinA_IA_start = list(np.array(P_inA_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_IA_end   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['P_inA_IA'] = (PinA_IA_start, PinA_IA_end)
 
-Pin1_IA1_start = list(Pin0_branch_start_np) + [ end1_radius_um ]
-Pin1_IA1_end   = list(np.array(I_A1_pos) + np.array([-interneuron_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['P_in1_I_A1'] = (Pin1_IA1_start, Pin1_IA1_end)
+PinB_IA_start = list(np.array(P_inB_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_IA_end   = list(np.array(IA_pos) + np.array([-interneuron_soma_radius_um, 0, 0]))
+axon_ends['P_inB_IA'] = (PinB_IA_start, PinB_IA_end)
 
-# PA0_PB0_start  = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PA0_PB0_end    = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_A0_P_B0'] = (PA0_PB0_start, PA0_PB0_end)
+IA_Pout_start = list(np.array(IA_pos) + np.array([interneuron_soma_radius_um, 0, 0]))
+IA_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['IA_P_out'] = (IA_Pout_start, IA_Pout_end)
 
-# PA1_PB1_start  = list(np.array(P_A1_pos) + np.array([principal_soma_radius_um, 0, 0]))
-# PA1_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0]))
-# axon_ends['P_A1_P_B1'] = (PA1_PB1_start, PA1_PB1_end)
+PA0_Pout_start = list(np.array(P_A0_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinA_PA0_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_A0_P_out'] = (PinA_PA0_start, PinA_PA0_end)
 
-IA0_PB1_start  = list(np.array(I_A0_pos) + np.array([interneuron_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-IA0_PB1_end    = list(np.array(P_B1_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['I_A0_P_B1'] = (IA0_PB1_start, IA0_PB1_end)
+PA1_Pout_start = list(np.array(P_A1_pos) + np.array([principal_soma_radius_um, 0, 0]))
+PinB_PA1_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0]))
+axon_ends['P_A1_P_out'] = (PA1_Pout_start, PinB_PA1_end)
 
-IA1_PB0_start  = list(np.array(I_A1_pos) + np.array([interneuron_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-IA1_PB0_end    = list(np.array(P_B0_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['I_A1_P_B0'] = (IA1_PB0_start, IA1_PB0_end)
-
-PB0_Pout_start = list(np.array(P_B0_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-PB0_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['P_B0_P_out'] = (PB0_Pout_start, PB0_Pout_end)
-
-PB1_Pout_start = list(np.array(P_B1_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-PB1_Pout_end   = list(np.array(P_out_pos) + np.array([-principal_soma_radius_um, 0, 0])) + [ end1_radius_um ]
-axon_ends['P_B1_P_out'] = (PB1_Pout_start, PB1_Pout_end)
-
-Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0])) + [ end0_radius_um ]
-Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0])) + [ end1_radius_um ]
+Pout_start = list(np.array(P_out_pos) + np.array([principal_soma_radius_um, 0, 0]))
+Pout_end = list(np.array(P_out_pos) + np.array([30.0, 0, 0]))
 axon_ends['P_out_axon'] = (Pout_start, Pout_end)
 
 axon_names = list(axon_ends.keys())
@@ -198,10 +173,10 @@ axon_names = list(axon_ends.keys())
 axons = {}
 for a in axon_names:
     axon = bg_api.BGNES_cylinder_create(
-                Point1Radius_um=axon_ends[a][0][3],
-                Point1Position_um=axon_ends[a][0][0:3],
-                Point2Radius_um=axon_ends[a][1][3],
-                Point2Position_um=axon_ends[a][1][0:3],)
+                Point1Radius_um=end0_radius_um,
+                Point1Position_um=axon_ends[a][0],
+                Point2Radius_um=end1_radius_um,
+                Point2Position_um=axon_ends[a][1],)
     axons[a] = axon
 
 # 3.3 Create compartments.
@@ -222,6 +197,7 @@ for n in neuron_names:
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     soma_compartments[n] = compartment
+    print('Made neuron compartment with ID %d with soma shape ID %d' % (compartment.ID, somas[n].ID))
 
 axon_compartments = {}
 for a in axon_names:
@@ -233,6 +209,7 @@ for a in axon_names:
                     DecayTime_ms=neuron_tau_AHP_ms,
                     AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,)
     axon_compartments[a] = compartment
+    print('Made axon compartment with ID %d with axon shape ID %d' % (compartment.ID, axons[a].ID))
 
 # 3.4 Create principal neurons.
 
@@ -279,10 +256,9 @@ for a in axon_names:
 neuron_tau_PSPr = 5.0
 neuron_tau_PSPd = 25.0
 neuron_IPSP = 870.0 # nA
-#neuron_tau_spont_mean_stdev_ms = (0, 0) # 0 means no spontaneous activity
-#neuron_t_spont_next = -1
 
 def neuron_builder(soma_name:str, axon_name:str):
+    print('Createing neuron with soma ID %d and axon ID %d' % (soma_compartments[soma_name].ID, axon_compartments[axon_name].ID))
     return bg_api.BGNES_BS_neuron_create(
         Soma=soma_compartments[soma_name].ID, 
         Axon=axon_compartments[axon_name].ID,
@@ -296,64 +272,50 @@ def neuron_builder(soma_name:str, axon_name:str):
         PostsynapticPotentialAmplitude_nA=neuron_IPSP,
     )
 
-def neuron_builder_special(soma_name:str, axon_name:str):
-    return bg_api.BGNES_BS_neuron_create(
-        Soma=soma_compartments[soma_name].ID, 
-        Axon=axon_compartments[axon_name].ID,
-        MembranePotential_mV=neuron_Vm_mV,
-        RestingPotential_mV=neuron_Vrest_mV,
-        SpikeThreshold_mV=neuron_Vact_mV,
-        DecayTime_ms=neuron_tau_AHP_ms,
-        AfterHyperpolarizationAmplitude_mV=neuron_Vahp_mV,
-        PostsynapticPotentialRiseTime_ms=neuron_tau_PSPr + 200,
-        PostsynapticPotentialDecayTime_ms=neuron_tau_PSPd,
-        PostsynapticPotentialAmplitude_nA=neuron_IPSP,
-    )
+# neuron consists of a soma and an axon. 
+# you're simply pairing a soma and an axon to make all connections needed to form a desired circuit.
+# but here, you 're only defining one axon (as the "official" axon; typically the longest one) per neuron.
+# other axons are established separately through the receptor definition that links axons to somas. 
+# when a neuron is "fired", its output branches to all axons it's connected to through when axons were defined.
 
-Pin0 = neuron_builder('P_in0', 'P_in0_P_B0') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
-Pin1 = neuron_builder('P_in1', 'P_in1_P_B1') # *** DO WE NEED TO WORRY ABOUT THE SECOND AXON?
-# PA0  = neuron_builder('P_A0', 'P_A0_P_B0')
-# PA1  = neuron_builder('P_A1', 'P_A1_P_B1')
-PB0  = neuron_builder_special('P_B0', 'P_B0_P_out')
-PB1  = neuron_builder_special('P_B1', 'P_B1_P_out')
-# PB0  = neuron_builder('P_B0', 'P_B0_P_out')
-# PB1  = neuron_builder('P_B1', 'P_B1_P_out')
+PinA = neuron_builder('P_inA', 'P_inA_P_A0')
+PinB = neuron_builder('P_inB', 'P_inB_P_A1')
+
+IA = neuron_builder('IA', 'IA_P_out')
+
+PA0 = neuron_builder('P_A0', 'P_A0_P_out')
+PA1 = neuron_builder('P_A1', 'P_A1_P_out')
+
 Pout = neuron_builder('P_out', 'P_out_axon')
+
+# print('Neuron PinA has ID %d' % PinA.ID)
+# print('Neuron PinB has ID %d' % PinB.ID)
+# print('Neuron IA has ID %d' % IA.ID)
+# print('Neuron Pout has ID %d' % Pout.ID)
 
 # 3.5 Create interneurons.
 
-IA0  = neuron_builder('I_A0', 'I_A0_P_B1')
-IA1  = neuron_builder('I_A1', 'I_A1_P_B0')
-
 cells = {
-    'P_in0': Pin0,
-    'P_in1': Pin1,
+    'P_inA': PinA,
+    'P_inB': PinB,
 
-    # 'P_A0': PA0,
-    # 'P_A1': PA1,
+    'P_A0': PA0,
+    'P_A1': PA1,
 
-    'P_B0': PB0,
-    'P_B1': PB1,
-
+    'IA': IA,
+    
     'P_out': Pout,
-
-    'I_A0': IA0,
-    'I_A1': IA1,
 }
 
 input_neurons = {
-    'P_in0': Pin0,
-    'P_in1': Pin1,
+    'P_inA': PinA,
+    'P_inB': PinB,
 }
-layerA_neurons = {
-    # 'P_A0': PA0,
-    # 'P_A1': PA1,
-    'I_A0': IA0,
-    'I_A1': IA1,
-}
-layerB_neurons = {
-    'P_B0': PB0,
-    'P_B1': PB1,
+LayerA_neurons = {
+    'P_A0': PA0,
+    'P_A1': PA1,
+
+    'IA': IA,
 }
 output_neurons = {
     'P_out': Pout,
@@ -363,29 +325,36 @@ output_neurons = {
 
 AMPA_conductance = 40.0 #60 # nS
 GABA_conductance = -40.0 # nS
-PinPB_weight  = 0.9 # Greater weight means stronger PSP amplitude.
-PinIA_weight  = 1.2
-#PAPB_weight   = 1.0
-IAPB_weight   = 1.2
-PBPout_weight = 1.0
+
+P_inA_P_A0_weight = 1.0
+P_inB_P_A1_weight = 1.0
+
+P_A0_P_out_weight = 1.0
+P_A1_P_out_weight = 1.0
+
+P_inA_IA_weight = 0.6
+P_inB_IA_weight = 0.6
+
+IA_Pout_weight = 2.3
 
 # dict key indicates 'from' axon, value[0] indicate 'to' cell soma, value[1] indicates AMPA/GABA
+# defining how neurons should interact with each other. 
+# need this for all connections within a circuit (all axons)
+
 connection_pattern_set = {
-    'P_in0_P_B0': ( 'P_in0_P_B0', 'P_B0', AMPA_conductance, PinPB_weight),
-    'P_in1_P_B1': ( 'P_in1_P_B1', 'P_B1', AMPA_conductance, PinPB_weight),
-    'P_in0_I_A0': ( 'P_in0_P_B0', 'I_A0', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
-    'P_in1_I_A1': ( 'P_in1_P_B1', 'I_A1', AMPA_conductance, PinIA_weight), # *** FAKING IT FOR FUNCTIONAL REASONS
+    'P_inA_P_A0':  ( 'P_inA_P_A0', 'P_A0', AMPA_conductance, P_inA_P_A0_weight),
+    'P_inB_P_A1':  ( 'P_inB_P_A1', 'P_A1', AMPA_conductance, P_inB_P_A1_weight),
 
-    # 'P_A0_P_B0': ( 'P_A0_P_B0', 'P_B0', AMPA_conductance),
-    # 'P_A1_P_B1': ( 'P_A1_P_B1', 'P_B1', AMPA_conductance),
+    'P_inA_IA':    ( 'P_inA_P_A0', 'IA', AMPA_conductance, P_inA_IA_weight),
+    'P_inB_IA':    ( 'P_inB_P_A1', 'IA', AMPA_conductance, P_inB_IA_weight),
 
-    'I_A0_P_B1': ( 'I_A0_P_B1', 'P_B1', GABA_conductance, IAPB_weight),
-    'I_A1_P_B0': ( 'I_A1_P_B0', 'P_B0', GABA_conductance, IAPB_weight),
+    'P_A0_P_out':  ( 'P_A0_P_out', 'P_out', AMPA_conductance, P_A0_P_out_weight),
+    'P_A1_P_out':  ( 'P_A1_P_out', 'P_out', AMPA_conductance, P_A1_P_out_weight),
 
-    'P_B0_P_out': ( 'P_B0_P_out', 'P_out', AMPA_conductance, PBPout_weight),
-    'P_B1_P_out': ( 'P_B1_P_out', 'P_out', AMPA_conductance,PBPout_weight),
+    'IA_P_out':    ( 'IA_P_out', 'P_out', GABA_conductance, IA_Pout_weight),
 }
 
+# *** ORIGINAL CONNECTION MAKING ALGORITHM:
 receptor_functionals = []
 receptor_morphologies = []
 for connection in connection_pattern_set.keys():
@@ -418,8 +387,10 @@ for connection in connection_pattern_set.keys():
             Dimensions_um=[0.1,0.1,0.1],
             Rotation_rad=[0,0,0],)
     receptor_morphologies.append(receptor_box)
+    print('Created receptor box with ID %d' % receptor_box.ID)
 
     # Build receptor function:
+    print('Creating receptor from ID %d to ID %d with shape %d' % (from_compartment_id, to_compartment_id, receptor_box.ID))
     receptor = bg_api.BGNES_BS_receptor_create(
         SourceCompartmentID=from_compartment_id,
         DestinationCompartmentID=to_compartment_id,
@@ -430,6 +401,9 @@ for connection in connection_pattern_set.keys():
         ReceptorMorphology=receptor_box.ID,
     )
     receptor_functionals.append( (receptor, to_cell) )
+
+print('Completed network model build.')
+
 
 # 3.7 Save the ground-truth system.
 
@@ -452,19 +426,20 @@ We use this to test the XOR logic by running the input
 spiking sequences:
 
   0 0 = (no spikes for the first 100 ms)
-  1 0 = (100.0, P_in0)
-  0 1 = (200.0, P_in1)
-  1 1 = (300.0, P_in0), (300.0, P_in1)
+  1 0 = (100.0, P_inA)
+  0 1 = (200.0, P_inB)
+  1 1 = (300.0, P_inA), (300.0, P_inB)
 '''
 
 # 4. Init experiment
 
 print(STIMTEXT1)
+
 t_soma_fire_ms = [
-    (100.0, cells['P_in0'].ID),
-    (200.0, cells['P_in1'].ID),
-    (300.0, cells['P_in0'].ID),
-    (300.0, cells['P_in1'].ID),
+    (100.0, cells['P_inA'].ID),
+    (200.0, cells['P_inB'].ID),
+    (300.0, cells['P_inA'].ID),
+    (300.0, cells['P_inB'].ID),
 ]
 print('Directed somatic firing: '+str(t_soma_fire_ms))
 
@@ -487,38 +462,76 @@ if not bg_api.BGNES_simulation_runfor_and_await_outcome(runtime_ms):
     exit(1)
 
 # 5.3 Retrieve recordings and plot
+print("\n=== RECORDING ANALYSIS ===")
 
-def find_cell_with_id(id:int)->str:
+def find_cell_with_id(id:int) -> str:
+    """Enhanced cell lookup with debug output"""
     for n in cells.keys():
         if cells[n].ID == id:
+            print(f"Found match - ID: {id}, Name: {n}")
             return n
+    print(f"Warning: No matching neuron found for ID: {id}")
     return ''
 
 recording_dict = bg_api.BGNES_get_recording()
+print("\nRaw recording keys:", list(recording_dict.keys()))
+
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
-        if recording_dict["StatusCode"] != 0:
-            print('Retrieving recording failed: StatusCode = '+str(recording_dict["StatusCode"]))
-        else:
-            if "Recording" not in recording_dict:
-                print('Missing "Recording" key.')
-            else:
-                if recording_dict["Recording"] is None:
-                    print('Recording is empty.')
+        print(f"API Status Code: {recording_dict['StatusCode']}")
+        
+    if "Recording" in recording_dict and recording_dict["Recording"] is not None:
+        recording = recording_dict["Recording"]
+        print("\n=== RECORDING DETAILS ===")
+        print("Available data categories:", list(recording.keys()))
+        
+        if 'neurons' in recording:
+            print("\nNeurons with recorded data:")
+            recorded_neuron_ids = list(recording['neurons'].keys())
+            print("Raw neuron IDs in recording:", recorded_neuron_ids)
+            
+            # Create mapping of all expected neurons
+            print("\nExpected neurons in model:")
+            for name, cell in cells.items():
+                print(f"Name: {name}, ID: {cell.ID}")
+            
+            # Check for recorded neurons not in our model
+            print("\nNeuron ID analysis:")
+            missing_ids = []
+            for neuron_idstr in recorded_neuron_ids:
+                neuron_id = int(neuron_idstr)
+                name = find_cell_with_id(neuron_id)
+                if not name:
+                    missing_ids.append(neuron_idstr)
+            
+            if missing_ids:
+                print(f"\nWarning: Recording contains data for unknown neuron IDs: {missing_ids}")
+            
+            # Prepare for plotting
+            sorted_neuron_names = []
+            for neuron_idstr in recorded_neuron_ids:
+                neuron_id = int(neuron_idstr)
+                neuron_name = find_cell_with_id(neuron_id)
+                if neuron_name:
+                    sorted_neuron_names.append(neuron_name)
                 else:
-                    print('Keys in record: '+str(list(recording_dict["Recording"].keys())))
-
-                    print('Neurons for which output was recorded: '+str(list(recording_dict["Recording"]['neurons'].keys())))
-
-                    #print('The arrangement of neurons in the plot at %s will be:' % savefolder)
-                    sorted_neuron_names = [ '?' for n in range(len(cells))]
-                    for neuron_idstr in recording_dict["Recording"]['neurons'].keys():
-                        neuron_name = find_cell_with_id(int(neuron_idstr))
-                        sorted_neuron_names[int(neuron_idstr)] = neuron_name
-                        #print(neuron_idstr+' --> '+find_cell_with_id(int(neuron_idstr)))
-
-                    plot_recorded(
-                        savefolder=savefolder,
-                        data=recording_dict["Recording"],
-                        figspecs=figspecs,
-                        cell_titles=sorted_neuron_names)
+                    sorted_neuron_names.append(f"Unknown_{neuron_idstr}")
+            
+            print("\nFinal neuron mapping for plotting:")
+            for i, name in enumerate(sorted_neuron_names):
+                print(f"Plot position {i}: {name}")
+            
+            # Generate plot
+            print(f"\nGenerating plot in {savefolder}")
+            plot_recorded(
+                savefolder=savefolder,
+                data=recording,
+                figspecs=figspecs,
+                cell_titles=sorted_neuron_names
+            )
+        else:
+            print("Error: No neuron data in recording")
+    else:
+        print("Error: Recording data is missing or empty")
+else:
+    print("Error: Invalid recording format received")
