@@ -716,6 +716,8 @@ if (Args.RenderEM):
                 #     os.makedirs(EMstitched_folder)
                 #     StackStitcher.StitchManySlices(EMoutput_folder, EMstitched_folder, borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
 
+        DatasetHandle = None
+        NeuroglancerURL = None
         if Args.Neuroglancer and not EMerror:
             try:
                 VSDAEMInstance.PrepareNeuroglancerDataset()
