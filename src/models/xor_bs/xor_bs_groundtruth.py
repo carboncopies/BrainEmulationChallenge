@@ -469,6 +469,7 @@ def find_cell_with_id(id:int)->str:
     return ''
 
 recording_dict = bg_api.BGNES_get_recording()
+
 if isinstance(recording_dict, dict):
     if "StatusCode" in recording_dict:
         if recording_dict["StatusCode"] != 0:
