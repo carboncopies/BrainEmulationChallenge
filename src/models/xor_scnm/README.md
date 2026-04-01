@@ -10,3 +10,41 @@
 
 3. Run `./xor_scnm_acquisition_direct.py` to run test activity on the model and
    acquire data from the virtual tissue.
+
+## Default dynamics
+
+The XOR Simple Compartmental (xor_scnm) example uses Netmorph to grow the
+structure of the model and uses the default parameter values for SC neuron
+dynamics as specified for NES-embedded Netmorph.
+
+These are specified in the BrainGenix-NES repository, in file
+Source/Core/Netmorph/NetmorphManagerThread.cpp, as follows:
+
+```
+const std::map<synapse_type, float> conductances_nS = {
+    { syntype_AMPAR, 40.0 },
+    { syntype_NMDAR, 60.0 },
+    { syntype_GABAR, -40.0 },
+    { syntype_candidate, 0.0 },
+    { syntype_GluR, 40.0 },
+    { syntype_iGluR, 40.0 },
+    { syntype_mGluR, 40.0 },
+};
+
+struct DynamicPars {
+    float neuron_Vm_mV = -60.0;
+    float neuron_Vrest_mV = -60.0;
+    float neuron_Vact_mV = -50.0;
+    float neuron_Vahp_mV = -20.0;
+    float neuron_tau_AHP_ms = 30.0;
+    float neuron_IPSP = 870.0; // nA
+};
+
+struct PSPTiming {
+    float neuron_tau_PSPr = 5.0;
+    float neuron_tau_PSPd = 25.0;
+};
+```
+
+Use the PythonClient BrainGenix API function Simulation.EditSCNeuron() to
+change dynamic parameters.
