@@ -11,6 +11,24 @@
 3. Run `./xor_scnm_acquisition_direct.py` to run test activity on the model and
    acquire data from the virtual tissue.
 
+## Using the virtual Python environment
+
+The BrainEmulationChallenge repository comes with `Tools/Setup.sh` and `Tools/Update.sh`
+scripts that assume you are using a virtual environment to set up necessary Python
+modules.
+
+The `Run.sh` script provided for the xor_scnm example includes activation of the
+virtual environment (`source venv/bin/activate`).
+
+If you are running the scripts described above independently you may need to
+activate the virtual environment explicitly first. The `venv` folder is located
+at the root of the repository (BrainEmulationChallenge/venv). So, to activate
+from the `xor_scnm` folder:
+
+```
+source ../../../venv/bin/activate
+```
+
 ## Default dynamics
 
 The XOR Simple Compartmental (xor_scnm) example uses Netmorph to grow the
