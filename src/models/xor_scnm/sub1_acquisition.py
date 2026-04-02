@@ -147,12 +147,6 @@ except Exception as e:
 ### Modify Model to create divergent SUB      ###
 ### ========================================= ###
 
-    Edit.MembranePotential_mV = Handle.GetParFloat("MembranePotential_mV", C.MembranePotential_mV, true);
-    Edit.RestingPotential_mV = Handle.GetParFloat("RestingPotential_mV", C.RestingPotential_mV, true);
-    Edit.SpikeThreshold_mV = Handle.GetParFloat("SpikeThreshold_mV", C.SpikeThreshold_mV, true);
-    Edit.DecayTime_ms = Handle.GetParFloat("DecayTime_ms", C.DecayTime_ms, true);
-
-
 editpars = {
     #"MembranePotential_mV": ,
     #"RestingPotential_mV": ,
