@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!../../../venv/bin/python
 
 # This script was creaed by copying acquisition_template.py.
 #

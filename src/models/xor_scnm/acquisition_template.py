@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!../../../venv/bin/python
 
 # This template was created by Kayla Stafford by simplifying
 # xor_scnm_acquisition_direct.py.
