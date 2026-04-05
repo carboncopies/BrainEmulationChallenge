@@ -1,2 +1,12 @@
 ValidationReports/*
 *.json
+*.venv
+*.ipynb_checkpoints
+*.log
+*.out
+*.err
+*.blend
+*.blend.gz
+*.xlsx
+
+  
