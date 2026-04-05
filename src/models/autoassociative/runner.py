@@ -46,14 +46,16 @@ print("Port: ", port)
 
 
 ### %%
-for j in range(2): # loop over number of  par lines in the sample excel file
+for j in range(df.shape[0]
+               ): # loop over number of  par lines in the sample excel file
+    # for j in range(1): # loop over number of  par lines in the sample excel file
     pars=[]
     # print(df.iloc[j])
    
     for k in range(len(cols)): # number of parameters in the excel file
         # print(df.iloc[j][cols[k]])
         if k < 6:
-            pars.append(int(df.iloc[j][cols[k]]))
+            pars.append(int(df.iloc[j][cols[k]]))       # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script.
         else:
             pars.append(float(df.iloc[j][cols[k]]))
     # print(f'string {pars[2]}')
@@ -102,7 +104,7 @@ for j in range(2): # loop over number of  par lines in the sample excel file
 
     print(autoassociative_connectome_myg.net_connectome(port))
 
-    df.usable_conns[j] = autoassociative_connectome_myg.net_connectome(port)    
+    df.loc[j, 'usable_conns'] = autoassociative_connectome_myg.net_connectome(port)   
     df.to_excel("NetmorphParOptim/test_sample_labeled.xlsx", index=False)
     
 

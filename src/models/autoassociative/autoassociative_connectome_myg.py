@@ -281,8 +281,6 @@ def net_connectome(nport:int):
     print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
     print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
     print('')
-    # n_conn = NumActive()
-
 
 
     # def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
@@ -526,5 +524,5 @@ def net_connectome(nport:int):
     print(" -- Done.")
 
     return NumActive()
-    # return len(Neuron2Neuron)
+   
 
