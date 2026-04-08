@@ -138,21 +138,21 @@ except Exception as e:
 # Some helper functions for dealing with batch sample entries
 
 def runs_incomplete(batchinfo:dict)->bool:
-    for netmorphrun in batchinfo:
+    for netmorphrun in batchinfo.values():
         if ntemorphrun['status'] == 'running':
             return True
     return False
 
 def runs_completed(batchinfo:dict)->bool:
     num_completed = 0
-    for netmorphrun in batchinfo:
+    for netmorphrun in batchinfo.values():
         if ntemorphrun['status'] == 'completed':
             num_completed += 1
     return num_completed
 
 def runs_failed(batchinfo:dict)->bool:
     num_failed = 0
-    for netmorphrun in batchinfo:
+    for netmorphrun in batchinfo.values():
         if ntemorphrun['status'] == 'failed':
             num_failed += 1
     return num_failed
@@ -205,7 +205,7 @@ for i in range(batchsize):
 # === Batch starts
 
 print(" -- Starting batch of Netmorph runs ")
-for netmorphrun in batchinfo:
+for netmorphrun in batchinfo.values():
 
     sample_modelcontent = modelcontent # Copy loaded configuration
 
@@ -267,7 +267,7 @@ for netmorphrun in batchinfo:
 
 while runs_incomplete(batchinfo):
 
-    for netmorphrun in batchinfo:
+    for netmorphrun in batchinfo.values():
         if netmorphrun['status'] == 'running':
 
             MySim = netmorphrun['Sim']
@@ -300,7 +300,7 @@ print('Runs failed   : %d' % runs_failed(batchinfo))
 
 
 # === Update the ExpsDB.json database for all samples in the batch
-for netmorphrun in batchinfo:
+for netmorphrun in batchinfo.values():
     vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 print(" -- Done.")
