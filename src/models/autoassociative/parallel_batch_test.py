@@ -210,10 +210,10 @@ for netmorphrun in batchinfo:
     sample_modelcontent = modelcontent # Copy loaded configuration
 
     sample_modelcontent += ARCHITECTURE_MODIFY % (EMBEDMULTIPLE*PATTERNSIZE*Args.Patterns, PATTERNSIZE*Args.Patterns)
-    if Args.DoOBJ:
-        sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
-    if Args.DoBlend:
-        sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
+    # if Args.DoOBJ:
+    #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
+    # if Args.DoBlend:
+    #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
     if Args.growdays:
         sample_modelcontent += GROWDAYS % Args.growdays
 
