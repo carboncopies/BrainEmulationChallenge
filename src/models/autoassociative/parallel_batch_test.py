@@ -62,6 +62,7 @@ Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to 
 Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
+Parser.add_argument("-batchsize", default=10, type=int, help="Number of Netmorph sample runs at once")
 Args = Parser.parse_args()
 
 # if Args.DoBlend:
@@ -183,7 +184,7 @@ def runs_failed(batchinfo:dict)->int:
 # - Add try-except to detect problem but not crash
 # - Replace some ErrorExit()
 
-batchsize = 10
+batchsize = Args.batchsize
 batchinfo = {}
 
 for i in range(batchsize):
