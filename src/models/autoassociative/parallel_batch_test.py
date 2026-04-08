@@ -139,21 +139,21 @@ except Exception as e:
 
 def runs_incomplete(batchinfo:dict)->bool:
     for netmorphrun in batchinfo.values():
-        if ntemorphrun['status'] == 'running':
+        if netmorphrun['status'] == 'running':
             return True
     return False
 
 def runs_completed(batchinfo:dict)->bool:
     num_completed = 0
     for netmorphrun in batchinfo.values():
-        if ntemorphrun['status'] == 'completed':
+        if netmorphrun['status'] == 'completed':
             num_completed += 1
     return num_completed
 
 def runs_failed(batchinfo:dict)->bool:
     num_failed = 0
     for netmorphrun in batchinfo.values():
-        if ntemorphrun['status'] == 'failed':
+        if netmorphrun['status'] == 'failed':
             num_failed += 1
     return num_failed
 
