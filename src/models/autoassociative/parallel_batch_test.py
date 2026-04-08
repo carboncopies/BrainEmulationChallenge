@@ -285,7 +285,7 @@ while runs_incomplete(batchinfo):
                 Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
             except Exception as e:
                 print('...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
-                time.sleep(1.0)
+                sleep(1.0)
                 continue
 
             if NetmorphStatus == "None":
@@ -302,7 +302,7 @@ while runs_incomplete(batchinfo):
 
                 print('...a run completed')
 
-    time.sleep(1.0)
+    sleep(1.0)
 
 print('Runs completed: %d' % runs_completed(batchinfo))
 print('Runs failed   : %d' % runs_failed(batchinfo))
