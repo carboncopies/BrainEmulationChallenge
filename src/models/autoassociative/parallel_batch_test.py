@@ -143,14 +143,21 @@ def runs_incomplete(batchinfo:dict)->bool:
             return True
     return False
 
-def runs_completed(batchinfo:dict)->bool:
+def runs_running(batchinfo:dict)->int:
+    num_running = 0
+    for netmorphrun in batchinfo.values():
+        if netmorphrun['status'] == 'running':
+            num_running += 1
+    return num_running
+
+def runs_completed(batchinfo:dict)->int:
     num_completed = 0
     for netmorphrun in batchinfo.values():
         if netmorphrun['status'] == 'completed':
             num_completed += 1
     return num_completed
 
-def runs_failed(batchinfo:dict)->bool:
+def runs_failed(batchinfo:dict)->int:
     num_failed = 0
     for netmorphrun in batchinfo.values():
         if netmorphrun['status'] == 'failed':
@@ -262,6 +269,8 @@ for netmorphrun in batchinfo.values():
     print('...launched Nemorph run %d' % netmorphrun['runID'])
     netmorphrun['status'] = 'running'
 
+
+print('Number of Netmorph sample runs running (out of %d): %d' % (batchsize, runs_running(batchinfo)))
 
 # === Loop check for runs that have completed
 
