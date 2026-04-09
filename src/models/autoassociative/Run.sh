@@ -20,12 +20,14 @@ forceURLbase=""
 
 # Function to display usage
 usage() {
-    echo "Usage: $0 [-R] [-x execute-at] [-s subdivide] [-r resolution] [-f modelfile] [-m modelname] [-n] [-S] [-M] [-F baseURL] [-i simID]"
+    echo "Usage: $0 [-R] [-H host] [-P port] [-x execute-at] [-s subdivide] [-r resolution] [-f modelfile] [-m modelname] [-n] [-S] [-M] [-F baseURL] [-i simID]"
     echo "  -R  running locally to remote API server at $Rhost:$Rport"
     echo "      Note that you can also use this option when running the"
     echo "      front-end on the remote server. It will then produce a"
     echo "      URL that you can use on a local browser to view"
     echo "      generated Neuroglancer output."
+    echo "  -H  Specify alternative API server host address"
+    echo "  -P  Specify alternative API server port number"
     echo "  -x  start executing at step (default r)"
     echo "      options are:"
     echo "        r - reservoir generation (Netmorph)"
@@ -48,6 +50,11 @@ usage() {
     echo "  Carries out reservoir generation, connectome tuning and data acquisition."
     echo "  Assumes API calls to remote server."
     echo ""
+    echo "  ./Run.sh -H localhost -P 8030"
+    echo "  Carries out reservoir generation, connectome tuning and data acquisition."
+    echo "  Assumes API calls to localhost:8030. Note that localhost is also the"
+    echo "  default if unspecified."
+    echo ""
     echo "  ./Run.sh -a"
     echo "  Reuses previously generated reservoir and connectome models. Carries out"
     echo "  only data acquisition."
@@ -67,8 +74,14 @@ usage() {
 }
 
 # Parse command line arguments
-while getopts "Rs:r:f:m:x:nSMF:i:" opt; do
+while getopts "RH:P:s:r:f:m:x:nSMF:i:" opt; do
   case ${opt} in
+    H )
+      host="-Host $OPTARG"
+      ;;
+    P )
+      port="-Port $OPTARG"
+      ;;
     R )
       host="-Host $Rhost"
       port="-Port $Rport"
