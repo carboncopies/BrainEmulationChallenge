@@ -18,6 +18,7 @@ import os
 from pathlib import Path
 import pandas as pds
 import copy
+import psutil
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
@@ -379,6 +380,10 @@ def add_completed(netmorphrun:dict):
     except Exception as e:
         print('WARNING: Adding completed data to batchinfo_completed.json failed')
 
+def resources_low()->bool:
+    mem = psutil.virtual_memory()
+    return (mem.used/mem.total) > 0.9
+
 # NOTE:
 # Below, I will be running the same Netmorph configuration in multiple
 # Netmorph runs in parallel. This is just as a test of how the server
@@ -558,8 +563,17 @@ while runs_incomplete(batchinfo):
 
             sleep(2.0)
 
+    if resources_low():
+        mem = psutil.virtual_memory()
+        usedGB = mem.used/(1024 ** 3)
+        totalGB = mem.total/(1024 ** 3)
+        print(f'Used {usedGB:.2f} GB of {totalGB:.2f} GB')
+        print("Low RAM - let's break here (clear NES and restart script to do remaining)")
+        break
+
 print('Runs completed: %d' % runs_completed(batchinfo))
 print('Runs failed   : %d' % runs_failed(batchinfo))
+print('Runs remaining: %d' % runs_running(batchinfo))
 
 
 # === Update the ExpsDB.json database for all samples in the batch
