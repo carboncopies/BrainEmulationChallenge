@@ -64,11 +64,11 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
             Neuron2RegionMap[n] = reg
 
     print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
-    print("Regions: "+str(Regions))
-    print("Neuron types: "+str(NeuronTypes))
-    print("Region-to-region connections in resevoirs:")
-    print(PreRegions)
-    print("Neuron to Region map: "+str(Neuron2RegionMap))
+    #print("Regions: "+str(Regions))
+    #print("Neuron types: "+str(NeuronTypes))
+    #print("Region-to-region connections in resevoirs:")
+    #print(PreRegions)
+    #print("Neuron to Region map: "+str(Neuron2RegionMap))
     def SetAll(TheList:list, Value:int):
         for i in range(len(TheList)):
             TheList[i][2] = Value
@@ -129,9 +129,9 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
         frompyrmid = ConnectionsFrom('In', n)
         if len(frompyrmid)<1:
             EliminateByPost(n)
-        else:
-            print('%d: %s' % (n, str(frompyrmid)))
-    print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
+        #else:
+        #    print('%d: %s' % (n, str(frompyrmid)))
+    #print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
     print("Number of connections: "+str(len(Neuron2Neuron)))
 
     def NumActive()->int:
@@ -150,7 +150,7 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
         return active_str
 
     print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
-    print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
+    #print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
 
     result1 = NumActive()
 
@@ -521,7 +521,7 @@ while runs_incomplete(batchinfo):
                 netmorphrun['usable_conns1'] = result1
                 netmorphrun['usable_conns2'] = result2
 
-                print('...a run completed')
+                print('...completed run with ID %s' % str(netmorphrun['runID']))
 
     sleep(1.0)
 
@@ -535,7 +535,7 @@ for netmorphrun in batchinfo.values():
     df.loc[netmorphrun['runID'], 'usable_conns'] = netmorphrun['usable_conns1']
 
 path = Path(Args.excel)
-labeledpath = path.with_suffix("")+'-labeled.xlsx'
+labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
 df.to_excel(labeledpath, index=False)
 
 print("Let's compare the results from the two label interpretation methods:")
