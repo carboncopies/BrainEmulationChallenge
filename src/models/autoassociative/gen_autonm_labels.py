@@ -11,10 +11,10 @@ scriptversion='0.1.0'
 import numpy as np
 #from datetime import datetime
 from time import sleep
-#import json
+import json
 import base64
 import argparse
-#import os
+import os
 from pathlib import Path
 import pandas as pds
 import copy
@@ -352,6 +352,33 @@ def runs_failed(batchinfo:dict)->int:
             num_failed += 1
     return num_failed
 
+# Retrieve results data for previously completed samples.
+def get_previously_completed()->dict:
+    try:
+        with open('batchinfo_completed.json', 'r') as f:
+            completed_batchinfo = json.load(f)
+    except:
+        completed_batchinfo = {}
+    return completed_batchinfo
+
+def add_completed(netmorphrun:dict):
+    completed_batchinfo = get_previously_completed()
+    completed_batchinfo[netmorphrun['runID']] = {
+        "runID": netmorphrun['runID'],
+        "modelname": netmorphrun['modelname'],
+        "pars": netmorphrun['pars'],
+        "status": netmorphrun['status'],
+        "usable_conns1": netmorphrun['usable_conns1'],
+        "usable_conns2": netmorphrun['usable_conns2'],
+    }
+    try:
+        if os.path.exists('batchinfo_completed.json'):
+            os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
+        with open('batchinfo_completed.json', 'w') as f:
+            json.dump(completed_batchinfo, f)
+    except Exception as e:
+        print('WARNING: Adding completed data to batchinfo_completed.json failed')
+
 # NOTE:
 # Below, I will be running the same Netmorph configuration in multiple
 # Netmorph runs in parallel. This is just as a test of how the server
@@ -367,13 +394,17 @@ def runs_failed(batchinfo:dict)->int:
 
 # === Batch prepare
 
-#batchsize = df.shape[0] # Args.batchsize
-batchsize = 4 # just for testing!
-batchinfo = {}
+batchsize = df.shape[0] # Args.batchsize
+#batchsize = 4 # just for testing!
+batchinfo = get_previously_completed(batchinfo)
 
 # Each simulation in the batch corresponds to one line in the Excel sheet.
 # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
 for i in range(batchsize):
+
+    if i in batchinfo:
+        print('Run for data line %d already stored as completed' % i)
+        continue
 
     modelname = Args.modelname+'%04d' % i
     batchinfo[i] = {
@@ -412,6 +443,9 @@ for i in range(batchsize):
 print(" -- Starting batch of Netmorph runs ")
 for netmorphrun in batchinfo.values():
 
+    if 'status' in netmorphrun: # was already stored as completed
+        continue
+
     pars = netmorphrun['pars']
     print(pars)
     growdays = pars[0]
@@ -437,9 +471,6 @@ for netmorphrun in batchinfo.values():
     sample_modelcontent += SHAPE_RADIUS % shapeRadius
     sample_modelcontent += SHAPE_THICKNESS % shapeThickness
     sample_modelcontent += DM_WEIGHT % dmWeight
-
-
-    # *** NOTE: Here, add additional templated modifications of sample_modelcontent as needed!
 
     # Create A New Simulation
     print("...Creating Simulation")
@@ -500,7 +531,7 @@ while runs_incomplete(batchinfo):
                 Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
             except Exception as e:
                 print('...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
-                sleep(1.0)
+                sleep(2.0)
                 continue
 
             if NetmorphStatus == "None":
@@ -521,9 +552,11 @@ while runs_incomplete(batchinfo):
                 netmorphrun['usable_conns1'] = result1
                 netmorphrun['usable_conns2'] = result2
 
-                print('...completed run with ID %s' % str(netmorphrun['runID']))
+                add_completed(netmorphrun)
 
-    sleep(1.0)
+                print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
+
+            sleep(2.0)
 
 print('Runs completed: %d' % runs_completed(batchinfo))
 print('Runs failed   : %d' % runs_failed(batchinfo))
@@ -532,6 +565,10 @@ print('Runs failed   : %d' % runs_failed(batchinfo))
 # === Update the ExpsDB.json database for all samples in the batch
 for netmorphrun in batchinfo.values():
     vbp.UpdateExpsDB(netmorphrun['DBdata'])
+
+# === Update Excel sheet with data from all completed runs
+completed_batchinfo = get_previously_completed()
+for netmorphrun in completed_batchinfo.values():
     df.loc[netmorphrun['runID'], 'usable_conns'] = netmorphrun['usable_conns1']
 
 path = Path(Args.excel)
@@ -539,7 +576,7 @@ labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
 df.to_excel(labeledpath, index=False)
 
 print("Let's compare the results from the two label interpretation methods:")
-for netmorphrun in batchinfo.values():
+for netmorphrun in completed_batchinfo.values():
     print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
 
 print(" -- Done.")
