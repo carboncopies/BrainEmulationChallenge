@@ -357,7 +357,8 @@ def runs_failed(batchinfo:dict)->int:
 def get_previously_completed()->dict:
     try:
         with open('batchinfo_completed.json', 'r') as f:
-            completed_batchinfo = json.load(f)
+            completed_batchinfo_jsonkeys = json.load(f)
+        completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
     except:
         completed_batchinfo = {}
     return completed_batchinfo
