@@ -1,6 +1,6 @@
 #!../../../venv/bin/python
 # autoassociative_connectome.py
-# Randal A. Koene, 20250620
+# Randal A. Koene, 20250620, 20250811
 
 # This script is STEP 2 in the creation of realistic
 # ground-truth virtual tissue containing an intended
@@ -14,7 +14,7 @@
 
 scriptversion='0.1.0'
 
-#import numpy as np
+import numpy as np
 #from datetime import datetime
 from time import sleep
 import json
@@ -22,9 +22,17 @@ import json
 import copy
 import argparse
 #import os
+from os.path import isdir
+from os import makedirs
+import pickle
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
+
+from sys import path
+from pathlib import Path
+path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
+from NES_interfaces.KGTRecords import plot_weights
 
 
 # Handle Arguments for Host, Port, etc
@@ -38,6 +46,10 @@ Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should 
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
+Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve")
+Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
+Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
+Parser.add_argument("-T", type=float, help="Simulation time in ms")
 Args = Parser.parse_args()
 
 if Args.DoBlend:
@@ -53,6 +65,18 @@ DBdata = vbp.InitExpDB(
     },
     _initOUT = {
     })
+
+FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
+
+PATTERNSIZE=8
+CUESIZE=4
+EMBEDMULTIPLE=2
+
+# The following requisite combined peak conductance available
+# between each pre-post pair of pyramidal neurons was derived
+# from results in LIFtest.py.
+RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
+PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / CUESIZE
 
 
 # Create Client Configuration For Local Simulation
@@ -87,6 +111,11 @@ try:
 except:
     vbp.ErrorExit(DBdata, 'NES error: Failed to create simulation')
 
+MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
+MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
+MySim.SetSTDP(_DoSTDP=Args.STDP)
+print('Options specified')
+
 
 # Load previously generated model
 try:
@@ -97,390 +126,145 @@ except:
     vbp.ErrorExit(DBdata, 'NES error: model load failed')
 
 
-# Get connectome
+# Get cell positions to verify model structure
 try:
-    response = MySim.GetAbstractConnectome(Sparse=True)
+    cell_positions = MySim.GetSomaPositions()
+except:
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model cell positions')
+
+if not isdir('output'):
+    makedirs('output')
+try:
+    with open('output/cell_positions.pkl', 'wb') as f:
+        pickle.dump(cell_positions, f)
+except:
+    print('Error: Unable to store data in output/cell_positions.pkl')
+
+# Get and plot connectome to have insight into what the reservoir makes available
+try:
+    connections_before_dict = MySim.GetConnectome()
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_weights', FIGSPECS):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_conductance', FIGSPECS, usematrix='conductance'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_numreceptors', FIGSPECS, usematrix='numreceptors'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+
+    if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_before_GABA_conductance', FIGSPECS, receptor='GABA', usematrix='conductance'):
+        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+
 except:
     vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
 
-# Neuron-to-neuron connections:
-PrePostNumReceptors = response['PrePostNumReceptors']
-print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
-# Regions and the neurons in them:
-Regions = response['Regions']
-print("Regions: "+str(Regions))
-# Neuron types:
-NeuronTypes = response['Types']
-print("Neuron types: "+str(NeuronTypes))
-print('')
+def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
+    numneurons = len(connections_dict["ConnectionGPeakSum"])
+    # Find pyramidal neurons
+    types = connections_dict['ConnectionTypes']
+    pyramidal = []
+    for pre in range(numneurons):
+        for i in range(len(types[pre])):
+            if types[pre][i] == 1: # AMPA
+                pyramidal.append(pre)
+                break
+    # Get pyramidal prepost combined AMPA peak conductances
+    targets = connections_dict['ConnectionTargets']
+    gpeaksummatrix = np.zeros((numneurons, numneurons))
+    gpeaksum = connections_dict['ConnectionGPeakSum']
+    for pre in pyramidal:
+        for i in range(len(gpeaksum[pre])):
+            if types[pre][i] == 1: # AMPA
+                post = targets[pre][i]
+                gpeaksummatrix[pre][post] += gpeaksum[pre][i]
+    return pyramidal, gpeaksummatrix
 
-def RegionByNeuronID(NeuronID:int)->str:
-    for reg in list(Regions.keys()):
-        if NeuronID in Regions[reg]:
-            return reg
-    return 'unknown'
+pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
+proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
+attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET) # array of True/False
+plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
+print('Number of pre-post pyramidal connections at target g_sum_peak: %d' % int(attargetgpeaksum.sum()))
+agp = np.zeros(attargetgpeaksum.shape)
+agp[attargetgpeaksum] = 1
+plot_weights(agp, 'output', 'autoassociative_reservoir_attargetgpeaksum', FIGSPECS)
 
-PreRegions = {}
-for preidx, postidx, reccnt in PrePostNumReceptors:
-    prereg = RegionByNeuronID(preidx)
-    postreg = RegionByNeuronID(postidx)
-    if prereg not in PreRegions:
-        PreRegions[prereg] = {}
-    if postreg not in PreRegions[prereg]:
-        PreRegions[prereg][postreg] = 1
-    else:
-        PreRegions[prereg][postreg] += 1
+# Let's just try training and see what happens
+# We'll start with non-overlapping pattern input IDs
+patternstims = []
+available = pyramidal.copy()
+for p in range(Args.Patterns):
+    p_stim = []
+    for i in range(PATTERNSIZE*EMBEDMULTIPLE):
+        n = available.pop(0)
+        p_stim.append(n)
+    patternstims.append(p_stim)
 
-print("Region-to-region connections in resevoirs:")
-print(PreRegions)
+cuestims = []
+for p in range(Args.Patterns):
+    c_stim = [ n for n in range(int(len(patternstims[p])//2)) ]
+    cuestims.append(c_stim)
 
-# Make neuron to region map (assuming only one region per neuron):
-Neuron2RegionMap = {}
-for reg in Regions:
-    for n in Regions[reg]:
-        Neuron2RegionMap[n] = reg
-print("Neuron to Region map: "+str(Neuron2RegionMap))
+# Set stimulation times
+    T = 80000
+    if Args.T:
+        T = int(Args.T)
 
-def SetAll(TheList:list, Value:int):
-    for i in range(len(TheList)):
-        TheList[i][2] = Value
+STIMINTERVAL = 70.0
+REPEATSPERBATCH = 4
 
-def SetOneByPost(TheList:list, PostID:int, Value:int):
-    for i in range(len(TheList)):
-        if TheList[i][1]==PostID:
-            TheList[i][2] = Value
+training_stim = [ i*STIMINTERVAL for i in range(Args.Patterns*REPEATSPERBATCH) ]
+batchduration = STIMINTERVAL*Args.Patterns*REPEATSPERBATCH
+batchinterval = batchduration + 100
+repeatinterval = 2*batchinterval
+repeats = int(T // repeatinterval)
 
-def SetOneByPre(TheList:list, PreID:int, Value:int):
-    for i in range(len(TheList)):
-        if TheList[i][0]==PreID:
-            TheList[i][2] = Value
+timeneuronpairs_list = []
+for n in range(len(pyramidal)):
+    for r in range(repeats):
+        for s in range(len(training_stim)):
+            p = s % Args.Patterns
+            if n in patternstims[p]:
+                timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r, n) )
 
-def PostIs(TheList:list, PostID:int)->int:
-    for i in range(len(TheList)):
-        if TheList[i][1]==PostID:
-            return TheList[i][2]
-    return 0
+for n in range(len(pyramidal)):
+    for r in range(repeats):
+        for s in range(len(training_stim)):
+            p = s % Args.Patterns
+            if n in cuestims[p]:
+                timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r+batchinterval, n)  )
 
-def PreIs(TheList:list, PreID:int)->int:
-    for i in range(len(TheList)):
-        if TheList[i][0]==PreID:
-            return TheList[i][2]
-    return 0
+MySim.SetSpecificAPTimes(timeneuronpairs_list)
+print('Simulation stimulation specified')
 
-# Active connections in reservoir:
-Neuron2Neuron = copy.deepcopy(PrePostNumReceptors)
-SetAll(Neuron2Neuron, 1)
+connectome_before_dict = MySim.GetConnectome()
+if not vbp.PlotAndStoreConnections(connectome_before_dict, 'output', 'autoassoc_connectome_before', FIGSPECS):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+# if not vbp.PlotAndStoreConnections(connectome_before_dict, 'output', 'autoassoc_connectome_before_conductance', FIGSPECS, usematrix='conductance'):
+#     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity conductance')
 
-def ActiveInputsTo(NeuronID:int)->list:
-    res = []
-    for pre, post, active in Neuron2Neuron:
-        if active>0 and post==NeuronID:
-            res.append(pre)
-    return res
+# Run simulation and record membrane potential
+MySim.RecordAll(-1)
+MySim.RunAndWait(Runtime_ms=T, Dt_ms=Args.Dt, timeout_s=100.0)
+print('Functional stimulation completed')
 
-def ActiveOutputsFrom(NeuronID:int)->list:
-    res = []
-    for pre, post, active in Neuron2Neuron:
-        if active>0 and pre==NeuronID:
-            res.append(post)
-    return res
+recording_dict = MySim.GetRecording()
+print('Recorded data retrieved')
+spikes_dict = MySim.GetSpikeTimes()
+print('Spike times retrieved')
 
-def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
-    res = []
-    activeinputs = ActiveInputsTo(NeuronID)
-    for pre in activeinputs:
-        if Neuron2RegionMap[pre]==SourceRegion:
-            res.append(pre)
-    return res
+#with open('output/raw.json', 'w') as f:
+#    json.dump(recording_dict, f)
+#with open('output/spikes.json', 'w') as f:
+#    json.dump(spikes_dict, f)
 
-def EliminateByPost(NeuronID:int):
-    SetOneByPost(Neuron2Neuron, NeuronID, 0)
+if not vbp.PlotAndStoreRecordedActivity(recording_dict, 'output', FIGSPECS, spikes_dict):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of recorded activity')
+print('Data plot saved as PDF')
 
-def EliminateByPre(NeuronID:int):
-    SetOneByPre(Neuron2Neuron, NeuronID, 0)
+connectome_after_dict = MySim.GetConnectome()
+if not vbp.PlotAndStoreConnections(connectome_after_dict, 'output', 'autoassoc_connectome_after', FIGSPECS):
+    vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
+# if not vbp.PlotAndStoreConnections(connectome_after_dict, 'output', 'autoassoc_connectome_after_conductance', FIGSPECS, usematrix='conductance'):
+#     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity conductance')
 
-# Eliminate from our working set those Neurons that appear in In
-# but have no connections from other Neurons in In:
-print('Neurons in In population with >0 connections from other In neurons:')
-for n in Regions['In']:
-    frompyrmid = ConnectionsFrom('In', n)
-    if len(frompyrmid)<1:
-        EliminateByPost(n)
-    else:
-        print('%d: %s' % (n, str(frompyrmid)))
-print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
-print("Number of connections: "+str(len(Neuron2Neuron)))
-
-# --- UP TO HERE THIS SHOULD BE REUSABLE AS IS
-
-# # Eliminate Neurons that appear in PyrOut with fewer than 2 connections from PyrMid:
-# print("PyrOut neurons with >1 connections from PyrMid:")
-# for n in Regions['PyrOut']:
-#     frompyrmid = ConnectionsFrom('PyrMid', n)
-#     if len(frompyrmid)<2:
-#         EliminateByPost(n)
-#     else:
-#         print('%d: %s' % (n, str(frompyrmid)))
-# print("Neuron to Neuron after eliminating PyrOut neurons with <2 connections from PyrMid: "+str(Neuron2Neuron))
-
-# # Exclude Neurons not reachable from both PyrOut and PyrIn:
-# def PreRecurse(TrackerFlags:list, NeuronID:int):
-#     SetOneByPost(TrackerFlags, NeuronID, 1)
-#     inp = ActiveInputsTo(NeuronID)
-#     for i in inp:
-#         if PostIs(TrackerFlags, i)==0:
-#             PreRecurse(TrackerFlags, i)
-#
-# def PostRecurse(TrackerFlags:list, NeuronID:int):
-#     SetOneByPre(TrackerFlags, NeuronID, 1)
-#     out = ActiveOutputsFrom(NeuronID)
-#     for o in out:
-#         if PreIs(TrackerFlags, o)==0:
-#             PostRecurse(TrackerFlags, o)
-#
-# N2NFromOutput = copy.deepcopy(Neuron2Neuron)
-# SetAll(N2NFromOutput, 0)
-# # Set flags for all neurons reachable from active PyrOut neurons:
-# for n in Regions['PyrOut']:
-#     if PostIs(Neuron2Neuron, n)>0:
-#         PreRecurse(N2NFromOutput, n)
-# N2NFromInput = copy.deepcopy(Neuron2Neuron)
-# SetAll(N2NFromInput, 0)
-# # Set flags for all neurons reachable from active PyrIn neurons:
-# for n in Regions['PyrIn']:
-#     if PreIs(Neuron2Neuron, n)>0:
-#         PostRecurse(N2NFromInput, n)
-# # Keep only those that are reachable in both directions:
-# for idx in range(len(Neuron2Neuron)):
-#     if N2NFromOutput[idx][2]==0 or N2NFromInput[idx][2]==0:
-#         Neuron2Neuron[idx][2]=0
-
-def NumActive()->int:
-    num = 0
-    for pre, post, active in Neuron2Neuron:
-        if active>0:
-            num += 1
-    return num
-
-def PrintActive()->str:
-    active_str = ''
-    num = 0
-    for pre, post, active in Neuron2Neuron:
-        if active>0:
-            active_str += '[%s -> %s], ' % (pre, post)
-    return active_str
-
-print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
-print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
-print('')
-
-# def HasInputFromRegion(NeuronID:int, Reg:str)->bool:
-#     inp = ActiveInputsTo(NeuronID)
-#     for i in inp:
-#         if Neuron2RegionMap[i]==Reg:
-#             return True
-#     return False
-#
-# def SubsetByInput(Neurons:list, Reg:str)->list:
-#     res = []
-#     for n in Neurons:
-#         if HasInputFromRegion(n, Reg):
-#             res.append(n)
-#     return res
-#
-# def Intersection(NeuronsA:list, NeuronsB:list)->list:
-#     res = []
-#     for n in NeuronsA:
-#         if n in NeuronsB:
-#             res.append(n)
-#     return res
-#
-# # Eliminate connections with PyrMid neurons that do not have input from both PyrIn and Int:
-# pyrmid = Regions['PyrMid']
-# print('PyrMid neurons: '+str(pyrmid))
-# pyrmid_from_pyrin = SubsetByInput(pyrmid, 'PyrIn')
-# print('PyrMid neurons from PyrIn: '+str(pyrmid_from_pyrin))
-# pyrmid_from_int = SubsetByInput(pyrmid, 'Int')
-# print('PyrMid neurons from Int: '+str(pyrmid_from_int))
-# pyrmid_from_pyrin_and_int = Intersection(pyrmid_from_pyrin, pyrmid_from_int)
-# print("List of neurons in PyrMid with inputs from both PyrIn and Int: %s" % str(pyrmid_from_pyrin_and_int))
-# for n in pyrmid:
-#     if n not in pyrmid_from_pyrin_and_int:
-#         EliminateByPost(n)
-#         EliminateByPre(n)
-# print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
-# print("Neuron to Neuron remaining: "+PrintActive())
-# print('')
-#
-# # Eliminate connections with PyrMid neurons that do not have inputs that can create A and not B:
-# pyrmid_from_pyrin_and_not_int = []
-# for n in pyrmid_from_pyrin_and_int:
-#     frompyrin = ConnectionsFrom('PyrIn', n)
-#     fromint = ConnectionsFrom('Int', n)
-#     fromint_frompyrin = []
-#     for pre in fromint:
-#         fromint_frompyrin += ConnectionsFrom('PyrIn', pre)
-#     for pre in fromint_frompyrin:
-#         if pre not in frompyrin:
-#             pyrmid_from_pyrin_and_not_int.append(n)
-#             break
-# print("List of neurons in PyrMid creating PyrIn and not-Int connections: %s" % str(pyrmid_from_pyrin_and_not_int))
-# for n in pyrmid:
-#     if n not in pyrmid_from_pyrin_and_not_int:
-#         EliminateByPost(n)
-#         EliminateByPre(n)
-# print("Usable connections remaining after eliminating connections through other PyrMid neurons: %d" % NumActive())
-# print("Neuron to Neuron remaining: "+PrintActive())
-# print('')
-#
-# # Let's take a look at what we still have:
-# for n in pyrmid_from_pyrin_and_not_int:
-#     print('PyrMid %d: From PyrIn %s' % (n, ConnectionsFrom('PyrIn', n)))
-#
-# def FindIntAndInWithDifferentPyrIn(PyrMidID:int, NotPyrInID:set)->tuple:
-#     midint = ConnectionsFrom('Int', PyrMidID)
-#     for mi in midint:
-#         intinp = ConnectionsFrom('PyrIn', mi)
-#         for ii in intinp:
-#             if ii not in NotPyrInID:
-#                 return mi, ii
-#     print('Found nothing...')
-#     exit(1)
-#
-# def FindIntAndInWithDifferentPyrInAndInt(PyrMidID:int, NotPyrInID:set, NotIntID:int)->tuple:
-#     midint = ConnectionsFrom('Int', PyrMidID)
-#     for mi in midint:
-#         if mi != NotIntID:
-#             intinp = ConnectionsFrom('PyrIn', mi)
-#             for ii in intinp:
-#                 if ii not in NotPyrInID:
-#                     return mi, ii
-#     print('Found nothing...')
-#     exit(1)
-#
-# PrePostPairs = []
-# XORInput = []
-# def SpecifyConnection(PreSynID:int, PostSynID:int, IOlabel:str):
-#     PrePostPairs.append( (PreSynID, PostSynID) )
-#     XORInput.append(IOlabel)
-#
-# # For the first side of the XOR connectome:
-#
-# PyrInA = set() # The set of neurons representing XOR input A
-# PyrInB = set() # The set of neurons representing XOR input B
-# PyrOut = set() # The set of neurons representing XOR output
-#
-# if len(pyrmid_from_pyrin_and_not_int) > 0:
-#     pyrmidA = pyrmid_from_pyrin_and_not_int[0]
-#     pyrinA_0 = ConnectionsFrom('PyrIn', pyrmidA)[0]
-#     SpecifyConnection(pyrinA_0, pyrmidA, 'InA')
-#     PyrInA.add(pyrinA_0)
-#
-#     pyrintB, pyrinB_0 = FindIntAndInWithDifferentPyrIn(pyrmidA, PyrInA)
-#     SpecifyConnection(pyrintB, pyrmidA, '...')
-#
-#     SpecifyConnection(pyrinB_0, pyrintB, 'InB')
-#     PyrInB.add(pyrinB_0)
-#
-# # For the second side of the XOR connectome:
-#
-# if len(pyrmid_from_pyrin_and_not_int) > 1:
-#     pyrmidB = pyrmid_from_pyrin_and_not_int[1]
-#     midin = ConnectionsFrom('PyrIn', pyrmidB)
-#     for mi in midin:
-#         if mi not in PyrInA:
-#             pyrinB_1 = mi
-#     SpecifyConnection(pyrinB_1, pyrmidB, 'InB')
-#     PyrInB.add(pyrinB_1)
-#
-#     pyrintA, pyrinA_1 = FindIntAndInWithDifferentPyrInAndInt(pyrmidB, PyrInB, pyrintB)
-#     SpecifyConnection(pyrintA, pyrmidB, '...')
-#
-#     SpecifyConnection(pyrinA_1, pyrintA, 'InA')
-#     PyrInA.add(pyrinA_1)
-#
-#     # Find the PyrOut that receives from both PyrMid neurons:
-#     PyrOutGroup = []
-#     pyrout = Regions['PyrOut']
-#     for n in pyrout:
-#         frommid = ConnectionsFrom('PyrMid', n)
-#         if pyrmidA in frommid and pyrmidB in frommid:
-#             PyrOutGroup.append(n)
-#     SpecifyConnection(pyrmidA, PyrOutGroup[0], 'Out')
-#     SpecifyConnection(pyrmidB, PyrOutGroup[0], 'Out')
-#     PyrOut.add(PyrOutGroup[0])
-#
-# def NeuronTypeStr(NeuronID:int)->str:
-#     if NeuronTypes[NeuronID]==1:
-#         return 'pyr'
-#     elif NeuronTypes[NeuronID]==2:
-#         return 'int'
-#     else:
-#         return 'unknown'
-#
-# print("Connectome pre-post pairs for both branches of the XOR:")
-# for i in range(len(PrePostPairs)):
-#     pre, post = PrePostPairs[i]
-#     print('  %s: %s %d (%s) -> %s %d (%s)' % (
-#         XORInput[i],
-#         Neuron2RegionMap[pre],
-#         pre,
-#         NeuronTypeStr(pre),
-#         Neuron2RegionMap[post],
-#         post,
-#         NeuronTypeStr(post)))
-#
-#
-# # Weights previously used in the tuned ball-and-stick example:
-# WeightsPrePost = {
-#     'PyrIn': { 'Int': 1.2, 'PyrMid': 0.9 },
-#     'Int': { 'PyrMid': 1.2 },
-#     'PyrMid': { 'PyrOut': 1.0 },
-# }
-#
-# # Set connections as per the intentions expressed in PrePostPairs:
-# PreSynList = []
-# PostSynList = []
-# ConductanceList = []
-# for pre, post, active in Neuron2Neuron:
-#     if (pre, post) in PrePostPairs:
-#         # Set this to a specific strength:
-#         PreSynList.append(pre)
-#         PostSynList.append(post)
-#         PreSynReg = Neuron2RegionMap[pre]
-#         PostSynReg = Neuron2RegionMap[post]
-#         Weight = WeightsPrePost[PreSynReg][PostSynReg]
-#         if PreSynReg=="Int":
-#             ConductanceList.append(-40.0/Weight) # AMPA 40.0, GABA -40.0
-#         else:
-#             ConductanceList.append(40.0/Weight) # AMPA 40.0, GABA -40.0
-#     else:
-#         # Set this to zero:
-#         PreSynList.append(pre)
-#         PostSynList.append(post)
-#         ConductanceList.append(0.0)
-
-# Instead of what was done to set up the Spiking XOR, for the
-# autoassociative memory example, we can now imprint some stored
-# patterns with a prerequisite cue-size. Alternatively, this can
-# be entrained in NES.
-
-
-
-
-# try:
-#     MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
-#     print("\nUpdated model connectome accordingly.")
-# except:
-#     vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
-
-
-# Let's test the update:
-try:
-    response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
-    print("\nUpdated connectome: "+str(response))
-except:
-    vbp.ErrorToDB(DBdata, 'NES error: Failed to receive connectome after tuning')
 
 # Save tuned model at the NES server
 tunedmodelname = Args.modelname+"-tuned"
@@ -490,24 +274,6 @@ try:
     print("Saved modified model on server as: "+tunedmodelname)
 except:
     vbp.ErrorExit(DBdata, 'NES error: Model save failed')
-
-# Note: The result here should actually be a set of overlapping patterns.
-PatternIdentifiers = {
-    'A': [ 11, 12, 13, ],
-    'B': [ 14, 15, 16, ],
-    'C': [ 17, 18, 19, 20, ],
-}
-vbp.AddOutputToDB(DBdata, 'IOIDs', PatternIdentifiers)
-print("Saved autoassociative pattern identifiers in "+Args.ExpsDB)
-
-# # Add Input-Ouput identifiers to results
-# XORInOutIdentifiers = {
-#     'InA': list(PyrInA),
-#     'InB': list(PyrInB),
-#     'Out': list(PyrOut),
-# }
-# vbp.AddOutputToDB(DBdata, 'IOIDs', XORInOutIdentifiers)
-# print("Saved XOR I/O neuron identifiers in "+Args.ExpsDB)
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)

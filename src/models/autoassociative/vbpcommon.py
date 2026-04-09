@@ -10,9 +10,61 @@ path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
 import BrainGenix.NES as NES
 
-from NES_interfaces.KGTRecords import extract_t_Vm, save_t_Vm_pickled, plot_t_Vm
+from NES_interfaces.KGTRecords import extract_t_Vm, extract_spiketimes, save_t_Vm_pickled, plot_t_Vm, save_connections_pickled, plot_weights
 
-def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
+def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:str, figspecs:dict, receptor='AMPA', usematrix='weights')->bool:
+    import numpy as np
+
+    if not isinstance(connections_dict, dict):
+        print('Error: Connections is not a dict')
+        return False
+    if "StatusCode" not in connections_dict:
+        print('Error: Missing StatusCode in connections dict')
+        return False
+    try:
+        assert(connections_dict["StatusCode"] == 0)
+        print('Keys in connections: '+str(list(connections_dict.keys())))
+    except Exception as e:
+        print('Error: Connections content not usable: '+str(e))
+        return False
+
+    try:
+        numneurons = len(connections_dict["ConnectionTargets"])
+        weightmatrix = np.zeros((numneurons, numneurons))
+
+        type_ids = {
+            'AMPA': 1,
+            'GABA': 2,
+            'NMDA': 3,
+        }
+        type_id = type_ids[receptor]
+
+        targets = connections_dict['ConnectionTargets']
+        types = connections_dict['ConnectionTypes']
+        if usematrix=='conductance':
+            weights = connections_dict['ConnectionGPeakSum']
+        elif usematrix=='weights':
+            weights = connections_dict['ConnectionWeights']
+        else:
+            weights = connections_dict['NumReceptors']
+
+        total = 0
+        for pre in range(numneurons):
+            for i in range(len(weights[pre])):
+                if types[pre][i] == type_id:
+                    post = targets[pre][i]
+                    weightmatrix[pre][post] += weights[pre][i]
+                    total += weights[pre][i]
+
+        print('Total %s: %d' % (usematrix, total))
+        save_connections_pickled(weightmatrix, savefolder, nameappend)
+        plot_weights(weightmatrix, savefolder, nameappend, figspecs)
+        return True
+    except Exception as e:
+        print('Error: Failed to plot and store connections: '+str(e))
+        return False
+
+def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict, spikes_dict:dict=None)->bool:
     if not isinstance(recording_dict, dict):
         print('Error: Recorded activity is not a dict')
         return False
@@ -25,15 +77,37 @@ def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:d
     except Exception as e:
         print('Error: Recorded activity content not usable: '+str(e))
         return False
+
+    if spikes_dict:
+        if not isinstance(spikes_dict, dict):
+            print('Error: Spikes is not a dict')
+            return False
+        if "StatusCode" not in spikes_dict:
+            print('Error: Missing StatusCode in spikes dict')
+            return False
+        try:
+            assert(spikes_dict["StatusCode"] == 0)
+            print('Keys in spikes record: '+str(list(spikes_dict["SpikeTimes"].keys())))
+        except Exception as e:
+            print('Error: Recorded spikes content not usable: '+str(e))
+            return False
+
     try:
         t_ms, Vm_cells = extract_t_Vm(data=recording_dict["Recording"])
         if not t_ms:
-            print('plot_recorded Error: No data to plot.')
+            print('extract_t_Vm Error: No data to plot.')
             return False
-        save_t_Vm_pickled(t_ms, Vm_cells, savefolder)
-        plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs)
+
+        spikes_cells=None
+        if spikes_dict:
+            spikes_cells = extract_spiketimes(data=spikes_dict["SpikeTimes"])
+            if not spikes_cells:
+                print('extract_spiketimes Error: No spikes.')
+
+        save_t_Vm_pickled(t_ms, Vm_cells, savefolder, spikes_cells)
+        plot_t_Vm(t_ms, Vm_cells, savefolder, figspecs, spikes_cells=spikes_cells)
     except Exception as e:
-        print('Error: Failed to plot and store recorded acticity: '+str(e))
+        print('Error: Failed to plot and store recorded activity: '+str(e))
         return False
     return True
 
