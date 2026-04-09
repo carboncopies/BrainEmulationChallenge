@@ -24,7 +24,7 @@ import argparse
 #import os
 
 
-def net_connectome(nport:int):
+def net_connectome(nport:int, nmod:str):
     # def net_connectome(n_conn:int):
 
     import vbpcommon as vbp
@@ -45,6 +45,10 @@ def net_connectome(nport:int):
 
     if Args.DoBlend:
         Args.DoOBJ = True
+
+
+    if nmod != Args.modelname:
+        Args.modelname = nmod
 
     # Initialize data collection for entry in DB file
     DBdata = vbp.InitExpDB(

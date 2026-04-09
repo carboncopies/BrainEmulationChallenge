@@ -4,7 +4,9 @@ import subprocess
 import autoassociative_connectome_myg
 import re
 
-df = pds.read_excel(open('NetmorphParOptim/test_sample.xlsx','rb')) 
+f = 'ParameterSpace_700_samples'
+df = pds.read_excel(open('NetmorphParOptim/'+f+'.xlsx','rb')) 
+# df = pds.read_excel(open('NetmorphParOptim/test_sample.xlsx','rb')) 
 print(df.head(10))
 print(df.shape)
 
@@ -46,8 +48,9 @@ print("Port: ", port)
 
 
 ### %%
-for j in range(df.shape[0]
-               ): # loop over number of  par lines in the sample excel file
+for j in range(50): 
+# for j in range(df.shape[0]): 
+    # loop over number of  par lines in the sample excel file
     # for j in range(1): # loop over number of  par lines in the sample excel file
     pars=[]
     # print(df.iloc[j])
@@ -78,13 +81,14 @@ for j in range(df.shape[0]
     ####################################
     ## Run Reservoir script with Latin Hypercube generated parameters.
     ####################################
+    nmodel = "myg-autoassociative-iter-"+str(j)
 
     subprocess.run([
     "python3",
     "autoassociative_reservoir_myg.py",
     "-Port", str(port),
     "-modelfile", "nesvbp-autoassociative",
-    "-modelname", "myg-autoassociative",
+    "-modelname", nmodel,
     # "-DoBlend", "True",
     # "-BevelDepth", "0.2",
     # "-BlendExec", "/home/mgabr001/blender-4.1.1-linux-x64/blender",
@@ -102,10 +106,11 @@ for j in range(df.shape[0]
     # This is the main output that will be used for par optimization. 
     # I wrapped the original script into a function to return the number of usable connections as an integer.
 
-    print(autoassociative_connectome_myg.net_connectome(port))
+    print(autoassociative_connectome_myg.net_connectome(port,nmodel))
 
-    df.loc[j, 'usable_conns'] = autoassociative_connectome_myg.net_connectome(port)   
-    df.to_excel("NetmorphParOptim/test_sample_labeled.xlsx", index=False)
+    df.loc[j, 'usable_conns'] = autoassociative_connectome_myg.net_connectome(port,nmodel)   
+    df.to_excel("NetmorphParOptim/"+f+'-labeled-50.xlsx', index=False)
+    # df.to_excel("NetmorphParOptim/test_sample_labeled.xlsx", index=False)
     
 
 ##### RUNNING ORIGINAL SCRIPTS AS A TEST. THE NUMBER OF USABLE CONNECTIONS SHOULD BE 83.
