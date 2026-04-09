@@ -19,6 +19,7 @@ from pathlib import Path
 import pandas as pds
 import copy
 import psutil
+import tqdm
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
@@ -388,6 +389,28 @@ def resources_low()->bool:
     mem = psutil.virtual_memory()
     return (mem.used/mem.total) > 0.9
 
+def prepare_statusbar():
+    StatusBar = tqdm.tqdm("Progress", total=1)
+    StatusBar.leave = True
+    StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
+    StatusBar.colour = "green"
+    return StatusBar
+
+def update_statusbar(StatusBar, batchinfo:dict):
+    grand_total = 0
+    grand_percent = 0
+    for netmorphrun in batchinfo.values():
+        if 'percent' in netmorphrun:
+            grand_total += 100
+            grand_percent += netmorphrun['percent']
+    StatusBar.total = 100
+    StatusBar.n = 100.0*grand_percent/grand_total
+    StatusBar.refresh()
+
+def close_statusbar(StatusBar, batchinfo:dict):
+    update_statusbar(StatusBar, Percent)
+    StatusBar.close()
+
 # NOTE:
 # Below, I will be running the same Netmorph configuration in multiple
 # Netmorph runs in parallel. This is just as a test of how the server
@@ -537,6 +560,7 @@ print('Number of Netmorph sample runs running (out of %d): %d' % (batchsize, run
 
 # === Loop check for runs that have completed
 
+StatusBar = prepare_statusbar()
 while runs_incomplete(batchinfo):
 
     for netmorphrun in batchinfo.values():
@@ -546,6 +570,7 @@ while runs_incomplete(batchinfo):
 
             try:
                 Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
+                netmorphrun['percent'] = Percent
             except Exception as e:
                 print('...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
                 sleep(2.0)
@@ -573,6 +598,7 @@ while runs_incomplete(batchinfo):
 
                 print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
 
+            update_statusbar(StatusBar, batchinfo)
             sleep(2.0)
 
     if resources_low():
@@ -582,6 +608,8 @@ while runs_incomplete(batchinfo):
         print(f'Used {usedGB:.2f} GB of {totalGB:.2f} GB')
         print("Low RAM - let's break here (clear NES and restart script to do remaining)")
         break
+
+close_statusbar(StatusBar, batchinfo)
 
 print('Runs completed: %d' % runs_completed(batchinfo))
 print('Runs failed   : %d' % runs_failed(batchinfo))
