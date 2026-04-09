@@ -364,6 +364,9 @@ def get_previously_completed()->dict:
 
 def add_completed(netmorphrun:dict):
     completed_batchinfo = get_previously_completed()
+    if netmorphrun['runID'] in completed_batchinfo:
+        print('Oops - looks like line %d was already marked completed and saved.')
+        k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
     completed_batchinfo[netmorphrun['runID']] = {
         "runID": netmorphrun['runID'],
         "modelname": netmorphrun['modelname'],
@@ -403,6 +406,10 @@ batchsize = df.shape[0] # Args.batchsize
 #batchsize = 4 # just for testing!
 batchinfo = get_previously_completed()
 
+if len(batchinfo.keys()) > 0:
+    print('Number of samples completed previously: %d' % len(batchinfo.keys()))
+    k = input('Press Enter to process remaining %d' % (batchsize - len(batchinfo.keys())))
+
 # Each simulation in the batch corresponds to one line in the Excel sheet.
 # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
 for i in range(batchsize):
@@ -411,6 +418,7 @@ for i in range(batchsize):
         print('Run for data line %d already stored as completed' % i)
         continue
 
+    print('Preparing data line %d' % i)
     modelname = Args.modelname+'%04d' % i
     batchinfo[i] = {
         "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
@@ -441,6 +449,9 @@ for i in range(batchsize):
             'modelname': modelname,
         })
     batchinfo[i]['DBdata'] = DBdata # DB data unique to this sample run
+
+print('Batch prepared.')
+k = input('Press Enter to start simulations.')
 
 # === Batch starts
 #     Run Reservoir script with Latin Hypercube generated parameters.
