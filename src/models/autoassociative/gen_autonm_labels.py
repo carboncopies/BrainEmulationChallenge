@@ -63,7 +63,7 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
         for n in Regions[reg]:
             Neuron2RegionMap[n] = reg
 
-    print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
+    #print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
     #print("Regions: "+str(Regions))
     #print("Neuron types: "+str(NeuronTypes))
     #print("Region-to-region connections in resevoirs:")
