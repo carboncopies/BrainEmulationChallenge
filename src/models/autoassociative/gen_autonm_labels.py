@@ -412,13 +412,14 @@ print(" -- Starting batch of Netmorph runs ")
 for netmorphrun in batchinfo.values():
 
     pars = netmorphrun['pars']
-    growdays = str(pars[0])
-    pyramidal = str(pars[1])
-    interneuron = str(pars[2])
-    minneuronseparation = str(pars[3])
-    shapeRadius = str(pars[4])
-    shapeThickness = str(pars[5])
-    dmWeight = str(pars[6])
+    print(pars)
+    growdays = pars[0]
+    pyramidal = pars[1]
+    interneuron = pars[2]
+    minneuronseparation = pars[3]
+    shapeRadius = pars[4]
+    shapeThickness = pars[5]
+    dmWeight = pars[6]
 
     sample_modelcontent = modelcontent # Copy loaded configuration
 
