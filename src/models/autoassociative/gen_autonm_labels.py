@@ -396,7 +396,7 @@ def add_completed(netmorphrun:dict):
 
 batchsize = df.shape[0] # Args.batchsize
 #batchsize = 4 # just for testing!
-batchinfo = get_previously_completed(batchinfo)
+batchinfo = get_previously_completed()
 
 # Each simulation in the batch corresponds to one line in the Excel sheet.
 # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
