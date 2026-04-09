@@ -37,7 +37,7 @@ Extensive debugging of the Python client interface led to several critical stabi
 
 ### Visual Output
 Visual validation confirmed synchronous shifting through all stages.
-![Membrane Potential Plot](./output/shift_212205/groundtruth-Vm.png)
+![Membrane Potential Plot](./docs/img/shift_register_vm.png)
 
 ## ⚠️ Notes for Reviewers
 - The simulation requires the BrainGenix-NES server to be running (local or remote `pve.braingenix.org`).

@@ -43,5 +43,5 @@ cd src/models/shift_register_lifc/
 ## Visual Proof
 Below is the membrane potential plot showing the 8nd-stage synchronous shift sequence.
 
-![Shift Register Vm](/Users/apple/fun_project/BrainEmulationChallenge/src/models/shift_register_lifc/output/shift_212205/groundtruth-Vm.png)
-*(Note: Use the absolute path in your local environment to view the generated plot.)*
+![Shift Register Vm](./img/shift_register_vm.png)
+*(Note: Visual proof showing synchronous bit shifts across all stages.)*
