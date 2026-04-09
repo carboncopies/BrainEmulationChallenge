@@ -17,6 +17,7 @@ import argparse
 #import os
 from pathlib import Path
 import pandas as pds
+import copy
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
