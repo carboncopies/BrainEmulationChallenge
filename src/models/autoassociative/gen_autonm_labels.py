@@ -1,32 +1,10 @@
 #!../../../venv/bin/python
-# parallel_batch_test.py
-# Randal A. Koene, 20260407
+# gen_autonm_labels.py
+# Randal A. Koene, 20260408
 
-# This is a test of multiple parallel launches of Netmorph model growth
-# via one running NES server.
-
-# Note: We're making a single client connection to the API server here,
-#       but we will be making multiple simulations, because each
-#       Netmorph run needs to be done in a separate simulation.
-#       To keep the ExpsDB.json clean, this also means we need to
-#       prepare multiple entries for it, one for each simulation.
-#       (You don't need to use ExpsDB.json, it's just a standard
-#       we've been using in typical example scripts.)
-#
-#       The Blender output options were commented out and retrieval
-#       of Blender data was removed from the script to keep it
-#       simple and focused.
-#
-#       Output plotting and saving was also left out for the same reason.
-#
-#       Notice that the specific 'modelname' used in the batchinfo dict
-#       is the same as the 'modelname' saved in the corresponding "OUT"
-#       section of the entry that will be added to ExpsDB.json. So, you
-#       can identify which entry in the database belongs to which sample.
-#
-#       In this script, saving output to ExpsDB.json is done once for
-#       the whole batch at the very end. This is risky, because the
-#       script might fail or hang. There are smarter ways to do this.
+# This script merges parallel Netmorph running as per the
+# parallel_batch_test.py script and sample space exploration
+# and label generation script by Marianna.
 
 scriptversion='0.1.0'
 
@@ -37,6 +15,8 @@ from time import sleep
 import base64
 import argparse
 #import os
+from pathlib import Path
+import pandas as pds
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
@@ -45,6 +25,177 @@ from sys import path
 from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
+
+def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
+    MySim = netmorphrun['Sim']
+
+    # --- Based on the version in autoassociative_connectome_myg.py
+    # Get connectome
+    try:
+        response = MySim.GetAbstractConnectome(Sparse=True)
+    except:
+        #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+        print('NES error: failed to receive abstract model connectome')
+        return -1, -1
+    PrePostNumReceptors = response['PrePostNumReceptors']
+    Regions = response['Regions']
+    NeuronTypes = response['Types']
+    def RegionByNeuronID(NeuronID:int)->str:
+        for reg in list(Regions.keys()):
+            if NeuronID in Regions[reg]:
+                return reg
+        return 'unknown'
+
+    PreRegions = {}
+    for preidx, postidx, reccnt in PrePostNumReceptors:
+        prereg = RegionByNeuronID(preidx)
+        postreg = RegionByNeuronID(postidx)
+        if prereg not in PreRegions:
+            PreRegions[prereg] = {}
+        if postreg not in PreRegions[prereg]:
+            PreRegions[prereg][postreg] = 1
+        else:
+            PreRegions[prereg][postreg] += 1
+
+    Neuron2RegionMap = {}
+    for reg in Regions:
+        for n in Regions[reg]:
+            Neuron2RegionMap[n] = reg
+
+    print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
+    print("Regions: "+str(Regions))
+    print("Neuron types: "+str(NeuronTypes))
+    print("Region-to-region connections in resevoirs:")
+    print(PreRegions)
+    print("Neuron to Region map: "+str(Neuron2RegionMap))
+    def SetAll(TheList:list, Value:int):
+        for i in range(len(TheList)):
+            TheList[i][2] = Value
+
+    def SetOneByPost(TheList:list, PostID:int, Value:int):
+        for i in range(len(TheList)):
+            if TheList[i][1]==PostID:
+                TheList[i][2] = Value
+
+    def SetOneByPre(TheList:list, PreID:int, Value:int):
+        for i in range(len(TheList)):
+            if TheList[i][0]==PreID:
+                TheList[i][2] = Value
+
+    def PostIs(TheList:list, PostID:int)->int:
+        for i in range(len(TheList)):
+            if TheList[i][1]==PostID:
+                return TheList[i][2]
+        return 0
+
+    def PreIs(TheList:list, PreID:int)->int:
+        for i in range(len(TheList)):
+            if TheList[i][0]==PreID:
+                return TheList[i][2]
+        return 0
+    Neuron2Neuron = copy.deepcopy(PrePostNumReceptors)
+    SetAll(Neuron2Neuron, 1)
+    def ActiveInputsTo(NeuronID:int)->list:
+        res = []
+        for pre, post, active in Neuron2Neuron:
+            if active>0 and post==NeuronID:
+                res.append(pre)
+        return res
+
+    def ActiveOutputsFrom(NeuronID:int)->list:
+        res = []
+        for pre, post, active in Neuron2Neuron:
+            if active>0 and pre==NeuronID:
+                res.append(post)
+        return res
+
+    def ConnectionsFrom(SourceRegion:str, NeuronID:int)->list:
+        res = []
+        activeinputs = ActiveInputsTo(NeuronID)
+        for pre in activeinputs:
+            if Neuron2RegionMap[pre]==SourceRegion:
+                res.append(pre)
+        return res
+
+    def EliminateByPost(NeuronID:int):
+        SetOneByPost(Neuron2Neuron, NeuronID, 0)
+
+    def EliminateByPre(NeuronID:int):
+        SetOneByPre(Neuron2Neuron, NeuronID, 0)
+
+    print('Neurons in In population with >0 connections from other In neurons:')
+    for n in Regions['In']:
+        frompyrmid = ConnectionsFrom('In', n)
+        if len(frompyrmid)<1:
+            EliminateByPost(n)
+        else:
+            print('%d: %s' % (n, str(frompyrmid)))
+    print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
+    print("Number of connections: "+str(len(Neuron2Neuron)))
+
+    def NumActive()->int:
+        num = 0
+        for pre, post, active in Neuron2Neuron:
+            if active>0:
+                num += 1
+        return num
+
+    def PrintActive()->str:
+        active_str = ''
+        num = 0
+        for pre, post, active in Neuron2Neuron:
+            if active>0:
+                active_str += '[%s -> %s], ' % (pre, post)
+        return active_str
+
+    print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
+    print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
+
+    result1 = NumActive()
+
+    # --- Based on the version at the end of autoassociative_reservoir.py
+    try:
+        connections_before_dict = MySim.GetConnectome()
+        # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_weights', FIGSPECS):
+        #     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity weights')
+        # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_numreceptors', FIGSPECS, usematrix='numreceptors'):
+        #     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity number of receptors')
+    except:
+        #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+        print('NES error: failed to receive model connectome')
+        return result1, -1
+
+    def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
+        numneurons = len(connections_dict["ConnectionGPeakSum"])
+        # Find pyramidal neurons
+        types = connections_dict['ConnectionTypes']
+        pyramidal = []
+        for pre in range(numneurons):
+            for i in range(len(types[pre])):
+                if types[pre][i] == 1: # AMPA
+                    pyramidal.append(pre)
+                    break
+        # Get pyramidal prepost combined AMPA peak conductances
+        targets = connections_dict['ConnectionTargets']
+        gpeaksummatrix = np.zeros((numneurons, numneurons))
+        gpeaksum = connections_dict['ConnectionGPeakSum']
+        for pre in pyramidal:
+            for i in range(len(gpeaksum[pre])):
+                if types[pre][i] == 1: # AMPA
+                    post = targets[pre][i]
+                    gpeaksummatrix[pre][post] += gpeaksum[pre][i]
+        return pyramidal, gpeaksummatrix
+
+    pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
+    proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
+    attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
+    #plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
+    print('Number of pre-post pyramidal connections at target g_sum_peak: %d' % int(attargetgpeaksum.sum()))
+
+    result2 = int(attargetgpeaksum.sum())
+
+    return result1, result2
+
 
 # Handle Arguments for Host, Port, etc
 Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
@@ -62,11 +213,21 @@ Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to 
 Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
-Parser.add_argument("-batchsize", default=10, type=int, help="Number of Netmorph sample runs at once")
+#Parser.add_argument("-batchsize", default=10, type=int, help="Number of Netmorph sample runs at once")
+Parser.add_argument("-excel", default="NetmorphParOptim/ParameterSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
 Args = Parser.parse_args()
 
 # if Args.DoBlend:
 #     Args.DoOBJ = True
+
+# Load samples parameter values from Excel file and keep file name
+f = Path(Args.excel).stem
+df = pds.read_excel(open(Args.excel,'rb'))
+print(df.head(10))
+print(df.shape)
+cols = df.columns # column identifiers
+
+df['usable_conns']=0
 
 # FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
@@ -100,6 +261,31 @@ blender_exec_path=%s;
 GROWDAYS = '''
 days=%d;
 '''
+
+PYRAMIDAL_POP='''
+In.pyramidal=%d;
+'''
+
+INTERNEURON_POP='''
+In.interneuron=%d;
+'''
+
+MIN_NEURON_SEPARATION='''
+In.minneuronseparation=%d;
+'''
+
+SHAPE_RADIUS='''
+In.shape.radius=%d;
+'''
+
+SHAPE_THICKNESS='''
+In.shape.thickness=%d;
+'''
+
+DM_WEIGHT='''
+all_axons.axondm.dm_weight=%.1f;
+'''
+
 
 # Load Netmorph model file
 modelcontent = 'kjhskdjfhkjhs'
@@ -180,13 +366,12 @@ def runs_failed(batchinfo:dict)->int:
 
 # === Batch prepare
 
-# Todo:
-# - Add try-except to detect problem but not crash
-# - Replace some ErrorExit()
-
-batchsize = Args.batchsize
+#batchsize = df.shape[0] # Args.batchsize
+batchsize = 4 # just for testing!
 batchinfo = {}
 
+# Each simulation in the batch corresponds to one line in the Excel sheet.
+# Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
 for i in range(batchsize):
 
     modelname = Args.modelname+'%04d' % i
@@ -195,6 +380,17 @@ for i in range(batchsize):
         "modelname": modelname  # Remember which output model belongs to this run
     }
 
+    # Get parameters from data frame
+    pars = []
+    for k in range(len(cols)):
+        if k < 6:
+            pars.append(int(df.iloc[i][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
+        else:
+            pars.append(float(df.iloc[i][cols[k]]))
+    batchinfo[i]['pars'] = pars
+
+    growdays = str(pars[0])
+
     # Initialize data collection for entry in DB file
     DBdata = vbp.InitExpDB(
         Args.ExpsDB,
@@ -202,18 +398,27 @@ for i in range(batchsize):
         scriptversion,
         _initIN = {
             'modelfile': Args.modelfile,
-            'growdays_override': str(Args.growdays), # REPLACE with the growdays of this sample run
+            'growdays_override': growdays,
         },
         _initOUT = {
             'modelname': modelname,
         })
     batchinfo[i]['DBdata'] = DBdata # DB data unique to this sample run
 
-
 # === Batch starts
+#     Run Reservoir script with Latin Hypercube generated parameters.
 
 print(" -- Starting batch of Netmorph runs ")
 for netmorphrun in batchinfo.values():
+
+    pars = netmorphrun['pars']
+    growdays = str(pars[0])
+    pyramidal = str(pars[1])
+    interneuron = str(pars[2])
+    minneuronseparation = str(pars[3])
+    shapeRadius = str(pars[4])
+    shapeThickness = str(pars[5])
+    dmWeight = str(pars[6])
 
     sample_modelcontent = modelcontent # Copy loaded configuration
 
@@ -222,8 +427,15 @@ for netmorphrun in batchinfo.values():
     #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
     # if Args.DoBlend:
     #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
-    if Args.growdays:
-        sample_modelcontent += GROWDAYS % Args.growdays
+    
+    sample_modelcontent += GROWDAYS % growdays
+    sample_modelcontent += PYRAMIDAL_POP % pyramidal
+    sample_modelcontent += INTERNEURON_POP % interneuron
+    sample_modelcontent += MIN_NEURON_SEPARATION % minneuronseparation        
+    sample_modelcontent += SHAPE_RADIUS % shapeRadius
+    sample_modelcontent += SHAPE_THICKNESS % shapeThickness
+    sample_modelcontent += DM_WEIGHT % dmWeight
+
 
     # *** NOTE: Here, add additional templated modifications of sample_modelcontent as needed!
 
@@ -301,6 +513,12 @@ while runs_incomplete(batchinfo):
                     vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
                     print('Failed to save completed model')
 
+                print('...checking connectome')
+                result1, result2 = check_connectome(netmorphrun, PREPOSTGPEAKSUMTARGET)
+
+                netmorphrun['usable_conns1'] = result1
+                netmorphrun['usable_conns2'] = result2
+
                 print('...a run completed')
 
     sleep(1.0)
@@ -312,5 +530,14 @@ print('Runs failed   : %d' % runs_failed(batchinfo))
 # === Update the ExpsDB.json database for all samples in the batch
 for netmorphrun in batchinfo.values():
     vbp.UpdateExpsDB(netmorphrun['DBdata'])
+    df.loc[netmorphrun['runID'], 'usable_conns'] = netmorphrun['usable_conns1']
+
+path = Path(Args.excel)
+labeledpath = path.with_suffix("")+'-labeled.xlsx'
+df.to_excel(labeledpath, index=False)
+
+print("Let's compare the results from the two label interpretation methods:")
+for netmorphrun in batchinfo.values():
+    print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
 
 print(" -- Done.")

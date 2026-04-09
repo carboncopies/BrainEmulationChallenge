@@ -180,10 +180,6 @@ def runs_failed(batchinfo:dict)->int:
 
 # === Batch prepare
 
-# Todo:
-# - Add try-except to detect problem but not crash
-# - Replace some ErrorExit()
-
 batchsize = Args.batchsize
 batchinfo = {}
 

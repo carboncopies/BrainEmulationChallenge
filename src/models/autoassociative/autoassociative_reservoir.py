@@ -196,6 +196,17 @@ if Args.DoBlend:
 vbp.UpdateExpsDB(DBdata)
 
 # Get and plot connectome to have insight into what the reservoir makes available
+# For LIFC neurons, this retrieves:
+# [ (list with one dict entry per neuron)
+#   { 
+#      "ConnectionTargets": [ (list of all neurons targeted by this neuron per connection) ],
+#      "ConnectionTypes": [ (list of corresponding neurotransmitter type per connection) ],
+#      "ConnectionWeights": [ (list of corresponding weights per connection) ],
+#      "ConnectionGPeakSum": [ (list of max peak conductance per connection) ],
+#      "NumReceptors": [ (list of number of actual physical synapses involved per connection) ]
+#   }
+#   ...
+# ]
 try:
     connections_before_dict = MySim.GetConnectome()
     if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_weights', FIGSPECS):
