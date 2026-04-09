@@ -408,7 +408,7 @@ def update_statusbar(StatusBar, batchinfo:dict):
     StatusBar.refresh()
 
 def close_statusbar(StatusBar, batchinfo:dict):
-    update_statusbar(StatusBar, Percent)
+    update_statusbar(StatusBar, batchinfo)
     StatusBar.close()
 
 # NOTE:
