@@ -6,6 +6,12 @@
 # parallel_batch_test.py script and sample space exploration
 # and label generation script by Marianna.
 
+# TODO:
+# - make more modular
+# - add option to delete completed sims (option, because might want to check connectome)
+# - add option to launch new sim when RAM and cores used drops below limit after deleting sims
+# - figure out modules or functions that can go into PythonClient
+
 scriptversion='0.1.0'
 
 import numpy as np
@@ -29,17 +35,172 @@ from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
 
-def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
-    MySim = netmorphrun['Sim']
+# Handle Arguments for Host, Port, etc
+def get_Args():
+    Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
+    Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
+    Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
+    Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+    Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
+    Parser.add_argument("-modelname", default="autoassociative", type=str, help="Stem name of neuronal circuit models to save")
+    #Parser.add_argument("-growdays", default=20, type=int, help="Number of days Netmorph growth")
+    Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
+    Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve (def: 2)")
+    Parser.add_argument("-PATTERNSIZE", default=8, type=int, help="Median number of neurons in each pattern (def: 8)")
+    Parser.add_argument("-CUESIZE", default=4, type=int, help="Intended minimum cue size to retrieve patterns (def: 4)")
+    Parser.add_argument("-EMBEDMULTIPLE", default=2, type=int, help="Multiplier to embed engram neurons in larger population (def: 2)")
+    Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
+    Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
+    Parser.add_argument("-excel", default="NetmorphParOptim/ParameterSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
+    Parser.add_argument("-fitcpus", action="store_true", help="Fit batches to the number of logical CPUs available")
+    return Parser.parse_args()
 
-    # --- Based on the version in autoassociative_connectome_myg.py
+# Load samples parameter values from Excel file, return data frame and column identifiers
+def get_sample_data(Args)->tuple:
+    #f = Path(Args.excel).stem
+    df = pds.read_excel(open(Args.excel,'rb'))
+    print(df.head(10))
+    print(df.shape)
+    return df, df.columns
+
+# Load Netmorph model file
+def load_Netmorph_configuration(Args)->str:
+    modelcontent = 'kjhskdjfhkjhs'
+    if Args.modelfile:
+        try:
+            with open(Args.modelfile, 'r') as f:
+                modelcontent = f.read()
+        except Exception as e:
+            print('Failed: modelfile error: '+str(e))
+            exit(1)
+    else:
+        print('Failed: missing modelfile')
+        exit(1)
+    return modelfile
+
+# Create Client Configuration For Local Simulation
+def connect_client(Args):
+    print(" -- Creating Client Configuration For Local Simulation")
+    ClientCfg = NES.Client.Configuration()
+    ClientCfg.Mode = NES.Client.Modes.Remote
+    ClientCfg.Host = Args.Host
+    ClientCfg.Port = Args.Port
+    ClientCfg.UseHTTPS = Args.UseHTTPS
+    ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
+    ClientCfg.Username = "Admonishing"
+    ClientCfg.Password = "Instruction"
+
+    # Create Client Instance
+    print(" -- Creating Client Instance")
+    try:
+        ClientInstance = NES.Client.Client(ClientCfg)
+        if not ClientInstance.IsReady():
+            print('NES.Client error: not ready')
+            exit(1)
+    except Exception as e:
+        print('NES.Client error: '+str(e))
+        exit(1)
+    return ClientInstance
+
+# Retrieve results data for previously completed samples.
+def get_previously_completed()->dict:
+    try:
+        with open('batchinfo_completed.json', 'r') as f:
+            completed_batchinfo_jsonkeys = json.load(f)
+        completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
+    except:
+        completed_batchinfo = {}
+    return completed_batchinfo
+
+# Update results data for completed samples.
+def add_completed(netmorphrun:dict):
+    completed_batchinfo = get_previously_completed()
+    if netmorphrun['runID'] in completed_batchinfo:
+        print('Oops - looks like line %d was already marked completed and saved.')
+        k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
+    completed_batchinfo[netmorphrun['runID']] = {
+        "runID": netmorphrun['runID'],
+        "modelname": netmorphrun['modelname'],
+        "pars": netmorphrun['pars'],
+        "status": netmorphrun['status'],
+        "usable_conns1": netmorphrun['usable_conns1'],
+        "usable_conns2": netmorphrun['usable_conns2'],
+    }
+    try:
+        if os.path.exists('batchinfo_completed.json'):
+            os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
+        with open('batchinfo_completed.json', 'w') as f:
+            json.dump(completed_batchinfo, f)
+    except Exception as e:
+        print('WARNING: Adding completed data to batchinfo_completed.json failed')
+
+# Check RAM
+def resources_low()->bool:
+    mem = psutil.virtual_memory()
+    return (mem.used/mem.total) > 0.9
+
+# Status bar helper functions
+def prepare_statusbar():
+    StatusBar = tqdm.tqdm("Progress", total=1)
+    StatusBar.leave = True
+    StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
+    StatusBar.colour = "green"
+    return StatusBar
+
+def update_statusbar(StatusBar, batchinfo:dict):
+    grand_total = 0
+    grand_percent = 0
+    for netmorphrun in batchinfo.values():
+        if 'percent' in netmorphrun:
+            grand_total += 100
+            grand_percent += netmorphrun['percent']
+    StatusBar.total = 100
+    if grand_total <= 0:
+        StatusBar.n = 100
+    else:
+        StatusBar.n = 100.0*grand_percent/grand_total
+    StatusBar.refresh()
+
+def close_statusbar(StatusBar, batchinfo:dict):
+    update_statusbar(StatusBar, batchinfo)
+    StatusBar.close()
+
+# Helper functions for batch runs
+def runs_incomplete(batchinfo:dict)->bool:
+    for netmorphrun in batchinfo.values():
+        if netmorphrun['status'] == 'running':
+            return True
+    return False
+
+def count_runs_by_status(batchinfo:dict, status:str)->int:
+    num = 0
+    for netmorphrun in batchinfo.values():
+        if netmorphrun['status'] == status:
+            num += 1
+    return num
+
+def runs_prepped(batchinfo:dict)->int:
+    return count_runs_by_status(batchinfo, 'prepped')
+
+def runs_running(batchinfo:dict)->int:
+    return count_runs_by_status(batchinfo, 'running')
+
+def runs_completed(batchinfo:dict)->int:
+    return count_runs_by_status(batchinfo, 'completed')
+
+def runs_failed(batchinfo:dict)->int:
+    return count_runs_by_status(batchinfo, 'failed')
+
+# Usable connections interpretation
+# --- Based on the version in autoassociative_connectome_myg.py
+def usable_connections_method1(MySim)->int:
     # Get connectome
     try:
         response = MySim.GetAbstractConnectome(Sparse=True)
     except:
         #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive abstract model connectome')
-        return -1, -1
+        return -1
     PrePostNumReceptors = response['PrePostNumReceptors']
     Regions = response['Regions']
     NeuronTypes = response['Types']
@@ -154,9 +315,10 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
     print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
     #print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
 
-    result1 = NumActive()
+    return NumActive()
 
-    # --- Based on the version at the end of autoassociative_reservoir.py
+# --- Based on the version at the end of autoassociative_reservoir.py
+def usable_connections_method1(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
     try:
         connections_before_dict = MySim.GetConnectome()
         # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_weights', FIGSPECS):
@@ -166,7 +328,7 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
     except:
         #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive model connectome')
-        return result1, -1
+        return -1
 
     def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
         numneurons = len(connections_dict["ConnectionGPeakSum"])
@@ -195,58 +357,227 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
     #plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
     print('Number of pre-post pyramidal connections at target g_sum_peak: %d' % int(attargetgpeaksum.sum()))
 
-    result2 = int(attargetgpeaksum.sum())
+    return int(attargetgpeaksum.sum())
 
+def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
+    MySim = netmorphrun['Sim']
+    result1 = int(usable_connections_method1(MySim))
+    result2 = int(usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET))
     return result1, result2
 
+# Batch prepare batch information and ExpsDB data for those that will be run
+def prepare_batch_information(numsamples, Args)->dict:
+    batchinfo = get_previously_completed()
 
-# Handle Arguments for Host, Port, etc
-Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
-Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
-Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
-Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
-Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
-Parser.add_argument("-modelname", default="autoassociative", type=str, help="Name of neuronal circuit model to save")
-Parser.add_argument("-growdays", default=20, type=int, help="Number of days Netmorph growth")
-#Parser.add_argument("-DoOBJ", action='store_true', help="Netmorph should produce OBJ output")
-#Parser.add_argument("-DoBlend", action='store_true', help="Netmorph should produce Blender output")
-#Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
-#Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
-Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
-Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve")
-Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
-Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
-#Parser.add_argument("-batchsize", default=10, type=int, help="Number of Netmorph sample runs at once")
-Parser.add_argument("-excel", default="NetmorphParOptim/ParameterSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
-Args = Parser.parse_args()
+    if len(batchinfo.keys()) > 0:
+        print('Number of samples completed previously: %d' % len(batchinfo.keys()))
+        k = input('Press Enter to process remaining %d' % (numsamples - len(batchinfo.keys())))
 
-# if Args.DoBlend:
-#     Args.DoOBJ = True
+    # Each simulation in the batch corresponds to one line in the Excel sheet.
+    # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
+    for i in range(numsamples):
 
-# Load samples parameter values from Excel file and keep file name
-f = Path(Args.excel).stem
-df = pds.read_excel(open(Args.excel,'rb'))
-print(df.head(10))
-print(df.shape)
-cols = df.columns # column identifiers
+        if i in batchinfo:
+            print('Run for data line %d already stored as completed' % i)
+            continue
 
-# Make new columns in data frame
-df['usable_conns1']=0
-df['usable_conns2']=0
+        print('Preparing data line %d' % i)
+        modelname = Args.modelname+'%04d' % i
+        batchinfo[i] = {
+            "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
+            "modelname": modelname  # Remember which output model belongs to this run
+        }
 
-# FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
+        # Get parameters from data frame
+        pars = []
+        for k in range(len(cols)):
+            if k < 6:
+                pars.append(int(df.iloc[i][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
+            else:
+                pars.append(float(df.iloc[i][cols[k]]))
+        batchinfo[i]['pars'] = pars
 
-PATTERNSIZE=8
-CUESIZE=4
-EMBEDMULTIPLE=2
+        growdays = str(pars[0])
 
-# The following requisite combined peak conductance available
-# between each pre-post pair of pyramidal neurons was derived
-# from results in LIFtest.py.
-RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
-PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / CUESIZE
+        # Initialize data collection for entry in DB file
+        DBdata = vbp.InitExpDB(
+            Args.ExpsDB,
+            'reservoir',
+            scriptversion,
+            _initIN = {
+                'modelfile': Args.modelfile,
+                'growdays_override': growdays,
+            },
+            _initOUT = {
+                'modelname': modelname,
+            })
+        batchinfo[i]['DBdata'] = DBdata # DB data unique to this sample run
+        batchinfo[i]['status'] = 'prepped'
 
-# Netmorph model content modification templates for use below (based on overrides in command line arguments)
+    return batchinfo
+
+
+# Modify Netmorph configuration for sample run
+def get_sample_modelcontent(modelcontent:str, pars:list, Args)->str:
+    print(pars)
+    growdays = pars[0]
+    pyramidal = pars[1]
+    interneuron = pars[2]
+    minneuronseparation = pars[3]
+    shapeRadius = pars[4]
+    shapeThickness = pars[5]
+    dmWeight = pars[6]
+
+    sample_modelcontent = modelcontent # Copy loaded configuration
+
+    sample_modelcontent += ARCHITECTURE_MODIFY % (Args, EMBEDMULTIPLE*Args.PATTERNSIZE*Args.Patterns, Args.PATTERNSIZE*Args.Patterns)
+    # if Args.DoOBJ:
+    #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
+    # if Args.DoBlend:
+    #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
+    
+    sample_modelcontent += GROWDAYS % growdays
+    sample_modelcontent += PYRAMIDAL_POP % pyramidal
+    sample_modelcontent += INTERNEURON_POP % interneuron
+    sample_modelcontent += MIN_NEURON_SEPARATION % minneuronseparation        
+    sample_modelcontent += SHAPE_RADIUS % shapeRadius
+    sample_modelcontent += SHAPE_THICKNESS % shapeThickness
+    sample_modelcontent += DM_WEIGHT % dmWeight
+    return sample_modelcontent
+
+# Run Reservoir script with Latin Hypercube generated parameters.
+def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, Args):
+    print(" -- Starting batch of Netmorph runs ")
+    for netmorphrun in batchinfo.values():
+
+        if netmorphrun['status'] != 'prepped': # was already stored as completed
+            continue
+
+        if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
+            return
+
+        sample_modelcontent = get_sample_modelcontent(modelcontent, netmorphrun['pars'], Args)
+
+        # Create A New Simulation
+        print("...Creating Simulation")
+        SimulationCfg = NES.Simulation.Configuration()
+        SimulationCfg.Name = "Netmorph-"+netmorphrun['modelname']
+        SimulationCfg.Seed = 0
+        try:
+            MySim = ClientInstance.CreateSimulation(SimulationCfg)
+        except:
+            vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to create simulation')
+            netmorphrun['status'] = 'failed'
+            continue # Skipping this sample
+
+        try:
+            MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
+            MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
+            MySim.SetSTDP(_DoSTDP=Args.STDP)
+        except Exception as e:
+            vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to specify options: %s' % str(e))
+            netmorphrun['status'] = 'failed'
+            continue # Skipping this sample
+
+        print('...Options specified')
+
+        netmorphrun['SimID'] = MySim.ID
+        netmorphrun['Sim'] = MySim
+
+        # Start a Netmorph neural morphogenesis simulation
+        try:
+            NetmorphOutputDirectory, NetmorphErrCode = MySim.Netmorph_Start(sample_modelcontent, _NeuronClass='LIFC')
+            if NetmorphErrCode != 0:
+                vbp.ErrorToDB(netmorphrun['DBdata'], 'Netmorph error: %s\nNetmorph output dir: %s' % (str(NetmorphErrCode), str(NetmorphOutputDirectory)))
+                netmorphrun['status'] = 'failed'
+                continue # Skipping this sample
+
+        except Exception as e:
+            vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to launch Netmorph: %s' % str(e))
+            netmorphrun['status'] = 'failed'
+            continue # Skipping this sample
+
+        vbp.AddOutputToDB(netmorphrun['DBdata'], 'NetmorphOutputDirectory', str(NetmorphOutputDirectory))
+        print('...launched Nemorph run with data sample ID %d' % netmorphrun['runID'])
+        netmorphrun['status'] = 'running'
+
+
+# Loop check for runs that have completed
+def monitor_batch(batchinfo:dict, PREPOSTGPEAKSUMTARGET:float):
+    StatusBar = prepare_statusbar()
+    while runs_incomplete(batchinfo):
+
+        for netmorphrun in batchinfo.values():
+            if netmorphrun['status'] == 'running':
+
+                MySim = netmorphrun['Sim']
+
+                try:
+                    Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
+                    netmorphrun['percent'] = Percent
+                except Exception as e:
+                    print('\n...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
+                    sleep(2.0)
+                    continue
+
+                if NetmorphStatus == "None":
+                    netmorphrun['status'] = 'failed'
+                    print('...run %d failed' % netmorphrun['runID'])
+                elif NetmorphStatus == "Done":
+                    netmorphrun['status'] = 'completed'
+                    try:
+                        MySim.ModelSave(netmorphrun['modelname'])
+                        print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
+                    except:
+                        vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
+                        print('Failed to save completed model for run %d' % netmorphrun['runID'])
+
+                    print('...checking connectome for run %d' % netmorphrun['runID'])
+                    result1, result2 = check_connectome(netmorphrun, PREPOSTGPEAKSUMTARGET)
+
+                    netmorphrun['usable_conns1'] = result1
+                    netmorphrun['usable_conns2'] = result2
+
+                    add_completed(netmorphrun)
+
+                    print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
+
+                update_statusbar(StatusBar, batchinfo)
+                sleep(2.0)
+
+        if resources_low():
+            mem = psutil.virtual_memory()
+            usedGB = mem.used/(1024 ** 3)
+            totalGB = mem.total/(1024 ** 3)
+            print(f'\nUsed {usedGB:.2f} GB of {totalGB:.2f} GB')
+            print("Low RAM - let's break here (clear NES and restart script to do remaining)")
+            break
+
+    close_statusbar(StatusBar, batchinfo)
+
+# Update the ExpsDB.json database for all samples in the batch
+def update_experiments_database(batchinfo:dict):
+    for netmorphrun in batchinfo.values():
+        if 'DBdata' in netmorphrun:
+            vbp.UpdateExpsDB(netmorphrun['DBdata'])
+
+# Save resulting label data for all completed runs to excel file
+def write_excel_with_results(df, Args)
+    df['usable_conns1']=0 # add column
+    df['usable_conns2']=0 # add column
+    completed_batchinfo = get_previously_completed()
+    for netmorphrun in completed_batchinfo.values():
+        df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
+        df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
+
+    path = Path(Args.excel)
+    labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
+    df.to_excel(labeledpath, index=False)
+    print('Results written to: '+labeledpath)
+    return completed_batchinfo
+
+
+# String templates for augmenting Netmorph model configuration content
 ARCHITECTURE_MODIFY = '''
 In.pyramidal=%d;
 In.interneurons=%d;
@@ -291,353 +622,61 @@ DM_WEIGHT='''
 all_axons.axondm.dm_weight=%.1f;
 '''
 
+# Constants
 
-# Load Netmorph model file
-modelcontent = 'kjhskdjfhkjhs'
-if Args.modelfile:
-    try:
-        with open(Args.modelfile, 'r') as f:
-            modelcontent = f.read()
-    except Exception as e:
-        print('Failed: modelfile error: '+str(e))
-        exit(1)
-else:
-    print('Failed: missing modelfile')
-    exit(1)
+# The following requisite combined peak conductance available
+# between each pre-post pair of pyramidal neurons was derived
+# from results in LIFtest.py.
+RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
 
-# Create Client Configuration For Local Simulation
-print(" -- Creating Client Configuration For Local Simulation")
-ClientCfg = NES.Client.Configuration()
-ClientCfg.Mode = NES.Client.Modes.Remote
-ClientCfg.Host = Args.Host
-ClientCfg.Port = Args.Port
-ClientCfg.UseHTTPS = Args.UseHTTPS
-ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
-ClientCfg.Username = "Admonishing"
-ClientCfg.Password = "Instruction"
+# FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
-# Create Client Instance
-print(" -- Creating Client Instance")
-try:
-    ClientInstance = NES.Client.Client(ClientCfg)
-    if not ClientInstance.IsReady():
-        print('NES.Client error: not ready')
-        exit(1)
-except Exception as e:
-    print('NES.Client error: '+str(e))
-    exit(1)
+# === Start of program steps
+if __name__ == '__main__':
 
-# Some helper functions for dealing with batch sample entries
+    Args = get_Args()
 
-def runs_incomplete(batchinfo:dict)->bool:
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'running':
-            return True
-    return False
+    df, cols = get_sample_data(Args)
 
-def runs_running(batchinfo:dict)->int:
-    num_running = 0
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'running':
-            num_running += 1
-    return num_running
+    # Find out total conductance that needs to be possible through the combination of
+    # all synapses between one Pyr-Pyr pair so that when trained to max weight by STDP
+    # that multi-synaptic connection can contribute the proportion of
+    # RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT needed to achieve engram retrieval with
+    # a cue of at least Args.CUESIZE active neurons.
+    PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / Args.CUESIZE
 
-def runs_completed(batchinfo:dict)->int:
-    num_completed = 0
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'completed':
-            num_completed += 1
-    return num_completed
+    modelcontent = load_Netmorph_configuration(Args)
 
-def runs_failed(batchinfo:dict)->int:
-    num_failed = 0
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'failed':
-            num_failed += 1
-    return num_failed
+    ClientInstance = connect_client(Args)
 
-# Retrieve results data for previously completed samples.
-def get_previously_completed()->dict:
-    try:
-        with open('batchinfo_completed.json', 'r') as f:
-            completed_batchinfo_jsonkeys = json.load(f)
-        completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
-    except:
-        completed_batchinfo = {}
-    return completed_batchinfo
-
-def add_completed(netmorphrun:dict):
-    completed_batchinfo = get_previously_completed()
-    if netmorphrun['runID'] in completed_batchinfo:
-        print('Oops - looks like line %d was already marked completed and saved.')
-        k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
-    completed_batchinfo[netmorphrun['runID']] = {
-        "runID": netmorphrun['runID'],
-        "modelname": netmorphrun['modelname'],
-        "pars": netmorphrun['pars'],
-        "status": netmorphrun['status'],
-        "usable_conns1": netmorphrun['usable_conns1'],
-        "usable_conns2": netmorphrun['usable_conns2'],
-    }
-    try:
-        if os.path.exists('batchinfo_completed.json'):
-            os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
-        with open('batchinfo_completed.json', 'w') as f:
-            json.dump(completed_batchinfo, f)
-    except Exception as e:
-        print('WARNING: Adding completed data to batchinfo_completed.json failed')
-
-def resources_low()->bool:
-    mem = psutil.virtual_memory()
-    return (mem.used/mem.total) > 0.9
-
-def prepare_statusbar():
-    StatusBar = tqdm.tqdm("Progress", total=1)
-    StatusBar.leave = True
-    StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
-    StatusBar.colour = "green"
-    return StatusBar
-
-def update_statusbar(StatusBar, batchinfo:dict):
-    grand_total = 0
-    grand_percent = 0
-    for netmorphrun in batchinfo.values():
-        if 'percent' in netmorphrun:
-            grand_total += 100
-            grand_percent += netmorphrun['percent']
-    StatusBar.total = 100
-    if grand_total <= 0:
-        StatusBar.n = 100
+    # Determine total and batch sizes
+    logicalCPUs = os.cpu_count()
+    numsamples = df.shape[0] # Args.batchsize
+    if Args.fitcpus and batchsize > logicalCPUs:
+        batchsize = logicalCPUs
     else:
-        StatusBar.n = 100.0*grand_percent/grand_total
-    StatusBar.refresh()
+        batchsize = numsamples
 
-def close_statusbar(StatusBar, batchinfo:dict):
-    update_statusbar(StatusBar, batchinfo)
-    StatusBar.close()
+    batchinfo = prepare_batch_information(numsamples, Args)
+    print('Batch prepared to do %d sample runs out of a total of %d.' % (runs_prepped(batchinfo), numsamples))
+    k = input('Press Enter to start simulations.')
 
-# NOTE:
-# Below, I will be running the same Netmorph configuration in multiple
-# Netmorph runs in parallel. This is just as a test of how the server
-# uses resources and maintains connectivity.
-# If you use this script as a template, you'll probably want to set
-# up the parameters you want to try on each sample run in either a
-# dict (or similar object), or load them from a file.
-# E.g. you wouldn't be grabbing growdays from Args.growdays but from
-# your dict/list of parameters.
-# For each of the simulations being run in parallel, you copy the
-# original configuration content and apply the necessary templated
-# modifications.
+    start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
+    print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, runs_running(batchinfo)))
 
-# === Batch prepare
+    monitor_batch(batchinfo, PREPOSTGPEAKSUMTARGET)
+    print('Runs completed: %d' % runs_completed(batchinfo))
+    print('Runs failed   : %d' % runs_failed(batchinfo))
+    print('Runs remaining: %d' % runs_running(batchinfo))
 
-batchsize = df.shape[0] # Args.batchsize
-#batchsize = 4 # just for testing!
-batchinfo = get_previously_completed()
+    update_experiments_database(batchinfo)
 
-if len(batchinfo.keys()) > 0:
-    print('Number of samples completed previously: %d' % len(batchinfo.keys()))
-    k = input('Press Enter to process remaining %d' % (batchsize - len(batchinfo.keys())))
+    completed_batchinfo = write_excel_with_results(df, Args)
 
-# Each simulation in the batch corresponds to one line in the Excel sheet.
-# Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
-for i in range(batchsize):
+    print("Let's compare the results from the two label interpretation methods:")
+    sorted_batchinfo = {k: completed_batchinfo[k] for k in sorted(completed_batchinfo)}
+    for netmorphrun in sorted_batchinfo.values():
+        print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
 
-    if i in batchinfo:
-        print('Run for data line %d already stored as completed' % i)
-        continue
-
-    print('Preparing data line %d' % i)
-    modelname = Args.modelname+'%04d' % i
-    batchinfo[i] = {
-        "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
-        "modelname": modelname  # Remember which output model belongs to this run
-    }
-
-    # Get parameters from data frame
-    pars = []
-    for k in range(len(cols)):
-        if k < 6:
-            pars.append(int(df.iloc[i][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
-        else:
-            pars.append(float(df.iloc[i][cols[k]]))
-    batchinfo[i]['pars'] = pars
-
-    growdays = str(pars[0])
-
-    # Initialize data collection for entry in DB file
-    DBdata = vbp.InitExpDB(
-        Args.ExpsDB,
-        'reservoir',
-        scriptversion,
-        _initIN = {
-            'modelfile': Args.modelfile,
-            'growdays_override': growdays,
-        },
-        _initOUT = {
-            'modelname': modelname,
-        })
-    batchinfo[i]['DBdata'] = DBdata # DB data unique to this sample run
-
-print('Batch prepared.')
-k = input('Press Enter to start simulations.')
-
-# === Batch starts
-#     Run Reservoir script with Latin Hypercube generated parameters.
-
-print(" -- Starting batch of Netmorph runs ")
-for netmorphrun in batchinfo.values():
-
-    if 'status' in netmorphrun: # was already stored as completed
-        continue
-
-    pars = netmorphrun['pars']
-    print(pars)
-    growdays = pars[0]
-    pyramidal = pars[1]
-    interneuron = pars[2]
-    minneuronseparation = pars[3]
-    shapeRadius = pars[4]
-    shapeThickness = pars[5]
-    dmWeight = pars[6]
-
-    sample_modelcontent = modelcontent # Copy loaded configuration
-
-    sample_modelcontent += ARCHITECTURE_MODIFY % (EMBEDMULTIPLE*PATTERNSIZE*Args.Patterns, PATTERNSIZE*Args.Patterns)
-    # if Args.DoOBJ:
-    #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
-    # if Args.DoBlend:
-    #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
-    
-    sample_modelcontent += GROWDAYS % growdays
-    sample_modelcontent += PYRAMIDAL_POP % pyramidal
-    sample_modelcontent += INTERNEURON_POP % interneuron
-    sample_modelcontent += MIN_NEURON_SEPARATION % minneuronseparation        
-    sample_modelcontent += SHAPE_RADIUS % shapeRadius
-    sample_modelcontent += SHAPE_THICKNESS % shapeThickness
-    sample_modelcontent += DM_WEIGHT % dmWeight
-
-    # Create A New Simulation
-    print("...Creating Simulation")
-    SimulationCfg = NES.Simulation.Configuration()
-    SimulationCfg.Name = "Netmorph-"+netmorphrun['modelname']
-    SimulationCfg.Seed = 0
-    try:
-        MySim = ClientInstance.CreateSimulation(SimulationCfg)
-    except:
-        vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to create simulation')
-        netmorphrun['status'] = 'failed'
-        continue # Skipping this sample
-
-    try:
-        MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
-        MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
-        MySim.SetSTDP(_DoSTDP=Args.STDP)
-    except Exception as e:
-        vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to specify options: %s' % str(e))
-        netmorphrun['status'] = 'failed'
-        continue # Skipping this sample
-
-    print('...Options specified')
-
-    netmorphrun['SimID'] = MySim.ID
-    netmorphrun['Sim'] = MySim
-
-    # Firstly, Setup and Invoke Netmorph
-    try:
-        NetmorphOutputDirectory, NetmorphErrCode = MySim.Netmorph_Start(sample_modelcontent, _NeuronClass='LIFC')
-        if NetmorphErrCode != 0:
-            vbp.ErrorToDB(netmorphrun['DBdata'], 'Netmorph error: %s\nNetmorph output dir: %s' % (str(NetmorphErrCode), str(NetmorphOutputDirectory)))
-            netmorphrun['status'] = 'failed'
-            continue # Skipping this sample
-
-    except Exception as e:
-        vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to launch Netmorph: %s' % str(e))
-        netmorphrun['status'] = 'failed'
-        continue # Skipping this sample
-
-    vbp.AddOutputToDB(netmorphrun['DBdata'], 'NetmorphOutputDirectory', str(NetmorphOutputDirectory))
-    print('...launched Nemorph run %d' % netmorphrun['runID'])
-    netmorphrun['status'] = 'running'
-
-
-print('Number of Netmorph sample runs running (out of %d): %d' % (batchsize, runs_running(batchinfo)))
-
-# === Loop check for runs that have completed
-
-StatusBar = prepare_statusbar()
-while runs_incomplete(batchinfo):
-
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'running':
-
-            MySim = netmorphrun['Sim']
-
-            try:
-                Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
-                netmorphrun['percent'] = Percent
-            except Exception as e:
-                print('...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
-                sleep(2.0)
-                continue
-
-            if NetmorphStatus == "None":
-                netmorphrun['status'] = 'failed'
-                print('...a run failed')
-            elif NetmorphStatus == "Done":
-                netmorphrun['status'] = 'completed'
-                try:
-                    MySim.ModelSave(netmorphrun['modelname'])
-                    print("Saved resulting model as "+netmorphrun['modelname'])
-                except:
-                    vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
-                    print('Failed to save completed model')
-
-                print('...checking connectome')
-                result1, result2 = check_connectome(netmorphrun, PREPOSTGPEAKSUMTARGET)
-
-                netmorphrun['usable_conns1'] = result1
-                netmorphrun['usable_conns2'] = result2
-
-                add_completed(netmorphrun)
-
-                print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
-
-            update_statusbar(StatusBar, batchinfo)
-            sleep(2.0)
-
-    if resources_low():
-        mem = psutil.virtual_memory()
-        usedGB = mem.used/(1024 ** 3)
-        totalGB = mem.total/(1024 ** 3)
-        print(f'Used {usedGB:.2f} GB of {totalGB:.2f} GB')
-        print("Low RAM - let's break here (clear NES and restart script to do remaining)")
-        break
-
-close_statusbar(StatusBar, batchinfo)
-
-print('Runs completed: %d' % runs_completed(batchinfo))
-print('Runs failed   : %d' % runs_failed(batchinfo))
-print('Runs remaining: %d' % runs_running(batchinfo))
-
-
-# === Update the ExpsDB.json database for all samples in the batch
-for netmorphrun in batchinfo.values():
-    if 'DBdata' in netmorphrun:
-        vbp.UpdateExpsDB(netmorphrun['DBdata'])
-
-# === Update Excel sheet with data from all completed runs
-completed_batchinfo = get_previously_completed()
-for netmorphrun in completed_batchinfo.values():
-    df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
-    df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
-
-path = Path(Args.excel)
-labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
-df.to_excel(labeledpath, index=False)
-
-print("Let's compare the results from the two label interpretation methods:")
-for netmorphrun in completed_batchinfo.values():
-    print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
-
-print(" -- Done.")
+    print(" -- Done.")
+    exit(0)
