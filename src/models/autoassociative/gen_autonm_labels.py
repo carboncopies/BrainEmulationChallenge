@@ -230,7 +230,9 @@ print(df.head(10))
 print(df.shape)
 cols = df.columns # column identifiers
 
-df['usable_conns']=0
+# Make new columns in data frame
+df['usable_conns1']=0
+df['usable_conns2']=0
 
 # FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
@@ -404,7 +406,10 @@ def update_statusbar(StatusBar, batchinfo:dict):
             grand_total += 100
             grand_percent += netmorphrun['percent']
     StatusBar.total = 100
-    StatusBar.n = 100.0*grand_percent/grand_total
+    if grand_total <= 0:
+        StatusBar.n = 100
+    else:
+        StatusBar.n = 100.0*grand_percent/grand_total
     StatusBar.refresh()
 
 def close_statusbar(StatusBar, batchinfo:dict):
@@ -624,7 +629,8 @@ for netmorphrun in batchinfo.values():
 # === Update Excel sheet with data from all completed runs
 completed_batchinfo = get_previously_completed()
 for netmorphrun in completed_batchinfo.values():
-    df.loc[netmorphrun['runID'], 'usable_conns'] = netmorphrun['usable_conns1']
+    df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
+    df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
 
 path = Path(Args.excel)
 labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
