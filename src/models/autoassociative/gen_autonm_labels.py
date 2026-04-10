@@ -618,7 +618,8 @@ print('Runs remaining: %d' % runs_running(batchinfo))
 
 # === Update the ExpsDB.json database for all samples in the batch
 for netmorphrun in batchinfo.values():
-    vbp.UpdateExpsDB(netmorphrun['DBdata'])
+    if 'DBdata' in netmorphrun:
+        vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # === Update Excel sheet with data from all completed runs
 completed_batchinfo = get_previously_completed()
