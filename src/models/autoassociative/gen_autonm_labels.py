@@ -1,15 +1,13 @@
 #!../../../venv/bin/python
 # gen_autonm_labels.py
-# Randal A. Koene, 20260408
+# Randal A. Koene, 20260410
 
 # This script merges parallel Netmorph running as per the
 # parallel_batch_test.py script and sample space exploration
 # and label generation script by Marianna.
 
 # TODO:
-# - make more modular
-# - add option to delete completed sims (option, because might want to check connectome)
-# - add option to launch new sim when RAM and cores used drops below limit after deleting sims
+# - add DeleteResidentByID() API
 # - figure out modules or functions that can go into PythonClient
 
 scriptversion='0.1.0'
@@ -53,11 +51,11 @@ def get_Args():
     Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
     Parser.add_argument("-excel", default="NetmorphParOptim/ParameterSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
     Parser.add_argument("-fitcpus", action="store_true", help="Fit batches to the number of logical CPUs available")
+    Parser.add_argument("-deleteresident", action="store_true", help="Delete completed server-resident simulations to run more samples")
     return Parser.parse_args()
 
 # Load samples parameter values from Excel file, return data frame and column identifiers
 def get_sample_data(Args)->tuple:
-    #f = Path(Args.excel).stem
     df = pds.read_excel(open(Args.excel,'rb'))
     print(df.head(10))
     print(df.shape)
@@ -138,6 +136,10 @@ def add_completed(netmorphrun:dict):
 def resources_low()->bool:
     mem = psutil.virtual_memory()
     return (mem.used/mem.total) > 0.9
+
+def lauch_resources_low()->bool:
+    mem = psutil.virtual_memory()
+    return (mem.used/mem.total) > 0.8
 
 # Status bar helper functions
 def prepare_statusbar():
@@ -447,13 +449,16 @@ def get_sample_modelcontent(modelcontent:str, pars:list, Args)->str:
 
 # Run Reservoir script with Latin Hypercube generated parameters.
 def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, Args):
-    print(" -- Starting batch of Netmorph runs ")
+    print(" Attempt to add batch of Netmorph runs")
     for netmorphrun in batchinfo.values():
 
-        if netmorphrun['status'] != 'prepped': # was already stored as completed
+        if netmorphrun['status'] != 'prepped': # was already stored as completed or is running or has failed
             continue
 
         if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
+            return
+
+        if lauch_resources_low(): # enough RAM to add another sample run?
             return
 
         sample_modelcontent = get_sample_modelcontent(modelcontent, netmorphrun['pars'], Args)
@@ -503,7 +508,7 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
 
 
 # Loop check for runs that have completed
-def monitor_batch(batchinfo:dict, PREPOSTGPEAKSUMTARGET:float):
+def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, PREPOSTGPEAKSUMTARGET:float, Args):
     StatusBar = prepare_statusbar()
     while runs_incomplete(batchinfo):
 
@@ -542,6 +547,9 @@ def monitor_batch(batchinfo:dict, PREPOSTGPEAKSUMTARGET:float):
 
                     print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
 
+                    if Args.deleteresident:
+                        MySim.DeleteResidentByID() # This is new!
+
                 update_statusbar(StatusBar, batchinfo)
                 sleep(2.0)
 
@@ -553,12 +561,16 @@ def monitor_batch(batchinfo:dict, PREPOSTGPEAKSUMTARGET:float):
             print("Low RAM - let's break here (clear NES and restart script to do remaining)")
             break
 
+        # If we are not running all that were prepped and resources permit then add to running batch
+        if runs_prepped(batchinfo) > 0:
+            start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
+
     close_statusbar(StatusBar, batchinfo)
 
 # Update the ExpsDB.json database for all samples in the batch
 def update_experiments_database(batchinfo:dict):
     for netmorphrun in batchinfo.values():
-        if 'DBdata' in netmorphrun:
+        if 'DBdata' in netmorphrun and netmorphrun['status'] != 'prepped': # only ones that were just run and completed or failed
             vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # Save resulting label data for all completed runs to excel file
@@ -664,10 +676,11 @@ if __name__ == '__main__':
     start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, runs_running(batchinfo)))
 
-    monitor_batch(batchinfo, PREPOSTGPEAKSUMTARGET)
-    print('Runs completed: %d' % runs_completed(batchinfo))
-    print('Runs failed   : %d' % runs_failed(batchinfo))
-    print('Runs remaining: %d' % runs_running(batchinfo))
+    monitor_batch(ClientInstance, batchinfo, batchsize, modelcontent, PREPOSTGPEAKSUMTARGET, Args)
+    print('Number of samples: %d' % numsamples)
+    print('Runs completed   : %d' % runs_completed(batchinfo))
+    print('Runs failed      : %d' % runs_failed(batchinfo))
+    print('Runs remaining   : %d' % (runs_running(batchinfo)+runs_prepped(batchinfo)))
 
     update_experiments_database(batchinfo)
 
