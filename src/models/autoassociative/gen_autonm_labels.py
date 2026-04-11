@@ -52,6 +52,7 @@ def get_Args():
     Parser.add_argument("-excel", default="NetmorphParOptim/ParameterSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
     Parser.add_argument("-fitcpus", action="store_true", help="Fit batches to the number of logical CPUs available")
     Parser.add_argument("-deleteresident", action="store_true", help="Delete completed server-resident simulations to run more samples")
+    Parser.add_argument("-batchlimit", default=0, type=int, help="Never run more than this many at once (def: 0, means no limit)")
     return Parser.parse_args()
 
 # Load samples parameter values from Excel file, return data frame and column identifiers
@@ -664,7 +665,9 @@ if __name__ == '__main__':
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
     numsamples = df.shape[0] # Args.batchsize
-    if Args.fitcpus and batchsize > logicalCPUs:
+    if Args.batchlimit > 0:
+        batchsize = Args.batchlimit
+    elif Args.fitcpus and batchsize > logicalCPUs:
         batchsize = logicalCPUs
     else:
         batchsize = numsamples
