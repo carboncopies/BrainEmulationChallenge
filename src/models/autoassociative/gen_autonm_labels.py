@@ -575,7 +575,7 @@ def update_experiments_database(batchinfo:dict):
             vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # Save resulting label data for all completed runs to excel file
-def write_excel_with_results(df, Args)
+def write_excel_with_results(df, Args):
     df['usable_conns1']=0 # add column
     df['usable_conns2']=0 # add column
     completed_batchinfo = get_previously_completed()
