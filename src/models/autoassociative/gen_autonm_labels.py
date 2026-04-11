@@ -323,7 +323,7 @@ def usable_connections_method1(MySim)->int:
     return NumActive()
 
 # --- Based on the version at the end of autoassociative_reservoir.py
-def usable_connections_method1(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
+def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
     try:
         connections_before_dict = MySim.GetConnectome()
         # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_weights', FIGSPECS):
@@ -517,6 +517,7 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
 
 # Loop check for runs that have completed
 def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, PREPOSTGPEAKSUMTARGET:float, Args):
+    run_peak_RAM = []
     StatusBar = prepare_statusbar()
     while runs_incomplete(batchinfo):
 
@@ -556,6 +557,8 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
                     print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
 
                     if Args.deleteresident:
+                        mem = psutil.virtual_memory()
+                        run_peak_RAM.append(mem.used)
                         MySim.DeleteResidentByID() # This is new!
 
                 update_statusbar(StatusBar, batchinfo)
@@ -574,6 +577,7 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
             start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
 
     close_statusbar(StatusBar, batchinfo)
+    print('Memory usage: %s' % str(run_peak_RAM))
 
 # Update the ExpsDB.json database for all samples in the batch
 def update_experiments_database(batchinfo:dict):
