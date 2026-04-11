@@ -440,7 +440,7 @@ def get_sample_modelcontent(modelcontent:str, pars:list, Args)->str:
 
     sample_modelcontent = modelcontent # Copy loaded configuration
 
-    sample_modelcontent += ARCHITECTURE_MODIFY % (Args, EMBEDMULTIPLE*Args.PATTERNSIZE*Args.Patterns, Args.PATTERNSIZE*Args.Patterns)
+    sample_modelcontent += ARCHITECTURE_MODIFY % (Args.EMBEDMULTIPLE*Args.PATTERNSIZE*Args.Patterns, Args.PATTERNSIZE*Args.Patterns)
     # if Args.DoOBJ:
     #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
     # if Args.DoBlend:
