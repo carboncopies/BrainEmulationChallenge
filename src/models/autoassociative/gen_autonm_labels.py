@@ -372,7 +372,7 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
 
 # Batch prepare batch information and ExpsDB data for those that will be run
 def prepare_batch_information(numsamples, Args)->dict:
-    if Args.to <= 0:
+    if Args.to_sample <= 0:
         to_sample = numsamples
     else:
         to_sample = Args.to_sample
