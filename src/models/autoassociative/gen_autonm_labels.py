@@ -53,6 +53,8 @@ def get_Args():
     Parser.add_argument("-fitcpus", action="store_true", help="Fit batches to the number of logical CPUs available")
     Parser.add_argument("-deleteresident", action="store_true", help="Delete completed server-resident simulations to run more samples")
     Parser.add_argument("-batchlimit", default=0, type=int, help="Never run more than this many at once (def: 0, means no limit)")
+    Parser.add_argument("-from_sample", default=0, type=int, help="Samples starting at line (def: 0)")
+    Parser.add_argument("-to_sample", default=0, type=int, help="Samples up to line (def: 0, meaning all)")
     return Parser.parse_args()
 
 # Load samples parameter values from Excel file, return data frame and column identifiers
@@ -75,7 +77,7 @@ def load_Netmorph_configuration(Args)->str:
     else:
         print('Failed: missing modelfile')
         exit(1)
-    return modelfile
+    return modelcontent
 
 # Create Client Configuration For Local Simulation
 def connect_client(Args):
@@ -370,15 +372,20 @@ def check_connectome(netmorphrun:dict, PREPOSTGPEAKSUMTARGET:float):
 
 # Batch prepare batch information and ExpsDB data for those that will be run
 def prepare_batch_information(numsamples, Args)->dict:
+    if Args.to <= 0:
+        to_sample = numsamples
+    else:
+        to_sample = Args.to_sample
+
     batchinfo = get_previously_completed()
 
     if len(batchinfo.keys()) > 0:
         print('Number of samples completed previously: %d' % len(batchinfo.keys()))
-        k = input('Press Enter to process remaining %d' % (numsamples - len(batchinfo.keys())))
+        k = input('Press Enter to process remaining %d' % ((to_sample - Args.from_sample) - len(batchinfo.keys())))
 
     # Each simulation in the batch corresponds to one line in the Excel sheet.
     # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
-    for i in range(numsamples):
+    for i in range(Args.from_sample, to_sample):
 
         if i in batchinfo:
             print('Run for data line %d already stored as completed' % i)
