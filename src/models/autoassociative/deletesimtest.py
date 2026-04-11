@@ -163,19 +163,19 @@ MySim.SetSTDP(_DoSTDP=Args.STDP)
 print('Options specified')
 
 # Run Netmorph
-RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
-if not RunResponse["Success"]:
-    vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
+# RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
+# if not RunResponse["Success"]:
+#     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
-vbp.AddOutputToDB(DBdata, 'NetmorphOutputDirectory', str(RunResponse["NetmorphOutputDirectory"]))
-print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
+# vbp.AddOutputToDB(DBdata, 'NetmorphOutputDirectory', str(RunResponse["NetmorphOutputDirectory"]))
+# print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
 
-# Save model at the NES server
-try:
-    MySim.ModelSave(Args.modelname)
-    print(" -- Neuronal Circuit Model saved as "+Args.modelname)
-except:
-    vbp.ErrorExit(DBdata, 'NES error: Model save failed')
+# # Save model at the NES server
+# try:
+#     MySim.ModelSave(Args.modelname)
+#     print(" -- Neuronal Circuit Model saved as "+Args.modelname)
+# except:
+#     vbp.ErrorExit(DBdata, 'NES error: Model save failed')
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
