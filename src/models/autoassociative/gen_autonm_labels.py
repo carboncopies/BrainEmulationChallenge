@@ -457,7 +457,6 @@ def get_sample_modelcontent(modelcontent:str, pars:list, Args)->str:
 
 # Run Reservoir script with Latin Hypercube generated parameters.
 def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, Args):
-    print(" Attempt to add batch of Netmorph runs")
     for netmorphrun in batchinfo.values():
 
         if netmorphrun['status'] != 'prepped': # was already stored as completed or is running or has failed
