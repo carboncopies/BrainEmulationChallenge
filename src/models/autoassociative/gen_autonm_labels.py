@@ -466,6 +466,8 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
             return
 
         if lauch_resources_low(): # enough RAM to add another sample run?
+            # *** Warning! This may not work, because released memory is kept in the internal process heap.
+            #     Think about how to get around this.
             return
 
         sample_modelcontent = get_sample_modelcontent(modelcontent, netmorphrun['pars'], Args)
