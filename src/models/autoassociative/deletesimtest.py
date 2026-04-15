@@ -157,18 +157,18 @@ try:
 except:
     vbp.ErrorExit(DBdata, 'NES error: Failed to create simulation')
 
-# MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
-# MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
-# MySim.SetSTDP(_DoSTDP=Args.STDP)
-# print('Options specified')
+MySim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True) # needs to be called before building LIFC receptors
+MySim.SetLIFCPreciseSpikeTimes(_UsePreciseSpikeTimes=(Args.Dt > 0.2))
+MySim.SetSTDP(_DoSTDP=Args.STDP)
+print('Options specified')
 
 # Run Netmorph
-# RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
-# if not RunResponse["Success"]:
-#     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
+RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
+if not RunResponse["Success"]:
+    vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
-# vbp.AddOutputToDB(DBdata, 'NetmorphOutputDirectory', str(RunResponse["NetmorphOutputDirectory"]))
-# print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
+vbp.AddOutputToDB(DBdata, 'NetmorphOutputDirectory', str(RunResponse["NetmorphOutputDirectory"]))
+print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
 
 # # Save model at the NES server
 # try:
