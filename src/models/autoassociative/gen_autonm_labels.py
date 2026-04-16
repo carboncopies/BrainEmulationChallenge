@@ -682,6 +682,7 @@ if __name__ == '__main__':
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
     numsamples = df.shape[0] # Args.batchsize
+    batchsize = numsamples
     if Args.batchlimit > 0:
         batchsize = Args.batchlimit
     elif Args.fitcpus and batchsize > logicalCPUs:
