@@ -182,7 +182,7 @@ vbp.UpdateExpsDB(DBdata)
 
 resources = MySim.GetResourceStatus()
 freeRAMbytes = resources['RAMfree']
-print('RAM free while Sim is still resident: %d' % freeRAMbytes)
+print('RAM free while Sim is still resident: %.2f MB' % (float(freeRAMbytes)/(1024*1024)))
 
 print('Attempting sim delete.')
 response = MySim.DeleteResidentByID()
@@ -190,6 +190,6 @@ print('Response: '+str(response))
 
 resources = MySim.GetResourceStatus()
 freeRAMbytes = resources['RAMfree']
-print('RAM free after deleting Sim: %d' % freeRAMbytes)
+print('RAM free after deleting Sim: %.2f MB' % (float(freeRAMbytes)/(1024*1024)))
 
 print(" -- Done.")
