@@ -38,7 +38,8 @@ resource_tests = {
     'low_checked': 0,
     'low_checked_failed': 0,
     'launch_checked': 0,
-    'launch_checked_failed': 0
+    'launch_checked_failed': 0,
+    'fail_succeed': [],
 }
 
 # Handle Arguments for Host, Port, etc
@@ -150,10 +151,13 @@ def resources_low(ClientInstance)->bool:
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['low_checked'] += 1
+        resource_tests['fail_succeed'].append('S')
     except:
         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
         resource_tests['low_checked_failed'] += 1
+        resource_tests['fail_succeed'].append('F')
+        print('Distribution: '+str(resource_tests['fail_succeed']))
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     mem = psutil.virtual_memory()
@@ -166,10 +170,13 @@ def lauch_resources_low(ClientInstance)->bool:
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['launch_checked'] += 1
+        resource_tests['fail_succeed'].append('S')
     except:
         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
         resource_tests['launch_checked_failed'] += 1
+        resource_tests['fail_succeed'].append('F')
+        print('Distribution: '+str(resource_tests['fail_succeed']))
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     return toofull
