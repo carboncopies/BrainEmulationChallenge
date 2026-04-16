@@ -28,7 +28,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
-Parser.add_argument("-runtime_ms", default=500, type=float, help="Runtime of functional experiment (ms)")
+Parser.add_argument("-runtime_ms", default=5000, type=float, help="Runtime of functional experiment (ms)")
 Parser.add_argument("-timeout_s", default=120.0, type=float, help="RunAndWait timeout (s)")
 Args = Parser.parse_args()
 
@@ -152,20 +152,69 @@ def SpikeInputNeuronsAt(InputID: str, t_ms: float):
         t_soma_fire_ms.append((t_ms, n))
 
 
-t_test_ms = {
+t_test_ms_odd = {
     'XOR_10': 100.0,
     'XOR_01': 200.0,
     'XOR_11': 300.0,
 }
+
+t_test_ms_even = {
+    'XOR_11' : 100.0,
+    'XOR_01' : 200.0,
+    'XOR_10' : 300.0,
+}
+
+cycle_duration = 400.0
+repetitions = 10
+trial_map = []
+
+for r in range(repetitions):
+    t = r*cycle_duration
+    if(r%2 == 0):
+        #reordering every even trial
+        # Add 1 1 XOR test case.
+        print(t_test_ms_even.keys())
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_11'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_01'] + t)
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_10'] + t)
+
+        #Mapping for even trials
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 300.0 + t, 't_end': 400.0 + t})
+    else:
+        # The 0 0 case is not explicitly tested.
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_10'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_01'] + t)
+        # Add 1 1 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_11'] + t)
+
+        #Mapping for odd trials
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 300.0 + t, 't_end': 400.0 + t})
+
+Path(savefolder).mkdir(parents=True, exist_ok=True)
+with open(f"{savefolder}/trial_map.json", "w") as f:
+    json.dump(trial_map, f, indent=2)
+
 # The 0 0 case is not explicitly tested.
 # Add 1 0 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
+#SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
 # Add 0 1 XOR test case.
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
+#SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
 # Add 1 1 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
-print('Directed somatic firing: ' + str(t_soma_fire_ms))
+#SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
+#SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
+#print('Directed somatic firing: ' + str(t_soma_fire_ms))
 
 try:
     MySim.SetSpecificAPTimes(TimeNeuronPairs=t_soma_fire_ms)
