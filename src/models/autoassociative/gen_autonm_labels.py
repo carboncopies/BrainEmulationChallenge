@@ -138,14 +138,22 @@ def add_completed(netmorphrun:dict):
 
 # Check RAM
 def resources_low(ClientInstance)->bool:
-    freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    try:
+        freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    except:
+        print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
+        return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     mem = psutil.virtual_memory()
     vmpercenttoohigh = (mem.used/mem.total) > 0.9
     return toofull or vmpercenttoohigh
 
 def lauch_resources_low(ClientInstance)->bool:
-    freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    try:
+        freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    except:
+        print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
+        return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     return toofull
 
@@ -567,6 +575,10 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
                         run_peak_RAM.append(mem.used)
                         MySim.DeleteResidentByID() # This is new!
 
+                    # If we are not running all that were prepped and resources permit then add to running batch
+                    if runs_prepped(batchinfo) > 0:
+                        start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
+
                 update_statusbar(StatusBar, batchinfo)
                 sleep(2.0)
 
@@ -577,10 +589,6 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
             print(f'\nUsed {usedGB:.2f} GB of {totalGB:.2f} GB')
             print("Low RAM - let's break here (clear NES and restart script to do remaining)")
             break
-
-        # If we are not running all that were prepped and resources permit then add to running batch
-        if runs_prepped(batchinfo) > 0:
-            start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
 
     close_statusbar(StatusBar, batchinfo)
     print('Memory usage: %s' % str(run_peak_RAM))
