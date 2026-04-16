@@ -146,6 +146,7 @@ def add_completed(netmorphrun:dict):
 # Check RAM
 def resources_low(ClientInstance)->bool:
     global resource_tests
+    freeRAMbytes = None
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['low_checked'] += 1
@@ -161,6 +162,7 @@ def resources_low(ClientInstance)->bool:
 
 def lauch_resources_low(ClientInstance)->bool:
     global resource_tests
+    freeRAMbytes = None
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['launch_checked'] += 1
