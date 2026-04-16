@@ -136,13 +136,17 @@ def add_completed(netmorphrun:dict):
         print('WARNING: Adding completed data to batchinfo_completed.json failed')
 
 # Check RAM
-def resources_low()->bool:
+def resources_low(ClientInstance)->bool:
+    freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    toofull = freeRAMbytes < (2*1024*1024*1024)
     mem = psutil.virtual_memory()
-    return (mem.used/mem.total) > 0.9
+    vmpercenttoohigh = (mem.used/mem.total) > 0.9
+    return toofull or vmpercenttoohigh
 
-def lauch_resources_low()->bool:
-    mem = psutil.virtual_memory()
-    return (mem.used/mem.total) > 0.8
+def lauch_resources_low(ClientInstance)->bool:
+    freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+    toofull = freeRAMbytes < (2*1024*1024*1024)
+    return toofull
 
 # Status bar helper functions
 def prepare_statusbar():
@@ -465,7 +469,7 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
         if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
             return
 
-        if lauch_resources_low(): # enough RAM to add another sample run?
+        if lauch_resources_low(ClientInstance): # enough RAM to add another sample run?
             # *** Warning! This may not work, because released memory is kept in the internal process heap.
             #     Think about how to get around this.
             return
@@ -565,7 +569,7 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
                 update_statusbar(StatusBar, batchinfo)
                 sleep(2.0)
 
-        if resources_low():
+        if resources_low(ClientInstance):
             mem = psutil.virtual_memory()
             usedGB = mem.used/(1024 ** 3)
             totalGB = mem.total/(1024 ** 3)
