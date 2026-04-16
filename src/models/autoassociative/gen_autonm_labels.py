@@ -559,7 +559,7 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
 
                     add_completed(netmorphrun)
 
-                    print('...completed run with ID %s (runs remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo)))
+                    print('...completed run with ID %s (runs remaining: %d, prepped remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo), runs_prepped(batchinfo)))
 
                     if Args.deleteresident:
                         mem = psutil.virtual_memory()
