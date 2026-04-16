@@ -7,8 +7,9 @@
 # and label generation script by Marianna.
 
 # TODO:
-# - add DeleteResidentByID() API
 # - figure out modules or functions that can go into PythonClient
+#
+# E.g. Run this as: ./gen_autonm_labels.py -fitcpus -deleteresident
 
 scriptversion='0.1.0'
 
