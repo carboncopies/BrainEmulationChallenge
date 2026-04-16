@@ -34,6 +34,13 @@ from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
 
+resource_tests = {
+    'low_checked': 0,
+    'low_checked_failed': 0,
+    'launch_checked': 0,
+    'launch_checked_failed': 0
+}
+
 # Handle Arguments for Host, Port, etc
 def get_Args():
     Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
@@ -138,10 +145,14 @@ def add_completed(netmorphrun:dict):
 
 # Check RAM
 def resources_low(ClientInstance)->bool:
+    global resource_tests
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+        resource_tests['low_checked'] += 1
     except:
         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
+        print('Response was: '+str(freeRAMbytes))
+        resource_tests['low_checked_failed'] += 1
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     mem = psutil.virtual_memory()
@@ -149,10 +160,14 @@ def resources_low(ClientInstance)->bool:
     return toofull or vmpercenttoohigh
 
 def lauch_resources_low(ClientInstance)->bool:
+    global resource_tests
     try:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+        resource_tests['launch_checked'] += 1
     except:
         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
+        print('Response was: '+str(freeRAMbytes))
+        resource_tests['launch_checked_failed'] += 1
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
     return toofull
@@ -479,8 +494,6 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
             return
 
         if lauch_resources_low(ClientInstance): # enough RAM to add another sample run?
-            # *** Warning! This may not work, because released memory is kept in the internal process heap.
-            #     Think about how to get around this.
             return
 
         sample_modelcontent = get_sample_modelcontent(modelcontent, netmorphrun['pars'], Args)
@@ -531,6 +544,7 @@ def start_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str,
 
 # Loop check for runs that have completed
 def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:str, PREPOSTGPEAKSUMTARGET:float, Args):
+    global resource_tests
     run_peak_RAM = []
     StatusBar = prepare_statusbar()
     while runs_incomplete(batchinfo):
@@ -578,6 +592,8 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
                     # If we are not running all that were prepped and resources permit then add to running batch
                     if runs_prepped(batchinfo) > 0:
                         start_batch(ClientInstance, batchinfo, batchsize, modelcontent, Args)
+
+                    print('Resource checks: low_checked %d, low_failed %d, launch_checked %d, launch_checked_failed: %d' % ( resource_tests['low_checked'], resource_tests['low_checked_failed'], resource_tests['launch_checked'], resource_tests['launch_checked_failed'] ))
 
                 update_statusbar(StatusBar, batchinfo)
                 sleep(2.0)
