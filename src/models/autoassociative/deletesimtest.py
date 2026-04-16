@@ -180,7 +180,7 @@ print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputD
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
 
-resources = MySim.GetResourceStatus()
+resources = ClientInstance.GetResourceStatus()
 freeRAMbytes = resources['RAMfree']
 print('RAM free while Sim is still resident: %.2f MB' % (float(freeRAMbytes)/(1024*1024)))
 
@@ -188,7 +188,7 @@ print('Attempting sim delete.')
 response = MySim.DeleteResidentByID()
 print('Response: '+str(response))
 
-resources = MySim.GetResourceStatus()
+resources = ClientInstance.GetResourceStatus()
 freeRAMbytes = resources['RAMfree']
 print('RAM free after deleting Sim: %.2f MB' % (float(freeRAMbytes)/(1024*1024)))
 
