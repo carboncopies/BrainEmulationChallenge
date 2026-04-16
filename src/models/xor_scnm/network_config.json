@@ -1,0 +1,51 @@
+{
+  "network_id": "XOR_35neuron",
+  "io_channels": {
+    "input_A": [27],
+    "input_B": [25, 30],
+    "output":  [4]
+  },
+  "neurons": {
+    "0":  {"label": "neuron_0",  "role": "extended_network"},
+    "1":  {"label": "neuron_1",  "role": "extended_network"},
+    "2":  {"label": "neuron_2",  "role": "extended_network"},
+    "3":  {"label": "neuron_3",  "role": "extended_network"},
+    "4":  {"label": "E",         "role": "output"},
+    "5":  {"label": "neuron_5",  "role": "extended_network"},
+    "6":  {"label": "neuron_6",  "role": "extended_network"},
+    "7":  {"label": "neuron_7",  "role": "extended_network"},
+    "8":  {"label": "neuron_8",  "role": "extended_network"},
+    "9":  {"label": "Int_A",     "role": "interneuron"},      
+    "10": {"label": "neuron_10", "role": "extended_network"},
+    "11": {"label": "neuron_11", "role": "extended_network"},
+    "12": {"label": "neuron_12", "role": "extended_network"},
+    "13": {"label": "Int_B",     "role": "interneuron"},
+    "14": {"label": "neuron_14", "role": "extended_network"},
+    "15": {"label": "PyrMid_A",  "role": "intermediate"},
+    "16": {"label": "PyrMid_B",  "role": "intermediate"},
+    "17": {"label": "neuron_17", "role": "extended_network"},
+    "18": {"label": "neuron_18", "role": "extended_network"},
+    "19": {"label": "neuron_19", "role": "extended_network"},
+    "20": {"label": "neuron_20", "role": "extended_network"},
+    "21": {"label": "neuron_21", "role": "extended_network"},
+    "22": {"label": "neuron_22", "role": "extended_network"},
+    "23": {"label": "neuron_23", "role": "extended_network"},
+    "24": {"label": "neuron_24", "role": "extended_network"},
+    "25": {"label": "PyrIn_B1",  "role": "input", "input_channel": 2},
+    "26": {"label": "neuron_26", "role": "extended_network"},
+    "27": {"label": "PyrIn_A",   "role": "input", "input_channel": 1},
+    "28": {"label": "neuron_28", "role": "extended_network"},
+    "29": {"label": "neuron_29", "role": "extended_network"},
+    "30": {"label": "PyrIn_B2",  "role": "input", "input_channel": 2},
+    "31": {"label": "neuron_31", "role": "extended_network"},
+    "32": {"label": "neuron_32", "role": "extended_network"},
+    "33": {"label": "neuron_33", "role": "extended_network"},
+    "34": {"label": "neuron_34", "role": "extended_network"}
+  },
+  "truth_table": {
+    "XOR_00": {"input_A": 0, "input_B": 0, "expected_output": 0},
+    "XOR_01": {"input_A": 0, "input_B": 1, "expected_output": 1},
+    "XOR_10": {"input_A": 1, "input_B": 0, "expected_output": 1},
+    "XOR_11": {"input_A": 1, "input_B": 1, "expected_output": 0}
+  }
+}
