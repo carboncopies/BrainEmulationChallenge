@@ -28,6 +28,7 @@ import tqdm
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
+from BrainGenix.BatchRun import BatchRun
 
 from sys import path
 from pathlib import Path
@@ -36,302 +37,302 @@ from NES_interfaces.KGTRecords import plot_weights
 
 # ===== Parts that can be generalized, templated and added to PythonClient
 
-resource_tests = {
-    'low_checked': 0,
-    'low_checked_failed': 0,
-    'launch_checked': 0,
-    'launch_checked_failed': 0,
-    'fail_succeed': [],
-    'timestamps': [],
-}
+# resource_tests = {
+#     'low_checked': 0,
+#     'low_checked_failed': 0,
+#     'launch_checked': 0,
+#     'launch_checked_failed': 0,
+#     'fail_succeed': [],
+#     'timestamps': [],
+# }
 
-def save_check_info():
-    global resource_tests
-    try:
-        if os.path.exists('resource_checks.json'):
-            os.replace('resource_checks.json', 'resource_checks_backup.json')
-        with open('resource_checks.json', 'w') as f:
-            json.dump(resource_tests, f)
-    except:
-        pass
+# def save_check_info():
+#     global resource_tests
+#     try:
+#         if os.path.exists('resource_checks.json'):
+#             os.replace('resource_checks.json', 'resource_checks_backup.json')
+#         with open('resource_checks.json', 'w') as f:
+#             json.dump(resource_tests, f)
+#     except:
+#         pass
 
-# Check RAM
-def resources_low(ClientInstance, threshold:int, maxRAMratio=0.9)->bool:
-    global resource_tests
-    freeRAMbytes = None
-    try:
-        freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
-        resource_tests['low_checked'] += 1
-        resource_tests['fail_succeed'].append('S')
-        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-        save_check_info()
-    except:
-        print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
-        print('Response was: '+str(freeRAMbytes))
-        resource_tests['low_checked_failed'] += 1
-        resource_tests['fail_succeed'].append('F')
-        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-        save_check_info()
-        print('Distribution: '+str(resource_tests['fail_succeed']))
-        return False
-    toofull = freeRAMbytes < threshold
-    mem = psutil.virtual_memory()
-    vmpercenttoohigh = (mem.used/mem.total) > maxRAMratio
-    return toofull or vmpercenttoohigh
+# # Check RAM
+# def resources_low(ClientInstance, threshold:int, maxRAMratio=0.9)->bool:
+#     global resource_tests
+#     freeRAMbytes = None
+#     try:
+#         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+#         resource_tests['low_checked'] += 1
+#         resource_tests['fail_succeed'].append('S')
+#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+#         save_check_info()
+#     except:
+#         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
+#         print('Response was: '+str(freeRAMbytes))
+#         resource_tests['low_checked_failed'] += 1
+#         resource_tests['fail_succeed'].append('F')
+#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+#         save_check_info()
+#         print('Distribution: '+str(resource_tests['fail_succeed']))
+#         return False
+#     toofull = freeRAMbytes < threshold
+#     mem = psutil.virtual_memory()
+#     vmpercenttoohigh = (mem.used/mem.total) > maxRAMratio
+#     return toofull or vmpercenttoohigh
 
-def lauch_resources_low(ClientInstance, threshold:int)->bool:
-    global resource_tests
-    freeRAMbytes = None
-    try:
-        freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
-        resource_tests['launch_checked'] += 1
-        resource_tests['fail_succeed'].append('S')
-        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-        save_check_info()
-    except:
-        print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
-        print('Response was: '+str(freeRAMbytes))
-        resource_tests['launch_checked_failed'] += 1
-        resource_tests['fail_succeed'].append('F')
-        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-        save_check_info()
-        print('Distribution: '+str(resource_tests['fail_succeed']))
-        return False
-    toofull = freeRAMbytes < threshold
-    return toofull
+# def lauch_resources_low(ClientInstance, threshold:int)->bool:
+#     global resource_tests
+#     freeRAMbytes = None
+#     try:
+#         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
+#         resource_tests['launch_checked'] += 1
+#         resource_tests['fail_succeed'].append('S')
+#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+#         save_check_info()
+#     except:
+#         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
+#         print('Response was: '+str(freeRAMbytes))
+#         resource_tests['launch_checked_failed'] += 1
+#         resource_tests['fail_succeed'].append('F')
+#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+#         save_check_info()
+#         print('Distribution: '+str(resource_tests['fail_succeed']))
+#         return False
+#     toofull = freeRAMbytes < threshold
+#     return toofull
 
-# Load Netmorph model file
-def load_Netmorph_configuration(netmorphconfigpath:str)->str:
-    modelcontent = 'kjhskdjfhkjhs'
-    try:
-        with open(netmorphconfigpath, 'r') as f:
-            modelcontent = f.read()
-    except Exception as e:
-        print('Failed: modelfile error: '+str(e))
-        exit(1)
-    return modelcontent
+# # Load Netmorph model file
+# def load_Netmorph_configuration(netmorphconfigpath:str)->str:
+#     modelcontent = 'kjhskdjfhkjhs'
+#     try:
+#         with open(netmorphconfigpath, 'r') as f:
+#             modelcontent = f.read()
+#     except Exception as e:
+#         print('Failed: modelfile error: '+str(e))
+#         exit(1)
+#     return modelcontent
 
-# Create Client Configuration For Local Simulation
-def connect_client(Host, Port, UseHTTPS):
-    print(" -- Creating Client Configuration For Local Simulation")
-    ClientCfg = NES.Client.Configuration()
-    ClientCfg.Mode = NES.Client.Modes.Remote
-    ClientCfg.Host = Host
-    ClientCfg.Port = Port
-    ClientCfg.UseHTTPS = UseHTTPS
-    ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
-    ClientCfg.Username = "Admonishing"
-    ClientCfg.Password = "Instruction"
+# # Create Client Configuration For Local Simulation
+# def connect_client(Host, Port, UseHTTPS):
+#     print(" -- Creating Client Configuration For Local Simulation")
+#     ClientCfg = NES.Client.Configuration()
+#     ClientCfg.Mode = NES.Client.Modes.Remote
+#     ClientCfg.Host = Host
+#     ClientCfg.Port = Port
+#     ClientCfg.UseHTTPS = UseHTTPS
+#     ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
+#     ClientCfg.Username = "Admonishing"
+#     ClientCfg.Password = "Instruction"
 
-    # Create Client Instance
-    print(" -- Creating Client Instance")
-    try:
-        ClientInstance = NES.Client.Client(ClientCfg)
-        if not ClientInstance.IsReady():
-            print('NES.Client error: not ready')
-            exit(1)
-    except Exception as e:
-        print('NES.Client error: '+str(e))
-        exit(1)
-    return ClientInstance
+#     # Create Client Instance
+#     print(" -- Creating Client Instance")
+#     try:
+#         ClientInstance = NES.Client.Client(ClientCfg)
+#         if not ClientInstance.IsReady():
+#             print('NES.Client error: not ready')
+#             exit(1)
+#     except Exception as e:
+#         print('NES.Client error: '+str(e))
+#         exit(1)
+#     return ClientInstance
 
-# Retrieve results data for previously completed samples.
-def get_previously_completed()->dict:
-    try:
-        with open('batchinfo_completed.json', 'r') as f:
-            completed_batchinfo_jsonkeys = json.load(f)
-        completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
-    except:
-        completed_batchinfo = {}
-    return completed_batchinfo
+# # Retrieve results data for previously completed samples.
+# def get_previously_completed()->dict:
+#     try:
+#         with open('batchinfo_completed.json', 'r') as f:
+#             completed_batchinfo_jsonkeys = json.load(f)
+#         completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
+#     except:
+#         completed_batchinfo = {}
+#     return completed_batchinfo
 
-# Update results data for completed samples.
-def add_completed(samplerun:dict, batchdatakeys:list)->bool:
-    completed_batchinfo = get_previously_completed()
-    if samplerun['runID'] in completed_batchinfo:
-        print('Oops - looks like batch sample %d was already marked completed and saved.')
-        k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
-    completed_batchinfo[samplerun['runID']] = { # These are obligatory
-        "runID": samplerun['runID'],
-        "status": samplerun['status'],
-    }
-    for datakey in batchdatakeys: # These are unique to a script's batched runs
-        completed_batchinfo[datakey] = samplerun[datakey]
-    try:
-        if os.path.exists('batchinfo_completed.json'):
-            os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
-        with open('batchinfo_completed.json', 'w') as f:
-            json.dump(completed_batchinfo, f)
-        return True
-    except Exception as e:
-        print('WARNING: Adding completed data to batchinfo_completed.json failed')
-        return False
+# # Update results data for completed samples.
+# def add_completed(samplerun:dict, batchdatakeys:list)->bool:
+#     completed_batchinfo = get_previously_completed()
+#     if samplerun['runID'] in completed_batchinfo:
+#         print('Oops - looks like batch sample %d was already marked completed and saved.')
+#         k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
+#     completed_batchinfo[samplerun['runID']] = { # These are obligatory
+#         "runID": samplerun['runID'],
+#         "status": samplerun['status'],
+#     }
+#     for datakey in batchdatakeys: # These are unique to a script's batched runs
+#         completed_batchinfo[datakey] = samplerun[datakey]
+#     try:
+#         if os.path.exists('batchinfo_completed.json'):
+#             os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
+#         with open('batchinfo_completed.json', 'w') as f:
+#             json.dump(completed_batchinfo, f)
+#         return True
+#     except Exception as e:
+#         print('WARNING: Adding completed data to batchinfo_completed.json failed')
+#         return False
 
-# Status bar helper functions
-def prepare_statusbar():
-    StatusBar = tqdm.tqdm("Progress", total=1)
-    StatusBar.leave = True
-    StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
-    StatusBar.colour = "green"
-    return StatusBar
+# # Status bar helper functions
+# def prepare_statusbar():
+#     StatusBar = tqdm.tqdm("Progress", total=1)
+#     StatusBar.leave = True
+#     StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
+#     StatusBar.colour = "green"
+#     return StatusBar
 
-def update_statusbar(StatusBar, batchinfo:dict):
-    grand_total = 0
-    grand_percent = 0
-    for netmorphrun in batchinfo.values():
-        if 'percent' in netmorphrun:
-            grand_total += 100
-            grand_percent += netmorphrun['percent']
-    StatusBar.total = 100
-    if grand_total <= 0:
-        StatusBar.n = 100
-    else:
-        StatusBar.n = 100.0*grand_percent/grand_total
-    StatusBar.refresh()
+# def update_statusbar(StatusBar, batchinfo:dict):
+#     grand_total = 0
+#     grand_percent = 0
+#     for netmorphrun in batchinfo.values():
+#         if 'percent' in netmorphrun:
+#             grand_total += 100
+#             grand_percent += netmorphrun['percent']
+#     StatusBar.total = 100
+#     if grand_total <= 0:
+#         StatusBar.n = 100
+#     else:
+#         StatusBar.n = 100.0*grand_percent/grand_total
+#     StatusBar.refresh()
 
-def close_statusbar(StatusBar, batchinfo:dict):
-    update_statusbar(StatusBar, batchinfo)
-    StatusBar.close()
+# def close_statusbar(StatusBar, batchinfo:dict):
+#     update_statusbar(StatusBar, batchinfo)
+#     StatusBar.close()
 
-# Helper functions for batch runs
-def runs_incomplete(batchinfo:dict)->bool:
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == 'running':
-            return True
-    return False
+# # Helper functions for batch runs
+# def runs_incomplete(batchinfo:dict)->bool:
+#     for netmorphrun in batchinfo.values():
+#         if netmorphrun['status'] == 'running':
+#             return True
+#     return False
 
-def count_runs_by_status(batchinfo:dict, status:str)->int:
-    num = 0
-    for netmorphrun in batchinfo.values():
-        if netmorphrun['status'] == status:
-            num += 1
-    return num
+# def count_runs_by_status(batchinfo:dict, status:str)->int:
+#     num = 0
+#     for netmorphrun in batchinfo.values():
+#         if netmorphrun['status'] == status:
+#             num += 1
+#     return num
 
-def runs_prepped(batchinfo:dict)->int:
-    return count_runs_by_status(batchinfo, 'prepped')
+# def runs_prepped(batchinfo:dict)->int:
+#     return count_runs_by_status(batchinfo, 'prepped')
 
-def runs_running(batchinfo:dict)->int:
-    return count_runs_by_status(batchinfo, 'running')
+# def runs_running(batchinfo:dict)->int:
+#     return count_runs_by_status(batchinfo, 'running')
 
-def runs_completed(batchinfo:dict)->int:
-    return count_runs_by_status(batchinfo, 'completed')
+# def runs_completed(batchinfo:dict)->int:
+#     return count_runs_by_status(batchinfo, 'completed')
 
-def runs_failed(batchinfo:dict)->int:
-    return count_runs_by_status(batchinfo, 'failed')
+# def runs_failed(batchinfo:dict)->int:
+#     return count_runs_by_status(batchinfo, 'failed')
 
-# Batch prepare batch information and ExpsDB data for those that will be run
-def prepare_batch_information(numsamples:int, extraprepfunc, extraprepdata:dict, from_sample:int=0, to_sample:int=-1)->dict:
-    if to_sample <= 0:
-        to_sample = numsamples
+# # Batch prepare batch information and ExpsDB data for those that will be run
+# def prepare_batch_information(numsamples:int, extraprepfunc, extraprepdata:dict, from_sample:int=0, to_sample:int=-1)->dict:
+#     if to_sample <= 0:
+#         to_sample = numsamples
 
-    batchinfo = get_previously_completed()
+#     batchinfo = get_previously_completed()
 
-    if len(batchinfo.keys()) > 0:
-        print('Number of samples completed previously: %d' % len(batchinfo.keys()))
-        k = input('Press Enter to process remaining %d' % ((to_sample - from_sample) - len(batchinfo.keys())))
+#     if len(batchinfo.keys()) > 0:
+#         print('Number of samples completed previously: %d' % len(batchinfo.keys()))
+#         k = input('Press Enter to process remaining %d' % ((to_sample - from_sample) - len(batchinfo.keys())))
 
-    # Each simulation in the batch corresponds to one line in the Excel sheet.
-    # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
-    for i in range(from_sample, to_sample):
+#     # Each simulation in the batch corresponds to one line in the Excel sheet.
+#     # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
+#     for i in range(from_sample, to_sample):
 
-        if i in batchinfo:
-            print('Run for data line %d already stored as completed' % i)
-            continue
+#         if i in batchinfo:
+#             print('Run for data line %d already stored as completed' % i)
+#             continue
 
-        print('Preparing data line %d' % i)
-        batchinfo[i] = {
-            "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
-        }
-        if extraprepfunc:
-            if not extraprepfunc(batchinfo, i, extraprepdata):
-                print('Extra prep function failed')
-                exit(1)
+#         print('Preparing data line %d' % i)
+#         batchinfo[i] = {
+#             "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
+#         }
+#         if extraprepfunc:
+#             if not extraprepfunc(batchinfo, i, extraprepdata):
+#                 print('Extra prep function failed')
+#                 exit(1)
 
-        batchinfo[i]['status'] = 'prepped'
+#         batchinfo[i]['status'] = 'prepped'
 
-    return batchinfo
+#     return batchinfo
 
-# Run Reservoir script with Latin Hypercube generated parameters.
-def start_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, samplerequestsfunc, samplerequestsdata:dict, resourceslowbytes:int):
-    for netmorphrun in batchinfo.values():
+# # Run Reservoir script with Latin Hypercube generated parameters.
+# def start_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, samplerequestsfunc, samplerequestsdata:dict, resourceslowbytes:int):
+#     for netmorphrun in batchinfo.values():
 
-        if netmorphrun['status'] != 'prepped': # was already stored as completed or is running or has failed
-            continue
+#         if netmorphrun['status'] != 'prepped': # was already stored as completed or is running or has failed
+#             continue
 
-        if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
-            return
+#         if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
+#             return
 
-        if lauch_resources_low(ClientInstance, resourceslowbytes): # enough RAM to add another sample run?
-            return
+#         if lauch_resources_low(ClientInstance, resourceslowbytes): # enough RAM to add another sample run?
+#             return
 
-        # Create A New Simulation
-        print("...Creating Simulation")
-        SimulationCfg = NES.Simulation.Configuration()
-        SimulationCfg.Name = batchname+str(netmorphrun['runID'])
-        SimulationCfg.Seed = 0
-        try:
-            MySim = ClientInstance.CreateSimulation(SimulationCfg)
-        except:
-            print('NES error: Failed to create simulation')
-            netmorphrun['status'] = 'failed'
-            continue # Skipping this sample
+#         # Create A New Simulation
+#         print("...Creating Simulation")
+#         SimulationCfg = NES.Simulation.Configuration()
+#         SimulationCfg.Name = batchname+str(netmorphrun['runID'])
+#         SimulationCfg.Seed = 0
+#         try:
+#             MySim = ClientInstance.CreateSimulation(SimulationCfg)
+#         except:
+#             print('NES error: Failed to create simulation')
+#             netmorphrun['status'] = 'failed'
+#             continue # Skipping this sample
 
-        netmorphrun['SimID'] = MySim.ID
-        netmorphrun['Sim'] = MySim
+#         netmorphrun['SimID'] = MySim.ID
+#         netmorphrun['Sim'] = MySim
 
-        if not samplerequestsfunc(netmorphrun, samplerequestsdata):
-            netmorphrun['status'] = 'failed'
-            continue # Skipping this sample
+#         if not samplerequestsfunc(netmorphrun, samplerequestsdata):
+#             netmorphrun['status'] = 'failed'
+#             continue # Skipping this sample
 
-        netmorphrun['status'] = 'running'
+#         netmorphrun['status'] = 'running'
 
-# Loop check for runs that have completed
-def monitor_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, modelcontent:str, evalfunc, evalcriteriadata:dict, samplerequestsfunc, samplerequestsdata:dict, batchdatakeys:list, resourceslowbytes:int, deleteresident:bool):
-    global resource_tests
-    run_peak_RAM = []
-    StatusBar = prepare_statusbar()
-    while runs_incomplete(batchinfo):
+# # Loop check for runs that have completed
+# def monitor_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, modelcontent:str, evalfunc, evalcriteriadata:dict, samplerequestsfunc, samplerequestsdata:dict, batchdatakeys:list, resourceslowbytes:int, deleteresident:bool):
+#     global resource_tests
+#     run_peak_RAM = []
+#     StatusBar = prepare_statusbar()
+#     while runs_incomplete(batchinfo):
 
-        for netmorphrun in batchinfo.values():
-            if netmorphrun['status'] == 'running':
+#         for netmorphrun in batchinfo.values():
+#             if netmorphrun['status'] == 'running':
 
-                evalres, Percent = evalfunc(netmorphrun, evalcriteriadata)
-                netmorphrun['percent'] = Percent
-                if evalres == 'failed':
-                    netmorphrun['status'] = 'failed'
-                    print('...run %d failed' % netmorphrun['runID'])
-                elif evalres == 'completed':
-                    netmorphrun['status'] = 'completed'
-                    add_completed(netmorphrun, batchdatakeys)
-                    print('...completed run with ID %s (runs remaining: %d, prepped remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo), runs_prepped(batchinfo)))
-                    if deleteresident:
-                        mem = psutil.virtual_memory()
-                        run_peak_RAM.append(mem.used)
-                        MySim = netmorphrun['Sim']
-                        try:
-                            MySim.DeleteResidentByID()
-                            print('Deleted resident simulation for run %s to make space' % str(netmorphrun['runID']))
-                        except Exception as e:
-                            print('Simulation deletion request failed: '+str(e))
-                    # If we are not running all that were prepped and resources permit then add to running batch
-                    if runs_prepped(batchinfo) > 0:
-                        start_batch(ClientInstance, batchname, batchinfo, batchsize, samplerequestsfunc, samplerequestsdata, resourceslowbytes)
+#                 evalres, Percent = evalfunc(netmorphrun, evalcriteriadata)
+#                 netmorphrun['percent'] = Percent
+#                 if evalres == 'failed':
+#                     netmorphrun['status'] = 'failed'
+#                     print('...run %d failed' % netmorphrun['runID'])
+#                 elif evalres == 'completed':
+#                     netmorphrun['status'] = 'completed'
+#                     add_completed(netmorphrun, batchdatakeys)
+#                     print('...completed run with ID %s (runs remaining: %d, prepped remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo), runs_prepped(batchinfo)))
+#                     if deleteresident:
+#                         mem = psutil.virtual_memory()
+#                         run_peak_RAM.append(mem.used)
+#                         MySim = netmorphrun['Sim']
+#                         try:
+#                             MySim.DeleteResidentByID()
+#                             print('Deleted resident simulation for run %s to make space' % str(netmorphrun['runID']))
+#                         except Exception as e:
+#                             print('Simulation deletion request failed: '+str(e))
+#                     # If we are not running all that were prepped and resources permit then add to running batch
+#                     if runs_prepped(batchinfo) > 0:
+#                         start_batch(ClientInstance, batchname, batchinfo, batchsize, samplerequestsfunc, samplerequestsdata, resourceslowbytes)
 
-                    #print('Resource checks: low_checked %d, low_failed %d, launch_checked %d, launch_checked_failed: %d' % ( resource_tests['low_checked'], resource_tests['low_checked_failed'], resource_tests['launch_checked'], resource_tests['launch_checked_failed'] ))
+#                     #print('Resource checks: low_checked %d, low_failed %d, launch_checked %d, launch_checked_failed: %d' % ( resource_tests['low_checked'], resource_tests['low_checked_failed'], resource_tests['launch_checked'], resource_tests['launch_checked_failed'] ))
 
-                update_statusbar(StatusBar, batchinfo)
-                sleep(2.0)
+#                 update_statusbar(StatusBar, batchinfo)
+#                 sleep(2.0)
 
-        if resources_low(ClientInstance, resourceslowbytes):
-            mem = psutil.virtual_memory()
-            usedGB = mem.used/(1024 ** 3)
-            totalGB = mem.total/(1024 ** 3)
-            print(f'\nUsed {usedGB:.2f} GB of {totalGB:.2f} GB')
-            print("Low RAM - let's break here (clear NES and restart script to do remaining)")
-            break
+#         if resources_low(ClientInstance, resourceslowbytes):
+#             mem = psutil.virtual_memory()
+#             usedGB = mem.used/(1024 ** 3)
+#             totalGB = mem.total/(1024 ** 3)
+#             print(f'\nUsed {usedGB:.2f} GB of {totalGB:.2f} GB')
+#             print("Low RAM - let's break here (clear NES and restart script to do remaining)")
+#             break
 
-    close_statusbar(StatusBar, batchinfo)
-    print('Memory usage: %s' % str(run_peak_RAM))
+#     close_statusbar(StatusBar, batchinfo)
+#     print('Memory usage: %s' % str(run_peak_RAM))
 
 # ===== Parts that are specific to this script's batch runs
 
@@ -790,20 +791,21 @@ if __name__ == '__main__':
     else:
         batchsize = numsamples
 
-    batchinfo = prepare_batch_information(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
-    print('Batch prepared to do %d sample runs out of a total of %d.' % (runs_prepped(batchinfo), numsamples))
-    k = input('Press Enter to start simulations.')
+    batchrun = BatchRun(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
+    #batchinfo = prepare_batch_information(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
+    #print('Batch prepared to do %d sample runs out of a total of %d.' % (runs_prepped(batchinfo), numsamples))
+    #k = input('Press Enter to start simulations.')
 
-    start_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchinfo, batchsize, sample_launch_requests, LAUNCHDATA, RESOURCESLOWBYTES)
-    print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, runs_running(batchinfo)))
+    batchrun.start_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchsize, sample_launch_requests, LAUNCHDATA, RESOURCESLOWBYTES)
+    print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
-    monitor_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchinfo, batchsize, modelcontent, evaluate_state_and_check_connectome, EVALCRITERIADATA, sample_launch_requests, LAUNCHDATA, BATCHDATAKEYS, RESOURCESLOWBYTES, Args.deleteresident)
+    batchrun.monitor_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchsize, evaluate_state_and_check_connectome, EVALCRITERIADATA, sample_launch_requests, LAUNCHDATA, BATCHDATAKEYS, RESOURCESLOWBYTES, Args.deleteresident)
     print('Number of samples: %d' % numsamples)
-    print('Runs completed   : %d' % runs_completed(batchinfo))
-    print('Runs failed      : %d' % runs_failed(batchinfo))
-    print('Runs remaining   : %d' % (runs_running(batchinfo)+runs_prepped(batchinfo)))
+    print('Runs completed   : %d' % batchrun.runs_completed())
+    print('Runs failed      : %d' % batchrun.runs_failed())
+    print('Runs remaining   : %d' % (batchrun.runs_running()+batchrun.runs_prepped()))
 
-    update_experiments_database(batchinfo)
+    update_experiments_database(batchrun.batchinfo)
 
     completed_batchinfo = write_excel_with_results(df, Args)
 
