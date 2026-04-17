@@ -615,7 +615,10 @@ def monitor_batch(ClientInstance, batchinfo:dict, batchsize:int, modelcontent:st
                     if Args.deleteresident:
                         mem = psutil.virtual_memory()
                         run_peak_RAM.append(mem.used)
-                        MySim.DeleteResidentByID() # This is new!
+                        try:
+                            MySim.DeleteResidentByID() # This is new!
+                        except:
+                            print('Simulation deletion request timed out.')
 
                     # If we are not running all that were prepped and resources permit then add to running batch
                     if runs_prepped(batchinfo) > 0:
