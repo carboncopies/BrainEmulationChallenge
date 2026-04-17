@@ -14,7 +14,7 @@
 scriptversion='0.1.0'
 
 import numpy as np
-#from datetime import datetime
+from datetime import datetime
 from time import sleep
 import json
 import base64
@@ -40,6 +40,7 @@ resource_tests = {
     'launch_checked': 0,
     'launch_checked_failed': 0,
     'fail_succeed': [],
+    'timestamps': [],
 }
 
 # Handle Arguments for Host, Port, etc
@@ -144,6 +145,14 @@ def add_completed(netmorphrun:dict):
     except Exception as e:
         print('WARNING: Adding completed data to batchinfo_completed.json failed')
 
+def save_check_info():
+    global resource_tests
+    try:
+        with open('resource_checks.json', 'w') as f:
+            json.dump(f, resource_tests)
+    except:
+        pass
+
 # Check RAM
 def resources_low(ClientInstance)->bool:
     global resource_tests
@@ -152,11 +161,14 @@ def resources_low(ClientInstance)->bool:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['low_checked'] += 1
         resource_tests['fail_succeed'].append('S')
+        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
     except:
         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
         resource_tests['low_checked_failed'] += 1
         resource_tests['fail_succeed'].append('F')
+        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+        save_check_info()
         print('Distribution: '+str(resource_tests['fail_succeed']))
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
@@ -171,11 +183,14 @@ def lauch_resources_low(ClientInstance)->bool:
         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
         resource_tests['launch_checked'] += 1
         resource_tests['fail_succeed'].append('S')
+        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
     except:
         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
         resource_tests['launch_checked_failed'] += 1
         resource_tests['fail_succeed'].append('F')
+        resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+        save_check_info()
         print('Distribution: '+str(resource_tests['fail_succeed']))
         return False
     toofull = freeRAMbytes < (2*1024*1024*1024)
