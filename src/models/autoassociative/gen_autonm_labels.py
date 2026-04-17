@@ -737,8 +737,8 @@ if __name__ == '__main__':
     batchsize = numsamples
     if Args.batchlimit > 0:
         batchsize = Args.batchlimit
-    elif Args.fitcpus and batchsize > (logicalCPUs-2):
-        batchsize = logicalCPUs-2
+    elif Args.fitcpus and batchsize > logicalCPUs:
+        batchsize = logicalCPUs
     else:
         batchsize = numsamples
 
