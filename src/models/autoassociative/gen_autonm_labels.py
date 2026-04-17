@@ -594,6 +594,34 @@ def extraprep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     batchinfo[idx]['DBdata'] = DBdata # DB data unique to this sample run
     return True
 
+def get_sample_modelcontent(launchdata:dict, pars:list)->str:
+    print(pars)
+    growdays = pars[0]
+    pyramidal = pars[1]
+    interneuron = pars[2]
+    minneuronseparation = pars[3]
+    shapeRadius = pars[4]
+    shapeThickness = pars[5]
+    dmWeight = pars[6]
+
+    sample_modelcontent = launchdata['modelcontent'] # Copy loaded configuration
+
+    sample_modelcontent += ARCHITECTURE_MODIFY % (launchdata['EMBEDMULTIPLE']*launchdata['PATTERNSIZE']*launchdata['Patterns'], launchdata['PATTERNSIZE']*launchdata['Patterns'])
+    # if Args.DoOBJ:
+    #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
+    # if Args.DoBlend:
+    #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
+    
+    sample_modelcontent += GROWDAYS % growdays
+    sample_modelcontent += PYRAMIDAL_POP % pyramidal
+    sample_modelcontent += INTERNEURON_POP % interneuron
+    sample_modelcontent += MIN_NEURON_SEPARATION % minneuronseparation        
+    sample_modelcontent += SHAPE_RADIUS % shapeRadius
+    sample_modelcontent += SHAPE_THICKNESS % shapeThickness
+    sample_modelcontent += DM_WEIGHT % dmWeight
+    return sample_modelcontent
+
+
 def sample_launch_requests(netmorphrun:dict, launchdata:dict)->bool:
     sample_modelcontent = get_sample_modelcontent(launchdata, netmorphrun['pars'])
 
