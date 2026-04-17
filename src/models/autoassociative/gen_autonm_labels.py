@@ -564,7 +564,7 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
 
 def extraprep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     modelname = extraprepdata['modelname']+'%04d' % idx
-    batchinfo[i]['modelname'] = modelname  # Remember which output model belongs to this run
+    batchinfo[idx]['modelname'] = modelname  # Remember which output model belongs to this run
 
     # Get parameters from data frame
     df = extraprepdata['dataframe']
@@ -575,7 +575,7 @@ def extraprep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
             pars.append(int(df.iloc[idx][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
         else:
             pars.append(float(df.iloc[idx][cols[k]]))
-    batchinfo[i]['pars'] = pars
+    batchinfo[idx]['pars'] = pars
 
     growdays = str(pars[0])
 
@@ -591,7 +591,7 @@ def extraprep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
         _initOUT = {
             'modelname': modelname,
         })
-    batchinfo[i]['DBdata'] = DBdata # DB data unique to this sample run
+    batchinfo[idx]['DBdata'] = DBdata # DB data unique to this sample run
     return True
 
 def sample_launch_requests(netmorphrun:dict, launchdata:dict)->bool:
