@@ -148,8 +148,10 @@ def add_completed(netmorphrun:dict):
 def save_check_info():
     global resource_tests
     try:
+        if os.path.exists('resource_checks.json'):
+            os.replace('resource_checks.json', 'resource_checks_backup.json')
         with open('resource_checks.json', 'w') as f:
-            json.dump(f, resource_tests)
+            json.dump(resource_tests, f)
     except:
         pass
 
@@ -162,6 +164,7 @@ def resources_low(ClientInstance)->bool:
         resource_tests['low_checked'] += 1
         resource_tests['fail_succeed'].append('S')
         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+        save_check_info()
     except:
         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
@@ -184,6 +187,7 @@ def lauch_resources_low(ClientInstance)->bool:
         resource_tests['launch_checked'] += 1
         resource_tests['fail_succeed'].append('S')
         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
+        save_check_info()
     except:
         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
         print('Response was: '+str(freeRAMbytes))
