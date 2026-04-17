@@ -307,6 +307,7 @@ def monitor_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, 
                     if deleteresident:
                         mem = psutil.virtual_memory()
                         run_peak_RAM.append(mem.used)
+                        MySim = netmorphrun['Sim']
                         try:
                             MySim.DeleteResidentByID()
                             print('Deleted resident simulation for run %s to make space' % str(netmorphrun['runID']))
