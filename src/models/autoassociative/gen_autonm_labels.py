@@ -35,307 +35,6 @@ from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
 
-# ===== Parts that can be generalized, templated and added to PythonClient
-
-# resource_tests = {
-#     'low_checked': 0,
-#     'low_checked_failed': 0,
-#     'launch_checked': 0,
-#     'launch_checked_failed': 0,
-#     'fail_succeed': [],
-#     'timestamps': [],
-# }
-
-# def save_check_info():
-#     global resource_tests
-#     try:
-#         if os.path.exists('resource_checks.json'):
-#             os.replace('resource_checks.json', 'resource_checks_backup.json')
-#         with open('resource_checks.json', 'w') as f:
-#             json.dump(resource_tests, f)
-#     except:
-#         pass
-
-# # Check RAM
-# def resources_low(ClientInstance, threshold:int, maxRAMratio=0.9)->bool:
-#     global resource_tests
-#     freeRAMbytes = None
-#     try:
-#         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
-#         resource_tests['low_checked'] += 1
-#         resource_tests['fail_succeed'].append('S')
-#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-#         save_check_info()
-#     except:
-#         print('Warning in resources_low(): Failed to retrieve resources data, carrying on')
-#         print('Response was: '+str(freeRAMbytes))
-#         resource_tests['low_checked_failed'] += 1
-#         resource_tests['fail_succeed'].append('F')
-#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-#         save_check_info()
-#         print('Distribution: '+str(resource_tests['fail_succeed']))
-#         return False
-#     toofull = freeRAMbytes < threshold
-#     mem = psutil.virtual_memory()
-#     vmpercenttoohigh = (mem.used/mem.total) > maxRAMratio
-#     return toofull or vmpercenttoohigh
-
-# def lauch_resources_low(ClientInstance, threshold:int)->bool:
-#     global resource_tests
-#     freeRAMbytes = None
-#     try:
-#         freeRAMbytes = ClientInstance.GetResourceStatus()['RAMfree']
-#         resource_tests['launch_checked'] += 1
-#         resource_tests['fail_succeed'].append('S')
-#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-#         save_check_info()
-#     except:
-#         print('Warning in launch_resources_low(): Failed to retrieve resources data, carrying on')
-#         print('Response was: '+str(freeRAMbytes))
-#         resource_tests['launch_checked_failed'] += 1
-#         resource_tests['fail_succeed'].append('F')
-#         resource_tests['timestamps'].append( datetime.now().strftime("%Y%m%d%H%M%S") )
-#         save_check_info()
-#         print('Distribution: '+str(resource_tests['fail_succeed']))
-#         return False
-#     toofull = freeRAMbytes < threshold
-#     return toofull
-
-# # Load Netmorph model file
-# def load_Netmorph_configuration(netmorphconfigpath:str)->str:
-#     modelcontent = 'kjhskdjfhkjhs'
-#     try:
-#         with open(netmorphconfigpath, 'r') as f:
-#             modelcontent = f.read()
-#     except Exception as e:
-#         print('Failed: modelfile error: '+str(e))
-#         exit(1)
-#     return modelcontent
-
-# # Create Client Configuration For Local Simulation
-# def connect_client(Host, Port, UseHTTPS):
-#     print(" -- Creating Client Configuration For Local Simulation")
-#     ClientCfg = NES.Client.Configuration()
-#     ClientCfg.Mode = NES.Client.Modes.Remote
-#     ClientCfg.Host = Host
-#     ClientCfg.Port = Port
-#     ClientCfg.UseHTTPS = UseHTTPS
-#     ClientCfg.AuthenticationMethod = NES.Client.Authentication.Password
-#     ClientCfg.Username = "Admonishing"
-#     ClientCfg.Password = "Instruction"
-
-#     # Create Client Instance
-#     print(" -- Creating Client Instance")
-#     try:
-#         ClientInstance = NES.Client.Client(ClientCfg)
-#         if not ClientInstance.IsReady():
-#             print('NES.Client error: not ready')
-#             exit(1)
-#     except Exception as e:
-#         print('NES.Client error: '+str(e))
-#         exit(1)
-#     return ClientInstance
-
-# # Retrieve results data for previously completed samples.
-# def get_previously_completed()->dict:
-#     try:
-#         with open('batchinfo_completed.json', 'r') as f:
-#             completed_batchinfo_jsonkeys = json.load(f)
-#         completed_batchinfo = {int(k): v for k, v in completed_batchinfo_jsonkeys.items()}
-#     except:
-#         completed_batchinfo = {}
-#     return completed_batchinfo
-
-# # Update results data for completed samples.
-# def add_completed(samplerun:dict, batchdatakeys:list)->bool:
-#     completed_batchinfo = get_previously_completed()
-#     if samplerun['runID'] in completed_batchinfo:
-#         print('Oops - looks like batch sample %d was already marked completed and saved.')
-#         k = input('Press Enter to overwrite results (or Ctrl+C to exit)')
-#     completed_batchinfo[samplerun['runID']] = { # These are obligatory
-#         "runID": samplerun['runID'],
-#         "status": samplerun['status'],
-#     }
-#     for datakey in batchdatakeys: # These are unique to a script's batched runs
-#         completed_batchinfo[samplerun['runID']][datakey] = samplerun[datakey]
-#     try:
-#         if os.path.exists('batchinfo_completed.json'):
-#             os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
-#         with open('batchinfo_completed.json', 'w') as f:
-#             json.dump(completed_batchinfo, f)
-#         return True
-#     except Exception as e:
-#         print('WARNING: Adding completed data to batchinfo_completed.json failed')
-#         return False
-
-# # Status bar helper functions
-# def prepare_statusbar():
-#     StatusBar = tqdm.tqdm("Progress", total=1)
-#     StatusBar.leave = True
-#     StatusBar.bar_format = "{desc}{percentage:3.0f}%|{bar}| [{elapsed}<{remaining}, {rate_fmt}{postfix}]"
-#     StatusBar.colour = "green"
-#     return StatusBar
-
-# def update_statusbar(StatusBar, batchinfo:dict):
-#     grand_total = 0
-#     grand_percent = 0
-#     for netmorphrun in batchinfo.values():
-#         if 'percent' in netmorphrun:
-#             grand_total += 100
-#             grand_percent += netmorphrun['percent']
-#     StatusBar.total = 100
-#     if grand_total <= 0:
-#         StatusBar.n = 100
-#     else:
-#         StatusBar.n = 100.0*grand_percent/grand_total
-#     StatusBar.refresh()
-
-# def close_statusbar(StatusBar, batchinfo:dict):
-#     update_statusbar(StatusBar, batchinfo)
-#     StatusBar.close()
-
-# # Helper functions for batch runs
-# def runs_incomplete(batchinfo:dict)->bool:
-#     for netmorphrun in batchinfo.values():
-#         if netmorphrun['status'] == 'running':
-#             return True
-#     return False
-
-# def count_runs_by_status(batchinfo:dict, status:str)->int:
-#     num = 0
-#     for netmorphrun in batchinfo.values():
-#         if netmorphrun['status'] == status:
-#             num += 1
-#     return num
-
-# def runs_prepped(batchinfo:dict)->int:
-#     return count_runs_by_status(batchinfo, 'prepped')
-
-# def runs_running(batchinfo:dict)->int:
-#     return count_runs_by_status(batchinfo, 'running')
-
-# def runs_completed(batchinfo:dict)->int:
-#     return count_runs_by_status(batchinfo, 'completed')
-
-# def runs_failed(batchinfo:dict)->int:
-#     return count_runs_by_status(batchinfo, 'failed')
-
-# # Batch prepare batch information and ExpsDB data for those that will be run
-# def prepare_batch_information(numsamples:int, extraprepfunc, extraprepdata:dict, from_sample:int=0, to_sample:int=-1)->dict:
-#     if to_sample <= 0:
-#         to_sample = numsamples
-
-#     batchinfo = get_previously_completed()
-
-#     if len(batchinfo.keys()) > 0:
-#         print('Number of samples completed previously: %d' % len(batchinfo.keys()))
-#         k = input('Press Enter to process remaining %d' % ((to_sample - from_sample) - len(batchinfo.keys())))
-
-#     # Each simulation in the batch corresponds to one line in the Excel sheet.
-#     # Note: The batchinfo["runID"] is identical to the line number in the Excel sheet.
-#     for i in range(from_sample, to_sample):
-
-#         if i in batchinfo:
-#             print('Run for data line %d already stored as completed' % i)
-#             continue
-
-#         print('Preparing data line %d' % i)
-#         batchinfo[i] = {
-#             "runID": i,             # Some unique identifier of this sample run (e.g. a point in the hypercube of parameter choices)
-#         }
-#         if extraprepfunc:
-#             if not extraprepfunc(batchinfo, i, extraprepdata):
-#                 print('Extra prep function failed')
-#                 exit(1)
-
-#         batchinfo[i]['status'] = 'prepped'
-
-#     return batchinfo
-
-# # Run Reservoir script with Latin Hypercube generated parameters.
-# def start_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, samplerequestsfunc, samplerequestsdata:dict, resourceslowbytes:int):
-#     for netmorphrun in batchinfo.values():
-
-#         if netmorphrun['status'] != 'prepped': # was already stored as completed or is running or has failed
-#             continue
-
-#         if runs_running(batchinfo) >= batchsize: # in case batch size is constrained
-#             return
-
-#         if lauch_resources_low(ClientInstance, resourceslowbytes): # enough RAM to add another sample run?
-#             return
-
-#         # Create A New Simulation
-#         print("...Creating Simulation")
-#         SimulationCfg = NES.Simulation.Configuration()
-#         SimulationCfg.Name = batchname+str(netmorphrun['runID'])
-#         SimulationCfg.Seed = 0
-#         try:
-#             MySim = ClientInstance.CreateSimulation(SimulationCfg)
-#         except:
-#             print('NES error: Failed to create simulation')
-#             netmorphrun['status'] = 'failed'
-#             continue # Skipping this sample
-
-#         netmorphrun['SimID'] = MySim.ID
-#         netmorphrun['Sim'] = MySim
-
-#         if not samplerequestsfunc(netmorphrun, samplerequestsdata):
-#             netmorphrun['status'] = 'failed'
-#             continue # Skipping this sample
-
-#         netmorphrun['status'] = 'running'
-
-# # Loop check for runs that have completed
-# def monitor_batch(ClientInstance, batchname:str, batchinfo:dict, batchsize:int, modelcontent:str, evalfunc, evalcriteriadata:dict, samplerequestsfunc, samplerequestsdata:dict, batchdatakeys:list, resourceslowbytes:int, deleteresident:bool):
-#     global resource_tests
-#     run_peak_RAM = []
-#     StatusBar = prepare_statusbar()
-#     while runs_incomplete(batchinfo):
-
-#         for netmorphrun in batchinfo.values():
-#             if netmorphrun['status'] == 'running':
-
-#                 evalres, Percent = evalfunc(netmorphrun, evalcriteriadata)
-#                 netmorphrun['percent'] = Percent
-#                 if evalres == 'failed':
-#                     netmorphrun['status'] = 'failed'
-#                     print('...run %d failed' % netmorphrun['runID'])
-#                 elif evalres == 'completed':
-#                     netmorphrun['status'] = 'completed'
-#                     add_completed(netmorphrun, batchdatakeys)
-#                     print('...completed run with ID %s (runs remaining: %d, prepped remaining: %d)' % (str(netmorphrun['runID']), runs_running(batchinfo), runs_prepped(batchinfo)))
-#                     if deleteresident:
-#                         mem = psutil.virtual_memory()
-#                         run_peak_RAM.append(mem.used)
-#                         MySim = netmorphrun['Sim']
-#                         try:
-#                             MySim.DeleteResidentByID()
-#                             print('Deleted resident simulation for run %s to make space' % str(netmorphrun['runID']))
-#                         except Exception as e:
-#                             print('Simulation deletion request failed: '+str(e))
-#                     # If we are not running all that were prepped and resources permit then add to running batch
-#                     if runs_prepped(batchinfo) > 0:
-#                         start_batch(ClientInstance, batchname, batchinfo, batchsize, samplerequestsfunc, samplerequestsdata, resourceslowbytes)
-
-#                     #print('Resource checks: low_checked %d, low_failed %d, launch_checked %d, launch_checked_failed: %d' % ( resource_tests['low_checked'], resource_tests['low_checked_failed'], resource_tests['launch_checked'], resource_tests['launch_checked_failed'] ))
-
-#                 update_statusbar(StatusBar, batchinfo)
-#                 sleep(2.0)
-
-#         if resources_low(ClientInstance, resourceslowbytes):
-#             mem = psutil.virtual_memory()
-#             usedGB = mem.used/(1024 ** 3)
-#             totalGB = mem.total/(1024 ** 3)
-#             print(f'\nUsed {usedGB:.2f} GB of {totalGB:.2f} GB')
-#             print("Low RAM - let's break here (clear NES and restart script to do remaining)")
-#             break
-
-#     close_statusbar(StatusBar, batchinfo)
-#     print('Memory usage: %s' % str(run_peak_RAM))
-
-# ===== Parts that are specific to this script's batch runs
-
 # Handle Arguments for Host, Port, etc
 def get_Args():
     Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
@@ -344,7 +43,6 @@ def get_Args():
     Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
     Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
     Parser.add_argument("-modelname", default="autoassociative", type=str, help="Stem name of neuronal circuit models to save")
-    #Parser.add_argument("-growdays", default=20, type=int, help="Number of days Netmorph growth")
     Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
     Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve (def: 2)")
     Parser.add_argument("-PATTERNSIZE", default=8, type=int, help="Median number of neurons in each pattern (def: 8)")
@@ -374,7 +72,6 @@ def usable_connections_method1(MySim)->int:
     try:
         response = MySim.GetAbstractConnectome(Sparse=True)
     except:
-        #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive abstract model connectome')
         return -1
     PrePostNumReceptors = response['PrePostNumReceptors']
@@ -402,12 +99,6 @@ def usable_connections_method1(MySim)->int:
         for n in Regions[reg]:
             Neuron2RegionMap[n] = reg
 
-    #print("Pre-post neuron to neuron connections (PrePostNumReceptors): "+str(PrePostNumReceptors))
-    #print("Regions: "+str(Regions))
-    #print("Neuron types: "+str(NeuronTypes))
-    #print("Region-to-region connections in resevoirs:")
-    #print(PreRegions)
-    #print("Neuron to Region map: "+str(Neuron2RegionMap))
     def SetAll(TheList:list, Value:int):
         for i in range(len(TheList)):
             TheList[i][2] = Value
@@ -468,9 +159,7 @@ def usable_connections_method1(MySim)->int:
         frompyrmid = ConnectionsFrom('In', n)
         if len(frompyrmid)<1:
             EliminateByPost(n)
-        #else:
-        #    print('%d: %s' % (n, str(frompyrmid)))
-    #print("Neuron to Neuron after eliminating In neurons with <1 connections from In: "+str(Neuron2Neuron))
+
     print("Number of connections: "+str(len(Neuron2Neuron)))
 
     def NumActive()->int:
@@ -489,7 +178,6 @@ def usable_connections_method1(MySim)->int:
         return active_str
 
     print("There are %d usable connections on input-to-output paths (out of %d)." % (NumActive(), len(Neuron2Neuron)))
-    #print("Neurons to Neuron reachable both from input and from output: "+PrintActive())
 
     return NumActive()
 
@@ -497,10 +185,6 @@ def usable_connections_method1(MySim)->int:
 def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
     try:
         connections_before_dict = MySim.GetConnectome()
-        # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_weights', FIGSPECS):
-        #     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity weights')
-        # if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'autoassociative_reservoir_numreceptors', FIGSPECS, usematrix='numreceptors'):
-        #     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity number of receptors')
     except:
         #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive model connectome')
@@ -530,7 +214,6 @@ def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
     pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
     proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
     attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
-    #plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
     print('Number of pre-post pyramidal connections at target g_sum_peak: %d' % int(attargetgpeaksum.sum()))
 
     return int(attargetgpeaksum.sum())
@@ -609,10 +292,6 @@ def get_sample_modelcontent(launchdata:dict, pars:list)->str:
     sample_modelcontent = launchdata['modelcontent'] # Copy loaded configuration
 
     sample_modelcontent += ARCHITECTURE_MODIFY % (launchdata['EMBEDMULTIPLE']*launchdata['PATTERNSIZE']*launchdata['Patterns'], launchdata['PATTERNSIZE']*launchdata['Patterns'])
-    # if Args.DoOBJ:
-    #     sample_modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
-    # if Args.DoBlend:
-    #     sample_modelcontent += NETMORPH_BLEND % Args.BlendExec
     
     sample_modelcontent += GROWDAYS % growdays
     sample_modelcontent += PYRAMIDAL_POP % pyramidal
@@ -686,8 +365,6 @@ if __name__ == '__main__':
     # between each pre-post pair of pyramidal neurons was derived
     # from results in LIFtest.py.
     RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
-
-    # FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
     # String templates for augmenting Netmorph model configuration content
     ARCHITECTURE_MODIFY = '''
@@ -792,9 +469,6 @@ if __name__ == '__main__':
         batchsize = numsamples
 
     batchrun = BatchRun(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
-    #batchinfo = prepare_batch_information(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
-    #print('Batch prepared to do %d sample runs out of a total of %d.' % (runs_prepped(batchinfo), numsamples))
-    #k = input('Press Enter to start simulations.')
 
     batchrun.start_batch(
         ClientInstance,
