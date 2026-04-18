@@ -28,7 +28,7 @@ import tqdm
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
-from BrainGenix.BatchRun import BatchRun
+from BrainGenix.Tools.BatchRun import BatchRun, LoadNetmorphConfiguration, ConnectClient
 
 from sys import path
 from pathlib import Path
@@ -767,7 +767,7 @@ if __name__ == '__main__':
         "PREPOSTGPEAKSUMTARGET": PREPOSTGPEAKSUMTARGET,
     }
 
-    modelcontent = load_Netmorph_configuration(Args.modelfile)
+    modelcontent = LoadNetmorphConfiguration(Args.modelfile)
 
     LAUNCHDATA = {
         'modelcontent': modelcontent,
@@ -778,7 +778,7 @@ if __name__ == '__main__':
         'STDP': Args.STDP,
     }
 
-    ClientInstance = connect_client(Args.Host, Args.Port, Args.UseHTTPS)
+    ClientInstance = ConnectClient(Args.Host, Args.Port, Args.UseHTTPS)
 
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
