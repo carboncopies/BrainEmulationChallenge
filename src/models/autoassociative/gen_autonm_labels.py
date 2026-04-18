@@ -499,10 +499,12 @@ if __name__ == '__main__':
 
     completed_batchinfo = write_excel_with_results(batchrun, df, Args)
 
-    print("Let's compare the results from the two label interpretation methods:")
-    sorted_batchinfo = {k: completed_batchinfo[k] for k in sorted(completed_batchinfo)}
-    for netmorphrun in sorted_batchinfo.values():
-        print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
+    docompare = input('Shall we compare the results from the two label interpretation methods? (y/N) ')
+    if docompare == 'y':
+        print("Let's compare the results from the two label interpretation methods:")
+        sorted_batchinfo = {k: completed_batchinfo[k] for k in sorted(completed_batchinfo)}
+        for netmorphrun in sorted_batchinfo.values():
+            print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
 
     print(" -- Done.")
     exit(0)
