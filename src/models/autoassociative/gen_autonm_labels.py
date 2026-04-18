@@ -342,10 +342,10 @@ def update_experiments_database(batchinfo:dict):
             vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # Save resulting label data for all completed runs to excel file
-def write_excel_with_results(df, Args):
+def write_excel_with_results(batchrun, df, Args):
     df['usable_conns1']=0 # add column
     df['usable_conns2']=0 # add column
-    completed_batchinfo = get_previously_completed()
+    completed_batchinfo = batchrun.get_previously_completed()
     for netmorphrun in completed_batchinfo.values():
         df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
         df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
@@ -497,7 +497,7 @@ if __name__ == '__main__':
 
     update_experiments_database(batchrun.batchinfo)
 
-    completed_batchinfo = write_excel_with_results(df, Args)
+    completed_batchinfo = write_excel_with_results(batchrun, df, Args)
 
     print("Let's compare the results from the two label interpretation methods:")
     sorted_batchinfo = {k: completed_batchinfo[k] for k in sorted(completed_batchinfo)}
