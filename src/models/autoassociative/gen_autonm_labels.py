@@ -247,7 +247,7 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
 
     return 'running', Percent
 
-def extraprep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
+def extra_prep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     modelname = extraprepdata['modelname']+'%04d' % idx
     batchinfo[idx]['modelname'] = modelname  # Remember which output model belongs to this run
 
@@ -468,28 +468,33 @@ if __name__ == '__main__':
     else:
         batchsize = numsamples
 
-    batchrun = BatchRun(numsamples, extraprep, EXTRAPREPDATA, Args.from_sample, Args.to_sample)
+    batchrun = BatchRun(
+        numsamples=numsamples,
+        extraprepfunc=extra_prep,
+        extraprepdata=EXTRAPREPDATA,
+        from_sample=Args.from_sample,
+        to_sample=Args.to_sample)
 
     batchrun.start_batch(
-        ClientInstance,
-        'Netmorph-'+Args.modelname,
-        batchsize,
-        sample_launch_requests,
-        LAUNCHDATA,
-        RESOURCESLOWBYTES)
+        ClientInstance=ClientInstance,
+        batchname='Netmorph-'+Args.modelname,
+        batchsize=batchsize,
+        samplerequestsfunc=sample_launch_requests,
+        samplerequestsdata=LAUNCHDATA,
+        resourceslowbytes=RESOURCESLOWBYTES)
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
     batchrun.monitor_batch(
-        ClientInstance,
-        'Netmorph-'+Args.modelname,
-        batchsize,
-        evaluate_state_and_check_connectome,
-        EVALCRITERIADATA,
-        sample_launch_requests,
-        LAUNCHDATA,
-        BATCHDATAKEYS,
-        RESOURCESLOWBYTES,
-        Args.deleteresident)
+        ClientInstance=ClientInstance,
+        batchname='Netmorph-'+Args.modelname,
+        batchsize=batchsize,
+        evalfunc=evaluate_state_and_check_connectome,
+        evalcriteriadata=EVALCRITERIADATA,
+        samplerequestsfunc=sample_launch_requests,
+        samplerequestsdata=LAUNCHDATA,
+        batchdatakeys=BATCHDATAKEYS,
+        resourceslowbytes=RESOURCESLOWBYTES,
+        deleteresident=Args.deleteresident)
     print('Number of samples: %d' % numsamples)
     print('Runs completed   : %d' % batchrun.runs_completed())
     print('Runs failed      : %d' % batchrun.runs_failed())
