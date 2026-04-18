@@ -157,7 +157,7 @@ from NES_interfaces.KGTRecords import plot_weights
 #         "status": samplerun['status'],
 #     }
 #     for datakey in batchdatakeys: # These are unique to a script's batched runs
-#         completed_batchinfo[datakey] = samplerun[datakey]
+#         completed_batchinfo[samplerun['runID']][datakey] = samplerun[datakey]
 #     try:
 #         if os.path.exists('batchinfo_completed.json'):
 #             os.replace('batchinfo_completed.json', 'batchinfo_completed_backup.json')
@@ -796,10 +796,26 @@ if __name__ == '__main__':
     #print('Batch prepared to do %d sample runs out of a total of %d.' % (runs_prepped(batchinfo), numsamples))
     #k = input('Press Enter to start simulations.')
 
-    batchrun.start_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchsize, sample_launch_requests, LAUNCHDATA, RESOURCESLOWBYTES)
+    batchrun.start_batch(
+        ClientInstance,
+        'Netmorph-'+Args.modelname,
+        batchsize,
+        sample_launch_requests,
+        LAUNCHDATA,
+        RESOURCESLOWBYTES)
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
-    batchrun.monitor_batch(ClientInstance, 'Netmorph-'+Args.modelname, batchsize, evaluate_state_and_check_connectome, EVALCRITERIADATA, sample_launch_requests, LAUNCHDATA, BATCHDATAKEYS, RESOURCESLOWBYTES, Args.deleteresident)
+    batchrun.monitor_batch(
+        ClientInstance,
+        'Netmorph-'+Args.modelname,
+        batchsize,
+        evaluate_state_and_check_connectome,
+        EVALCRITERIADATA,
+        sample_launch_requests,
+        LAUNCHDATA,
+        BATCHDATAKEYS,
+        RESOURCESLOWBYTES,
+        Args.deleteresident)
     print('Number of samples: %d' % numsamples)
     print('Runs completed   : %d' % batchrun.runs_completed())
     print('Runs failed      : %d' % batchrun.runs_failed())
