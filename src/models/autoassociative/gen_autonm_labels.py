@@ -68,11 +68,14 @@ def get_sample_data(Args)->tuple:
 # Usable connections interpretation
 # --- Based on the version in autoassociative_connectome_myg.py
 def usable_connections_method1(MySim)->int:
+    global batchrun
     # Get connectome
     try:
         response = MySim.GetAbstractConnectome(Sparse=True)
+        batchrun.RTsuccess('getabsconn')
     except:
         print('NES error: failed to receive abstract model connectome')
+        batchrun.RTfailed('getabsconn_failed')
         return -1
     PrePostNumReceptors = response['PrePostNumReceptors']
     Regions = response['Regions']
@@ -183,11 +186,14 @@ def usable_connections_method1(MySim)->int:
 
 # --- Based on the version at the end of autoassociative_reservoir.py
 def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
+    global batchrun
     try:
         connections_before_dict = MySim.GetConnectome()
+        batchrun.RTsuccess('getconn')
     except:
         #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive model connectome')
+        batchrun.RTfailed('getconn_failed')
         return -1
 
     def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
@@ -220,6 +226,7 @@ def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
 
 # Return 'failed', 'completed' or 'running' and percent done
 def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)->tuple:
+    global batchrun
     MySim = netmorphrun['Sim']
 
     try:
@@ -234,9 +241,11 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         try:
             MySim.ModelSave(netmorphrun['modelname'])
             print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
+            batchrun.RTsuccess('modelsave')
         except:
             vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
             print('Failed to save completed model for run %d' % netmorphrun['runID'])
+            batchrun.RTfailed('modelsave_failed')
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
         result1 = int(usable_connections_method1(MySim))
@@ -475,6 +484,14 @@ if __name__ == '__main__':
         from_sample=Args.from_sample,
         to_sample=Args.to_sample)
 
+    # Let's add a bit of extra tracking while we're testing large batches
+    batchrun.resource_tests['getconn'] = 0
+    batchrun.resource_tests['getconn_failed'] = 0
+    batchrun.resource_tests['getabsconn'] = 0
+    batchrun.resource_tests['getabsconn_failed'] = 0
+    batchrun.resource_tests['modelsave'] = 0
+    batchrun.resource_tests['modelsave_failed'] = 0
+
     batchrun.start_batch(
         ClientInstance=ClientInstance,
         batchname='Netmorph-'+Args.modelname,
@@ -498,7 +515,8 @@ if __name__ == '__main__':
     print('Number of samples: %d' % numsamples)
     print('Runs completed   : %d' % batchrun.runs_completed())
     print('Runs failed      : %d' % batchrun.runs_failed())
-    print('Runs remaining   : %d' % (batchrun.runs_running()+batchrun.runs_prepped()))
+    remaining = batchrun.runs_running()+batchrun.runs_prepped()
+    print('Runs remaining   : %d' % remaining)
 
     update_experiments_database(batchrun.batchinfo)
 
@@ -511,5 +529,10 @@ if __name__ == '__main__':
         for netmorphrun in sorted_batchinfo.values():
             print('%03d %05d %05d' % (netmorphrun['runID'], netmorphrun['usable_conns1'], netmorphrun['usable_conns2']))
 
+    print('Inspect resource_checks.json for request success/failure tracking data.')
+    if remaining > 0:
+        print('To complete remaining simply rerun this script.')
+    else:
+        print('To run batch again, move or delete batchinfo_completed.json.')
     print(" -- Done.")
     exit(0)
