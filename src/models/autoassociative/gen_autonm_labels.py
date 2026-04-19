@@ -316,6 +316,7 @@ def get_sample_modelcontent(launchdata:dict, pars:list)->str:
 
 
 def sample_launch_requests(netmorphrun:dict, launchdata:dict)->bool:
+    global batchrun
     sample_modelcontent = get_sample_modelcontent(launchdata, netmorphrun['pars'])
 
     MySim = netmorphrun['Sim']
@@ -338,14 +339,14 @@ def sample_launch_requests(netmorphrun:dict, launchdata:dict)->bool:
         if NetmorphErrCode != 0:
             vbp.ErrorToDB(netmorphrun['DBdata'], 'Netmorph error: %s\nNetmorph output dir: %s' % (str(NetmorphErrCode), str(NetmorphOutputDirectory)))
             netmorphrun['status'] = 'failed'
-            self.RTfailed('launch_failed', 'Response: %s' % str(response) )
+            batchrun.RTfailed('launch_failed', 'Response: %s' % str(response) )
             return False
 
-        self.RTsuccess('launch')
+        batchrun.RTsuccess('launch')
     except Exception as e:
         vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to launch Netmorph: %s' % str(e))
         netmorphrun['status'] = 'failed'
-        self.RTfailed('launch_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
+        batchrun.RTfailed('launch_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
         return False
 
     vbp.AddOutputToDB(netmorphrun['DBdata'], 'NetmorphOutputDirectory', str(NetmorphOutputDirectory))
