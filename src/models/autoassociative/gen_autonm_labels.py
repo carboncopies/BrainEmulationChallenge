@@ -70,12 +70,13 @@ def get_sample_data(Args)->tuple:
 def usable_connections_method1(MySim)->int:
     global batchrun
     # Get connectome
+    response = 'not returned'
     try:
-        response = MySim.GetAbstractConnectome(Sparse=True)
+        response = MySim.GetAbstractConnectome(Sparse=True, Pause_s=0.1)
         batchrun.RTsuccess('getabsconn')
-    except:
+    except Exception as e:
         print('NES error: failed to receive abstract model connectome')
-        batchrun.RTfailed('getabsconn_failed')
+        batchrun.RTfailed('getabsconn_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
         return -1
     PrePostNumReceptors = response['PrePostNumReceptors']
     Regions = response['Regions']
@@ -187,13 +188,14 @@ def usable_connections_method1(MySim)->int:
 # --- Based on the version at the end of autoassociative_reservoir.py
 def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
     global batchrun
+    connections_before_dict = 'not returned'
     try:
-        connections_before_dict = MySim.GetConnectome()
+        connections_before_dict = MySim.GetConnectome(Pause_s=0.1)
         batchrun.RTsuccess('getconn')
-    except:
+    except Exception as e:
         #vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
         print('NES error: failed to receive model connectome')
-        batchrun.RTfailed('getconn_failed')
+        batchrun.RTfailed('getconn_failed', 'Response: %s, Exception: %s' % (str(connections_before_dict), str(e)) )
         return -1
 
     def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
@@ -238,14 +240,15 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
     if NetmorphStatus == "None":
         return 'failed', 100.0
     elif NetmorphStatus == "Done":
+        response = 'not returned'
         try:
-            MySim.ModelSave(netmorphrun['modelname'])
+            response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
             print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
             batchrun.RTsuccess('modelsave')
-        except:
+        except Exception as e:
             vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
             print('Failed to save completed model for run %d' % netmorphrun['runID'])
-            batchrun.RTfailed('modelsave_failed')
+            batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
         result1 = int(usable_connections_method1(MySim))
@@ -328,16 +331,21 @@ def sample_launch_requests(netmorphrun:dict, launchdata:dict)->bool:
     print('...Options specified')
 
     # Start a Netmorph neural morphogenesis simulation
+    response = 'not returned'
     try:
-        NetmorphOutputDirectory, NetmorphErrCode = MySim.Netmorph_Start(sample_modelcontent, _NeuronClass='LIFC')
+        response = MySim.Netmorph_Start(sample_modelcontent, _NeuronClass='LIFC')
+        NetmorphOutputDirectory, NetmorphErrCode = response
         if NetmorphErrCode != 0:
             vbp.ErrorToDB(netmorphrun['DBdata'], 'Netmorph error: %s\nNetmorph output dir: %s' % (str(NetmorphErrCode), str(NetmorphOutputDirectory)))
             netmorphrun['status'] = 'failed'
+            self.RTfailed('launch_failed', 'Response: %s' % str(response) )
             return False
 
+        self.RTsuccess('launch')
     except Exception as e:
         vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Failed to launch Netmorph: %s' % str(e))
         netmorphrun['status'] = 'failed'
+        self.RTfailed('launch_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
         return False
 
     vbp.AddOutputToDB(netmorphrun['DBdata'], 'NetmorphOutputDirectory', str(NetmorphOutputDirectory))
@@ -491,6 +499,8 @@ if __name__ == '__main__':
     batchrun.resource_tests['getabsconn_failed'] = 0
     batchrun.resource_tests['modelsave'] = 0
     batchrun.resource_tests['modelsave_failed'] = 0
+    batchrun.resource_tests['launch'] = 0
+    batchrun.resource_tests['launch_failed'] = 0
 
     batchrun.start_batch(
         ClientInstance=ClientInstance,
