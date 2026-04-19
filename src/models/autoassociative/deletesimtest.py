@@ -171,11 +171,11 @@ vbp.AddOutputToDB(DBdata, 'NetmorphOutputDirectory', str(RunResponse["NetmorphOu
 print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputDirectory"]))
 
 # # Save model at the NES server
-# try:
-#     MySim.ModelSave(Args.modelname)
-#     print(" -- Neuronal Circuit Model saved as "+Args.modelname)
-# except:
-#     vbp.ErrorExit(DBdata, 'NES error: Model save failed')
+try:
+    MySim.ModelSave(Args.modelname)
+    print(" -- Neuronal Circuit Model saved as "+Args.modelname)
+except Exception as e:
+    vbp.ErrorExit(DBdata, 'NES error: Model save failed. Exception: '+str(e))
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
