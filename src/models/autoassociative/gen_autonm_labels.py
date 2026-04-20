@@ -473,8 +473,6 @@ if __name__ == '__main__':
         'STDP': Args.STDP,
     }
 
-    ClientInstance = ConnectClient(Args.Host, Args.Port, Args.UseHTTPS)
-
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
     numsamples = df.shape[0] # Args.batchsize
@@ -487,6 +485,9 @@ if __name__ == '__main__':
         batchsize = numsamples
 
     batchrun = BatchRun(
+        host=Args.Host,
+        port=Args.Port,
+        usehttps=Args.UseHTTPS,
         numsamples=numsamples,
         extraprepfunc=extra_prep,
         extraprepdata=EXTRAPREPDATA,
@@ -504,7 +505,6 @@ if __name__ == '__main__':
     batchrun.resource_tests['launch_failed'] = 0
 
     batchrun.start_batch(
-        ClientInstance=ClientInstance,
         batchname='Netmorph-'+Args.modelname,
         batchsize=batchsize,
         samplerequestsfunc=sample_launch_requests,
@@ -513,7 +513,6 @@ if __name__ == '__main__':
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
     batchrun.monitor_batch(
-        ClientInstance=ClientInstance,
         batchname='Netmorph-'+Args.modelname,
         batchsize=batchsize,
         evalfunc=evaluate_state_and_check_connectome,
