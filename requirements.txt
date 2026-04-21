@@ -6,3 +6,7 @@ imageio
 pandas
 joblib
 numpy==2.2.4
+h5py
+tables
+scipy
+IPython
