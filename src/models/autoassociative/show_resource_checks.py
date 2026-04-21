@@ -7,6 +7,10 @@ import json
 with open('resource_checks.json', 'r') as f:
     rc = json.load(f)
 
+print('Client instance creation times:')
+for T_Client_str in rc['T_Client']:
+    print('  %s' % T_Client_str)
+
 print('Successful API calls --')
 print('Low RAM checks       : %d' % rc['low_checked'])
 print('Launch RAM checks    : %d' % rc['launch_checked'])
