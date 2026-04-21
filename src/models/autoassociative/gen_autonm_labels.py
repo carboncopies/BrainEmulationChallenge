@@ -231,10 +231,13 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
     global batchrun
     MySim = netmorphrun['Sim']
 
+    Percent = 0
     try:
         Percent, NetmorphStatus = MySim.Netmorph_GetStatus()
+        batchrun.RTsuccess('netmorphstatus')
     except Exception as e:
         print('\n...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
+        batchrun.RTfailed('netmorphstatus_failed', 'Exception: %s' % str(e) )
         return 'running', Percent
 
     if NetmorphStatus == "None":
@@ -503,6 +506,8 @@ if __name__ == '__main__':
     batchrun.resource_tests['modelsave_failed'] = 0
     batchrun.resource_tests['launch'] = 0
     batchrun.resource_tests['launch_failed'] = 0
+    batchrun.resource_tests['netmorphstatus'] = 0
+    batchrun.resource_tests['netmorphstatus_failed'] = 0
 
     batchrun.start_batch(
         batchname='Netmorph-'+Args.modelname,
