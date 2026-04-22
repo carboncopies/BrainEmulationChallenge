@@ -237,7 +237,7 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         batchrun.RTsuccess('netmorphstatus')
     except Exception as e:
         print('\n...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
-        batchrun.RTfailed('netmorphstatus_failed', 'Exception: %s' % str(e) )
+        batchrun.RTfailed('netmorphstatus_failed', None) # Was (can be way too many): 'Exception: %s' % str(e) )
         return 'running', Percent
 
     if NetmorphStatus == "None":

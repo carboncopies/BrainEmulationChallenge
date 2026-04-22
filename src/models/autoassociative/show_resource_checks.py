@@ -32,7 +32,7 @@ print('Failed GetConnectome         : %d' % rc['getconn_failed'])
 print('Failed GetAbstractConnectome : %d' % rc['getabsconn_failed'])
 print('Failed ModelSave             : %d' % rc['modelsave_failed'])
 print('Failed Netmorph launches     : %d' % rc['launch_failed'])
-print('Failed Netmorph status checks: %d' % rc['netmorphstatus_failed'])
+print('Failed Netmorph status checks: %d (details not logged, to keep checks saving fast)' % rc['netmorphstatus_failed'])
 print('')
 
 for failure in rc['failures']:
