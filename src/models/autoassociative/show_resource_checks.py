@@ -37,5 +37,6 @@ print('')
 
 for failure in rc['failures']:
     print('%s (RAM free: %s) incident: %s' % (failure['T'], failure['OSRAMfree'], failure['action']))
+    print('\tBatch status: %d completed, %d running, %d prepped, %d failed' % (failure['status'][0], failure['status'][1], failure['status'][2], failure['status'][3]))
     print('\t%s' % failure['info'])
     print('')
