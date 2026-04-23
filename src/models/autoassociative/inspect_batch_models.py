@@ -36,8 +36,8 @@ def update_statusbar(StatusBar, batchinfo:dict, numdone:int):
         StatusBar.n = 100.0*numdone/grand_total
     StatusBar.refresh()
 
-def close_statusbar(StatusBar):
-    update_statusbar(StatusBar)
+def close_statusbar(StatusBar, batchinfo:dict):
+    update_statusbar(StatusBar, batchinfo, len(batchinfo))
     StatusBar.close()
 
 # ===== Start of program steps
@@ -99,7 +99,7 @@ if __name__ == '__main__':
         numdone += 1
         update_statusbar(statusbar, batchrun.batchinfo, numdone)
 
-    close_statusbar(statusbar)
+    close_statusbar(statusbar, batchrun.batchinfo)
 
     print('Number of neurons in each sample:\n'+str(num_neurons))
 
