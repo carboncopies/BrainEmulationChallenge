@@ -56,6 +56,7 @@ def get_Args():
     Parser.add_argument("-batchlimit", default=0, type=int, help="Never run more than this many at once (def: 0, means no limit)")
     Parser.add_argument("-from_sample", default=0, type=int, help="Samples starting at line (def: 0)")
     Parser.add_argument("-to_sample", default=0, type=int, help="Samples up to line (def: 0, meaning all)")
+    Parser.add_argument("-RCIncludeHeap", action="store_true", help="Include slow search of heap in resource check (def: False)")
     return Parser.parse_args()
 
 # Load samples parameter values from Excel file, return data frame and column identifiers
@@ -509,6 +510,13 @@ if __name__ == '__main__':
     batchrun.resource_tests['launch_failed'] = 0
     batchrun.resource_tests['netmorphstatus'] = 0
     batchrun.resource_tests['netmorphstatus_failed'] = 0
+
+    if Args.RCIncludeHeap:
+        try:
+            batchrun.ClientInstance.SetResourceChecksIncludeHeap(IncludeHeap=Args.RCIncludeHeap)
+        except Exception as e:
+            print('Unable to set IncludeHeap. Exception: '+str(e))
+            exit(1)
 
     batchrun.start_batch(
         batchname='Netmorph-'+Args.modelname,
