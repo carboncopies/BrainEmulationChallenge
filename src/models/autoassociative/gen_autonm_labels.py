@@ -37,7 +37,7 @@ from NES_interfaces.KGTRecords import plot_weights
 
 # Handle Arguments for Host, Port, etc
 def get_Args():
-    Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test Script")
+    Parser = argparse.ArgumentParser(description="BrainGenix-API Batch Run Script")
     Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
     Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
     Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
