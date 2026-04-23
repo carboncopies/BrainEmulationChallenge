@@ -60,7 +60,9 @@ if __name__ == '__main__':
             print('NES error: failed to receive model cell positions')
             exit(1)
 
-        print(str(cell_positions))
+        soma_centers = cell_positions['SomaCenters']
+
+        print('Number of neurons: %d' % len(soma_centers))
 
         # Free memory
         try:
