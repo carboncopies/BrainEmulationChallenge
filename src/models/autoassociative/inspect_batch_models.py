@@ -21,6 +21,8 @@ def get_Args():
 # ===== Start of program steps
 if __name__ == '__main__':
 
+    Args = get_Args()
+
     # Load information about completed batch runs.
     batchrun = BatchRun(
         host=Args.Host,
