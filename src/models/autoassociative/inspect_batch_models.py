@@ -27,10 +27,7 @@ if __name__ == '__main__':
     batchrun = BatchRun(
         host=Args.Host,
         port=Args.Port,
-        usehttps=Args.UseHTTPS,
-        numsamples=None,
-        extraprepfunc=None,
-        extraprepdata=None)
+        usehttps=Args.UseHTTPS)
 
     print('Number of completed samples: %d' % len(batchrun.batchinfo))
 
