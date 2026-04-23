@@ -53,10 +53,12 @@ if __name__ == '__main__':
 
     print('Number of completed samples: %d' % len(batchrun.batchinfo))
 
+    sorted_batchinfo = {k: batchrun.batchinfo[k] for k in sorted(batchrun.batchinfo)}
+
     statusbar = prepare_statusbar()
     num_neurons = []
     numdone = 0
-    for sample in batchrun.batchinfo.values():
+    for sample in sorted_batchinfo.values():
         saved_model_name = sample['modelname']
 
         # Create A New Simulation
@@ -97,9 +99,9 @@ if __name__ == '__main__':
             exit(1)
 
         numdone += 1
-        update_statusbar(statusbar, batchrun.batchinfo, numdone)
+        update_statusbar(statusbar, sorted_batchinfo, numdone)
 
-    close_statusbar(statusbar, batchrun.batchinfo)
+    close_statusbar(statusbar, sorted_batchinfo)
 
     print('Number of neurons in each sample:\n'+str(num_neurons))
 
