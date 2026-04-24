@@ -26,6 +26,10 @@ import vbpcommon as vbp
 #from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 import BrainGenix
+
+import numpy as np
+from BrainGenix.NES.VSDA import Calcium
+
 from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
 #from BrainGenix.Tools.NeuroglancerConverter import NeuroglancerConverter
 
@@ -381,27 +385,53 @@ if not Args.simID:
 
     # Carry out post-run Calcium Imaging
 
-    if (Args.RenderCA):
-        try:
-            VSDACAInstance.QueueRenderOperation()
-            VSDACAInstance.WaitForRender()
+    if Args.RenderCA:
+        # Initialize calcium imaging configuration
+        CAConfig = Calcium.Configuration()
+        CAConfig.BrightnessAmplification = 3.0
+        CAConfig.AttenuationPerUm = 0.01
+        CAConfig.VoxelResolution_nm = 0.05  # Note: actually in microns
+        CAConfig.ImageWidth_px = 1024
+        CAConfig.ImageHeight_px = 1024
+        CAConfig.NumVoxelsPerSlice = 16
+        CAConfig.ScanRegionOverlap_percent = 0
+        CAConfig.FlourescingNeuronIDs = []
+        CAConfig.NumPixelsPerVoxel_px = 1
+        CAConfig.CalciumIndicator = 'jGCaMP8'
+        CAConfig.IndicatorRiseTime_ms = 2.0
+        CAConfig.IndicatorDecayTime_ms = 40.0
+        CAConfig.IndicatorInterval_ms = 20.0
+        CAConfig.ImagingInterval_ms = 10.0
+        
+        # Create calcium imaging instrument
+        VSDACAInstance = MySim.AddVSDACa(CAConfig)
+        
+        # Define scan region (adjust values as needed)
+        BottomLeftPos_um = [-60, -60, -6]
+        TopRightPos_um = [60, 60, 6]
+        SampleRotation_rad = [0, 0, 0]
+        VSDACAInstance.DefineScanRegion(BottomLeftPos_um, TopRightPos_um, SampleRotation_rad)
+        
+        # Add parameters to database
+        vbp.AddInputToDB(DBdata, 'Calcium', {
+            'Config': CAConfig.__dict__,
+            'ScanRegion': {
+                'BottomLeft': BottomLeftPos_um,
+                'TopRight': TopRightPos_um,
+                'Rotation': SampleRotation_rad
+            }
+        })
 
-            CAimagesfolder = f"{savefolder}/ChallengeOutput/CARegions/0/Data"
-            CAparamsfile = f"{savefolder}/ChallengeOutput/CARegions/0/Params.json"
-            vbp.AddOutputToDB(DBdata, 'CAimagesfolder', CAimagesfolder)
-            vbp.AddOutputToDB(DBdata, 'CAparamsfile', CAparamsfile)
-        except:
-            vbp.ErrorToDB(DBdata, 'NES error: Failed to render CA images')
 
-        try:
-            os.makedirs(CAimagesfolder)
-            VSDACAInstance.SaveImageStack(CAimagesfolder, 10)
-        except:
-            vbp.ErrorToDB(DBdata, 'NES error: Failed to retrieve CA images to '+str(CAimagesfolder))
-
-        TotalCARenders += 1
-
-        CaJSON:dict = {
+        VSDACAInstance.QueueRenderOperation()
+        VSDACAInstance.WaitForRender()
+        
+        CAimagesfolder = f"{savefolder}/ChallengeOutput/CARegions/0/Data"
+        os.makedirs(CAimagesfolder, exist_ok=True)
+        VSDACAInstance.SaveImageStack(CAimagesfolder, 10)
+        
+        # Save metadata
+        CaJSON = {
             "SheetThickness_um": CAConfig.NumVoxelsPerSlice * CAConfig.VoxelResolution_nm,
             "ScanRegionBottomLeft_um": BottomLeftPos_um,
             "ScanRegionTopRight_um": TopRightPos_um,
@@ -409,18 +439,14 @@ if not Args.simID:
             "IndicatorName": CAConfig.CalciumIndicator,
             "ImageTimestep_ms": CAConfig.ImagingInterval_ms
         }
-        vbp.AddInputToDB(DBdata, 'Calcium', CaJSON)
-        try:
-            with open(CAparamsfile, 'w') as F:
-                F.write(json.dumps(CaJSON))
-        except:
-            vbp.ErrorToDB(DBdata, 'File error: Failed to write CA parameters to '+str(CAparamsfile))
+        with open(f"{savefolder}/ChallengeOutput/CARegions/0/Params.json", 'w') as f:
+            json.dump(CaJSON, f)
+            
+        TotalCARenders += 1
+        vbp.AddOutputToDB(DBdata, 'CalciumImages', CAimagesfolder)
+        
 
-        # NOTE: Stitching is BUGGY, temporarily deactivated.
-        #stitchedCA_folder = f"{savefolder}/CARegions/0"
-        #vbp.AddOutputToDB(DBdata, 'CAstitchedfolder', stitchedCA_folder)
-        #os.makedirs(stitchedCA_folder)
-        #CaImagingStackStitcher.StitchManySlices(CAimagesfolder, stitchedCA_folder, borderSizePx=0, nWorkers=os.cpu_count(), makeGIF=True)
+
 
     # Collect God-mode recording of neural activity
     try:
