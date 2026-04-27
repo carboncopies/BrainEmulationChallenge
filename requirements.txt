@@ -10,3 +10,6 @@ h5py
 tables
 scipy
 IPython
+plotly
+streamlit
+psutil
