@@ -5,9 +5,11 @@
 # Automates: acquisition → build HDF5 → run metrics
 #
 # Usage:
-#   ./run_pipeline.sh                           # full pipeline
+#   ./run_pipeline.sh --full-rebuild --pinggy           # full pipeline
 #   ./run_pipeline.sh --skip-acquisition        # reuse existing raw data
 #   ./run_pipeline.sh --output-folder output/20260412121829.917106-acquisition
+#   ./run_pipeline.sh --no-dashboard            # skip dashboard launch
+#   ./run_pipeline.sh --pinggy                  # expose dashboard via pinggy 
 # =============================================================================
 #
 # set -e  # Exit on any error
@@ -18,22 +20,34 @@ mkdir -p output
 
 NETWORK_CONFIG="network_config.json"
 SKIP_ACQUISITION=false
-FULL_REBUILD=true
+FULL_REBUILD=false
 OUTPUT_FOLDER=""
+DASHBOARD_FILE="dashboard.py"
+LAUNCH_DASHBOARD=true
+USE_PINGGY=false
+DASHBOARD_PORT=8501
 
 # ---- Parse arguments ----
 while [[ $# -gt 0 ]]; do
     case $1 in
-        -n|--network-config) NETWORK_CONFIG="$2";   shift 2;;
-        --skip-acquisition)  SKIP_ACQUISITION=false;  shift;;
+        -n|--network-config) NETWORK_CONFIG="$2";    shift 2;;
+        --skip-acquisition)  SKIP_ACQUISITION=false; shift;;
         --full-rebuild)      FULL_REBUILD=true;      shift;;
-        --raw-folder)        OUTPUT_FOLDER="$2";        shift 2;;
+        --output-folder)     OUTPUT_FOLDER="$2";     shift 2;;
+	-d|--dashboard)      DASHBOARD_FILE="$2";    shift 2;;
+	--no-dashboard)      LAUNCH_DASHBOARD=false; shift;;
+	--pinggy)            USE_PINGGY=true;        shift;;
+	--port)              DASHBOARD_PORT="$2";    shift 2;;
         -h|--help)
             echo "Usage: ./run_pipeline.sh [options]"
             echo "  -n, --network-config PATH Path to network_config.json"
-            echo "  --skip-acquisition        Skip step 1, reuse existing raw data"
-            echo "  --full-rebuild            Regrow network from scratch (NETMORPH + tune + acquire)"
+            echo "  --skip-acquisition        Skip step 1"
+            echo "  --full-rebuild            Build the full pipeline"
             echo "  --output-folder PATH      Path to existing output data folder"
+	    echo "  -d, --dashboard PATH      Path to dashboard.py"
+	    echo "  --no-dashboard            Skip launching the Streamlit dashboard"
+	    echo "  --pinggy                  Expose dashboard via Pinggy tunnel"
+	    echo "  --port PORT               Dashboard port (default: 8501)"
             exit 0;;
         *) echo "Unknown option: $1"; exit 1;;
     esac
@@ -138,6 +152,76 @@ python in_domain_metrics.py \
     2>&1 | tee "$METRICS_FOLDER/metrics_log.txt"
 
 echo ""
+
+# ---- Step 5: Launch Dashboard ----
+if [ "$LAUNCH_DASHBOARD" = true ]; then
+    echo "[Step 5/5] Launching dashboard..."
+
+    # Copy dashboard.py to the metrics folder if not already there
+
+    if [ -f "$DASHBOARD_FILE" ] && [ ! -f "$METRICS_FOLDER/dashboard.py" ]; then
+        cp "$DASHBOARD_FILE" "$METRICS_FOLDER/dashboard.py"
+        echo "  Copied $DASHBOARD_FILE → $METRICS_FOLDER/"
+    fi
+
+    if [ "$USE_PINGGY" = true ]; then
+        # ---- Pinggy tunnel: creates a public URL ----
+        echo ""
+        echo "  Starting Streamlit + Pinggy tunnel..."
+        echo ""
+ 
+        # Start Streamlit in background
+        cd "$METRICS_FOLDER"
+        streamlit run dashboard.py \
+            --server.port "$DASHBOARD_PORT" \
+            --server.headless true \
+            --server.address localhost &
+        STREAMLIT_PID=$!
+        cd - > /dev/null
+ 
+        # Wait for Streamlit to start
+        sleep 3
+ 
+        echo "  Streamlit running on port $DASHBOARD_PORT"
+        echo ""
+        echo "  Starting Pinggy tunnel..."
+        echo "  A public URL will appear below — share it with your team."
+        echo "  Press Ctrl+C to stop everything."
+        echo ""
+ 
+        # Clean up both processes on Ctrl+C
+        trap "echo ''; echo 'Shutting down...'; kill $STREAMLIT_PID 2>/dev/null; exit 0" INT
+ 
+        # Start Pinggy tunnel (press Enter if asked for password)
+        ssh -p 443 -R0:localhost:$DASHBOARD_PORT qr@free.pinggy.io
+ 
+        # Clean up if Pinggy exits on its own
+        kill $STREAMLIT_PID 2>/dev/null
+
+	else
+        # ---- Local only ----
+        echo ""
+        echo "  To access from your local machine, run this in a separate terminal:"
+        echo ""
+        echo "    ssh -L $DASHBOARD_PORT:localhost:$DASHBOARD_PORT veena@pve.braingenix.org"
+        echo ""
+        echo "  Then open: http://localhost:$DASHBOARD_PORT"
+        echo ""
+        echo "  Or re-run with --pinggy for a public URL anyone can access."
+        echo "  Press Ctrl+C to stop the dashboard."
+        echo ""
+
+        cd "$METRICS_FOLDER"
+        streamlit run dashboard.py \
+            --server.port "$DASHBOARD_PORT" \
+            --server.headless true
+    fi
+else
+    echo "[Step 5/5] Skipping dashboard."
+fi
+
+echo ""
+
 echo "============================================="
 echo " Pipeline complete!"
 echo "============================================="
@@ -145,5 +229,3 @@ echo " output data:    $OUTPUT_FOLDER"
 echo " HDF5:        $H5_FILE"
 echo " Metrics:     $METRICS_FOLDER"
 echo "============================================="
-
-
