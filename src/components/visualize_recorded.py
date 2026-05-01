@@ -22,6 +22,8 @@ Parser.add_argument("-y", default=12, type=float, help="Figure height (inches)")
 Parser.add_argument("--animate", action="store_true", help="Animate the plots over time")
 Parser.add_argument("-framesize", default=100, type=int, help="Number of time points per frame")
 Parser.add_argument("--save", type=str, help="Save animation to file (mp4 or gif)")
+Parser.add_argument("--csv", action="store_true", help="Expect CSV file (default is Pickle)")
+Parser.add_argument("-fspikes", type=str, help="Spikes CSV Data file path")
 Args = Parser.parse_args()
 
 if not Args.f:
@@ -32,14 +34,30 @@ if not os.path.exists(Args.f):
     print('File not found at '+str(Args.f))
     exit(1)
 
-with open(Args.f, 'rb') as f:
-    data_dict = pickle.load(f)
+if Args.csv:
+    import pandas as pd
+    df = pd.read_csv(Args.f)
+    max_neuron_id = max(df['neuron_id'])
+    Vm_cells = []
+    for i in range(max_neuron_id+1):
+        subset = df[df['neuron_id']==i]
+        Vm_cells.append( list(subset['value']) )
+    print('Loaded data.')
+    t_ms = list(df[df['neuron_id']==0]['t_ms'])
+    sf = pd.read_csv(Args.fspikes)
+    spikes_cells = []
+    for i in range(max_neuron_id+1):
+        subset = sf[sf['neuron_id']==i]
+        spikes_cells.append( list(subset['spike_time_ms']) )
+    print('Loaded spikes.')
 
-print('Loaded data.')
-
-t_ms = data_dict['t_ms']
-Vm_cells = data_dict['Vm_cells']
-spikes_cells = data_dict['spikes_cells']
+else:
+    with open(Args.f, 'rb') as f:
+        data_dict = pickle.load(f)
+    print('Loaded data.')
+    t_ms = data_dict['t_ms']
+    Vm_cells = data_dict['Vm_cells']
+    spikes_cells = data_dict['spikes_cells']
 
 SPIKE_PLOT_LEVEL=30.0
 

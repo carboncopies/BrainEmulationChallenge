@@ -160,7 +160,7 @@ if not Args.groundtruth:
 
     try:
         res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
-        print("Modified model into divergent submitted emulation")
+        print("Modified model into divergent submitted emulation by changing dynamic parameters.")
         print('')
     except Exception as e:
         vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
@@ -221,7 +221,6 @@ except Exception as e:
 recording_dict = None
 try:
     recording_dict = MySim.GetRecording()
-    print(recording_dict)
     if Args.groundtruth:
         csv_path = f"{savefolder}/groundtruth-Vm.csv"
     else:
