@@ -1,11 +1,10 @@
 #!../../../venv/bin/python
 
-# This script was creaed by copying acquisition_template.py.
+# This script was creaed by copying sub1_acquisition.py.
 #
 # This script creates a model that diverges slightly from the ground-truth.
 # Features:
-# - Structure is unchanged, identical to GT.
-# - SC neuron parameters modified to remove/reduce refractory period.
+# - Structure is modified by effectively deleting neuron(s), by setting connections to 0.
 #
 # Note that the modified model is not saved. Each time this script is run
 # we use the API to reload the GT model and we apply modifications to turn
@@ -150,20 +149,74 @@ except Exception as e:
 
 if not Args.groundtruth:
 
-    editpars = {
-        #"MembranePotential_mV": ,
-        #"RestingPotential_mV": ,
-        #"SpikeThreshold_mV": ,
-        #"DecayTime_ms": ,
-        "AfterHyperpolarizationAmplitude_mV": 0.0, # see default value neuron_Vahp_mV in README.md
-    }
+    # Pick the neurons to isolate and thereby effectively eliminate
+    isolate = [ 9 ]
+
+    # Fetch abstract connectome to identify full list of neurons
+    try:
+        response = MySim.GetAbstractConnectome(Sparse=True)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+
+    # Here, we'll make do with the 'Types' list to identify the neuron IDs
+    if 'Types' not in response:
+        print("Error: Missing 'Types' list.")
+        exit(1)
+    num_neurons = len(response['Types'])
+
+    def connection_exists(pre:int, post:int, PrePostNumReceptors:list)->bool:
+        for connection in PrePostNumReceptors:
+            if connection[0]==pre and connection[1]==post and connection[2]>0:
+                return True
+        return False
+
+    PrePostNumReceptors = response['PrePostNumReceptors']
+
+    # New effective conductances are set to 0 for each pre-post neuron
+    # pair specified. Specify in both directions to sever effective
+    # connection regardless of direction of causal signal path.
+    # We have to be careful to use information collected about the
+    # connectome, because the modification API request fails if you
+    # attempt to change connections that do not exist.
+    PreSynList = []
+    PostSynList = []
+    all_neurons = [ idx for idx in range(num_neurons) ]
+    for isolate_idx in isolate:
+        for i in range(num_neurons):
+            if connection_exists(isolate_idx, i, PrePostNumReceptors):
+                PreSynList.append( isolate_idx )
+                PostSynList.append( i )
+            if connection_exists(i, isolate_idx, PrePostNumReceptors):
+                PreSynList.append( i )
+                PostSynList.append( isolate_idx)
+
+    ConductanceList = [ 0.0 for i in range(len(PreSynList)) ]
+
+    print('Isolating: '+str(isolate))
+
+    for i in range(len(PreSynList)):
+        print('(%d -> %d = %d)' % (PreSynList[i], PostSynList[i], ConductanceList[i]), end=" ")
+    print('')
 
     try:
-        res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
-        print("Modified model into divergent submitted emulation by changing dynamic parameters.")
-        print('')
-    except Exception as e:
-        vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
+        setresponse = MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+        print("\nModified model into divergent submitted emulation by effectively removing neuron(s).")
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
+    if 'StatusCode' not in setresponse:
+        print('Error: Batch setting connections failed, no status code')
+        exit(1)
+    if setresponse['StatusCode'] != 0:
+        print('Error: Batch setting returned error code')
+        exit(1)
+
+    # Double-check if isolated neurons are now isolated
+    try:
+        response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+    PrePostNumReceptors = response['PrePostNumReceptors']
+    print('PrePostNumReceptors: '+str(PrePostNumReceptors))
 
 ### ========================================= ###
 ### Dynamic Data Acquisition                  ###
@@ -224,7 +277,7 @@ try:
     if Args.groundtruth:
         csv_path = f"{savefolder}/groundtruth-Vm.csv"
     else:
-        csv_path = f"{savefolder}/sub1-Vm.csv"
+        csv_path = f"{savefolder}/sub2-Vm.csv"
     save_nes_recording_csv(recording_dict, csv_path)
     print("Saved recording CSV:", csv_path)
     vbp.AddOutputToDB(DBdata, "recording_csv", csv_path)
@@ -240,7 +293,7 @@ try:
     if Args.groundtruth:
         spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
     else:
-        spike_csv_path = f"{savefolder}/sub1-spikes.csv"
+        spike_csv_path = f"{savefolder}/sub2-spikes.csv"
 
     with open(spike_csv_path, "w", newline="") as f:
         writer = csv.writer(f)
