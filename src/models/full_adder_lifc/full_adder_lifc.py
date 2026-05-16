@@ -37,10 +37,23 @@ from NES_interfaces.KGTRecords import plot_recorded
 import BrainGenix.NES as NES
 
 
+def ParseBool(value):
+    if isinstance(value, bool):
+        return value
+
+    normalized = value.lower()
+    if normalized in ("true", "1", "yes", "on"):
+        return True
+    if normalized in ("false", "0", "no", "off"):
+        return False
+
+    raise argparse.ArgumentTypeError("Expected a boolean value")
+
+
 Parser = argparse.ArgumentParser(description="LIFCNeuron test script")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
-Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+Parser.add_argument("-UseHTTPS", nargs="?", const=True, default=False, type=ParseBool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
 Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
@@ -694,4 +707,3 @@ if isinstance(recording_dict, dict):
         print("Error: Recording data is missing or empty")
 else:
     print("Error: Invalid recording format received")
-
