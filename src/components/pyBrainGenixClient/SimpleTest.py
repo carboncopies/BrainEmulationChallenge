@@ -1,6 +1,7 @@
 # Simple Test Example For BG
 import time
 import base64
+from pathlib import PurePosixPath
 
 import BrainGenix.NES as NES
 
@@ -124,7 +125,10 @@ def main():
     for Image in ImageHandles:
         print(f"    -- Saving Image '{Image}'")
         ImageData = VSDAEMInstance.GetImage(Image)
-        with open(Image.split("/")[1],"wb") as FileHandler:
+        ImageFilename = PurePosixPath(Image).name
+        if not ImageFilename:
+            raise ValueError(f"Invalid image handle: {Image!r}")
+        with open(ImageFilename,"wb") as FileHandler:
             FileHandler.write(base64.decodebytes(ImageData))
 
 
