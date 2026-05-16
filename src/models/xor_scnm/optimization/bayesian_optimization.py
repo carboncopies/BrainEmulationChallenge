@@ -29,7 +29,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Paths
-XOR_DIR = Path.home() / "BrainGenix/BrainEmulationChallenge/src/models/xor_scnm"
+XOR_DIR = Path(__file__).resolve().parents[1]
 CONFIG_FILE = "nesvbp-xor-res-sep-targets"
 RESERVOIR_SCRIPT = "./xor_scnm_groundtruth_reservoir.py"
 CONNECTOME_SCRIPT = "./xor_scnm_groundtruth_connectome.py"
