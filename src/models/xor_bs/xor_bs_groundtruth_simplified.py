@@ -67,7 +67,7 @@ bg_api.BGNES_simulation_create(name=sys_name, seed=randomseed)
 
 # 3. Define ground-truth model
 
-INITTEXT1='''
+INITTEXT1=r'''
 1. Defining an XOR logic circuit composed of ball-and-stick
    principal neurons and interneurons. The network and its
    connectivity are specified explicitly.
