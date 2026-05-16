@@ -53,7 +53,7 @@ def plot_neuron_somas(pyramidal, pyramidal_size, interneurons, interneurons_size
     pyramidal_size = np.array(pyramidal_size)
     interneurons_size = np.array(interneurons_size)
 
-    fig = plt.figure(figsize=(8, 6))
+    fig = plt.figure(figsize=FIGSIZE)
     ax = fig.add_subplot(111, projection='3d')
 
     # Get the current axes limits
@@ -146,7 +146,7 @@ def plot_connections(ax, objects, conn_matrix, color="k", alpha=0.3):
 
 def plot_neurons(objects, connectionmatrix=None):
     """objects: list of dicts with type='sphere' or 'box'"""
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=FIGSIZE)
     ax = fig.add_subplot(111, projection='3d')
 
     for obj in objects:
