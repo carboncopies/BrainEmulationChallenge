@@ -1,4 +1,5 @@
 import neuroglancer
+from time import sleep
 
 ip = '0.0.0.0' # or public IP of the machine for sharable display
 port = 8080 # change to an unused port number
@@ -14,4 +15,4 @@ print(viewer)
 
 
 while True:
-    pass
+    sleep(1)
