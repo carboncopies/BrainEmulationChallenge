@@ -31,6 +31,34 @@ class System:
         self.neurons = self.find_neurons(retrieved_file)
         self.receptors = self.find_receptors(retrieved_file)
         self.shapes = self.find_shapes(retrieved_file)
+        self.compartments_by_id = self.index_requests_by_id(
+            self.compartments,
+            RPCpath['compartment'],
+            ('ID', 'Id', 'id', 'CompartmentID'),
+        )
+        self.shapes_by_id = self.index_shapes_by_id(self.shapes)
+
+    def get_request_id(self, NESrequest:dict, RPC:str, IDKeys:tuple, FallbackID:int):
+        for IDKey in IDKeys:
+            if IDKey in NESrequest[RPC]:
+                return NESrequest[RPC][IDKey]
+        return FallbackID
+
+    def index_requests_by_id(self, NESrequests:list, RPC:str, IDKeys:tuple)->dict:
+        RequestsByID = {}
+        for Index, NESrequest in enumerate(NESrequests):
+            RequestID = self.get_request_id(NESrequest, RPC, IDKeys, Index)
+            RequestsByID[RequestID] = NESrequest
+        return RequestsByID
+
+    def index_shapes_by_id(self, shapes:list)->dict:
+        ShapesByID = {}
+        for Index, Shape in enumerate(shapes):
+            ShapeType, NESrequest = Shape
+            RPC = RPCpath[ShapeType]
+            ShapeID = self.get_request_id(NESrequest, RPC, ('ID', 'Id', 'id', 'ShapeID'), Index)
+            ShapesByID[ShapeID] = Shape
+        return ShapesByID
 
     def find_compartments(self, retrieved_file:list):
         RPC = RPCpath['compartment']
@@ -49,9 +77,26 @@ class System:
         return neurons
 
     def get_compartment(self, compartment_id:int)->dict:
-        if compartment_id >= len(self.compartments):
+        compartment = self.compartments_by_id.get(compartment_id)
+        if compartment is not None:
+            return compartment
+        try:
+            if compartment_id >= len(self.compartments):
+                return None
+        except TypeError:
             return None
         return self.compartments[compartment_id]
+
+    def get_shape(self, shape_id:int):
+        shape = self.shapes_by_id.get(shape_id)
+        if shape is not None:
+            return shape
+        try:
+            if shape_id >= len(self.shapes):
+                return None
+        except TypeError:
+            return None
+        return self.shapes[shape_id]
 
     def find_receptors(self, retrieved_file:list):
         RPC = RPCpath['receptor']
@@ -110,15 +155,22 @@ class System:
         return self.neurons
 
     def get_all_somas(self)->list:
-        somaIDs = []
-        for n in self.neurons:
-            somaIDs.append( n[RPCpath['neuron']]['SomaIDs'][0] )
         somas = []
-        for s_idx in somaIDs:
-            if self.shapes[s_idx][0] == 'sphere':
-                somas.append( self.shapes[s_idx][1][RPCpath['sphere']] )
+        for n in self.neurons:
+            soma_compartment_id = n[RPCpath['neuron']]['SomaIDs'][0]
+            soma_compartment = self.get_compartment(soma_compartment_id)
+            if soma_compartment is None:
+                print('Warning: Soma compartment with ID '+str(soma_compartment_id)+' was not found! Skipped.')
+                continue
+            soma_shape_id = soma_compartment[RPCpath['compartment']]['ShapeID']
+            soma_shape = self.get_shape(soma_shape_id)
+            if soma_shape is None:
+                print('Warning: Soma shape with ID '+str(soma_shape_id)+' was not found! Skipped.')
+                continue
+            if soma_shape[0] == 'sphere':
+                somas.append( soma_shape[1][RPCpath['sphere']] )
             else:
-                print('Warning: Shape with index '+str(s_idx)+'is not a sphere! Skipped.')
+                print('Warning: Shape with ID '+str(soma_shape_id)+' is not a sphere! Skipped.')
         return somas
 
     def get_all_soma_coords(self)->list:
