@@ -28,7 +28,7 @@ import BrainGenix
 Parser = argparse.ArgumentParser(description="LIFCNeuron test script")
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
-Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+Parser.add_argument("-UseHTTPS", nargs="?", const=True, default=False, type=vbp.ParseBool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
 Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")

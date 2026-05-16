@@ -40,7 +40,7 @@ def get_Args():
     Parser = argparse.ArgumentParser(description="BrainGenix-API Batch Run Script")
     Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
     Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
-    Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+    Parser.add_argument("-UseHTTPS", nargs="?", const=True, default=False, type=vbp.ParseBool, help="Enable or disable HTTPS")
     Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
     Parser.add_argument("-modelname", default="autoassociative", type=str, help="Stem name of neuronal circuit models to save")
     Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")

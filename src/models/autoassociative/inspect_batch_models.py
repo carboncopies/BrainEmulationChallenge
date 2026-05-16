@@ -15,7 +15,7 @@ def get_Args():
     Parser = argparse.ArgumentParser(description="Batch inspection script")
     Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
     Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
-    Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+    Parser.add_argument("-UseHTTPS", nargs="?", const=True, default=False, type=vbp.ParseBool, help="Enable or disable HTTPS")
     return Parser.parse_args()
 
 # Status bar helper functions

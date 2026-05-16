@@ -1,6 +1,7 @@
 # Enable common components used by multiple models:
 from datetime import datetime
 from time import sleep
+import argparse
 import json
 import os
 from sys import path
@@ -11,6 +12,18 @@ path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 import BrainGenix.NES as NES
 
 from NES_interfaces.KGTRecords import extract_t_Vm, extract_spiketimes, save_t_Vm_pickled, plot_t_Vm, save_connections_pickled, plot_weights
+
+def ParseBool(value):
+    if isinstance(value, bool):
+        return value
+
+    normalized = str(value).strip().lower()
+    if normalized in ('1', 'true', 't', 'yes', 'y', 'on'):
+        return True
+    if normalized in ('0', 'false', 'f', 'no', 'n', 'off'):
+        return False
+
+    raise argparse.ArgumentTypeError('Expected a boolean value')
 
 def PlotAndStoreConnections(connections_dict:dict, savefolder:str, nameappend:str, figspecs:dict, receptor='AMPA', usematrix='weights')->bool:
     import numpy as np

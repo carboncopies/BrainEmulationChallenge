@@ -49,7 +49,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-Resolution_um", default=0.05, type=float, help="Resolution in microns of each voxel")
 Parser.add_argument("-SubdivideSize", default=5, type=int, help="Amount to subdivide region in, 1 is full size, 2 is half size, etc.")
-Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
+Parser.add_argument("-UseHTTPS", nargs="?", const=True, default=False, type=vbp.ParseBool, help="Enable or disable HTTPS")
 Parser.add_argument("-DownloadEM", action="store_true", help="Enable downloading of EM Images")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Args = Parser.parse_args()
@@ -757,4 +757,3 @@ except Exception as e:
     print('Failed to update the SimDatabase: '+str(e))
 
 print(" -- Done.")
-
