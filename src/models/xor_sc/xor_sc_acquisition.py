@@ -438,9 +438,7 @@ else:
                 if len(neuron_Ca_data) < 1:
                     print('No Calcium concentration data for neuron '+neuron_id)
                 else:
-                    fig = plt.figure(figsize=figspecs['figsize'])
-                    gs = fig.add_gridspec(len(E_mV),1, hspace=0)
-                    axs = gs.subplots(sharex=True, sharey=True)
+                    fig, axs = plt.subplots(figsize=figspecs['figsize'])
                     axs.set_xlabel("Time (ms)")
                     axs.set_ylabel("Calcium Concentrations")
                     fig.suptitle('Neuron %s' % neuron_id)
