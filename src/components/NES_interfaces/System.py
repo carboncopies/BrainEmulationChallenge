@@ -6,7 +6,7 @@ Definitions of in-silico ground-truth systems.
 '''
 
 import matplotlib.pyplot as plt
-from time import sleep
+from time import monotonic, sleep
 import json
 
 import common.glb as glb
@@ -55,11 +55,15 @@ class System:
     def get_recording(self)->dict:
         return glb.bg_api.BGNES_get_recording()
 
-    def run_for(self, t_run_ms:float, blocking=True):
+    def run_for(self, t_run_ms:float, blocking=True, timeout_s:float=300.0):
         glb.bg_api.BGNES_simulation_runfor(t_run_ms)
         if not blocking: return
-        # TODO: *** Beware that the following can get stuck.
+        if timeout_s is not None and timeout_s < 0:
+            raise ValueError('timeout_s must be nonnegative or None')
+        deadline_s = None if timeout_s is None else monotonic() + timeout_s
         while glb.bg_api.BGNES_get_simulation_status()[0]:
+            if deadline_s is not None and monotonic() >= deadline_s:
+                raise TimeoutError('NES simulation did not finish within %s seconds' % timeout_s)
             sleep(0.005)
 
     def to_dict(self)->dict:
