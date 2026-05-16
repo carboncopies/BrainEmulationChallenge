@@ -53,7 +53,7 @@ class Recording_Electrode:
 		2. Multiply vector coordinates with the ratios given in eloc_ratio.
 		3. Add the resulting vector to the tip position.
 		'''
-		tip_to_end = self.tip_position - self.end_position
+		tip_to_end = self.end_position - self.tip_position
 		vec_to_add = tip_to_end * eloc_ratio[2]
 		sysloc_um = self.tip_position + vec_to_add
 		return sysloc_um
