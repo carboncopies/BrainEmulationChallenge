@@ -31,6 +31,12 @@ default_path = None
 default_sidesize = None
 default_overlap = None
 default_interpolation = None
+
+def normalize_interpolation(interpolation_value):
+    if interpolation_value[0].lower() == 'a':
+        return 'area'
+    return 'cubic'
+
 try:
     with open('.sliceviewer-dir','r') as f:
         data = json.load(f)
@@ -65,6 +71,8 @@ else:
         sidesize = input('Stiched side size in px (def.=%d): ' % default_sidesize)
         if sidesize == '':
             sidesize = default_sidesize
+        else:
+            sidesize = int(sidesize)
     else:
         sidesize = input('Stiched side size in px: ')
         if sidesize == '':
@@ -89,27 +97,21 @@ else:
             overlap = int(overlap)
 
 if Args.interpolation:
-    interpolation = float(Args.interpolation)
+    interpolation = normalize_interpolation(Args.interpolation)
 else:
     if default_interpolation:
         interpolation = input('Interpolation [c]ubic/[a]rea (def.=%s): ' % default_interpolation)
         if interpolation == '':
             interpolation = default_interpolation
         else:
-            if interpolation[0] == 'a':
-                interpolation = 'area'
-            else:
-                interpolation = 'cubic'
+            interpolation = normalize_interpolation(interpolation)
     else:
         interpolation = input('Interpolation [c]ubic/[a]rea: ')
         if interpolation == '':
             print('Missing interpolation.')
             exit(1)
         else:
-            if interpolation[0] == 'a':
-                interpolation = 'area'
-            else:
-                interpolation = 'cubic'
+            interpolation = normalize_interpolation(interpolation)
 
 maxcontrast = (input('Maximize contrast? (y/N) ') == 'y')
 
