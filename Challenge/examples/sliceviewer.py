@@ -124,12 +124,31 @@ all_files = listdir(dirpath)
 
 print('Found %d files.' % len(all_files))
 
+
+def parse_slice_index(fname):
+    p = fname.find('_Slice')
+    if p < 0:
+        return None
+
+    u = fname.find('_', p+6)
+    if u < 0:
+        return None
+
+    try:
+        return int(fname[p+6:u])
+    except ValueError:
+        return None
+
 slices = set()
 for fname in all_files:
-    p = fname.find('_Slice')
-    u = fname.find('_', p+6)
-    slice_idx = int(fname[p+6:u])
+    slice_idx = parse_slice_index(fname)
+    if slice_idx is None:
+        continue
     slices.add(slice_idx)
+
+if not slices:
+    print('No slice image files found in directory.')
+    exit(1)
 
 print('Number of slices     : '+str(len(slices)))
 print('Smallest slice number: '+str(min(slices)))
