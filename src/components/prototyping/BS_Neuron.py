@@ -121,6 +121,9 @@ class BS_Neuron(Neuron):
         self.tau_spont_mean_stdev_ms = mean_stdev
         mu = self.tau_spont_mean_stdev_ms[0]
         sigma = self.tau_spont_mean_stdev_ms[1]
+        if mu == 0 or sigma == 0:
+            self.dt_spont_dist = None
+            return
         a, b = 0, 2*mu
         self.dt_spont_dist = stats.truncnorm((a - mu) / sigma, (b - mu) / sigma, loc=mu, scale=sigma)
 
@@ -145,8 +148,7 @@ class BS_Neuron(Neuron):
             'vPSP': self.vPSP,
 
             'tau_spont_mean_stdev_ms': self.tau_spont_mean_stdev_ms,
-            't_spont_next': self.t_spont_next, # TODO: Should this be here?
-            'dt_spont_dist': self.dt_spont_dist, # TODO: Should this be here?
+            't_spont_next': self.t_spont_next,
 
             'morphology': morphology,
             'receptors': receptors,
@@ -167,9 +169,8 @@ class BS_Neuron(Neuron):
         self.tau_PSPd = cell_data['tau_PSPd']
         self.vPSP = cell_data['vPSP']
 
-        self.tau_spont_mean_stdev_ms = cell_data['tau_spont_mean_stdev_ms']
-        self.t_spont_next = cell_data['t_spont_next'] # TODO: Should this be here?
-        self.dt_spont_dist = cell_data['dt_spont_dist'] # TODO: Should this be here?
+        self.set_spontaneous_activity(tuple(cell_data['tau_spont_mean_stdev_ms']))
+        self.t_spont_next = cell_data['t_spont_next']
 
         self.t_directstim_ms = cell_data['t_directstim_ms']
         self.receptors = cell_data['receptors'] # This needs follow-up conversion to references in System.from_dict().

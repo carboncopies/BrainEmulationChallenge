@@ -123,8 +123,7 @@ class BS_Neuron(Neuron):
             'vPSP': self.vPSP,
 
             'tau_spont_mean_stdev_ms': self.tau_spont_mean_stdev_ms,
-            't_spont_next': self.t_spont_next, # TODO: Should this be here?
-            'dt_spont_dist': self.dt_spont_dist, # TODO: Should this be here?
+            't_spont_next': self.t_spont_next,
 
             'morphology': morphology,
             'receptors': receptors,
