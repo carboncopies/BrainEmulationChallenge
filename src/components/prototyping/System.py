@@ -40,10 +40,30 @@ class System:
         '''
         Runs a specified function in any component in the System that matches id.
         '''
-        # TODO: Complete this.
-        component = None
-        result = None
-        return result
+        component = self.neuralcircuits.get(component_id)
+        if component is None:
+            component = self.regions.get(component_id)
+        if component is None:
+            for neuron in self.get_all_neurons():
+                if neuron.id == component_id:
+                    component = neuron
+                    break
+        if component is None:
+            for electrode in self.recording_electrodes:
+                if electrode.id == component_id:
+                    component = electrode
+                    break
+        if component is None and self.calcium_imaging is not None and self.calcium_imaging.id == component_id:
+            component = self.calcium_imaging
+
+        if component is None:
+            return None
+
+        component_method = getattr(component, component_function, None)
+        if not callable(component_method):
+            return None
+
+        return component_method()
 
     def add_circuit(self, circuit:NeuralCircuit)->NeuralCircuit:
         self.neuralcircuits[circuit.id] = circuit
