@@ -568,7 +568,7 @@ if (Args.RenderEM):
 
             print(" -- Reconstructing Image Stack")
             os.makedirs(f"{savefolder}/EMRegions/{i}")
-            StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/0/Data", f"{savefolder}/EMRegions/0", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
+            StackStitcher.StitchManySlices(f"{savefolder}/ChallengeOutput/EMRegions/{i}/Data", f"{savefolder}/EMRegions/{i}", borderSizePx=3, nWorkers=os.cpu_count(), makeGIF=False)
 
         # if (Args.Neuroglancer):
             # NeuroglancerConverter(VSDAEMInstance, f"{savefolder}/NeuroglancerDataset")
