@@ -8,6 +8,16 @@ from cloudvolume import CloudVolume
 from cloudvolume import Bbox
 from cloudvolume.lib import mkdir, touch
 
+direct = './D'
+to_upload = [
+    fpath for fpath in os.listdir(direct)
+    if os.path.isfile(os.path.join(direct, fpath))
+]
+to_upload.sort()
+
+if len(to_upload) == 0:
+    raise RuntimeError(f'No image files found in {direct}')
+
 info = CloudVolume.create_new_info(
     num_channels = 3,
     layer_type = 'image', # 'image' or 'segmentation'
@@ -16,7 +26,7 @@ info = CloudVolume.create_new_info(
     resolution =   [20,   20,   40], # X,Y,Z values in nanometers
     voxel_offset = [0,    0,    0], # values X,Y,Z values in voxels
     chunk_size =   [1024, 1024, 1], # rechunk of image X,Y,Z in voxels
-    volume_size =  [1024, 1024, 8], # X,Y,Z size in voxels
+    volume_size =  [1024, 1024, len(to_upload)], # X,Y,Z size in voxels
 )
 
 # If you're using amazon or the local file system, you can replace 'gs' with 's3' or 'file'
@@ -27,14 +37,9 @@ vol.provenance.owners = ['email_address_for_uploader/imager'] # list of contact 
 vol.commit_info() # generates gs://bucket/dataset/layer/info json file
 vol.commit_provenance() # generates gs://bucket/dataset/layer/provenance json file
 
-direct = './D'
-
 # progress_dir = mkdir('progress/') # unlike os.mkdir doesn't crash on prexisting 
 # done_files = set([ int(z) for z in os.listdir(progress_dir) ])
 # all_files = set(range(vol.bounds.minpt.z, vol.bounds.maxpt.z + 1))
-
-to_upload = os.listdir(direct)#[z for z in all_files.difference(done_files) ]
-to_upload.sort()
 
 
 for z in range(len(to_upload)):
@@ -47,5 +52,4 @@ for z in range(len(to_upload)):
     image = image[..., np.newaxis]
     image = np.swapaxes(image, 2, 3)
     vol[:,:, z] = image
-
 
