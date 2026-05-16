@@ -360,6 +360,15 @@ class _Cylinder(Geometry):
         xyz_end = np.array(list(self.end1_um))
         dxyz = xyz_end - xyz_start
         mag_dxyz = np.sqrt(dxyz.dot(dxyz))
+        if mag_dxyz == 0:
+            voxelspecs = voxel_containing_point(xyz_start, voxel_um)
+            voxels_dict[voxelspecs['key']] = fluorescent_voxel(
+                voxelspecs['center'],
+                voxel_um,
+                neuron,
+                type_brightness=3.0)
+            return voxels_dict
+
         dxyz = (voxel_um/mag_dxyz)*dxyz
         xyz = xyz_start
         d = 0
