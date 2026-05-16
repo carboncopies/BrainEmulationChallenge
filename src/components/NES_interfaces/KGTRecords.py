@@ -17,6 +17,13 @@ from os import makedirs
 # import pandas as pd
 import pickle
 
+def _axes_list(axs)->list:
+    if hasattr(axs, 'flat'):
+        return list(axs.flat)
+    if isinstance(axs, (list, tuple)):
+        return list(axs)
+    return [axs]
+
 def extract_t_Vm(data:dict)->tuple:
     if 't_ms' not in data:
         print('extract_t_Vm Error: Missing t_ms record.')
@@ -87,7 +94,7 @@ def save_t_Vm_pickled(t_ms, Vm_cells, savefolder: str, spikes_cells=None):
 def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'linewidth':0.5, 'figext': 'pdf'}, cell_titles:list=None, spikes_cells:list=None):
     fig = plt.figure(figsize=figspecs['figsize'])
     gs = fig.add_gridspec(len(Vm_cells),1, hspace=0)
-    axs = gs.subplots(sharex=True, sharey=True)
+    axs = _axes_list(gs.subplots(sharex=True, sharey=True))
     fig.suptitle("God's eye recorded data")
     for c in range(len(Vm_cells)):
         # if c == 0:

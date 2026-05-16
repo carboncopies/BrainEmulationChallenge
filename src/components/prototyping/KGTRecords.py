@@ -11,6 +11,13 @@ from matplotlib.colors import ListedColormap
 import matplotlib.gridspec as gridspec
 from PIL import Image
 
+def _axes_list(axs)->list:
+    if hasattr(axs, 'flat'):
+        return list(axs.flat)
+    if isinstance(axs, (list, tuple)):
+        return list(axs)
+    return [axs]
+
 def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}):
     if 't_ms' not in data:
         raise Exception('plot_recorded: Missing t_ms record.')
@@ -27,7 +34,7 @@ def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'li
 
     fig = plt.figure(figsize=figspecs['figsize'])
     gs = fig.add_gridspec(len(Vm_cells),1, hspace=0)
-    axs = gs.subplots(sharex=True, sharey=True)
+    axs = _axes_list(gs.subplots(sharex=True, sharey=True))
     fig.suptitle("God's eye recorded data")
     for c in range(len(Vm_cells)):
         # if c == 0:
@@ -53,13 +60,10 @@ def plot_electrodes(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'
 
             fig = plt.figure(figsize=figspecs['figsize'])
             gs = fig.add_gridspec(len(E_mV),1, hspace=0)
-            axs = gs.subplots(sharex=True, sharey=True)
+            axs = _axes_list(gs.subplots(sharex=True, sharey=True))
             fig.suptitle('Electrode %s' % k)
             for site in range(len(E_mV)):
-                if len(E_mV)==1:
-                    axs.plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
-                else:
-                    axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
+                axs[site].plot(t_ms, E_mV[site], linewidth=figspecs['linewidth'])
             plt.draw()
             plt.savefig(savefolder+'/%s.%s' % (str(k),figspecs['figext']), dpi=300)
 
@@ -71,7 +75,7 @@ def plot_calcium_signals(savefolder: str, data:dict, figspecs:dict={'figsize':(6
 
     fig = plt.figure(figsize=figspecs['figsize'])
     gs = fig.add_gridspec(len(data['Ca_samples']),1, hspace=0)
-    axs = gs.subplots(sharex=True, sharey=True)
+    axs = _axes_list(gs.subplots(sharex=True, sharey=True))
     fig.suptitle("Calcium samples")
     for c in range(len(data['Ca_samples'])):
         # if c == 0:
