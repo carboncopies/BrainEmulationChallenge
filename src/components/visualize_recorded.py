@@ -8,6 +8,7 @@
 
 import numpy as np
 import argparse
+import ast
 import os
 import pickle
 import matplotlib.pyplot as plt
@@ -198,6 +199,42 @@ def animate_subset(cell_indices:list):
     plt.show()
 
 
+def parse_time_interval(text:str)->tuple:
+    if text.strip() == '':
+        return (0.0, TMAX)
+
+    parsed = ast.literal_eval(text)
+    if not isinstance(parsed, (list, tuple)):
+        raise ValueError('Expected a list or tuple with start and end times')
+    if len(parsed) == 0:
+        return (0.0, TMAX)
+    if len(parsed) != 2:
+        raise ValueError('Time interval must contain exactly two values')
+    if not all(isinstance(value, (int, float)) and not isinstance(value, bool) for value in parsed):
+        raise ValueError('Time interval values must be numeric')
+    if parsed[0] > parsed[1]:
+        raise ValueError('Time interval start must be less than or equal to the end')
+
+    return (float(parsed[0]), float(parsed[1]))
+
+
+def parse_cell_indices(text:str)->list:
+    if text.strip() == '':
+        return list(range(len(Vm_cells)))
+
+    parsed = ast.literal_eval(text)
+    if not isinstance(parsed, (list, tuple)):
+        raise ValueError('Expected a list or tuple of cell indices')
+    if len(parsed) == 0:
+        return list(range(len(Vm_cells)))
+    if not all(isinstance(index, int) and not isinstance(index, bool) for index in parsed):
+        raise ValueError('Cell indices must be integers')
+    if not all(0 <= index < len(Vm_cells) for index in parsed):
+        raise ValueError('Cell indices must be within the loaded cell bounds')
+
+    return list(parsed)
+
+
 # Show all cells first (static or animated)
 cell_list = list(range(len(Vm_cells)))
 if Args.animate:
@@ -207,14 +244,16 @@ else:
 
 # Then allow user to pick subset
 SHOW_SPIKES=False
-timeinterval = eval(input('Time interval in brackets: '))
-IDX_START = int(len(t_ms)*float(timeinterval[0])/TMAX)
-IDX_START = max(0, min(IDX_START, len(t_ms)-1))
-IDX_END = int(len(t_ms)*float(timeinterval[1])/TMAX)
-IDX_END = max(1, min(IDX_END, len(t_ms)))
-cell_indices = eval(input('List of cells to show with brackets (empty list=all): '))
-if len(cell_indices)==0:
-    cell_indices = list(range(len(Vm_cells)))
+try:
+    timeinterval = parse_time_interval(input('Time interval in brackets: '))
+    IDX_START = int(len(t_ms)*float(timeinterval[0])/TMAX)
+    IDX_START = max(0, min(IDX_START, len(t_ms)-1))
+    IDX_END = int(len(t_ms)*float(timeinterval[1])/TMAX)
+    IDX_END = max(1, min(IDX_END, len(t_ms)))
+    cell_indices = parse_cell_indices(input('List of cells to show with brackets (empty list=all): '))
+except (SyntaxError, ValueError) as exc:
+    print('Invalid plot selection: '+str(exc))
+    exit(1)
 if Args.animate:
     animate_subset(cell_indices)
 else:
