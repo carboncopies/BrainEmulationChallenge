@@ -8,6 +8,7 @@
 
 import numpy as np
 import argparse
+import ast
 import os
 import pickle
 import matplotlib.pyplot as plt
@@ -57,17 +58,34 @@ def plot_connections(pre_list:list, post_list:list, vmin=None, vmax=None, cmap='
     #plt.draw()
 
 
+def parse_indices(text:str, max_count:int)->list:
+    if text.strip() == '':
+        return list(range(max_count))
+
+    parsed = ast.literal_eval(text)
+    if not isinstance(parsed, (list, tuple)):
+        raise ValueError('Expected a list or tuple of neuron indices')
+    if len(parsed) == 0:
+        return list(range(max_count))
+    if not all(isinstance(index, int) for index in parsed):
+        raise ValueError('Neuron indices must be integers')
+    if not all(0 <= index < max_count for index in parsed):
+        raise ValueError('Neuron indices must be within the loaded matrix bounds')
+
+    return list(parsed)
+
+
 # Show all cells first (static or animated)
 cell_indices = list(range(data.shape[0]))
 plot_connections(cell_indices, cell_indices)
 
 # Then allow user to pick subset
-pre_indices = eval(input('From presynaptic neurons (empty list=all): '))
-if len(pre_indices)==0:
-    pre_indices = list(range(data.shape[0]))
-post_indices = eval(input('To postsynaptic neurons (empty list=all): '))
-if len(post_indices)==0:
-    post_indices = list(range(data.shape[0]))
+try:
+    pre_indices = parse_indices(input('From presynaptic neurons (empty list=all): '), data.shape[0])
+    post_indices = parse_indices(input('To postsynaptic neurons (empty list=all): '), data.shape[0])
+except (SyntaxError, ValueError) as exc:
+    print('Invalid neuron index selection: '+str(exc))
+    exit(1)
 print(pre_indices)
 print(post_indices)
 plot_connections(pre_indices, post_indices)
