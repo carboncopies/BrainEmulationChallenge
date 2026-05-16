@@ -8,6 +8,7 @@ neural circuits.
 
 from ._Geometry import Geometry
 from .NeuralCircuit import NeuralCircuit
+from .Spatial import PlotInfo
 
 class _BSAlignedNC(NeuralCircuit):
     '''
