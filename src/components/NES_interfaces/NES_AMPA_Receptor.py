@@ -34,9 +34,10 @@ class NES_AMPA_Receptor:
 			g_peak_pS_init:float=39,
 			a_norm_init:float=1.0,
 		)->None:
+		self.ID = ID
 		API_call(
 				'NES/AMPAR/init',
-				json.dumps(
+				json.dumps({
 						'ID': ID,
 						'Gsyn_pS_init': Gsyn_pS_init,
 						'Esyn_mV_init': Esyn_mV_init,
@@ -52,15 +53,15 @@ class NES_AMPA_Receptor:
 						'x_init': x_init,
 						'g_peak_pS_init': g_peak_pS_init,
 						'a_norm_init': a_norm_init,
-					),
+					}),
 			)
 	def set_psp_type(self, psp_type:str):
 		API_call(
 				'NES/AMPAR/set_psp_type',
-				json.dumps(
-						'ID': ID,
+				json.dumps({
+						'ID': self.ID,
 						'psp_type': psp_type, # 'dblexp' or 'mxh'
-					)
+					})
 			)
 	# PROPOSAL 1: Waiting for a response can be a blocking await function as
 	# shown here.
@@ -69,12 +70,12 @@ class NES_AMPA_Receptor:
 	def np_Gsyn_t_pS_dbl(self, t_ms:np.ndarray)->np.ndarray:
 		API_call(
 				'NES/AMPAR/np_Gsyn_t_pS_dbl',
-				json.dumps(
-						'ID': ID,
-						't_ms': t_ms,
-					)
+				json.dumps({
+						'ID': self.ID,
+						't_ms': t_ms.tolist(),
+					})
 			)
-		resp = await_API_response('NES/AMPAR/np_Gsyn_t_pS_dbl', ID)
+		resp = await_API_response('NES/AMPAR/np_Gsyn_t_pS_dbl', self.ID)
 		if resp is None:
 			raise Exception(get_API_error())
 		if 'error' in resp:
@@ -86,22 +87,22 @@ class NES_AMPA_Receptor:
 	def np_Gsyn_t_pS_dbl_withcallback(self, t_ms:np.ndarray)->bool:
 		API_call(
 				'NES/AMPAR/np_Gsyn_t_pS_dbl',
-				json.dumps(
-						'ID': ID,
-						't_ms': t_ms,
-					)
+				json.dumps({
+						'ID': self.ID,
+						't_ms': t_ms.tolist(),
+					}),
 				callback=self.np_Gsyn_t_pS_dbl_handle
 			)
 		return True
 	def np_Gsyn_t_pS_mxh(self, t_ms:np.ndarray)->np.ndarray:
 		API_call(
 				'NES/AMPAR/np_Gsyn_t_pS_mxh',
-				json.dumps(
-						'ID': ID,
-						't_ms': t_ms,
-					)
+				json.dumps({
+						'ID': self.ID,
+						't_ms': t_ms.tolist(),
+					})
 			)
-		resp = await_API_response('NES/AMPAR/np_Gsyn_t_pS_mxh', ID)
+		resp = await_API_response('NES/AMPAR/np_Gsyn_t_pS_mxh', self.ID)
 		if resp is None:
 			raise Exception(get_API_error())
 		if 'error' in resp:
@@ -110,10 +111,10 @@ class NES_AMPA_Receptor:
 	def np_Gsyn_t_pS_mxh_withcallback(self, t_ms:np.ndarray)->bool:
 		API_call(
 				'NES/AMPAR/np_Gsyn_t_pS_mxh',
-				json.dumps(
-						'ID': ID,
-						't_ms': t_ms,
-					)
+				json.dumps({
+						'ID': self.ID,
+						't_ms': t_ms.tolist(),
+					}),
 				callback=self.np_Gsyn_t_pS_mxh_handle
 			)
 		return True

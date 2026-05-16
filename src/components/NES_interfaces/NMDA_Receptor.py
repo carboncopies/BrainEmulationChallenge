@@ -68,14 +68,14 @@ class NMDA_Receptor(AMPA_Receptor):
 		Modeled with a Bolzmann function.
 		Easy to use, but not directly related to physical aspects of Mg2+ blocking mechanism.
 		'''
-		return 1.0 / ( 1.0 + exp(-(self.Vm - self.V_halfblocked)/self.k_init) )
+		return 1.0 / ( 1.0 + exp(-(self.Vm_mV - self.V_halfblocked)/self.k) )
 
 	def Phi(self,
 			T:float,	# Absolute temperature.
 			z=2,		# Valenve of blocking ion (+2 for Mg2+).
 		)->float:
 		R = 8.31446261815324	# Gas constant (in J/(K*mol)).
-		F = 96 485.3321			# Faraday constant (in s*A/mol).
+		F = 96485.3321			# Faraday constant (in s*A/mol).
 		return z*F / (R*T)
 
 	def k_binding_rate(self,
