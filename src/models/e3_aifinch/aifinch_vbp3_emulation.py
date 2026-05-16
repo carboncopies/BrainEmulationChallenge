@@ -6,9 +6,11 @@
 This file is used to run, validate and test AIFinch emulations that were
 generated with aifinch_translation.py.
 '''
-import aifinch_groundtruth as kgt
-import aifinch_acquisition as acq
-import aifinch_translation as sit
+from __future__ import annotations
+
+import aifinch_vbp0_groundtruth as kgt
+import aifinch_vbp1_acquisition as acq
+import aifinch_vbp2_translation as sit
 
 # == EM Model Building: =================================================================================
 

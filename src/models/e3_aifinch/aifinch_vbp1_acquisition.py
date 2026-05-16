@@ -7,7 +7,7 @@ This file is used to generate a simulated data acquisition protocol that is appl
 the ground-truth system that was generated with aifinch_groundtruth.py.
 '''
 
-import aifinch_groundtruth as kgt
+import aifinch_vbp0_groundtruth as kgt
 
 # == Functional Recording Procedures: ===================================================================
 
@@ -35,11 +35,11 @@ class EFP_ElectrodeArray:
         target_region:kgt.Region,
         num_electrodes:int=10,
         sites_per_electrode:int=1,
-        electrode_placement:Placement):
+        electrode_placement:Placement=None):
         self.target_region = target_region
         self.num_electrodes = num_electrodes
         self.sites_per_electrode = sites_per_electrode
-        self.electrode_placement = electrode_placement
+        self.electrode_placement = electrode_placement if electrode_placement is not None else Placement()
 
     def show(self):
         pass

@@ -8,8 +8,8 @@ data acquired with aifinch_acquisition.py, with model selection and parameter
 estimation steps. The result is one or more possible AIFinch emulation representations.
 '''
 
-import aifinch_groundtruth as kgt
-import aifinch_acquisition as acq
+import aifinch_vbp0_groundtruth as kgt
+import aifinch_vbp1_acquisition as acq
 
 # == Layout Identification and Translation: =============================================================
 
