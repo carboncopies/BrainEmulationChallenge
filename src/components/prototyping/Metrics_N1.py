@@ -55,7 +55,10 @@ class Metrics_N1:
         kgt_num_neurons = len(self.kgt.get_all_neurons())
 
         num_neurons_difference = abs(emulation_num_neurons - kgt_num_neurons)
-        percentage_difference = (num_neurons_difference / kgt_num_neurons) * 100
+        if kgt_num_neurons == 0:
+            percentage_difference = 0 if emulation_num_neurons == 0 else 100
+        else:
+            percentage_difference = (num_neurons_difference / kgt_num_neurons) * 100
 
         # get connectivity matrix
         connectivity_matrix_kgt = self.build_connectivity_matrix(self.kgt)
