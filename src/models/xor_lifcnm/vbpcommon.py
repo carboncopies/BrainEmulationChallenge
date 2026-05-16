@@ -1,4 +1,5 @@
 # Enable common components used by multiple models:
+import argparse
 from datetime import datetime
 from time import sleep
 import json
@@ -9,6 +10,18 @@ from pathlib import Path
 path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 
 from NES_interfaces.KGTRecords import extract_t_Vm, save_t_Vm_pickled, plot_t_Vm
+
+def ParseBool(value):
+    if isinstance(value, bool):
+        return value
+
+    normalized = value.lower()
+    if normalized in ("true", "1", "yes", "on"):
+        return True
+    if normalized in ("false", "0", "no", "off"):
+        return False
+
+    raise argparse.ArgumentTypeError("Expected a boolean value")
 
 def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:dict)->bool:
     if not isinstance(recording_dict, dict):
