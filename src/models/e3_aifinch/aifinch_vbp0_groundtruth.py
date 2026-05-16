@@ -59,12 +59,14 @@ class Sequence:
     A sequence of patterns.
     '''
     def __init__(self,
-        list_of_ids:list=[ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ],
+        list_of_ids:list=None,
         pattern_size_mean:float=10,
         pattern_size_stdev:float=2,
         overlap_ratio_mean:float=0.1,
         overlap_ratio_stdev:float=0.01,):
-        self.list_of_ids = list_of_ids
+        if list_of_ids is None:
+            list_of_ids = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ]
+        self.list_of_ids = list(list_of_ids)
         self.patterns = []
         self.generate_patterns()
 
@@ -110,9 +112,11 @@ class AIF_DistributedAutoAssociative_NC(NeuralCircuit):
         ToDo('NES Team', 'Implement low-level modeling resources and API as required by AI Finch LTM VBP specs.')
 
     def Encode(self,
-        pattern_set=[ Sequence(), ],
+        pattern_set=None,
         encoding_method='instant',
         synapse_weight_method='binary',):
+        if pattern_set is None:
+            pattern_set = [ Sequence(), ]
         pass
         # TODO:
         # - Implement a variety of encoding methods and synapse weight methods.
@@ -134,9 +138,13 @@ class BrainRegion(Region):
     '''
     def __init__(self,
         id:str,
-        shape:Geometry=Cube(side_um=10.0),
-        content:NeuralCircuit=ArbitraryCells_NC(id='Arbitrary NC', num_cells=100),):
+        shape:Geometry=None,
+        content:NeuralCircuit=None,):
         super().__init__(id=id)
+        if shape is None:
+            shape = Cube(side_um=10.0)
+        if content is None:
+            content = ArbitraryCells_NC(id='Arbitrary NC', num_cells=100)
         self.shape = shape
         self.content = content
         # TODO:
@@ -155,8 +163,10 @@ class PatternGenerator(Region):
     '''
     def __init__(self,
         id:str,
-        pattern_set=[ Sequence(), ],):
+        pattern_set=None,):
         super().__init__(id=id)
+        if pattern_set is None:
+            pattern_set = [ Sequence(), ]
         self.pattern_set = pattern_set
 
     def random_selection(self,
