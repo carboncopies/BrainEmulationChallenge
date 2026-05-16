@@ -43,7 +43,7 @@ Parser.add_argument(
     "-Port", default=8000, type=int, help="Port number to connect to"
 )
 Parser.add_argument(
-    "-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS"
+    "-UseHTTPS", nargs="?", const=True, default=False, type=vbpcommon.ParseBool, help="Enable or disable HTTPS"
 )
 Args = Parser.parse_args()
 
