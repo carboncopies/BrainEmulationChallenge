@@ -112,8 +112,8 @@ def PlotAndStoreRecordedActivity(recording_dict:dict, savefolder:str, figspecs:d
     return True
 
 def InitExpDB(_ExpsDB:str, _DBkey:str, _scriptversion:str, _initIN:dict, _initOUT:dict)->dict:
-    _initIN['scriptversion'] = _DBkey+'-'+_scriptversion,
-    _initIN['datetime'] = datetime.now().strftime('%Y%m%d%H%M%S'),
+    _initIN['scriptversion'] = _DBkey+'-'+_scriptversion
+    _initIN['datetime'] = datetime.now().strftime('%Y%m%d%H%M%S')
     return {
         'dbfile': _ExpsDB,
         'key': _DBkey,
@@ -202,7 +202,7 @@ def UpdateExpsDB(DBdata:dict)->bool:
 def ErrorToDB(DBdata:dict, errmsg:str):
     print(errmsg)
     if 'error' in DBdata['entry']['OUT']:
-        errmsg = DBdata['entry']['OUT']+'\n'+errmsg
+        errmsg = DBdata['entry']['OUT']['error']+'\n'+errmsg
     AddOutputToDB(DBdata, 'error', errmsg)
 
 def ErrorExit(DBdata:dict, errmsg:str):
