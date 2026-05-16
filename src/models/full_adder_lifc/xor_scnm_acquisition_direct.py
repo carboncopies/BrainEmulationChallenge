@@ -12,7 +12,7 @@ WBE topic-level X: data acquisition (in-silico)
 
 scriptversion='0.1.0'
 
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #import numpy as np
 from datetime import datetime
 #from time import sleep
@@ -459,9 +459,37 @@ if not Args.simID:
 
     # Collect activity-dendendent recordings
 
-    #instrument_data = MySim.GetInstrumentRecordings()
+    try:
+        instrument_data = MySim.GetInstrumentRecordings()
+    except Exception:
+        vbp.ErrorToDB(DBdata, 'NES error: Failed to retrieve instrument recordings')
+    else:
+        if 'Calcium' not in instrument_data:
+            print('No Calcium Concentration neuron data in instrument data')
+        else:
+            caimaging_data = instrument_data['Calcium']
+            if "Ca_t_ms" not in caimaging_data:
+                print('Missing Ca_t_ms record in Calcium instrument data.')
+            else:
+                Ca_t_ms = caimaging_data["Ca_t_ms"]
+                neuron_ids = sorted(
+                    (str(key) for key in caimaging_data.keys() if str(key) != "Ca_t_ms"),
+                    key=lambda key: (0, int(key)) if key.isdigit() else (1, key))
+                for neuron_id in neuron_ids:
+                    neuron_Ca_data = caimaging_data[neuron_id]
+                    if len(neuron_Ca_data) < 1:
+                        print('No Calcium concentration data for neuron '+neuron_id)
+                    else:
+                        fig, axs = plt.subplots(figsize=figspecs['figsize'])
+                        axs.set_xlabel("Time (ms)")
+                        axs.set_ylabel("Calcium Concentrations")
+                        fig.suptitle('Neuron %s' % neuron_id)
+                        axs.plot(Ca_t_ms, neuron_Ca_data, linewidth=figspecs['linewidth'])
+                        plt.draw()
+                        print(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}')
+                        plt.savefig(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}', dpi=300)
+                        plt.close(fig)
 
-    # *** TODO: Here you can add God's eye neuron-Ca signal plotting.
     def write_electrode_output(
         folder:str,
         electrode_number:int,
@@ -542,9 +570,7 @@ if not Args.simID:
     #                 if len(neuron_Ca_data) < 1:
     #                     print('No Calcium concentration data for neuron '+neuron_id)
     #                 else:
-    #                     fig = plt.figure(figsize=figspecs['figsize'])
-    #                     gs = fig.add_gridspec(len(E_mV),1, hspace=0)
-    #                     axs = gs.subplots(sharex=True, sharey=True)
+    #                     fig, axs = plt.subplots(figsize=figspecs['figsize'])
     #                     axs.set_xlabel("Time (ms)")
     #                     axs.set_ylabel("Calcium Concentrations")
     #                     fig.suptitle('Neuron %s' % neuron_id)
@@ -552,6 +578,7 @@ if not Args.simID:
     #                     plt.draw()
     #                     print(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}')
     #                     plt.savefig(savefolder+f'/Ca_{str(neuron_id)}.{figspecs["figext"]}', dpi=300)
+    #                     plt.close(fig)
 
 ### ========================================= ###
 ### Structure Data Acquisition                ###
@@ -785,4 +812,3 @@ except Exception as e:
     print('Failed to update the SimDatabase: '+str(e))
 
 print(" -- Done.")
-
