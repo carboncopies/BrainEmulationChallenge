@@ -125,6 +125,7 @@ fi
 # IMPORTANT: this template does NOT use imaging/neuroglancer/subdivide/resolution/simID options.
 if [ "$executeat" = "r" -o "$executeat" = "c" -o "$executeat" = "a" ]; then
   python3 acquisition_template.py $host $port -modelname "$modelname-tuned" -ExpsDB "./ExpsDB.json"
+  python3 sub1_test_acquisition.py $host $port -modelname "$modelname-tuned" -ExpsDB "./ExpsDB.json"
 fi
 
 echo " -- Done."

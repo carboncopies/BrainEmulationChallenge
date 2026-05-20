@@ -194,26 +194,53 @@ class build_h5:
 if __name__ == "__main__":
     current_dir   = os.getcwd()
     input_dir = os.path.join(current_dir, "output")
-    acq_folders = sorted(
-        [f for f in os.listdir(output_dir) if f.endswith('-acquisition')],
+
+    # All timestamped output dirs, newest first
+    all_dirs = sorted(
+        [f for f in os.listdir(input_dir)
+         if f.endswith('-acquisition') and os.path.isdir(os.path.join(input_dir, f))],
         reverse=True
     )
-    if not acq_folders:
-        print("ERROR: No acquisition folders found in output/")
-        exit(1)
-    folder_dir    = os.path.join(current_dir, "output", acq_folders[0])
-    print(f"Using: {folder_dir}")
-    output_folder = os.path.join(current_dir, "output", "GT_h5")
 
-    converter = build_h5(
-        vm_csv       = os.path.join(folder_dir, "groundtruth-Vm.csv"),
-        spikes_csv   = os.path.join(folder_dir, "groundtruth-spikes.csv"),
-        net_con      = os.path.join(folder_dir, "network_config.json"),
-        t_map        = os.path.join(folder_dir, "trial_map.json"),
-        h5_file_path = os.path.join(output_folder, "groundtruth.h5")
+    gt_folder  = next((f for f in all_dirs
+                       if os.path.exists(os.path.join(input_dir, f, "groundtruth-spikes.csv"))), None)
+    sub_folder = next((f for f in all_dirs
+                       if os.path.exists(os.path.join(input_dir, f, "sub-spikes.csv"))), None)
+
+    if not gt_folder:
+        print("ERROR: No groundtruth *-acquisition folder found in output/")
+        exit(1)
+    if not sub_folder:
+        print("ERROR: No sub *-acquisition folder found in output/")
+        exit(1)
+
+    gt_dir  = os.path.join(input_dir, gt_folder)
+    sub_dir = os.path.join(input_dir, sub_folder)
+    print(f"GT  dir: {gt_dir}")
+    print(f"SUB dir: {sub_dir}")
+
+    gt_output_folder = os.path.join(input_dir, "GT_h5")
+
+    gt_converter = build_h5(
+        vm_csv       = os.path.join(gt_dir, "groundtruth-Vm.csv"),
+        spikes_csv   = os.path.join(gt_dir, "groundtruth-spikes.csv"),
+        net_con      = os.path.join(gt_dir, "network_config.json"),
+        t_map        = os.path.join(gt_dir, "trial_map.json"),
+        h5_file_path = os.path.join(gt_output_folder, "groundtruth.h5")
     )
 
-    converter.build()
+    gt_converter.build()
+
+    sub_output_folder = os.path.join(input_dir, "SUB_h5")
+
+    sub_converter = build_h5(
+        vm_csv       = os.path.join(sub_dir, "sub-Vm.csv"),
+        spikes_csv   = os.path.join(sub_dir, "sub-spikes.csv"),
+        net_con      = os.path.join(gt_dir, "network_config.json"),
+        t_map        = os.path.join(sub_dir, "trial_map.json"),
+        h5_file_path = os.path.join(sub_output_folder, "sub.h5")
+    )
+    sub_converter.build()
 
 # =============================================================================
 # DATA TRANSFORMATION PIPELINE

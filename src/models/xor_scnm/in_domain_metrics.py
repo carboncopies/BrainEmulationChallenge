@@ -43,8 +43,11 @@ try:
     gt_spikes = pd.read_hdf(h5_file_path,"/spikes_raw")
     print("Spikes Data Loading done!")
 
-    sub_data = gt_data.copy()
-    sub_spikes = gt_spikes.copy()
+    sub_h5_path = os.path.join(current_dir, "output", "SUB_h5", "sub.h5")
+    sub_data    = pd.read_hdf(sub_h5_path, "/data")
+    print("SUB Voltage Data Loading done!")
+    sub_spikes  = pd.read_hdf(sub_h5_path, "/spikes_raw")
+    print("SUB Spikes Data Loading done!")
 
     #Common to both GT and SUB
     cfg  = pd.read_hdf(h5_file_path, "/network_config")
@@ -54,7 +57,10 @@ try:
 
     import json
 
-    acq_folders = sorted(glob.glob("output/*-acquisition"))
+    acq_folders = sorted(
+    f for f in glob.glob("output/*-acquisition")
+    if os.path.exists(os.path.join(f, "groundtruth-spikes.csv"))
+    )
     if not acq_folders:
         raise FileNotFoundError("No acquisition folders found in output/")
     latest_folder = acq_folders[-1]
@@ -64,7 +70,7 @@ try:
     truth_table = net_config["truth_table"]
 
 except Exception as e:
-    print(f"Data laoding failed as {e}")
+    print(f"Data loading failed as {e}")
 
 
 # In[99]:
@@ -726,6 +732,8 @@ for col in FOCUS_NEURONS:
         trial_ids    = tmap[tmap["case"] == p]["trial_id"].tolist()
         gt_trials_p  = [get_trial(gt_data,  trial_id=i) for i in trial_ids]
         sub_trials_p = [get_trial(sub_data, trial_id=i) for i in trial_ids]
+        print("tmap last t_end:", tmap["t_end"].iloc[-1])
+        print("SUB last t_ms:  ", sub_data["t_ms"].max())
         GT_resp = _resp_aligned(gt_trials_p, col, ALIGN_PRE_MS, ALIGN_POST_MS)
         SB_resp = _resp_aligned(sub_trials_p, col, ALIGN_PRE_MS, ALIGN_POST_MS)
         ax = axes[j]
@@ -967,8 +975,8 @@ def plot_isi(gt_isi_df, sub_isi_df):
             gt_row = gt_isi_df[(gt_isi_df["neuron"] == neuron) & (gt_isi_df["pattern"] == p)]
             sub_row = sub_isi_df[(sub_isi_df["neuron"] == neuron) & (sub_isi_df["pattern"] == p)]
 
-            gt_isi = gt_row["isi"].values[0]
-            sub_isi = sub_row["isi"].values[0]
+            gt_isi = gt_row["isi"].values[0] if not gt_row.empty else np.array([])
+            sub_isi = sub_row["isi"].values[0] if not sub_row.empty else np.array([])
 
             if len(gt_isi) == 0 and len(sub_isi) == 0:
                 continue  #Skip that dont give results
@@ -978,11 +986,17 @@ def plot_isi(gt_isi_df, sub_isi_df):
             else:
                 w = None
 
+            # Safely pull CV/Fano (may be missing on one side)
+            gt_cv   = gt_row["cv"].values[0]   if not gt_row.empty  else None
+            gt_fano = gt_row["fano"].values[0] if not gt_row.empty  else None
+            sub_cv   = sub_row["cv"].values[0]   if not sub_row.empty else None
+            sub_fano = sub_row["fano"].values[0] if not sub_row.empty else None
+
             # print the data
             print(f"\nNeuron: {neuron} | Pattern: {p}")
-            print(f"  GT  - CV: {gt_row['cv'].values[0]:.4f} | Fano: {gt_row['fano'].values[0]}")
-            print(f"  SUB - CV: {sub_row['cv'].values[0]:.4f} | Fano: {sub_row['fano'].values[0]}")
-            print(f"  Wasserstein: {w:.4f}" if w is not None else "  Wasserstein: N/A")
+            print(f"  GT  - CV: {gt_cv if gt_cv is None else f'{gt_cv:.4f}'} | Fano: {gt_fano}")
+            print(f"  SUB - CV: {sub_cv if sub_cv is None else f'{sub_cv:.4f}'} | Fano: {sub_fano}")
+            print(f"  Wasserstein: {w:.4f}" if w is not None else "  Wasserstein: N/A (missing on one side)")
             # plot
             fig, ax = plt.subplots(figsize=(6, 3))
             if len(gt_isi) > 0:
