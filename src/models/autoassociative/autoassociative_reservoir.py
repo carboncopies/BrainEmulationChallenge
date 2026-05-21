@@ -86,7 +86,7 @@ else:
 # Modify Netmorph model content based on overrides
 ARCHITECTURE_MODIFY = '''
 In.pyramidal=%d;
-In.interneurons=%d;
+In.interneuron=%d;
 '''
 
 NETMORPH_OBJ = '''
