@@ -1,1 +1,146 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "label": "improved_stdp.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L1"}, {"id": "components_improved_stdp_stdp_symmetric", "label": "stdp_symmetric()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L8"}, {"id": "components_improved_stdp_stdp_shifted", "label": "stdp_shifted()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L12"}, {"id": "components_improved_stdp_stdp_shifted_two_part", "label": "stdp_shifted_two_part()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L17"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L1", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "target": "matplotlib_pyplot", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L2", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "target": "components_improved_stdp_stdp_symmetric", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L8", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "target": "components_improved_stdp_stdp_shifted", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_improved_stdp_py", "target": "components_improved_stdp_stdp_shifted_two_part", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L17", "weight": 1.0}], "raw_calls": [{"caller_nid": "components_improved_stdp_stdp_symmetric", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L9"}, {"caller_nid": "components_improved_stdp_stdp_symmetric", "callee": "abs", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L9"}, {"caller_nid": "components_improved_stdp_stdp_shifted", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L14"}, {"caller_nid": "components_improved_stdp_stdp_shifted", "callee": "abs", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L14"}, {"caller_nid": "components_improved_stdp_stdp_shifted_two_part", "callee": "zeros", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L18"}, {"caller_nid": "components_improved_stdp_stdp_shifted_two_part", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L20"}, {"caller_nid": "components_improved_stdp_stdp_shifted_two_part", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L20"}, {"caller_nid": "components_improved_stdp_stdp_shifted_two_part", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L24"}, {"caller_nid": "components_improved_stdp_stdp_shifted_two_part", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py", "source_location": "L27"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_improved_stdp_py",
+      "label": "improved_stdp.py",
+      "file_type": "code",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_improved_stdp_stdp_symmetric",
+      "label": "stdp_symmetric()",
+      "file_type": "code",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L8"
+    },
+    {
+      "id": "components_improved_stdp_stdp_shifted",
+      "label": "stdp_shifted()",
+      "file_type": "code",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "components_improved_stdp_stdp_shifted_two_part",
+      "label": "stdp_shifted_two_part()",
+      "file_type": "code",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L17"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_improved_stdp_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_improved_stdp_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_improved_stdp_py",
+      "target": "components_improved_stdp_stdp_symmetric",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_improved_stdp_py",
+      "target": "components_improved_stdp_stdp_shifted",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_improved_stdp_py",
+      "target": "components_improved_stdp_stdp_shifted_two_part",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L17",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_improved_stdp_stdp_symmetric",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L9"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_symmetric",
+      "callee": "abs",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L9"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L14"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted",
+      "callee": "abs",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L14"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted_two_part",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted_two_part",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L20"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted_two_part",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L20"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted_two_part",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L24"
+    },
+    {
+      "caller_nid": "components_improved_stdp_stdp_shifted_two_part",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/improved_stdp.py",
+      "source_location": "L27"
+    }
+  ]
+}

@@ -1,1 +1,743 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "label": "Spatial.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L1"}, {"id": "common_spatial_plotinfo", "label": "PlotInfo", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L34"}, {"id": "common_spatial_plotinfo_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L35"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L35"}, {"id": "common_spatial_vec3add", "label": "vec3add()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L46"}, {"id": "common_spatial_vec3sub", "label": "vec3sub()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L49"}, {"id": "common_spatial_get_cube_vertices", "label": "get_cube_vertices()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L52"}, {"id": "array", "label": "array", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L52"}, {"id": "common_spatial_get_cube_edges", "label": "get_cube_edges()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L76"}, {"id": "common_spatial_plot_cube", "label": "plot_cube()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L87"}, {"id": "common_spatial_plot_voxel", "label": "plot_voxel()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L109"}, {"id": "common_spatial_vecbox", "label": "VecBox", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L125"}, {"id": "common_spatial_vecbox_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L130"}, {"id": "common_spatial_vecbox_show", "label": ".show()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L140"}, {"id": "common_spatial_point_is_within_box", "label": "point_is_within_box()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155"}, {"id": "common_spatial_plane", "label": "Plane", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L162"}, {"id": "common_spatial_plane_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L163"}, {"id": "common_spatial_sixplanesbox", "label": "SixPlanesBox", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L167"}, {"id": "common_spatial_sixplanesbox_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L171"}, {"id": "common_spatial_rationale_88", "label": "Expects four points: cube_definition = [         (0,0,0), (0,1,0), (1,0,0), (0,0", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L88"}, {"id": "common_spatial_rationale_110", "label": "Expects dict with 'xyz' a 3 element tuple, list or np.array and 'size' a float.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L110"}, {"id": "common_spatial_rationale_126", "label": "Note that this box is defined differently than Box below,     but a conversion c", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L126"}, {"id": "common_spatial_rationale_156", "label": "The point must be a 3D vector.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L156"}, {"id": "common_spatial_rationale_168", "label": "This box is defined by six planes.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L168"}, {"id": "common_spatial_rationale_137", "label": "# TODO: Add functions to initialize dx, dy and dz from 8 points or from", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L137"}, {"id": "common_spatial_rationale_141", "label": "# TODO: Make this also work for subvolumes where dx, dy, and dz are not", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L141"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "matplotlib_pyplot", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L9", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "mpl_toolkits_mplot3d", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "mpl_toolkits_mplot3d_art3d", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_plotinfo", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L34", "weight": 1.0}, {"source": "common_spatial_plotinfo", "target": "common_spatial_plotinfo_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L35", "weight": 1.0}, {"source": "common_spatial_plotinfo_init", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L35", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_vec3add", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L46", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_vec3sub", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L49", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_get_cube_vertices", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L52", "weight": 1.0}, {"source": "common_spatial_get_cube_vertices", "target": "array", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L52", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_get_cube_edges", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L76", "weight": 1.0}, {"source": "common_spatial_get_cube_edges", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L76", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_plot_cube", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L87", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_plot_voxel", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L109", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_vecbox", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L125", "weight": 1.0}, {"source": "common_spatial_vecbox", "target": "common_spatial_vecbox_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L130", "weight": 1.0}, {"source": "common_spatial_vecbox_init", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L130", "weight": 1.0}, {"source": "common_spatial_vecbox_init", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L130", "weight": 1.0}, {"source": "common_spatial_vecbox", "target": "common_spatial_vecbox_show", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L140", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_point_is_within_box", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155", "weight": 1.0}, {"source": "common_spatial_point_is_within_box", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155", "weight": 1.0}, {"source": "common_spatial_point_is_within_box", "target": "common_spatial_vecbox", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155", "weight": 1.0}, {"source": "common_spatial_point_is_within_box", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L155", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_plane", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L162", "weight": 1.0}, {"source": "common_spatial_plane", "target": "common_spatial_plane_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L163", "weight": 1.0}, {"source": "common_spatial_plane_init", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L163", "weight": 1.0}, {"source": "common_spatial_plane_init", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L163", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "target": "common_spatial_sixplanesbox", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L167", "weight": 1.0}, {"source": "common_spatial_sixplanesbox", "target": "common_spatial_sixplanesbox_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L171", "weight": 1.0}, {"source": "common_spatial_sixplanesbox_init", "target": "common_spatial_vecbox", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L171", "weight": 1.0}, {"source": "common_spatial_get_cube_vertices", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L55", "weight": 1.0}, {"source": "common_spatial_plot_cube", "target": "common_spatial_plotinfo", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L95", "weight": 1.0}, {"source": "common_spatial_plot_cube", "target": "common_spatial_get_cube_vertices", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L97", "weight": 1.0}, {"source": "common_spatial_plot_cube", "target": "common_spatial_get_cube_edges", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L98", "weight": 1.0}, {"source": "common_spatial_plot_voxel", "target": "common_spatial_plot_cube", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L123", "weight": 1.0}, {"source": "common_spatial_vecbox_show", "target": "common_spatial_plot_cube", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L153", "weight": 1.0}, {"source": "common_spatial_sixplanesbox_init", "target": "common_spatial_plane", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L173", "weight": 1.0}, {"source": "common_spatial_rationale_88", "target": "common_spatial_plot_cube", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L88", "weight": 1.0}, {"source": "common_spatial_rationale_110", "target": "common_spatial_plot_voxel", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L110", "weight": 1.0}, {"source": "common_spatial_rationale_126", "target": "common_spatial_vecbox", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L126", "weight": 1.0}, {"source": "common_spatial_rationale_156", "target": "common_spatial_point_is_within_box", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L156", "weight": 1.0}, {"source": "common_spatial_rationale_168", "target": "common_spatial_sixplanesbox", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L168", "weight": 1.0}, {"source": "common_spatial_rationale_137", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L137", "weight": 1.0}, {"source": "common_spatial_rationale_141", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_common_spatial_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L141", "weight": 1.0}], "raw_calls": [{"caller_nid": "common_spatial_plotinfo_init", "callee": "figure", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L36"}, {"caller_nid": "common_spatial_plotinfo_init", "callee": "title", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L37"}, {"caller_nid": "common_spatial_plotinfo_init", "callee": "add_subplot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L38"}, {"caller_nid": "common_spatial_plotinfo_init", "callee": "choice", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L40"}, {"caller_nid": "common_spatial_plotinfo_init", "callee": "choice", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L41"}, {"caller_nid": "common_spatial_get_cube_vertices", "callee": "list", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L55"}, {"caller_nid": "common_spatial_plot_cube", "callee": "Poly3DCollection", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L99"}, {"caller_nid": "common_spatial_plot_cube", "callee": "set_facecolor", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L100"}, {"caller_nid": "common_spatial_plot_cube", "callee": "add_collection3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L102"}, {"caller_nid": "common_spatial_plot_cube", "callee": "scatter", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L106"}, {"caller_nid": "common_spatial_plot_cube", "callee": "set_aspect", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L107"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "dot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "dot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}, {"caller_nid": "common_spatial_point_is_within_box", "callee": "dot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py", "source_location": "L160"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_common_spatial_py",
+      "label": "Spatial.py",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "common_spatial_plotinfo",
+      "label": "PlotInfo",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "common_spatial_plotinfo_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "common_spatial_vec3add",
+      "label": "vec3add()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "common_spatial_vec3sub",
+      "label": "vec3sub()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L49"
+    },
+    {
+      "id": "common_spatial_get_cube_vertices",
+      "label": "get_cube_vertices()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "array",
+      "label": "array",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "common_spatial_get_cube_edges",
+      "label": "get_cube_edges()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L76"
+    },
+    {
+      "id": "common_spatial_plot_cube",
+      "label": "plot_cube()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "common_spatial_plot_voxel",
+      "label": "plot_voxel()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "common_spatial_vecbox",
+      "label": "VecBox",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "common_spatial_vecbox_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L130"
+    },
+    {
+      "id": "common_spatial_vecbox_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L140"
+    },
+    {
+      "id": "common_spatial_point_is_within_box",
+      "label": "point_is_within_box()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155"
+    },
+    {
+      "id": "common_spatial_plane",
+      "label": "Plane",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "common_spatial_plane_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L163"
+    },
+    {
+      "id": "common_spatial_sixplanesbox",
+      "label": "SixPlanesBox",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L167"
+    },
+    {
+      "id": "common_spatial_sixplanesbox_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L171"
+    },
+    {
+      "id": "common_spatial_rationale_88",
+      "label": "Expects four points: cube_definition = [         (0,0,0), (0,1,0), (1,0,0), (0,0",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L88"
+    },
+    {
+      "id": "common_spatial_rationale_110",
+      "label": "Expects dict with 'xyz' a 3 element tuple, list or np.array and 'size' a float.",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L110"
+    },
+    {
+      "id": "common_spatial_rationale_126",
+      "label": "Note that this box is defined differently than Box below,     but a conversion c",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "common_spatial_rationale_156",
+      "label": "The point must be a 3D vector.",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L156"
+    },
+    {
+      "id": "common_spatial_rationale_168",
+      "label": "This box is defined by six planes.",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L168"
+    },
+    {
+      "id": "common_spatial_rationale_137",
+      "label": "# TODO: Add functions to initialize dx, dy and dz from 8 points or from",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L137"
+    },
+    {
+      "id": "common_spatial_rationale_141",
+      "label": "# TODO: Make this also work for subvolumes where dx, dy, and dz are not",
+      "file_type": "rationale",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L141"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "mpl_toolkits_mplot3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "mpl_toolkits_mplot3d_art3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_plotinfo",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plotinfo",
+      "target": "common_spatial_plotinfo_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plotinfo_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_vec3add",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_vec3sub",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_get_cube_vertices",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_get_cube_vertices",
+      "target": "array",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_get_cube_edges",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_get_cube_edges",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_plot_cube",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_plot_voxel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_vecbox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_vecbox",
+      "target": "common_spatial_vecbox_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_vecbox_init",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_vecbox_init",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_vecbox",
+      "target": "common_spatial_vecbox_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_point_is_within_box",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_point_is_within_box",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_point_is_within_box",
+      "target": "common_spatial_vecbox",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_point_is_within_box",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_plane",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plane",
+      "target": "common_spatial_plane_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plane_init",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plane_init",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_spatial_py",
+      "target": "common_spatial_sixplanesbox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L167",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_sixplanesbox",
+      "target": "common_spatial_sixplanesbox_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_sixplanesbox_init",
+      "target": "common_spatial_vecbox",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_get_cube_vertices",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plot_cube",
+      "target": "common_spatial_plotinfo",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plot_cube",
+      "target": "common_spatial_get_cube_vertices",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plot_cube",
+      "target": "common_spatial_get_cube_edges",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_plot_voxel",
+      "target": "common_spatial_plot_cube",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_vecbox_show",
+      "target": "common_spatial_plot_cube",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_sixplanesbox_init",
+      "target": "common_spatial_plane",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_88",
+      "target": "common_spatial_plot_cube",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_110",
+      "target": "common_spatial_plot_voxel",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_126",
+      "target": "common_spatial_vecbox",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_156",
+      "target": "common_spatial_point_is_within_box",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L156",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_168",
+      "target": "common_spatial_sixplanesbox",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_137",
+      "target": "src_components_common_spatial_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "common_spatial_rationale_141",
+      "target": "src_components_common_spatial_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L141",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "common_spatial_plotinfo_init",
+      "callee": "figure",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L36"
+    },
+    {
+      "caller_nid": "common_spatial_plotinfo_init",
+      "callee": "title",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "common_spatial_plotinfo_init",
+      "callee": "add_subplot",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L38"
+    },
+    {
+      "caller_nid": "common_spatial_plotinfo_init",
+      "callee": "choice",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L40"
+    },
+    {
+      "caller_nid": "common_spatial_plotinfo_init",
+      "callee": "choice",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L41"
+    },
+    {
+      "caller_nid": "common_spatial_get_cube_vertices",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L55"
+    },
+    {
+      "caller_nid": "common_spatial_plot_cube",
+      "callee": "Poly3DCollection",
+      "is_member_call": false,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L99"
+    },
+    {
+      "caller_nid": "common_spatial_plot_cube",
+      "callee": "set_facecolor",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L100"
+    },
+    {
+      "caller_nid": "common_spatial_plot_cube",
+      "callee": "add_collection3d",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L102"
+    },
+    {
+      "caller_nid": "common_spatial_plot_cube",
+      "callee": "scatter",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L106"
+    },
+    {
+      "caller_nid": "common_spatial_plot_cube",
+      "callee": "set_aspect",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L107"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "dot",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "dot",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "common_spatial_point_is_within_box",
+      "callee": "dot",
+      "is_member_call": true,
+      "source_file": "src/components/common/Spatial.py",
+      "source_location": "L160"
+    }
+  ]
+}

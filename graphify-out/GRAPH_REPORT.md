@@ -1,16 +1,16 @@
 # Graph Report - BrainEmulationChallenge  (2026-05-24)
 
 ## Corpus Check
-- 167 files · ~164,214 words
+- 167 files · ~164,353 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1693 nodes · 2911 edges · 155 communities (126 shown, 29 thin omitted)
+- 1694 nodes · 2913 edges · 157 communities (125 shown, 32 thin omitted)
 - Extraction: 88% EXTRACTED · 12% INFERRED · 0% AMBIGUOUS · INFERRED: 360 edges (avg confidence: 0.53)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `2690cac0`
+- Built from commit: `2869f03e`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -139,6 +139,8 @@
 - [[_COMMUNITY_Community 131|Community 131]]
 - [[_COMMUNITY_Community 132|Community 132]]
 - [[_COMMUNITY_Community 133|Community 133]]
+- [[_COMMUNITY_Community 155|Community 155]]
+- [[_COMMUNITY_Community 156|Community 156]]
 
 ## God Nodes (most connected - your core abstractions)
 1. `IF_neuron` - 72 edges
@@ -164,11 +166,11 @@
 - `System` --uses--> `System`  [INFERRED]
   src/components/prototyping/Metrics_C11.py → src/components/prototyping/System.py
 
-## Communities (155 total, 29 thin omitted)
+## Communities (157 total, 32 thin omitted)
 
 ### Community 0 - "Community 0"
-Cohesion: 0.06
-Nodes (44): BS_Aligned_NC, BS_Uniform_Random_NC, Generate a neural circuit composed of ball-and-stick neurons that are     connec, Generate a neural circuit composed of ball-and-stick neurons that are     connec, BS_Axon(), BS_Morphology(), BS_Receptor(), BS_Soma() (+36 more)
+Cohesion: 0.05
+Nodes (55): BS_Aligned_NC, BS_Uniform_Random_NC, Generate a neural circuit composed of ball-and-stick neurons that are     connec, Generate a neural circuit composed of ball-and-stick neurons that are     connec, BS_Axon(), BS_Morphology(), BS_Receptor(), BS_Soma() (+47 more)
 
 ### Community 1 - "Community 1"
 Cohesion: 0.03
@@ -195,20 +197,20 @@ Cohesion: 0.08
 Nodes (17): Metrics_N1, # TODO: Given that this is first of all intended to be used, BrainRegion, Define the characteristics of a brain region, such as geometric shape and     ph, Region, Record all dynamically calculated values for a maximum of t_max_ms         milli, # TODO: *** Beware that the following can get stuck., # TODO: Should we include defined instruments? (+9 more)
 
 ### Community 7 - "Community 7"
-Cohesion: 0.10
-Nodes (23): load_emulation(), load_ground_truth(), parse_command_line(), quickstart(), validate_success_criteria(), Metrics_C11, Metrics_C4, Metrics_C8 (+15 more)
+Cohesion: 0.13
+Nodes (16): load_emulation(), load_ground_truth(), parse_command_line(), quickstart(), validate_success_criteria(), Metrics_C11, Metrics_N2, Metrics_N3 (+8 more)
 
 ### Community 8 - "Community 8"
 Cohesion: 0.09
 Nodes (17): AIF_Layout, AIF_ModelSelector, DeriveLayout, init(), Layout, ModelSelector, Model selection process., AI Finch layout blueprint. (+9 more)
 
 ### Community 9 - "Community 9"
-Cohesion: 0.09
-Nodes (10): # TODO: Given that this is first of all intended to be used, Expects a list of tuples where each tuple associates a mean and stdev         sp, Record all dynamically calculated values for a maximum of t_max_ms         milli, Record with specified simulated recording instruments for a maximum         of t, # TODO: Should we include defined instruments?, # TODO: Should we include defined instruments?, # TODO: Complete this., Collects a list of references to all neurons in all neural circuits. (+2 more)
+Cohesion: 0.10
+Nodes (8): Expects a list of tuples where each tuple associates a mean and stdev         sp, Record all dynamically calculated values for a maximum of t_max_ms         milli, Record with specified simulated recording instruments for a maximum         of t, Runs a specified function in any component in the System that matches id., Collects a list of references to all neurons in all neural circuits., Find and return the geometric center of the system.         This is done by find, System, str
 
 ### Community 10 - "Community 10"
-Cohesion: 0.10
-Nodes (12): BrainRegion, Define the characteristics of a brain region, such as geometric shape and     ph, Region, Runs a specified function in any component in the System that matches id., Geometry, NeuralCircuit, str, bool (+4 more)
+Cohesion: 0.16
+Nodes (10): BrainRegion, Define the characteristics of a brain region, such as geometric shape and     ph, Region, Geometry, NeuralCircuit, str, bool, float (+2 more)
 
 ### Community 11 - "Community 11"
 Cohesion: 0.11
@@ -251,8 +253,8 @@ Cohesion: 0.14
 Nodes (10): BayesianOptimizer, main(), Run connectome analysis and parse results, Format elapsed time as MM:SS, Objective function for optimization.         Runs one actual NETMORPH test and r, Print optimization summary, Backup original config file, Restore original config file (+2 more)
 
 ### Community 21 - "Community 21"
-Cohesion: 0.14
-Nodes (10): The characteristics in specs override default characteristics. 		Any that are no, # TODO: Fix this to properly use the width dimension of the electrode, 1. Get a vector from tip to end. 		2. Multiply vector coordinates with the ratio, # TODO: We could improve efficiency by filtering so that only neurons, # TODO: We can do a lot to improve the realism of this calculation, Calculate the electric field potential at the electrode site as 		a combination, Recording_Electrode, array (+2 more)
+Cohesion: 0.19
+Nodes (7): The characteristics in specs override default characteristics. 		Any that are no, 1. Get a vector from tip to end. 		2. Multiply vector coordinates with the ratio, Calculate the electric field potential at the electrode site as 		a combination, Recording_Electrode, array, float, int
 
 ### Community 22 - "Community 22"
 Cohesion: 0.14
@@ -275,20 +277,20 @@ Cohesion: 0.30
 Nodes (18): AddInputToDB(), AddOutputToDB(), ClientFromArgs(), ErrorExit(), ErrorToDB(), ExitOrReturn(), GetMostRecentDBEntry(), GetMostRecentDBEntryIN() (+10 more)
 
 ### Community 27 - "Community 27"
-Cohesion: 0.17
-Nodes (14): common_commandline_parsing(), Common_Parameters, make_savefolder(), quickstart(), load_system(), parse_command_line(), quickstart(), system_identification() (+6 more)
+Cohesion: 0.08
+Nodes (35): common_commandline_parsing(), Common_Parameters, make_savefolder(), vec3add(), JSONEncoder, init_calcium_imaging(), init_functional_data_acquisition(), init_recording_electrode() (+27 more)
 
 ### Community 28 - "Community 28"
 Cohesion: 0.14
 Nodes (17): find_nearest(), plot_box(), plot_connections(), plot_neuron_somas(), plot_neurons(), plot_sphere(), Set 3D plot axes to equal scale so a sphere or cube looks correct., Plot straight-line connections between neuron centers.     conn_matrix[i,j] != 0 (+9 more)
 
 ### Community 29 - "Community 29"
-Cohesion: 0.13
-Nodes (12): NotesToSound, PatternMapper, An abstract alternative to a Brain Region intended as an output receiver., An abstract alternative to a Brain Region that interprets note identifiers and, A specification of connections from one Brain Region to another., An abstract mapper from an input pattern arrangement to an output pattern arrang, Region, RegionPath (+4 more)
+Cohesion: 0.15
+Nodes (10): PatternMapper, An abstract alternative to a Brain Region intended as an output receiver., A specification of connections from one Brain Region to another., An abstract mapper from an input pattern arrangement to an output pattern arrang, Region, RegionPath, SpikeMonitor, BuildEmulation (+2 more)
 
 ### Community 30 - "Community 30"
-Cohesion: 0.24
-Nodes (16): vec3add(), init_calcium_imaging(), init_functional_data_acquisition(), init_recording_electrode(), init_spontaneous_activity(), load_groundtruth(), parse_command_line(), run_functional_data_acquisition() (+8 more)
+Cohesion: 0.15
+Nodes (8): # TODO: Fix this to properly use the width dimension of the electrode, # TODO: We could improve efficiency by filtering so that only neurons, # TODO: We can do a lot to improve the realism of this calculation, Metrics_C4, # TODO: Should we include defined instruments?, # TODO: Should we include defined instruments?, # TODO: Complete this., System
 
 ### Community 31 - "Community 31"
 Cohesion: 0.24
@@ -331,8 +333,8 @@ Cohesion: 0.21
 Nodes (6): NeuralCircuit, Neuron, int, Neuron, str, str
 
 ### Community 41 - "Community 41"
-Cohesion: 0.23
-Nodes (6): ArbitraryCells_NC, NeuralCircuit, Generate a neural circuit composed of an arbitrary collection of cell types., verbose(), int, str
+Cohesion: 0.26
+Nodes (5): NotesToSound, An abstract alternative to a Brain Region that interprets note identifiers and, verbose(), int, str
 
 ### Community 42 - "Community 42"
 Cohesion: 0.15
@@ -344,7 +346,7 @@ Nodes (13): g_rec_peak, hilloc_distance, n_from, n_to, onset_delay, quantity, re
 
 ### Community 44 - "Community 44"
 Cohesion: 0.18
-Nodes (7): ActivityRecorder, AIF_DistributedAutoAssociative_NC, init(), Display parameter states of the components of one or more of a list of brain reg, Display the timeline of recorded activity of one or more of a list of brain regi, Generate a neural circuit that is able to encode auto-associative pattern memori, StateReader
+Nodes (7): ActivityRecorder, AIF_DistributedAutoAssociative_NC, Imager2D, init(), Display requested 2D sections of one or more of a list of brain regions., Display the timeline of recorded activity of one or more of a list of brain regi, Generate a neural circuit that is able to encode auto-associative pattern memori
 
 ### Community 45 - "Community 45"
 Cohesion: 0.15
@@ -358,17 +360,13 @@ Nodes (6): NES_AMPA_Receptor, Use this class as a convenient stand-in that carri
 Cohesion: 0.17
 Nodes (11): Challenge Series, code:bash (python3 -m venv venv), Contact, Dependencies, Getting Started, License, Local server integration, Overview (+3 more)
 
-### Community 49 - "Community 49"
-Cohesion: 0.27
-Nodes (11): init_experiment(), init_groundtruth(), parse_command_line(), quickstart(), # TODO: *** Do some rewriting such that all of the functional, # TODO: *** Ensure that the NES and prototype update functions are, run_experiment(), bool (+3 more)
-
 ### Community 50 - "Community 50"
 Cohesion: 0.18
 Nodes (10): About `aifinch_acquisition.py`, About `aifinch_emulation.py`, About `aifinch_groundtruth.py`, About `aifinch_translation.py`, AI Finch - Example VBP specification for Translation study, Overview, Suggested variations to explore, Suggested variations to explore (+2 more)
 
 ### Community 51 - "Community 51"
-Cohesion: 0.22
-Nodes (6): Box, Cube, Geometry, # TODO:, # TODO:, # TODO:
+Cohesion: 0.16
+Nodes (9): ArbitraryCells_NC, Box, Cube, Geometry, NeuralCircuit, # TODO:, # TODO:, # TODO: (+1 more)
 
 ### Community 52 - "Community 52"
 Cohesion: 0.22
@@ -414,10 +412,6 @@ Nodes (7): # NOTE: If the model was created with NES-Netmorph, and alternative t
 Cohesion: 0.25
 Nodes (7): Ball-and-stick neurons - Example VBP specification, code:block1 (<example-name>_<VBP-process-step>_<process-label>_<topic-lev), Double-blind data acquisition: `bs_vbp01_doubleblind_x_acquisition.py`, Emulation validation: `bs_vbp03_emulation_iii_validation.py`, KGT: `bs_vbp00_groundtruth_xi_sampleprep.py`, Overview, System identification: `bs_vbp02_translation_iv_system_identification.py`
 
-### Community 64 - "Community 64"
-Cohesion: 0.29
-Nodes (5): JSONEncoder, load_acq_data(), NumpyArrayEncoder, save_acq_data(), str
-
 ### Community 65 - "Community 65"
 Cohesion: 0.32
 Nodes (7): # NOTE:, runs_completed(), runs_failed(), runs_incomplete(), runs_running(), bool, int
@@ -446,13 +440,17 @@ Nodes (6): code:bash (./full_adder_lifc.py -Host pve.braingenix.org -Port 8000),
 Cohesion: 0.33
 Nodes (4): In CNS, the number of vesicles ready to fuse with membrane in the presence of Ca, SynTr_Quantal_Release, float, int
 
+### Community 72 - "Community 72"
+Cohesion: 0.31
+Nodes (3): Metrics_N1, # TODO: Given that this is first of all intended to be used, System
+
 ### Community 73 - "Community 73"
 Cohesion: 0.33
 Nodes (4): In CNS, the number of vesicles ready to fuse with membrane in the presence of Ca, SynTr_Quantal_Release, float, int
 
 ### Community 74 - "Community 74"
-Cohesion: 0.38
-Nodes (3): generate_knowledge_graph(), usage(), Tag.sh script
+Cohesion: 0.36
+Nodes (4): generate_knowledge_graph(), normalize_graphify_paths(), usage(), Tag.sh script
 
 ### Community 75 - "Community 75"
 Cohesion: 0.29
@@ -549,16 +547,16 @@ Nodes (3): Acknowledgements, ldr-template, Rmd
 ## Knowledge Gaps
 - **241 isolated node(s):** `Setup.sh script`, `Update.sh script`, `RunXOR.sh script`, `PushWithSubmodules.sh script`, `Setup.sh script` (+236 more)
   These have ≤1 connection - possible missing edges or undocumented components.
-- **29 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
+- **32 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `PlotInfo` connect `Community 22` to `Community 0`, `Community 32`, `Community 2`, `Community 35`, `Community 6`, `Community 9`, `Community 10`, `Community 11`, `Community 13`, `Community 18`, `Community 55`?**
-  _High betweenness centrality (0.030) - this node is a cross-community bridge._
-- **Why does `VecBox` connect `Community 11` to `Community 0`, `Community 32`, `Community 7`, `Community 18`, `Community 22`, `Community 55`, `Community 27`, `Community 30`?**
-  _High betweenness centrality (0.017) - this node is a cross-community bridge._
-- **Why does `System` connect `Community 9` to `Community 7`, `Community 72`, `Community 10`, `Community 13`, `Community 49`, `Community 21`, `Community 27`, `Community 30`?**
+- **Why does `PlotInfo` connect `Community 22` to `Community 0`, `Community 32`, `Community 2`, `Community 35`, `Community 6`, `Community 9`, `Community 10`, `Community 11`, `Community 13`, `Community 18`, `Community 55`, `Community 30`?**
+  _High betweenness centrality (0.032) - this node is a cross-community bridge._
+- **Why does `System` connect `Community 9` to `Community 0`, `Community 99`, `Community 7`, `Community 72`, `Community 10`, `Community 155`, `Community 13`, `Community 49`, `Community 21`, `Community 27`, `Community 156`, `Community 30`?**
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
+- **Why does `VecBox` connect `Community 11` to `Community 0`, `Community 32`, `Community 7`, `Community 18`, `Community 22`, `Community 55`, `Community 27`?**
   _High betweenness centrality (0.017) - this node is a cross-community bridge._
 - **Are the 35 inferred relationships involving `System` (e.g. with `str` and `bool`) actually correct?**
   _`System` has 35 INFERRED edges - model-reasoned connections that need verification._

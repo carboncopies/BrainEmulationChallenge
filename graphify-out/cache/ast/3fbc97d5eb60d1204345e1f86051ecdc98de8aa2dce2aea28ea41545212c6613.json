@@ -1,1 +1,831 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_ifneuron_py", "label": "IFneuron.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L1"}, {"id": "prototyping_ifneuron_dblexp", "label": "dblexp()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52"}, {"id": "prototyping_ifneuron_ifneuron", "label": "IFneuron", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L56"}, {"id": "prototyping_ifneuron_ifneuron_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L60"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L60"}, {"id": "prototyping_ifneuron_ifneuron_attach_direct_stim", "label": ".attach_direct_stim()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L89"}, {"id": "prototyping_ifneuron_ifneuron_set_spontaneous_activity", "label": ".set_spontaneous_activity()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L92"}, {"id": "prototyping_ifneuron_ifneuron_record", "label": ".record()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L99"}, {"id": "prototyping_ifneuron_ifneuron_has_spiked", "label": ".has_spiked()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L103"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L103"}, {"id": "prototyping_ifneuron_ifneuron_dt_act_ms", "label": ".dt_act_ms()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L107"}, {"id": "prototyping_ifneuron_ifneuron_vspike_t", "label": ".vSpike_t()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L113"}, {"id": "prototyping_ifneuron_ifneuron_vahp_t", "label": ".vAHP_t()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L119"}, {"id": "prototyping_ifneuron_ifneuron_vpsp_t", "label": ".vPSP_t()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L124"}, {"id": "prototyping_ifneuron_ifneuron_update_vm", "label": ".update_Vm()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L134"}, {"id": "prototyping_ifneuron_ifneuron_detect_threshold", "label": ".detect_threshold()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L152"}, {"id": "prototyping_ifneuron_ifneuron_spontaneous_activity", "label": ".spontaneous_activity()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L160"}, {"id": "prototyping_ifneuron_ifneuron_update", "label": ".update()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L172"}, {"id": "prototyping_ifneuron_ifneuron_get_recording", "label": ".get_recording()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L190"}, {"id": "prototyping_ifneuron_rationale_57", "label": "A simple integrate-and-fire neuron.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L57"}, {"id": "prototyping_ifneuron_rationale_135", "label": "Vm = Vrest + vSpike(t) + vAHP(t) + vPSP(t)         Compare Vm with Vact.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L135"}, {"id": "prototyping_ifneuron_rationale_153", "label": "Compare Vm with Vact.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L153"}, {"id": "prototyping_ifneuron_rationale_161", "label": "Possible spontaneous activity.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L161"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_ifneuron_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L49", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_ifneuron_py", "target": "scipy_stats", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L50", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_ifneuron_py", "target": "prototyping_ifneuron_dblexp", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "prototyping_ifneuron_dblexp", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "prototyping_ifneuron_dblexp", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "prototyping_ifneuron_dblexp", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "prototyping_ifneuron_dblexp", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "prototyping_ifneuron_dblexp", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L52", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_ifneuron_py", "target": "prototyping_ifneuron_ifneuron", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L56", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L60", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_init", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L60", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_attach_direct_stim", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L89", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_attach_direct_stim", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L89", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_set_spontaneous_activity", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L92", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_record", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L99", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_record", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L99", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_has_spiked", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L103", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_has_spiked", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L103", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_dt_act_ms", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L107", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_dt_act_ms", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L107", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_dt_act_ms", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L107", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_vspike_t", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L113", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vspike_t", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L113", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vspike_t", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L113", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_vahp_t", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L119", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vahp_t", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L119", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vahp_t", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L119", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_vpsp_t", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L124", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vpsp_t", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L124", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vpsp_t", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L124", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_update_vm", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L134", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L134", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L134", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_detect_threshold", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L152", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_detect_threshold", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L152", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_spontaneous_activity", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L160", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_spontaneous_activity", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L160", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_update", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L172", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L172", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L172", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron", "target": "prototyping_ifneuron_ifneuron_get_recording", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L190", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vpsp_t", "target": "prototyping_ifneuron_ifneuron_has_spiked", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L129", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vpsp_t", "target": "prototyping_ifneuron_ifneuron_dt_act_ms", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L130", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_vpsp_t", "target": "prototyping_ifneuron_dblexp", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L131", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_has_spiked", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L140", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_dt_act_ms", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L140", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_vspike_t", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L142", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_vahp_t", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L143", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_vpsp_t", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L144", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update_vm", "target": "prototyping_ifneuron_ifneuron_record", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L150", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update", "target": "prototyping_ifneuron_ifneuron_update_vm", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L183", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update", "target": "prototyping_ifneuron_ifneuron_detect_threshold", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L184", "weight": 1.0}, {"source": "prototyping_ifneuron_ifneuron_update", "target": "prototyping_ifneuron_ifneuron_spontaneous_activity", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L185", "weight": 1.0}, {"source": "prototyping_ifneuron_rationale_57", "target": "prototyping_ifneuron_ifneuron", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L57", "weight": 1.0}, {"source": "prototyping_ifneuron_rationale_135", "target": "prototyping_ifneuron_ifneuron_update_vm", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L135", "weight": 1.0}, {"source": "prototyping_ifneuron_rationale_153", "target": "prototyping_ifneuron_ifneuron_detect_threshold", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L153", "weight": 1.0}, {"source": "prototyping_ifneuron_rationale_161", "target": "prototyping_ifneuron_ifneuron_spontaneous_activity", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L161", "weight": 1.0}], "raw_calls": [{"caller_nid": "prototyping_ifneuron_dblexp", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L54"}, {"caller_nid": "prototyping_ifneuron_dblexp", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L54"}, {"caller_nid": "prototyping_ifneuron_ifneuron_attach_direct_stim", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L90"}, {"caller_nid": "prototyping_ifneuron_ifneuron_set_spontaneous_activity", "callee": "truncnorm", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L97"}, {"caller_nid": "prototyping_ifneuron_ifneuron_record", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L100"}, {"caller_nid": "prototyping_ifneuron_ifneuron_record", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L101"}, {"caller_nid": "prototyping_ifneuron_ifneuron_has_spiked", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L104"}, {"caller_nid": "prototyping_ifneuron_ifneuron_vahp_t", "callee": "exp", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L122"}, {"caller_nid": "prototyping_ifneuron_ifneuron_update_vm", "callee": "roll", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L148"}, {"caller_nid": "prototyping_ifneuron_ifneuron_detect_threshold", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L158"}, {"caller_nid": "prototyping_ifneuron_ifneuron_spontaneous_activity", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L168"}, {"caller_nid": "prototyping_ifneuron_ifneuron_spontaneous_activity", "callee": "rvs", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L169"}, {"caller_nid": "prototyping_ifneuron_ifneuron_update", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L177"}, {"caller_nid": "prototyping_ifneuron_ifneuron_update", "callee": "pop", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L179"}, {"caller_nid": "prototyping_ifneuron_ifneuron_update", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py", "source_location": "L180"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_ifneuron_py",
+      "label": "IFneuron.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_ifneuron_dblexp",
+      "label": "dblexp()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron",
+      "label": "IFneuron",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L56"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L60"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L60"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_attach_direct_stim",
+      "label": ".attach_direct_stim()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L89"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_set_spontaneous_activity",
+      "label": ".set_spontaneous_activity()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L92"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_record",
+      "label": ".record()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L99"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_has_spiked",
+      "label": ".has_spiked()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "label": ".dt_act_ms()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L107"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_vspike_t",
+      "label": ".vSpike_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L113"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_vahp_t",
+      "label": ".vAHP_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L119"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "label": ".vPSP_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L124"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_update_vm",
+      "label": ".update_Vm()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "label": ".detect_threshold()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L152"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "label": ".spontaneous_activity()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L160"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_update",
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L172"
+    },
+    {
+      "id": "prototyping_ifneuron_ifneuron_get_recording",
+      "label": ".get_recording()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L190"
+    },
+    {
+      "id": "prototyping_ifneuron_rationale_57",
+      "label": "A simple integrate-and-fire neuron.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L57"
+    },
+    {
+      "id": "prototyping_ifneuron_rationale_135",
+      "label": "Vm = Vrest + vSpike(t) + vAHP(t) + vPSP(t)         Compare Vm with Vact.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "prototyping_ifneuron_rationale_153",
+      "label": "Compare Vm with Vact.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L153"
+    },
+    {
+      "id": "prototyping_ifneuron_rationale_161",
+      "label": "Possible spontaneous activity.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L161"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_ifneuron_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_ifneuron_py",
+      "target": "scipy_stats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_ifneuron_py",
+      "target": "prototyping_ifneuron_dblexp",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_dblexp",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_dblexp",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_dblexp",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_dblexp",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_dblexp",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_ifneuron_py",
+      "target": "prototyping_ifneuron_ifneuron",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_attach_direct_stim",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_attach_direct_stim",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_set_spontaneous_activity",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L92",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_record",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_record",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_has_spiked",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_has_spiked",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_vspike_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vspike_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vspike_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_vahp_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vahp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vahp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_update_vm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L160",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L160",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron",
+      "target": "prototyping_ifneuron_ifneuron_get_recording",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "target": "prototyping_ifneuron_ifneuron_has_spiked",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "target": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "target": "prototyping_ifneuron_dblexp",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_has_spiked",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_dt_act_ms",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_vspike_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_vahp_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_vpsp_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update_vm",
+      "target": "prototyping_ifneuron_ifneuron_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update",
+      "target": "prototyping_ifneuron_ifneuron_update_vm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update",
+      "target": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_ifneuron_update",
+      "target": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_rationale_57",
+      "target": "prototyping_ifneuron_ifneuron",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_rationale_135",
+      "target": "prototyping_ifneuron_ifneuron_update_vm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_rationale_153",
+      "target": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_ifneuron_rationale_161",
+      "target": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L161",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_ifneuron_dblexp",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_dblexp",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_attach_direct_stim",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_set_spontaneous_activity",
+      "callee": "truncnorm",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L97"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L100"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L101"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_has_spiked",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L104"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_vahp_t",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L122"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_update_vm",
+      "callee": "roll",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L148"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_detect_threshold",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L158"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_spontaneous_activity",
+      "callee": "rvs",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L169"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_update",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L177"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_update",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "prototyping_ifneuron_ifneuron_update",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/IFneuron.py",
+      "source_location": "L180"
+    }
+  ]
+}

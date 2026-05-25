@@ -1,1 +1,127 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_e0_bs_md", "label": "e0_bs.md", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L1"}, {"id": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "label": "Ball-and-stick neurons - Example VBP specification", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L1"}, {"id": "doc_e0_bs_codeblock_1", "label": "code:block1 (<example-name>_<VBP-process-step>_<process-label>_<topic-lev)", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L17"}, {"id": "doc_e0_bs_overview", "label": "Overview", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L37"}, {"id": "doc_e0_bs_kgt_bs_vbp00_groundtruth_xi_sampleprep_py", "label": "KGT: `bs_vbp00_groundtruth_xi_sampleprep.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L44"}, {"id": "doc_e0_bs_double_blind_data_acquisition_bs_vbp01_doubleblind_x_acquisition_py", "label": "Double-blind data acquisition: `bs_vbp01_doubleblind_x_acquisition.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L53"}, {"id": "doc_e0_bs_system_identification_bs_vbp02_translation_iv_system_identification_py", "label": "System identification: `bs_vbp02_translation_iv_system_identification.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L55"}, {"id": "doc_e0_bs_emulation_validation_bs_vbp03_emulation_iii_validation_py", "label": "Emulation validation: `bs_vbp03_emulation_iii_validation.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L57"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_e0_bs_md", "target": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L1", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_codeblock_1", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L17", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_overview", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L37", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_kgt_bs_vbp00_groundtruth_xi_sampleprep_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L44", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_double_blind_data_acquisition_bs_vbp01_doubleblind_x_acquisition_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L53", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_system_identification_bs_vbp02_translation_iv_system_identification_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L55", "weight": 1.0}, {"source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification", "target": "doc_e0_bs_emulation_validation_bs_vbp03_emulation_iii_validation_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md", "source_location": "L57", "weight": 1.0}], "input_tokens": 0, "output_tokens": 0}
+{
+  "nodes": [
+    {
+      "id": "doc_e0_bs_md",
+      "label": "e0_bs.md",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "label": "Ball-and-stick neurons - Example VBP specification",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_e0_bs_codeblock_1",
+      "label": "code:block1 (<example-name>_<VBP-process-step>_<process-label>_<topic-lev)",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "doc_e0_bs_overview",
+      "label": "Overview",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L37"
+    },
+    {
+      "id": "doc_e0_bs_kgt_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "label": "KGT: `bs_vbp00_groundtruth_xi_sampleprep.py`",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L44"
+    },
+    {
+      "id": "doc_e0_bs_double_blind_data_acquisition_bs_vbp01_doubleblind_x_acquisition_py",
+      "label": "Double-blind data acquisition: `bs_vbp01_doubleblind_x_acquisition.py`",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L53"
+    },
+    {
+      "id": "doc_e0_bs_system_identification_bs_vbp02_translation_iv_system_identification_py",
+      "label": "System identification: `bs_vbp02_translation_iv_system_identification.py`",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L55"
+    },
+    {
+      "id": "doc_e0_bs_emulation_validation_bs_vbp03_emulation_iii_validation_py",
+      "label": "Emulation validation: `bs_vbp03_emulation_iii_validation.py`",
+      "file_type": "document",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L57"
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_e0_bs_md",
+      "target": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_codeblock_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_overview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_kgt_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_double_blind_data_acquisition_bs_vbp01_doubleblind_x_acquisition_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_system_identification_bs_vbp02_translation_iv_system_identification_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e0_bs_ball_and_stick_neurons_example_vbp_specification",
+      "target": "doc_e0_bs_emulation_validation_bs_vbp03_emulation_iii_validation_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e0_bs.md",
+      "source_location": "L57",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

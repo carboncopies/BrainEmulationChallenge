@@ -1,1 +1,325 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "label": "xor_scnm_acquisition_direct.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L1"}, {"id": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum", "label": "PointsInCircum()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L36"}, {"id": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat", "label": "SpikeInputNeuronsAt()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208"}, {"id": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "label": "write_electrode_output()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L465"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L465"}, {"id": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_562", "label": "# NOTE: If the model was created with NES-Netmorph, and alternative to", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L562"}, {"id": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_737", "label": "# NOTE: Stitching is BUGGY, temporarily deactivated.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L737"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L17", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L19", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "math", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L20", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L21", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "os", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L22", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L24", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "braingenix_nes", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L27", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "braingenix", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L28", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L30", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "braingenix_nes_vsda", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L31", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "braingenix_tools_stackstitcher", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L33", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L36", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L208", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "target": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L465", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L465", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L465", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L470", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_562", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L562", "weight": 1.0}, {"source": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_737", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_xor_scnm_acquisition_direct_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L737", "weight": 1.0}], "raw_calls": [{"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum", "callee": "cos", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L37"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum", "callee": "sin", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L37"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L37"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L210"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "callee": "makedirs", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L469"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L470"}, {"caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output", "callee": "dump", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py", "source_location": "L471"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "label": "xor_scnm_acquisition_direct.py",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum",
+      "label": "PointsInCircum()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L36"
+    },
+    {
+      "id": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat",
+      "label": "SpikeInputNeuronsAt()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208"
+    },
+    {
+      "id": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "label": "write_electrode_output()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L465"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L465"
+    },
+    {
+      "id": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_562",
+      "label": "# NOTE: If the model was created with NES-Netmorph, and alternative to",
+      "file_type": "rationale",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L562"
+    },
+    {
+      "id": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_737",
+      "label": "# NOTE: Stitching is BUGGY, temporarily deactivated.",
+      "file_type": "rationale",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L737"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "braingenix",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "braingenix_nes_vsda",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "braingenix_tools_stackstitcher",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "target": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L465",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L465",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L465",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L470",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_562",
+      "target": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L562",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_xor_scnm_acquisition_direct_rationale_737",
+      "target": "src_models_full_adder_lifc_xor_scnm_acquisition_direct_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L737",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum",
+      "callee": "cos",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_pointsincircum",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_spikeinputneuronsat",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L210"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "callee": "makedirs",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L469"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L470"
+    },
+    {
+      "caller_nid": "full_adder_lifc_xor_scnm_acquisition_direct_write_electrode_output",
+      "callee": "dump",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py",
+      "source_location": "L471"
+    }
+  ]
+}

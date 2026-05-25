@@ -1,1 +1,1229 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "label": "gen_autonm_labels.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L1"}, {"id": "autoassociative_gen_autonm_labels_get_args", "label": "get_Args()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L39"}, {"id": "autoassociative_gen_autonm_labels_get_sample_data", "label": "get_sample_data()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L63"}, {"id": "autoassociative_gen_autonm_labels_usable_connections_method1", "label": "usable_connections_method1()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L71"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L71"}, {"id": "autoassociative_gen_autonm_labels_usable_connections_method2", "label": "usable_connections_method2()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L190"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L190"}, {"id": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "label": "evaluate_state_and_check_connectome()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L231"}, {"id": "autoassociative_gen_autonm_labels_extra_prep", "label": "extra_prep()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L267"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L267"}, {"id": "autoassociative_gen_autonm_labels_get_sample_modelcontent", "label": "get_sample_modelcontent()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L299"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L299"}, {"id": "autoassociative_gen_autonm_labels_sample_launch_requests", "label": "sample_launch_requests()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L323"}, {"id": "autoassociative_gen_autonm_labels_update_experiments_database", "label": "update_experiments_database()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L362"}, {"id": "autoassociative_gen_autonm_labels_write_excel_with_results", "label": "write_excel_with_results()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L368"}, {"id": "autoassociative_gen_autonm_labels_rationale_9", "label": "# TODO:", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L9"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L16", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L17", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L18", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L19", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "base64", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L20", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L21", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "os", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L22", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "pathlib", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L23", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "pandas", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L24", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "copy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L25", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "psutil", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L26", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "tqdm", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L27", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L29", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "braingenix_bg_api", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L30", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "braingenix_tools_batchrun", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L31", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "sys", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L33", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "pathlib", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L34", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "nes_interfaces_kgtrecords", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L36", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_get_args", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L39", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_get_sample_data", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L63", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_usable_connections_method1", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L71", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method1", "target": "int", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L71", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_usable_connections_method2", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L190", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method2", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L190", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method2", "target": "int", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L190", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L231", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_extra_prep", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L267", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_extra_prep", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L267", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_extra_prep", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L267", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_get_sample_modelcontent", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L299", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_get_sample_modelcontent", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L299", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_sample_launch_requests", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L323", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_sample_launch_requests", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L323", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_update_experiments_database", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L362", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "target": "autoassociative_gen_autonm_labels_write_excel_with_results", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L368", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method1", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L80", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method2", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L199", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_usable_connections_method2", "target": "int", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L226", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L256", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "target": "int", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L259", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "target": "autoassociative_gen_autonm_labels_usable_connections_method1", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L259", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "target": "autoassociative_gen_autonm_labels_usable_connections_method2", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L260", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_extra_prep", "target": "int", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L277", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_extra_prep", "target": "float", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L279", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_extra_prep", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L282", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_sample_launch_requests", "target": "autoassociative_gen_autonm_labels_get_sample_modelcontent", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L325", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_sample_launch_requests", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L333", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_write_excel_with_results", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L377", "weight": 1.0}, {"source": "autoassociative_gen_autonm_labels_rationale_9", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_gen_autonm_labels_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L9", "weight": 1.0}], "raw_calls": [{"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "ArgumentParser", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L40"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L41"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L42"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L43"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L44"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L45"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L46"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L47"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L48"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L49"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L50"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L51"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L52"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L53"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L54"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L55"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L56"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L57"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L58"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L59"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_args", "callee": "parse_args", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L60"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_data", "callee": "read_excel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L64"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_data", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L64"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_data", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L65"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_data", "callee": "head", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L65"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_data", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L66"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "GetAbstractConnectome", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L76"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "RTsuccess", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L77"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L79"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L80"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "RegionByNeuronID", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L93"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "RegionByNeuronID", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L94"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "deepcopy", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L132"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "SetAll", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L133"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L162"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "ConnectionsFrom", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L164"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L165"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "EliminateByPost", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L166"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L168"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L168"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L185"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "NumActive", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L185"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L185"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1", "callee": "NumActive", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L187"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "GetConnectome", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L194"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "RTsuccess", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L195"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L198"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L199"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "get_prepost_pyramidal_AMPA", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L223"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L226"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "sum", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L226"}, {"caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2", "callee": "sum", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L228"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "Netmorph_GetStatus", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L237"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "RTsuccess", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L238"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L240"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L242"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "ModelSave", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L250"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L251"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "RTsuccess", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L252"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "ErrorToDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L254"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L255"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L256"}, {"caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L258"}, {"caller_nid": "autoassociative_gen_autonm_labels_extra_prep", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L275"}, {"caller_nid": "autoassociative_gen_autonm_labels_extra_prep", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L275"}, {"caller_nid": "autoassociative_gen_autonm_labels_extra_prep", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L277"}, {"caller_nid": "autoassociative_gen_autonm_labels_extra_prep", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L279"}, {"caller_nid": "autoassociative_gen_autonm_labels_extra_prep", "callee": "InitExpDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L285"}, {"caller_nid": "autoassociative_gen_autonm_labels_get_sample_modelcontent", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L300"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "SetLIFCAbstractedFunctional", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L329"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "SetLIFCPreciseSpikeTimes", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L330"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "SetSTDP", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L331"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "ErrorToDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L333"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L337"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "Netmorph_Start", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L342"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "ErrorToDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L345"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L347"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "RTsuccess", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L350"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "ErrorToDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L352"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "RTfailed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L354"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "AddOutputToDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L357"}, {"caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L358"}, {"caller_nid": "autoassociative_gen_autonm_labels_update_experiments_database", "callee": "values", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L363"}, {"caller_nid": "autoassociative_gen_autonm_labels_update_experiments_database", "callee": "UpdateExpsDB", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L365"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "get_previously_completed", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L371"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "values", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L372"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "Path", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L376"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "with_suffix", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L377"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "to_excel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L378"}, {"caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py", "source_location": "L379"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_autoassociative_gen_autonm_labels_py",
+      "label": "gen_autonm_labels.py",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_get_args",
+      "label": "get_Args()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L39"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_get_sample_data",
+      "label": "get_sample_data()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "label": "usable_connections_method1()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L71"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L71"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "label": "usable_connections_method2()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L190"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L190"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "label": "evaluate_state_and_check_connectome()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L231"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_extra_prep",
+      "label": "extra_prep()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L267"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L267"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_get_sample_modelcontent",
+      "label": "get_sample_modelcontent()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L299"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L299"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "label": "sample_launch_requests()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L323"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_update_experiments_database",
+      "label": "update_experiments_database()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L362"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "label": "write_excel_with_results()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L368"
+    },
+    {
+      "id": "autoassociative_gen_autonm_labels_rationale_9",
+      "label": "# TODO:",
+      "file_type": "rationale",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L9"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "pandas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "copy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "psutil",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "tqdm",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "braingenix_tools_batchrun",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_get_args",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_get_sample_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L231",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_extra_prep",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L267",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_extra_prep",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L267",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_extra_prep",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L267",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_get_sample_modelcontent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L299",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_get_sample_modelcontent",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L299",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L323",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L323",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_update_experiments_database",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L362",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_gen_autonm_labels_py",
+      "target": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L368",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L80",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "target": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L259",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "target": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_extra_prep",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_extra_prep",
+      "target": "float",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L279",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_extra_prep",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L282",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "target": "autoassociative_gen_autonm_labels_get_sample_modelcontent",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L325",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L333",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L377",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_gen_autonm_labels_rationale_9",
+      "target": "src_models_autoassociative_gen_autonm_labels_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L9",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "ArgumentParser",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L40"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L41"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L42"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L43"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L44"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L45"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L46"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L47"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L48"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L49"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L50"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L52"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L55"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L56"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L57"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_args",
+      "callee": "parse_args",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L60"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_data",
+      "callee": "read_excel",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L64"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_data",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L64"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_data",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L65"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_data",
+      "callee": "head",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L65"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_data",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L66"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "GetAbstractConnectome",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "RTsuccess",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L77"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L79"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L80"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "RegionByNeuronID",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L93"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "RegionByNeuronID",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L94"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "deepcopy",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L132"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "SetAll",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L133"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L162"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "ConnectionsFrom",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L165"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "EliminateByPost",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L166"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L185"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "NumActive",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L185"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L185"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method1",
+      "callee": "NumActive",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L187"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "GetConnectome",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L194"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "RTsuccess",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L195"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L198"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L199"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "get_prepost_pyramidal_AMPA",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L223"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L226"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "sum",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L226"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_usable_connections_method2",
+      "callee": "sum",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L228"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "Netmorph_GetStatus",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L237"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "RTsuccess",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L238"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L240"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L242"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "ModelSave",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L250"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L251"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "RTsuccess",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L252"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "ErrorToDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L254"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L255"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L256"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_evaluate_state_and_check_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L258"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_extra_prep",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L275"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_extra_prep",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L275"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_extra_prep",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L277"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_extra_prep",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L279"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_extra_prep",
+      "callee": "InitExpDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L285"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_get_sample_modelcontent",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L300"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "SetLIFCAbstractedFunctional",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L329"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "SetLIFCPreciseSpikeTimes",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L330"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "SetSTDP",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L331"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "ErrorToDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L337"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "Netmorph_Start",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L342"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "ErrorToDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L345"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L347"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "RTsuccess",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L350"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "ErrorToDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L352"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "RTfailed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L354"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "AddOutputToDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L357"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_sample_launch_requests",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L358"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_update_experiments_database",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L363"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_update_experiments_database",
+      "callee": "UpdateExpsDB",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L365"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "get_previously_completed",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L371"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L372"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "Path",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L376"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "with_suffix",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L377"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "to_excel",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L378"
+    },
+    {
+      "caller_nid": "autoassociative_gen_autonm_labels_write_excel_with_results",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/gen_autonm_labels.py",
+      "source_location": "L379"
+    }
+  ]
+}

@@ -1,1 +1,103 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "label": "submitted-emulation.json", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L1"}, {"id": "wereconstructllc_submitted_emulation_model", "label": "Model", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L2"}, {"id": "wereconstructllc_submitted_emulation_submissionauthors", "label": "SubmissionAuthors", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L3"}, {"id": "wereconstructllc_submitted_emulation_submissionformatversion", "label": "SubmissionFormatVersion", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L4"}, {"id": "wereconstructllc_submitted_emulation_neurons", "label": "Neurons", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L5"}, {"id": "wereconstructllc_submitted_emulation_connections", "label": "Connections", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L49"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "target": "wereconstructllc_submitted_emulation_model", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L2", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "target": "wereconstructllc_submitted_emulation_submissionauthors", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L3", "weight": 1.0}, {"source": "wereconstructllc_submitted_emulation_submissionauthors", "target": "ref_randal_koene", "relation": "extends", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L3", "weight": 1.0, "context": "import"}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "target": "wereconstructllc_submitted_emulation_submissionformatversion", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L4", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "target": "wereconstructllc_submitted_emulation_neurons", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L5", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_challenge_examples_wereconstructllc_submitted_emulation_json", "target": "wereconstructllc_submitted_emulation_connections", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json", "source_location": "L49", "weight": 1.0}]}
+{
+  "nodes": [
+    {
+      "id": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "label": "submitted-emulation.json",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L1"
+    },
+    {
+      "id": "wereconstructllc_submitted_emulation_model",
+      "label": "Model",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "wereconstructllc_submitted_emulation_submissionauthors",
+      "label": "SubmissionAuthors",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "wereconstructllc_submitted_emulation_submissionformatversion",
+      "label": "SubmissionFormatVersion",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L4"
+    },
+    {
+      "id": "wereconstructllc_submitted_emulation_neurons",
+      "label": "Neurons",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "wereconstructllc_submitted_emulation_connections",
+      "label": "Connections",
+      "file_type": "code",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L49"
+    }
+  ],
+  "edges": [
+    {
+      "source": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "target": "wereconstructllc_submitted_emulation_model",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "target": "wereconstructllc_submitted_emulation_submissionauthors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "wereconstructllc_submitted_emulation_submissionauthors",
+      "target": "ref_randal_koene",
+      "relation": "extends",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "context": "import"
+    },
+    {
+      "source": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "target": "wereconstructllc_submitted_emulation_submissionformatversion",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "target": "wereconstructllc_submitted_emulation_neurons",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_examples_wereconstructllc_submitted_emulation_json",
+      "target": "wereconstructllc_submitted_emulation_connections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/examples/WeReconstructLLC/submitted-emulation.json",
+      "source_location": "L49",
+      "weight": 1.0
+    }
+  ]
+}

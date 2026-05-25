@@ -1,1 +1,104 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "label": "xor_scnm_groundtruth.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L1"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L7", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L8", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L9", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "braingenix_bg_api", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L13", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "nes_interfaces_kgtrecords", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L14", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "netmorph2nes", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L15", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_xor_scnm_groundtruth_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py", "source_location": "L18", "weight": 1.0}], "raw_calls": []}
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "label": "xor_scnm_groundtruth.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "netmorph2nes",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_xor_scnm_groundtruth_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py",
+      "source_location": "L18",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}

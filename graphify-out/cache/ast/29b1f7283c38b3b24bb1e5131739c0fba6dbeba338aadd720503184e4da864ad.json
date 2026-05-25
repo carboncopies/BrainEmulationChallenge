@@ -1,1 +1,37 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_validated_brain_emulation_in_silico_tools_build_sh", "label": "Build.sh", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Tools/Build.sh", "source_location": "L1", "metadata": {"language": "bash", "kind": "file"}}, {"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_validated_brain_emulation_in_silico_tools_build_sh__entry", "label": "Build.sh script", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Tools/Build.sh", "source_location": "L1", "metadata": {"language": "bash", "kind": "bash_entrypoint"}}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_validated_brain_emulation_in_silico_tools_build_sh", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_validated_brain_emulation_in_silico_tools_build_sh__entry", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Tools/Build.sh", "source_location": "L1", "weight": 1.0}]}
+{
+  "nodes": [
+    {
+      "id": "doc_validated_brain_emulation_in_silico_tools_build_sh",
+      "label": "Build.sh",
+      "file_type": "code",
+      "source_file": "doc/validated-brain-emulation-in-silico/Tools/Build.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      }
+    },
+    {
+      "id": "doc_validated_brain_emulation_in_silico_tools_build_sh__entry",
+      "label": "Build.sh script",
+      "file_type": "code",
+      "source_file": "doc/validated-brain-emulation-in-silico/Tools/Build.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_validated_brain_emulation_in_silico_tools_build_sh",
+      "target": "doc_validated_brain_emulation_in_silico_tools_build_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/validated-brain-emulation-in-silico/Tools/Build.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    }
+  ]
+}
