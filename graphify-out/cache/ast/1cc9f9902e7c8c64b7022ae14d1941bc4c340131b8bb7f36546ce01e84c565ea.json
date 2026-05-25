@@ -1,1 +1,420 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "label": "full_adder_lifc.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L1"}, {"id": "full_adder_lifc_full_adder_lifc_neuronstub", "label": "NeuronStub", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L124"}, {"id": "full_adder_lifc_full_adder_lifc_neuronstub_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L125"}, {"id": "full_adder_lifc_full_adder_lifc_makesphere", "label": "makeSphere()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L135"}, {"id": "full_adder_lifc_full_adder_lifc_makecylinder", "label": "makeCylinder()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L148"}, {"id": "full_adder_lifc_full_adder_lifc_makecompartment", "label": "makeCompartment()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L209"}, {"id": "full_adder_lifc_full_adder_lifc_makeneuron", "label": "makeNeuron()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L233"}, {"id": "full_adder_lifc_full_adder_lifc_makebox", "label": "makeBox()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L386"}, {"id": "full_adder_lifc_full_adder_lifc_makepresynreceptor", "label": "makePreSynReceptor()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L394"}, {"id": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor", "label": "makeNetmorphPreSynReceptor()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L426"}, {"id": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "label": "find_cell_with_id()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626"}, {"id": "full_adder_lifc_full_adder_lifc_rationale_627", "label": "Enhanced cell lookup with debug output", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L627"}, {"id": "full_adder_lifc_full_adder_lifc_rationale_208", "label": "# NOTE: A number of parameters inherited from SCNeuron are automatically set in", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L208"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L31", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L32", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L33", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L35", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "nes_interfaces_kgtrecords", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L36", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "braingenix_nes", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L37", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_neuronstub", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L124", "weight": 1.0}, {"source": "full_adder_lifc_full_adder_lifc_neuronstub", "target": "full_adder_lifc_full_adder_lifc_neuronstub_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L125", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makesphere", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L135", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makecylinder", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L148", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makecompartment", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L209", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makeneuron", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L233", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makebox", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L386", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makepresynreceptor", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L394", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L426", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "target": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626", "weight": 1.0}, {"source": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626", "weight": 1.0}, {"source": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L626", "weight": 1.0}, {"source": "full_adder_lifc_full_adder_lifc_rationale_627", "target": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L627", "weight": 1.0}, {"source": "full_adder_lifc_full_adder_lifc_rationale_208", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_full_adder_lifc_py", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L208", "weight": 1.0}], "raw_calls": [{"caller_nid": "full_adder_lifc_full_adder_lifc_makesphere", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L136"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makesphere", "callee": "AddSphere", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L140"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makecylinder", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L149"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makecylinder", "callee": "AddCylinder", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L155"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makecompartment", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L210"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makecompartment", "callee": "AddLIFCCompartment", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L219"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makeneuron", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L241"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makeneuron", "callee": "AddLIFCNeuron", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L294"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makebox", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L387"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makebox", "callee": "AddBox", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L392"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makepresynreceptor", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L400"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makepresynreceptor", "callee": "AddLIFCReceptor", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L424"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L432"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor", "callee": "AddNetmorphLIFCReceptor", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L458"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L628"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L630"}, {"caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py", "source_location": "L632"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "label": "full_adder_lifc.py",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_neuronstub",
+      "label": "NeuronStub",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L124"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_neuronstub_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makesphere",
+      "label": "makeSphere()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makecylinder",
+      "label": "makeCylinder()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makecompartment",
+      "label": "makeCompartment()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L209"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makeneuron",
+      "label": "makeNeuron()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L233"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makebox",
+      "label": "makeBox()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L386"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makepresynreceptor",
+      "label": "makePreSynReceptor()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L394"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor",
+      "label": "makeNetmorphPreSynReceptor()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L426"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "label": "find_cell_with_id()",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_rationale_627",
+      "label": "Enhanced cell lookup with debug output",
+      "file_type": "rationale",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L627"
+    },
+    {
+      "id": "full_adder_lifc_full_adder_lifc_rationale_208",
+      "label": "# NOTE: A number of parameters inherited from SCNeuron are automatically set in",
+      "file_type": "rationale",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L208"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_neuronstub",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L124",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_full_adder_lifc_neuronstub",
+      "target": "full_adder_lifc_full_adder_lifc_neuronstub_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makesphere",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makecylinder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makecompartment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makeneuron",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L233",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makebox",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L386",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makepresynreceptor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L394",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L426",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "target": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L626",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_full_adder_lifc_rationale_627",
+      "target": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L627",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_full_adder_lifc_rationale_208",
+      "target": "src_models_full_adder_lifc_full_adder_lifc_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L208",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makesphere",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L136"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makesphere",
+      "callee": "AddSphere",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makecylinder",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makecylinder",
+      "callee": "AddCylinder",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L155"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makecompartment",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L210"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makecompartment",
+      "callee": "AddLIFCCompartment",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L219"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makeneuron",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L241"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makeneuron",
+      "callee": "AddLIFCNeuron",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L294"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makebox",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L387"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makebox",
+      "callee": "AddBox",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L392"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makepresynreceptor",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L400"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makepresynreceptor",
+      "callee": "AddLIFCReceptor",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L424"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L432"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_makenetmorphpresynreceptor",
+      "callee": "AddNetmorphLIFCReceptor",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L458"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L628"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L630"
+    },
+    {
+      "caller_nid": "full_adder_lifc_full_adder_lifc_find_cell_with_id",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/full_adder_lifc/full_adder_lifc.py",
+      "source_location": "L632"
+    }
+  ]
+}

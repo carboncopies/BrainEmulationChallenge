@@ -1,1 +1,982 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "label": "visualize_cells.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L1"}, {"id": "components_visualize_cells_plot_neuron_somas", "label": "plot_neuron_somas()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L42"}, {"id": "components_visualize_cells_plot_sphere", "label": "plot_sphere()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L86"}, {"id": "components_visualize_cells_plot_box", "label": "plot_box()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L95"}, {"id": "components_visualize_cells_set_axes_equal", "label": "set_axes_equal()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L113"}, {"id": "components_visualize_cells_plot_connections", "label": "plot_connections()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L133"}, {"id": "components_visualize_cells_plot_neurons", "label": "plot_neurons()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L147"}, {"id": "components_visualize_cells_ring_positions", "label": "ring_positions()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L186"}, {"id": "components_visualize_cells_sum_squared_distance", "label": "sum_squared_distance()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L198"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L198"}, {"id": "components_visualize_cells_find_nearest", "label": "find_nearest()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L201"}, {"id": "components_visualize_cells_rationale_43", "label": "Plot neuron soma centers given a list or array of 3D coordinates.      Parameter", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L43"}, {"id": "components_visualize_cells_rationale_87", "label": "Plot a sphere at given center with given radius.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L87"}, {"id": "components_visualize_cells_rationale_96", "label": "Plot an axis-aligned box given center and (dx, dy, dz) size.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L96"}, {"id": "components_visualize_cells_rationale_114", "label": "Set 3D plot axes to equal scale so a sphere or cube looks correct.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L114"}, {"id": "components_visualize_cells_rationale_134", "label": "Plot straight-line connections between neuron centers.     conn_matrix[i,j] != 0", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L134"}, {"id": "components_visualize_cells_rationale_148", "label": "objects: list of dicts with type='sphere' or 'box", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L148"}, {"id": "components_visualize_cells_rationale_187", "label": "Return N equidistant positions on a ring of given radius at height z.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L187"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L9", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "os", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "pickle", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "matplotlib_pyplot", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L13", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "mpl_toolkits_mplot3d", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L14", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "mpl_toolkits_mplot3d_art3d", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L16", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_plot_neuron_somas", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L42", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_plot_sphere", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L86", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_plot_box", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L95", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_set_axes_equal", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L113", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_plot_connections", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L133", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_plot_neurons", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L147", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_ring_positions", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L186", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_sum_squared_distance", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L198", "weight": 1.0}, {"source": "components_visualize_cells_sum_squared_distance", "target": "float", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L198", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_visualize_cells_py", "target": "components_visualize_cells_find_nearest", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L201", "weight": 1.0}, {"source": "components_visualize_cells_plot_neurons", "target": "components_visualize_cells_plot_sphere", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L154", "weight": 1.0}, {"source": "components_visualize_cells_plot_neurons", "target": "components_visualize_cells_plot_box", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L156", "weight": 1.0}, {"source": "components_visualize_cells_plot_neurons", "target": "components_visualize_cells_plot_connections", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L176", "weight": 1.0}, {"source": "components_visualize_cells_plot_neurons", "target": "components_visualize_cells_set_axes_equal", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L178", "weight": 1.0}, {"source": "components_visualize_cells_find_nearest", "target": "components_visualize_cells_sum_squared_distance", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L208", "weight": 1.0}, {"source": "components_visualize_cells_rationale_43", "target": "components_visualize_cells_plot_neuron_somas", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L43", "weight": 1.0}, {"source": "components_visualize_cells_rationale_87", "target": "components_visualize_cells_plot_sphere", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L87", "weight": 1.0}, {"source": "components_visualize_cells_rationale_96", "target": "components_visualize_cells_plot_box", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L96", "weight": 1.0}, {"source": "components_visualize_cells_rationale_114", "target": "components_visualize_cells_set_axes_equal", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L114", "weight": 1.0}, {"source": "components_visualize_cells_rationale_134", "target": "components_visualize_cells_plot_connections", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L134", "weight": 1.0}, {"source": "components_visualize_cells_rationale_148", "target": "components_visualize_cells_plot_neurons", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L148", "weight": 1.0}, {"source": "components_visualize_cells_rationale_187", "target": "components_visualize_cells_ring_positions", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L187", "weight": 1.0}], "raw_calls": [{"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L51"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L52"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L53"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L54"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "figure", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L56"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "add_subplot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L57"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "get_xlim", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L60"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "get_ylim", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L61"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "get_size_inches", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L65"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "scatter", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L74"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "scatter", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L76"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "set_xlabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L79"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "set_ylabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L80"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "set_zlabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L81"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "set_title", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L82"}, {"caller_nid": "components_visualize_cells_plot_neuron_somas", "callee": "show", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L84"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "linspace", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L88"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "linspace", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L89"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "outer", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L90"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "cos", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L90"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "sin", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L90"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "outer", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L91"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "sin", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L91"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "sin", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L91"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "outer", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L92"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "ones_like", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L92"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "cos", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L92"}, {"caller_nid": "components_visualize_cells_plot_sphere", "callee": "plot_surface", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L93"}, {"caller_nid": "components_visualize_cells_plot_box", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L103"}, {"caller_nid": "components_visualize_cells_plot_box", "callee": "add_collection3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L111"}, {"caller_nid": "components_visualize_cells_plot_box", "callee": "Poly3DCollection", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L111"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "get_xlim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L115"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "get_ylim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L116"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "get_zlim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L117"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L119"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "mean", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L120"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L121"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "mean", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L122"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "abs", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L123"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "mean", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L124"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "max", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L126"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "set_xlim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L128"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "set_ylim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L129"}, {"caller_nid": "components_visualize_cells_set_axes_equal", "callee": "set_zlim3d", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L130"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L138"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L139"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L140"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L142"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L143"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "plot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L144"}, {"caller_nid": "components_visualize_cells_plot_connections", "callee": "zip", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L144"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "figure", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L149"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "add_subplot", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L150"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "get", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L154"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "get", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L156"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L163"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L163"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L164"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L164"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L167"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L167"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L167"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L168"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L168"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L168"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L170"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "min", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L171"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "max", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L171"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "enumerate", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L172"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "zip", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L172"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "getattr(ax, f\"set_{'xyz'[i]}lim\")", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L173"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "getattr", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L173"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "set_xlabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L180"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "set_ylabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L181"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "set_zlabel", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L182"}, {"caller_nid": "components_visualize_cells_plot_neurons", "callee": "show", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L183"}, {"caller_nid": "components_visualize_cells_ring_positions", "callee": "linspace", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L190"}, {"caller_nid": "components_visualize_cells_ring_positions", "callee": "cos", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L193"}, {"caller_nid": "components_visualize_cells_ring_positions", "callee": "sin", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L194"}, {"caller_nid": "components_visualize_cells_ring_positions", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L195"}, {"caller_nid": "components_visualize_cells_find_nearest", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L206"}, {"caller_nid": "components_visualize_cells_find_nearest", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py", "source_location": "L206"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_visualize_cells_py",
+      "label": "visualize_cells.py",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_visualize_cells_plot_neuron_somas",
+      "label": "plot_neuron_somas()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "components_visualize_cells_plot_sphere",
+      "label": "plot_sphere()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "components_visualize_cells_plot_box",
+      "label": "plot_box()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "components_visualize_cells_set_axes_equal",
+      "label": "set_axes_equal()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L113"
+    },
+    {
+      "id": "components_visualize_cells_plot_connections",
+      "label": "plot_connections()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L133"
+    },
+    {
+      "id": "components_visualize_cells_plot_neurons",
+      "label": "plot_neurons()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L147"
+    },
+    {
+      "id": "components_visualize_cells_ring_positions",
+      "label": "ring_positions()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L186"
+    },
+    {
+      "id": "components_visualize_cells_sum_squared_distance",
+      "label": "sum_squared_distance()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L198"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L198"
+    },
+    {
+      "id": "components_visualize_cells_find_nearest",
+      "label": "find_nearest()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L201"
+    },
+    {
+      "id": "components_visualize_cells_rationale_43",
+      "label": "Plot neuron soma centers given a list or array of 3D coordinates.      Parameter",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L43"
+    },
+    {
+      "id": "components_visualize_cells_rationale_87",
+      "label": "Plot a sphere at given center with given radius.",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "components_visualize_cells_rationale_96",
+      "label": "Plot an axis-aligned box given center and (dx, dy, dz) size.",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L96"
+    },
+    {
+      "id": "components_visualize_cells_rationale_114",
+      "label": "Set 3D plot axes to equal scale so a sphere or cube looks correct.",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L114"
+    },
+    {
+      "id": "components_visualize_cells_rationale_134",
+      "label": "Plot straight-line connections between neuron centers.     conn_matrix[i,j] != 0",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "components_visualize_cells_rationale_148",
+      "label": "objects: list of dicts with type='sphere' or 'box",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "components_visualize_cells_rationale_187",
+      "label": "Return N equidistant positions on a ring of given radius at height z.",
+      "file_type": "rationale",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L187"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "pickle",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "mpl_toolkits_mplot3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "mpl_toolkits_mplot3d_art3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_plot_neuron_somas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_plot_sphere",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_plot_box",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_set_axes_equal",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_plot_connections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_plot_neurons",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_ring_positions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_sum_squared_distance",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_sum_squared_distance",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_cells_py",
+      "target": "components_visualize_cells_find_nearest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L201",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_plot_neurons",
+      "target": "components_visualize_cells_plot_sphere",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_plot_neurons",
+      "target": "components_visualize_cells_plot_box",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L156",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_plot_neurons",
+      "target": "components_visualize_cells_plot_connections",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_plot_neurons",
+      "target": "components_visualize_cells_set_axes_equal",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L178",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_find_nearest",
+      "target": "components_visualize_cells_sum_squared_distance",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_43",
+      "target": "components_visualize_cells_plot_neuron_somas",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_87",
+      "target": "components_visualize_cells_plot_sphere",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_96",
+      "target": "components_visualize_cells_plot_box",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_114",
+      "target": "components_visualize_cells_set_axes_equal",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_134",
+      "target": "components_visualize_cells_plot_connections",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_148",
+      "target": "components_visualize_cells_plot_neurons",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "components_visualize_cells_rationale_187",
+      "target": "components_visualize_cells_ring_positions",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L187",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L52"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "figure",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L56"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "add_subplot",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L57"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "get_xlim",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L60"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "get_ylim",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L61"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "get_size_inches",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L65"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "scatter",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L74"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "scatter",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "set_xlabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L79"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "set_ylabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L80"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "set_zlabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L81"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "set_title",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neuron_somas",
+      "callee": "show",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L84"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "linspace",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "linspace",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L89"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "outer",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "cos",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "outer",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "outer",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L92"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "ones_like",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L92"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "cos",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L92"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_sphere",
+      "callee": "plot_surface",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L93"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_box",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_box",
+      "callee": "add_collection3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_box",
+      "callee": "Poly3DCollection",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "get_xlim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L115"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "get_ylim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "get_zlim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L117"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L119"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "mean",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L120"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L121"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "mean",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L122"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "abs",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L123"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "mean",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L124"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "max",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L126"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "set_xlim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L128"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "set_ylim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L129"
+    },
+    {
+      "caller_nid": "components_visualize_cells_set_axes_equal",
+      "callee": "set_zlim3d",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L130"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L138"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L139"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L142"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L143"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "plot",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L144"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_connections",
+      "callee": "zip",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L144"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "figure",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "add_subplot",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L150"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "get",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L154"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "get",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L156"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L163"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L163"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L167"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L167"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L167"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L170"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "min",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L171"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "max",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L171"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "enumerate",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L172"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "zip",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L172"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "getattr(ax, f\"set_{'xyz'[i]}lim\")",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L173"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "getattr",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L173"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "set_xlabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L180"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "set_ylabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "set_zlabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L182"
+    },
+    {
+      "caller_nid": "components_visualize_cells_plot_neurons",
+      "callee": "show",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L183"
+    },
+    {
+      "caller_nid": "components_visualize_cells_ring_positions",
+      "callee": "linspace",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L190"
+    },
+    {
+      "caller_nid": "components_visualize_cells_ring_positions",
+      "callee": "cos",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L193"
+    },
+    {
+      "caller_nid": "components_visualize_cells_ring_positions",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L194"
+    },
+    {
+      "caller_nid": "components_visualize_cells_ring_positions",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L195"
+    },
+    {
+      "caller_nid": "components_visualize_cells_find_nearest",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L206"
+    },
+    {
+      "caller_nid": "components_visualize_cells_find_nearest",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/visualize_cells.py",
+      "source_location": "L206"
+    }
+  ]
+}

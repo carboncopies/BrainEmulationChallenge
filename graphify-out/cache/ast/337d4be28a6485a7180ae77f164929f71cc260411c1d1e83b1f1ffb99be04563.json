@@ -1,1 +1,1296 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "label": "vbpcommon.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L1"}, {"id": "autoassociative_vbpcommon_plotandstoreconnections", "label": "PlotAndStoreConnections()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15"}, {"id": "autoassociative_vbpcommon_plotandstorerecordedactivity", "label": "PlotAndStoreRecordedActivity()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L67"}, {"id": "autoassociative_vbpcommon_initexpdb", "label": "InitExpDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L114"}, {"id": "autoassociative_vbpcommon_addinputtodb", "label": "AddInputToDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L126"}, {"id": "autoassociative_vbpcommon_addoutputtodb", "label": "AddOutputToDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L129"}, {"id": "autoassociative_vbpcommon_unlockdb", "label": "UnlockDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L132"}, {"id": "autoassociative_vbpcommon_waittolockdb", "label": "WaitToLockDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L139"}, {"id": "autoassociative_vbpcommon_loadexpsdb", "label": "LoadExpsDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L162"}, {"id": "autoassociative_vbpcommon_updateexpsdb", "label": "UpdateExpsDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L182"}, {"id": "autoassociative_vbpcommon_errortodb", "label": "ErrorToDB()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L202"}, {"id": "autoassociative_vbpcommon_errorexit", "label": "ErrorExit()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L208"}, {"id": "autoassociative_vbpcommon_exitorreturn", "label": "ExitOrReturn()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L213"}, {"id": "autoassociative_vbpcommon_getmostrecentdbentry", "label": "GetMostRecentDBEntry()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L219"}, {"id": "autoassociative_vbpcommon_getmostrecentdbentryin", "label": "GetMostRecentDBEntryIN()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L239"}, {"id": "autoassociative_vbpcommon_getmostrecentdbentryout", "label": "GetMostRecentDBEntryOUT()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L247"}, {"id": "autoassociative_vbpcommon_clientfromargs", "label": "ClientFromArgs()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L255"}, {"id": "autoassociative_vbpcommon_newsimulation", "label": "NewSimulation()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L278"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L2", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L3", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L4", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "os", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L5", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "sys", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L6", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "pathlib", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L7", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "braingenix_nes", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "nes_interfaces_kgtrecords", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L13", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_plotandstoreconnections", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstoreconnections", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstoreconnections", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstoreconnections", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L15", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_plotandstorerecordedactivity", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L67", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstorerecordedactivity", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L67", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstorerecordedactivity", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L67", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_initexpdb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L114", "weight": 1.0}, {"source": "autoassociative_vbpcommon_initexpdb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L114", "weight": 1.0}, {"source": "autoassociative_vbpcommon_initexpdb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L114", "weight": 1.0}, {"source": "autoassociative_vbpcommon_initexpdb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L114", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_addinputtodb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L126", "weight": 1.0}, {"source": "autoassociative_vbpcommon_addinputtodb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L126", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_addoutputtodb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L129", "weight": 1.0}, {"source": "autoassociative_vbpcommon_addoutputtodb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L129", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_unlockdb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L132", "weight": 1.0}, {"source": "autoassociative_vbpcommon_unlockdb", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L132", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_waittolockdb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L139", "weight": 1.0}, {"source": "autoassociative_vbpcommon_waittolockdb", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L139", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_loadexpsdb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L162", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_updateexpsdb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L182", "weight": 1.0}, {"source": "autoassociative_vbpcommon_updateexpsdb", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L182", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_errortodb", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L202", "weight": 1.0}, {"source": "autoassociative_vbpcommon_errortodb", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L202", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_errorexit", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L208", "weight": 1.0}, {"source": "autoassociative_vbpcommon_errorexit", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L208", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_exitorreturn", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L213", "weight": 1.0}, {"source": "autoassociative_vbpcommon_exitorreturn", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L213", "weight": 1.0}, {"source": "autoassociative_vbpcommon_exitorreturn", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L213", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_getmostrecentdbentry", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L219", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L219", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L219", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L219", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_getmostrecentdbentryin", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L239", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryin", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L239", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryin", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L239", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryin", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L239", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_getmostrecentdbentryout", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L247", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryout", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L247", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryout", "target": "bool", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L247", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryout", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L247", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_clientfromargs", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L255", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_autoassociative_vbpcommon_py", "target": "autoassociative_vbpcommon_newsimulation", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L278", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstoreconnections", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L26", "weight": 1.0}, {"source": "autoassociative_vbpcommon_plotandstorerecordedactivity", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L76", "weight": 1.0}, {"source": "autoassociative_vbpcommon_loadexpsdb", "target": "autoassociative_vbpcommon_waittolockdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L163", "weight": 1.0}, {"source": "autoassociative_vbpcommon_loadexpsdb", "target": "autoassociative_vbpcommon_unlockdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L166", "weight": 1.0}, {"source": "autoassociative_vbpcommon_updateexpsdb", "target": "autoassociative_vbpcommon_loadexpsdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L183", "weight": 1.0}, {"source": "autoassociative_vbpcommon_updateexpsdb", "target": "autoassociative_vbpcommon_unlockdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L196", "weight": 1.0}, {"source": "autoassociative_vbpcommon_errortodb", "target": "autoassociative_vbpcommon_addoutputtodb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L206", "weight": 1.0}, {"source": "autoassociative_vbpcommon_errorexit", "target": "autoassociative_vbpcommon_errortodb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L209", "weight": 1.0}, {"source": "autoassociative_vbpcommon_errorexit", "target": "autoassociative_vbpcommon_updateexpsdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L210", "weight": 1.0}, {"source": "autoassociative_vbpcommon_exitorreturn", "target": "autoassociative_vbpcommon_errorexit", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L215", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "autoassociative_vbpcommon_loadexpsdb", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L220", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "autoassociative_vbpcommon_exitorreturn", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L222", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentry", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L226", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryin", "target": "autoassociative_vbpcommon_getmostrecentdbentry", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L240", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryin", "target": "autoassociative_vbpcommon_exitorreturn", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L244", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryout", "target": "autoassociative_vbpcommon_getmostrecentdbentry", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L248", "weight": 1.0}, {"source": "autoassociative_vbpcommon_getmostrecentdbentryout", "target": "autoassociative_vbpcommon_exitorreturn", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L252", "weight": 1.0}, {"source": "autoassociative_vbpcommon_clientfromargs", "target": "autoassociative_vbpcommon_errorexit", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L272", "weight": 1.0}, {"source": "autoassociative_vbpcommon_clientfromargs", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L274", "weight": 1.0}, {"source": "autoassociative_vbpcommon_newsimulation", "target": "autoassociative_vbpcommon_errorexit", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L287", "weight": 1.0}], "raw_calls": [{"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "isinstance", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L18"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L19"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L22"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L26"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "list", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L26"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L26"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L28"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L32"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "zeros", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L33"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L52"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L53"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L53"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L59"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "save_connections_pickled", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L60"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "plot_weights", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L61"}, {"caller_nid": "autoassociative_vbpcommon_plotandstoreconnections", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L64"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "isinstance", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L68"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L69"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L72"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L76"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "list", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L76"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L76"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L78"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "isinstance", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L82"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L83"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L86"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L90"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "list", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L90"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L90"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L92"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "extract_t_Vm", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L96"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L98"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "extract_spiketimes", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L103"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L105"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "save_t_Vm_pickled", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L107"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "plot_t_Vm", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L108"}, {"caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L110"}, {"caller_nid": "autoassociative_vbpcommon_initexpdb", "callee": "strftime", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L116"}, {"caller_nid": "autoassociative_vbpcommon_initexpdb", "callee": "now", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L116"}, {"caller_nid": "autoassociative_vbpcommon_unlockdb", "callee": "exists", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L134"}, {"caller_nid": "autoassociative_vbpcommon_unlockdb", "callee": "remove", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L135"}, {"caller_nid": "autoassociative_vbpcommon_waittolockdb", "callee": "exists", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L142"}, {"caller_nid": "autoassociative_vbpcommon_waittolockdb", "callee": "sleep", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L143"}, {"caller_nid": "autoassociative_vbpcommon_waittolockdb", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L148"}, {"caller_nid": "autoassociative_vbpcommon_waittolockdb", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L149"}, {"caller_nid": "autoassociative_vbpcommon_loadexpsdb", "callee": "exists", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L164"}, {"caller_nid": "autoassociative_vbpcommon_loadexpsdb", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L169"}, {"caller_nid": "autoassociative_vbpcommon_loadexpsdb", "callee": "load", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L170"}, {"caller_nid": "autoassociative_vbpcommon_loadexpsdb", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L176"}, {"caller_nid": "autoassociative_vbpcommon_updateexpsdb", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L190"}, {"caller_nid": "autoassociative_vbpcommon_updateexpsdb", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L193"}, {"caller_nid": "autoassociative_vbpcommon_updateexpsdb", "callee": "dump", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L194"}, {"caller_nid": "autoassociative_vbpcommon_updateexpsdb", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L197"}, {"caller_nid": "autoassociative_vbpcommon_errortodb", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L203"}, {"caller_nid": "autoassociative_vbpcommon_errorexit", "callee": "exit", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L211"}, {"caller_nid": "autoassociative_vbpcommon_getmostrecentdbentry", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L223"}, {"caller_nid": "autoassociative_vbpcommon_getmostrecentdbentry", "callee": "reversed", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L232"}, {"caller_nid": "autoassociative_vbpcommon_clientfromargs", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L257"}, {"caller_nid": "autoassociative_vbpcommon_clientfromargs", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L258"}, {"caller_nid": "autoassociative_vbpcommon_clientfromargs", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L268"}, {"caller_nid": "autoassociative_vbpcommon_clientfromargs", "callee": "Client", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L270"}, {"caller_nid": "autoassociative_vbpcommon_clientfromargs", "callee": "IsReady", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L271"}, {"caller_nid": "autoassociative_vbpcommon_newsimulation", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L280"}, {"caller_nid": "autoassociative_vbpcommon_newsimulation", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L281"}, {"caller_nid": "autoassociative_vbpcommon_newsimulation", "callee": "CreateSimulation", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py", "source_location": "L285"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_autoassociative_vbpcommon_py",
+      "label": "vbpcommon.py",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "autoassociative_vbpcommon_plotandstoreconnections",
+      "label": "PlotAndStoreConnections()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "label": "PlotAndStoreRecordedActivity()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "autoassociative_vbpcommon_initexpdb",
+      "label": "InitExpDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L114"
+    },
+    {
+      "id": "autoassociative_vbpcommon_addinputtodb",
+      "label": "AddInputToDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "autoassociative_vbpcommon_addoutputtodb",
+      "label": "AddOutputToDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L129"
+    },
+    {
+      "id": "autoassociative_vbpcommon_unlockdb",
+      "label": "UnlockDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "autoassociative_vbpcommon_waittolockdb",
+      "label": "WaitToLockDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L139"
+    },
+    {
+      "id": "autoassociative_vbpcommon_loadexpsdb",
+      "label": "LoadExpsDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L162"
+    },
+    {
+      "id": "autoassociative_vbpcommon_updateexpsdb",
+      "label": "UpdateExpsDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L182"
+    },
+    {
+      "id": "autoassociative_vbpcommon_errortodb",
+      "label": "ErrorToDB()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L202"
+    },
+    {
+      "id": "autoassociative_vbpcommon_errorexit",
+      "label": "ErrorExit()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L208"
+    },
+    {
+      "id": "autoassociative_vbpcommon_exitorreturn",
+      "label": "ExitOrReturn()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L213"
+    },
+    {
+      "id": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "label": "GetMostRecentDBEntry()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L219"
+    },
+    {
+      "id": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "label": "GetMostRecentDBEntryIN()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L239"
+    },
+    {
+      "id": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "label": "GetMostRecentDBEntryOUT()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L247"
+    },
+    {
+      "id": "autoassociative_vbpcommon_clientfromargs",
+      "label": "ClientFromArgs()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L255"
+    },
+    {
+      "id": "autoassociative_vbpcommon_newsimulation",
+      "label": "NewSimulation()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L278"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_plotandstoreconnections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstoreconnections",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstoreconnections",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstoreconnections",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_initexpdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L114",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_addinputtodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_addinputtodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_addoutputtodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_addoutputtodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_unlockdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_unlockdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_waittolockdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_waittolockdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_loadexpsdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L162",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_updateexpsdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_updateexpsdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_errortodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_errortodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L202",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_errorexit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_errorexit",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_exitorreturn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_exitorreturn",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_exitorreturn",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_clientfromargs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L255",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_vbpcommon_py",
+      "target": "autoassociative_vbpcommon_newsimulation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L278",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstoreconnections",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_loadexpsdb",
+      "target": "autoassociative_vbpcommon_waittolockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_loadexpsdb",
+      "target": "autoassociative_vbpcommon_unlockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L166",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_updateexpsdb",
+      "target": "autoassociative_vbpcommon_loadexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_updateexpsdb",
+      "target": "autoassociative_vbpcommon_unlockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_errortodb",
+      "target": "autoassociative_vbpcommon_addoutputtodb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_errorexit",
+      "target": "autoassociative_vbpcommon_errortodb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L209",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_errorexit",
+      "target": "autoassociative_vbpcommon_updateexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_exitorreturn",
+      "target": "autoassociative_vbpcommon_errorexit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "autoassociative_vbpcommon_loadexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "autoassociative_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "target": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L240",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryin",
+      "target": "autoassociative_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L244",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "target": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L248",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_getmostrecentdbentryout",
+      "target": "autoassociative_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_clientfromargs",
+      "target": "autoassociative_vbpcommon_errorexit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_clientfromargs",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L274",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_vbpcommon_newsimulation",
+      "target": "autoassociative_vbpcommon_errorexit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L287",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "isinstance",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L19"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L22"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L26"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L26"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L26"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L28"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L32"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L33"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L52"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "save_connections_pickled",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L60"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "plot_weights",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L61"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstoreconnections",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L64"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "isinstance",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L78"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "isinstance",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L83"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L86"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L92"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "extract_t_Vm",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L96"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L98"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "extract_spiketimes",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L105"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "save_t_Vm_pickled",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L107"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "plot_t_Vm",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L108"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L110"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_initexpdb",
+      "callee": "strftime",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_initexpdb",
+      "callee": "now",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_unlockdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L134"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_unlockdb",
+      "callee": "remove",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L135"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_waittolockdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L142"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_waittolockdb",
+      "callee": "sleep",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L143"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_waittolockdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L148"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_waittolockdb",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_loadexpsdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_loadexpsdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L169"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_loadexpsdb",
+      "callee": "load",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L170"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_loadexpsdb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_updateexpsdb",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L190"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_updateexpsdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L193"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_updateexpsdb",
+      "callee": "dump",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L194"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_updateexpsdb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L197"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_errortodb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L203"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_errorexit",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L211"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L223"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_getmostrecentdbentry",
+      "callee": "reversed",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L232"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_clientfromargs",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L257"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_clientfromargs",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L258"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_clientfromargs",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L268"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_clientfromargs",
+      "callee": "Client",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L270"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_clientfromargs",
+      "callee": "IsReady",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L271"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_newsimulation",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L280"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_newsimulation",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L281"
+    },
+    {
+      "caller_nid": "autoassociative_vbpcommon_newsimulation",
+      "callee": "CreateSimulation",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/vbpcommon.py",
+      "source_location": "L285"
+    }
+  ]
+}

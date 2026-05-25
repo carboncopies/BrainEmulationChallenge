@@ -1,1 +1,773 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "label": "netmorph2obj.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L1"}, {"id": "legacy_netmorph2obj_add_neuron_neurites", "label": "add_neuron_neurites()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135"}, {"id": "array", "label": "array", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135"}, {"id": "legacy_netmorph2obj_add_simple_cube", "label": "add_simple_cube()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150"}, {"id": "legacy_netmorph2obj_add_soma_cube", "label": "add_soma_cube()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173"}, {"id": "legacy_netmorph2obj_add_soma_pyramid", "label": "add_soma_pyramid()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203"}, {"id": "legacy_netmorph2obj_make_wavefront_obj", "label": "make_Wavefront_OBJ()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L234"}, {"id": "legacy_netmorph2obj_find_center_of_mass", "label": "find_center_of_mass()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L276"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L13", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "netmorph2nes", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L15", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L20", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_add_neuron_neurites", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_neuron_neurites", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_neuron_neurites", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_neuron_neurites", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_neuron_neurites", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L135", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_add_simple_cube", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L150", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_add_soma_cube", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L173", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_add_soma_pyramid", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L203", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_make_wavefront_obj", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L234", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "array", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L234", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L234", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_legacy_netmorph2obj_py", "target": "legacy_netmorph2obj_find_center_of_mass", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L276", "weight": 1.0}, {"source": "legacy_netmorph2obj_find_center_of_mass", "target": "array", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L276", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_neuron_neurites", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L140", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L155", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_simple_cube", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L164", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L174", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_cube", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L176", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L204", "weight": 1.0}, {"source": "legacy_netmorph2obj_add_soma_pyramid", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L206", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L242", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "legacy_netmorph2obj_add_soma_pyramid", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L246", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "legacy_netmorph2obj_add_neuron_neurites", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L252", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L264", "weight": 1.0}, {"source": "legacy_netmorph2obj_make_wavefront_obj", "target": "legacy_netmorph2obj_add_simple_cube", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L270", "weight": 1.0}, {"source": "legacy_netmorph2obj_find_center_of_mass", "target": "array", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L277", "weight": 1.0}, {"source": "legacy_netmorph2obj_find_center_of_mass", "target": "float", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L280", "weight": 1.0}], "raw_calls": [{"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L155"}, {"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L161"}, {"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L161"}, {"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L163"}, {"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L168"}, {"caller_nid": "legacy_netmorph2obj_add_simple_cube", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L169"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L176"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L177"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L178"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L179"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L180"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L181"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L182"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L183"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L191"}, {"caller_nid": "legacy_netmorph2obj_add_soma_cube", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L193"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L206"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L207"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L208"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L209"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L210"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L222"}, {"caller_nid": "legacy_netmorph2obj_add_soma_pyramid", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L224"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L242"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L250"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L255"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "postsyn_receptor_point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L264"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "presyn_spine_point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L265"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "norm", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L267"}, {"caller_nid": "legacy_netmorph2obj_make_wavefront_obj", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L269"}, {"caller_nid": "legacy_netmorph2obj_find_center_of_mass", "callee": "point", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L279"}, {"caller_nid": "legacy_netmorph2obj_find_center_of_mass", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py", "source_location": "L280"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "label": "netmorph2obj.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "legacy_netmorph2obj_add_neuron_neurites",
+      "label": "add_neuron_neurites()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "array",
+      "label": "array",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135"
+    },
+    {
+      "id": "legacy_netmorph2obj_add_simple_cube",
+      "label": "add_simple_cube()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150"
+    },
+    {
+      "id": "legacy_netmorph2obj_add_soma_cube",
+      "label": "add_soma_cube()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173"
+    },
+    {
+      "id": "legacy_netmorph2obj_add_soma_pyramid",
+      "label": "add_soma_pyramid()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203"
+    },
+    {
+      "id": "legacy_netmorph2obj_make_wavefront_obj",
+      "label": "make_Wavefront_OBJ()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L234"
+    },
+    {
+      "id": "legacy_netmorph2obj_find_center_of_mass",
+      "label": "find_center_of_mass()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L276"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "netmorph2nes",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_add_neuron_neurites",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_neuron_neurites",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_neuron_neurites",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_neuron_neurites",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_neuron_neurites",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_add_simple_cube",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_add_soma_cube",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_add_soma_pyramid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_make_wavefront_obj",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2obj_py",
+      "target": "legacy_netmorph2obj_find_center_of_mass",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_find_center_of_mass",
+      "target": "array",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_neuron_neurites",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L140",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_simple_cube",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_cube",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_add_soma_pyramid",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L242",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "legacy_netmorph2obj_add_soma_pyramid",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "legacy_netmorph2obj_add_neuron_neurites",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L252",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_make_wavefront_obj",
+      "target": "legacy_netmorph2obj_add_simple_cube",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L270",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_find_center_of_mass",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L277",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2obj_find_center_of_mass",
+      "target": "float",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L280",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L155"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L161"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L161"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L163"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_simple_cube",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L169"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L177"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L178"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L180"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L182"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L183"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L191"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_cube",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L193"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L206"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L207"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L208"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L209"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L210"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L222"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_add_soma_pyramid",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L224"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L242"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L250"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L255"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "postsyn_receptor_point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L264"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "presyn_spine_point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L265"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "norm",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L267"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_make_wavefront_obj",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L269"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_find_center_of_mass",
+      "callee": "point",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L279"
+    },
+    {
+      "caller_nid": "legacy_netmorph2obj_find_center_of_mass",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2obj.py",
+      "source_location": "L280"
+    }
+  ]
+}

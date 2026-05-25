@@ -1,1 +1,1069 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "label": "xor_scnm_groundtruth_connectome.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L1"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "label": "RegionByNeuronID()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_setall", "label": "SetAll()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L144"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "label": "SetOneByPost()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L148"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "label": "SetOneByPre()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L153"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "label": "PostIs()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L158"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "label": "PreIs()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L164"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "label": "ActiveInputsTo()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L174"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom", "label": "ActiveOutputsFrom()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L181"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "label": "ConnectionsFrom()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L188"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost", "label": "EliminateByPost()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L196"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre", "label": "EliminateByPre()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L199"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "label": "PreRecurse()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L212"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "label": "PostRecurse()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L219"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_numactive", "label": "NumActive()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L243"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_printactive", "label": "PrintActive()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L250"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "label": "HasInputFromRegion()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput", "label": "SubsetByInput()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L269"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_intersection", "label": "Intersection()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L276"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "label": "FindIntAndInWithDifferentPyrIn()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L325"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "label": "FindIntAndInWithDifferentPyrInAndInt()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L335"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "label": "SpecifyConnection()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L348"}, {"id": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr", "label": "NeuronTypeStr()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L398"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L19", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "json", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L20", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "copy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L22", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L23", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L26", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "braingenix_bg_api", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L27", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L117", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setall", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L144", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_setall", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L144", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L148", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L148", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L148", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L153", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L153", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L153", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "target": "int", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L158", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L164", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L164", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "target": "int", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L164", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L174", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L174", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L181", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L181", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L188", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L188", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L188", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L196", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L196", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L199", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L199", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L212", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L212", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L219", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L219", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_numactive", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L243", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_numactive", "target": "int", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L243", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_printactive", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L250", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_printactive", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L250", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L262", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L269", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L269", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_intersection", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L276", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L325", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L325", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L335", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L335", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L335", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L348", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L348", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L348", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L348", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_xor_scnm_groundtruth_connectome_py", "target": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L398", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L398", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L398", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L190", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L200", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L213", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L214", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L216", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L220", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L221", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse", "target": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L223", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L263", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput", "target": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L272", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L326", "weight": 1.0}, {"source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L336", "weight": 1.0}], "raw_calls": [{"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "callee": "list", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L118"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L118"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setall", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L145"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setall", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L145"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L149"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L149"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L154"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L154"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L159"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_postis", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L159"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "callee": "range", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L165"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_preis", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L165"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L178"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L185"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L193"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L273"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_intersection", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L280"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L332"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin", "callee": "exit", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L333"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L343"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint", "callee": "exit", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L344"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L349"}, {"caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py", "source_location": "L350"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "label": "xor_scnm_groundtruth_connectome.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "label": "RegionByNeuronID()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_setall",
+      "label": "SetAll()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L144"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "label": "SetOneByPost()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "label": "SetOneByPre()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L153"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "label": "PostIs()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "label": "PreIs()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L164"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "label": "ActiveInputsTo()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L174"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom",
+      "label": "ActiveOutputsFrom()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L181"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "label": "ConnectionsFrom()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L188"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost",
+      "label": "EliminateByPost()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L196"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre",
+      "label": "EliminateByPre()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "label": "PreRecurse()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L212"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "label": "PostRecurse()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L219"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_numactive",
+      "label": "NumActive()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L243"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_printactive",
+      "label": "PrintActive()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L250"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "label": "HasInputFromRegion()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput",
+      "label": "SubsetByInput()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L269"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_intersection",
+      "label": "Intersection()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L276"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "label": "FindIntAndInWithDifferentPyrIn()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L325"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "label": "FindIntAndInWithDifferentPyrInAndInt()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L335"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "label": "SpecifyConnection()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L348"
+    },
+    {
+      "id": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr",
+      "label": "NeuronTypeStr()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L398"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "copy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setall",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_setall",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L153",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L196",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L212",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_numactive",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L243",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_numactive",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L243",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_printactive",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_printactive",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L250",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L262",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L269",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L269",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_intersection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L325",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L325",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L335",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L335",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L335",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L348",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L348",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L348",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L348",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_xor_scnm_groundtruth_connectome_py",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L398",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L398",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_neurontypestr",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L398",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypost",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_eliminatebypre",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L200",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L214",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_prerecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_postrecurse",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L223",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L263",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_hasinputfromregion",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L272",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L326",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "target": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L336",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L118"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_regionbyneuronid",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L118"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setall",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L145"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setall",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L145"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypost",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L154"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_setonebypre",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L154"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L159"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_postis",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L159"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L165"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_preis",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L165"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_activeinputsto",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L178"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_activeoutputsfrom",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L185"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_connectionsfrom",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L193"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_subsetbyinput",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L273"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_intersection",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L280"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L332"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrin",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L343"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_findintandinwithdifferentpyrinandint",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L344"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L349"
+    },
+    {
+      "caller_nid": "xor_scnm_xor_scnm_groundtruth_connectome_specifyconnection",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py",
+      "source_location": "L350"
+    }
+  ]
+}

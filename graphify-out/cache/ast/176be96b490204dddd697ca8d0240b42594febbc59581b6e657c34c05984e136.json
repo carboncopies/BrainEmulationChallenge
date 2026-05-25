@@ -1,1 +1,1002 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "label": "xor_sc_emulation.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L1"}, {"id": "xor_sc_xor_sc_emulation_event_occurs", "label": "event_occurs()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44"}, {"id": "float", "label": "float", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44"}, {"id": "bool", "label": "bool", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44"}, {"id": "xor_sc_xor_sc_emulation_set_connection_data", "label": "set_connection_data()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158"}, {"id": "xor_sc_xor_sc_emulation_set_neuron_soma", "label": "set_neuron_soma()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L181"}, {"id": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "label": "dendrite_root_start_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L188"}, {"id": "xor_sc_xor_sc_emulation_axon_root_start_np", "label": "axon_root_start_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L191"}, {"id": "xor_sc_xor_sc_emulation_axon_root_end_np", "label": "axon_root_end_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L194"}, {"id": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "label": "set_neuron_dendrite_branch()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197"}, {"id": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "label": "set_neuron_axon_branch()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206"}, {"id": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "label": "branch_intersect_receptor_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L215"}, {"id": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "label": "dendrite_branch_deflected_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L218"}, {"id": "xor_sc_xor_sc_emulation_dendrite_point_np", "label": "dendrite_point_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L221"}, {"id": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np", "label": "set_dendrite_branch_points_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L232"}, {"id": "xor_sc_xor_sc_emulation_axon_point_np", "label": "axon_point_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L236"}, {"id": "xor_sc_xor_sc_emulation_set_axon_branch_points_np", "label": "set_axon_branch_points_np()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L249"}, {"id": "xor_sc_xor_sc_emulation_make_shape", "label": "make_shape()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L392"}, {"id": "xor_sc_xor_sc_emulation_neuron_builder", "label": "neuron_builder()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L458"}, {"id": "xor_sc_xor_sc_emulation_find_cell_with_id", "label": "find_cell_with_id()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L580"}, {"id": "int", "label": "int", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L580"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L26", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L27", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "time", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L28", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "vbpcommon", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L30", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "braingenix_bg_api", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L31", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "nes_interfaces_kgtrecords", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L32", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L35", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_event_occurs", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_event_occurs", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_event_occurs", "target": "bool", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L44", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_connection_data", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_connection_data", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_connection_data", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_connection_data", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_connection_data", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_connection_data", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L158", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_neuron_soma", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L181", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_soma", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L181", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_soma", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L181", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_soma", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L181", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L188", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L188", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L188", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_axon_root_start_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L191", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_root_start_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L191", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_root_start_np", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L191", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_axon_root_end_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L194", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_root_end_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L194", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L197", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L206", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L215", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L215", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L215", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L215", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L218", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L218", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "target": "float", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L218", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_dendrite_point_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L221", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L232", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L232", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L232", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_axon_point_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L236", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_set_axon_branch_points_np", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L249", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L249", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L249", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_make_shape", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L392", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_neuron_builder", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L458", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_neuron_builder", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L458", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_sc_xor_sc_emulation_py", "target": "xor_sc_xor_sc_emulation_find_cell_with_id", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L580", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_find_cell_with_id", "target": "int", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L580", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_find_cell_with_id", "target": "str", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L580", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_point_np", "target": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L224", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_point_np", "target": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L226", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_point_np", "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L228", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_dendrite_point_np", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L230", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np", "target": "xor_sc_xor_sc_emulation_dendrite_point_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L233", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_point_np", "target": "xor_sc_xor_sc_emulation_axon_root_start_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L239", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_point_np", "target": "xor_sc_xor_sc_emulation_axon_root_end_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L241", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_point_np", "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L245", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_axon_point_np", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L247", "weight": 1.0}, {"source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np", "target": "xor_sc_xor_sc_emulation_axon_point_np", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L250", "weight": 1.0}], "raw_calls": [{"caller_nid": "xor_sc_xor_sc_emulation_event_occurs", "callee": "rand", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L45"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_connection_data", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L163"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_soma", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L185"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_soma", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L186"}, {"caller_nid": "xor_sc_xor_sc_emulation_dendrite_root_start_np", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L189"}, {"caller_nid": "xor_sc_xor_sc_emulation_axon_root_start_np", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L192"}, {"caller_nid": "xor_sc_xor_sc_emulation_axon_root_end_np", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L195"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L202"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L203"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L204"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L211"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L212"}, {"caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch", "callee": "tolist", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L213"}, {"caller_nid": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np", "callee": "array", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L219"}, {"caller_nid": "xor_sc_xor_sc_emulation_dendrite_point_np", "callee": "Exception", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L230"}, {"caller_nid": "xor_sc_xor_sc_emulation_axon_point_np", "callee": "Exception", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L247"}, {"caller_nid": "xor_sc_xor_sc_emulation_make_shape", "callee": "BGNES_sphere_create", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L395"}, {"caller_nid": "xor_sc_xor_sc_emulation_make_shape", "callee": "BGNES_cylinder_create", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L399"}, {"caller_nid": "xor_sc_xor_sc_emulation_make_shape", "callee": "BGNES_box_create", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L405"}, {"caller_nid": "xor_sc_xor_sc_emulation_neuron_builder", "callee": "BGNES_SC_neuron_create", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L462"}, {"caller_nid": "xor_sc_xor_sc_emulation_find_cell_with_id", "callee": "keys", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py", "source_location": "L581"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_sc_xor_sc_emulation_py",
+      "label": "xor_sc_emulation.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_event_occurs",
+      "label": "event_occurs()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_connection_data",
+      "label": "set_connection_data()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "label": "set_neuron_soma()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L181"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "label": "dendrite_root_start_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L188"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "label": "axon_root_start_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L191"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_axon_root_end_np",
+      "label": "axon_root_end_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L194"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "label": "set_neuron_dendrite_branch()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "label": "set_neuron_axon_branch()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "label": "branch_intersect_receptor_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L215"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "label": "dendrite_branch_deflected_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L218"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "label": "dendrite_point_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L221"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np",
+      "label": "set_dendrite_branch_points_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L232"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_axon_point_np",
+      "label": "axon_point_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L236"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_set_axon_branch_points_np",
+      "label": "set_axon_branch_points_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L249"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_make_shape",
+      "label": "make_shape()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L392"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_neuron_builder",
+      "label": "neuron_builder()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L458"
+    },
+    {
+      "id": "xor_sc_xor_sc_emulation_find_cell_with_id",
+      "label": "find_cell_with_id()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L580"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L580"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_event_occurs",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_event_occurs",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_event_occurs",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_connection_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_connection_data",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_axon_root_end_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_root_end_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L194",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L197",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L218",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L218",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L218",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L232",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_axon_point_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_set_axon_branch_points_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L249",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L249",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L249",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_make_shape",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L392",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_neuron_builder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L458",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_neuron_builder",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L458",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_emulation_py",
+      "target": "xor_sc_xor_sc_emulation_find_cell_with_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L580",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_find_cell_with_id",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L580",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_find_cell_with_id",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L580",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "target": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L224",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "target": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_dendrite_branch_points_np",
+      "target": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L233",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_point_np",
+      "target": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_point_np",
+      "target": "xor_sc_xor_sc_emulation_axon_root_end_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L241",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_point_np",
+      "target": "xor_sc_xor_sc_emulation_branch_intersect_receptor_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L245",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_axon_point_np",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_emulation_set_axon_branch_points_np",
+      "target": "xor_sc_xor_sc_emulation_axon_point_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L250",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_event_occurs",
+      "callee": "rand",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L45"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_connection_data",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L163"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L185"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_soma",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L186"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_dendrite_root_start_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L189"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_axon_root_start_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L192"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_axon_root_end_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L195"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L202"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L203"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_dendrite_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L204"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L211"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L212"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_set_neuron_axon_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L213"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_dendrite_branch_deflected_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L219"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_dendrite_point_np",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L230"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_axon_point_np",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L247"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_make_shape",
+      "callee": "BGNES_sphere_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L395"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_make_shape",
+      "callee": "BGNES_cylinder_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L399"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_make_shape",
+      "callee": "BGNES_box_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L405"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_neuron_builder",
+      "callee": "BGNES_SC_neuron_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L462"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_emulation_find_cell_with_id",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_emulation.py",
+      "source_location": "L581"
+    }
+  ]
+}

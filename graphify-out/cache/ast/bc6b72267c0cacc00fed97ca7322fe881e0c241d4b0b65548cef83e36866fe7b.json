@@ -1,1 +1,277 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "label": "Geometry.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L1"}, {"id": "prototyping_geometry_box", "label": "Box", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L15"}, {"id": "prototyping_geometry_box_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L19"}, {"id": "prototyping_geometry_sphere", "label": "Sphere", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L30"}, {"id": "prototyping_geometry_sphere_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L34"}, {"id": "prototyping_geometry_cylinder", "label": "Cylinder", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L43"}, {"id": "prototyping_geometry_cylinder_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L47"}, {"id": "prototyping_geometry_rationale_16", "label": "A box-like geometry defined by depth, width, length.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L16"}, {"id": "prototyping_geometry_rationale_31", "label": "A sphere-like geometry defined by center and radius.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L31"}, {"id": "prototyping_geometry_rationale_44", "label": "A cylinder-like geometry defined by two circular end planes.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L44"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "matplotlib_pyplot", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L8", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "mpl_toolkits_mplot3d", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L9", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "scipy_linalg", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_common_geometry_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L13", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "prototyping_geometry_box", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L15", "weight": 1.0}, {"source": "prototyping_geometry_box", "target": "prototyping_geometry_box", "relation": "inherits", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L15", "weight": 1.0}, {"source": "prototyping_geometry_box", "target": "prototyping_geometry_box_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L19", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "prototyping_geometry_sphere", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L30", "weight": 1.0}, {"source": "prototyping_geometry_sphere", "target": "prototyping_geometry_sphere", "relation": "inherits", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L30", "weight": 1.0}, {"source": "prototyping_geometry_sphere", "target": "prototyping_geometry_sphere_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L34", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "target": "prototyping_geometry_cylinder", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L43", "weight": 1.0}, {"source": "prototyping_geometry_cylinder", "target": "prototyping_geometry_cylinder", "relation": "inherits", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L43", "weight": 1.0}, {"source": "prototyping_geometry_cylinder", "target": "prototyping_geometry_cylinder_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L47", "weight": 1.0}, {"source": "prototyping_geometry_box_init", "target": "prototyping_geometry_cylinder_init", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L24", "weight": 1.0}, {"source": "prototyping_geometry_sphere_init", "target": "prototyping_geometry_cylinder_init", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L38", "weight": 1.0}, {"source": "prototyping_geometry_rationale_16", "target": "prototyping_geometry_box", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L16", "weight": 1.0}, {"source": "prototyping_geometry_rationale_31", "target": "prototyping_geometry_sphere", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L31", "weight": 1.0}, {"source": "prototyping_geometry_rationale_44", "target": "prototyping_geometry_cylinder", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L44", "weight": 1.0}], "raw_calls": [{"caller_nid": "prototyping_geometry_box_init", "callee": "super", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L24"}, {"caller_nid": "prototyping_geometry_sphere_init", "callee": "super", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L38"}, {"caller_nid": "prototyping_geometry_cylinder_init", "callee": "super", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py", "source_location": "L53"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_geometry_py",
+      "label": "Geometry.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_geometry_box",
+      "label": "Box",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "prototyping_geometry_box_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "prototyping_geometry_sphere",
+      "label": "Sphere",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "prototyping_geometry_sphere_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "prototyping_geometry_cylinder",
+      "label": "Cylinder",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L43"
+    },
+    {
+      "id": "prototyping_geometry_cylinder_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L47"
+    },
+    {
+      "id": "prototyping_geometry_rationale_16",
+      "label": "A box-like geometry defined by depth, width, length.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "prototyping_geometry_rationale_31",
+      "label": "A sphere-like geometry defined by center and radius.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "prototyping_geometry_rationale_44",
+      "label": "A cylinder-like geometry defined by two circular end planes.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L44"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "mpl_toolkits_mplot3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "scipy_linalg",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "src_components_prototyping_common_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "prototyping_geometry_box",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_box",
+      "target": "prototyping_geometry_box",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_box",
+      "target": "prototyping_geometry_box_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "prototyping_geometry_sphere",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_sphere",
+      "target": "prototyping_geometry_sphere",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_sphere",
+      "target": "prototyping_geometry_sphere_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_geometry_py",
+      "target": "prototyping_geometry_cylinder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_cylinder",
+      "target": "prototyping_geometry_cylinder",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_cylinder",
+      "target": "prototyping_geometry_cylinder_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_box_init",
+      "target": "prototyping_geometry_cylinder_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_sphere_init",
+      "target": "prototyping_geometry_cylinder_init",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_rationale_16",
+      "target": "prototyping_geometry_box",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_rationale_31",
+      "target": "prototyping_geometry_sphere",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_geometry_rationale_44",
+      "target": "prototyping_geometry_cylinder",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L44",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_geometry_box_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L24"
+    },
+    {
+      "caller_nid": "prototyping_geometry_sphere_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L38"
+    },
+    {
+      "caller_nid": "prototyping_geometry_cylinder_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Geometry.py",
+      "source_location": "L53"
+    }
+  ]
+}

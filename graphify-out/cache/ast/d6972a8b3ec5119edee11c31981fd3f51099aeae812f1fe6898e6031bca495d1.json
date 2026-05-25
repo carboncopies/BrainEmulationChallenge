@@ -1,1 +1,175 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_e3_aifinch_md", "label": "e3_aifinch.md", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L1"}, {"id": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "label": "AI Finch - Example VBP specification for Translation study", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L1"}, {"id": "doc_e3_aifinch_overview", "label": "Overview", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L11"}, {"id": "doc_e3_aifinch_about_aifinch_groundtruth_py", "label": "About `aifinch_groundtruth.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L44"}, {"id": "doc_e3_aifinch_suggested_variations_to_explore", "label": "Suggested variations to explore", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L79"}, {"id": "doc_e3_aifinch_about_aifinch_acquisition_py", "label": "About `aifinch_acquisition.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L101"}, {"id": "doc_e3_aifinch_suggested_variations_to_explore_115", "label": "Suggested variations to explore", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L115"}, {"id": "doc_e3_aifinch_about_aifinch_translation_py", "label": "About `aifinch_translation.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L128"}, {"id": "doc_e3_aifinch_about_aifinch_emulation_py", "label": "About `aifinch_emulation.py`", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L142"}, {"id": "doc_e3_aifinch_suggested_variations_to_explore_163", "label": "Suggested variations to explore", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L163"}, {"id": "doc_e3_aifinch_todo_notes", "label": "TODO notes:", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L172"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_doc_e3_aifinch_md", "target": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L1", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_overview", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L11", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_about_aifinch_groundtruth_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L44", "weight": 1.0}, {"source": "doc_e3_aifinch_about_aifinch_groundtruth_py", "target": "doc_e3_aifinch_suggested_variations_to_explore", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L79", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_about_aifinch_acquisition_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L101", "weight": 1.0}, {"source": "doc_e3_aifinch_about_aifinch_acquisition_py", "target": "doc_e3_aifinch_suggested_variations_to_explore_115", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L115", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_about_aifinch_translation_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L128", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_about_aifinch_emulation_py", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L142", "weight": 1.0}, {"source": "doc_e3_aifinch_about_aifinch_emulation_py", "target": "doc_e3_aifinch_suggested_variations_to_explore_163", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L163", "weight": 1.0}, {"source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study", "target": "doc_e3_aifinch_todo_notes", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md", "source_location": "L172", "weight": 1.0}], "input_tokens": 0, "output_tokens": 0}
+{
+  "nodes": [
+    {
+      "id": "doc_e3_aifinch_md",
+      "label": "e3_aifinch.md",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "label": "AI Finch - Example VBP specification for Translation study",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_e3_aifinch_overview",
+      "label": "Overview",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "doc_e3_aifinch_about_aifinch_groundtruth_py",
+      "label": "About `aifinch_groundtruth.py`",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L44"
+    },
+    {
+      "id": "doc_e3_aifinch_suggested_variations_to_explore",
+      "label": "Suggested variations to explore",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L79"
+    },
+    {
+      "id": "doc_e3_aifinch_about_aifinch_acquisition_py",
+      "label": "About `aifinch_acquisition.py`",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L101"
+    },
+    {
+      "id": "doc_e3_aifinch_suggested_variations_to_explore_115",
+      "label": "Suggested variations to explore",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L115"
+    },
+    {
+      "id": "doc_e3_aifinch_about_aifinch_translation_py",
+      "label": "About `aifinch_translation.py`",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L128"
+    },
+    {
+      "id": "doc_e3_aifinch_about_aifinch_emulation_py",
+      "label": "About `aifinch_emulation.py`",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L142"
+    },
+    {
+      "id": "doc_e3_aifinch_suggested_variations_to_explore_163",
+      "label": "Suggested variations to explore",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L163"
+    },
+    {
+      "id": "doc_e3_aifinch_todo_notes",
+      "label": "TODO notes:",
+      "file_type": "document",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L172"
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_e3_aifinch_md",
+      "target": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_overview",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_about_aifinch_groundtruth_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_about_aifinch_groundtruth_py",
+      "target": "doc_e3_aifinch_suggested_variations_to_explore",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_about_aifinch_acquisition_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_about_aifinch_acquisition_py",
+      "target": "doc_e3_aifinch_suggested_variations_to_explore_115",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_about_aifinch_translation_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L128",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_about_aifinch_emulation_py",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_about_aifinch_emulation_py",
+      "target": "doc_e3_aifinch_suggested_variations_to_explore_163",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_e3_aifinch_ai_finch_example_vbp_specification_for_translation_study",
+      "target": "doc_e3_aifinch_todo_notes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/e3_aifinch.md",
+      "source_location": "L172",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

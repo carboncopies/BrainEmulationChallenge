@@ -1,1 +1,301 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "label": "BS_Morphology.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L1"}, {"id": "prototyping_bs_morphology_bs_soma", "label": "BS_Soma()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12"}, {"id": "sphere", "label": "Sphere", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12"}, {"id": "prototyping_bs_morphology_bs_axon", "label": "BS_Axon()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L33"}, {"id": "cylinder", "label": "Cylinder", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L33"}, {"id": "prototyping_bs_morphology_bs_receptor", "label": "BS_Receptor()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L63"}, {"id": "box", "label": "Box", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L63"}, {"id": "prototyping_bs_morphology_bs_morphology", "label": "BS_Morphology()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L90"}, {"id": "geometry", "label": "Geometry", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L90"}, {"id": "prototyping_bs_morphology_rationale_91", "label": "Generate a morphology component from its description and data.", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L91"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_common_geometry_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L9", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_geometry_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "prototyping_bs_morphology_bs_soma", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_soma", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_soma", "target": "sphere", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "prototyping_bs_morphology_bs_axon", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L33", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_axon", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L33", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_axon", "target": "cylinder", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L33", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "prototyping_bs_morphology_bs_receptor", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L63", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_receptor", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L63", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_receptor", "target": "box", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L63", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_prototyping_bs_morphology_py", "target": "prototyping_bs_morphology_bs_morphology", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L90", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_morphology", "target": "geometry", "relation": "references", "context": "return_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L90", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_soma", "target": "sphere", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L31", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_axon", "target": "cylinder", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L61", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_receptor", "target": "box", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L68", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_morphology", "target": "box", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L95", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_morphology", "target": "sphere", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L97", "weight": 1.0}, {"source": "prototyping_bs_morphology_bs_morphology", "target": "cylinder", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L99", "weight": 1.0}, {"source": "prototyping_bs_morphology_rationale_91", "target": "prototyping_bs_morphology_bs_morphology", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L91", "weight": 1.0}], "raw_calls": [{"caller_nid": "prototyping_bs_morphology_bs_morphology", "callee": "from_dict", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L95"}, {"caller_nid": "prototyping_bs_morphology_bs_morphology", "callee": "from_dict", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L97"}, {"caller_nid": "prototyping_bs_morphology_bs_morphology", "callee": "from_dict", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py", "source_location": "L99"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_bs_morphology_py",
+      "label": "BS_Morphology.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_bs_morphology_bs_soma",
+      "label": "BS_Soma()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "sphere",
+      "label": "Sphere",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "prototyping_bs_morphology_bs_axon",
+      "label": "BS_Axon()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "cylinder",
+      "label": "Cylinder",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "prototyping_bs_morphology_bs_receptor",
+      "label": "BS_Receptor()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "box",
+      "label": "Box",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "prototyping_bs_morphology_bs_morphology",
+      "label": "BS_Morphology()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "geometry",
+      "label": "Geometry",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "prototyping_bs_morphology_rationale_91",
+      "label": "Generate a morphology component from its description and data.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L91"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "src_components_prototyping_common_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "src_components_prototyping_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "prototyping_bs_morphology_bs_soma",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_soma",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_soma",
+      "target": "sphere",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "prototyping_bs_morphology_bs_axon",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_axon",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_axon",
+      "target": "cylinder",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "prototyping_bs_morphology_bs_receptor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_receptor",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_receptor",
+      "target": "box",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_morphology_py",
+      "target": "prototyping_bs_morphology_bs_morphology",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_morphology",
+      "target": "geometry",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_soma",
+      "target": "sphere",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_axon",
+      "target": "cylinder",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_receptor",
+      "target": "box",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_morphology",
+      "target": "box",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_morphology",
+      "target": "sphere",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_bs_morphology",
+      "target": "cylinder",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_morphology_rationale_91",
+      "target": "prototyping_bs_morphology_bs_morphology",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L91",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_bs_morphology_bs_morphology",
+      "callee": "from_dict",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L95"
+    },
+    {
+      "caller_nid": "prototyping_bs_morphology_bs_morphology",
+      "callee": "from_dict",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L97"
+    },
+    {
+      "caller_nid": "prototyping_bs_morphology_bs_morphology",
+      "callee": "from_dict",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Morphology.py",
+      "source_location": "L99"
+    }
+  ]
+}

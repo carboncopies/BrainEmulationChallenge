@@ -1,1 +1,268 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "label": "Region.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L1"}, {"id": "nes_interfaces_region_region", "label": "Region", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L14"}, {"id": "nes_interfaces_region_region_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L15"}, {"id": "str", "label": "str", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L15"}, {"id": "nes_interfaces_region_brainregion", "label": "BrainRegion", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L18"}, {"id": "nes_interfaces_region_brainregion_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23"}, {"id": "geometry", "label": "Geometry", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23"}, {"id": "neuralcircuit", "label": "NeuralCircuit", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23"}, {"id": "nes_interfaces_region_brainregion_to_dict", "label": ".to_dict()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L32"}, {"id": "nes_interfaces_region_brainregion_show", "label": ".show()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L40"}, {"id": "nes_interfaces_region_rationale_19", "label": "Define the characteristics of a brain region, such as geometric shape and     ph", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L19"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "matplotlib_pyplot", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L8", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_common_spatial_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L10", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_common_geometry_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L11", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_common_neuralcircuit_py", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L12", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "nes_interfaces_region_region", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L14", "weight": 1.0}, {"source": "nes_interfaces_region_region", "target": "nes_interfaces_region_region_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L15", "weight": 1.0}, {"source": "nes_interfaces_region_region_init", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L15", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_nes_interfaces_region_py", "target": "nes_interfaces_region_brainregion", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L18", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion", "target": "nes_interfaces_region_region", "relation": "inherits", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L18", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion", "target": "nes_interfaces_region_brainregion_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion_init", "target": "str", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion_init", "target": "geometry", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion_init", "target": "neuralcircuit", "relation": "references", "context": "parameter_type", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L23", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion", "target": "nes_interfaces_region_brainregion_to_dict", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L32", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion", "target": "nes_interfaces_region_brainregion_show", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L40", "weight": 1.0}, {"source": "nes_interfaces_region_brainregion_show", "target": "str", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L42", "weight": 1.0}, {"source": "nes_interfaces_region_rationale_19", "target": "nes_interfaces_region_brainregion", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L19", "weight": 1.0}], "raw_calls": [{"caller_nid": "nes_interfaces_region_brainregion_init", "callee": "super", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L27"}, {"caller_nid": "nes_interfaces_region_brainregion_init", "callee": "init_cells", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L30"}, {"caller_nid": "nes_interfaces_region_brainregion_show", "callee": "PlotInfo", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py", "source_location": "L42"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_nes_interfaces_region_py",
+      "label": "Region.py",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "nes_interfaces_region_region",
+      "label": "Region",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "nes_interfaces_region_region_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "nes_interfaces_region_brainregion",
+      "label": "BrainRegion",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "nes_interfaces_region_brainregion_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "geometry",
+      "label": "Geometry",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "neuralcircuit",
+      "label": "NeuralCircuit",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23"
+    },
+    {
+      "id": "nes_interfaces_region_brainregion_to_dict",
+      "label": ".to_dict()",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "nes_interfaces_region_brainregion_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "nes_interfaces_region_rationale_19",
+      "label": "Define the characteristics of a brain region, such as geometric shape and     ph",
+      "file_type": "rationale",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L19"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "src_components_nes_interfaces_common_spatial_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "src_components_nes_interfaces_common_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "src_components_nes_interfaces_common_neuralcircuit_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "nes_interfaces_region_region",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_region",
+      "target": "nes_interfaces_region_region_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_region_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_nes_interfaces_region_py",
+      "target": "nes_interfaces_region_brainregion",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion",
+      "target": "nes_interfaces_region_region",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion",
+      "target": "nes_interfaces_region_brainregion_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion_init",
+      "target": "geometry",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion_init",
+      "target": "neuralcircuit",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion",
+      "target": "nes_interfaces_region_brainregion_to_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion",
+      "target": "nes_interfaces_region_brainregion_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_brainregion_show",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "nes_interfaces_region_rationale_19",
+      "target": "nes_interfaces_region_brainregion",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L19",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "nes_interfaces_region_brainregion_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L27"
+    },
+    {
+      "caller_nid": "nes_interfaces_region_brainregion_init",
+      "callee": "init_cells",
+      "is_member_call": true,
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L30"
+    },
+    {
+      "caller_nid": "nes_interfaces_region_brainregion_show",
+      "callee": "PlotInfo",
+      "is_member_call": false,
+      "source_file": "src/components/NES_interfaces/Region.py",
+      "source_location": "L42"
+    }
+  ]
+}

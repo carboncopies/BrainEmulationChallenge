@@ -1,1 +1,1301 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "label": "bayesian_optimization.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L1"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer", "label": "BayesianOptimizer", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L44"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_init", "label": ".__init__()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L45"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "label": ".backup_config()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L52"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "label": ".restore_config()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L60"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "label": ".modify_config()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L67"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "label": ".run_reservoir()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L89"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "label": ".run_connectome()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L115"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "label": ".format_time()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L157"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "label": ".objective_function()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L163"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "label": ".save_results()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L257"}, {"id": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "label": ".print_summary()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L264"}, {"id": "optimization_bayesian_optimization_main", "label": "main()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L302"}, {"id": "optimization_bayesian_optimization_rationale_53", "label": "Backup original config file", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L53"}, {"id": "optimization_bayesian_optimization_rationale_61", "label": "Restore original config file", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L61"}, {"id": "optimization_bayesian_optimization_rationale_68", "label": "Modify config file with new parameters", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L68"}, {"id": "optimization_bayesian_optimization_rationale_90", "label": "Run reservoir generation", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L90"}, {"id": "optimization_bayesian_optimization_rationale_116", "label": "Run connectome analysis and parse results", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L116"}, {"id": "optimization_bayesian_optimization_rationale_158", "label": "Format elapsed time as MM:SS", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L158"}, {"id": "optimization_bayesian_optimization_rationale_164", "label": "Objective function for optimization.         Runs one actual NETMORPH test and r", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L164"}, {"id": "optimization_bayesian_optimization_rationale_265", "label": "Print optimization summary", "file_type": "rationale", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L265"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "numpy", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L18", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "pandas", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L19", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "skopt", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L20", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "skopt_space", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L21", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "skopt_utils", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L22", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "argparse", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L23", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "time", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L24", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "shutil", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L25", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "subprocess", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L26", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "re", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L27", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "pathlib", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L28", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "datetime", "relation": "imports_from", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L29", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "optimization_bayesian_optimization_bayesianoptimizer", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L44", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_init", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L45", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L52", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L60", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L67", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L89", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L115", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L157", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L163", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L257", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer", "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "relation": "method", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L264", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_xor_scnm_optimization_bayesian_optimization_py", "target": "optimization_bayesian_optimization_main", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L302", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L186", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L191", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L193", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "target": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L206", "weight": 1.0}, {"source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L215", "weight": 1.0}, {"source": "optimization_bayesian_optimization_main", "target": "optimization_bayesian_optimization_bayesianoptimizer", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L336", "weight": 1.0}, {"source": "optimization_bayesian_optimization_main", "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L337", "weight": 1.0}, {"source": "optimization_bayesian_optimization_main", "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L351", "weight": 1.0}, {"source": "optimization_bayesian_optimization_main", "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "relation": "calls", "context": "call", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L355", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_53", "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L53", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_61", "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L61", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_68", "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L68", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_90", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L90", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_116", "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L116", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_158", "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L158", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_164", "target": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L164", "weight": 1.0}, {"source": "optimization_bayesian_optimization_rationale_265", "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "relation": "rationale_for", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L265", "weight": 1.0}], "raw_calls": [{"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_init", "callee": "Path", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L49"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_init", "callee": "mkdir", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L50"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "callee": "strftime", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L55"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "callee": "now", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L55"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "callee": "copy2", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L57"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L58"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "callee": "exists", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L62"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "callee": "copy2", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L64"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L65"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L71"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "readlines", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L72"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "items", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L80"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "enumerate", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L81"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "startswith", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L82"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "strip", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L82"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L86"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config", "callee": "writelines", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L87"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "run", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L94"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L102"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L103"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L104"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L109"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L112"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "run", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L120"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L128"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L129"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L130"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "search", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L137"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "split", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L140"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "group", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L140"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L141"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "search", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L145"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L151"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L154"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "callee": "int", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L159"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_format_time", "callee": "int", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L160"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L174"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L175"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L176"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L177"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L178"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L179"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L180"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L181"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "time", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L183"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L187"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L190"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "time", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L192"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L205"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L208"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L211"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L214"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "time", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L217"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "int", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L225"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L235"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L236"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L237"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "append", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L250"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function", "callee": "float", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L255"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "callee": "DataFrame", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L259"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "callee": "to_csv", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L261"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L262"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "DataFrame", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L266"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L268"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L269"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L270"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "idxmax", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L273"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "astype", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L273"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L276"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L277"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L278"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L279"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L280"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L281"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L282"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L285"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L286"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L286"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L287"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L287"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L288"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L288"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L289"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "len", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L289"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "sum", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L292"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "int", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L292"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "split", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L292"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "sum", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L293"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "int", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L293"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "split", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L293"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L294"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L296"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L297"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L298"}, {"caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L299"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "ArgumentParser", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L303"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L319"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "add_argument", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L321"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "parse_args", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L324"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L326"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L327"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L328"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L329"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L330"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L331"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L332"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L333"}, {"caller_nid": "optimization_bayesian_optimization_main", "callee": "gp_minimize", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py", "source_location": "L341"}]}
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "label": "bayesian_optimization.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer",
+      "label": "BayesianOptimizer",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "label": ".backup_config()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "label": ".restore_config()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L60"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "label": ".modify_config()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "label": ".run_reservoir()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L89"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "label": ".run_connectome()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L115"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "label": ".format_time()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L157"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "label": ".objective_function()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L163"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "label": ".save_results()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L257"
+    },
+    {
+      "id": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "label": ".print_summary()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L264"
+    },
+    {
+      "id": "optimization_bayesian_optimization_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L302"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_53",
+      "label": "Backup original config file",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_61",
+      "label": "Restore original config file",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_68",
+      "label": "Modify config file with new parameters",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L68"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_90",
+      "label": "Run reservoir generation",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_116",
+      "label": "Run connectome analysis and parse results",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L116"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_158",
+      "label": "Format elapsed time as MM:SS",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L158"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_164",
+      "label": "Objective function for optimization.         Runs one actual NETMORPH test and r",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L164"
+    },
+    {
+      "id": "optimization_bayesian_optimization_rationale_265",
+      "label": "Print optimization summary",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L265"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "pandas",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "skopt",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "skopt_space",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "skopt_utils",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "shutil",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "subprocess",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "re",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L52",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L257",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L264",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_optimization_bayesian_optimization_py",
+      "target": "optimization_bayesian_optimization_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L302",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L206",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_main",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L336",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_main",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L337",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_main",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L351",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_main",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L355",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_53",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_61",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_68",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_90",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_116",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_158",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_164",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "optimization_bayesian_optimization_rationale_265",
+      "target": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L265",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_init",
+      "callee": "Path",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L49"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_init",
+      "callee": "mkdir",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L50"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "callee": "strftime",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L55"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "callee": "now",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L55"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "callee": "copy2",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L57"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_backup_config",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L62"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "callee": "copy2",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L64"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_restore_config",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L65"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L71"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "readlines",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "items",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L80"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "enumerate",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L81"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "startswith",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "strip",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L86"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_modify_config",
+      "callee": "writelines",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L87"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "run",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L94"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L102"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L104"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L109"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_reservoir",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L112"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "run",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L120"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L128"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L129"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L130"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "search",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L137"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "group",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L141"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "search",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L145"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L151"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_run_connectome",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L154"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L159"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_format_time",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L160"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L174"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L175"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L177"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L178"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L180"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "time",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L183"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L187"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L190"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "time",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L192"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L205"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L208"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L211"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L214"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "time",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L217"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L225"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L235"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L236"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L237"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L250"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_objective_function",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L255"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "callee": "DataFrame",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L259"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "callee": "to_csv",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L261"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_save_results",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L262"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "DataFrame",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L266"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L268"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L269"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L270"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "idxmax",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L273"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "astype",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L273"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L276"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L277"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L278"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L279"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L280"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L281"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L282"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L285"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L286"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L286"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L287"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L287"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L288"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L288"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L289"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L289"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L292"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L292"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L292"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L293"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L293"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L293"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L294"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L296"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L297"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L298"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_bayesianoptimizer_print_summary",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L299"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "ArgumentParser",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L303"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L319"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "add_argument",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L321"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "parse_args",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L324"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L326"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L327"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L328"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L329"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L330"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L331"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L332"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "optimization_bayesian_optimization_main",
+      "callee": "gp_minimize",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/optimization/bayesian_optimization.py",
+      "source_location": "L341"
+    }
+  ]
+}

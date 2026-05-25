@@ -1,1 +1,207 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_experiment_log_md", "label": "experiment_log.md", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L1"}, {"id": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "label": "NETMORPH Parameter Tuning Experiments - XOR Reservoir", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L1"}, {"id": "full_adder_lifc_experiment_log_baseline_configuration", "label": "Baseline Configuration", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L5"}, {"id": "full_adder_lifc_experiment_log_experiment_1_moderate_increase", "label": "Experiment 1: Moderate Increase", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L11"}, {"id": "full_adder_lifc_experiment_log_experiment_2_high_increase", "label": "Experiment 2: High Increase", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L17"}, {"id": "full_adder_lifc_experiment_log_experiment_3_low_decrease", "label": "Experiment 3: Low Decrease", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L23"}, {"id": "full_adder_lifc_experiment_log_summary_table", "label": "Summary Table", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L29"}, {"id": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "label": "Elongation Rate Parameter Sweep", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L39"}, {"id": "full_adder_lifc_experiment_log_baseline_configuration_44", "label": "Baseline Configuration", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L44"}, {"id": "full_adder_lifc_experiment_log_experiment_4_low_elongation_rate", "label": "Experiment 4: Low Elongation Rate", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L50"}, {"id": "full_adder_lifc_experiment_log_experiment_5_high_elongation_rate", "label": "Experiment 5: High Elongation Rate", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L57"}, {"id": "full_adder_lifc_experiment_log_turn_separation_parameter_turning_frequency", "label": "turn_separation Parameter (Turning Frequency)", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L64"}, {"id": "full_adder_lifc_experiment_log_e_parameter_competition_for_resources", "label": "E Parameter (Competition for Resources)", "file_type": "document", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L87"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_experiment_log_md", "target": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L1", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "target": "full_adder_lifc_experiment_log_baseline_configuration", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L5", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "target": "full_adder_lifc_experiment_log_experiment_1_moderate_increase", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L11", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "target": "full_adder_lifc_experiment_log_experiment_2_high_increase", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L17", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "target": "full_adder_lifc_experiment_log_experiment_3_low_decrease", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L23", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir", "target": "full_adder_lifc_experiment_log_summary_table", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L29", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_models_full_adder_lifc_experiment_log_md", "target": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L39", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "target": "full_adder_lifc_experiment_log_baseline_configuration_44", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L44", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "target": "full_adder_lifc_experiment_log_experiment_4_low_elongation_rate", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L50", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "target": "full_adder_lifc_experiment_log_experiment_5_high_elongation_rate", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L57", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "target": "full_adder_lifc_experiment_log_turn_separation_parameter_turning_frequency", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L64", "weight": 1.0}, {"source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep", "target": "full_adder_lifc_experiment_log_e_parameter_competition_for_resources", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md", "source_location": "L87", "weight": 1.0}], "input_tokens": 0, "output_tokens": 0}
+{
+  "nodes": [
+    {
+      "id": "src_models_full_adder_lifc_experiment_log_md",
+      "label": "experiment_log.md",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "label": "NETMORPH Parameter Tuning Experiments - XOR Reservoir",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_baseline_configuration",
+      "label": "Baseline Configuration",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_experiment_1_moderate_increase",
+      "label": "Experiment 1: Moderate Increase",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_experiment_2_high_increase",
+      "label": "Experiment 2: High Increase",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_experiment_3_low_decrease",
+      "label": "Experiment 3: Low Decrease",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L23"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_summary_table",
+      "label": "Summary Table",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "label": "Elongation Rate Parameter Sweep",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L39"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_baseline_configuration_44",
+      "label": "Baseline Configuration",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L44"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_experiment_4_low_elongation_rate",
+      "label": "Experiment 4: Low Elongation Rate",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L50"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_experiment_5_high_elongation_rate",
+      "label": "Experiment 5: High Elongation Rate",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L57"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_turn_separation_parameter_turning_frequency",
+      "label": "turn_separation Parameter (Turning Frequency)",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L64"
+    },
+    {
+      "id": "full_adder_lifc_experiment_log_e_parameter_competition_for_resources",
+      "label": "E Parameter (Competition for Resources)",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L87"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_full_adder_lifc_experiment_log_md",
+      "target": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "target": "full_adder_lifc_experiment_log_baseline_configuration",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "target": "full_adder_lifc_experiment_log_experiment_1_moderate_increase",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "target": "full_adder_lifc_experiment_log_experiment_2_high_increase",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "target": "full_adder_lifc_experiment_log_experiment_3_low_decrease",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_netmorph_parameter_tuning_experiments_xor_reservoir",
+      "target": "full_adder_lifc_experiment_log_summary_table",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_full_adder_lifc_experiment_log_md",
+      "target": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "target": "full_adder_lifc_experiment_log_baseline_configuration_44",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "target": "full_adder_lifc_experiment_log_experiment_4_low_elongation_rate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "target": "full_adder_lifc_experiment_log_experiment_5_high_elongation_rate",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L57",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "target": "full_adder_lifc_experiment_log_turn_separation_parameter_turning_frequency",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_experiment_log_elongation_rate_parameter_sweep",
+      "target": "full_adder_lifc_experiment_log_e_parameter_competition_for_resources",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/experiment_log.md",
+      "source_location": "L87",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

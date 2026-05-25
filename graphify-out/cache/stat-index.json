@@ -1,1 +1,977 @@
-{"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Tools/Setup.sh":{"size":489,"mtime_ns":1779682688388508619,"hash":"4259cd12e5abd78a5740623ad25067458269de839616cce3f4499b2ca83f97de"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Tools/Tag.sh":{"size":3432,"mtime_ns":1779682963259549911,"hash":"90f5f0cbba1ea3dc25db64939f98921a43b66703b3b0cdf531c3baa05d7f13e1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Tools/Update.sh":{"size":325,"mtime_ns":1779676235822702286,"hash":"b499781221d950afb0e90e580b586a4e50aaa38d3fe869679c2729f0d35f6786"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Tools/RunXOR.sh":{"size":59,"mtime_ns":1779676235822536661,"hash":"7a92097b80e08dab5a11dc515a1e458fc0db6fcdc6882d615c5b66ac63e2f589"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Tools/PushWithSubmodules.sh":{"size":124,"mtime_ns":1779676235822452161,"hash":"531672547caaf17294dc0773caa2baa68b4aef2db193c9cc13c3d8b73790bc3e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/NeuroglancerTests/Neuroglancer.py":{"size":585,"mtime_ns":1779676235822125244,"hash":"feec3057c072308f40d32e7fbecbf6676cc9f485ede39433d4eaaa8ff83db4c2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/NeuroglancerTests/CreateCVDataset.py":{"size":1839,"mtime_ns":1779676235822008827,"hash":"25cfedeb011b4e91b4bb4c9758456e78b9aea3703af1b4380aace28ed7ae5691"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Tools/Setup.sh":{"size":62,"mtime_ns":1779676235835063994,"hash":"8bb2262f77e563a8f665ddcf0312c04d0d3db4e2899de6eec511e5824b19f244"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Tools/Build.sh":{"size":39,"mtime_ns":1779676235834984494,"hash":"29b1f7283c38b3b24bb1e5131739c0fba6dbeba338aadd720503184e4da864ad"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Tools/Setup.sh":{"size":62,"mtime_ns":1779676235824696202,"hash":"bbd6443b927e4f5e288b422346855ae27b02cda18e0ac462aed778a4900541f6"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Tools/Build.sh":{"size":39,"mtime_ns":1779676235824624994,"hash":"e038d67d30a62703ce9a7655ddd05c95cf377fa5afc674df5bc5820e0f4cb0f1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/sliceviewer.py":{"size":16687,"mtime_ns":1779676235821617327,"hash":"1f00980cf0d4410e6aa9d42f2ef5fddfb05ef0716c8d081104ed46bc849be7a3"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/WeReconstructLLC/submitted-emulation.json":{"size":1820,"mtime_ns":1779676235821446619,"hash":"daea115138e7472a25dea99aab278e7aa27668e8516f3aaaa734675337257c8a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/SubmissionConverter/VisualizerTest.py":{"size":4231,"mtime_ns":1779676235821174619,"hash":"ab351d1fcad7c1fc57bf5f3215ae7b9192f3895533be547dca2b041af34c7f54"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/SubmissionConverter/Test.json":{"size":790,"mtime_ns":1779676235821070536,"hash":"82141c93b1e15b1be8300e240ead340e1aedf40f6427b01e69a3e027ee832b73"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/SubmissionConverter/SubmissionVisualizer.py":{"size":18384,"mtime_ns":1779676235820965077,"hash":"aa787aecb097cb416e0f78ceea1bcac18e04c12c1a16500d55dc72f20a6d63bd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_validation.py":{"size":3348,"mtime_ns":1779676235859763286,"hash":"7e0ac590815070801be950fdefce8a6f18a833710a06456c620a9342786a7413"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_validation-python.py":{"size":1459,"mtime_ns":1779676235859677702,"hash":"993174584812c94c6c61108f4fbffa01b97306accc425d9a9b91f2b24367a770"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_acquisition.py":{"size":20598,"mtime_ns":1779676235859377452,"hash":"16a0c4fad9cfe5d1d4d72658f04074fe2efb64dd1090b10227a85d7e3b4db69c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/align3dtest.py":{"size":7752,"mtime_ns":1779676235858886161,"hash":"7ba7f4f43e3c4d22e9dd43ca88ce7d532267dd2ee4ee5b8bec43074e8a44790d"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/ConferenceAcquisition.py":{"size":21969,"mtime_ns":1779676235858702994,"hash":"eb5c09d019ce6e6cb7c20752ff14a019c504459e0bcc1c82d8f57dac360402c8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/vbpcommon.py":{"size":169,"mtime_ns":1779676235859272619,"hash":"2c5c11ba22496df479d113c340dd6ed1664f3ebd2a9326c4bdacfea30ec27f7c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/connectomes.py":{"size":6939,"mtime_ns":1779676235859002453,"hash":"1978bcfe4ee06b6b41a54fde8399248c011ec714dfbc1174b537afccc79620a4"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_groundtruth.py":{"size":27407,"mtime_ns":1779676235859597619,"hash":"15176717674796043326d1e66a3fd09148909d3549c10633158d88b4818a9124"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/xor_sc_emulation.py":{"size":27702,"mtime_ns":1779676235859485036,"hash":"176be96b490204dddd697ca8d0240b42594febbc59581b6e657c34c05984e136"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/legacy_autoassociative_connectome.py":{"size":20475,"mtime_ns":1779676235851511036,"hash":"04fce9f600076792e7b97e0ffdcf8c20c315ae6b97607c7a5121974e1b8acf24"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/gen_autonm_labels.py":{"size":21989,"mtime_ns":1779676235851318036,"hash":"f4fc78fd51a63394da0cac3f66ba924028283a8942aa906b242528ee872a5a3d"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/autoassociative_reservoir.py":{"size":9543,"mtime_ns":1779676235851041494,"hash":"a408d3048b82be5913cd231a4d9921e7551315168fd3ea558350dfd4ccaa05bd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/vbpcommon.py":{"size":10746,"mtime_ns":1779676235851980078,"hash":"337d4be28a6485a7180ae77f164929f71cc260411c1d1e83b1f1ffb99be04563"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/LIFtest.py":{"size":36192,"mtime_ns":1779676235850269161,"hash":"ad7bff2a695160c24cc3c1ffb4f764f7ed46c7d1b95ef4edd295ffe66cb547d5"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/deletesimtest.py":{"size":6829,"mtime_ns":1779676235851139869,"hash":"46435adcb149611637a6003fd0444a6e053720e93150e1a0df02d59b39af79e0"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/inspect_batch_models.py":{"size":3447,"mtime_ns":1779676235851401827,"hash":"ead17791594cae3960f391c65575d48c8542f1d91adb172585f945ba3328fcfe"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/Run.sh":{"size":5425,"mtime_ns":1779676235850649994,"hash":"bec313edf9d9d27129006528b91d0785e23c4f7393bb6daa179c4ac3350a8a74"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/parallel_batch_test.py":{"size":11660,"mtime_ns":1779676235851789453,"hash":"bf79ec60cb7526e9b520d69adabd09cfa1c9b85c34d476d985c4349ea88bbd46"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/autoassociative_connectome.py":{"size":10977,"mtime_ns":1779676235850867911,"hash":"6660e270121441953d65ad98c84ad0c4bd7d39bf88a4d7cb2e221493e86cff67"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/autoassociative_acquisition.py":{"size":31623,"mtime_ns":1779676235850727577,"hash":"970b9e86bd9a8444950a80a0112b66f7d6ecd77f40a6b134adec2594b0ce2307"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/show_resource_checks.py":{"size":1900,"mtime_ns":1779676235851862369,"hash":"b9704e3890094cbe38154504ff417abaa790278d8155bb9c728d910606fff285"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_lifcnm/xor_lifcnm_groundtruth_reservoir.py":{"size":5617,"mtime_ns":1779676235858289619,"hash":"be2b836935d2c1289e600af8dc4aa83a2fd9c341d70fb7cdef01e9385c6a0561"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_lifcnm/vbpcommon.py":{"size":6596,"mtime_ns":1779676235857998286,"hash":"082bcc4c96beba7b9f9fcca7d676833a8d14b6ebba5eac5bf3de00c3f301647a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_lifcnm/Run.sh":{"size":4951,"mtime_ns":1779676235857820244,"hash":"af5bc0461db543f7ae27e59f95b4f778830e55f4d7703e850ee4e5244efdfa76"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_lifcnm/xor_lifcnm_groundtruth_connectome.py":{"size":15828,"mtime_ns":1779676235858168202,"hash":"b8e5f04e5e374f71d23db32d4774fa9855cf58ef501fe7f5f7cc5891230222ad"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_lifcnm/xor_lifcnm_acquisition_direct.py":{"size":31739,"mtime_ns":1779676235858065827,"hash":"bda7282dbd19bf5feeba2923653341c6d42a10569f5b08644236b22c11b026d0"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/vbpcommon.py":{"size":169,"mtime_ns":1779676235853647161,"hash":"5dfa89671b220aafb396bfd8650573f0721a43afd759def171eda1e390b3a367"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/Demo.sh":{"size":425,"mtime_ns":1779676235852202494,"hash":"144addb956f8e628f6f45a9a2cbc54d64fde8f900abdcefadfc930b4a034c42b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py":{"size":15310,"mtime_ns":1779676235852414702,"hash":"720c18d4f7323c5bb0ee99e5ae4588a0d17b82062850a891b320831b4713b2f6"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/bs_vbp01_doubleblind_x_acquisition.py":{"size":17172,"mtime_ns":1779676235852580619,"hash":"448b882ed26fb4be4ceef3e84a7819e2e05f2bb5d8686acc55055f60b4cad16e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/prototyping/vbpcommon.py":{"size":176,"mtime_ns":1779676235853480827,"hash":"0756a2f8a322e75b969daa65f6b494faf99608668eea9aeef4f663b417a7bf85"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py":{"size":6635,"mtime_ns":1779676235853299661,"hash":"1e2a91118e4804da71f5a08e00a8ab44ca323ada0ecada581194f0bb21758c73"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/prototyping/bs_vbp02_translation_iv_system_identification.py":{"size":4640,"mtime_ns":1779676235853171244,"hash":"ec716781eddaaefff9e0ed0f09dc3c4f63b89eb8dafa69d7db1667560189f142"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/prototyping/bs_vbp00_groundtruth_xi_sampleprep.py":{"size":7109,"mtime_ns":1779676235852856411,"hash":"f141eb460f9534ed8c59311f46a0c097cd3af1895472e16b1ef79d5a128469ef"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/prototyping/bs_vbp01_doubleblind_x_acquisition.py":{"size":11097,"mtime_ns":1779676235853037786,"hash":"1b33841bdf788f927073ee706a4d95cfb8b3358ae2c2d6e64c53906dc659c622"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e3_aifinch/aifinch_vbp0_groundtruth.py":{"size":12167,"mtime_ns":1779676235853861119,"hash":"e0c770a309c7ec54156860ea340622948ee659759b86838cee0da16af28c6d11"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e3_aifinch/aifinch_vbp1_acquisition.py":{"size":4070,"mtime_ns":1779676235853969911,"hash":"43a6e06bab3b14d14df163b7ce22fd5d4cf09f79b69b4ee7b087c499176a1161"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e3_aifinch/aifinch_vbp3_emulation.py":{"size":6505,"mtime_ns":1779676235854388827,"hash":"c54b694c83885a0fc73f23d348e3c84f98061e497591d8eebee1556648c20abf"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e3_aifinch/aifinch_vbp2_translation.py":{"size":4874,"mtime_ns":1779676235854136453,"hash":"db73a7c93219c992afc14f1e985294f2b335d26319eef3554c1b3c41b518620d"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/test_neurite_diameters/groundtruth_reservoir.py":{"size":3814,"mtime_ns":1779676235856284161,"hash":"886f3280262ced25a48174d92df9a58fe4a07b214bfa96c021ab009fce4c982b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/test_neurite_diameters/vbpcommon.py":{"size":169,"mtime_ns":1779676235856503786,"hash":"3decd9a5ec2be9acff3e52c61792767e06dfea276102c4851c762cb145e3c691"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/vbpcommon.py":{"size":7772,"mtime_ns":1779676235855793202,"hash":"d54f37acb2c1ef6efece08d44a8b6e828087d962536ef6928e4ec221ff331258"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/Run.sh":{"size":4931,"mtime_ns":1779676235854937411,"hash":"3a558ac85d818920417eddf2035d5685eb9d3e0bedd5b26f189ad956cc1d07a4"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/Loop.py":{"size":218,"mtime_ns":1779676235854723994,"hash":"004100d9b7a041e5f551e8520e9812a7d882f6a1ef24f60093d250579dc61b56"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/xor_scnm_acquisition_direct.py":{"size":32362,"mtime_ns":1779676235855933619,"hash":"516beeb7dbce722969390286d953d3c13b23ac0160eb0fd9d2f657470a8a02a1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_lifc.py":{"size":25647,"mtime_ns":1779676235855218744,"hash":"1cc9f9902e7c8c64b7022ae14d1941bc4c340131b8bb7f36546ce01e84c565ea"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/xor_bs_groundtruth_simplified.py":{"size":19651,"mtime_ns":1779676235857444494,"hash":"74afefb23f10b616b50402a781ba0595c5ea46baf33fe879a52780e31dc8bf08"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/xor_bs_acquisition.py":{"size":17231,"mtime_ns":1779676235856916286,"hash":"38139f1f48ef7ec5d2890f637405850be5c858e13b2393bea145797bc7971e4e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/xor_bs_simplified.py":{"size":19073,"mtime_ns":1779676235857540786,"hash":"74f9d4951fa4ef8caf82d5d957d7c03a73f6c04067178bc2c89161403df60315"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/vbpcommon.py":{"size":169,"mtime_ns":1779676235856830744,"hash":"b368f9f394e1e5a8b31e66800251acd5b866e9aa5bc53f703b12dd179959168e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/xor_bs_groundtruth.py":{"size":18143,"mtime_ns":1779676235857352244,"hash":"22b6421d8e47753b1183d88b897f507b8205d289de194f740703925ae793c7b2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/sub1_acquisition.py":{"size":9124,"mtime_ns":1779676235863028994,"hash":"79ece778a1487b05e8d70ac94eec91b08b83f0aea8e7a67ce7345e0c194819c8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/vbpcommon.py":{"size":6596,"mtime_ns":1779676235863276036,"hash":"ad2f68ffeed1d61c1529fd8671e281de23ec2bacbadd692fc96e0fe3a8792610"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/sub2_acquisition.py":{"size":11369,"mtime_ns":1779676235863165827,"hash":"d4bf2c06533a08f16e2c268683ac58965d287ea5a78c94a2ce8f6947c13bf97b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/acquisition_template.py":{"size":7809,"mtime_ns":1779676235860192286,"hash":"1e863815b9eb4eac042790f1bcf6b4c7b1aebbaa51c9d30f5df1d2e0d913c1e8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/Run.sh":{"size":5433,"mtime_ns":1779676235860072786,"hash":"23983a1895be3caef88e81d6c62b5547dc0001257fa99b65bc046b1eb3e33851"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_reservoir.py":{"size":5731,"mtime_ns":1779676235863589161,"hash":"0ed6ddeb36af392718777ba8b974308854c6d6d45edb672b86b9ef5a5460646c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_groundtruth_connectome.py":{"size":15824,"mtime_ns":1779676235863473827,"hash":"3d71c07c86f22307cc475bdd2eb95fb67bd1f72e09d6956e1ff8b43650b59bd1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/xor_scnm_acquisition_direct.py":{"size":31733,"mtime_ns":1779676235863366286,"hash":"0bdf4d897a51fd40f61d9d6dec58cba63928d2acd23af23fcfef69a8bf623067"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/test_parameter_combinations.py":{"size":9797,"mtime_ns":1779676235862856202,"hash":"b6b81bc572a56b91c7f0fb64920b03b93f81c400f1117a019e085d3aa6a3475f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/bayesian_optimization.py":{"size":12420,"mtime_ns":1779676235862153244,"hash":"1dd52d2b40859185c2b802aaf2ef88b3066d33947504729e827581e7fcf7bc4f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/generate_parameter_sweep.py":{"size":7517,"mtime_ns":1779676235862618536,"hash":"fcc0bc60a855c9dec93c67998de924110583c468a97eb2da3cc30beb7ae3ae41"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2obj.py":{"size":9673,"mtime_ns":1779676235860488953,"hash":"1ed1d15ffb4b2cde2101a1dc0c1d1ed82f1c74869e66395e9e488edcb7a4f169"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/netmorph2nes.py":{"size":9093,"mtime_ns":1779676235860359953,"hash":"5b00039bb568e88ee2be8326d4e42e6effd4c81100f9f4cb5726c31632b0bf49"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth.py":{"size":7842,"mtime_ns":1779676235860894453,"hash":"9b4f23d7589bd3434c01db9ca0713df4bf8e892ba4cc82a5d16eed497e501975"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth-batched.py":{"size":11076,"mtime_ns":1779676235860776619,"hash":"33746d2f2ab1db56b1ff96b2f9f2785fc27715ab6ffab67c1a0a2c658e2b3af9"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_groundtruth_direct.py":{"size":3196,"mtime_ns":1779676235860988744,"hash":"8cfee7afdeffb2145b6e7495fe2d852ec8b67558a4be250ff86577b98f0504d0"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/objcurves.py":{"size":3445,"mtime_ns":1779676235860557244,"hash":"fde7641fe59ccd4c9a8e14accdef246d40d2156c3e774f59a3612ea580214dd7"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/legacy/xor_scnm_acquisition.py":{"size":21248,"mtime_ns":1779676235860639077,"hash":"6f46a8fd729d4a91a5ced307c5e5164f7dbbdcfc888203dc4f9da467bd3d200c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/IF_with_stdp.py":{"size":29072,"mtime_ns":1779676235843613077,"hash":"ac53a765992eb564fd92f6e5f06362d061815fcf9c19c71334921571807e76f2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/psp_test.py":{"size":1987,"mtime_ns":1779676235849104286,"hash":"756d45385607af7f17d946235c9befc242132b0e29608d1309195e2fd570d5cd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/normalized_double_exponential_plot.py":{"size":2196,"mtime_ns":1779676235845989452,"hash":"33d1ada4f6033d4824f3a4db86a9694a2cedc32b3a0149938776e22a120ce7fa"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/normalized_psp_kernels.py":{"size":1823,"mtime_ns":1779676235846078744,"hash":"e8fbdf1c4b68ead4bba19f6168f9c5870f3f5a3eb61c06eda98e3c901ca0bd92"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/IF_with_stdp.cpp":{"size":27077,"mtime_ns":1779676235843473577,"hash":"28ff89b6c15427afdaf907747281629b8b06dc3500ce02bb4ccfcc41e8ea0ca5"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/improved_stdp.py":{"size":1784,"mtime_ns":1779676235845913327,"hash":"5e106fc77b1e803a9deac0431306e4a38bda6f49b950da9072833348c7bbd9f8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/exponential_Euler.py":{"size":3029,"mtime_ns":1779676235845846828,"hash":"b59cfcf738b2c27d87eb0fcbf67ae1af5cb4dd530800c609a83639ed051d883e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_recorded.py":{"size":7508,"mtime_ns":1779676235849851161,"hash":"9b8d58e2298b001488bab8b2c0868e15c4b662a31bd087cf0f239fc1f6ffe432"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/bbox_test.py":{"size":1814,"mtime_ns":1779676235844997077,"hash":"cec29ce002627fff9981fd3868adcd60e408ade75e5156fb88e32127adeb7680"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/test_receptors.py":{"size":1491,"mtime_ns":1779676235849441078,"hash":"a1c15ee6e27e842e1f60a79688b69129917121f02714dd81c84ff8675cc1dadd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/test_drawing.py":{"size":1446,"mtime_ns":1779676235849365036,"hash":"b86a0cb2e7a853752b239f4df632916635f58684e6f6b8bac5f8e25b6da37628"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/psp_cond_test.py":{"size":1754,"mtime_ns":1779676235849036786,"hash":"06df1b524d41721fc673d0cd501ede026c7b2e0805f19ea72e98f49ee298ae5b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/stdp.py":{"size":1281,"mtime_ns":1779676235849293661,"hash":"308612ff00dd00153c9d482ebe161b8e59d579dccc466183f072ac57bcc0e6aa"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/psp_cond_pyr_int.py":{"size":1033,"mtime_ns":1779676235848965202,"hash":"871f2af55ccba1e2954482772e0380af424c04a736958dcf084a7d037b25660d"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/vilo-task4-constrained-estimation.py":{"size":21309,"mtime_ns":1779676235849539536,"hash":"e60f820695ea1085dbdb173215ed342f87c196cd5431451969ec9e073ced1b31"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_connections.py":{"size":2310,"mtime_ns":1779676235849744661,"hash":"9b78f7e3b60e9786f025f3afdb653b032fd8fd2fcb4165dec767a78566298ebe"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/IF_test.py":{"size":3792,"mtime_ns":1779676235843347911,"hash":"046f28e5b9495651d3449f43d6bec603a40899f58ce7d4fbaf9b06b7b4409ade"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/IF_normalized.py":{"size":5140,"mtime_ns":1779676235843236036,"hash":"4f9539aa1d01d042ee97c39860575a16cc4b526180341dc919ea1c7f0041a95c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/visualize_cells.py":{"size":9538,"mtime_ns":1779676235849675119,"hash":"ee9aa03c8c20082e990c377c3af2a40f209eb0c597a6c1cd48dda9274b1fcdcb"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_N1.py":{"size":5551,"mtime_ns":1779676235847491411,"hash":"d0441bcb6f63019d3f9506548e30936fbdd48cd2b15bb62b1faefe4ef534ece2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_P3.py":{"size":607,"mtime_ns":1779676235847791619,"hash":"dcb47b0d6f794a033c3f5654c59ef49aa25a56d02737b2f32aba3f78cc7a4016"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/System.py":{"size":9359,"mtime_ns":1779676235848268911,"hash":"12c54cb5acb13bea50ad40639ea46057db02ba383180f5b5d780a26351375396"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_N4.py":{"size":664,"mtime_ns":1779676235847713578,"hash":"562059d724ca5684cc2c72fa0636e51a6ec1e2794f0f1522cc824e988e96620f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/KGTRecords.py":{"size":4702,"mtime_ns":1779676235847140036,"hash":"a1a1495eee81ad2af3d53902f20f2334b87db373a69d07fcb2d3b0b32c52c865"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Region.py":{"size":1640,"mtime_ns":1779676235847973119,"hash":"e697f319b5c7047bdab0b56940b7fb5d673161cbb0f4813268df43f86adf9bea"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Calcium_Imaging.py":{"size":12410,"mtime_ns":1779676235846671911,"hash":"ff9ed1e8a7d1be0ad9c42cf8e86581ee09d9a14fea727e0a70fdd5821137a806"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_C8.py":{"size":652,"mtime_ns":1779676235847383952,"hash":"c53a8d9086a4e8878aedbc708f8cb9472299a63c2e5526058c99acc7d1a34d4a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Aligned_NC.py":{"size":4557,"mtime_ns":1779676235846313911,"hash":"0b217f51e81b39cda9cd704253cb2149d733f68bdd76b536dedc53d68e929fbb"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Morphology.py":{"size":3188,"mtime_ns":1779676235846429077,"hash":"e8cde9805050a411414ad7c3a00b9db65ca736b987cc7efc258a52637c6f0b1a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Electrodes.py":{"size":3916,"mtime_ns":1779676235846858703,"hash":"a647b381be4cd2e172c98171e119b29523fa23f5a63cfbf62c1c24293d70f8d3"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Geometry.py":{"size":1361,"mtime_ns":1779676235846936953,"hash":"bc6b72267c0cacc00fed97ca7322fe881e0c241d4b0b65548cef83e36866fe7b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/NMDA_Receptor.py":{"size":4615,"mtime_ns":1779676235847900494,"hash":"7eb30bee4c27f94ef1e53abe8d8e9fd62203ce959b2b0eb5091874812a8a9f0a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/SynTr_Quantal_Release.py":{"size":864,"mtime_ns":1779676235848138036,"hash":"5a79434da78106aade07159a690ecd323f91d9ce564e67cedab3e4d92207ddf6"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/SignalFunctions.py":{"size":6662,"mtime_ns":1779676235848064786,"hash":"f763a658d8d75a28afffe9bbfe68e55a44c7a3477888683eba6906f63af0d57b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_C11.py":{"size":664,"mtime_ns":1779676235847226119,"hash":"49d30d9db873303d75f75d43e52456fd323c22d5a5d432f90fbdeff932d052b0"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_N3.py":{"size":646,"mtime_ns":1779676235847629702,"hash":"1a50e49bd6b37870b4eaf5fad7cf2d9681e4ad54e0876833397fe72e4f35a348"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_C4.py":{"size":585,"mtime_ns":1779676235847302911,"hash":"3d2a67ddcad1e9b074e1c7032da09ef046013c8ae0ef10e7e186a84a7163b5f5"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Metrics_N2.py":{"size":601,"mtime_ns":1779676235847555994,"hash":"712ca8f74306fda7a4ab8f95eba00ef988b6a2839ea3ce5c9ad7be85d05d1a3f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/AMPA_Receptor.py":{"size":5230,"mtime_ns":1779676235846218911,"hash":"ee81f9e1a79bcb477957fa3664508d1a6c412a3603951f31b6b965b937ffc20e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/Data.py":{"size":1453,"mtime_ns":1779676235846758744,"hash":"5d8c941aa8cf5fa1757e40d1f55e4765d413025f5d02eaba9bce4386a4dd0fa2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/BS_Neuron.py":{"size":12391,"mtime_ns":1779676235846556661,"hash":"22949ee11503a80a7883169366d9ae3c3193ddcdb0b3955f89751efa1b120493"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/prototyping/IFneuron.py":{"size":6831,"mtime_ns":1779676235847034994,"hash":"3fbc97d5eb60d1204345e1f86051ecdc98de8aa2dce2aea28ea41545212c6613"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Neuron.py":{"size":181,"mtime_ns":1779676235845289577,"hash":"1c8cdb21395b790048322a345d9a66b97cc31cddfe10831a8b691fa3db1d1187"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/_BSAlignedNC.py":{"size":3937,"mtime_ns":1779676235845562452,"hash":"674aebdbf8f0988e468268e95a8914210b3ed013a1e15f020aaa80eb31bed3f8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/NeuralCircuit.py":{"size":683,"mtime_ns":1779676235845219952,"hash":"87b410c1dac7f768a95d2153ac5911500592df2664a7dd866fec8cd6e3c52128"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/glb.py":{"size":647,"mtime_ns":1779676235845769786,"hash":"742f92fe4fc3bb9ad6aef4c30c20fdf55acebc0d446eb5c5ca5dcda54691db05"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Common_Parameters.py":{"size":3270,"mtime_ns":1779676235845135786,"hash":"5cef5f9af133b7e1fd52374b31ca6cff7a27d53804cb28bb7aad5d339248a934"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/Spatial.py":{"size":6311,"mtime_ns":1779676235845470869,"hash":"fad98b831f927817cd0c8cb46813cd9fa96dd1d6c6a8d9ecea46cf65786e5db9"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/_Geometry.py":{"size":17309,"mtime_ns":1779676235845675536,"hash":"20f01f594bf8823ed3d594dd481599daf60ea173e61e5558078b35d42b89c41a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py":{"size":4110,"mtime_ns":1779676235849227786,"hash":"695ee13d0664f45c5823f0ba3b166962e54f924a3df07cd896ecfea61d54fe77"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Metrics_N1.py":{"size":5756,"mtime_ns":1779676235844320119,"hash":"5895b0f927a85bafe017e4bf1c8036ef60a8b1db9115044d198c8e93341ea738"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/System.py":{"size":3031,"mtime_ns":1779676235844804244,"hash":"2ba54f73edd47852c1457627e6cd6c74caef9a2c60c425611033b9cdd65c218f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/KGTRecords.py":{"size":6444,"mtime_ns":1779676235844210078,"hash":"bf52d9cabddcc3dc8e6df633b1c2ea63ec307c069908b0419c28448fa0550438"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/NES_AMPA_Receptor.py":{"size":3236,"mtime_ns":1779676235844423328,"hash":"88aab7e184cb4d28ef05890f22a37fae78c3f0b3146cbce089460de420840403"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Region.py":{"size":1263,"mtime_ns":1779676235844625202,"hash":"a94aac517252bf6128faedf9f858c461f6e4d51f7777d7829b015e40f17743f1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/BS_Aligned_NC.py":{"size":2515,"mtime_ns":1779676235843737369,"hash":"571166d16044409d1a1fca028e134f85dca88ba92c4c0c8019d32d54f2c62ee1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/BS_Morphology.py":{"size":1999,"mtime_ns":1779676235843831327,"hash":"e30d6ae95f77c4ea9408ca7b4d9c40cf48ea726076204a0a43d7a793865cc033"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/Geometry.py":{"size":1932,"mtime_ns":1779676235844077786,"hash":"ff23ef70e277b90c41f9f0e93b1a241483a10a9eb834da501070ca3d549b84d1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/NMDA_Receptor.py":{"size":4615,"mtime_ns":1779676235844533703,"hash":"5cd2c34ea465d7ce045bc3a107929a9feaaa98202c88bc3e1cb396ae433c3558"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/SynTr_Quantal_Release.py":{"size":864,"mtime_ns":1779676235844728577,"hash":"548ca42df79994e5da18c862665c28311fba4c6e889ed8636d112a435365cfa3"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/NES_interfaces/BS_Neuron.py":{"size":7487,"mtime_ns":1779676235843947411,"hash":"1815fba83d8dc31fd4f8958a54b9ef3aa26a5dfdfcde7cd9b87448c66acc9606"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/modules-versions-20250116-rkoene.txt":{"size":417,"mtime_ns":1779676235842716661,"hash":"493c75ccf6e640aa7c8869524c021ca6e08e2e025bf886ed3fb9fcd027cb982a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/requirements.txt":{"size":82,"mtime_ns":1779676235842962661,"hash":"15da1aa88e7c0b10556a4617ad6aa4b1b8d39aaa95b8d69c29b0635a937dcfda"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/README.md":{"size":4139,"mtime_ns":1779676235822297869,"hash":"fc3d803492fae5391707a66cb99898700f16c7f413929a08c7897172d7706a97"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/modules-versions-20250116-kstafford.txt":{"size":416,"mtime_ns":1779676235842637119,"hash":"ff3bc50a1aa3cb166b6afef6bb7bfffa1be6da626e3f71200d25c803540817df"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/agent notes/agent-session-notes-2026-05-09.md":{"size":1790,"mtime_ns":1779676235822825286,"hash":"6351756fd02799533c10e961eae87633147ea45ea70805b79aac83f564990bf7"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.md":{"size":2358,"mtime_ns":1779676235831486077,"hash":"b0ac627901c68ee9a31d459bbbc7bb3b8508b9167625680bf3f60f224362afff"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/Notes-on-taking-the-challenge.md":{"size":2576,"mtime_ns":1779676235823444577,"hash":"b875abc95e1d9ed1d0b7ca7e1c4015021988380986279dc89b60b75749d713f8"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e3_aifinch.md":{"size":8642,"mtime_ns":1779676235833717203,"hash":"d6972a8b3ec5119edee11c31981fd3f51099aeae812f1fe6898e6031bca495d1"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/README.md":{"size":816,"mtime_ns":1779676235834856494,"hash":"506ae46c5e8aadd0d407fdb10636d20e68fea3f37ea805876560bc04f3625049"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/README.md":{"size":816,"mtime_ns":1779676235824498077,"hash":"05b2717b0c6f470ae26800fd0e16ea125c60088f0ec574b803db9ba55c94c064"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/graphify/README.md":{"size":527,"mtime_ns":1779682688389246911,"hash":"bd5fde8a36e51607d97f8881f8b08ab67445297bedb1a18c4ad1afb68562dc9b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/Challenge/examples/README.md":{"size":147,"mtime_ns":1779676235821279411,"hash":"f1c5f7c35da1f9e29aeeb0a1cb4bc0a2317a2db0c37dd30d11e8823f99889d61"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/README.md":{"size":9696,"mtime_ns":1779676235850008202,"hash":"d1b18110308a27ba3162e74a1f40b2b84b91fdeb3e1290d174c8d1746a8b0afd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/fishsource.txt":{"size":4675,"mtime_ns":1779676235859105161,"hash":"f5730ef0597111d62e2d09fd58bdfd14a1d507e058054ac97de5b11d09bc8411"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/README.md":{"size":2211,"mtime_ns":1779676235858786202,"hash":"093950941f6c7fa7119cfb23f480814b8689e36e02659a48f2797cff2027c82b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_sc/fishtarget.txt":{"size":4650,"mtime_ns":1779676235859205327,"hash":"5a7fb256a5948170e0f76ba89dc26e56dfb5d7e7d845a19aa02559dfef7f3eb7"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/autoassociative/README.md":{"size":1020,"mtime_ns":1779676235850545327,"hash":"576db794c03a94ba42ea62d871960766154a088c3f794772ab35173c4c9a515a"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/e0_bs/README.md":{"size":2660,"mtime_ns":1779676235852267119,"hash":"752b7149eb3ff056210c2e989a540b5c7a129227960668334994192d8d599904"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/test_neurite_diameters/README.md":{"size":303,"mtime_ns":1779676235856147577,"hash":"3e1a7f65da1c20dcd511cf862a45417e465af6a954afd76a3e4c97cf0d110a31"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/validation_results.md":{"size":805,"mtime_ns":1779676235855653911,"hash":"f4c66069d80069753f09d688683d53c4a3380be9b8b72bdc75b2eff377a36bc0"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/README.md":{"size":1020,"mtime_ns":1779676235854819036,"hash":"3b6c3fbf1f8bcc201831517986f60009cbdd6ea0e10b5df55cd8e7d34523bddd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/experiment_log.md":{"size":3515,"mtime_ns":1779676235855041119,"hash":"5efef72ae53cdf3c5ada4d8db3af1bc74e616e3fe1825772d9e854e04509dcbf"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/Readme.md":{"size":486,"mtime_ns":1779676235856748078,"hash":"a1e2da5da37f138a6b69c174cf0e9fcf2eb780461ad92ded3e05ede5e91d4135"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/README.md":{"size":2306,"mtime_ns":1779676235859979369,"hash":"d34390d8437822939877f5358aa66a7aa63e0fd9ef112e2bc553f851f277a31c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_scnm/optimization/README.md":{"size":2093,"mtime_ns":1779676235862007702,"hash":"a73ec76e8ecdced542fe4ec6abfb879993edad6761cf3d5a46f4f4e7dee2d380"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/common/README.md":{"size":827,"mtime_ns":1779676235845363453,"hash":"f8db3eba3311486d3e1464784cec36b338578c27133c07defa9cd5ec7d567231"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated_brain_emulation_in_silico.pdf":{"size":560240,"mtime_ns":1779676235842526286,"hash":"b1e3f2181d02d4768a3d3f10fc327229f22cc65cda6bfdde7dcfc3cd35712344"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/main.pdf":{"size":739349,"mtime_ns":1779676235840645327,"hash":"a345acab8196578c55bd20d8312c3a04eed94cd8797ae0ce18f455f61a96ecfc"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/example_figure.pdf":{"size":380936,"mtime_ns":1779676235837565952,"hash":"6dfac3379e42d55b382df06852617f622aa44c7ede26bcb6afac77c514019f2d"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/main.pdf":{"size":839698,"mtime_ns":1779676235830690411,"hash":"d8a5859618e100bf221688941909ea0a730b8435e0f374c428b9704ae249809b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/example_figure.pdf":{"size":380936,"mtime_ns":1779676235827292411,"hash":"3c6a95f2e3b7a594d1cd884a3a0c0fa7f40cfe3692a0dff33212eb7878cd2c3f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/full_adder_lifc/full_adder_validation_plot.pdf":{"size":23243,"mtime_ns":1779676235855382452,"hash":"10a8e6131dff12f89dd1316fd061c22586bace313c20d42af9aa848c67c5f39e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/Deriving-whole-brain-emulation.png":{"size":128702,"mtime_ns":1779676235823310952,"hash":"8df978fbf6b3a51760feaebf4672306195003120072617e0c68ad746b26d9fcd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs_recorded.png":{"size":34408,"mtime_ns":1779676235833527494,"hash":"693fb76561c142d0d98121b4443b9c20c517e2cb8b856bb43e9297f5ea3d1b6e"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/e0_bs.png":{"size":179799,"mtime_ns":1779676235832050077,"hash":"0d8664573011370071e6ffa33d8594e25746317e362f73adf91ac1ffb3c387f9"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/Deriving-whole-brain-emulation.png":{"size":128702,"mtime_ns":1779676235835512202,"hash":"d9cd0a835c0647b16209c59a5ac336a88444ef8c2158d6b9213393d69406afcd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/e0_bs_recorded.png":{"size":34408,"mtime_ns":1779676235836309202,"hash":"54be3f0e025d6c7cf3522846d4a723df9da9a1434ae52f5a6e9407506d591f38"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/e0_bs.png":{"size":179799,"mtime_ns":1779676235836104952,"hash":"8d4be0f74c74961cf5526c78c4f67c18a90ad458a46b93ff634ec4f7d7314845"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/VBP_System_Architecture_Overview.drawio.png":{"size":66100,"mtime_ns":1779676235834746327,"hash":"ea9ea26349883ffae1c2b4bbb87d92f4d6a3a644fa2dafa31cfa8966251fd306"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/validated-brain-emulation-in-silico/Figures/VBP_EM_Render_Pipeline.drawio.png":{"size":48484,"mtime_ns":1779676235834403411,"hash":"74fc252334e1c825b56c7676d0c02dffb72dde4354c001e26f94716ae2c8436f"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/Deriving-whole-brain-emulation.png":{"size":128702,"mtime_ns":1779676235825116536,"hash":"ff8f63fd7f7d087bd209d98e00584a4c883985fe96f631dc3ee4322c2651b6b5"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/to-animal-brains.jpg":{"size":27700,"mtime_ns":1779676235828140911,"hash":"651d252b54da7f8495078d3107b0e1ba731ba6643938a257d0cd227f7f7a58b3"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/e0_bs_recorded.png":{"size":34408,"mtime_ns":1779676235826110702,"hash":"6f172c2ef1e01b6fba034f549301e510a946c1e8144566c273f640e621cba7a5"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/e0_bs.png":{"size":179799,"mtime_ns":1779676235825919161,"hash":"1c1c57572e5dd48e95c6c4e24ea2b73631049d6206dfee27a8fd8a562281fafd"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/success-criteria.jpg":{"size":81693,"mtime_ns":1779676235827975452,"hash":"b762ed5922cfd0b5f4f9578a924ad3955e636ee62b0ad8d7520ef41fd2dc4d5c"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/VBP_System_Architecture_Overview.drawio.png":{"size":66100,"mtime_ns":1779676235824395411,"hash":"5815af99792f6fa61cc4cf4a30adef8cfc92089fcef9d4cbb3ffde052afba72b"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/VBP_EM_Render_Pipeline.drawio.png":{"size":48484,"mtime_ns":1779676235824054036,"hash":"3abd90717a35ba4f18a9567fd7a3e22eee71550986ba059fcf1357caa889f324"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/doc/a-whole-brain-emulation-challenge/Figures/challenge-process.jpg":{"size":44599,"mtime_ns":1779676235825323703,"hash":"8a5d00698c072bc525edf749ee54376ae671ae1b7024b182ae5a425a4784c4c2"},"/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/models/xor_bs/xor_bs_circuit.jpg":{"size":50754,"mtime_ns":1779676235857146536,"hash":"80f1f769f44c526eed82aa6658ec410c0b3c4a6a6d98971b717f9ffe5d79630a"}}
+{
+  "Tools/Setup.sh": {
+    "size": 489,
+    "mtime_ns": 1779682688388508619,
+    "hash": "4259cd12e5abd78a5740623ad25067458269de839616cce3f4499b2ca83f97de"
+  },
+  "Tools/Tag.sh": {
+    "size": 5118,
+    "mtime_ns": 1779684253688485869,
+    "hash": "6820aa62527c61f873084c4cad0f54a793076472c03c89f0b72e6121e8425f2b"
+  },
+  "Tools/Update.sh": {
+    "size": 325,
+    "mtime_ns": 1779676235822702286,
+    "hash": "b499781221d950afb0e90e580b586a4e50aaa38d3fe869679c2729f0d35f6786"
+  },
+  "Tools/RunXOR.sh": {
+    "size": 59,
+    "mtime_ns": 1779676235822536661,
+    "hash": "7a92097b80e08dab5a11dc515a1e458fc0db6fcdc6882d615c5b66ac63e2f589"
+  },
+  "Tools/PushWithSubmodules.sh": {
+    "size": 124,
+    "mtime_ns": 1779676235822452161,
+    "hash": "531672547caaf17294dc0773caa2baa68b4aef2db193c9cc13c3d8b73790bc3e"
+  },
+  "NeuroglancerTests/Neuroglancer.py": {
+    "size": 585,
+    "mtime_ns": 1779676235822125244,
+    "hash": "feec3057c072308f40d32e7fbecbf6676cc9f485ede39433d4eaaa8ff83db4c2"
+  },
+  "NeuroglancerTests/CreateCVDataset.py": {
+    "size": 1839,
+    "mtime_ns": 1779676235822008827,
+    "hash": "25cfedeb011b4e91b4bb4c9758456e78b9aea3703af1b4380aace28ed7ae5691"
+  },
+  "doc/validated-brain-emulation-in-silico/Tools/Setup.sh": {
+    "size": 62,
+    "mtime_ns": 1779676235835063994,
+    "hash": "8bb2262f77e563a8f665ddcf0312c04d0d3db4e2899de6eec511e5824b19f244"
+  },
+  "doc/validated-brain-emulation-in-silico/Tools/Build.sh": {
+    "size": 39,
+    "mtime_ns": 1779676235834984494,
+    "hash": "29b1f7283c38b3b24bb1e5131739c0fba6dbeba338aadd720503184e4da864ad"
+  },
+  "doc/a-whole-brain-emulation-challenge/Tools/Setup.sh": {
+    "size": 62,
+    "mtime_ns": 1779676235824696202,
+    "hash": "bbd6443b927e4f5e288b422346855ae27b02cda18e0ac462aed778a4900541f6"
+  },
+  "doc/a-whole-brain-emulation-challenge/Tools/Build.sh": {
+    "size": 39,
+    "mtime_ns": 1779676235824624994,
+    "hash": "e038d67d30a62703ce9a7655ddd05c95cf377fa5afc674df5bc5820e0f4cb0f1"
+  },
+  "Challenge/examples/sliceviewer.py": {
+    "size": 16687,
+    "mtime_ns": 1779676235821617327,
+    "hash": "1f00980cf0d4410e6aa9d42f2ef5fddfb05ef0716c8d081104ed46bc849be7a3"
+  },
+  "Challenge/examples/WeReconstructLLC/submitted-emulation.json": {
+    "size": 1820,
+    "mtime_ns": 1779676235821446619,
+    "hash": "daea115138e7472a25dea99aab278e7aa27668e8516f3aaaa734675337257c8a"
+  },
+  "Challenge/SubmissionConverter/VisualizerTest.py": {
+    "size": 4231,
+    "mtime_ns": 1779676235821174619,
+    "hash": "ab351d1fcad7c1fc57bf5f3215ae7b9192f3895533be547dca2b041af34c7f54"
+  },
+  "Challenge/SubmissionConverter/Test.json": {
+    "size": 790,
+    "mtime_ns": 1779676235821070536,
+    "hash": "82141c93b1e15b1be8300e240ead340e1aedf40f6427b01e69a3e027ee832b73"
+  },
+  "Challenge/SubmissionConverter/SubmissionVisualizer.py": {
+    "size": 18384,
+    "mtime_ns": 1779676235820965077,
+    "hash": "aa787aecb097cb416e0f78ceea1bcac18e04c12c1a16500d55dc72f20a6d63bd"
+  },
+  "src/models/xor_sc/xor_sc_validation.py": {
+    "size": 3348,
+    "mtime_ns": 1779676235859763286,
+    "hash": "7e0ac590815070801be950fdefce8a6f18a833710a06456c620a9342786a7413"
+  },
+  "src/models/xor_sc/xor_sc_validation-python.py": {
+    "size": 1459,
+    "mtime_ns": 1779676235859677702,
+    "hash": "993174584812c94c6c61108f4fbffa01b97306accc425d9a9b91f2b24367a770"
+  },
+  "src/models/xor_sc/xor_sc_acquisition.py": {
+    "size": 20598,
+    "mtime_ns": 1779676235859377452,
+    "hash": "16a0c4fad9cfe5d1d4d72658f04074fe2efb64dd1090b10227a85d7e3b4db69c"
+  },
+  "src/models/xor_sc/align3dtest.py": {
+    "size": 7752,
+    "mtime_ns": 1779676235858886161,
+    "hash": "7ba7f4f43e3c4d22e9dd43ca88ce7d532267dd2ee4ee5b8bec43074e8a44790d"
+  },
+  "src/models/xor_sc/ConferenceAcquisition.py": {
+    "size": 21969,
+    "mtime_ns": 1779676235858702994,
+    "hash": "eb5c09d019ce6e6cb7c20752ff14a019c504459e0bcc1c82d8f57dac360402c8"
+  },
+  "src/models/xor_sc/vbpcommon.py": {
+    "size": 169,
+    "mtime_ns": 1779676235859272619,
+    "hash": "2c5c11ba22496df479d113c340dd6ed1664f3ebd2a9326c4bdacfea30ec27f7c"
+  },
+  "src/models/xor_sc/connectomes.py": {
+    "size": 6939,
+    "mtime_ns": 1779676235859002453,
+    "hash": "1978bcfe4ee06b6b41a54fde8399248c011ec714dfbc1174b537afccc79620a4"
+  },
+  "src/models/xor_sc/xor_sc_groundtruth.py": {
+    "size": 27407,
+    "mtime_ns": 1779676235859597619,
+    "hash": "15176717674796043326d1e66a3fd09148909d3549c10633158d88b4818a9124"
+  },
+  "src/models/xor_sc/xor_sc_emulation.py": {
+    "size": 27702,
+    "mtime_ns": 1779676235859485036,
+    "hash": "176be96b490204dddd697ca8d0240b42594febbc59581b6e657c34c05984e136"
+  },
+  "src/models/autoassociative/legacy_autoassociative_connectome.py": {
+    "size": 20475,
+    "mtime_ns": 1779676235851511036,
+    "hash": "04fce9f600076792e7b97e0ffdcf8c20c315ae6b97607c7a5121974e1b8acf24"
+  },
+  "src/models/autoassociative/gen_autonm_labels.py": {
+    "size": 21989,
+    "mtime_ns": 1779676235851318036,
+    "hash": "f4fc78fd51a63394da0cac3f66ba924028283a8942aa906b242528ee872a5a3d"
+  },
+  "src/models/autoassociative/autoassociative_reservoir.py": {
+    "size": 9543,
+    "mtime_ns": 1779676235851041494,
+    "hash": "a408d3048b82be5913cd231a4d9921e7551315168fd3ea558350dfd4ccaa05bd"
+  },
+  "src/models/autoassociative/vbpcommon.py": {
+    "size": 10746,
+    "mtime_ns": 1779676235851980078,
+    "hash": "337d4be28a6485a7180ae77f164929f71cc260411c1d1e83b1f1ffb99be04563"
+  },
+  "src/models/autoassociative/LIFtest.py": {
+    "size": 36192,
+    "mtime_ns": 1779676235850269161,
+    "hash": "ad7bff2a695160c24cc3c1ffb4f764f7ed46c7d1b95ef4edd295ffe66cb547d5"
+  },
+  "src/models/autoassociative/deletesimtest.py": {
+    "size": 6829,
+    "mtime_ns": 1779676235851139869,
+    "hash": "46435adcb149611637a6003fd0444a6e053720e93150e1a0df02d59b39af79e0"
+  },
+  "src/models/autoassociative/inspect_batch_models.py": {
+    "size": 3447,
+    "mtime_ns": 1779676235851401827,
+    "hash": "ead17791594cae3960f391c65575d48c8542f1d91adb172585f945ba3328fcfe"
+  },
+  "src/models/autoassociative/Run.sh": {
+    "size": 5425,
+    "mtime_ns": 1779676235850649994,
+    "hash": "bec313edf9d9d27129006528b91d0785e23c4f7393bb6daa179c4ac3350a8a74"
+  },
+  "src/models/autoassociative/parallel_batch_test.py": {
+    "size": 11660,
+    "mtime_ns": 1779676235851789453,
+    "hash": "bf79ec60cb7526e9b520d69adabd09cfa1c9b85c34d476d985c4349ea88bbd46"
+  },
+  "src/models/autoassociative/autoassociative_connectome.py": {
+    "size": 10977,
+    "mtime_ns": 1779676235850867911,
+    "hash": "6660e270121441953d65ad98c84ad0c4bd7d39bf88a4d7cb2e221493e86cff67"
+  },
+  "src/models/autoassociative/autoassociative_acquisition.py": {
+    "size": 31623,
+    "mtime_ns": 1779676235850727577,
+    "hash": "970b9e86bd9a8444950a80a0112b66f7d6ecd77f40a6b134adec2594b0ce2307"
+  },
+  "src/models/autoassociative/show_resource_checks.py": {
+    "size": 1900,
+    "mtime_ns": 1779676235851862369,
+    "hash": "b9704e3890094cbe38154504ff417abaa790278d8155bb9c728d910606fff285"
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_groundtruth_reservoir.py": {
+    "size": 5617,
+    "mtime_ns": 1779676235858289619,
+    "hash": "be2b836935d2c1289e600af8dc4aa83a2fd9c341d70fb7cdef01e9385c6a0561"
+  },
+  "src/models/xor_lifcnm/vbpcommon.py": {
+    "size": 6596,
+    "mtime_ns": 1779676235857998286,
+    "hash": "082bcc4c96beba7b9f9fcca7d676833a8d14b6ebba5eac5bf3de00c3f301647a"
+  },
+  "src/models/xor_lifcnm/Run.sh": {
+    "size": 4951,
+    "mtime_ns": 1779676235857820244,
+    "hash": "af5bc0461db543f7ae27e59f95b4f778830e55f4d7703e850ee4e5244efdfa76"
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_groundtruth_connectome.py": {
+    "size": 15828,
+    "mtime_ns": 1779676235858168202,
+    "hash": "b8e5f04e5e374f71d23db32d4774fa9855cf58ef501fe7f5f7cc5891230222ad"
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_acquisition_direct.py": {
+    "size": 31739,
+    "mtime_ns": 1779676235858065827,
+    "hash": "bda7282dbd19bf5feeba2923653341c6d42a10569f5b08644236b22c11b026d0"
+  },
+  "src/models/e0_bs/vbpcommon.py": {
+    "size": 169,
+    "mtime_ns": 1779676235853647161,
+    "hash": "5dfa89671b220aafb396bfd8650573f0721a43afd759def171eda1e390b3a367"
+  },
+  "src/models/e0_bs/Demo.sh": {
+    "size": 425,
+    "mtime_ns": 1779676235852202494,
+    "hash": "144addb956f8e628f6f45a9a2cbc54d64fde8f900abdcefadfc930b4a034c42b"
+  },
+  "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py": {
+    "size": 15310,
+    "mtime_ns": 1779676235852414702,
+    "hash": "720c18d4f7323c5bb0ee99e5ae4588a0d17b82062850a891b320831b4713b2f6"
+  },
+  "src/models/e0_bs/bs_vbp01_doubleblind_x_acquisition.py": {
+    "size": 17172,
+    "mtime_ns": 1779676235852580619,
+    "hash": "448b882ed26fb4be4ceef3e84a7819e2e05f2bb5d8686acc55055f60b4cad16e"
+  },
+  "src/models/e0_bs/prototyping/vbpcommon.py": {
+    "size": 176,
+    "mtime_ns": 1779676235853480827,
+    "hash": "0756a2f8a322e75b969daa65f6b494faf99608668eea9aeef4f663b417a7bf85"
+  },
+  "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py": {
+    "size": 6635,
+    "mtime_ns": 1779676235853299661,
+    "hash": "1e2a91118e4804da71f5a08e00a8ab44ca323ada0ecada581194f0bb21758c73"
+  },
+  "src/models/e0_bs/prototyping/bs_vbp02_translation_iv_system_identification.py": {
+    "size": 4640,
+    "mtime_ns": 1779676235853171244,
+    "hash": "ec716781eddaaefff9e0ed0f09dc3c4f63b89eb8dafa69d7db1667560189f142"
+  },
+  "src/models/e0_bs/prototyping/bs_vbp00_groundtruth_xi_sampleprep.py": {
+    "size": 7109,
+    "mtime_ns": 1779676235852856411,
+    "hash": "f141eb460f9534ed8c59311f46a0c097cd3af1895472e16b1ef79d5a128469ef"
+  },
+  "src/models/e0_bs/prototyping/bs_vbp01_doubleblind_x_acquisition.py": {
+    "size": 11097,
+    "mtime_ns": 1779676235853037786,
+    "hash": "1b33841bdf788f927073ee706a4d95cfb8b3358ae2c2d6e64c53906dc659c622"
+  },
+  "src/models/e3_aifinch/aifinch_vbp0_groundtruth.py": {
+    "size": 12167,
+    "mtime_ns": 1779676235853861119,
+    "hash": "e0c770a309c7ec54156860ea340622948ee659759b86838cee0da16af28c6d11"
+  },
+  "src/models/e3_aifinch/aifinch_vbp1_acquisition.py": {
+    "size": 4070,
+    "mtime_ns": 1779676235853969911,
+    "hash": "43a6e06bab3b14d14df163b7ce22fd5d4cf09f79b69b4ee7b087c499176a1161"
+  },
+  "src/models/e3_aifinch/aifinch_vbp3_emulation.py": {
+    "size": 6505,
+    "mtime_ns": 1779676235854388827,
+    "hash": "c54b694c83885a0fc73f23d348e3c84f98061e497591d8eebee1556648c20abf"
+  },
+  "src/models/e3_aifinch/aifinch_vbp2_translation.py": {
+    "size": 4874,
+    "mtime_ns": 1779676235854136453,
+    "hash": "db73a7c93219c992afc14f1e985294f2b335d26319eef3554c1b3c41b518620d"
+  },
+  "src/models/test_neurite_diameters/groundtruth_reservoir.py": {
+    "size": 3814,
+    "mtime_ns": 1779676235856284161,
+    "hash": "886f3280262ced25a48174d92df9a58fe4a07b214bfa96c021ab009fce4c982b"
+  },
+  "src/models/test_neurite_diameters/vbpcommon.py": {
+    "size": 169,
+    "mtime_ns": 1779676235856503786,
+    "hash": "3decd9a5ec2be9acff3e52c61792767e06dfea276102c4851c762cb145e3c691"
+  },
+  "src/models/full_adder_lifc/vbpcommon.py": {
+    "size": 7772,
+    "mtime_ns": 1779676235855793202,
+    "hash": "d54f37acb2c1ef6efece08d44a8b6e828087d962536ef6928e4ec221ff331258"
+  },
+  "src/models/full_adder_lifc/Run.sh": {
+    "size": 4931,
+    "mtime_ns": 1779676235854937411,
+    "hash": "3a558ac85d818920417eddf2035d5685eb9d3e0bedd5b26f189ad956cc1d07a4"
+  },
+  "src/models/full_adder_lifc/Loop.py": {
+    "size": 218,
+    "mtime_ns": 1779676235854723994,
+    "hash": "004100d9b7a041e5f551e8520e9812a7d882f6a1ef24f60093d250579dc61b56"
+  },
+  "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py": {
+    "size": 32362,
+    "mtime_ns": 1779676235855933619,
+    "hash": "516beeb7dbce722969390286d953d3c13b23ac0160eb0fd9d2f657470a8a02a1"
+  },
+  "src/models/full_adder_lifc/full_adder_lifc.py": {
+    "size": 25647,
+    "mtime_ns": 1779676235855218744,
+    "hash": "1cc9f9902e7c8c64b7022ae14d1941bc4c340131b8bb7f36546ce01e84c565ea"
+  },
+  "src/models/xor_bs/xor_bs_groundtruth_simplified.py": {
+    "size": 19651,
+    "mtime_ns": 1779676235857444494,
+    "hash": "74afefb23f10b616b50402a781ba0595c5ea46baf33fe879a52780e31dc8bf08"
+  },
+  "src/models/xor_bs/xor_bs_acquisition.py": {
+    "size": 17231,
+    "mtime_ns": 1779676235856916286,
+    "hash": "38139f1f48ef7ec5d2890f637405850be5c858e13b2393bea145797bc7971e4e"
+  },
+  "src/models/xor_bs/xor_bs_simplified.py": {
+    "size": 19073,
+    "mtime_ns": 1779676235857540786,
+    "hash": "74f9d4951fa4ef8caf82d5d957d7c03a73f6c04067178bc2c89161403df60315"
+  },
+  "src/models/xor_bs/vbpcommon.py": {
+    "size": 169,
+    "mtime_ns": 1779676235856830744,
+    "hash": "b368f9f394e1e5a8b31e66800251acd5b866e9aa5bc53f703b12dd179959168e"
+  },
+  "src/models/xor_bs/xor_bs_groundtruth.py": {
+    "size": 18143,
+    "mtime_ns": 1779676235857352244,
+    "hash": "22b6421d8e47753b1183d88b897f507b8205d289de194f740703925ae793c7b2"
+  },
+  "src/models/xor_scnm/sub1_acquisition.py": {
+    "size": 9124,
+    "mtime_ns": 1779676235863028994,
+    "hash": "79ece778a1487b05e8d70ac94eec91b08b83f0aea8e7a67ce7345e0c194819c8"
+  },
+  "src/models/xor_scnm/vbpcommon.py": {
+    "size": 6596,
+    "mtime_ns": 1779676235863276036,
+    "hash": "ad2f68ffeed1d61c1529fd8671e281de23ec2bacbadd692fc96e0fe3a8792610"
+  },
+  "src/models/xor_scnm/sub2_acquisition.py": {
+    "size": 11369,
+    "mtime_ns": 1779676235863165827,
+    "hash": "d4bf2c06533a08f16e2c268683ac58965d287ea5a78c94a2ce8f6947c13bf97b"
+  },
+  "src/models/xor_scnm/acquisition_template.py": {
+    "size": 7809,
+    "mtime_ns": 1779676235860192286,
+    "hash": "1e863815b9eb4eac042790f1bcf6b4c7b1aebbaa51c9d30f5df1d2e0d913c1e8"
+  },
+  "src/models/xor_scnm/Run.sh": {
+    "size": 5433,
+    "mtime_ns": 1779676235860072786,
+    "hash": "23983a1895be3caef88e81d6c62b5547dc0001257fa99b65bc046b1eb3e33851"
+  },
+  "src/models/xor_scnm/xor_scnm_groundtruth_reservoir.py": {
+    "size": 5731,
+    "mtime_ns": 1779676235863589161,
+    "hash": "0ed6ddeb36af392718777ba8b974308854c6d6d45edb672b86b9ef5a5460646c"
+  },
+  "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py": {
+    "size": 15824,
+    "mtime_ns": 1779676235863473827,
+    "hash": "3d71c07c86f22307cc475bdd2eb95fb67bd1f72e09d6956e1ff8b43650b59bd1"
+  },
+  "src/models/xor_scnm/xor_scnm_acquisition_direct.py": {
+    "size": 31733,
+    "mtime_ns": 1779676235863366286,
+    "hash": "0bdf4d897a51fd40f61d9d6dec58cba63928d2acd23af23fcfef69a8bf623067"
+  },
+  "src/models/xor_scnm/optimization/test_parameter_combinations.py": {
+    "size": 9797,
+    "mtime_ns": 1779676235862856202,
+    "hash": "b6b81bc572a56b91c7f0fb64920b03b93f81c400f1117a019e085d3aa6a3475f"
+  },
+  "src/models/xor_scnm/optimization/bayesian_optimization.py": {
+    "size": 12420,
+    "mtime_ns": 1779676235862153244,
+    "hash": "1dd52d2b40859185c2b802aaf2ef88b3066d33947504729e827581e7fcf7bc4f"
+  },
+  "src/models/xor_scnm/optimization/generate_parameter_sweep.py": {
+    "size": 7517,
+    "mtime_ns": 1779676235862618536,
+    "hash": "fcc0bc60a855c9dec93c67998de924110583c468a97eb2da3cc30beb7ae3ae41"
+  },
+  "src/models/xor_scnm/legacy/netmorph2obj.py": {
+    "size": 9673,
+    "mtime_ns": 1779676235860488953,
+    "hash": "1ed1d15ffb4b2cde2101a1dc0c1d1ed82f1c74869e66395e9e488edcb7a4f169"
+  },
+  "src/models/xor_scnm/legacy/netmorph2nes.py": {
+    "size": 9093,
+    "mtime_ns": 1779676235860359953,
+    "hash": "5b00039bb568e88ee2be8326d4e42e6effd4c81100f9f4cb5726c31632b0bf49"
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py": {
+    "size": 7842,
+    "mtime_ns": 1779676235860894453,
+    "hash": "9b4f23d7589bd3434c01db9ca0713df4bf8e892ba4cc82a5d16eed497e501975"
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth-batched.py": {
+    "size": 11076,
+    "mtime_ns": 1779676235860776619,
+    "hash": "33746d2f2ab1db56b1ff96b2f9f2785fc27715ab6ffab67c1a0a2c658e2b3af9"
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth_direct.py": {
+    "size": 3196,
+    "mtime_ns": 1779676235860988744,
+    "hash": "8cfee7afdeffb2145b6e7495fe2d852ec8b67558a4be250ff86577b98f0504d0"
+  },
+  "src/models/xor_scnm/legacy/objcurves.py": {
+    "size": 3445,
+    "mtime_ns": 1779676235860557244,
+    "hash": "fde7641fe59ccd4c9a8e14accdef246d40d2156c3e774f59a3612ea580214dd7"
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_acquisition.py": {
+    "size": 21248,
+    "mtime_ns": 1779676235860639077,
+    "hash": "6f46a8fd729d4a91a5ced307c5e5164f7dbbdcfc888203dc4f9da467bd3d200c"
+  },
+  "src/components/IF_with_stdp.py": {
+    "size": 29072,
+    "mtime_ns": 1779676235843613077,
+    "hash": "ac53a765992eb564fd92f6e5f06362d061815fcf9c19c71334921571807e76f2"
+  },
+  "src/components/psp_test.py": {
+    "size": 1987,
+    "mtime_ns": 1779676235849104286,
+    "hash": "756d45385607af7f17d946235c9befc242132b0e29608d1309195e2fd570d5cd"
+  },
+  "src/components/normalized_double_exponential_plot.py": {
+    "size": 2196,
+    "mtime_ns": 1779676235845989452,
+    "hash": "33d1ada4f6033d4824f3a4db86a9694a2cedc32b3a0149938776e22a120ce7fa"
+  },
+  "src/components/normalized_psp_kernels.py": {
+    "size": 1823,
+    "mtime_ns": 1779676235846078744,
+    "hash": "e8fbdf1c4b68ead4bba19f6168f9c5870f3f5a3eb61c06eda98e3c901ca0bd92"
+  },
+  "src/components/IF_with_stdp.cpp": {
+    "size": 27077,
+    "mtime_ns": 1779676235843473577,
+    "hash": "28ff89b6c15427afdaf907747281629b8b06dc3500ce02bb4ccfcc41e8ea0ca5"
+  },
+  "src/components/improved_stdp.py": {
+    "size": 1784,
+    "mtime_ns": 1779676235845913327,
+    "hash": "5e106fc77b1e803a9deac0431306e4a38bda6f49b950da9072833348c7bbd9f8"
+  },
+  "src/components/exponential_Euler.py": {
+    "size": 3029,
+    "mtime_ns": 1779676235845846828,
+    "hash": "b59cfcf738b2c27d87eb0fcbf67ae1af5cb4dd530800c609a83639ed051d883e"
+  },
+  "src/components/visualize_recorded.py": {
+    "size": 7508,
+    "mtime_ns": 1779676235849851161,
+    "hash": "9b8d58e2298b001488bab8b2c0868e15c4b662a31bd087cf0f239fc1f6ffe432"
+  },
+  "src/components/bbox_test.py": {
+    "size": 1814,
+    "mtime_ns": 1779676235844997077,
+    "hash": "cec29ce002627fff9981fd3868adcd60e408ade75e5156fb88e32127adeb7680"
+  },
+  "src/components/test_receptors.py": {
+    "size": 1491,
+    "mtime_ns": 1779676235849441078,
+    "hash": "a1c15ee6e27e842e1f60a79688b69129917121f02714dd81c84ff8675cc1dadd"
+  },
+  "src/components/test_drawing.py": {
+    "size": 1446,
+    "mtime_ns": 1779676235849365036,
+    "hash": "b86a0cb2e7a853752b239f4df632916635f58684e6f6b8bac5f8e25b6da37628"
+  },
+  "src/components/psp_cond_test.py": {
+    "size": 1754,
+    "mtime_ns": 1779676235849036786,
+    "hash": "06df1b524d41721fc673d0cd501ede026c7b2e0805f19ea72e98f49ee298ae5b"
+  },
+  "src/components/stdp.py": {
+    "size": 1281,
+    "mtime_ns": 1779676235849293661,
+    "hash": "308612ff00dd00153c9d482ebe161b8e59d579dccc466183f072ac57bcc0e6aa"
+  },
+  "src/components/psp_cond_pyr_int.py": {
+    "size": 1033,
+    "mtime_ns": 1779676235848965202,
+    "hash": "871f2af55ccba1e2954482772e0380af424c04a736958dcf084a7d037b25660d"
+  },
+  "src/components/vilo-task4-constrained-estimation.py": {
+    "size": 21309,
+    "mtime_ns": 1779676235849539536,
+    "hash": "e60f820695ea1085dbdb173215ed342f87c196cd5431451969ec9e073ced1b31"
+  },
+  "src/components/visualize_connections.py": {
+    "size": 2310,
+    "mtime_ns": 1779676235849744661,
+    "hash": "9b78f7e3b60e9786f025f3afdb653b032fd8fd2fcb4165dec767a78566298ebe"
+  },
+  "src/components/IF_test.py": {
+    "size": 3792,
+    "mtime_ns": 1779676235843347911,
+    "hash": "046f28e5b9495651d3449f43d6bec603a40899f58ce7d4fbaf9b06b7b4409ade"
+  },
+  "src/components/IF_normalized.py": {
+    "size": 5140,
+    "mtime_ns": 1779676235843236036,
+    "hash": "4f9539aa1d01d042ee97c39860575a16cc4b526180341dc919ea1c7f0041a95c"
+  },
+  "src/components/visualize_cells.py": {
+    "size": 9538,
+    "mtime_ns": 1779676235849675119,
+    "hash": "ee9aa03c8c20082e990c377c3af2a40f209eb0c597a6c1cd48dda9274b1fcdcb"
+  },
+  "src/components/prototyping/Metrics_N1.py": {
+    "size": 5551,
+    "mtime_ns": 1779676235847491411,
+    "hash": "d0441bcb6f63019d3f9506548e30936fbdd48cd2b15bb62b1faefe4ef534ece2"
+  },
+  "src/components/prototyping/Metrics_P3.py": {
+    "size": 607,
+    "mtime_ns": 1779676235847791619,
+    "hash": "dcb47b0d6f794a033c3f5654c59ef49aa25a56d02737b2f32aba3f78cc7a4016"
+  },
+  "src/components/prototyping/System.py": {
+    "size": 9359,
+    "mtime_ns": 1779676235848268911,
+    "hash": "12c54cb5acb13bea50ad40639ea46057db02ba383180f5b5d780a26351375396"
+  },
+  "src/components/prototyping/Metrics_N4.py": {
+    "size": 664,
+    "mtime_ns": 1779676235847713578,
+    "hash": "562059d724ca5684cc2c72fa0636e51a6ec1e2794f0f1522cc824e988e96620f"
+  },
+  "src/components/prototyping/KGTRecords.py": {
+    "size": 4702,
+    "mtime_ns": 1779676235847140036,
+    "hash": "a1a1495eee81ad2af3d53902f20f2334b87db373a69d07fcb2d3b0b32c52c865"
+  },
+  "src/components/prototyping/Region.py": {
+    "size": 1640,
+    "mtime_ns": 1779676235847973119,
+    "hash": "e697f319b5c7047bdab0b56940b7fb5d673161cbb0f4813268df43f86adf9bea"
+  },
+  "src/components/prototyping/Calcium_Imaging.py": {
+    "size": 12410,
+    "mtime_ns": 1779676235846671911,
+    "hash": "ff9ed1e8a7d1be0ad9c42cf8e86581ee09d9a14fea727e0a70fdd5821137a806"
+  },
+  "src/components/prototyping/Metrics_C8.py": {
+    "size": 652,
+    "mtime_ns": 1779676235847383952,
+    "hash": "c53a8d9086a4e8878aedbc708f8cb9472299a63c2e5526058c99acc7d1a34d4a"
+  },
+  "src/components/prototyping/BS_Aligned_NC.py": {
+    "size": 4557,
+    "mtime_ns": 1779676235846313911,
+    "hash": "0b217f51e81b39cda9cd704253cb2149d733f68bdd76b536dedc53d68e929fbb"
+  },
+  "src/components/prototyping/BS_Morphology.py": {
+    "size": 3188,
+    "mtime_ns": 1779676235846429077,
+    "hash": "e8cde9805050a411414ad7c3a00b9db65ca736b987cc7efc258a52637c6f0b1a"
+  },
+  "src/components/prototyping/Electrodes.py": {
+    "size": 3916,
+    "mtime_ns": 1779676235846858703,
+    "hash": "a647b381be4cd2e172c98171e119b29523fa23f5a63cfbf62c1c24293d70f8d3"
+  },
+  "src/components/prototyping/Geometry.py": {
+    "size": 1361,
+    "mtime_ns": 1779676235846936953,
+    "hash": "bc6b72267c0cacc00fed97ca7322fe881e0c241d4b0b65548cef83e36866fe7b"
+  },
+  "src/components/prototyping/NMDA_Receptor.py": {
+    "size": 4615,
+    "mtime_ns": 1779676235847900494,
+    "hash": "7eb30bee4c27f94ef1e53abe8d8e9fd62203ce959b2b0eb5091874812a8a9f0a"
+  },
+  "src/components/prototyping/SynTr_Quantal_Release.py": {
+    "size": 864,
+    "mtime_ns": 1779676235848138036,
+    "hash": "5a79434da78106aade07159a690ecd323f91d9ce564e67cedab3e4d92207ddf6"
+  },
+  "src/components/prototyping/SignalFunctions.py": {
+    "size": 6662,
+    "mtime_ns": 1779676235848064786,
+    "hash": "f763a658d8d75a28afffe9bbfe68e55a44c7a3477888683eba6906f63af0d57b"
+  },
+  "src/components/prototyping/Metrics_C11.py": {
+    "size": 664,
+    "mtime_ns": 1779676235847226119,
+    "hash": "49d30d9db873303d75f75d43e52456fd323c22d5a5d432f90fbdeff932d052b0"
+  },
+  "src/components/prototyping/Metrics_N3.py": {
+    "size": 646,
+    "mtime_ns": 1779676235847629702,
+    "hash": "1a50e49bd6b37870b4eaf5fad7cf2d9681e4ad54e0876833397fe72e4f35a348"
+  },
+  "src/components/prototyping/Metrics_C4.py": {
+    "size": 585,
+    "mtime_ns": 1779676235847302911,
+    "hash": "3d2a67ddcad1e9b074e1c7032da09ef046013c8ae0ef10e7e186a84a7163b5f5"
+  },
+  "src/components/prototyping/Metrics_N2.py": {
+    "size": 601,
+    "mtime_ns": 1779676235847555994,
+    "hash": "712ca8f74306fda7a4ab8f95eba00ef988b6a2839ea3ce5c9ad7be85d05d1a3f"
+  },
+  "src/components/prototyping/AMPA_Receptor.py": {
+    "size": 5230,
+    "mtime_ns": 1779676235846218911,
+    "hash": "ee81f9e1a79bcb477957fa3664508d1a6c412a3603951f31b6b965b937ffc20e"
+  },
+  "src/components/prototyping/Data.py": {
+    "size": 1453,
+    "mtime_ns": 1779676235846758744,
+    "hash": "5d8c941aa8cf5fa1757e40d1f55e4765d413025f5d02eaba9bce4386a4dd0fa2"
+  },
+  "src/components/prototyping/BS_Neuron.py": {
+    "size": 12391,
+    "mtime_ns": 1779676235846556661,
+    "hash": "22949ee11503a80a7883169366d9ae3c3193ddcdb0b3955f89751efa1b120493"
+  },
+  "src/components/prototyping/IFneuron.py": {
+    "size": 6831,
+    "mtime_ns": 1779676235847034994,
+    "hash": "3fbc97d5eb60d1204345e1f86051ecdc98de8aa2dce2aea28ea41545212c6613"
+  },
+  "src/components/common/Neuron.py": {
+    "size": 181,
+    "mtime_ns": 1779676235845289577,
+    "hash": "1c8cdb21395b790048322a345d9a66b97cc31cddfe10831a8b691fa3db1d1187"
+  },
+  "src/components/common/_BSAlignedNC.py": {
+    "size": 3937,
+    "mtime_ns": 1779676235845562452,
+    "hash": "674aebdbf8f0988e468268e95a8914210b3ed013a1e15f020aaa80eb31bed3f8"
+  },
+  "src/components/common/NeuralCircuit.py": {
+    "size": 683,
+    "mtime_ns": 1779676235845219952,
+    "hash": "87b410c1dac7f768a95d2153ac5911500592df2664a7dd866fec8cd6e3c52128"
+  },
+  "src/components/common/glb.py": {
+    "size": 647,
+    "mtime_ns": 1779676235845769786,
+    "hash": "742f92fe4fc3bb9ad6aef4c30c20fdf55acebc0d446eb5c5ca5dcda54691db05"
+  },
+  "src/components/common/Common_Parameters.py": {
+    "size": 3270,
+    "mtime_ns": 1779676235845135786,
+    "hash": "5cef5f9af133b7e1fd52374b31ca6cff7a27d53804cb28bb7aad5d339248a934"
+  },
+  "src/components/common/Spatial.py": {
+    "size": 6311,
+    "mtime_ns": 1779676235845470869,
+    "hash": "fad98b831f927817cd0c8cb46813cd9fa96dd1d6c6a8d9ecea46cf65786e5db9"
+  },
+  "src/components/common/_Geometry.py": {
+    "size": 17309,
+    "mtime_ns": 1779676235845675536,
+    "hash": "20f01f594bf8823ed3d594dd481599daf60ea173e61e5558078b35d42b89c41a"
+  },
+  "src/components/pyBrainGenixClient/SimpleTest.py": {
+    "size": 4110,
+    "mtime_ns": 1779676235849227786,
+    "hash": "695ee13d0664f45c5823f0ba3b166962e54f924a3df07cd896ecfea61d54fe77"
+  },
+  "src/components/NES_interfaces/Metrics_N1.py": {
+    "size": 5756,
+    "mtime_ns": 1779676235844320119,
+    "hash": "5895b0f927a85bafe017e4bf1c8036ef60a8b1db9115044d198c8e93341ea738"
+  },
+  "src/components/NES_interfaces/System.py": {
+    "size": 3031,
+    "mtime_ns": 1779676235844804244,
+    "hash": "2ba54f73edd47852c1457627e6cd6c74caef9a2c60c425611033b9cdd65c218f"
+  },
+  "src/components/NES_interfaces/KGTRecords.py": {
+    "size": 6444,
+    "mtime_ns": 1779676235844210078,
+    "hash": "bf52d9cabddcc3dc8e6df633b1c2ea63ec307c069908b0419c28448fa0550438"
+  },
+  "src/components/NES_interfaces/NES_AMPA_Receptor.py": {
+    "size": 3236,
+    "mtime_ns": 1779676235844423328,
+    "hash": "88aab7e184cb4d28ef05890f22a37fae78c3f0b3146cbce089460de420840403"
+  },
+  "src/components/NES_interfaces/Region.py": {
+    "size": 1263,
+    "mtime_ns": 1779676235844625202,
+    "hash": "a94aac517252bf6128faedf9f858c461f6e4d51f7777d7829b015e40f17743f1"
+  },
+  "src/components/NES_interfaces/BS_Aligned_NC.py": {
+    "size": 2515,
+    "mtime_ns": 1779676235843737369,
+    "hash": "571166d16044409d1a1fca028e134f85dca88ba92c4c0c8019d32d54f2c62ee1"
+  },
+  "src/components/NES_interfaces/BS_Morphology.py": {
+    "size": 1999,
+    "mtime_ns": 1779676235843831327,
+    "hash": "e30d6ae95f77c4ea9408ca7b4d9c40cf48ea726076204a0a43d7a793865cc033"
+  },
+  "src/components/NES_interfaces/Geometry.py": {
+    "size": 1932,
+    "mtime_ns": 1779676235844077786,
+    "hash": "ff23ef70e277b90c41f9f0e93b1a241483a10a9eb834da501070ca3d549b84d1"
+  },
+  "src/components/NES_interfaces/NMDA_Receptor.py": {
+    "size": 4615,
+    "mtime_ns": 1779676235844533703,
+    "hash": "5cd2c34ea465d7ce045bc3a107929a9feaaa98202c88bc3e1cb396ae433c3558"
+  },
+  "src/components/NES_interfaces/SynTr_Quantal_Release.py": {
+    "size": 864,
+    "mtime_ns": 1779676235844728577,
+    "hash": "548ca42df79994e5da18c862665c28311fba4c6e889ed8636d112a435365cfa3"
+  },
+  "src/components/NES_interfaces/BS_Neuron.py": {
+    "size": 7487,
+    "mtime_ns": 1779676235843947411,
+    "hash": "1815fba83d8dc31fd4f8958a54b9ef3aa26a5dfdfcde7cd9b87448c66acc9606"
+  },
+  "modules-versions-20250116-rkoene.txt": {
+    "size": 417,
+    "mtime_ns": 1779676235842716661,
+    "hash": "493c75ccf6e640aa7c8869524c021ca6e08e2e025bf886ed3fb9fcd027cb982a"
+  },
+  "requirements.txt": {
+    "size": 82,
+    "mtime_ns": 1779676235842962661,
+    "hash": "15da1aa88e7c0b10556a4617ad6aa4b1b8d39aaa95b8d69c29b0635a937dcfda"
+  },
+  "README.md": {
+    "size": 4139,
+    "mtime_ns": 1779676235822297869,
+    "hash": "fc3d803492fae5391707a66cb99898700f16c7f413929a08c7897172d7706a97"
+  },
+  "modules-versions-20250116-kstafford.txt": {
+    "size": 416,
+    "mtime_ns": 1779676235842637119,
+    "hash": "ff3bc50a1aa3cb166b6afef6bb7bfffa1be6da626e3f71200d25c803540817df"
+  },
+  "agent notes/agent-session-notes-2026-05-09.md": {
+    "size": 1790,
+    "mtime_ns": 1779676235822825286,
+    "hash": "6351756fd02799533c10e961eae87633147ea45ea70805b79aac83f564990bf7"
+  },
+  "doc/e0_bs.md": {
+    "size": 2358,
+    "mtime_ns": 1779676235831486077,
+    "hash": "b0ac627901c68ee9a31d459bbbc7bb3b8508b9167625680bf3f60f224362afff"
+  },
+  "doc/Notes-on-taking-the-challenge.md": {
+    "size": 2576,
+    "mtime_ns": 1779676235823444577,
+    "hash": "b875abc95e1d9ed1d0b7ca7e1c4015021988380986279dc89b60b75749d713f8"
+  },
+  "doc/e3_aifinch.md": {
+    "size": 8642,
+    "mtime_ns": 1779676235833717203,
+    "hash": "d6972a8b3ec5119edee11c31981fd3f51099aeae812f1fe6898e6031bca495d1"
+  },
+  "doc/validated-brain-emulation-in-silico/README.md": {
+    "size": 816,
+    "mtime_ns": 1779676235834856494,
+    "hash": "506ae46c5e8aadd0d407fdb10636d20e68fea3f37ea805876560bc04f3625049"
+  },
+  "doc/a-whole-brain-emulation-challenge/README.md": {
+    "size": 816,
+    "mtime_ns": 1779676235824498077,
+    "hash": "05b2717b0c6f470ae26800fd0e16ea125c60088f0ec574b803db9ba55c94c064"
+  },
+  "graphify/README.md": {
+    "size": 527,
+    "mtime_ns": 1779682688389246911,
+    "hash": "bd5fde8a36e51607d97f8881f8b08ab67445297bedb1a18c4ad1afb68562dc9b"
+  },
+  "Challenge/examples/README.md": {
+    "size": 147,
+    "mtime_ns": 1779676235821279411,
+    "hash": "f1c5f7c35da1f9e29aeeb0a1cb4bc0a2317a2db0c37dd30d11e8823f99889d61"
+  },
+  "src/models/README.md": {
+    "size": 9696,
+    "mtime_ns": 1779676235850008202,
+    "hash": "d1b18110308a27ba3162e74a1f40b2b84b91fdeb3e1290d174c8d1746a8b0afd"
+  },
+  "src/models/xor_sc/fishsource.txt": {
+    "size": 4675,
+    "mtime_ns": 1779676235859105161,
+    "hash": "f5730ef0597111d62e2d09fd58bdfd14a1d507e058054ac97de5b11d09bc8411"
+  },
+  "src/models/xor_sc/README.md": {
+    "size": 2211,
+    "mtime_ns": 1779676235858786202,
+    "hash": "093950941f6c7fa7119cfb23f480814b8689e36e02659a48f2797cff2027c82b"
+  },
+  "src/models/xor_sc/fishtarget.txt": {
+    "size": 4650,
+    "mtime_ns": 1779676235859205327,
+    "hash": "5a7fb256a5948170e0f76ba89dc26e56dfb5d7e7d845a19aa02559dfef7f3eb7"
+  },
+  "src/models/autoassociative/README.md": {
+    "size": 1020,
+    "mtime_ns": 1779676235850545327,
+    "hash": "576db794c03a94ba42ea62d871960766154a088c3f794772ab35173c4c9a515a"
+  },
+  "src/models/e0_bs/README.md": {
+    "size": 2660,
+    "mtime_ns": 1779676235852267119,
+    "hash": "752b7149eb3ff056210c2e989a540b5c7a129227960668334994192d8d599904"
+  },
+  "src/models/test_neurite_diameters/README.md": {
+    "size": 303,
+    "mtime_ns": 1779676235856147577,
+    "hash": "3e1a7f65da1c20dcd511cf862a45417e465af6a954afd76a3e4c97cf0d110a31"
+  },
+  "src/models/full_adder_lifc/validation_results.md": {
+    "size": 805,
+    "mtime_ns": 1779676235855653911,
+    "hash": "f4c66069d80069753f09d688683d53c4a3380be9b8b72bdc75b2eff377a36bc0"
+  },
+  "src/models/full_adder_lifc/README.md": {
+    "size": 1020,
+    "mtime_ns": 1779676235854819036,
+    "hash": "3b6c3fbf1f8bcc201831517986f60009cbdd6ea0e10b5df55cd8e7d34523bddd"
+  },
+  "src/models/full_adder_lifc/experiment_log.md": {
+    "size": 3515,
+    "mtime_ns": 1779676235855041119,
+    "hash": "5efef72ae53cdf3c5ada4d8db3af1bc74e616e3fe1825772d9e854e04509dcbf"
+  },
+  "src/models/xor_bs/Readme.md": {
+    "size": 486,
+    "mtime_ns": 1779676235856748078,
+    "hash": "a1e2da5da37f138a6b69c174cf0e9fcf2eb780461ad92ded3e05ede5e91d4135"
+  },
+  "src/models/xor_scnm/README.md": {
+    "size": 2306,
+    "mtime_ns": 1779676235859979369,
+    "hash": "d34390d8437822939877f5358aa66a7aa63e0fd9ef112e2bc553f851f277a31c"
+  },
+  "src/models/xor_scnm/optimization/README.md": {
+    "size": 2093,
+    "mtime_ns": 1779676235862007702,
+    "hash": "a73ec76e8ecdced542fe4ec6abfb879993edad6761cf3d5a46f4f4e7dee2d380"
+  },
+  "src/components/common/README.md": {
+    "size": 827,
+    "mtime_ns": 1779676235845363453,
+    "hash": "f8db3eba3311486d3e1464784cec36b338578c27133c07defa9cd5ec7d567231"
+  },
+  "doc/validated_brain_emulation_in_silico.pdf": {
+    "size": 560240,
+    "mtime_ns": 1779676235842526286,
+    "hash": "b1e3f2181d02d4768a3d3f10fc327229f22cc65cda6bfdde7dcfc3cd35712344"
+  },
+  "doc/validated-brain-emulation-in-silico/main.pdf": {
+    "size": 739349,
+    "mtime_ns": 1779676235840645327,
+    "hash": "a345acab8196578c55bd20d8312c3a04eed94cd8797ae0ce18f455f61a96ecfc"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/example_figure.pdf": {
+    "size": 380936,
+    "mtime_ns": 1779676235837565952,
+    "hash": "6dfac3379e42d55b382df06852617f622aa44c7ede26bcb6afac77c514019f2d"
+  },
+  "doc/a-whole-brain-emulation-challenge/main.pdf": {
+    "size": 839698,
+    "mtime_ns": 1779676235830690411,
+    "hash": "d8a5859618e100bf221688941909ea0a730b8435e0f374c428b9704ae249809b"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/example_figure.pdf": {
+    "size": 380936,
+    "mtime_ns": 1779676235827292411,
+    "hash": "3c6a95f2e3b7a594d1cd884a3a0c0fa7f40cfe3692a0dff33212eb7878cd2c3f"
+  },
+  "src/models/full_adder_lifc/full_adder_validation_plot.pdf": {
+    "size": 23243,
+    "mtime_ns": 1779676235855382452,
+    "hash": "10a8e6131dff12f89dd1316fd061c22586bace313c20d42af9aa848c67c5f39e"
+  },
+  "doc/Deriving-whole-brain-emulation.png": {
+    "size": 128702,
+    "mtime_ns": 1779676235823310952,
+    "hash": "8df978fbf6b3a51760feaebf4672306195003120072617e0c68ad746b26d9fcd"
+  },
+  "doc/e0_bs_recorded.png": {
+    "size": 34408,
+    "mtime_ns": 1779676235833527494,
+    "hash": "693fb76561c142d0d98121b4443b9c20c517e2cb8b856bb43e9297f5ea3d1b6e"
+  },
+  "doc/e0_bs.png": {
+    "size": 179799,
+    "mtime_ns": 1779676235832050077,
+    "hash": "0d8664573011370071e6ffa33d8594e25746317e362f73adf91ac1ffb3c387f9"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/Deriving-whole-brain-emulation.png": {
+    "size": 128702,
+    "mtime_ns": 1779676235835512202,
+    "hash": "d9cd0a835c0647b16209c59a5ac336a88444ef8c2158d6b9213393d69406afcd"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/e0_bs_recorded.png": {
+    "size": 34408,
+    "mtime_ns": 1779676235836309202,
+    "hash": "54be3f0e025d6c7cf3522846d4a723df9da9a1434ae52f5a6e9407506d591f38"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/e0_bs.png": {
+    "size": 179799,
+    "mtime_ns": 1779676235836104952,
+    "hash": "8d4be0f74c74961cf5526c78c4f67c18a90ad458a46b93ff634ec4f7d7314845"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/VBP_System_Architecture_Overview.drawio.png": {
+    "size": 66100,
+    "mtime_ns": 1779676235834746327,
+    "hash": "ea9ea26349883ffae1c2b4bbb87d92f4d6a3a644fa2dafa31cfa8966251fd306"
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/VBP_EM_Render_Pipeline.drawio.png": {
+    "size": 48484,
+    "mtime_ns": 1779676235834403411,
+    "hash": "74fc252334e1c825b56c7676d0c02dffb72dde4354c001e26f94716ae2c8436f"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/Deriving-whole-brain-emulation.png": {
+    "size": 128702,
+    "mtime_ns": 1779676235825116536,
+    "hash": "ff8f63fd7f7d087bd209d98e00584a4c883985fe96f631dc3ee4322c2651b6b5"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/to-animal-brains.jpg": {
+    "size": 27700,
+    "mtime_ns": 1779676235828140911,
+    "hash": "651d252b54da7f8495078d3107b0e1ba731ba6643938a257d0cd227f7f7a58b3"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/e0_bs_recorded.png": {
+    "size": 34408,
+    "mtime_ns": 1779676235826110702,
+    "hash": "6f172c2ef1e01b6fba034f549301e510a946c1e8144566c273f640e621cba7a5"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/e0_bs.png": {
+    "size": 179799,
+    "mtime_ns": 1779676235825919161,
+    "hash": "1c1c57572e5dd48e95c6c4e24ea2b73631049d6206dfee27a8fd8a562281fafd"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/success-criteria.jpg": {
+    "size": 81693,
+    "mtime_ns": 1779676235827975452,
+    "hash": "b762ed5922cfd0b5f4f9578a924ad3955e636ee62b0ad8d7520ef41fd2dc4d5c"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/VBP_System_Architecture_Overview.drawio.png": {
+    "size": 66100,
+    "mtime_ns": 1779676235824395411,
+    "hash": "5815af99792f6fa61cc4cf4a30adef8cfc92089fcef9d4cbb3ffde052afba72b"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/VBP_EM_Render_Pipeline.drawio.png": {
+    "size": 48484,
+    "mtime_ns": 1779676235824054036,
+    "hash": "3abd90717a35ba4f18a9567fd7a3e22eee71550986ba059fcf1357caa889f324"
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/challenge-process.jpg": {
+    "size": 44599,
+    "mtime_ns": 1779676235825323703,
+    "hash": "8a5d00698c072bc525edf749ee54376ae671ae1b7024b182ae5a425a4784c4c2"
+  },
+  "src/models/xor_bs/xor_bs_circuit.jpg": {
+    "size": 50754,
+    "mtime_ns": 1779676235857146536,
+    "hash": "80f1f769f44c526eed82aa6658ec410c0b3c4a6a6d98971b717f9ffe5d79630a"
+  }
+}

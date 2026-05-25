@@ -1,1 +1,404 @@
-{"nodes": [{"id": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_pybraingenixclient_simpletest_py", "label": "SimpleTest.py", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L1"}, {"id": "pybraingenixclient_simpletest_main", "label": "main()", "file_type": "code", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L9"}], "edges": [{"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_pybraingenixclient_simpletest_py", "target": "time", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L2", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_pybraingenixclient_simpletest_py", "target": "base64", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L3", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_pybraingenixclient_simpletest_py", "target": "braingenix_nes", "relation": "imports", "context": "import", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L5", "weight": 1.0}, {"source": "users_apple_fun_project_mac_silicon_may_modifications_brainemulationchallenge_src_components_pybraingenixclient_simpletest_py", "target": "pybraingenixclient_simpletest_main", "relation": "contains", "confidence": "EXTRACTED", "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L9", "weight": 1.0}], "raw_calls": [{"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L12"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L13"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "GetInsecureToken", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L17"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L18"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L21"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L22"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L31"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Client", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L32"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "IsReady", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L34"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L38"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L39"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "CreateSimulation", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L41"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L45"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L46"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddSphere", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L50"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L53"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L54"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddBox", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L59"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L62"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L63"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddCylinder", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L69"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L72"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L73"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddBSCompartment", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L79"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L81"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L82"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddBSCompartment", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L88"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L90"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L91"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddBSCompartment", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L97"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L101"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "Configuration", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L102"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "AddVSDAEM", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L108"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L110"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "DefineScanRegion", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L111"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L113"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "QueueRenderOperation", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L114"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L116"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "GetRenderStatus", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L117"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "sleep", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L118"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L120"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "GetImageStack", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L121"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L123"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "print", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L125"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "GetImage", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L126"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "open", "is_member_call": false, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L127"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "split", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L127"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "write", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L128"}, {"caller_nid": "pybraingenixclient_simpletest_main", "callee": "decodebytes", "is_member_call": true, "source_file": "/Users/apple/fun_project/mac_silicon/may modifications/BrainEmulationChallenge/src/components/pyBrainGenixClient/SimpleTest.py", "source_location": "L128"}]}
+{
+  "nodes": [
+    {
+      "id": "src_components_pybraingenixclient_simpletest_py",
+      "label": "SimpleTest.py",
+      "file_type": "code",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "pybraingenixclient_simpletest_main",
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L9"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_pybraingenixclient_simpletest_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pybraingenixclient_simpletest_py",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pybraingenixclient_simpletest_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_pybraingenixclient_simpletest_py",
+      "target": "pybraingenixclient_simpletest_main",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L9",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L12"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L13"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "GetInsecureToken",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L17"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L21"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L22"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L31"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Client",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L32"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "IsReady",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L38"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L39"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "CreateSimulation",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L41"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L45"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L46"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddSphere",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L50"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddBox",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L62"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L63"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddCylinder",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L73"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddBSCompartment",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L79"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L81"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddBSCompartment",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L90"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddBSCompartment",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L97"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L101"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "Configuration",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L102"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "AddVSDAEM",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L108"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L110"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "DefineScanRegion",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L113"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "QueueRenderOperation",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L114"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "GetRenderStatus",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L117"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "sleep",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L118"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L120"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "GetImageStack",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L121"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L123"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L125"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "GetImage",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L126"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L127"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L127"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L128"
+    },
+    {
+      "caller_nid": "pybraingenixclient_simpletest_main",
+      "callee": "decodebytes",
+      "is_member_call": true,
+      "source_file": "src/components/pyBrainGenixClient/SimpleTest.py",
+      "source_location": "L128"
+    }
+  ]
+}
