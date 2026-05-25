@@ -11,6 +11,7 @@ git checkout origin/main
 echo "Creating virtual environment and installing dependencies..."
 python3 -m venv ../venv
 ../venv/bin/pip install -r ../requirements.txt
+../venv/bin/pip install graphifyy
 
 echo "Done. Required submodules are up to date."
 echo "Activate the virtual environment with: source venv/bin/activate"
