@@ -69,7 +69,6 @@ DBdata = vbp.InitExpDB(
         'modelname': Args.modelname,
     })
 
-
 # Load Netmorph model file
 modelcontent = 'kjhskdjfhkjhs'
 
