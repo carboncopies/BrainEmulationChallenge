@@ -278,4 +278,14 @@ except:
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
 
+print('===============================================================')
+print('WARNING:')
+print('Even though this Connectome script attempts connectome training')
+print('This has not been tested to work yet.')
+print('A sufficient reservoir needs to be guaranteed first by using')
+print('the right Netmorph configuration (see NetmorphConfig project).')
+print('This script also does not store necessary information about')
+print('IO neurons in the database yet.')
+print('===============================================================')
+
 print(" -- Done.")

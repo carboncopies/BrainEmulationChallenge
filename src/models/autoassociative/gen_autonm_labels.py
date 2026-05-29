@@ -25,6 +25,7 @@ import pandas as pds
 import copy
 import psutil
 import tqdm
+import random
 
 import vbpcommon as vbp
 from BrainGenix.BG_API import NES
@@ -57,6 +58,7 @@ def get_Args():
     Parser.add_argument("-from_sample", default=0, type=int, help="Samples starting at line (def: 0)")
     Parser.add_argument("-to_sample", default=0, type=int, help="Samples up to line (def: 0, meaning all)")
     Parser.add_argument("-RCIncludeHeap", action="store_true", help="Include slow search of heap in resource check (def: False)")
+    Parser.add_argument("-randomseed", default=20240628, type=int, help="Specify a random seed (def: 20240628, 0: auto-pick)")
     return Parser.parse_args()
 
 # Load samples parameter values from Excel file, return data frame and column identifiers
@@ -317,6 +319,7 @@ def get_sample_modelcontent(launchdata:dict, pars:list)->str:
     sample_modelcontent += SHAPE_RADIUS % shapeRadius
     sample_modelcontent += SHAPE_THICKNESS % shapeThickness
     sample_modelcontent += DM_WEIGHT % dmWeight
+    sample_modelcontent += RANDOMSEED % launchdata['randomseed']
     return sample_modelcontent
 
 
@@ -374,9 +377,10 @@ def write_excel_with_results(batchrun, df, Args):
         df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
 
     path = Path(Args.excel)
-    labeledpath = str(path.with_suffix(""))+'-labeled.xlsx'
+    labeledpath = str(path.with_suffix(""))+'-labeled-RS'+str(Args.randomseed)+'.xlsx'
     df.to_excel(labeledpath, index=False)
     print('Results written to: '+labeledpath)
+    print('Note that RS%d in the file name specifies the random seed used.')
     return completed_batchinfo
 
 # ===== Start of program steps
@@ -392,7 +396,7 @@ if __name__ == '__main__':
     # String templates for augmenting Netmorph model configuration content
     ARCHITECTURE_MODIFY = '''
     In.pyramidal=%d;
-    In.interneurons=%d;
+    In.interneuron=%d;
     '''
 
     NETMORPH_OBJ = '''
@@ -434,6 +438,10 @@ if __name__ == '__main__':
     all_axons.axondm.dm_weight=%.1f;
     '''
 
+    RANDOMSEED='''
+    randomseed=%d;
+    '''
+
     # List of batch keys to store and retrieve across potential multiple restarts of this script
     BATCHDATAKEYS = [
         "modelname",
@@ -445,6 +453,10 @@ if __name__ == '__main__':
     RESOURCESLOWBYTES = 2*1024*1024*1024 # 2GB
 
     Args = get_Args()
+
+    if Args.randomseed == 0:
+        Args.randomseed = random.randint(1, 99999999)
+    print('Random seed is: '+str(Args.randomseed))
 
     df, cols = get_sample_data(Args)
 
@@ -476,6 +488,7 @@ if __name__ == '__main__':
         'Patterns': Args.Patterns,
         'Dt': Args.Dt,
         'STDP': Args.STDP,
+        'randomseed': Args.randomseed,
     }
 
     # Determine total and batch sizes
