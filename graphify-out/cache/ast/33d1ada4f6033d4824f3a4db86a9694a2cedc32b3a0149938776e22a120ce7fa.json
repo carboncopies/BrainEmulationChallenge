@@ -1,0 +1,96 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_normalized_double_exponential_plot_py",
+      "label": "normalized_double_exponential_plot.py",
+      "file_type": "code",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_normalized_double_exponential_plot_compute_normalization",
+      "label": "compute_normalization()",
+      "file_type": "code",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L5"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_normalized_double_exponential_plot_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_normalized_double_exponential_plot_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_normalized_double_exponential_plot_py",
+      "target": "mpl_toolkits_mplot3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_normalized_double_exponential_plot_py",
+      "target": "components_normalized_double_exponential_plot_compute_normalization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L5",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_normalized_double_exponential_plot_compute_normalization",
+      "callee": "any",
+      "is_member_call": true,
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L6"
+    },
+    {
+      "caller_nid": "components_normalized_double_exponential_plot_compute_normalization",
+      "callee": "ValueError",
+      "is_member_call": false,
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L7"
+    },
+    {
+      "caller_nid": "components_normalized_double_exponential_plot_compute_normalization",
+      "callee": "log",
+      "is_member_call": true,
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L8"
+    },
+    {
+      "caller_nid": "components_normalized_double_exponential_plot_compute_normalization",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L9"
+    },
+    {
+      "caller_nid": "components_normalized_double_exponential_plot_compute_normalization",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/normalized_double_exponential_plot.py",
+      "source_location": "L9"
+    }
+  ]
+}

@@ -1,0 +1,436 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "label": "aifinch_vbp1_acquisition.py",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_placement",
+      "label": "Placement",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L14"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_placement_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L15"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "label": "PlacementRectangle",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "label": "EFP_ElectrodeArray",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "region",
+      "label": "Region",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L44"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "label": "TEM_VolumeImaging",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L49"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_init",
+      "label": "init()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "label": "parse_command_line()",
+      "file_type": "code",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L108"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_rationale_19",
+      "label": "Rectangular electrode placement arrangement.",
+      "file_type": "rationale",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_rationale_31",
+      "label": "Multi-site multi-electrode electric field potential recording system.",
+      "file_type": "rationale",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_rationale_50",
+      "label": "Transmission Electron Microscope high-throughput volume imaging system.",
+      "file_type": "rationale",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L50"
+    },
+    {
+      "id": "e3_aifinch_aifinch_vbp1_acquisition_rationale_67",
+      "label": "# TODO:",
+      "file_type": "rationale",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L67"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "aifinch_groundtruth",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placement",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_placement",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placement_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placement",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "target": "region",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_init",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placement",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_init",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L108",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_init",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_init",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_init",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_rationale_19",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_placementrectangle",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_rationale_31",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_efp_electrodearray",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_rationale_50",
+      "target": "e3_aifinch_aifinch_vbp1_acquisition_tem_volumeimaging",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "e3_aifinch_aifinch_vbp1_acquisition_rationale_67",
+      "target": "src_models_e3_aifinch_aifinch_vbp1_acquisition_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L67",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "copy",
+      "is_member_call": true,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L112"
+    },
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L113"
+    },
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L114"
+    },
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "e3_aifinch_aifinch_vbp1_acquisition_parse_command_line",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/e3_aifinch/aifinch_vbp1_acquisition.py",
+      "source_location": "L117"
+    }
+  ]
+}

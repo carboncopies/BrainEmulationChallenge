@@ -1,0 +1,806 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "label": "bs_vbp03_emulation_iii_validation.py",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "label": "quickstart()",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "label": "load_emulation()",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "common_parameters",
+      "label": "Common_Parameters",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "system",
+      "label": "System",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "label": "load_ground_truth()",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "label": "validate_success_criteria()",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L121"
+    },
+    {
+      "id": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "label": "parse_command_line()",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L165"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "bs_vbp00_groundtruth_xi_sampleprep",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "common_common_parameters",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "common_spatial",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_system",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_c11",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_c4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_c8",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_n1",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_n2",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_n3",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_n4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "nes_interfaces_metrics_p3",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_system",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_c11",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_c4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_c8",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_n1",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_n2",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_n3",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L49",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_n4",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_metrics_p3",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "target": "common_parameters",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "target": "system",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "target": "common_parameters",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "target": "system",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "target": "system",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "target": "system",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_prototyping_bs_vbp03_emulation_iii_validation_py",
+      "target": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "target": "system",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "target": "system",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L91",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "target": "common_parameters",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L177",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "callee": "set_local",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L56"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "callee": "BGNES_QuickStart",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L57"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_quickstart",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "callee": "fullpath",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L70"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "callee": "load",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L74"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_emulation",
+      "callee": "show",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L76"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "callee": "fullpath",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L89"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "callee": "load",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L93"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_load_ground_truth",
+      "callee": "show",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L95"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L123"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_P3",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L125"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L126"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_C4",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L128"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L129"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_C8",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L131"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L132"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_C11",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L134"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L135"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_N1",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L137"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L138"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_N2",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L141"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_N3",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L143"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L144"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "Metrics_N4",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L146"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_validate_success_criteria",
+      "callee": "validate",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L147"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "copy",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L171"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L172"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L173"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "common_commandline_parsing",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L174"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L177"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L182"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L187"
+    },
+    {
+      "caller_nid": "prototyping_bs_vbp03_emulation_iii_validation_parse_command_line",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py",
+      "source_location": "L189"
+    }
+  ]
+}

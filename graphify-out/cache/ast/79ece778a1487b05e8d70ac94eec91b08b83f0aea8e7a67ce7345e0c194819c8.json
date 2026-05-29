@@ -1,0 +1,300 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_sub1_acquisition_py",
+      "label": "sub1_acquisition.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "label": "save_nes_recording_csv()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "xor_scnm_sub1_acquisition_spikeinputneuronsat",
+      "label": "SpikeInputNeuronsAt()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L176"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L176"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "csv",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_sub1_acquisition_py",
+      "target": "xor_scnm_sub1_acquisition_spikeinputneuronsat",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_sub1_acquisition_spikeinputneuronsat",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_sub1_acquisition_spikeinputneuronsat",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L176",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "get",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L41"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "get",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L43"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "get",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L44"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "Path",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L46"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "mkdir",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L47"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "open",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L50"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "writer",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "writerow",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L52"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "items",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "isinstance",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "items",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L62"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_save_nes_recording_csv",
+      "callee": "writerow",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L73"
+    },
+    {
+      "caller_nid": "xor_scnm_sub1_acquisition_spikeinputneuronsat",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/sub1_acquisition.py",
+      "source_location": "L178"
+    }
+  ]
+}

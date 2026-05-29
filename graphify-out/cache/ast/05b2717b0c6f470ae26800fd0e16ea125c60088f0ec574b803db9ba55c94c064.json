@@ -1,0 +1,63 @@
+{
+  "nodes": [
+    {
+      "id": "doc_a_whole_brain_emulation_challenge_readme_md",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "a_whole_brain_emulation_challenge_readme_ldr_template",
+      "label": "ldr-template",
+      "file_type": "document",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "a_whole_brain_emulation_challenge_readme_rmd",
+      "label": "Rmd",
+      "file_type": "document",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "a_whole_brain_emulation_challenge_readme_acknowledgements",
+      "label": "Acknowledgements",
+      "file_type": "document",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L13"
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_a_whole_brain_emulation_challenge_readme_md",
+      "target": "a_whole_brain_emulation_challenge_readme_ldr_template",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "a_whole_brain_emulation_challenge_readme_ldr_template",
+      "target": "a_whole_brain_emulation_challenge_readme_rmd",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "a_whole_brain_emulation_challenge_readme_ldr_template",
+      "target": "a_whole_brain_emulation_challenge_readme_acknowledgements",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/a-whole-brain-emulation-challenge/README.md",
+      "source_location": "L13",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

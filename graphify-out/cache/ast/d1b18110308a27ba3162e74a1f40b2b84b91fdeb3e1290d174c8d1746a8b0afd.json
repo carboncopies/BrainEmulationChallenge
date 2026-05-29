@@ -1,0 +1,255 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_readme_md",
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "models_readme_wbe_challenge_example_models",
+      "label": "WBE Challenge Example Models",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "models_readme_practice_ground_truth_examples",
+      "label": "Practice ground-truth examples",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L33"
+    },
+    {
+      "id": "models_readme_spiking_neuron_xor_logic_circuit",
+      "label": "Spiking neuron XOR logic circuit",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L54"
+    },
+    {
+      "id": "models_readme_t_maze_7_place_field_auto_associative_eciii_inspired_attractors",
+      "label": "T-maze 7 place field auto-associative ECIII-inspired attractors",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L65"
+    },
+    {
+      "id": "models_readme_one_shot_sustained_activity_short_term_buffer_using_after_depolarization",
+      "label": "One-shot sustained activity short-term buffer using after-depolarization",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L77"
+    },
+    {
+      "id": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "label": "Operational neuronal circuit components used in auto-generated ground-truth systems from which Challenge data sets are produced",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L93"
+    },
+    {
+      "id": "models_readme_single_neuron_dendritic_computation",
+      "label": "Single-neuron dendritic-computation",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L99"
+    },
+    {
+      "id": "models_readme_retrievable_pattern_memory_through_attractors_of_neuronal_population_activity",
+      "label": "Retrievable pattern memory through attractors of neuronal population activity",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L110"
+    },
+    {
+      "id": "models_readme_spontaneous_recruitment_as_reservoir_computing_in_an_interconnected_population_of_neurons",
+      "label": "Spontaneous recruitment as reservoir computing in an interconnected population of neurons",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L117"
+    },
+    {
+      "id": "models_readme_feature_detector_composition_through_simple_to_complex_cell_layering",
+      "label": "Feature detector composition through simple- to complex-cell layering",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L126"
+    },
+    {
+      "id": "models_readme_cell_specific_receptive_fields_in_auto_and_hetero_associative_newtorks",
+      "label": "Cell-specific receptive fields in auto- and hetero-associative newtorks",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L136"
+    },
+    {
+      "id": "models_readme_sustained_activity_of_cortical_pyramidal_neurons",
+      "label": "Sustained activity of cortical pyramidal neurons",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L144"
+    },
+    {
+      "id": "models_readme_columnar_processing",
+      "label": "Columnar processing",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L152"
+    },
+    {
+      "id": "models_readme_synchronized_rhythmic_modulation",
+      "label": "Synchronized rhythmic modulation",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L161"
+    },
+    {
+      "id": "models_readme_rhythmic_interaction_at_specific_phase_offsets",
+      "label": "Rhythmic interaction at specific phase offsets",
+      "file_type": "document",
+      "source_file": "src/models/README.md",
+      "source_location": "L169"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_readme_md",
+      "target": "models_readme_wbe_challenge_example_models",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_wbe_challenge_example_models",
+      "target": "models_readme_practice_ground_truth_examples",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_practice_ground_truth_examples",
+      "target": "models_readme_spiking_neuron_xor_logic_circuit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L54",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_practice_ground_truth_examples",
+      "target": "models_readme_t_maze_7_place_field_auto_associative_eciii_inspired_attractors",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_practice_ground_truth_examples",
+      "target": "models_readme_one_shot_sustained_activity_short_term_buffer_using_after_depolarization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_wbe_challenge_example_models",
+      "target": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_single_neuron_dendritic_computation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L99",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_retrievable_pattern_memory_through_attractors_of_neuronal_population_activity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_spontaneous_recruitment_as_reservoir_computing_in_an_interconnected_population_of_neurons",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_feature_detector_composition_through_simple_to_complex_cell_layering",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_cell_specific_receptive_fields_in_auto_and_hetero_associative_newtorks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_sustained_activity_of_cortical_pyramidal_neurons",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_columnar_processing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_synchronized_rhythmic_modulation",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L161",
+      "weight": 1.0
+    },
+    {
+      "source": "models_readme_operational_neuronal_circuit_components_used_in_auto_generated_ground_truth_systems_from_which_challenge_data_sets_are_produced",
+      "target": "models_readme_rhythmic_interaction_at_specific_phase_offsets",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/README.md",
+      "source_location": "L169",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

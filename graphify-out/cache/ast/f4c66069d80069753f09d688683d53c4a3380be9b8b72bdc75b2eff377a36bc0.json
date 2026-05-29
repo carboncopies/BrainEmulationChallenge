@@ -1,0 +1,111 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_full_adder_lifc_validation_results_md",
+      "label": "validation_results.md",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "label": "Full Adder Validation Testing",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_test_performed",
+      "label": "Test Performed",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L5"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_command",
+      "label": "Command",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_codeblock_1",
+      "label": "code:bash (./full_adder_lifc.py -Host pve.braingenix.org -Port 8000)",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L9"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_results",
+      "label": "Results",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "full_adder_lifc_validation_results_validation_table",
+      "label": "Validation Table",
+      "file_type": "document",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L17"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_full_adder_lifc_validation_results_md",
+      "target": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "target": "full_adder_lifc_validation_results_test_performed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "target": "full_adder_lifc_validation_results_command",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_validation_results_command",
+      "target": "full_adder_lifc_validation_results_codeblock_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "target": "full_adder_lifc_validation_results_results",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "full_adder_lifc_validation_results_full_adder_validation_testing",
+      "target": "full_adder_lifc_validation_results_validation_table",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/full_adder_lifc/validation_results.md",
+      "source_location": "L17",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

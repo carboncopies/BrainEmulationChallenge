@@ -1,0 +1,118 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_if_test_py",
+      "label": "IF_test.py",
+      "file_type": "code",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_if_test_double_exp_kernel",
+      "label": "double_exp_kernel()",
+      "file_type": "code",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L27"
+    },
+    {
+      "id": "components_if_test_single_exp_kernel",
+      "label": "single_exp_kernel()",
+      "file_type": "code",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "components_if_test_add_kernel_to_trace",
+      "label": "add_kernel_to_trace()",
+      "file_type": "code",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L69"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_if_test_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_test_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_test_py",
+      "target": "components_if_test_double_exp_kernel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_test_py",
+      "target": "components_if_test_single_exp_kernel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_test_py",
+      "target": "components_if_test_add_kernel_to_trace",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L69",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_if_test_double_exp_kernel",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L28"
+    },
+    {
+      "caller_nid": "components_if_test_double_exp_kernel",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L28"
+    },
+    {
+      "caller_nid": "components_if_test_single_exp_kernel",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L31"
+    },
+    {
+      "caller_nid": "components_if_test_add_kernel_to_trace",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L71"
+    },
+    {
+      "caller_nid": "components_if_test_add_kernel_to_trace",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_test.py",
+      "source_location": "L72"
+    }
+  ]
+}

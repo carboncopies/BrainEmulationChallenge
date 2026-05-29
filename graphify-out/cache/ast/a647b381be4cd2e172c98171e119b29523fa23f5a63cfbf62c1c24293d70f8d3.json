@@ -1,0 +1,579 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_electrodes_py",
+      "label": "Electrodes.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode",
+      "label": "Recording_Electrode",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L11"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_electrode_coords_to_system_coords",
+      "label": ".electrode_coords_to_system_coords()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "array",
+      "label": "array",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L45"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_init_system_coord_site_locations",
+      "label": ".init_system_coord_site_locations()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "label": ".init_neuron_references_and_distances()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L65"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_init_records",
+      "label": ".init_records()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L77"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_add_noise",
+      "label": ".add_noise()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "label": ".electric_field_potential()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_record",
+      "label": ".record()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "prototyping_electrodes_recording_electrode_get_recording",
+      "label": ".get_recording()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L112"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_13",
+      "label": "The characteristics in specs override default characteristics. \t\tAny that are no",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_51",
+      "label": "1. Get a vector from tip to end. \t\t2. Multiply vector coordinates with the ratio",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_90",
+      "label": "Calculate the electric field potential at the electrode site as \t\ta combination",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_46",
+      "label": "# TODO: Fix this to properly use the width dimension of the electrode",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_66",
+      "label": "# TODO: We could improve efficiency by filtering so that only neurons",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "prototyping_electrodes_rationale_88",
+      "label": "# TODO: We can do a lot to improve the realism of this calculation",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L88"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_electrodes_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_electrodes_py",
+      "target": "prototyping_electrodes_recording_electrode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_electrode_coords_to_system_coords",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_electrode_coords_to_system_coords",
+      "target": "array",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_init_system_coord_site_locations",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_init_records",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_add_noise",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_add_noise",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_record",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_record",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode",
+      "target": "prototyping_electrodes_recording_electrode_get_recording",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init",
+      "target": "prototyping_electrodes_recording_electrode_init_system_coord_site_locations",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init",
+      "target": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init",
+      "target": "prototyping_electrodes_recording_electrode_init_records",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init_system_coord_site_locations",
+      "target": "prototyping_electrodes_recording_electrode_electrode_coords_to_system_coords",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "target": "prototyping_electrodes_recording_electrode_add_noise",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_recording_electrode_record",
+      "target": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_13",
+      "target": "prototyping_electrodes_recording_electrode_init",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_51",
+      "target": "prototyping_electrodes_recording_electrode_electrode_coords_to_system_coords",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_90",
+      "target": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_46",
+      "target": "src_components_prototyping_electrodes_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_66",
+      "target": "src_components_prototyping_electrodes_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_electrodes_rationale_88",
+      "target": "src_components_prototyping_electrodes_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L88",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init",
+      "callee": "rand",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init",
+      "callee": "update",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L25"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_system_coord_site_locations",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L63"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "get_all_neurons",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "get_cell_center",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "norm",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L73"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L74"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_neuron_references_and_distances",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L75"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_records",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L78"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_records",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L78"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_init_records",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L79"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_add_noise",
+      "callee": "rand",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L96"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_electric_field_potential",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L96"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L107"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_record",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L108"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_record",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L108"
+    },
+    {
+      "caller_nid": "prototyping_electrodes_recording_electrode_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/Electrodes.py",
+      "source_location": "L110"
+    }
+  ]
+}
