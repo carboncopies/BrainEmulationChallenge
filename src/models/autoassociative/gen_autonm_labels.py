@@ -246,6 +246,9 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
 
     if NetmorphStatus == "None":
         return 'failed', 100.0
+    elif NetmorphStatus == "Failed":
+        print("Netmorph failed for run %d. Reported errors: %s" % (netmorphrun['runID'], MySim.NetmorphError))
+        return 'failed', 100.0
     elif NetmorphStatus == "Done":
         response = 'not returned'
         try:
