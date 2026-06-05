@@ -37,6 +37,9 @@ path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
 
 # Handle Arguments for Host, Port, etc
+# Note that the "rerunfailed" option only operates as expected if used consistently on
+# every re-run of the script on the same batch, because it depends on whether "failed"
+# is tracked in 'batchinfo_completed.json' or not.
 def get_Args():
     Parser = argparse.ArgumentParser(description="BrainGenix-API Batch Run Script")
     Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
@@ -58,6 +61,7 @@ def get_Args():
     Parser.add_argument("-from_sample", default=0, type=int, help="Samples starting at line (def: 0)")
     Parser.add_argument("-to_sample", default=0, type=int, help="Samples up to line (def: 0, meaning all)")
     Parser.add_argument("-RCIncludeHeap", action="store_true", help="Include slow search of heap in resource check (def: False)")
+    Parser.add_argument("-rerunfailed", action="store_true", help="Auto-rerun rather than mark failed samples (def: False)")
     Parser.add_argument("-randomseed", default=20240628, type=int, help="Specify a random seed (def: 20240628, 0: auto-pick)")
     return Parser.parse_args()
 
@@ -420,13 +424,19 @@ def update_experiments_database(batchinfo:dict):
             vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # Save resulting label data for all completed runs to excel file
+# Note that this retrieves only what was stored in batchinfo_completed.json
+# to create the Excel file.
 def write_excel_with_results(batchrun, df, Args):
     df['usable_conns1']=0 # add column
     df['usable_conns2']=0 # add column
     completed_batchinfo = batchrun.get_previously_completed()
     for netmorphrun in completed_batchinfo.values():
-        df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
-        df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
+        if netmorphrun['status'] == 'completed':
+            df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
+            df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
+        else:
+            df.loc[netmorphrun['runID'], 'usable_conns1'] = -1
+            df.loc[netmorphrun['runID'], 'usable_conns2'] = -1
 
     path = Path(Args.excel)
     labeledpath = str(path.with_suffix(""))+'-labeled-RS'+str(Args.randomseed)+'.xlsx'
@@ -563,7 +573,8 @@ if __name__ == '__main__':
         extraprepfunc=extra_prep,
         extraprepdata=EXTRAPREPDATA,
         from_sample=Args.from_sample,
-        to_sample=Args.to_sample)
+        to_sample=Args.to_sample,
+        rerunfailed=Args.rerunfailed)
 
     # Let's add a bit of extra tracking while we're testing large batches
     batchrun.resource_tests['getconn'] = 0
