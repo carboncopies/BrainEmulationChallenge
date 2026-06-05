@@ -277,15 +277,56 @@ def extra_prep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     # This needs to be careful, because the data might be provided in a different order of
     # parameters and some parameters might be missing, needing default values.
     df = extraprepdata['dataframe']
-    cols = extraprepdata['cols']
-    print(cols)
-    exit(0)
+    cols = extraprepdata['cols'] # This is an 'Index' object with a list of strings containing column names.
     pars = []
-    for k in range(len(cols)):
-        if k < 6:
-            pars.append(int(df.iloc[idx][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
+    if 'days' in cols:
+        pars.append(int(df.iloc[idx]['days']))
+    else:
+        print('Missing "days" column. Using default: 21')
+        pars.append(21)
+    if 'pyramidal' in cols:
+        pyramidal = int(df.iloc[idx]['pyramidal'])
+    else:
+        pyramidal = extraprepdata['launchdata']['EMBEDMULTIPLE']*extraprepdata['launchdata']['PATTERNSIZE']*extraprepdata['launchdata']['Patterns']
+        print('Missing "pyramidal" column. Using default: %d' % pyramidal)
+    pars.append(pyramidal)
+    if 'interneuron' in cols:
+        interneuron = int(df.iloc[idx]['interneuron'])
+    else:
+        interneuron = extraprepdata['launchdata']['PATTERNSIZE']*extraprepdata['launchdata']['Patterns']
+        print('Missing "interneuron" column. Using default: %d' % interneuron)
+    pars.append(interneuron)
+    if 'minneuronseparation' in cols:
+        pars.append(int(df.iloc[idx]['minneuronseparation']))
+    else:
+        print('Missing "minneuronseparation" column. Using default: 15')
+        pars.append(15)
+    if 'shape.radius' in cols:
+        pars.append(int(df.iloc[idx]['shape.radius']))
+    else:
+        # V_shape = pi*r^2*h, h is either given or assumed 30 ==> r^2 = V_shape / (pi*h)
+        # V_soma = 4/3*pi*r^3, assuming average soma r = 10 um ==> 4188.7902
+        if 'shape.thickness' in cols:
+            h = int(df.iloc[idx]['shape.thickness'])
         else:
-            pars.append(float(df.iloc[idx][cols[k]]))
+            h = 30
+        V_all_somas = 4200 * (pyramidal + interneuron)
+        V_shape = V_all_somas * 2
+        r2 = V_shape / (3.14*h)
+        r = np.sqrt(r2)
+        print('Missing "shape.radius" column. Using default: %d' % r)
+        pars.append(int(r))
+    if 'shape.thickness' in cols:
+        pars.append(int(df.iloc[idx]['shape.thickness']))
+    else:
+        print('Missing "shape.thickness" column. Using default: 30')
+        pars.append(30)
+    if 'dm.weight' in cols:
+        pars.append(float(df.iloc[idx]['dm.weight']))
+    else:
+        print('Missing "dm.weight" column. Using default: 0.5')
+        pars.append(float(0.5))
+
     batchinfo[idx]['pars'] = pars
 
     growdays = str(pars[0])
@@ -497,6 +538,7 @@ if __name__ == '__main__':
         'STDP': Args.STDP,
         'randomseed': Args.randomseed,
     }
+    EXTRAPREPDATA['launchdata'] = LAUNCHDATA
 
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
