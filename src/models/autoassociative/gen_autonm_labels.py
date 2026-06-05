@@ -274,8 +274,12 @@ def extra_prep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     batchinfo[idx]['modelname'] = modelname  # Remember which output model belongs to this run
 
     # Get parameters from data frame
+    # This needs to be careful, because the data might be provided in a different order of
+    # parameters and some parameters might be missing, needing default values.
     df = extraprepdata['dataframe']
     cols = extraprepdata['cols']
+    print(cols)
+    exit(0)
     pars = []
     for k in range(len(cols)):
         if k < 6:
