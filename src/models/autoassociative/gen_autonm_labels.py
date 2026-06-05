@@ -229,7 +229,7 @@ def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
 
     return int(attargetgpeaksum.sum())
 
-# Return 'failed', 'completed' or 'running' and percent done
+# Return 'failed', 'completed' or 'running', percent done, check succeeded
 def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)->tuple:
     global batchrun
     MySim = netmorphrun['Sim']
@@ -242,14 +242,15 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         print('\n...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
         # *** Maybe turn tracking back on for this failure if there are fewer when there isn't a connection drop.
         batchrun.RTfailed('netmorphstatus_failed', None) # Was (can be way too many): 'Exception: %s' % str(e) )
-        return 'running', Percent
+        return 'running', Percent, False
 
     if NetmorphStatus == "None":
-        return 'failed', 100.0
+        return 'failed', 100.0, True
     elif NetmorphStatus == "Failed":
         print("Netmorph failed for run %d. Reported errors: %s" % (netmorphrun['runID'], MySim.NetmorphError))
-        return 'failed', 100.0
+        return 'failed', 100.0, True
     elif NetmorphStatus == "Done":
+        check_succeeded = True
         response = 'not returned'
         try:
             response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
@@ -259,13 +260,16 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
             vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
             print('Failed to save completed model for run %d' % netmorphrun['runID'])
             batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
+            check_succeeded = False
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
         result1 = int(usable_connections_method1(MySim))
         result2 = int(usable_connections_method2(MySim, evalcriteriadata['PREPOSTGPEAKSUMTARGET']))
+        if result1 == -1 or result2 == -1:
+            check_succeeded = False
         netmorphrun['usable_conns1'] = result1
         netmorphrun['usable_conns2'] = result2
-        return 'completed', 100.0
+        return 'completed', 100.0, check_succeeded
 
     return 'running', Percent
 
@@ -588,7 +592,7 @@ if __name__ == '__main__':
         resourceslowbytes=RESOURCESLOWBYTES)
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
-    batchrun.monitor_batch(
+    completed_batch = batchrun.monitor_batch(
         batchname='Netmorph-'+Args.modelname,
         batchsize=batchsize,
         evalfunc=evaluate_state_and_check_connectome,
@@ -598,6 +602,7 @@ if __name__ == '__main__':
         batchdatakeys=BATCHDATAKEYS,
         resourceslowbytes=RESOURCESLOWBYTES,
         deleteresident=Args.deleteresident)
+
     print('Number of samples: %d' % numsamples)
     print('Runs completed   : %d' % batchrun.runs_completed())
     print('Runs failed      : %d' % batchrun.runs_failed())
@@ -620,5 +625,9 @@ if __name__ == '__main__':
         print('To complete remaining simply rerun this script.')
     else:
         print('To run batch again, move or delete batchinfo_completed.json.')
+
+    if not completed_batch:
+        print('PLEASE NOTE:\nThis batch did NOT complete. Possible API/NES server problem detected!\nSolve the problem and rerun to complete.')
+
     print(" -- Done.")
     exit(0)
