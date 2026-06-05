@@ -271,7 +271,7 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         netmorphrun['usable_conns2'] = result2
         return 'completed', 100.0, check_succeeded
 
-    return 'running', Percent
+    return 'running', Percent, True
 
 def extra_prep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     modelname = extraprepdata['modelname']+'%04d' % idx
