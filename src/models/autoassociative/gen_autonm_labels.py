@@ -47,6 +47,7 @@ def get_Args():
     Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
     Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
     Parser.add_argument("-modelname", default="autoassociative", type=str, help="Stem name of neuronal circuit models to save")
+    Parser.add_argument("-savemodels", action="store_true", help="Save generated sample models (def: False)")
     Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
     Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve (def: 2)")
     Parser.add_argument("-PATTERNSIZE", default=8, type=int, help="Median number of neurons in each pattern (def: 8)")
@@ -255,16 +256,17 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         return 'failed', 100.0, True
     elif NetmorphStatus == "Done":
         check_succeeded = True
-        response = 'not returned'
-        try:
-            response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
-            print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
-            batchrun.RTsuccess('modelsave')
-        except Exception as e:
-            vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
-            print('Failed to save completed model for run %d' % netmorphrun['runID'])
-            batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
-            check_succeeded = False
+        if evalcriteriadata['savemodels']:
+            response = 'not returned'
+            try:
+                response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
+                print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
+                batchrun.RTsuccess('modelsave')
+            except Exception as e:
+                vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
+                print('Failed to save completed model for run %d' % netmorphrun['runID'])
+                batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
+                check_succeeded = False
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
         result1 = int(usable_connections_method1(MySim))
@@ -539,6 +541,7 @@ if __name__ == '__main__':
 
     EVALCRITERIADATA = {
         "PREPOSTGPEAKSUMTARGET": PREPOSTGPEAKSUMTARGET,
+        "savemodels": Args.savemodels,
     }
 
     modelcontent = LoadNetmorphConfiguration(Args.modelfile)
