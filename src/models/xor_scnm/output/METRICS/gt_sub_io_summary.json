@@ -1,0 +1,17 @@
+{
+  "gt_h5": "/home/pkhole/BrainGenix/BrainEmulationChallenge/src/models/xor_scnm/output/GT/groundtruth.h5",
+  "sub_h5": "/home/pkhole/BrainGenix/BrainEmulationChallenge/src/models/xor_scnm/output/SUB/substitute.h5",
+  "io_neurons_vm": [
+    "PyrIn_B1_vm",
+    "PyrIn_A_vm",
+    "PyrIn_B2_vm",
+    "E_vm"
+  ],
+  "output_spike_col": "E_spike",
+  "mean_io_vm_rmse_mV": 1.2190863662221865,
+  "mean_vr_output": 0.018518048195729338,
+  "mean_schreiber_r_output": 0.9991490677333186,
+  "trial_len_ms": 100,
+  "tau_vr_ms": 20.0,
+  "schreiber_sigma_ms": 10.0
+}

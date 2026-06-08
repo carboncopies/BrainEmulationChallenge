@@ -1,0 +1,161 @@
+Voltage Data Loading done!
+Spikes Data Loading done!
+Submission (SUB) loaded from: /home/pkhole/BrainGenix/BrainEmulationChallenge/src/models/xor_scnm/output/SUB/substitute.h5
+Network configuration Loading done!
+Trial Map Loading done!
+Behavioural Metrics
+                 XOR_00  XOR_01  XOR_10  XOR_11
+input_A               0       0       1       1
+input_B               0       1       0       1
+expected_output       0       1       1       0
+Ground Truth:
+Pattern  TP  FN  TN  FP  Accuracy  Sensitivity  Specificity
+     00   0   0  10   0       1.0          0.0          1.0
+     11   0   0  10   0       1.0          0.0          1.0
+     01  10   0   0   0       1.0          1.0          0.0
+     10  10   0   0   0       1.0          1.0          0.0
+
+Submission:
+Pattern  TP  FN  TN  FP  Accuracy  Sensitivity  Specificity
+     00   0   0  10   0       1.0          0.0          1.0
+     11   0   0  10   0       1.0          0.0          1.0
+     01  10   0   0   0       1.0          1.0          0.0
+     10  10   0   0   0       1.0          1.0          0.0
+Membrane Potential Visualization - Stitched Traces and Statistical Views
+[0, 4, 8, 12, 16, 20, 24, 28, 32, 36]
+[1, 7, 9, 15, 17, 23, 25, 31, 33, 39]
+[2, 6, 10, 14, 18, 22, 26, 30, 34, 38]
+[3, 5, 11, 13, 19, 21, 27, 29, 35, 37]
+Raster Plot Visualization - Compare GT vs SUB spike patterns
+
+Jaccard similarity per neuron:
+  Int_B_spike        0.000
+  PyrMid_A_spike     0.000
+  PyrIn_B1_spike     1.000
+  Int_A_spike        0.000
+  E_spike            0.143
+  PyrIn_A_spike      1.000
+  PyrIn_B2_spike     1.000
+  PyrMid_B_spike     0.000
+Mean Jaccard: 0.393
+
+Difference counts (GT⊕SUB) per neuron:
+  Int_B_spike        10
+  PyrMid_A_spike     20
+  PyrIn_B1_spike     0
+  Int_A_spike        10
+  E_spike            30
+  PyrIn_A_spike      0
+  PyrIn_B2_spike     0
+  PyrMid_B_spike     20
+
+Mean Jaccard by pattern:
+  pattern 00: 1.000
+  pattern 11: 0.750
+  pattern 01: 0.625
+  pattern 10: 0.667
+PSTH Metric - Peristimulus Time Histogram Analysis
+
+[PSTH metrics] (r, RMSE, bias) per neuron:
+        Neuron  Overall_r  Overall_RMSE  Overall_bias(GT-SUB)  r_00  r_11    r_01   r_10  RMSE_00  RMSE_11  RMSE_01  RMSE_10  bias_00  bias_11  bias_01  bias_10
+   Int_B_spike        NaN        0.1118                0.0125   NaN   NaN     NaN    NaN      0.0   0.0000   0.0000   0.2236      0.0     0.00     0.00     0.05
+PyrMid_A_spike        NaN        0.1118                0.0250   NaN   NaN     NaN    NaN      0.0   0.1581   0.1581   0.0000      0.0     0.05     0.05     0.00
+PyrIn_B1_spike     1.0000        0.0000                0.0000   NaN   1.0  1.0000    NaN      0.0   0.0000   0.0000   0.0000      0.0     0.00     0.00     0.00
+   Int_A_spike        NaN        0.1118                0.0125   NaN   NaN     NaN    NaN      0.0   0.0000   0.2236   0.0000      0.0     0.00     0.05     0.00
+       E_spike     0.2676        0.1768                0.0000   NaN   NaN -0.0526 0.6882      0.0   0.0000   0.3162   0.1581      0.0     0.00     0.00     0.00
+ PyrIn_A_spike     1.0000        0.0000                0.0000   NaN   1.0     NaN 1.0000      0.0   0.0000   0.0000   0.0000      0.0     0.00     0.00     0.00
+PyrIn_B2_spike     1.0000        0.0000                0.0000   NaN   1.0  1.0000    NaN      0.0   0.0000   0.0000   0.0000      0.0     0.00     0.00     0.00
+PyrMid_B_spike        NaN        0.1581                0.0250   NaN   NaN     NaN    NaN      0.0   0.2236   0.0000   0.2236      0.0     0.05     0.00     0.05
+
+=== PSTH Auto-Narrative ===
+• Int_B_spike: shape n/a (r=n/a), level mismatch RMSE=0.112 spikes/bin, bias=GT higher (+0.013).
+• PyrMid_A_spike: shape n/a (r=n/a), level mismatch RMSE=0.112 spikes/bin, bias=GT higher (+0.025).
+• PyrIn_B1_spike: shape excellent (r=1.000), level mismatch RMSE=0.000 spikes/bin, bias=no bias (+0.000).
+• Int_A_spike: shape n/a (r=n/a), level mismatch RMSE=0.112 spikes/bin, bias=GT higher (+0.013).
+• E_spike: shape weak (r=0.268), level mismatch RMSE=0.177 spikes/bin, bias=no bias (+0.000).
+• PyrIn_A_spike: shape excellent (r=1.000), level mismatch RMSE=0.000 spikes/bin, bias=no bias (+0.000).
+• PyrIn_B2_spike: shape excellent (r=1.000), level mismatch RMSE=0.000 spikes/bin, bias=no bias (+0.000).
+• PyrMid_B_spike: shape n/a (r=n/a), level mismatch RMSE=0.158 spikes/bin, bias=GT higher (+0.025).
+• Int_B_spike: largest difference in pattern 10 (r=n/a, RMSE=0.224, bias=(+0.050)).
+• PyrMid_A_spike: largest difference in pattern 11 (r=n/a, RMSE=0.158, bias=(+0.050)).
+• Int_A_spike: largest difference in pattern 01 (r=n/a, RMSE=0.224, bias=(+0.050)).
+• E_spike: largest difference in pattern 01 (r=-0.053, RMSE=0.316, bias=(+0.000)).
+• PyrMid_B_spike: largest difference in pattern 11 (r=n/a, RMSE=0.224, bias=(+0.050)).
+• PyrMid_A_spike@11: SUB earlier by ~-4.5 ms (latency).
+• PyrMid_A_spike@01: SUB earlier by ~-4.5 ms (latency).
+• PyrMid_B_spike@11: SUB earlier by ~-4.0 ms (latency).
+• PyrMid_B_spike@10: SUB earlier by ~-4.0 ms (latency).
+[PSTH] Results bundled: PSTH_RESULTS, AUTO_PSTH_REPORT
+ISI
+GT Model
+
+      neuron pattern        cv  fano                                                              isi
+0          E      00       NaN   NaN                                                               []
+1          E      11       NaN   NaN                                                               []
+2          E      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+3          E      10  0.528920   0.0  [199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0]
+4      Int_A      00       NaN   NaN                                                               []
+5      Int_A      11       NaN   NaN                                                               []
+6      Int_A      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+7      Int_A      10       NaN   NaN                                                               []
+8      Int_B      00       NaN   NaN                                                               []
+9      Int_B      11       NaN   NaN                                                               []
+10     Int_B      01       NaN   NaN                                                               []
+11     Int_B      10  0.528920   0.0  [199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0]
+12  PyrMid_A      00       NaN   NaN                                                               []
+13  PyrMid_A      11  0.472980   0.0  [601.0, 199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0, 601.0]
+14  PyrMid_A      01  0.002485   0.0  [399.0, 401.0, 399.0, 401.0, 399.0, 401.0, 399.0, 401.0, 399.0]
+15  PyrMid_A      10       NaN   NaN                                                               []
+16  PyrMid_B      00       NaN   NaN                                                               []
+17  PyrMid_B      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+18  PyrMid_B      01       NaN   NaN                                                               []
+19  PyrMid_B      10  0.526134   0.0  [200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0]
+20  PyrIn_B1      00       NaN   NaN                                                               []
+21  PyrIn_B1      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+22  PyrIn_B1      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+23  PyrIn_B1      10       NaN   NaN                                                               []
+24   PyrIn_A      00       NaN   NaN                                                               []
+25   PyrIn_A      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+26   PyrIn_A      01       NaN   NaN                                                               []
+27   PyrIn_A      10  0.526134   0.0  [200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0]
+28  PyrIn_B2      00       NaN   NaN                                                               []
+29  PyrIn_B2      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+30  PyrIn_B2      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+31  PyrIn_B2      10       NaN   NaN                                                               []
+
+SUB Model
+
+      neuron pattern        cv  fano                                                              isi
+0          E      00       NaN   NaN                                                               []
+1          E      11       NaN   NaN                                                               []
+2          E      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+3          E      10  0.528920   0.0  [199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0, 601.0, 199.0]
+4   PyrIn_B1      00       NaN   NaN                                                               []
+5   PyrIn_B1      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+6   PyrIn_B1      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+7   PyrIn_B1      10       NaN   NaN                                                               []
+8    PyrIn_A      00       NaN   NaN                                                               []
+9    PyrIn_A      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+10   PyrIn_A      01       NaN   NaN                                                               []
+11   PyrIn_A      10  0.526134   0.0  [200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0]
+12  PyrIn_B2      00       NaN   NaN                                                               []
+13  PyrIn_B2      11  0.470751   0.0  [600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0, 200.0, 600.0]
+14  PyrIn_B2      01  0.000000   0.0  [400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0, 400.0]
+15  PyrIn_B2      10       NaN   NaN                                                               []
+
+Neuron: E | Pattern: 01
+  GT  - CV: 0.0000 | Fano: 0.0
+  SUB - CV: 0.0000 | Fano: 0.0
+  Wasserstein: 0.0000
+
+Neuron: E | Pattern: 10
+  GT  - CV: 0.5289 | Fano: 0.0
+  SUB - CV: 0.5289 | Fano: 0.0
+  Wasserstein: 0.0000
+Traceback (most recent call last):
+  File "/home/pkhole/BrainGenix/BrainEmulationChallenge/src/models/xor_scnm/in_domain_metrics.py", line 1018, in <module>
+    plot_isi(gt_isi_stats,sub_isi_stats)
+  File "/home/pkhole/BrainGenix/BrainEmulationChallenge/src/models/xor_scnm/in_domain_metrics.py", line 988, in plot_isi
+    sub_isi = sub_row["isi"].values[0]
+              ~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
