@@ -1,10 +1,15 @@
 """
 XOR Neural Network Metrics Dashboard
 =====================================
-Run:  streamlit run xor_dashboard.py
-Place groundtruth.h5 in the same directory as this script (or set paths in the sidebar).
-Optional: network_config.json with a truth_table block (same layout as in_domain_metrics.ipynb)
-next to the H5 or under GT / output/GT — overrides the built-in XOR truth table for metrics.
+Run:  streamlit run dashboard.py
+  (from xor_scnm/ or from output/METRICS/ after run_pipeline.sh)
+
+Default HDF5 paths (first existing wins):
+  - Same directory as this script: groundtruth.h5, substitute.h5
+  - output/METRICS/ (pipeline dashboard bundle)
+  - output/GT/groundtruth.h5 and output/SUB/substitute.h5
+
+Optional: network_config.json with truth_table beside the H5 or under output/GT/.
 """
 
 import streamlit as st
@@ -148,7 +153,7 @@ section[data-testid="stSidebar"] * { color: #c9d1d9 !important; }
 /* Streamlit native widgets — dark */
 .stSelectbox > div > div,
 .stRadio > div,
-.stSlider > div {
+.stSelectSlider > div {
     background-color: transparent !important;
 }
 /* Selectbox dropdown */
@@ -161,8 +166,8 @@ section[data-testid="stSidebar"] * { color: #c9d1d9 !important; }
 /* Radio buttons text */
 .stRadio label { color: #e6edf3 !important; }
 
-/* Slider */
-.stSlider [data-testid="stTickBar"] { color: #e6edf3 !important; }
+/* Select-slider */
+.stSelectSlider [data-testid="stTickBar"] { color: #e6edf3 !important; }
 
 /* DataFrame / table */
 .stDataFrame, [data-testid="stDataFrame"] {
@@ -255,6 +260,45 @@ iframe { background-color: #161b22 !important; }
     color: #e6edf3 !important;
 }
 
+/* DataFrame / element toolbar icons — visible on dark, no grey box */
+[data-testid="stElementToolbar"] button,
+[data-testid="stDataFrame"] button,
+[data-testid="stDataFrame"] [role="button"] {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+[data-testid="stElementToolbar"] svg,
+[data-testid="stElementToolbar"] svg path,
+[data-testid="stDataFrame"] svg,
+[data-testid="stDataFrame"] svg path {
+    color: #c9d1d9 !important;
+    fill: #c9d1d9 !important;
+    opacity: 1 !important;
+}
+[data-testid="stElementToolbar"] button:hover,
+[data-testid="stDataFrame"] button:hover {
+    background: rgba(255,255,255,0.08) !important;
+}
+[data-testid="stElementToolbar"] button:hover svg,
+[data-testid="stElementToolbar"] button:hover svg path,
+[data-testid="stDataFrame"] button:hover svg,
+[data-testid="stDataFrame"] button:hover svg path {
+    color: #58a6ff !important;
+    fill: #58a6ff !important;
+}
+/* Plotly modebar icons */
+.js-plotly-plot .plotly .modebar-btn {
+    background: transparent !important;
+}
+.js-plotly-plot .plotly .modebar-btn path {
+    fill: #c9d1d9 !important;
+}
+.js-plotly-plot .plotly .modebar-btn:hover path {
+    fill: #58a6ff !important;
+}
+
 /* Hide Streamlit branding */
 #MainMenu, footer { visibility: hidden; }
 
@@ -265,6 +309,50 @@ header[data-testid="stHeader"] {
 }
 [data-testid="stHeader"] * {
     color: #e6edf3 !important;
+}
+
+/* ── TOOLTIPS (? help popover) ── */
+div[data-testid="stTooltipIcon"] svg,
+div[data-testid="stTooltipIcon"] svg path {
+    fill: #8b949e !important;
+}
+/* Tooltip popover container */
+div[role="tooltip"],
+[data-testid="stTooltipContent"],
+.stTooltipContent,
+div[class*="tooltip"],
+div[class*="Tooltip"] {
+    background-color: #1c2128 !important;
+    border: 1px solid #30363d !important;
+    border-radius: 6px !important;
+    color: #e6edf3 !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.6) !important;
+}
+/* Tooltip text inside */
+div[role="tooltip"] *,
+div[role="tooltip"] p,
+div[role="tooltip"] span,
+[data-testid="stTooltipContent"] *,
+[data-testid="stTooltipContent"] p,
+[data-testid="stTooltipContent"] span {
+    color: #e6edf3 !important;
+    background-color: transparent !important;
+}
+/* BaseWeb tooltip (Streamlit internals) */
+[data-baseweb="tooltip"] > div,
+[data-baseweb="tooltip"] {
+    background-color: #1c2128 !important;
+    border: 1px solid #30363d !important;
+    color: #e6edf3 !important;
+}
+[data-baseweb="tooltip"] * {
+    color: #e6edf3 !important;
+    background-color: transparent !important;
+}
+/* Tooltip arrow */
+[data-baseweb="tooltip"] [class*="Arrow"],
+[data-baseweb="tooltip"] [class*="arrow"] {
+    background-color: #1c2128 !important;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -285,6 +373,14 @@ PAL_GT  = "#58a6ff"   # blue  – GT
 PAL_SUB = "#f0883e"   # orange – SUB
 PAL_ACC = ["#58a6ff","#3fb950","#f0883e","#ffa657"]
 PAT_COLORS = {"00":"#58a6ff","11":"#3fb950","01":"#ffa657","10":"#f0883e"}
+
+# ──────────────────────────────────────────────────────────────
+# CHART INFO HELPER  — collapsible plain-English description
+# ──────────────────────────────────────────────────────────────
+def chart_info(title: str, body: str):
+    """Renders a collapsible ℹ️ expander explaining what the chart below shows."""
+    with st.expander(f"ℹ️  {title}", expanded=False):
+        st.markdown(body)
 
 def dark_fig(**kw):
     fig = go.Figure(**kw)
@@ -326,10 +422,11 @@ def load_h5_pair(gt_path, sub_path):
 def load_truth_table_json(h5_path):
     """
     Optional `network_config.json` with a `truth_table` block (notebook-style).
-    Searches: same dir as the H5, then ./GT/ and ./output/GT/ relative to the H5 parent.
+    Searches: same dir as the H5, pipeline GT/METRICS folders, and parents.
     Returns (raw dict or None, resolved path or None).
     """
     base = os.path.dirname(os.path.abspath(h5_path))
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     candidates = [
         os.path.join(base, "network_config.json"),
         os.path.join(os.path.dirname(base), "network_config.json"),
@@ -337,6 +434,8 @@ def load_truth_table_json(h5_path):
         os.path.join(os.path.dirname(base), "GT", "network_config.json"),
         os.path.join(base, "output", "GT", "network_config.json"),
         os.path.join(os.path.dirname(base), "output", "GT", "network_config.json"),
+        os.path.join(script_dir, "output", "GT", "network_config.json"),
+        os.path.join(script_dir, "network_config.json"),
     ]
     for p in candidates:
         p = os.path.normpath(p)
@@ -478,6 +577,51 @@ TRUTH = {
     "11": {"input_A":1,"input_B":1,"expected_output":0},
 }
 
+
+def _first_existing_path(*candidates):
+    for p in candidates:
+        if p and os.path.isfile(p):
+            return os.path.abspath(p)
+    return None
+
+
+def resolve_default_h5_paths():
+    """
+    Pick GT/SUB HDF5 defaults for run_pipeline layout (output/GT, output/SUB, output/METRICS)
+    or files colocated with this script.
+    """
+    here = os.path.dirname(os.path.abspath(__file__))
+    gt = _first_existing_path(
+        os.path.join(here, "groundtruth.h5"),
+        os.path.join(here, "output", "METRICS", "groundtruth.h5"),
+        os.path.join(here, "output", "GT", "groundtruth.h5"),
+    )
+    sub = _first_existing_path(
+        os.path.join(here, "substitute.h5"),
+        os.path.join(here, "output", "METRICS", "substitute.h5"),
+        os.path.join(here, "output", "SUB", "substitute.h5"),
+    )
+    if gt is None:
+        gt = os.path.join(here, "groundtruth.h5")
+    if sub is None:
+        sub = gt
+    return gt, sub
+
+
+def resolve_gt_sub_metrics_dir(h5_path):
+    """Directory where in_domain_gt_sub_metrics.py wrote CSV/JSON (pipeline: output/METRICS)."""
+    here = os.path.dirname(os.path.abspath(__file__))
+    base = os.path.dirname(os.path.abspath(h5_path))
+    for d in (
+        base,
+        os.path.join(here, "output", "METRICS"),
+        here,
+    ):
+        p = os.path.join(d, "gt_sub_io_summary.json")
+        if os.path.isfile(p):
+            return d
+    return None
+
 # ──────────────────────────────────────────────────────────────
 # SIDEBAR NAVIGATION
 # ──────────────────────────────────────────────────────────────
@@ -509,29 +653,40 @@ with st.sidebar:
     </div>
     """, unsafe_allow_html=True)
 
+<<<<<<< Updated upstream
     _metrics_dir = os.path.dirname(os.path.abspath(__file__))
     default_path = os.path.join(_metrics_dir, "groundtruth.h5")
     _default_sub = os.path.join(_metrics_dir, "substitute.h5")
     default_sub_path = _default_sub if os.path.isfile(_default_sub) else default_path
+=======
+    default_gt_path, default_sub_path = resolve_default_h5_paths()
+>>>>>>> Stashed changes
     st.markdown(
         '<div style="font-size:0.68rem;color:#8b949e;padding:6px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Data paths</div>',
         unsafe_allow_html=True,
     )
     gt_path = st.text_input(
         "Ground truth data",
-        value=default_path,
+        value=default_gt_path,
         key="path_gt_h5",
-        help="H5 with GT voltage/spikes; network_config and trial_map are taken from this file.",
+        help="HDF5 from output/GT/groundtruth.h5 or output/METRICS/ after run_pipeline.sh.",
     )
     sub_path = st.text_input(
         "Submission (SUB) data",
         value=default_sub_path,
         key="path_sub_h5",
+<<<<<<< Updated upstream
         help="H5 with submission /data and /spikes_raw. If substitute.h5 exists beside this script, it is used by default (IF black-box SUB from the pipeline).",
+=======
+        help="IF black-box substitute.h5 (output/SUB/ or output/METRICS/).",
+>>>>>>> Stashed changes
     )
     _same = os.path.normpath(os.path.abspath(gt_path)) == os.path.normpath(os.path.abspath(sub_path))
-    st.caption("Using one H5 for both GT and SUB (self-check)." if _same else "GT and SUB load from different files.")
-
+    st.caption(
+        "Using one H5 for both GT and SUB (self-check)."
+        if _same
+        else "GT and SUB load from different files (black-box comparison)."
+    )
     st.markdown('<div class="nav-section">Metrics</div>', unsafe_allow_html=True)
 
     for icon, label, key in METRICS:
@@ -607,9 +762,30 @@ if active == "overview":
         st.markdown(
             f'<div class="info-box">ℹ️ <b>GT vs SUB</b>: Ground truth from <code>{os.path.basename(gt_path)}</code> · '
             f"Submission from <code>{os.path.basename(sub_path)}</code>. "
-            "Network config and trial map follow the <b>ground truth</b> file.</div>",
+            "Network config and trial map follow the <b>ground truth</b> file. "
+            "Both models use internal processing; pipeline I/O metrics compare only aligned input/output neurons.</div>",
             unsafe_allow_html=True,
         )
+
+    _gt_sub_dir = resolve_gt_sub_metrics_dir(gt_path)
+    if _gt_sub_dir and not same_h5_file:
+        _summ_p = os.path.join(_gt_sub_dir, "gt_sub_io_summary.json")
+        _beh_p = os.path.join(_gt_sub_dir, "gt_sub_behavior_by_pattern.csv")
+        try:
+            with open(_summ_p, "r", encoding="utf-8") as _f:
+                _summ = json.load(_f)
+            st.markdown("**I/O + behaviour summary** (`in_domain_gt_sub_metrics.py`)")
+            c1, c2, c3 = st.columns(3)
+            if _summ.get("mean_io_vm_rmse_mV") is not None:
+                c1.metric("Mean I/O Vm RMSE (mV)", f"{float(_summ['mean_io_vm_rmse_mV']):.4f}")
+            if _summ.get("mean_vr_output") is not None:
+                c2.metric("Mean Van Rossum (output)", f"{float(_summ['mean_vr_output']):.4f}")
+            if _summ.get("mean_schreiber_r_output") is not None:
+                c3.metric("Mean Schreiber r (output)", f"{float(_summ['mean_schreiber_r_output']):.4f}")
+            if os.path.isfile(_beh_p):
+                st.dataframe(pd.read_csv(_beh_p), use_container_width=True, hide_index=True)
+        except (OSError, json.JSONDecodeError, TypeError, ValueError):
+            pass
 
     col1, col2 = st.columns([3, 2])
     with col1:
@@ -645,12 +821,23 @@ if active == "overview":
         st.markdown("**Pattern Distribution**")
         counts = tmap["case"].value_counts().sort_index()
         ymax = float(counts.max()) if len(counts) else 10.0
+        chart_info(
+            "Pattern Distribution",
+            "How many trials belong to each XOR input pattern.\n\n"
+            "- **XOR_00** → inputs (0,0), expected output **0**\n"
+            "- **XOR_01** → inputs (0,1), expected output **1**\n"
+            "- **XOR_10** → inputs (1,0), expected output **1**\n"
+            "- **XOR_11** → inputs (1,1), expected output **0**\n\n"
+            "Balanced counts (e.g. 10 per pattern) mean each pattern was tested equally often. "
+            "Imbalanced counts can bias aggregate accuracy metrics.",
+        )
         fig = dark_fig()
         fig.add_trace(go.Bar(
             x=[f"XOR_{p}" for p in counts.index], y=counts.values,
             marker_color=[PAT_COLORS.get(p,"#58a6ff") for p in counts.index],
             text=counts.values, textposition="outside",
             cliponaxis=False,
+            hovertemplate="<b>Pattern %{x}</b><br>Trial count: %{y}<extra></extra>",
         ))
         fig.update_layout(
             height=300, showlegend=False,
@@ -791,6 +978,18 @@ elif active == "behavioral":
     st.markdown("**Behavioral Metrics per Pattern (GT vs SUB)**")
     metrics = ["Accuracy", "Sensitivity", "Specificity"]
     xs = [f"XOR_{p}" for p in df_gt["Pattern"]]
+    chart_info(
+        "Behavioral Metrics per Pattern",
+        "These three bars compare how well the XOR output neuron fired on each input pattern:\n\n"
+        "- **Accuracy** — fraction of trials where the neuron did the right thing "
+        "(fired when it should, silent when it should). *Perfect = 1.0.*\n"
+        "- **Sensitivity (Recall)** — of all trials that *should* produce a spike (output=1), "
+        "what fraction actually did? Low sensitivity = missed spikes.\n"
+        "- **Specificity** — of all trials that *should not* spike (output=0), "
+        "what fraction stayed silent? Low specificity = false alarms.\n\n"
+        "**Blue = Ground Truth (GT) · Orange = Submission (SUB)**. "
+        "Ideally both bars are identical and reach 1.0.",
+    )
     fig = make_subplots(rows=1, cols=3, subplot_titles=metrics)
     for i, metric in enumerate(metrics):
         fig.add_trace(
@@ -803,6 +1002,7 @@ elif active == "behavioral":
                 textposition="outside",
                 legendgroup="gt",
                 showlegend=(i == 0),
+                hovertemplate=f"<b>GT · %{{x}}</b><br>{metric}: %{{y:.3f}}<extra>Ground Truth</extra>",
             ),
             row=1,
             col=i + 1,
@@ -817,6 +1017,7 @@ elif active == "behavioral":
                 textposition="outside",
                 legendgroup="sub",
                 showlegend=(i == 0),
+                hovertemplate=f"<b>SUB · %{{x}}</b><br>{metric}: %{{y:.3f}}<extra>Submission</extra>",
             ),
             row=1,
             col=i + 1,
@@ -836,6 +1037,21 @@ elif active == "behavioral":
 elif active == "vm_traces":
     st.markdown('<div class="section-title">⚡ Membrane Potential Traces</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subtitle">Stitched traces with median overlay, and median ± IQR per pattern</div>', unsafe_allow_html=True)
+    chart_info(
+        "How to read the Vm Traces",
+        "The **membrane potential (Vm)** is the voltage across a neuron's membrane, measured in millivolts (mV). "
+        "A sharp upward spike followed by a quick return to baseline is an **action potential** (the neuron 'fired').\n\n"
+        "**Stitched + Median view**\n"
+        "- The thin solid/dashed line is every trial concatenated end-to-end so you can see all repetitions at once.\n"
+        "- The thicker dashed line (same colour) is the **median** voltage at each time point across all repetitions — "
+        "it smooths out trial-to-trial noise.\n"
+        "- Faint grey verticals mark trial boundaries.\n\n"
+        "**Median ± IQR view**\n"
+        "- The shaded band is the **interquartile range** (25th–75th percentile), showing how consistent the neuron is across repetitions.\n"
+        "- A narrow band = highly repeatable behaviour; a wide band = high trial-to-trial variability.\n\n"
+        "**Blue = GT · Orange = SUB.** "
+        "Identical traces confirm the submission reproduces the exact same voltage dynamics.",
+    )
 
     active_vm = get_vm_cols(cfg, scope="active")
     neuron_names = [c.replace("_vm","") for c in active_vm]
@@ -886,6 +1102,11 @@ elif active == "vm_traces":
                 for k in range(1, len(trials))]
         return traces, seps
 
+    def hex_to_rgba(hex_color, alpha=0.2):
+        h = hex_color.lstrip("#")
+        r, g, b = int(h[0:2],16), int(h[2:4],16), int(h[4:6],16)
+        return f"rgba({r},{g},{b},{alpha})"
+
     def median_iqr_trace(trials, col, color, name_prefix):
         med, q25, q75 = median_iqr(trials, col)
         if med is None: return []
@@ -893,7 +1114,7 @@ elif active == "vm_traces":
         return [
             go.Scatter(x=t_ax+t_ax[::-1],
                        y=q75.tolist()+q25[::-1].tolist(),
-                       fill="toself", fillcolor=color+"33",
+                       fill="toself", fillcolor=hex_to_rgba(color, 0.2),
                        line=dict(color="rgba(0,0,0,0)"),
                        name=f"{name_prefix} IQR", showlegend=True,
                        hoverinfo="skip"),
@@ -940,6 +1161,19 @@ elif active == "vm_traces":
 elif active == "raster":
     st.markdown('<div class="section-title">🔬 Raster Plot</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subtitle">Spike rasters across all 40 trials — GT (blue, lower tick) and SUB (orange, upper tick) are offset vertically so both stay visible when they overlap</div>', unsafe_allow_html=True)
+    chart_info(
+        "How to read this Raster Plot",
+        "Each **vertical tick mark** represents a single spike from one neuron at a specific time.\n\n"
+        "- **Y-axis** — neuron identity. Each row is a different neuron.\n"
+        "- **X-axis** — time (in ms). The full horizontal span covers all trials concatenated together; "
+        "faint vertical lines separate individual trials.\n"
+        "- **Blue ticks (GT)** are placed slightly below the row centre; "
+        "**orange ticks (SUB)** slightly above — so overlapping spikes remain visible instead of hiding each other.\n"
+        "- **Differences Only mode** shows purple ticks wherever GT and SUB disagree "
+        "(a spike in one but not the other).\n\n"
+        "**What to look for:** In a perfect submission all blue and orange ticks coincide. "
+        "Stray orange or blue ticks, or clusters of purple ticks, reveal where the submission deviates from ground truth.",
+    )
 
     c1, c2 = st.columns([2,1])
     filter_pat = c1.selectbox("Filter pattern", ["All"]+patterns, key="raster_pat_sel")
@@ -1033,8 +1267,23 @@ elif active == "raster":
 elif active == "psth":
     st.markdown('<div class="section-title">📈 PSTH — Peristimulus Time Histogram</div>', unsafe_allow_html=True)
     st.markdown('<div class="section-subtitle">Average spike rate per bin across repetitions — GT (blue) vs SUB (orange)</div>', unsafe_allow_html=True)
+    chart_info(
+        "What is a PSTH?",
+        "A **Peristimulus Time Histogram (PSTH)** answers the question: "
+        "*on average, when during a trial does this neuron tend to fire?*\n\n"
+        "Time is divided into fixed-width bins (adjustable with the selector). "
+        "For each bin the number of spikes across all repetitions of that pattern is averaged, "
+        "giving a **spike rate profile** over the trial duration.\n\n"
+        "- **X-axis** — bin index (each bin = *N* ms, set by the selector).\n"
+        "- **Y-axis** — average spikes per bin. A tall bar means the neuron fires reliably at that time.\n"
+        "- **Blue (GT) vs Dashed orange (SUB)** — the two profiles should be nearly identical in a good submission.\n\n"
+        "**Pearson r** (shown in the summary table) measures how correlated the GT and SUB profiles are; "
+        "1.0 = perfect. **RMSE** measures the average absolute difference in spike rate; 0.0 = perfect.\n\n"
+        "The **Response-Aligned PSTH** at the bottom realigns time to the first input, "
+        "making it easier to see latency differences between GT and SUB.",
+    )
 
-    BIN_MS = st.slider("Bin size (ms)", 1, 20, 5, key="psth_bin_ms")
+    BIN_MS = st.select_slider("Bin size (ms)", options=list(range(1, 21)), value=5, key="psth_bin_ms")
 
     def bin_counts(vec, bin_ms, fs):
         x = np.asarray(vec, int)
@@ -1093,20 +1342,43 @@ elif active == "psth":
 
         fig.add_trace(go.Scatter(
             x=t_ax, y=sub_h[:L].tolist(), mode="lines",
-            line=dict(color=PAL_SUB,width=2,dash="dash"), name="SUB" if j==0 else None,
-            showlegend=(j==0),
-            hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"),
+            line=dict(color=PAL_SUB, width=2.5, dash="dash"),
+            name="SUB" if j == 0 else None,
+            legendgroup="SUB",
+            showlegend=(j == 0),
+            hovertemplate=(
+                f"<b>Pattern {p}</b><br>"
+                f"bin: %{{x}}<br>"
+                f"SUB: %{{y:.3f}}"
+                f"<extra></extra>"
+            )),
             row=1, col=j+1)
+
         fig.add_trace(go.Scatter(
             x=t_ax, y=gt_h[:L].tolist(), mode="lines",
-            line=dict(color=PAL_GT,width=2.5), name="GT" if j==0 else None,
-            showlegend=(j==0),
-            hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"),
+            line=dict(color=PAL_GT, width=2.5, dash="dot"),
+            name="GT" if j == 0 else None,
+            legendgroup="GT",
+            showlegend=(j == 0),
+            hovertemplate=(
+                f"<b>Pattern {p}</b><br>"
+                f"bin: %{{x}}<br>"
+                f"GT: %{{y:.3f}}"
+                f"<extra></extra>"
+            )),
             row=1, col=j+1)
 
     apply_dark(fig)
-    fig.update_layout(height=320, title_text=f"PSTH — {sel_psth_neuron} (bin={BIN_MS} ms)",
-                      hovermode="x unified")
+    fig.update_layout(
+        height=320,
+        title_text=f"PSTH — {sel_psth_neuron} (bin={BIN_MS} ms)",
+        hovermode="x unified",
+        hoverlabel=dict(
+            bgcolor="#1c2128",
+            bordercolor="#30363d",
+            font=dict(color="#e6edf3", size=13, family="IBM Plex Mono"),
+        ),
+    )
     fig.update_xaxes(title_text="bin")
     fig.update_yaxes(title_text="spikes/bin", row=1, col=1)
     st.plotly_chart(fig, use_container_width=True)
@@ -1126,15 +1398,26 @@ elif active == "psth":
             if L==0: continue
             t_ax = list(range(L))  # bin index — matches notebook
             row_figs.add_trace(go.Scatter(x=t_ax, y=sub_h[:L].tolist(), mode="lines",
-                line=dict(color=PAL_SUB,width=1.8,dash="dash"), name="SUB" if j==0 else None,
-                showlegend=(j==0),
-                hovertemplate=f"bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+                line=dict(color=PAL_SUB, width=1.8, dash="dash"),
+                name="SUB" if j==0 else None, legendgroup="SUB", showlegend=(j==0),
+                hovertemplate=f"<b>Pattern {p}</b><br>bin: %{{x}}<br>SUB: %{{y:.3f}}<extra></extra>"),
+                row=1, col=j+1)
             row_figs.add_trace(go.Scatter(x=t_ax, y=gt_h[:L].tolist(), mode="lines",
-                line=dict(color=PAL_GT,width=2.2), name="GT" if j==0 else None, showlegend=(j==0),
-                hovertemplate=f"bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+                line=dict(color=PAL_GT, width=2.2, dash="dot"),
+                name="GT" if j==0 else None, legendgroup="GT", showlegend=(j==0),
+                hovertemplate=f"<b>Pattern {p}</b><br>bin: %{{x}}<br>GT: %{{y:.3f}}<extra></extra>"),
+                row=1, col=j+1)
         apply_dark(row_figs)
-        row_figs.update_layout(height=240, title_text=f"PSTH — {n_name} (bin={BIN_MS} ms)",
-                                hovermode="x unified", margin=dict(l=40,r=10,t=40,b=30))
+        row_figs.update_layout(
+            height=240, title_text=f"PSTH — {n_name} (bin={BIN_MS} ms)",
+            hovermode="x unified",
+            hoverlabel=dict(
+                bgcolor="#1c2128",
+                bordercolor="#30363d",
+                font=dict(color="#e6edf3", size=12, family="IBM Plex Mono"),
+            ),
+            margin=dict(l=40, r=10, t=40, b=30),
+        )
         row_figs.update_xaxes(title_text="bin")
         row_figs.update_yaxes(title_text="spikes/bin", row=1, col=1)
         st.plotly_chart(row_figs, use_container_width=True)
@@ -1150,7 +1433,7 @@ elif active == "psth":
 
     for col_ra in focus_neurons:
         n_name_ra = col_ra.replace("_spike","")
-        has_data = False
+        has_data = True
         fig_ra = make_subplots(rows=1, cols=len(resp_patterns),
             subplot_titles=[f"pattern {p}" for p in resp_patterns], shared_yaxes=True)
         for j, p in enumerate(resp_patterns):
@@ -1161,34 +1444,38 @@ elif active == "psth":
                 if col_ra not in t_df.columns: continue
                 vec = t_df[col_ra].to_numpy(int)[:trial_len]
                 rows_ra.append(vec)
-            if not rows_ra: continue
-            L_ra = min(len(v) for v in rows_ra)
-            psth_ra = np.nanmean(np.stack([v[:L_ra] for v in rows_ra]),0)
-            if psth_ra.sum() == 0: continue
-            has_data = True
-            t_ra = list(range(L_ra))  # ms within trial (0..trial_len-1)
-            # sub first, then GT on top (blue visible over dashed orange when identical)
+            # determine length from GT rows, or fall back to trial_len
+            L_ra = min(len(v) for v in rows_ra) if rows_ra else trial_len
+            psth_ra = np.nanmean(np.stack([v[:L_ra] for v in rows_ra]), 0) if rows_ra else np.zeros(L_ra)
+            has_data = True  # always show all patterns
+            t_ra = list(range(L_ra))
+            # SUB trace
             rows_sb = []
             for tid in ids:
                 t_df2 = get_trial(sub_data, tid)
                 if col_ra not in t_df2.columns: continue
                 vec2 = t_df2[col_ra].to_numpy(int)[:trial_len]
                 rows_sb.append(vec2)
-            if rows_sb:
-                psth_sb = np.nanmean(np.stack([v[:L_ra] for v in rows_sb[:len(rows_ra)]]),0)
-                fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_sb[:L_ra].tolist(), mode="lines",
-                    line=dict(color=PAL_SUB,width=2,dash="dash"), name="SUB" if j==0 else None,
-                    showlegend=(j==0),
-                    hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
-            fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_ra.tolist(), mode="lines",
-                line=dict(color=PAL_GT,width=2.5), name="GT" if j==0 else None,
+            psth_sb = np.nanmean(np.stack([v[:L_ra] for v in rows_sb[:len(rows_ra)]]), 0) if rows_sb else np.zeros(L_ra)
+            fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_sb[:L_ra].tolist(), mode="lines",
+                line=dict(color=PAL_SUB, width=2, dash="dash"), name="SUB" if j==0 else None,
                 showlegend=(j==0),
-                hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+                hovertemplate=f"<b>Pattern {p}</b><br>t=%{{x}} ms<br>SUB: %{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+            fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_ra.tolist(), mode="lines",
+                line=dict(color=PAL_GT, width=2.5, dash="dot"), name="GT" if j==0 else None,
+                showlegend=(j==0),
+                hovertemplate=f"<b>Pattern {p}</b><br>t=%{{x}} ms<br>GT: %{{y:.3f}}<extra></extra>"), row=1, col=j+1)
 
         if has_data:
             apply_dark(fig_ra)
             fig_ra.update_layout(height=280, title_text=f"Response-aligned PSTH — {n_name_ra} (0 = earliest input)",
-                                  hovermode="x unified", margin=dict(l=40,r=10,t=45,b=30))
+                                  hovermode="x unified",
+                                  hoverlabel=dict(
+                                      bgcolor="#1c2128",
+                                      bordercolor="#30363d",
+                                      font=dict(color="#e6edf3", size=12, family="IBM Plex Mono"),
+                                  ),
+                                  margin=dict(l=40,r=10,t=45,b=30))
             fig_ra.update_xaxes(title_text="ms rel. to input")
             fig_ra.update_yaxes(title_text="spikes/sample", row=1, col=1)
             st.plotly_chart(fig_ra, use_container_width=True)
@@ -1198,6 +1485,24 @@ elif active == "psth":
 # ══════════════════════════════════════════════════════════════
 elif active == "isi":
     st.markdown('<div class="section-title">⏱ ISI & Fano Factor</div>', unsafe_allow_html=True)
+    chart_info(
+        "ISI, CV, and Fano Factor explained",
+        "**Inter-Spike Interval (ISI)** is the time (in ms) between consecutive spikes from one neuron. "
+        "It characterises the neuron's firing *rhythm*.\n\n"
+        "**Coefficient of Variation (CV)** = std(ISI) / mean(ISI)\n"
+        "- CV ≈ 0 → very regular firing (clock-like)\n"
+        "- CV ≈ 1 → Poisson-like (random)\n"
+        "- CV > 1 → bursty firing\n\n"
+        "**Fano Factor** = Var(spike count) / Mean(spike count) across repetitions\n"
+        "- Fano ≈ 1 → Poisson variability\n"
+        "- Fano < 1 → more regular than Poisson\n"
+        "- Fano > 1 → more variable than Poisson (gain modulation, bursting)\n\n"
+        "**ISI Histogram** — the shape tells you the firing pattern: "
+        "a sharp peak at a short ISI = bursting; a broad distribution = irregular; "
+        "an exponential tail = Poisson-like.\n\n"
+        "**Wasserstein distance** measures how different the GT and SUB ISI distributions are overall; "
+        "0.0 = identical distributions.",
+    )
 
     try:
         from scipy.stats import wasserstein_distance as wdist
@@ -1235,26 +1540,39 @@ elif active == "isi":
     sub_cv = [isi_sub_df[isi_sub_df["neuron"] == n]["cv"].dropna().mean() for n in neurons_isi]
     sub_fano = [isi_sub_df[isi_sub_df["neuron"] == n]["fano"].dropna().mean() for n in neurons_isi]
 
+    chart_info(
+        "CV & Fano Factor bar chart",
+        "Each bar is the **mean value across all XOR patterns** for that neuron.\n\n"
+        "**Left panel — ISI Coefficient of Variation (CV):**\n"
+        "How irregular is the neuron's firing? CV = std(ISI) / mean(ISI).\n"
+        "CV ≈ 0 → clock-like · CV ≈ 1 → Poisson random · CV > 1 → bursty.\n\n"
+        "**Right panel — Fano Factor:**\n"
+        "How variable is the spike *count* across repetitions? Fano = Var(count) / Mean(count).\n"
+        "Fano = 1 → Poisson · Fano < 1 → more reliable than Poisson · Fano > 1 → over-dispersed.\n\n"
+        "Blue = GT · Orange = SUB. Bars should nearly overlap in a good submission."
+    )
     fig_cv = make_subplots(rows=1, cols=2,
         subplot_titles=["ISI Coefficient of Variation (mean over patterns)",
                         "Fano Factor (Var/Mean)"])
     for vals, col_r, title_r in [(gt_cv, 1, "ISI CV"), (gt_fano, 2, "Fano")]:
+        _desc = "Coefficient of Variation of ISIs — 0=regular, 1=Poisson, >1=bursty" if "CV" in title_r else "Fano Factor = Var/Mean spike count — 1=Poisson, <1=regular, >1=variable"
         fig_cv.add_trace(go.Bar(
             x=list(neurons_isi), y=vals,
             marker_color=PAL_GT, name=f"GT {title_r}",
             text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
             textposition="outside",
-            hovertemplate=f"%{{x}}<br>GT {title_r}=%{{y:.4f}}<extra></extra>",
+            hovertemplate=f"<b>%{{x}}</b> (GT)<br>{title_r}: %{{y:.4f}}<br><i>{_desc}</i><extra>GT</extra>",
             showlegend=False,
         ), row=1, col=col_r)
     if not same_h5_file:
         for j_sub, (vals, col_r, title_r) in enumerate([(sub_cv, 1, "ISI CV"), (sub_fano, 2, "Fano")]):
+            _desc = "Coefficient of Variation of ISIs — 0=regular, 1=Poisson, >1=bursty" if "CV" in title_r else "Fano Factor = Var/Mean spike count — 1=Poisson, <1=regular, >1=variable"
             fig_cv.add_trace(go.Bar(
                 x=list(neurons_isi), y=vals,
                 marker_color=PAL_SUB, name=f"SUB {title_r}",
                 text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
                 textposition="outside",
-                hovertemplate=f"%{{x}}<br>SUB {title_r}=%{{y:.4f}}<extra></extra>",
+                hovertemplate=f"<b>%{{x}}</b> (SUB)<br>{title_r}: %{{y:.4f}}<br><i>{_desc}</i><extra>SUB</extra>",
                 showlegend=(j_sub == 0),
             ), row=1, col=col_r)
     apply_dark(fig_cv)
@@ -1323,6 +1641,19 @@ elif active == "isi":
 # ══════════════════════════════════════════════════════════════
 elif active == "ks":
     st.markdown('<div class="section-title">📉 KS Test — Spike Time Distributions</div>', unsafe_allow_html=True)
+    chart_info(
+        "Kolmogorov–Smirnov (KS) Test explained",
+        "The **KS test** asks: *are the spike-time distributions of GT and SUB statistically indistinguishable?*\n\n"
+        "**KS statistic** is the maximum vertical distance between the two Empirical CDFs (ECDFs). "
+        "Range 0–1; **0 = identical distributions, 1 = completely different**.\n\n"
+        "**Heatmap** — each cell is the KS statistic for one neuron (row) × one XOR pattern (column). "
+        "All-zero (dark) = the submission perfectly reproduces the spike-time distribution.\n\n"
+        "**ECDF Viewer** — the cumulative fraction of spikes that have occurred by each time point *t*. "
+        "Two overlapping S-curves mean the distributions match. "
+        "A large gap between curves at any *t* is exactly what the KS statistic captures.\n\n"
+        "**p-value** < 0.05 means the two distributions are significantly different "
+        "(in a perfect submission all p-values should be large, or KS = 0).",
+    )
 
     try:
         from scipy.stats import ks_2samp
@@ -1361,7 +1692,7 @@ elif active == "ks":
     piv = ks_df.pivot(index="neuron", columns="pattern", values="ks_stat").fillna(0)
     fig_heat = go.Figure(go.Heatmap(
         z=piv.values.tolist(), x=list(piv.columns), y=list(piv.index),
-        colorscale="YlOrRd", hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>KS=%{z:.4f}<extra></extra>",
+        colorscale="YlOrRd", hovertemplate="<b>%{y}</b> — Pattern %{x}<br>KS statistic: %{z:.4f}<br><i>0.0 = distributions identical · 1.0 = completely different</i><extra></extra>",
         text=[[f"{v:.4f}" for v in row] for row in piv.values],
         texttemplate="%{text}",
     ))
@@ -1371,6 +1702,17 @@ elif active == "ks":
 
     # ECDF viewer
     st.markdown("**ECDF Viewer**")
+    chart_info(
+        "ECDF Viewer explained",
+        "The **Empirical Cumulative Distribution Function (ECDF)** shows, for each time point *t*, "
+        "what fraction of all spikes from this neuron occurred *before* time *t* in the trial.\n\n"
+        "- **X-axis** — time within trial (ms).\n"
+        "- **Y-axis** — cumulative fraction (0 → 1).\n"
+        "- A steep rise early = most spikes happen early in the trial.\n"
+        "- A gradual slope = spikes spread across the full trial.\n\n"
+        "**Comparing GT (blue) vs SUB (orange):** the maximum vertical gap between the two curves "
+        "is exactly the **KS statistic**. Perfectly overlapping curves → KS = 0 = identical distributions.",
+    )
     c1, c2 = st.columns(2)
     sel_ks_n = c1.selectbox("Neuron", spike_cols, key="ks_n")
     sel_ks_p = c2.selectbox("Pattern", patterns, key="ks_p")
@@ -1406,6 +1748,20 @@ elif active == "psp_counts":
     st.markdown(
         '<div class="section-subtitle">EPSP/IPSP counts via scipy.find_peaks on baseline-subtracted traces (notebook parameters)</div>',
         unsafe_allow_html=True,
+    )
+    chart_info(
+        "What are PSPs and what does this chart show?",
+        "**Post-Synaptic Potentials (PSPs)** are transient voltage deflections in a neuron's membrane "
+        "caused by incoming signals from other neurons.\n\n"
+        "- **EPSP (Excitatory PSP)** — voltage deflects *upward*; pushes the neuron closer to firing.\n"
+        "- **IPSP (Inhibitory PSP)** — voltage deflects *downward*; pushes the neuron away from firing.\n\n"
+        "Detection method: the Vm trace is baseline-subtracted (median of the first 10 ms is removed), "
+        "then `scipy.find_peaks` finds upward peaks (EPSP) and downward peaks (IPSP) with a minimum "
+        f"prominence of {0.5} mV and minimum spacing of {2} ms.\n\n"
+        "**Heatmap** — total EPSP count (GT) across all trials, broken down by neuron (row) × pattern (column). "
+        "Dark = fewer PSPs; bright = more.\n\n"
+        "A mismatch between GT and SUB counts (badge turns orange) suggests the submission's "
+        "synaptic input dynamics differ from ground truth.",
     )
     try:
         from scipy.signal import find_peaks
@@ -1509,6 +1865,17 @@ elif active == "psp_counts":
     st.dataframe(psp_df, use_container_width=True, height=420)
 
     if not psp_df.empty:
+        chart_info(
+            "EPSP Count Heatmap explained",
+            "Each cell shows the **total number of upward Vm deflections (EPSPs)** detected for "
+            "one neuron across all trials of one XOR pattern.\n\n"
+            "- **Bright/high values** → many excitatory inputs arrived at that neuron during those trials.\n"
+            "- **Dark/zero values** → few or no detectable EPSPs.\n\n"
+            "Detection uses `scipy.find_peaks` on the baseline-subtracted Vm trace with "
+            f"minimum prominence 0.5 mV and minimum spacing 2 ms.\n\n"
+            "Compare this heatmap against the equivalent SUB counts in the table above — "
+            "any mismatch suggests the submission's synaptic drive differs from ground truth.",
+        )
         piv_epsp = psp_df.pivot(index="neuron", columns="pattern", values="EPSP_GT").fillna(0)
         fig_epsp = go.Figure(
             go.Heatmap(
@@ -1528,8 +1895,20 @@ elif active == "psp_counts":
 # ══════════════════════════════════════════════════════════════
 elif active == "van_rossum":
     st.markdown('<div class="section-title">🌊 Van Rossum Distance</div>', unsafe_allow_html=True)
+    chart_info(
+        "Van Rossum Distance explained",
+        "The **Van Rossum distance** is a principled way to measure how similar two spike trains are. "
+        "It works by convolving each spike train with an exponential kernel of time constant **τ (tau)** "
+        "and then computing the Euclidean distance between the two smoothed signals.\n\n"
+        "- **τ small** (e.g. 5 ms) — sensitive to *precise* spike timing differences.\n"
+        "- **τ large** (e.g. 100 ms) — sensitive to *rate* differences; ignores small timing jitter.\n\n"
+        "**Perfect score = 0.0** — both spike trains are identical.\n\n"
+        "**Heatmap** — mean Van Rossum distance per neuron (row) × XOR pattern (column). "
+        "All cells dark (≈ 0) = the submission matches GT spike timing within the chosen τ.\n\n"
+        "Use the **τ selector** to explore how robust the match is across different temporal resolutions.",
+    )
 
-    tau_ms = st.slider("τ (ms)", 5, 100, 20, key="vr_tau_sl")
+    tau_ms = st.select_slider("τ (ms)", options=list(range(5, 101)), value=20, key="vr_tau_sl")
 
     def vr_dist(tx, ty, tau):
         Nx,Ny = tx.size, ty.size
@@ -1572,7 +1951,7 @@ elif active == "van_rossum":
     fig_vr = go.Figure(go.Heatmap(
         z=piv.values.tolist(), x=list(piv.columns), y=list(piv.index),
         colorscale="YlOrRd",
-        hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>VR=%{z:.6f}<extra></extra>",
+        hovertemplate="<b>%{y}</b> — Pattern %{x}<br>Mean Van Rossum distance: %{z:.6f}<br><i>0.0 = identical spike trains · larger = more different</i><extra></extra>",
         text=[[f"{v:.4f}" for v in row] for row in piv.values],
         texttemplate="%{text}",
     ))
@@ -1598,10 +1977,26 @@ elif active == "msc":
         '<div class="section-subtitle">Gaussian-smoothed spike trains: Pearson r between GT and SUB vs kernel σ (ms)</div>',
         unsafe_allow_html=True,
     )
+    chart_info(
+        "Multi-Scale Correlation explained",
+        "This metric asks: *how well does the submission's spike train match the ground truth "
+        "when you look at different temporal resolutions?*\n\n"
+        "Each spike train is convolved with a Gaussian kernel of width **σ (sigma)**. "
+        "A small σ preserves fine timing detail; a large σ blurs spikes into a smooth rate envelope. "
+        "At each σ the **Pearson r** between the two smoothed trains is computed.\n\n"
+        "**The line plot (r vs σ):**\n"
+        "- Each coloured line = one neuron.\n"
+        "- **r = 1.0** across all σ → the submission is identical to GT at every timescale.\n"
+        "- r drops at small σ but recovers at large σ → the submission matches the *rate* but not precise *timing*.\n"
+        "- r stays low even at large σ → the submission fires at the wrong rate entirely.\n\n"
+        "**both_silent_pct** — fraction of trials where *neither* GT nor SUB fired; "
+        "these are excluded from the average (both-silent counts as a perfect match by convention).\n"
+        "**one_silent_pct** — fraction where only one side fired; these hurt the score.",
+    )
 
     lo_ms = 0
     hi_ms = int(trial_len)
-    sigma_max = st.slider("Max σ (ms)", 10, 200, 100, key="msc_sig_max")
+    sigma_max = st.select_slider("Max σ (ms)", options=list(range(10, 201, 10)), value=100, key="msc_sig_max")
     sigma_vals_ms = np.arange(1, sigma_max + 1, dtype=float)
     dt_ms = MS_PER_SAMPLE
 
@@ -1783,6 +2178,19 @@ elif active == "msc":
         st.dataframe(neuron_summary, use_container_width=True)
 
     sel_msc_pat = st.selectbox("Pattern (mean r vs σ)", patterns, key="msc_pat_sel")
+    chart_info(
+        "r vs σ line chart explained",
+        "Each line tracks how the **Pearson correlation** between GT and SUB spike trains changes "
+        "as the Gaussian smoothing kernel **σ** increases from 1 ms to the chosen maximum.\n\n"
+        "- **X-axis** — kernel width σ in ms (left = fine timing, right = coarse rate).\n"
+        "- **Y-axis** — Pearson r between the smoothed GT and SUB spike trains (1.0 = perfect).\n"
+        "- Each coloured line = one neuron.\n\n"
+        "**Interpretation patterns:**\n"
+        "- Flat at 1.0 across all σ → submission is identical to GT at every timescale.\n"
+        "- Rises from low to ~1.0 as σ increases → submission matches overall *rate* but has timing jitter.\n"
+        "- Stays flat and low across all σ → fundamental rate disagreement, not just timing.\n"
+        "- Dips below 0 → submission fires at opposite times to GT.",
+    )
     fig_msc = go.Figure()
     neu_colors = px.colors.qualitative.Set2
     for ni, neu in enumerate(sc_msc):
@@ -1799,7 +2207,7 @@ elif active == "msc":
                 mode="lines",
                 name=neu,
                 line=dict(width=1.8, color=col),
-                hovertemplate=f"neuron={neu}<br>σ=%{{x}} ms<br>r=%{{y:.4f}}<extra></extra>",
+                hovertemplate=f"<b>{neu.replace('_spike','')}</b><br>σ: %{{x:.0f}} ms<br>Pearson r: %{{y:.4f}}<br><i>r=1.0 = identical at this timescale</i><extra></extra>",
             )
         )
     apply_dark(fig_msc)
@@ -1818,8 +2226,24 @@ elif active == "msc":
 # ══════════════════════════════════════════════════════════════
 elif active == "schreiber":
     st.markdown('<div class="section-title">🔗 Schreiber Similarity</div>', unsafe_allow_html=True)
+    chart_info(
+        "Schreiber Similarity explained",
+        "**Schreiber similarity** is a normalised measure of how alike two spike trains are after "
+        "Gaussian smoothing with kernel width **σ**.\n\n"
+        "It is computed as the **normalised dot product** (cosine similarity) of the two smoothed trains:\n"
+        "> r = (GT_smooth · SUB_smooth) / (‖GT_smooth‖ × ‖SUB_smooth‖)\n\n"
+        "- **r = 1.0** → trains are perfectly co-linear (identical timing and rate shape).\n"
+        "- **r = 0.0** → trains are orthogonal (completely non-overlapping in time).\n"
+        "- **r < 0** → extremely anti-correlated (one fires exactly where the other is silent).\n\n"
+        "Unlike Pearson r it is insensitive to absolute firing *rate* — only the *shape* of the "
+        "smoothed train matters. This makes it complementary to Van Rossum distance.\n\n"
+        "**Heatmap** — mean r per neuron (row) × XOR pattern (column). "
+        "Bright green ≈ 1 = great; dark red ≈ 0 = poor match.\n\n"
+        "**Per-pattern line plots** show each neuron's median r so you can spot which specific "
+        "neuron/pattern combinations are causing the most disagreement.",
+    )
 
-    sigma_ms = st.slider("σ (ms)", 2, 50, 10, key="sch_sig_sl")
+    sigma_ms = st.select_slider("σ (ms)", options=list(range(2, 51)), value=10, key="sch_sig_sl")
 
     def gaussian_kernel(sigma, fs):
         dt = 1000.0/fs
@@ -1871,7 +2295,7 @@ elif active == "schreiber":
         fig_sch = go.Figure(go.Heatmap(
             z=piv_sch.values.tolist(), x=list(piv_sch.columns), y=list(piv_sch.index),
             colorscale="RdYlGn", zmin=0, zmax=1,
-            hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>r=%{z:.4f}<extra></extra>",
+            hovertemplate="<b>%{y}</b> — Pattern %{x}<br>Mean Schreiber r: %{z:.4f}<br><i>1.0 = perfect spike-shape match · 0.0 = no overlap</i><extra></extra>",
             text=[[f"{v:.4f}" if not np.isnan(v) else "—" for v in row] for row in piv_sch.values],
             texttemplate="%{text}",
         ))
@@ -1892,7 +2316,7 @@ elif active == "schreiber":
                 marker=dict(size=10, color=PAL_GT, symbol="circle"),
                 line=dict(color=PAL_GT, width=1.5),
                 name="Median r",
-                hovertemplate="%{x}<br>r=%{y:.4f}<extra></extra>"))
+                hovertemplate="<b>%{x}</b><br>Schreiber r: %{y:.4f}<br><i>1.0 = perfect · 0.0 = no match</i><extra></extra>"))
             apply_dark(fig_sp)
             fig_sp.update_layout(height=240, title=f"Schreiber (σ={sigma_ms} ms) — Pattern {p}",
                 yaxis=dict(range=[0,1.1]), xaxis_title="Neuron", yaxis_title="Schreiber r")
@@ -1903,6 +2327,20 @@ elif active == "schreiber":
 # ══════════════════════════════════════════════════════════════
 elif active == "vm_mismatch":
     st.markdown('<div class="section-title">⚡ Membrane Potential Mismatch (RMS Δ)</div>', unsafe_allow_html=True)
+    chart_info(
+        "Vm Mismatch (RMS Δ) explained",
+        "This chart measures how closely the submission reproduces the **raw membrane voltage (Vm)** "
+        "of each neuron, sample by sample.\n\n"
+        "For every trial the point-wise difference `GT(t) − SUB(t)` is computed, then the "
+        "**Root Mean Square (RMS)** of that difference is taken — giving a single number in **mV** "
+        "that summarises the average voltage error across the trial.\n\n"
+        "- **Mean RMS Δ (blue bar)** — average error across all trials and patterns.\n"
+        "- **Max RMS Δ (orange bar, semi-transparent)** — worst-case trial for that neuron.\n\n"
+        "**Expected value: 0.0 mV** — identical Vm traces produce zero error.\n\n"
+        "Even a small RMS (e.g. 0.01 mV) may indicate slight noise or floating-point differences. "
+        "Large values (> 1 mV) suggest the neuron dynamics genuinely differ between GT and SUB, "
+        "which could lead to downstream spiking differences.",
+    )
 
     vm_active = get_vm_cols(cfg, scope="active")
     mismatch_rows = []
@@ -1934,10 +2372,10 @@ elif active == "vm_mismatch":
     fig_mm = go.Figure()
     fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_mean"],
         name="Mean RMS Δ", marker_color=PAL_GT,
-        hovertemplate="%{x}<br>Mean RMS=%{y:.6f} mV<extra></extra>"))
+        hovertemplate="<b>%{x}</b><br>Mean RMS Δ: %{y:.6f} mV<br><i>Average voltage error across all trials/patterns</i><extra>Mean</extra>"))
     fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_max"],
         name="Max RMS Δ", marker_color=PAL_SUB, opacity=0.5,
-        hovertemplate="%{x}<br>Max RMS=%{y:.6f} mV<extra></extra>"))
+        hovertemplate="<b>%{x}</b><br>Max RMS Δ: %{y:.6f} mV<br><i>Worst-case single trial voltage error</i><extra>Max</extra>"))
     apply_dark(fig_mm)
     fig_mm.update_layout(height=380, barmode="overlay", title="Vm Mismatch per Neuron",
                           xaxis_title="Neuron", yaxis_title="RMS Δ (mV)")
@@ -1949,8 +2387,22 @@ elif active == "vm_mismatch":
 # ══════════════════════════════════════════════════════════════
 elif active == "xcorr":
     st.markdown('<div class="section-title">🔀 Cross-Correlogram (CCG)</div>', unsafe_allow_html=True)
+    chart_info(
+        "Cross-Correlogram (CCG) explained",
+        "A **Cross-Correlogram** reveals *temporal coordination* between pairs of neurons: "
+        "does neuron A tend to fire a few milliseconds before (or after) neuron B?\n\n"
+        "The matrix is arranged so that **row = 'source' neuron, column = 'target' neuron**. "
+        "The diagonal (purple) shows each neuron's **auto-correlogram** — its own firing regularity.\n\n"
+        "**X-axis** — lag in ms (negative = source fires *before* target; positive = source fires *after*).\n"
+        "**Y-axis** — normalised cross-correlation coefficient.\n\n"
+        "- A **central peak at lag 0** → the two neurons fire simultaneously.\n"
+        "- A **peak at a positive lag** → the source neuron leads the target by that many ms.\n"
+        "- A **flat profile** → no consistent timing relationship.\n\n"
+        "Compare GT and SUB CCGs side-by-side (select *Both*) to see whether the submission "
+        "preserves the network's synchrony and sequential firing patterns.",
+    )
 
-    MAX_LAG = st.slider("Max lag (ms)", 5, 50, 15, key="xcorr_lag_sl")
+    MAX_LAG = st.select_slider("Max lag (ms)", options=list(range(5, 51)), value=15, key="xcorr_lag_sl")
     sel_xcorr_pat = st.selectbox("Pattern", patterns, key="xcorr_pat_sel")
     dataset_choice = st.radio("Dataset", ["GT","SUB","Both"], horizontal=True, key="xcorr_ds")
 
@@ -2033,15 +2485,35 @@ elif active == "xcorr":
 # ══════════════════════════════════════════════════════════════
 elif active == "granger":
     st.markdown('<div class="section-title">🕸 Granger Causality</div>', unsafe_allow_html=True)
+    chart_info(
+        "Granger Causality explained",
+        "**Granger causality** asks: *does knowing neuron A's past firing help predict neuron B's future firing, "
+        "beyond what neuron B's own past already tells us?* If yes, we say A 'Granger-causes' B.\n\n"
+        "**How it works here:**\n"
+        "1. Spike trains are binned at the chosen bin size.\n"
+        "2. Two linear regression models are fitted for each ordered pair (A → B): "
+        "a *restricted* model using only B's own history, and a *full* model that also includes A's history.\n"
+        "3. The **GC effect size** = log(RSS_restricted / RSS_full) — how much residual error drops when A is added.\n"
+        "4. An F-test produces a p-value; Benjamini–Hochberg FDR correction is applied at the chosen α.\n\n"
+        "**Heatmap (GT vs SUB):** rows = 'target' neuron, columns = 'source' neuron. "
+        "Only statistically significant edges (q ≤ α) are shown; blank = not significant.\n\n"
+        "**Degree bar chart:** out-degree = how many neurons a given neuron influences; "
+        "in-degree = how many neurons influence it.\n\n"
+        "**Jaccard similarity** measures the overlap between the GT and SUB significant-edge sets; "
+        "1.0 = identical connectivity graphs.\n\n"
+        "**Tip:** increase the lag selector to detect slower inter-neuron influences; "
+        "tighten α to keep only the strongest edges.",
+    )
 
     try:
         from scipy.stats import f as _f_dist; _HAS_SCIPY=True
     except: _HAS_SCIPY=False
 
     c1,c2,c3 = st.columns(3)
-    gc_bin  = c1.slider("Bin (ms)", 2, 20, 5, key="gc_bin_sl")
-    gc_lag  = c2.slider("Lag (bins)", 3, 20, 10, key="gc_lag_sl")
-    gc_alpha= c3.number_input("FDR α", 0.001, 0.2, 0.05, step=0.005, key="gc_a_sl")
+    gc_bin  = c1.select_slider("Bin (ms)", options=list(range(2, 21)), value=5, key="gc_bin_sl")
+    gc_lag  = c2.select_slider("Lag (bins)", options=list(range(3, 21)), value=10, key="gc_lag_sl")
+    _alpha_opts = [round(v, 3) for v in list(np.arange(0.001, 0.011, 0.001)) + list(np.arange(0.02, 0.21, 0.01))]
+    gc_alpha= c3.select_slider("FDR α", options=_alpha_opts, value=0.05, key="gc_a_sl")
     sel_gc_pat = st.selectbox("Pattern", patterns, key="gc_pat_sel")
 
     def lag_design(y, X_lags, lag):
@@ -2148,9 +2620,10 @@ elif active == "granger":
         fig = go.Figure(go.Heatmap(
             z=display.tolist(), x=labels_gc, y=labels_gc,
             colorscale="Magma", text=text, texttemplate="%{text}",
-            hovertemplate="From=%{x}<br>To=%{y}<br>GC=%{z:.2f}<extra></extra>"))
+            hovertemplate="<b>%{x} → %{y}</b><br>GC effect: %{z:.2f}<br><i>log(RSS_restricted/RSS_full) — higher = stronger causal influence</i><extra></extra>"))
         apply_dark(fig)
-        fig.update_layout(height=380, title=title)
+        fig.update_layout(height=380, title=title,
+            xaxis_title="Source neuron", yaxis_title="Target neuron")
         return fig
 
     col1, col2 = st.columns(2)
@@ -2163,9 +2636,9 @@ elif active == "granger":
     outdeg = use_sb.sum(0); indeg = use_sb.sum(1)
     fig_deg = go.Figure()
     fig_deg.add_trace(go.Bar(x=labels_gc, y=outdeg.tolist(), name="out-degree", marker_color=PAL_GT,
-        hovertemplate="%{x}<br>out=%{y}<extra></extra>"))
+        hovertemplate="<b>%{x}</b><br>Out-degree: %{y}<br><i>Number of neurons this neuron significantly Granger-causes</i><extra></extra>"))
     fig_deg.add_trace(go.Bar(x=labels_gc, y=indeg.tolist(), name="in-degree", marker_color=PAL_SUB,
-        hovertemplate="%{x}<br>in=%{y}<extra></extra>"))
+        hovertemplate="<b>%{x}</b><br>In-degree: %{y}<br><i>Number of neurons that significantly Granger-cause this neuron</i><extra></extra>"))
     apply_dark(fig_deg)
     fig_deg.update_layout(height=300, barmode="group",
         title=f"Degree (significant @ q≤{gc_alpha}) — SUB, Pattern {sel_gc_pat}",
@@ -2197,3 +2670,4 @@ st.markdown("""
     XOR Network Metrics Dashboard · GT vs GT · Streamlit
 </div>
 """, unsafe_allow_html=True)
+
