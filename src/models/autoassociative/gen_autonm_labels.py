@@ -37,6 +37,9 @@ path.insert(0, str(Path(__file__).parent.parent.parent)+'/components')
 from NES_interfaces.KGTRecords import plot_weights
 
 # Handle Arguments for Host, Port, etc
+# Note that the "rerunfailed" option only operates as expected if used consistently on
+# every re-run of the script on the same batch, because it depends on whether "failed"
+# is tracked in 'batchinfo_completed.json' or not.
 def get_Args():
     Parser = argparse.ArgumentParser(description="BrainGenix-API Batch Run Script")
     Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
@@ -44,6 +47,7 @@ def get_Args():
     Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
     Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
     Parser.add_argument("-modelname", default="autoassociative", type=str, help="Stem name of neuronal circuit models to save")
+    Parser.add_argument("-savemodels", action="store_true", help="Save generated sample models (def: False)")
     Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
     Parser.add_argument("-Patterns", default=2, type=int, help="Number of patterns to encode and retrieve (def: 2)")
     Parser.add_argument("-PATTERNSIZE", default=8, type=int, help="Median number of neurons in each pattern (def: 8)")
@@ -58,6 +62,7 @@ def get_Args():
     Parser.add_argument("-from_sample", default=0, type=int, help="Samples starting at line (def: 0)")
     Parser.add_argument("-to_sample", default=0, type=int, help="Samples up to line (def: 0, meaning all)")
     Parser.add_argument("-RCIncludeHeap", action="store_true", help="Include slow search of heap in resource check (def: False)")
+    Parser.add_argument("-rerunfailed", action="store_true", help="Auto-rerun rather than mark failed samples (def: False)")
     Parser.add_argument("-randomseed", default=20240628, type=int, help="Specify a random seed (def: 20240628, 0: auto-pick)")
     return Parser.parse_args()
 
@@ -229,7 +234,7 @@ def usable_connections_method2(MySim, PREPOSTGPEAKSUMTARGET:float)->int:
 
     return int(attargetgpeaksum.sum())
 
-# Return 'failed', 'completed' or 'running' and percent done
+# Return 'failed', 'completed' or 'running', percent done, check succeeded
 def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)->tuple:
     global batchrun
     MySim = netmorphrun['Sim']
@@ -242,43 +247,96 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
         print('\n...failed to retrieve status for sample run %d, continuing (possible momentary comms problem)' % netmorphrun['runID'])
         # *** Maybe turn tracking back on for this failure if there are fewer when there isn't a connection drop.
         batchrun.RTfailed('netmorphstatus_failed', None) # Was (can be way too many): 'Exception: %s' % str(e) )
-        return 'running', Percent
+        return 'running', Percent, False
 
     if NetmorphStatus == "None":
-        return 'failed', 100.0
+        return 'failed', 100.0, True
+    elif NetmorphStatus == "Failed":
+        print("Netmorph failed for run %d. Reported errors: %s" % (netmorphrun['runID'], MySim.NetmorphError))
+        return 'failed', 100.0, True
     elif NetmorphStatus == "Done":
-        response = 'not returned'
-        try:
-            response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
-            print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
-            batchrun.RTsuccess('modelsave')
-        except Exception as e:
-            vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
-            print('Failed to save completed model for run %d' % netmorphrun['runID'])
-            batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
+        check_succeeded = True
+        if evalcriteriadata['savemodels']:
+            response = 'not returned'
+            try:
+                response = MySim.ModelSave(netmorphrun['modelname'], Pause_s=0.1)
+                print("Saved resulting model for run %d as %s" % (netmorphrun['runID'], netmorphrun['modelname']))
+                batchrun.RTsuccess('modelsave')
+            except Exception as e:
+                vbp.ErrorToDB(netmorphrun['DBdata'], 'NES error: Model save failed')
+                print('Failed to save completed model for run %d' % netmorphrun['runID'])
+                batchrun.RTfailed('modelsave_failed', 'Response: %s, Exception: %s' % (str(response), str(e)) )
+                check_succeeded = False
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
         result1 = int(usable_connections_method1(MySim))
         result2 = int(usable_connections_method2(MySim, evalcriteriadata['PREPOSTGPEAKSUMTARGET']))
+        if result1 == -1 or result2 == -1:
+            check_succeeded = False
         netmorphrun['usable_conns1'] = result1
         netmorphrun['usable_conns2'] = result2
-        return 'completed', 100.0
+        return 'completed', 100.0, check_succeeded
 
-    return 'running', Percent
+    return 'running', Percent, True
 
 def extra_prep(batchinfo:dict, idx:int, extraprepdata:dict)->bool:
     modelname = extraprepdata['modelname']+'%04d' % idx
     batchinfo[idx]['modelname'] = modelname  # Remember which output model belongs to this run
 
     # Get parameters from data frame
+    # This needs to be careful, because the data might be provided in a different order of
+    # parameters and some parameters might be missing, needing default values.
     df = extraprepdata['dataframe']
-    cols = extraprepdata['cols']
+    cols = extraprepdata['cols'] # This is an 'Index' object with a list of strings containing column names.
     pars = []
-    for k in range(len(cols)):
-        if k < 6:
-            pars.append(int(df.iloc[idx][cols[k]])) # explicit type casting since the values are read as floats from the excel file, but we need integers for the parameters in the reservoir script
+    if 'days' in cols:
+        pars.append(int(df.iloc[idx]['days']))
+    else:
+        print('Missing "days" column. Using default: 21')
+        pars.append(21)
+    if 'pyramidal' in cols:
+        pyramidal = int(df.iloc[idx]['pyramidal'])
+    else:
+        pyramidal = extraprepdata['launchdata']['EMBEDMULTIPLE']*extraprepdata['launchdata']['PATTERNSIZE']*extraprepdata['launchdata']['Patterns']
+        print('Missing "pyramidal" column. Using default: %d' % pyramidal)
+    pars.append(pyramidal)
+    if 'interneuron' in cols:
+        interneuron = int(df.iloc[idx]['interneuron'])
+    else:
+        interneuron = extraprepdata['launchdata']['PATTERNSIZE']*extraprepdata['launchdata']['Patterns']
+        print('Missing "interneuron" column. Using default: %d' % interneuron)
+    pars.append(interneuron)
+    if 'minneuronseparation' in cols:
+        pars.append(int(df.iloc[idx]['minneuronseparation']))
+    else:
+        print('Missing "minneuronseparation" column. Using default: 15')
+        pars.append(15)
+    if 'shape.radius' in cols:
+        pars.append(int(df.iloc[idx]['shape.radius']))
+    else:
+        # V_shape = pi*r^2*h, h is either given or assumed 30 ==> r^2 = V_shape / (pi*h)
+        # V_soma = 4/3*pi*r^3, assuming average soma r = 10 um ==> 4188.7902
+        if 'shape.thickness' in cols:
+            h = int(df.iloc[idx]['shape.thickness'])
         else:
-            pars.append(float(df.iloc[idx][cols[k]]))
+            h = 30
+        V_all_somas = 4200 * (pyramidal + interneuron)
+        V_shape = V_all_somas * 2
+        r2 = V_shape / (3.14*h)
+        r = np.sqrt(r2)
+        print('Missing "shape.radius" column. Using default: %d' % r)
+        pars.append(int(r))
+    if 'shape.thickness' in cols:
+        pars.append(int(df.iloc[idx]['shape.thickness']))
+    else:
+        print('Missing "shape.thickness" column. Using default: 30')
+        pars.append(30)
+    if 'dm.weight' in cols:
+        pars.append(float(df.iloc[idx]['dm.weight']))
+    else:
+        print('Missing "dm.weight" column. Using default: 0.5')
+        pars.append(float(0.5))
+
     batchinfo[idx]['pars'] = pars
 
     growdays = str(pars[0])
@@ -368,13 +426,19 @@ def update_experiments_database(batchinfo:dict):
             vbp.UpdateExpsDB(netmorphrun['DBdata'])
 
 # Save resulting label data for all completed runs to excel file
+# Note that this retrieves only what was stored in batchinfo_completed.json
+# to create the Excel file.
 def write_excel_with_results(batchrun, df, Args):
     df['usable_conns1']=0 # add column
     df['usable_conns2']=0 # add column
     completed_batchinfo = batchrun.get_previously_completed()
     for netmorphrun in completed_batchinfo.values():
-        df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
-        df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
+        if netmorphrun['status'] == 'completed':
+            df.loc[netmorphrun['runID'], 'usable_conns1'] = netmorphrun['usable_conns1']
+            df.loc[netmorphrun['runID'], 'usable_conns2'] = netmorphrun['usable_conns2']
+        else:
+            df.loc[netmorphrun['runID'], 'usable_conns1'] = -1
+            df.loc[netmorphrun['runID'], 'usable_conns2'] = -1
 
     path = Path(Args.excel)
     labeledpath = str(path.with_suffix(""))+'-labeled-RS'+str(Args.randomseed)+'.xlsx'
@@ -477,6 +541,7 @@ if __name__ == '__main__':
 
     EVALCRITERIADATA = {
         "PREPOSTGPEAKSUMTARGET": PREPOSTGPEAKSUMTARGET,
+        "savemodels": Args.savemodels,
     }
 
     modelcontent = LoadNetmorphConfiguration(Args.modelfile)
@@ -490,6 +555,7 @@ if __name__ == '__main__':
         'STDP': Args.STDP,
         'randomseed': Args.randomseed,
     }
+    EXTRAPREPDATA['launchdata'] = LAUNCHDATA
 
     # Determine total and batch sizes
     logicalCPUs = os.cpu_count()
@@ -510,7 +576,8 @@ if __name__ == '__main__':
         extraprepfunc=extra_prep,
         extraprepdata=EXTRAPREPDATA,
         from_sample=Args.from_sample,
-        to_sample=Args.to_sample)
+        to_sample=Args.to_sample,
+        rerunfailed=Args.rerunfailed)
 
     # Let's add a bit of extra tracking while we're testing large batches
     batchrun.resource_tests['getconn'] = 0
@@ -539,7 +606,7 @@ if __name__ == '__main__':
         resourceslowbytes=RESOURCESLOWBYTES)
     print('Number of Netmorph sample runs running (out of %d): %d' % (numsamples, batchrun.runs_running()))
 
-    batchrun.monitor_batch(
+    completed_batch = batchrun.monitor_batch(
         batchname='Netmorph-'+Args.modelname,
         batchsize=batchsize,
         evalfunc=evaluate_state_and_check_connectome,
@@ -549,6 +616,7 @@ if __name__ == '__main__':
         batchdatakeys=BATCHDATAKEYS,
         resourceslowbytes=RESOURCESLOWBYTES,
         deleteresident=Args.deleteresident)
+
     print('Number of samples: %d' % numsamples)
     print('Runs completed   : %d' % batchrun.runs_completed())
     print('Runs failed      : %d' % batchrun.runs_failed())
@@ -571,5 +639,9 @@ if __name__ == '__main__':
         print('To complete remaining simply rerun this script.')
     else:
         print('To run batch again, move or delete batchinfo_completed.json.')
+
+    if not completed_batch:
+        print('PLEASE NOTE:\nThis batch did NOT complete. Possible API/NES server problem detected!\nSolve the problem and rerun to complete.')
+
     print(" -- Done.")
     exit(0)
