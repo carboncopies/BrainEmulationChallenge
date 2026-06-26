@@ -1,0 +1,37 @@
+{
+  "nodes": [
+    {
+      "id": "doc_a_whole_brain_emulation_challenge_tools_setup_sh",
+      "label": "Setup.sh",
+      "file_type": "code",
+      "source_file": "doc/a-whole-brain-emulation-challenge/Tools/Setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "file"
+      }
+    },
+    {
+      "id": "doc_a_whole_brain_emulation_challenge_tools_setup_sh__entry",
+      "label": "Setup.sh script",
+      "file_type": "code",
+      "source_file": "doc/a-whole-brain-emulation-challenge/Tools/Setup.sh",
+      "source_location": "L1",
+      "metadata": {
+        "language": "bash",
+        "kind": "bash_entrypoint"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_a_whole_brain_emulation_challenge_tools_setup_sh",
+      "target": "doc_a_whole_brain_emulation_challenge_tools_setup_sh__entry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/a-whole-brain-emulation-challenge/Tools/Setup.sh",
+      "source_location": "L1",
+      "weight": 1.0
+    }
+  ]
+}

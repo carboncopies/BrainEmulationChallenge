@@ -1,0 +1,267 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_autoassociative_parallel_batch_test_py",
+      "label": "parallel_batch_test.py",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "autoassociative_parallel_batch_test_runs_incomplete",
+      "label": "runs_incomplete()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L141"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L141"
+    },
+    {
+      "id": "autoassociative_parallel_batch_test_runs_running",
+      "label": "runs_running()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L147"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L147"
+    },
+    {
+      "id": "autoassociative_parallel_batch_test_runs_completed",
+      "label": "runs_completed()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L154"
+    },
+    {
+      "id": "autoassociative_parallel_batch_test_runs_failed",
+      "label": "runs_failed()",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L161"
+    },
+    {
+      "id": "autoassociative_parallel_batch_test_rationale_168",
+      "label": "# NOTE:",
+      "file_type": "rationale",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L168"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "autoassociative_parallel_batch_test_runs_incomplete",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_parallel_batch_test_runs_incomplete",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L141",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "autoassociative_parallel_batch_test_runs_running",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_parallel_batch_test_runs_running",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "autoassociative_parallel_batch_test_runs_completed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_parallel_batch_test_runs_completed",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L154",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_parallel_batch_test_py",
+      "target": "autoassociative_parallel_batch_test_runs_failed",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L161",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_parallel_batch_test_runs_failed",
+      "target": "int",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L161",
+      "weight": 1.0
+    },
+    {
+      "source": "autoassociative_parallel_batch_test_rationale_168",
+      "target": "src_models_autoassociative_parallel_batch_test_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L168",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "autoassociative_parallel_batch_test_runs_incomplete",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L142"
+    },
+    {
+      "caller_nid": "autoassociative_parallel_batch_test_runs_running",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "autoassociative_parallel_batch_test_runs_completed",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L156"
+    },
+    {
+      "caller_nid": "autoassociative_parallel_batch_test_runs_failed",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/models/autoassociative/parallel_batch_test.py",
+      "source_location": "L163"
+    }
+  ]
+}

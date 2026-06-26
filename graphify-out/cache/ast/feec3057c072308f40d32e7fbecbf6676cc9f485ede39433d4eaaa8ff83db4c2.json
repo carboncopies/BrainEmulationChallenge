@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {
+      "id": "neuroglancertests_neuroglancer_py",
+      "label": "Neuroglancer.py",
+      "file_type": "code",
+      "source_file": "NeuroglancerTests/Neuroglancer.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "neuroglancertests_neuroglancer_py",
+      "target": "neuroglancer",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "NeuroglancerTests/Neuroglancer.py",
+      "source_location": "L1",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}

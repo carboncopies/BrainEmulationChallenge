@@ -26,6 +26,7 @@ fi
 echo "Installing Python dependencies..."
 run_cmd "$VENV_DIR/bin/python" -m pip install --upgrade pip
 run_cmd "$VENV_DIR/bin/python" -m pip install -r "$REPO_ROOT/requirements.txt"
+run_cmd "$VENV_DIR/bin/python" -m pip install graphifyy
 
 echo "Done. Required submodules are up to date."
 echo "Activate the virtual environment with: source $VENV_DIR/bin/activate"

@@ -1,0 +1,95 @@
+{
+  "nodes": [
+    {
+      "id": "doc_notes_on_taking_the_challenge_md",
+      "label": "Notes-on-taking-the-challenge.md",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_notes_on_taking_the_challenge_notes_on_taking_the_challenge",
+      "label": "Notes on taking the challenge",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L1"
+    },
+    {
+      "id": "doc_notes_on_taking_the_challenge_first_interaction_with_the_challenge_taker",
+      "label": "First interaction with the challenge taker",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L3"
+    },
+    {
+      "id": "doc_notes_on_taking_the_challenge_example_of_challenge_participant_taking_the_challenge",
+      "label": "Example of challenge participant taking the challenge",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L8"
+    },
+    {
+      "id": "doc_notes_on_taking_the_challenge_participant_inspects_the_em_data_stack",
+      "label": "Participant inspects the EM data stack",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L13"
+    },
+    {
+      "id": "doc_notes_on_taking_the_challenge_codeblock_1",
+      "label": "code:block1 ({)",
+      "file_type": "document",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L19"
+    }
+  ],
+  "edges": [
+    {
+      "source": "doc_notes_on_taking_the_challenge_md",
+      "target": "doc_notes_on_taking_the_challenge_notes_on_taking_the_challenge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_notes_on_taking_the_challenge_notes_on_taking_the_challenge",
+      "target": "doc_notes_on_taking_the_challenge_first_interaction_with_the_challenge_taker",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_notes_on_taking_the_challenge_notes_on_taking_the_challenge",
+      "target": "doc_notes_on_taking_the_challenge_example_of_challenge_participant_taking_the_challenge",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_notes_on_taking_the_challenge_example_of_challenge_participant_taking_the_challenge",
+      "target": "doc_notes_on_taking_the_challenge_participant_inspects_the_em_data_stack",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "doc_notes_on_taking_the_challenge_participant_inspects_the_em_data_stack",
+      "target": "doc_notes_on_taking_the_challenge_codeblock_1",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "doc/Notes-on-taking-the-challenge.md",
+      "source_location": "L19",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

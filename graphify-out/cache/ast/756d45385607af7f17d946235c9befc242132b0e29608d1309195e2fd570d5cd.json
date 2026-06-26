@@ -1,0 +1,34 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_psp_test_py",
+      "label": "psp_test.py",
+      "file_type": "code",
+      "source_file": "src/components/psp_test.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_psp_test_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/psp_test.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_psp_test_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/psp_test.py",
+      "source_location": "L2",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}

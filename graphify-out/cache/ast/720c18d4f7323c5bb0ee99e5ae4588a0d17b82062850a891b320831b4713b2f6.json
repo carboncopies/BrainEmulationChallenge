@@ -1,0 +1,100 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "label": "bs_vbp00_groundtruth_xi_sampleprep.py",
+      "file_type": "code",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "e0_bs_bs_vbp00_groundtruth_xi_sampleprep_rationale_150",
+      "label": "# TODO: We don't need the axon_ends list if we remember end0 and end0",
+      "file_type": "rationale",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L150"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L37",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "e0_bs_bs_vbp00_groundtruth_xi_sampleprep_rationale_150",
+      "target": "src_models_e0_bs_bs_vbp00_groundtruth_xi_sampleprep_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py",
+      "source_location": "L150",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}

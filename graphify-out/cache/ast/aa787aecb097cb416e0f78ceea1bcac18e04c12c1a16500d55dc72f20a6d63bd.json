@@ -1,0 +1,289 @@
+{
+  "nodes": [
+    {
+      "id": "challenge_submissionconverter_submissionvisualizer_py",
+      "label": "SubmissionVisualizer.py",
+      "file_type": "code",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "submissionconverter_submissionvisualizer_pointsincircum",
+      "label": "PointsInCircum()",
+      "file_type": "code",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "label": "write_electrode_output()",
+      "file_type": "code",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329"
+    },
+    {
+      "id": "submissionconverter_submissionvisualizer_rationale_169",
+      "label": "# NOTE: Copied these soma locations from the ground-truth script to",
+      "file_type": "rationale",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L169"
+    }
+  ],
+  "edges": [
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "math",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "braingenix_nes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "braingenix",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "braingenix_tools_stackstitcher",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "submissionconverter_submissionvisualizer_pointsincircum",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "challenge_submissionconverter_submissionvisualizer_py",
+      "target": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329",
+      "weight": 1.0
+    },
+    {
+      "source": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329",
+      "weight": 1.0
+    },
+    {
+      "source": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L329",
+      "weight": 1.0
+    },
+    {
+      "source": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L334",
+      "weight": 1.0
+    },
+    {
+      "source": "submissionconverter_submissionvisualizer_rationale_169",
+      "target": "challenge_submissionconverter_submissionvisualizer_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L169",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_pointsincircum",
+      "callee": "cos",
+      "is_member_call": true,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_pointsincircum",
+      "callee": "sin",
+      "is_member_call": true,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_pointsincircum",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "callee": "makedirs",
+      "is_member_call": true,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L334"
+    },
+    {
+      "caller_nid": "submissionconverter_submissionvisualizer_write_electrode_output",
+      "callee": "dump",
+      "is_member_call": true,
+      "source_file": "Challenge/SubmissionConverter/SubmissionVisualizer.py",
+      "source_location": "L335"
+    }
+  ]
+}

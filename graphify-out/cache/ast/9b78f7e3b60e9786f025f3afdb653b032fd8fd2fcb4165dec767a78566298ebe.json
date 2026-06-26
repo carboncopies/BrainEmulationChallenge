@@ -1,0 +1,158 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_visualize_connections_py",
+      "label": "visualize_connections.py",
+      "file_type": "code",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_visualize_connections_plot_connections",
+      "label": "plot_connections()",
+      "file_type": "code",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L39"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "pickle",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_visualize_connections_py",
+      "target": "components_visualize_connections_plot_connections",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L39",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "ix_",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L41"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "min",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L44"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "max",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L46"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "figure",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L48"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "imshow",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L49"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "colorbar",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "xlabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L52"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "ylabel",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "title",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "tight_layout",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L55"
+    },
+    {
+      "caller_nid": "components_visualize_connections_plot_connections",
+      "callee": "show",
+      "is_member_call": true,
+      "source_file": "src/components/visualize_connections.py",
+      "source_location": "L56"
+    }
+  ]
+}

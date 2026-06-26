@@ -1,0 +1,361 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_common_common_parameters_py",
+      "label": "Common_Parameters.py",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "common_common_parameters_common_parameters",
+      "label": "Common_Parameters",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "common_common_parameters_common_parameters_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "common_common_parameters_common_parameters_figspecs",
+      "label": ".figspecs()",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "common_common_parameters_common_parameters_fullpath",
+      "label": ".fullpath()",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L35"
+    },
+    {
+      "id": "common_common_parameters_common_commandline_parsing",
+      "label": "common_commandline_parsing()",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L55"
+    },
+    {
+      "id": "common_common_parameters_make_savefolder",
+      "label": "make_savefolder()",
+      "file_type": "code",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L107"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "os",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "common_common_parameters_common_parameters",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters",
+      "target": "common_common_parameters_common_parameters_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters",
+      "target": "common_common_parameters_common_parameters_figspecs",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters",
+      "target": "common_common_parameters_common_parameters_fullpath",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters_fullpath",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_parameters_fullpath",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "common_common_parameters_common_commandline_parsing",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_commandline_parsing",
+      "target": "common_common_parameters_common_parameters",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_commandline_parsing",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_commandline_parsing",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_common_parameters_py",
+      "target": "common_common_parameters_make_savefolder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_make_savefolder",
+      "target": "common_common_parameters_common_parameters",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "common_common_parameters_common_commandline_parsing",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L88",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "common_common_parameters_common_parameters_init",
+      "callee": "strftime",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L23"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_parameters_init",
+      "callee": "now",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L23"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L56"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L69"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L81"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L81"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L84"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L84"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "seed",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L85"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L91"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L94"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L94"
+    },
+    {
+      "caller_nid": "common_common_parameters_common_commandline_parsing",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L98"
+    },
+    {
+      "caller_nid": "common_common_parameters_make_savefolder",
+      "callee": "makedirs",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L108"
+    },
+    {
+      "caller_nid": "common_common_parameters_make_savefolder",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/common/Common_Parameters.py",
+      "source_location": "L109"
+    }
+  ]
+}
