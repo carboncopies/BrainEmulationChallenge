@@ -1,17 +1,13 @@
 #!../../../venv/bin/python
 
-# This script was creaed by copying acquisition_template.py.
+# This template was created by Kayla Stafford by simplifying
+# xor_scnm_acquisition_direct.py.
 #
-# This script creates a model that diverges slightly from the ground-truth.
-# Features:
-# - Structure is unchanged, identical to GT.
-# - SC neuron parameters modified to remove/reduce refractory period.
+# The template is focused on functional testing for the development
+# of functional metrics. No structural data is generated.
 #
-# Note that the modified model is not saved. Each time this script is run
-# we use the API to reload the GT model and we apply modifications to turn
-# it into a divergent SUB.
-# (Using the API to save the modified model may be useful if we need to
-# rerun it frequently.)
+# To use, please copy the template to your own script and adapt
+# as needed for your experimental stimulation trials.
 
 import vbpcommon as vbp # keep
 import argparse
@@ -32,7 +28,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
-Parser.add_argument("-runtime_ms", default=500, type=float, help="Runtime of functional experiment (ms)")
+Parser.add_argument("-runtime_ms", default=5000, type=float, help="Runtime of functional experiment (ms)")
 Parser.add_argument("-timeout_s", default=120.0, type=float, help="RunAndWait timeout (s)")
 Parser.add_argument("-groundtruth", action='store_true', help="Run as ground-truth for comparative output")
 Args = Parser.parse_args()
@@ -150,20 +146,75 @@ except Exception as e:
 
 if not Args.groundtruth:
 
-    editpars = {
-        #"MembranePotential_mV": ,
-        #"RestingPotential_mV": ,
-        #"SpikeThreshold_mV": ,
-        #"DecayTime_ms": ,
-        "AfterHyperpolarizationAmplitude_mV": 0.0, # see default value neuron_Vahp_mV in README.md
-    }
+    # Pick the neurons to isolate and thereby effectively eliminate
+    isolate = [ 9 ]
+
+    # Fetch abstract connectome to identify full list of neurons
+    try:
+        response = MySim.GetAbstractConnectome(Sparse=True)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+
+    # Here, we'll make do with the 'Types' list to identify the neuron IDs
+    if 'Types' not in response:
+        print("Error: Missing 'Types' list.")
+        exit(1)
+    num_neurons = len(response['Types'])
+
+    def connection_exists(pre:int, post:int, PrePostNumReceptors:list)->bool:
+        for connection in PrePostNumReceptors:
+            if connection[0]==pre and connection[1]==post and connection[2]>0:
+                return True
+        return False
+
+    PrePostNumReceptors = response['PrePostNumReceptors']
+
+    # New effective conductances are set to 0 for each pre-post neuron
+    # pair specified. Specify in both directions to sever effective
+    # connection regardless of direction of causal signal path.
+    # We have to be careful to use information collected about the
+    # connectome, because the modification API request fails if you
+    # attempt to change connections that do not exist.
+
+    PreSynList = []
+    PostSynList = []
+    all_neurons = [ idx for idx in range(num_neurons) ]
+    for isolate_idx in isolate:
+        for i in range(num_neurons):
+            if connection_exists(isolate_idx, i, PrePostNumReceptors):
+                PreSynList.append( isolate_idx )
+                PostSynList.append( i )
+            if connection_exists(i, isolate_idx, PrePostNumReceptors):
+                PreSynList.append( i )
+                PostSynList.append( isolate_idx)
+
+    ConductanceList = [ 0.0 for i in range(len(PreSynList)) ]
+
+    print('Isolating: '+str(isolate))
+
+    for i in range(len(PreSynList)):
+        print('(%d -> %d = %d)' % (PreSynList[i], PostSynList[i], ConductanceList[i]), end=" ")
+    print('')
 
     try:
-        res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
-        print("Modified model into divergent submitted emulation by changing dynamic parameters.")
-        print('')
-    except Exception as e:
-        vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
+        setresponse = MySim.BatchSetPrePostStrength(PreSynList, PostSynList, ConductanceList)
+        print("\nModified model into divergent submitted emulation by effectively removing neuron(s).")
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: Failed to set connection strengths in simulation')
+    if 'StatusCode' not in setresponse:
+        print('Error: Batch setting connections failed, no status code')
+        exit(1)
+    if setresponse['StatusCode'] != 0:
+        print('Error: Batch setting returned error code')
+        exit(1)
+
+    # Double-check if isolated neurons are now isolated
+    try:
+        response = MySim.GetAbstractConnectome(Sparse=True, NonZero=True)
+    except:
+        vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+    PrePostNumReceptors = response['PrePostNumReceptors']
+    print('PrePostNumReceptors: '+str(PrePostNumReceptors))
 
 ### ========================================= ###
 ### Dynamic Data Acquisition                  ###
@@ -178,28 +229,69 @@ def SpikeInputNeuronsAt(InputID: str, t_ms: float):
         t_soma_fire_ms.append((t_ms, n))
 
 
-t_test_ms = {
+t_test_ms_odd = {
     'XOR_10': 100.0,
     'XOR_01': 200.0,
     'XOR_11': 300.0,
 }
-repetitions = 1
+
+t_test_ms_even = {
+    'XOR_11' : 100.0,
+    'XOR_01' : 200.0,
+    'XOR_10' : 300.0,
+}
+
+cycle_duration = 400.0
+repetitions = 10
 trial_map = []
-# The 0 0 case is not explicitly tested.
-# Add 1 0 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
-trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 100.0 + t, 't_end': 200.0 + t})
-# Add 0 1 XOR test case.
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
-trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
-# Add 1 1 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
-trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 300.0 + t, 't_end': 400.0 + t})
+
+for r in range(repetitions):
+    t = r*cycle_duration
+    if(r%2 == 0):
+        #reordering every even trial
+        # Add 1 1 XOR test case.
+        print(t_test_ms_even.keys())
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_11'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_01'] + t)
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_10'] + t)
+
+        #Mapping for even trials
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 300.0 + t, 't_end': 400.0 + t})
+    else:
+        # The 0 0 case is not explicitly tested.
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_10'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_01'] + t)
+        # Add 1 1 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_11'] + t)
+
+        #Mapping for odd trials
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 300.0 + t, 't_end': 400.0 + t})
 
 Path(savefolder).mkdir(parents=True, exist_ok=True)
 with open(f"{savefolder}/trial_map.json", "w") as f:
     json.dump(trial_map, f, indent=2)
+
+# The 0 0 case is not explicitly tested.
+# Add 1 0 XOR test case.
+#SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
+# Add 0 1 XOR test case.
+#SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
+# Add 1 1 XOR test case.
+#SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
+#SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
+#print('Directed somatic firing: ' + str(t_soma_fire_ms))
 
 try:
     MySim.SetSpecificAPTimes(TimeNeuronPairs=t_soma_fire_ms)
@@ -232,7 +324,7 @@ try:
     if Args.groundtruth:
         csv_path = f"{savefolder}/groundtruth-Vm.csv"
     else:
-        csv_path = f"{savefolder}/sub1-Vm.csv"
+        csv_path = f"{savefolder}/sub-Vm.csv"
     save_nes_recording_csv(recording_dict, csv_path)
     print("Saved recording CSV:", csv_path)
     vbp.AddOutputToDB(DBdata, "recording_csv", csv_path)
@@ -248,7 +340,7 @@ try:
     if Args.groundtruth:
         spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
     else:
-        spike_csv_path = f"{savefolder}/sub1-spikes.csv"
+        spike_csv_path = f"{savefolder}/sub-spikes.csv"
 
     with open(spike_csv_path, "w", newline="") as f:
         writer = csv.writer(f)
@@ -266,3 +358,4 @@ except Exception as e:
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
+

@@ -1,17 +1,4 @@
-#!../../../venv/bin/python
-
-# This script was creaed by copying acquisition_template.py.
-#
-# This script creates a model that diverges slightly from the ground-truth.
-# Features:
-# - Structure is unchanged, identical to GT.
-# - SC neuron parameters modified to remove/reduce refractory period.
-#
-# Note that the modified model is not saved. Each time this script is run
-# we use the API to reload the GT model and we apply modifications to turn
-# it into a divergent SUB.
-# (Using the API to save the modified model may be useful if we need to
-# rerun it frequently.)
+#!/usr/bin/env python3
 
 import vbpcommon as vbp # keep
 import argparse
@@ -32,9 +19,8 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
-Parser.add_argument("-runtime_ms", default=500, type=float, help="Runtime of functional experiment (ms)")
+Parser.add_argument("-runtime_ms", default=5000, type=float, help="Runtime of functional experiment (ms)")
 Parser.add_argument("-timeout_s", default=120.0, type=float, help="RunAndWait timeout (s)")
-Parser.add_argument("-groundtruth", action='store_true', help="Run as ground-truth for comparative output")
 Args = Parser.parse_args()
 
 def save_nes_recording_csv(recording_dict: dict, out_csv: str) -> None:
@@ -46,7 +32,7 @@ def save_nes_recording_csv(recording_dict: dict, out_csv: str) -> None:
     out_path = Path(out_csv)
     out_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # If empty, still write header so you know it ran
+    # If empty, still write header so you know it ran-
     with out_path.open("w", newline="") as f:
         w = csv.writer(f)
         w.writerow(["t_ms", "neuron_id", "field", "value"])
@@ -145,27 +131,6 @@ except Exception as e:
     vbp.ErrorExit(DBdata, 'NES error: model load failed '+str(e))
 
 ### ========================================= ###
-### Modify Model to create divergent SUB      ###
-### ========================================= ###
-
-if not Args.groundtruth:
-
-    editpars = {
-        #"MembranePotential_mV": ,
-        #"RestingPotential_mV": ,
-        #"SpikeThreshold_mV": ,
-        #"DecayTime_ms": ,
-        "AfterHyperpolarizationAmplitude_mV": 0.0, # see default value neuron_Vahp_mV in README.md
-    }
-
-    try:
-        res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
-        print("Modified model into divergent submitted emulation by changing dynamic parameters.")
-        print('')
-    except Exception as e:
-        vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
-
-### ========================================= ###
 ### Dynamic Data Acquisition                  ###
 ### ========================================= ###
 runtime_ms = float(Args.runtime_ms)
@@ -178,24 +143,54 @@ def SpikeInputNeuronsAt(InputID: str, t_ms: float):
         t_soma_fire_ms.append((t_ms, n))
 
 
-t_test_ms = {
+t_test_ms_odd = {
     'XOR_10': 100.0,
     'XOR_01': 200.0,
     'XOR_11': 300.0,
 }
-repetitions = 1
-trial_map = []
-# The 0 0 case is not explicitly tested.
-# Add 1 0 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_10'])
-trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 100.0 + t, 't_end': 200.0 + t})
-# Add 0 1 XOR test case.
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_01'])
-trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
-# Add 1 1 XOR test case.
-SpikeInputNeuronsAt('InA', t_test_ms['XOR_11'])
-SpikeInputNeuronsAt('InB', t_test_ms['XOR_11'])
-trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 300.0 + t, 't_end': 400.0 + t})
+
+t_test_ms_even = {
+    'XOR_11': 100.0,
+    'XOR_01': 200.0,
+    'XOR_10': 300.0,
+}
+
+cycle_duration = 400.0
+repetitions = 10
+trial_map = []   
+
+for r in range(repetitions):
+    t = r*cycle_duration
+    if(r%2 == 0):
+        #reordering every even trial
+        # Add 1 1 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_11'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_even['XOR_01'] + t)
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_even['XOR_10'] + t)
+
+        #Mapping for even trials 
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 300.0 + t, 't_end': 400.0 + t})
+    else:
+        # The 0 0 case is not explicitly tested.
+        # Add 1 0 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_10'] + t)
+        # Add 0 1 XOR test case.
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_01'] + t)
+        # Add 1 1 XOR test case.
+        SpikeInputNeuronsAt('InA', t_test_ms_odd['XOR_11'] + t)
+        SpikeInputNeuronsAt('InB', t_test_ms_odd['XOR_11'] + t)
+
+        #Mapping for odd trials
+        trial_map.append({'rep': r, 'case': 'XOR_00', 't_start': 0.0   + t, 't_end': 100.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_10', 't_start': 100.0 + t, 't_end': 200.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_01', 't_start': 200.0 + t, 't_end': 300.0 + t})
+        trial_map.append({'rep': r, 'case': 'XOR_11', 't_start': 300.0 + t, 't_end': 400.0 + t})
 
 Path(savefolder).mkdir(parents=True, exist_ok=True)
 with open(f"{savefolder}/trial_map.json", "w") as f:
@@ -221,6 +216,7 @@ except Exception as e:
 
 # ---- Run ----
 try:
+    MySim.SetLIFCPreciseSpikeTimes(True)
     MySim.RunAndWait(Runtime_ms=runtime_ms, timeout_s=float(Args.timeout_s))
 except Exception as e:
     vbp.ErrorToDB(DBdata, "NES error: RunAndWait failed: " + str(e))
@@ -229,10 +225,7 @@ except Exception as e:
 recording_dict = None
 try:
     recording_dict = MySim.GetRecording()
-    if Args.groundtruth:
-        csv_path = f"{savefolder}/groundtruth-Vm.csv"
-    else:
-        csv_path = f"{savefolder}/sub1-Vm.csv"
+    csv_path = f"{savefolder}/groundtruth-Vm.csv"
     save_nes_recording_csv(recording_dict, csv_path)
     print("Saved recording CSV:", csv_path)
     vbp.AddOutputToDB(DBdata, "recording_csv", csv_path)
@@ -240,15 +233,13 @@ except Exception as e:
     vbp.ErrorToDB(DBdata, 'NES error: Failed to retrieve recorded activity '+str(e))
 
 # Save spike times to a second CSV
-MySim.SetLIFCPreciseSpikeTimes(True) # ??? Why is this here... these are not LIFC neurons
+MySim.SetLIFCPreciseSpikeTimes(True)
 try:
+
     spike_resp = MySim.GetSpikeTimes()
     spike_dict = spike_resp.get("SpikeTimes", {})
 
-    if Args.groundtruth:
-        spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
-    else:
-        spike_csv_path = f"{savefolder}/sub1-spikes.csv"
+    spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
 
     with open(spike_csv_path, "w", newline="") as f:
         writer = csv.writer(f)
@@ -266,3 +257,4 @@ except Exception as e:
 
 # Update experiments database file with results
 vbp.UpdateExpsDB(DBdata)
+
