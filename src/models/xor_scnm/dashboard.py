@@ -65,15 +65,24 @@ def _load_scoring_module():
     ]
     module_path = next((p for p in candidates if os.path.isfile(p)), None)
     if module_path is None:
+<<<<<<< Updated upstream
         return None, "dashboard_scoring.py is missing beside dashboard.py."
     try:
         spec = importlib.util.spec_from_file_location("xor_dashboard_scoring", module_path)
         if spec is None or spec.loader is None:
             return None, f"Could not load scoring module from {module_path}"
+=======
+        return None, {}, None, None, "dashboard_scoring.py is missing beside dashboard.py."
+    try:
+        spec = importlib.util.spec_from_file_location("xor_dashboard_scoring", module_path)
+        if spec is None or spec.loader is None:
+            return None, {}, None, None, f"Could not load scoring module from {module_path}"
+>>>>>>> Stashed changes
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         fn = getattr(mod, "compute_overall_score", None)
         if fn is None:
+<<<<<<< Updated upstream
             return None, f"compute_overall_score() not found in {module_path}"
         return fn, None
     except Exception as exc:
@@ -81,6 +90,26 @@ def _load_scoring_module():
 
 
 compute_overall_score_fn, SCORING_ERROR = _load_scoring_module()
+=======
+            return None, {}, None, None, f"compute_overall_score() not found in {module_path}"
+        profiles = getattr(mod, "SCORING_PROFILES", {})
+        parse_fn = getattr(mod, "parse_simulated_neurons", None)
+        manifest_fn = getattr(mod, "load_sub_manifest", None)
+        return fn, profiles, parse_fn, manifest_fn, None
+    except Exception as exc:
+        return None, {}, None, None, f"Scoring module error: {exc}"
+
+
+(
+    compute_overall_score_fn,
+    SCORING_PROFILES,
+    parse_simulated_neurons_fn,
+    load_sub_manifest_fn,
+    SCORING_ERROR,
+) = _load_scoring_module()
+if SCORING_ERROR:
+    compute_overall_score_fn = None
+>>>>>>> Stashed changes
 
 # ──────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -1002,6 +1031,42 @@ def show_scroll_table(df, max_height=420):
 # ──────────────────────────────────────────────────────────────
 # DATA LOADING
 # ──────────────────────────────────────────────────────────────
+def _first_existing_file(candidates: list) -> str:
+    """Return the first path that exists, else the first candidate (for error messages)."""
+    for p in candidates:
+        if p and os.path.isfile(p):
+            return os.path.abspath(p)
+    return os.path.abspath(candidates[0]) if candidates else ""
+
+
+def resolve_default_h5_paths(script_dir: str) -> tuple:
+    """
+    Pick GT/SUB H5 defaults — tries pipeline output layout first (xor_scnm VM),
+    then METRICS-style files beside the script.
+    """
+    base = os.path.abspath(script_dir)
+    gt_candidates = [
+        os.path.join(base, "output", "GT_h5", "groundtruth.h5"),
+        os.path.join(base, "output", "GT", "groundtruth.h5"),
+        os.path.join(base, "GT_h5", "groundtruth.h5"),
+        os.path.join(base, "groundtruth.h5"),
+        os.path.normpath(os.path.join(base, "..", "METRICS", "groundtruth.h5")),
+    ]
+    sub_candidates = [
+        os.path.join(base, "output", "SUB_h5", "sub.h5"),
+        os.path.join(base, "output", "SUB_h5", "substitute.h5"),
+        os.path.join(base, "output", "SUB", "sub.h5"),
+        os.path.join(base, "output", "SUB", "substitute.h5"),
+        os.path.join(base, "substitute.h5"),
+        os.path.join(base, "sub.h5"),
+    ]
+    gt_path = _first_existing_file(gt_candidates)
+    sub_path = _first_existing_file(sub_candidates)
+    if not os.path.isfile(sub_path):
+        sub_path = gt_path
+    return gt_path, sub_path
+
+
 def load_metadata(h5_path):
     """Read `/metadata` attrs (same contract as in_domain_metrics.ipynb)."""
     with h5py.File(h5_path, "r") as f:
@@ -1038,7 +1103,11 @@ def _cached_pdf_report(gt_path: str, sub_path: str, gt_mtime: float, sub_mtime: 
     return generate_pdf_report(gt_path, sub_path)
 
 
+<<<<<<< Updated upstream
 SCORE_CACHE_VERSION = 2
+=======
+SCORE_CACHE_VERSION = 3
+>>>>>>> Stashed changes
 
 
 @st.cache_data(show_spinner=True)
@@ -1047,10 +1116,25 @@ def _cached_overall_score(
     sub_path: str,
     gt_mtime: float,
     sub_mtime: float,
+<<<<<<< Updated upstream
     cache_version: int = SCORE_CACHE_VERSION,
 ) -> dict:
     del cache_version  # bust cache when scoring schema changes
     result = compute_overall_score_fn(gt_path, sub_path)
+=======
+    profile_id: str,
+    simulated_neurons_key: tuple,
+    cache_version: int = SCORE_CACHE_VERSION,
+) -> dict:
+    del cache_version, gt_mtime, sub_mtime
+    sim_list = list(simulated_neurons_key) if simulated_neurons_key else None
+    result = compute_overall_score_fn(
+        gt_path,
+        sub_path,
+        profile_id=profile_id,
+        simulated_neurons=sim_list,
+    )
+>>>>>>> Stashed changes
     if "categories" not in result or "metric_subscores" not in result:
         raise RuntimeError("Scoring module returned an outdated payload — update dashboard_scoring.py")
     return result
@@ -1106,8 +1190,17 @@ def load_truth_table_json(h5_path):
     candidates = [
         os.path.join(base, "network_config.json"),
         os.path.join(os.path.dirname(base), "network_config.json"),
+<<<<<<< Updated upstream
         os.path.join(base, "GT", "network_config.json"),
         os.path.join(os.path.dirname(base), "GT", "network_config.json"),
+=======
+        os.path.join(base, "GT_h5", "network_config.json"),
+        os.path.join(os.path.dirname(base), "GT_h5", "network_config.json"),
+        os.path.join(base, "GT", "network_config.json"),
+        os.path.join(os.path.dirname(base), "GT", "network_config.json"),
+        os.path.join(base, "output", "GT_h5", "network_config.json"),
+        os.path.join(os.path.dirname(base), "output", "GT_h5", "network_config.json"),
+>>>>>>> Stashed changes
         os.path.join(base, "output", "GT", "network_config.json"),
         os.path.join(os.path.dirname(base), "output", "GT", "network_config.json"),
     ]
@@ -1323,9 +1416,13 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     _metrics_dir = os.path.dirname(os.path.abspath(__file__))
+<<<<<<< Updated upstream
     default_path = os.path.join(_metrics_dir, "groundtruth.h5")
     _default_sub = os.path.join(_metrics_dir, "substitute.h5")
     default_sub_path = _default_sub if os.path.isfile(_default_sub) else default_path
+=======
+    default_path, default_sub_path = resolve_default_h5_paths(_metrics_dir)
+>>>>>>> Stashed changes
     st.markdown(
         '<div style="font-size:0.68rem;color:#8b949e;padding:6px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Data paths</div>',
         unsafe_allow_html=True,
@@ -1345,6 +1442,50 @@ with st.sidebar:
     _same = os.path.normpath(os.path.abspath(gt_path)) == os.path.normpath(os.path.abspath(sub_path))
     st.caption("Using one H5 for both GT and SUB (self-check)." if _same else "GT and SUB load from different files.")
 
+<<<<<<< Updated upstream
+=======
+    if compute_overall_score_fn is not None and SCORING_PROFILES:
+        st.markdown(
+            '<div style="font-size:0.68rem;color:#8b949e;padding:12px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Scoring profile</div>',
+            unsafe_allow_html=True,
+        )
+        _manifest = load_sub_manifest_fn(sub_path) if load_sub_manifest_fn and os.path.isfile(sub_path) else None
+        _profile_ids = list(SCORING_PROFILES.keys())
+        _default_profile = "blackbox_io"
+        if isinstance(_manifest, dict) and _manifest.get("evaluation_profile") in _profile_ids:
+            _default_profile = str(_manifest["evaluation_profile"])
+        if "scoring_profile_id" not in st.session_state:
+            st.session_state.scoring_profile_id = _default_profile
+        scoring_profile_id = st.selectbox(
+            "Evaluation mode",
+            options=_profile_ids,
+            format_func=lambda k: SCORING_PROFILES[k].get("label", k),
+            key="scoring_profile_id",
+            help="Black-box scores I/O only; full emulation includes interneurons and structure.",
+        )
+        st.caption(SCORING_PROFILES.get(scoring_profile_id, {}).get("description", ""))
+        _default_sim = ""
+        if isinstance(_manifest, dict) and _manifest.get("simulated_neurons"):
+            _sn = _manifest["simulated_neurons"]
+            if isinstance(_sn, (list, tuple)):
+                _default_sim = ", ".join(str(x) for x in _sn)
+        if "simulated_neurons_text" not in st.session_state and _default_sim:
+            st.session_state.simulated_neurons_text = _default_sim
+        st.text_area(
+            "Simulated neurons (optional)",
+            key="simulated_neurons_text",
+            height=68,
+            disabled=(scoring_profile_id == "blackbox_io"),
+            help=(
+                "Full emulation only. Comma- or newline-separated labels "
+                "(e.g. PyrIn_A, E, PyrMid_A). Empty = all spiking neurons. "
+                "Use for partial SUBs — only listed neurons affect spiking/membrane/structure score."
+            ),
+        )
+    elif SCORING_ERROR:
+        st.caption(f"Scoring unavailable: {SCORING_ERROR}")
+
+>>>>>>> Stashed changes
     st.markdown('<div class="nav-section">Metrics</div>', unsafe_allow_html=True)
 
     for icon, label, key in METRICS:
@@ -1418,12 +1559,27 @@ if active == "overview":
         st.warning(f"Overall score unavailable: {SCORING_ERROR}")
     else:
         try:
+<<<<<<< Updated upstream
+=======
+            _profile_id = st.session_state.get("scoring_profile_id", "blackbox_io")
+            _sim_text = st.session_state.get("simulated_neurons_text", "")
+            _sim_tuple = tuple(
+                parse_simulated_neurons_fn(_sim_text)
+                if parse_simulated_neurons_fn
+                else []
+            )
+>>>>>>> Stashed changes
             with st.spinner("Computing overall emulation score…"):
                 _score = _cached_overall_score(
                     gt_path,
                     sub_path,
                     _h5_mtime(gt_path),
                     _h5_mtime(sub_path),
+<<<<<<< Updated upstream
+=======
+                    _profile_id,
+                    _sim_tuple,
+>>>>>>> Stashed changes
                     SCORE_CACHE_VERSION,
                 )
             _overall = float(_score["overall"])
@@ -1431,6 +1587,18 @@ if active == "overview":
             _metric_subscores = _score["metric_subscores"]
             _score_color = "#3fb950" if _overall >= 85 else "#ffa657" if _overall >= 60 else "#f85149"
             st.markdown("**Overall emulation score**")
+<<<<<<< Updated upstream
+=======
+            st.caption(
+                f"Profile: **{_score.get('profile_label', _profile_id)}** · "
+                f"{_score.get('scope_note', '')}"
+            )
+            if _score.get("simulated_neurons"):
+                st.caption(
+                    "Simulated neurons in scope: "
+                    + ", ".join(_score["simulated_neurons"])
+                )
+>>>>>>> Stashed changes
             _sc1, _sc2 = st.columns([1, 2])
             with _sc1:
                 st.markdown(
