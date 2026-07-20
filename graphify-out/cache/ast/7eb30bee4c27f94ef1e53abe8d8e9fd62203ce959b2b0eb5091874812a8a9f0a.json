@@ -1,0 +1,838 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_nmda_receptor_py",
+      "label": "NMDA_Receptor.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor",
+      "label": "NMDA_Receptor",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L16"
+    },
+    {
+      "id": "ampa_receptor",
+      "label": "AMPA_Receptor",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_set_phi_v_type",
+      "label": ".set_phi_V_type()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_phi_v_bolzmann",
+      "label": ".phi_V_Bolzmann()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "label": ".Phi()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L73"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "label": ".k_binding_rate()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "label": ".k_unbinding_rate()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "label": ".phi_V_Woodhull_1()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "label": ".phi_V_Woodhull_2()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115"
+    },
+    {
+      "id": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "label": ".Isyn()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "prototyping_nmda_receptor_rationale_67",
+      "label": "Modeled with a Bolzmann function. \t\tEasy to use, but not directly related to phy",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "prototyping_nmda_receptor_rationale_106",
+      "label": "Modeled with a two-state Woodhull formalism derived from a kinetic model of \t\tex",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "prototyping_nmda_receptor_rationale_122",
+      "label": "Modeled with a two-state Woodhull formalism derived from a kinetic model of \t\tex",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L122"
+    },
+    {
+      "id": "prototyping_nmda_receptor_rationale_133",
+      "label": "Strong voltage dependence.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L133"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_nmda_receptor_py",
+      "target": "math",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_nmda_receptor_py",
+      "target": "prototyping_ampa_receptor",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_nmda_receptor_py",
+      "target": "prototyping_nmda_receptor_nmda_receptor",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "ampa_receptor",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_init",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_set_phi_v_type",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_set_phi_v_type",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_bolzmann",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_bolzmann",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L73",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor",
+      "target": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L88",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "target": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L112",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_rationale_67",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_bolzmann",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L67",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_rationale_106",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_1",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_rationale_122",
+      "target": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_nmda_receptor_rationale_133",
+      "target": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L133",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L36"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_phi_v_bolzmann",
+      "callee": "exp",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L71"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_k_binding_rate",
+      "callee": "exp",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_k_unbinding_rate",
+      "callee": "exp",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L96"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_phi_v_woodhull_2",
+      "callee": "exp",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L129"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "callee": "phi_V",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L136"
+    },
+    {
+      "caller_nid": "prototyping_nmda_receptor_nmda_receptor_isyn",
+      "callee": "postsyn_current_I",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/NMDA_Receptor.py",
+      "source_location": "L136"
+    }
+  ]
+}

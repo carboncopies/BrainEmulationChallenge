@@ -1,0 +1,13 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_common_glb_py",
+      "label": "glb.py",
+      "file_type": "code",
+      "source_file": "src/components/common/glb.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [],
+  "raw_calls": []
+}

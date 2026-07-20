@@ -1,0 +1,1214 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_prototyping_bs_neuron_py",
+      "label": "BS_Neuron.py",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron",
+      "label": "BS_Neuron",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "neuron",
+      "label": "Neuron",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "sphere",
+      "label": "Sphere",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "cylinder",
+      "label": "Cylinder",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_get_cell_center",
+      "label": ".get_cell_center()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "label": ".get_voxels()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "vecbox",
+      "label": "VecBox",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "label": ".set_FIFO()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L113"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_attach_direct_stim",
+      "label": ".attach_direct_stim()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_set_spontaneous_activity",
+      "label": ".set_spontaneous_activity()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L120"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_to_dict",
+      "label": ".to_dict()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L127"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_from_dict",
+      "label": ".from_dict()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L157"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L180"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_record",
+      "label": ".record()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L185"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "label": ".has_spiked()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L189"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L189"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "label": ".dt_act_ms()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L193"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_vspike_t",
+      "label": ".vSpike_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "label": ".vAHP_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L205"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "label": ".vPSP_t()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L210"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "label": ".update_Vm()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L220"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "label": ".detect_threshold()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L238"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "label": ".spontaneous_activity()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L246"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_update",
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L258"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "label": ".update_convolved_FIFO()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L276"
+    },
+    {
+      "id": "array",
+      "label": "array",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L276"
+    },
+    {
+      "id": "prototyping_bs_neuron_bs_neuron_get_recording",
+      "label": ".get_recording()",
+      "file_type": "code",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L302"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_20",
+      "label": "A ball-and-stick neuron with 3D physical geometry and integrate-and-fire     fun",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L20"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_65",
+      "label": "Based on the neuron morphology and voxel specifications, return         a list o",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L65"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_221",
+      "label": "Vm = Vrest + vSpike(t) + vAHP(t) + vPSP(t)         Compare Vm with Vact.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L221"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_239",
+      "label": "Compare Vm with Vact.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L239"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_247",
+      "label": "Possible spontaneous activity.",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L247"
+    },
+    {
+      "id": "prototyping_bs_neuron_rationale_93",
+      "label": "# TODO: Do the full process. (For now, as a test, we just return",
+      "file_type": "rationale",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L93"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "scipy_stats",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_common_spatial_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_signalfunctions_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_common_neuron_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_calcium_imaging_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "src_components_prototyping_bs_morphology_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_prototyping_bs_neuron_py",
+      "target": "prototyping_bs_neuron_bs_neuron",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "neuron",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_init",
+      "target": "sphere",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_init",
+      "target": "cylinder",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_get_cell_center",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "target": "vecbox",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L113",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_attach_direct_stim",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_attach_direct_stim",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_set_spontaneous_activity",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_to_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_from_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L157",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_record",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_record",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_vspike_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vspike_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vspike_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L205",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "target": "float",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L246",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L258",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L258",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L258",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "target": "array",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L276",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron",
+      "target": "prototyping_bs_neuron_bs_neuron_get_recording",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L302",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "target": "prototyping_bs_neuron_bs_neuron_update",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_show",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "target": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "target": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_dt_act_ms",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_vspike_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "target": "prototyping_bs_neuron_bs_neuron_record",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update",
+      "target": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L269",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update",
+      "target": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L270",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update",
+      "target": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L271",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "target": "array",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L286",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_20",
+      "target": "prototyping_bs_neuron_bs_neuron",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_65",
+      "target": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L65",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_221",
+      "target": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_239",
+      "target": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L239",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_247",
+      "target": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L247",
+      "weight": 1.0
+    },
+    {
+      "source": "prototyping_bs_neuron_rationale_93",
+      "target": "src_components_prototyping_bs_neuron_py",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L93",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L25"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "callee": "get_adjacent_dict",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L105"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_get_voxels",
+      "callee": "values",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L114"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_set_fifo",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L115"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_attach_direct_stim",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L118"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_set_spontaneous_activity",
+      "callee": "truncnorm",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L125"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_to_dict",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L133"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_from_dict",
+      "callee": "BS_Morphology",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L178"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_show",
+      "callee": "PlotInfo",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L186"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_record",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L187"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_has_spiked",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L190"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_vahp_t",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L208"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_vpsp_t",
+      "callee": "dblexp",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L217"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update_vm",
+      "callee": "roll",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L234"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_detect_threshold",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L244"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L254"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_spontaneous_activity",
+      "callee": "rvs",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L255"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L263"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L265"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L266"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "callee": "convolve_1d",
+      "is_member_call": false,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L286"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L287"
+    },
+    {
+      "caller_nid": "prototyping_bs_neuron_bs_neuron_update_convolved_fifo",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/prototyping/BS_Neuron.py",
+      "source_location": "L288"
+    }
+  ]
+}

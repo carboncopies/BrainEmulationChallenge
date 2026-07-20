@@ -1,0 +1,937 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_vbpcommon_py",
+      "label": "vbpcommon.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "label": "PlotAndStoreRecordedActivity()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "bool",
+      "label": "bool",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_initexpdb",
+      "label": "InitExpDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L38"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_addinputtodb",
+      "label": "AddInputToDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L50"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_addoutputtodb",
+      "label": "AddOutputToDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L53"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_unlockdb",
+      "label": "UnlockDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L56"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_waittolockdb",
+      "label": "WaitToLockDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L63"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_loadexpsdb",
+      "label": "LoadExpsDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_updateexpsdb",
+      "label": "UpdateExpsDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L106"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_errortodb",
+      "label": "ErrorToDB()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_errorexit",
+      "label": "ErrorExit()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_exitorreturn",
+      "label": "ExitOrReturn()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L137"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "label": "GetMostRecentDBEntry()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L143"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "label": "GetMostRecentDBEntryIN()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L163"
+    },
+    {
+      "id": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "label": "GetMostRecentDBEntryOUT()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L171"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "os",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_initexpdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_initexpdb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_addinputtodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_addinputtodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_addoutputtodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_addoutputtodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L53",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_unlockdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_unlockdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_waittolockdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_waittolockdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_loadexpsdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_updateexpsdb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_updateexpsdb",
+      "target": "bool",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_errortodb",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_errortodb",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_errorexit",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_errorexit",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L132",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_exitorreturn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_exitorreturn",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_exitorreturn",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L137",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L143",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_vbpcommon_py",
+      "target": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "target": "bool",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L171",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_loadexpsdb",
+      "target": "xor_scnm_vbpcommon_waittolockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_loadexpsdb",
+      "target": "xor_scnm_vbpcommon_unlockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_updateexpsdb",
+      "target": "xor_scnm_vbpcommon_loadexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L107",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_updateexpsdb",
+      "target": "xor_scnm_vbpcommon_unlockdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_errortodb",
+      "target": "xor_scnm_vbpcommon_addoutputtodb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_errorexit",
+      "target": "xor_scnm_vbpcommon_errortodb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_errorexit",
+      "target": "xor_scnm_vbpcommon_updateexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_exitorreturn",
+      "target": "xor_scnm_vbpcommon_errorexit",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L139",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "xor_scnm_vbpcommon_loadexpsdb",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L144",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "xor_scnm_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L150",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "target": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L164",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryin",
+      "target": "xor_scnm_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "target": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L172",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_scnm_vbpcommon_getmostrecentdbentryout",
+      "target": "xor_scnm_vbpcommon_exitorreturn",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L176",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "isinstance",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L14"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L15"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L18"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L22"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L22"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L22"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L24"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "extract_t_Vm",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L27"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L29"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "save_t_Vm_pickled",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L31"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "plot_t_Vm",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L32"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_plotandstorerecordedactivity",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_initexpdb",
+      "callee": "strftime",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L40"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_initexpdb",
+      "callee": "now",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L40"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_unlockdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_unlockdb",
+      "callee": "remove",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L59"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_waittolockdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L66"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_waittolockdb",
+      "callee": "sleep",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L67"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_waittolockdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L72"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_waittolockdb",
+      "callee": "write",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L73"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_loadexpsdb",
+      "callee": "exists",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L88"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_loadexpsdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L93"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_loadexpsdb",
+      "callee": "load",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L94"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_loadexpsdb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L100"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_updateexpsdb",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L114"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_updateexpsdb",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L117"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_updateexpsdb",
+      "callee": "dump",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L118"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_updateexpsdb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L121"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_errortodb",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L127"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_errorexit",
+      "callee": "exit",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L135"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L147"
+    },
+    {
+      "caller_nid": "xor_scnm_vbpcommon_getmostrecentdbentry",
+      "callee": "reversed",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/vbpcommon.py",
+      "source_location": "L156"
+    }
+  ]
+}

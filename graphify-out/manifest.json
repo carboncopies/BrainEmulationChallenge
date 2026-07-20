@@ -1,0 +1,977 @@
+{
+  "Tools/Setup.sh": {
+    "mtime": 1779682688.3885086,
+    "ast_hash": "f420bbea2e87785babed64d09ee75c2f",
+    "semantic_hash": ""
+  },
+  "Tools/Tag.sh": {
+    "mtime": 1779684253.6884859,
+    "ast_hash": "842d34928dd8a9370dec038a85bba65a",
+    "semantic_hash": ""
+  },
+  "Tools/Update.sh": {
+    "mtime": 1779676235.8227022,
+    "ast_hash": "bb122cfb5c2842d63a82d4100d026668",
+    "semantic_hash": ""
+  },
+  "Tools/RunXOR.sh": {
+    "mtime": 1779676235.8225367,
+    "ast_hash": "d6842bf0c924ee38003442a23f69aafd",
+    "semantic_hash": ""
+  },
+  "Tools/PushWithSubmodules.sh": {
+    "mtime": 1779676235.822452,
+    "ast_hash": "381196c130598050e3e3e4dbb580d20d",
+    "semantic_hash": ""
+  },
+  "NeuroglancerTests/Neuroglancer.py": {
+    "mtime": 1779676235.8221252,
+    "ast_hash": "0a09d080cbf874bee0d325b6a78b6323",
+    "semantic_hash": ""
+  },
+  "NeuroglancerTests/CreateCVDataset.py": {
+    "mtime": 1779676235.8220088,
+    "ast_hash": "e9a08a3e22f5a4eecce20b98cae09dba",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Tools/Setup.sh": {
+    "mtime": 1779676235.835064,
+    "ast_hash": "aa9f6335c3ff4dc3d107785b152a5a4a",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Tools/Build.sh": {
+    "mtime": 1779676235.8349845,
+    "ast_hash": "00db00781c8a376f5fa1d077c23e4dcf",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Tools/Setup.sh": {
+    "mtime": 1779676235.8246963,
+    "ast_hash": "aa9f6335c3ff4dc3d107785b152a5a4a",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Tools/Build.sh": {
+    "mtime": 1779676235.824625,
+    "ast_hash": "00db00781c8a376f5fa1d077c23e4dcf",
+    "semantic_hash": ""
+  },
+  "Challenge/examples/sliceviewer.py": {
+    "mtime": 1779676235.8216174,
+    "ast_hash": "61594b9359f935cde933f00ed5cfdff1",
+    "semantic_hash": ""
+  },
+  "Challenge/examples/WeReconstructLLC/submitted-emulation.json": {
+    "mtime": 1779676235.8214467,
+    "ast_hash": "292ad3d94d8d699edf8b1783c03c7472",
+    "semantic_hash": ""
+  },
+  "Challenge/SubmissionConverter/VisualizerTest.py": {
+    "mtime": 1779676235.8211746,
+    "ast_hash": "d213ea4d53c6d2a012c6305e79ddfbdd",
+    "semantic_hash": ""
+  },
+  "Challenge/SubmissionConverter/Test.json": {
+    "mtime": 1779676235.8210704,
+    "ast_hash": "62c290b5c9871c3905124e97d9d2f8bf",
+    "semantic_hash": ""
+  },
+  "Challenge/SubmissionConverter/SubmissionVisualizer.py": {
+    "mtime": 1779676235.820965,
+    "ast_hash": "152ed5b788ad311ae1386e4ff64b20fb",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/xor_sc_validation.py": {
+    "mtime": 1779676235.8597634,
+    "ast_hash": "d03f47d84c37f36dbfe2e4b2a828d61c",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/xor_sc_validation-python.py": {
+    "mtime": 1779676235.8596778,
+    "ast_hash": "3ae6dace7978c6d4f7c3afc7f4ca1a92",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/xor_sc_acquisition.py": {
+    "mtime": 1779676235.8593774,
+    "ast_hash": "3081beba76af4da0563ffcf24674b25c",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/align3dtest.py": {
+    "mtime": 1779676235.8588862,
+    "ast_hash": "b22abcf9646f0f5a51a25d32f45d65fc",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/ConferenceAcquisition.py": {
+    "mtime": 1779676235.858703,
+    "ast_hash": "07722250984f8272508015bc78ab9103",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/vbpcommon.py": {
+    "mtime": 1779676235.8592727,
+    "ast_hash": "6d241950f7d5c206d2e395f26092dd82",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/connectomes.py": {
+    "mtime": 1779676235.8590024,
+    "ast_hash": "23d74f33f0714e00ec76c69e1f8162d1",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/xor_sc_groundtruth.py": {
+    "mtime": 1779676235.8595977,
+    "ast_hash": "9694c7a20e3baf79d1b341bc93a83cc8",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/xor_sc_emulation.py": {
+    "mtime": 1779676235.8594851,
+    "ast_hash": "6ee6cf86ccf12bf8d76e27a09eb80a96",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/legacy_autoassociative_connectome.py": {
+    "mtime": 1779676235.851511,
+    "ast_hash": "8a47022249766aa6a93189fa5f53efd5",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/gen_autonm_labels.py": {
+    "mtime": 1779676235.8513181,
+    "ast_hash": "c3c681b005b862304deae951d0c51c06",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/autoassociative_reservoir.py": {
+    "mtime": 1779676235.8510416,
+    "ast_hash": "473f467568019728d1c6c636550fa903",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/vbpcommon.py": {
+    "mtime": 1779676235.85198,
+    "ast_hash": "fcf1c974c9af65d17fb2dd49407ee5ba",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/LIFtest.py": {
+    "mtime": 1779676235.850269,
+    "ast_hash": "e53648f11b593ad41018ae1bffbf87cc",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/deletesimtest.py": {
+    "mtime": 1779676235.8511398,
+    "ast_hash": "f7f3d3abeae29f33ca2034ce3e5d1fc8",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/inspect_batch_models.py": {
+    "mtime": 1779676235.8514018,
+    "ast_hash": "118ce718a5c988c7995458281f3c70bc",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/Run.sh": {
+    "mtime": 1779676235.85065,
+    "ast_hash": "1110e414feeb39ef763adb4562f43aab",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/parallel_batch_test.py": {
+    "mtime": 1779676235.8517895,
+    "ast_hash": "8a00ce21d44024aa6ca028470081b12e",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/autoassociative_connectome.py": {
+    "mtime": 1779676235.850868,
+    "ast_hash": "d0bc45a9776b199429819f71e45be85e",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/autoassociative_acquisition.py": {
+    "mtime": 1779676235.8507276,
+    "ast_hash": "cc19a5b4b3eb92a58e75fa81f6316ef1",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/show_resource_checks.py": {
+    "mtime": 1779676235.8518624,
+    "ast_hash": "429995a8ac41e9594a304e5c8aa5ac24",
+    "semantic_hash": ""
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_groundtruth_reservoir.py": {
+    "mtime": 1779676235.8582897,
+    "ast_hash": "07df55522c29a9b83e36b5413d628b24",
+    "semantic_hash": ""
+  },
+  "src/models/xor_lifcnm/vbpcommon.py": {
+    "mtime": 1779676235.8579984,
+    "ast_hash": "7c3b02045c7cedc3bb0d6a51ae8e1d8d",
+    "semantic_hash": ""
+  },
+  "src/models/xor_lifcnm/Run.sh": {
+    "mtime": 1779676235.8578203,
+    "ast_hash": "9b6961c2e02bfa16749da7020c4a04a8",
+    "semantic_hash": ""
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_groundtruth_connectome.py": {
+    "mtime": 1779676235.8581681,
+    "ast_hash": "16f47fd70658bb33ce6fe0fe60adb550",
+    "semantic_hash": ""
+  },
+  "src/models/xor_lifcnm/xor_lifcnm_acquisition_direct.py": {
+    "mtime": 1779676235.8580658,
+    "ast_hash": "74b418c7332652c1e56e7aade6c39216",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/vbpcommon.py": {
+    "mtime": 1779676235.8536472,
+    "ast_hash": "6d241950f7d5c206d2e395f26092dd82",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/Demo.sh": {
+    "mtime": 1779676235.8522024,
+    "ast_hash": "d477bb02557ed77e16c28f39ac49e62d",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/bs_vbp00_groundtruth_xi_sampleprep.py": {
+    "mtime": 1779676235.8524146,
+    "ast_hash": "35b159c0a0db7f76d1601509a96b4060",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/bs_vbp01_doubleblind_x_acquisition.py": {
+    "mtime": 1779676235.8525805,
+    "ast_hash": "88ca5ebca175559d646d52da438680ba",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/prototyping/vbpcommon.py": {
+    "mtime": 1779676235.8534808,
+    "ast_hash": "4a79837dc90bb3c103489767025f6992",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/prototyping/bs_vbp03_emulation_iii_validation.py": {
+    "mtime": 1779676235.8532996,
+    "ast_hash": "ddf3cef0d98b7e5a3504029d0e2f265c",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/prototyping/bs_vbp02_translation_iv_system_identification.py": {
+    "mtime": 1779676235.8531713,
+    "ast_hash": "172ca5c652a1bdcd029f933a16feabde",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/prototyping/bs_vbp00_groundtruth_xi_sampleprep.py": {
+    "mtime": 1779676235.8528564,
+    "ast_hash": "b5333571c7046fa016fbd1dfb509a1b3",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/prototyping/bs_vbp01_doubleblind_x_acquisition.py": {
+    "mtime": 1779676235.8530378,
+    "ast_hash": "c78bab4126c60849002d78928f94deda",
+    "semantic_hash": ""
+  },
+  "src/models/e3_aifinch/aifinch_vbp0_groundtruth.py": {
+    "mtime": 1779676235.853861,
+    "ast_hash": "10f31b2f51e71265378958b494f27fbb",
+    "semantic_hash": ""
+  },
+  "src/models/e3_aifinch/aifinch_vbp1_acquisition.py": {
+    "mtime": 1779676235.8539698,
+    "ast_hash": "89b4a33bb6393125214da997de481928",
+    "semantic_hash": ""
+  },
+  "src/models/e3_aifinch/aifinch_vbp3_emulation.py": {
+    "mtime": 1779676235.8543887,
+    "ast_hash": "4fc71f3040be21c3a000df755af7bb1a",
+    "semantic_hash": ""
+  },
+  "src/models/e3_aifinch/aifinch_vbp2_translation.py": {
+    "mtime": 1779676235.8541365,
+    "ast_hash": "45c5186fd014ba2d53310e5ce9165c21",
+    "semantic_hash": ""
+  },
+  "src/models/test_neurite_diameters/groundtruth_reservoir.py": {
+    "mtime": 1779676235.8562841,
+    "ast_hash": "0a65ad88473e32c0cc5be54d387ef396",
+    "semantic_hash": ""
+  },
+  "src/models/test_neurite_diameters/vbpcommon.py": {
+    "mtime": 1779676235.8565037,
+    "ast_hash": "6d241950f7d5c206d2e395f26092dd82",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/vbpcommon.py": {
+    "mtime": 1779676235.8557932,
+    "ast_hash": "cd487440612e4c1064f7aaeac09de23f",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/Run.sh": {
+    "mtime": 1779676235.8549373,
+    "ast_hash": "7f9ba60f33a9092158f3acfc74cf4cf6",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/Loop.py": {
+    "mtime": 1779676235.854724,
+    "ast_hash": "abdcac5d46992e49ebbfd214ead0e62a",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/xor_scnm_acquisition_direct.py": {
+    "mtime": 1779676235.8559337,
+    "ast_hash": "2d7c6dcd087b3fce8c3f47b81cfbc574",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/full_adder_lifc.py": {
+    "mtime": 1779676235.8552186,
+    "ast_hash": "07f2783e1cf29ca49aa695d66b902676",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/xor_bs_groundtruth_simplified.py": {
+    "mtime": 1779676235.8574445,
+    "ast_hash": "18347aa1bb82267c3b0f863d41d07eef",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/xor_bs_acquisition.py": {
+    "mtime": 1779676235.8569162,
+    "ast_hash": "ff16d23869e3315134a8e7c9a5005815",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/xor_bs_simplified.py": {
+    "mtime": 1779676235.8575408,
+    "ast_hash": "727470e30a796eec4dc37d0c5b97eaa3",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/vbpcommon.py": {
+    "mtime": 1779676235.8568308,
+    "ast_hash": "6d241950f7d5c206d2e395f26092dd82",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/xor_bs_groundtruth.py": {
+    "mtime": 1779676235.8573523,
+    "ast_hash": "ee767b1766618cfacfe8131276f4d7e5",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/sub1_acquisition.py": {
+    "mtime": 1779676235.863029,
+    "ast_hash": "ea67099579e502c8a11868f317758b8a",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/vbpcommon.py": {
+    "mtime": 1779676235.863276,
+    "ast_hash": "7c3b02045c7cedc3bb0d6a51ae8e1d8d",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/sub2_acquisition.py": {
+    "mtime": 1779676235.8631659,
+    "ast_hash": "5678425fc7bcb79f165f8ff4dc8966f7",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/acquisition_template.py": {
+    "mtime": 1779676235.8601923,
+    "ast_hash": "52ebc33f96d87185ebb1045def1ccb86",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/Run.sh": {
+    "mtime": 1779676235.8600729,
+    "ast_hash": "b4630d25123a04599e5b519851db97f1",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/xor_scnm_groundtruth_reservoir.py": {
+    "mtime": 1779676235.863589,
+    "ast_hash": "2f581d8141ab34946ee5dcd0e4fbe7c2",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/xor_scnm_groundtruth_connectome.py": {
+    "mtime": 1779676235.863474,
+    "ast_hash": "8652988bce78c0e82d61522f107dd467",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/xor_scnm_acquisition_direct.py": {
+    "mtime": 1779676235.8633664,
+    "ast_hash": "3410c6f71e758f513b45c1d5107f8fd4",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/optimization/test_parameter_combinations.py": {
+    "mtime": 1779676235.8628561,
+    "ast_hash": "2fbeb97feda646534779d5627a6df89c",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/optimization/bayesian_optimization.py": {
+    "mtime": 1779676235.8621533,
+    "ast_hash": "73ddba0b3337cf87939deb5664e68336",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/optimization/generate_parameter_sweep.py": {
+    "mtime": 1779676235.8626184,
+    "ast_hash": "5a45a8f954d51cc7eacec5f04e1ff9ee",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/netmorph2obj.py": {
+    "mtime": 1779676235.860489,
+    "ast_hash": "3029dbed6c59e8bd21315f2163fd5578",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/netmorph2nes.py": {
+    "mtime": 1779676235.86036,
+    "ast_hash": "b2a3c9ce003deffb33f10bb2367de727",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth.py": {
+    "mtime": 1779676235.8608944,
+    "ast_hash": "c97e0dc3e53a7146601285bff9180109",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth-batched.py": {
+    "mtime": 1779676235.8607767,
+    "ast_hash": "3a0a959ffcf3ffb15024377ceeecb8c6",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_groundtruth_direct.py": {
+    "mtime": 1779676235.8609889,
+    "ast_hash": "038f3d01d15e715fce427c11d12ace7e",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/objcurves.py": {
+    "mtime": 1779676235.8605573,
+    "ast_hash": "5afc1537702d16681d5df6b364c5fb65",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/legacy/xor_scnm_acquisition.py": {
+    "mtime": 1779676235.860639,
+    "ast_hash": "6ba411facfb1dc47a7e0ee58a500db59",
+    "semantic_hash": ""
+  },
+  "src/components/IF_with_stdp.py": {
+    "mtime": 1779676235.8436131,
+    "ast_hash": "ffe99ed2355c4723cee7531b8224c856",
+    "semantic_hash": ""
+  },
+  "src/components/psp_test.py": {
+    "mtime": 1779676235.8491044,
+    "ast_hash": "35395a7cd037ea3159a47d6ad79f14ca",
+    "semantic_hash": ""
+  },
+  "src/components/normalized_double_exponential_plot.py": {
+    "mtime": 1779676235.8459895,
+    "ast_hash": "656de6b44bbc795b663461a7d0b362e4",
+    "semantic_hash": ""
+  },
+  "src/components/normalized_psp_kernels.py": {
+    "mtime": 1779676235.8460786,
+    "ast_hash": "fb44333b269a59974931c263c9167c3d",
+    "semantic_hash": ""
+  },
+  "src/components/IF_with_stdp.cpp": {
+    "mtime": 1779676235.8434737,
+    "ast_hash": "037edb7ae43f863349013930a64aa0f7",
+    "semantic_hash": ""
+  },
+  "src/components/improved_stdp.py": {
+    "mtime": 1779676235.8459134,
+    "ast_hash": "0675b460dc41f54a90ca79405318ecd3",
+    "semantic_hash": ""
+  },
+  "src/components/exponential_Euler.py": {
+    "mtime": 1779676235.845847,
+    "ast_hash": "69743688b9530b248a38df3310d2f4d1",
+    "semantic_hash": ""
+  },
+  "src/components/visualize_recorded.py": {
+    "mtime": 1779676235.8498511,
+    "ast_hash": "b5be356c83d3c34179a5fd80acfb33f5",
+    "semantic_hash": ""
+  },
+  "src/components/bbox_test.py": {
+    "mtime": 1779676235.8449972,
+    "ast_hash": "de2d6ea59d86247eda0c1de4f7384b2b",
+    "semantic_hash": ""
+  },
+  "src/components/test_receptors.py": {
+    "mtime": 1779676235.849441,
+    "ast_hash": "8ec042ef69b2d917818a15f016e4b009",
+    "semantic_hash": ""
+  },
+  "src/components/test_drawing.py": {
+    "mtime": 1779676235.849365,
+    "ast_hash": "4779cee3daf7e6a4003032e1231232e0",
+    "semantic_hash": ""
+  },
+  "src/components/psp_cond_test.py": {
+    "mtime": 1779676235.8490367,
+    "ast_hash": "490773f7cbe438b20f5c8b07e5edbb38",
+    "semantic_hash": ""
+  },
+  "src/components/stdp.py": {
+    "mtime": 1779676235.8492937,
+    "ast_hash": "0af10b694a067e2583983525718355ff",
+    "semantic_hash": ""
+  },
+  "src/components/psp_cond_pyr_int.py": {
+    "mtime": 1779676235.8489652,
+    "ast_hash": "c631b592c19eec1c220aea7d1e5483d9",
+    "semantic_hash": ""
+  },
+  "src/components/vilo-task4-constrained-estimation.py": {
+    "mtime": 1779676235.8495395,
+    "ast_hash": "b16234b97bb810607a5331ad0958e177",
+    "semantic_hash": ""
+  },
+  "src/components/visualize_connections.py": {
+    "mtime": 1779676235.8497446,
+    "ast_hash": "286101074fcd039e2cb7a63e89fc11c4",
+    "semantic_hash": ""
+  },
+  "src/components/IF_test.py": {
+    "mtime": 1779676235.843348,
+    "ast_hash": "4b3ad92eb1433d0a44a735864362a822",
+    "semantic_hash": ""
+  },
+  "src/components/IF_normalized.py": {
+    "mtime": 1779676235.843236,
+    "ast_hash": "9cfd8e7b083e73a2aa670d54ac575153",
+    "semantic_hash": ""
+  },
+  "src/components/visualize_cells.py": {
+    "mtime": 1779676235.8496752,
+    "ast_hash": "6e311a84db0aeb44991211b12d717db7",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_N1.py": {
+    "mtime": 1779676235.8474915,
+    "ast_hash": "774fd4dd86b82b69a88b88a54c73f4cb",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_P3.py": {
+    "mtime": 1779676235.8477917,
+    "ast_hash": "b7e783bba5efae715f28712a14453179",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/System.py": {
+    "mtime": 1779676235.848269,
+    "ast_hash": "a65ae378210a3c75d8201f1cff1d2757",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_N4.py": {
+    "mtime": 1779676235.8477135,
+    "ast_hash": "3f82ae25e54c82ed26fe1405e7850e8d",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/KGTRecords.py": {
+    "mtime": 1779676235.84714,
+    "ast_hash": "58bf593eed49485bf32aea851ff74c38",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Region.py": {
+    "mtime": 1779676235.847973,
+    "ast_hash": "e67b70fcf229b97ed1ba392e1b9ab2a7",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Calcium_Imaging.py": {
+    "mtime": 1779676235.8466718,
+    "ast_hash": "49b29bc7f0d30e5aa9e4156eaf0805db",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_C8.py": {
+    "mtime": 1779676235.847384,
+    "ast_hash": "429bad2502dbf34df89f5a14c4788526",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/BS_Aligned_NC.py": {
+    "mtime": 1779676235.846314,
+    "ast_hash": "04b5866b80b673d9b7c1c2c83c6e3bd6",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/BS_Morphology.py": {
+    "mtime": 1779676235.846429,
+    "ast_hash": "2d094c00f617f9ae9f8867dc8a4e6bfe",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Electrodes.py": {
+    "mtime": 1779676235.8468587,
+    "ast_hash": "4af264a6c07645cacad258974aeebbd5",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Geometry.py": {
+    "mtime": 1779676235.846937,
+    "ast_hash": "dff906efa7136ce3ef23e04a11dd54b1",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/NMDA_Receptor.py": {
+    "mtime": 1779676235.8479004,
+    "ast_hash": "8fcde0df4dca1db9ce611b1d08dad2f1",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/SynTr_Quantal_Release.py": {
+    "mtime": 1779676235.848138,
+    "ast_hash": "9bdb9731caf7f42077457cbcf3d7715c",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/SignalFunctions.py": {
+    "mtime": 1779676235.848065,
+    "ast_hash": "5b8ee63716d6bee585ed0a02d35d88bd",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_C11.py": {
+    "mtime": 1779676235.8472261,
+    "ast_hash": "ced40ef18c267d89d99de523ebe26e2c",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_N3.py": {
+    "mtime": 1779676235.8476298,
+    "ast_hash": "0193a5f58b7292350c7baffa74730a6f",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_C4.py": {
+    "mtime": 1779676235.847303,
+    "ast_hash": "a00f1bf93be1037409a6f2942ddada14",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Metrics_N2.py": {
+    "mtime": 1779676235.8475559,
+    "ast_hash": "2c76bbe93526431140a4c99d48ad5d39",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/AMPA_Receptor.py": {
+    "mtime": 1779676235.8462188,
+    "ast_hash": "1457c5fd8306ea09bbd9d08a3b2171d1",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/Data.py": {
+    "mtime": 1779676235.8467588,
+    "ast_hash": "79e79a2ad7fd4cc8849b6664579f9a47",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/BS_Neuron.py": {
+    "mtime": 1779676235.8465567,
+    "ast_hash": "05cff3a9253e0b2d68ec31f5e75143fb",
+    "semantic_hash": ""
+  },
+  "src/components/prototyping/IFneuron.py": {
+    "mtime": 1779676235.847035,
+    "ast_hash": "277bab0a18f679b90983cbe11cf696cb",
+    "semantic_hash": ""
+  },
+  "src/components/common/Neuron.py": {
+    "mtime": 1779676235.8452895,
+    "ast_hash": "ce4235ca0f71fd20948a4b23ac759a9c",
+    "semantic_hash": ""
+  },
+  "src/components/common/_BSAlignedNC.py": {
+    "mtime": 1779676235.8455625,
+    "ast_hash": "7efcc8f4141d07d2db99c3278d007dc4",
+    "semantic_hash": ""
+  },
+  "src/components/common/NeuralCircuit.py": {
+    "mtime": 1779676235.8452199,
+    "ast_hash": "18db3d9c9a442d13aa05334a3b135a59",
+    "semantic_hash": ""
+  },
+  "src/components/common/glb.py": {
+    "mtime": 1779676235.84577,
+    "ast_hash": "920d635238be0a782424f6a15d89b4f0",
+    "semantic_hash": ""
+  },
+  "src/components/common/Common_Parameters.py": {
+    "mtime": 1779676235.8451357,
+    "ast_hash": "4caae77b39e057789827ba88972c24ed",
+    "semantic_hash": ""
+  },
+  "src/components/common/Spatial.py": {
+    "mtime": 1779676235.845471,
+    "ast_hash": "efec52c2278add8c7961845ac0737d53",
+    "semantic_hash": ""
+  },
+  "src/components/common/_Geometry.py": {
+    "mtime": 1779676235.8456755,
+    "ast_hash": "50cc34fe4f4ab4e06db7cf2f98171d67",
+    "semantic_hash": ""
+  },
+  "src/components/pyBrainGenixClient/SimpleTest.py": {
+    "mtime": 1779676235.8492277,
+    "ast_hash": "0660d6433384d62139dc4430240617cb",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/Metrics_N1.py": {
+    "mtime": 1779676235.84432,
+    "ast_hash": "a90a14a9df214a719d0c0b42e465d588",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/System.py": {
+    "mtime": 1779676235.8448043,
+    "ast_hash": "9525ce750ccb51ff5edbaecb9b1509fd",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/KGTRecords.py": {
+    "mtime": 1779676235.8442101,
+    "ast_hash": "a9d200b7b180cd015bc3d3b9370f7518",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/NES_AMPA_Receptor.py": {
+    "mtime": 1779676235.8444233,
+    "ast_hash": "ad2fcbd64636d609f815f5e7a45e7ab5",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/Region.py": {
+    "mtime": 1779676235.8446252,
+    "ast_hash": "5f9fc3c43859aade75d86b669a435f3d",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/BS_Aligned_NC.py": {
+    "mtime": 1779676235.8437374,
+    "ast_hash": "b505d7ed0656b5de6c5261e08a084d7b",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/BS_Morphology.py": {
+    "mtime": 1779676235.8438313,
+    "ast_hash": "c06e9ecf7ae3e95da8c7ba858c3bff07",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/Geometry.py": {
+    "mtime": 1779676235.8440778,
+    "ast_hash": "c236ac8446ee24fbeafd9b2fcdf90633",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/NMDA_Receptor.py": {
+    "mtime": 1779676235.8445337,
+    "ast_hash": "8fcde0df4dca1db9ce611b1d08dad2f1",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/SynTr_Quantal_Release.py": {
+    "mtime": 1779676235.8447285,
+    "ast_hash": "9bdb9731caf7f42077457cbcf3d7715c",
+    "semantic_hash": ""
+  },
+  "src/components/NES_interfaces/BS_Neuron.py": {
+    "mtime": 1779676235.8439474,
+    "ast_hash": "260d362b3a76c242b1c479e3b09c0c60",
+    "semantic_hash": ""
+  },
+  "modules-versions-20250116-rkoene.txt": {
+    "mtime": 1779676235.8427167,
+    "ast_hash": "5583ec7d51236fd5d2e0c60e4df068ce",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1779676235.8429627,
+    "ast_hash": "5204bfa85b8f0ac4f369252c39f213cd",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1779676235.8222978,
+    "ast_hash": "569c265f3d043cafa30aa65df5a2405b",
+    "semantic_hash": ""
+  },
+  "modules-versions-20250116-kstafford.txt": {
+    "mtime": 1779676235.842637,
+    "ast_hash": "56ec68fee0147019f194350faf3b4f95",
+    "semantic_hash": ""
+  },
+  "agent notes/agent-session-notes-2026-05-09.md": {
+    "mtime": 1779676235.8228252,
+    "ast_hash": "728f8d0ed4c45d2228af36c28f153d5b",
+    "semantic_hash": ""
+  },
+  "doc/e0_bs.md": {
+    "mtime": 1779676235.831486,
+    "ast_hash": "fef68475c7bec16a88b93f5cdb30e9f7",
+    "semantic_hash": ""
+  },
+  "doc/Notes-on-taking-the-challenge.md": {
+    "mtime": 1779676235.8234446,
+    "ast_hash": "dcfbadaee4cb1e097ddd6e969eb19c28",
+    "semantic_hash": ""
+  },
+  "doc/e3_aifinch.md": {
+    "mtime": 1779676235.833717,
+    "ast_hash": "e65b3655b923f897736d9eda08837a1a",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/README.md": {
+    "mtime": 1779676235.8348565,
+    "ast_hash": "b0ad8be0227b4156ce23d46a23d51cbb",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/README.md": {
+    "mtime": 1779676235.8244982,
+    "ast_hash": "b0ad8be0227b4156ce23d46a23d51cbb",
+    "semantic_hash": ""
+  },
+  "graphify/README.md": {
+    "mtime": 1779682688.389247,
+    "ast_hash": "0c4029db503c0a8732671eda3195351d",
+    "semantic_hash": ""
+  },
+  "Challenge/examples/README.md": {
+    "mtime": 1779676235.8212795,
+    "ast_hash": "c56e46fe3615e55182a598a0d8ae913c",
+    "semantic_hash": ""
+  },
+  "src/models/README.md": {
+    "mtime": 1779676235.8500082,
+    "ast_hash": "8539b5846aa0725710fb8b01e1ef52d0",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/fishsource.txt": {
+    "mtime": 1779676235.859105,
+    "ast_hash": "e156ef7067d7ca8f8262cfd07c5ac0e4",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/README.md": {
+    "mtime": 1779676235.858786,
+    "ast_hash": "0f787fbab944bb3e5b01c178c09de139",
+    "semantic_hash": ""
+  },
+  "src/models/xor_sc/fishtarget.txt": {
+    "mtime": 1779676235.8592052,
+    "ast_hash": "19a392a4ed1265f03bf017965dc2b509",
+    "semantic_hash": ""
+  },
+  "src/models/autoassociative/README.md": {
+    "mtime": 1779676235.8505454,
+    "ast_hash": "468585d009b30e96254305741df72357",
+    "semantic_hash": ""
+  },
+  "src/models/e0_bs/README.md": {
+    "mtime": 1779676235.852267,
+    "ast_hash": "92c8deb569228eb30980fe78156814d0",
+    "semantic_hash": ""
+  },
+  "src/models/test_neurite_diameters/README.md": {
+    "mtime": 1779676235.8561475,
+    "ast_hash": "818c225ddae2054395422860b3062f82",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/validation_results.md": {
+    "mtime": 1779676235.855654,
+    "ast_hash": "80970721777c9d360987131800e64186",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/README.md": {
+    "mtime": 1779676235.854819,
+    "ast_hash": "468585d009b30e96254305741df72357",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/experiment_log.md": {
+    "mtime": 1779676235.855041,
+    "ast_hash": "c25f1f11279ae287622b6517818aded8",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/Readme.md": {
+    "mtime": 1779676235.856748,
+    "ast_hash": "0f6021997aae1335d045d6cc92c0040a",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/README.md": {
+    "mtime": 1779676235.8599794,
+    "ast_hash": "abf0b45ac22862f8e9809d83cd17188e",
+    "semantic_hash": ""
+  },
+  "src/models/xor_scnm/optimization/README.md": {
+    "mtime": 1779676235.8620076,
+    "ast_hash": "e5aeecfa44fcf2dbfc263594038e8011",
+    "semantic_hash": ""
+  },
+  "src/components/common/README.md": {
+    "mtime": 1779676235.8453634,
+    "ast_hash": "bf55af718f4ead2b92c3475dbfa34054",
+    "semantic_hash": ""
+  },
+  "doc/validated_brain_emulation_in_silico.pdf": {
+    "mtime": 1779676235.8425262,
+    "ast_hash": "eae093ce7c037489186bbcf3dea93d97",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/main.pdf": {
+    "mtime": 1779676235.8406453,
+    "ast_hash": "eb40b20fb00a88c22d971d7bae52e53c",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/example_figure.pdf": {
+    "mtime": 1779676235.837566,
+    "ast_hash": "c0bf758d0da578882c997acefe1c6b9a",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/main.pdf": {
+    "mtime": 1779676235.8306904,
+    "ast_hash": "67daf0e83151b476928bc6ccda482bad",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/example_figure.pdf": {
+    "mtime": 1779676235.8272924,
+    "ast_hash": "c0bf758d0da578882c997acefe1c6b9a",
+    "semantic_hash": ""
+  },
+  "src/models/full_adder_lifc/full_adder_validation_plot.pdf": {
+    "mtime": 1779676235.8553824,
+    "ast_hash": "ae9920759efc59e4dbd7eee8eebb3e5e",
+    "semantic_hash": ""
+  },
+  "doc/Deriving-whole-brain-emulation.png": {
+    "mtime": 1779676235.8233109,
+    "ast_hash": "259f5921c78825a270349df9b24c0df8",
+    "semantic_hash": ""
+  },
+  "doc/e0_bs_recorded.png": {
+    "mtime": 1779676235.8335276,
+    "ast_hash": "5279dcae8d5f14463f350c83d6d4dd0b",
+    "semantic_hash": ""
+  },
+  "doc/e0_bs.png": {
+    "mtime": 1779676235.83205,
+    "ast_hash": "c40597b483c1768026a4a7529ccaebc3",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/Deriving-whole-brain-emulation.png": {
+    "mtime": 1779676235.8355122,
+    "ast_hash": "259f5921c78825a270349df9b24c0df8",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/e0_bs_recorded.png": {
+    "mtime": 1779676235.8363092,
+    "ast_hash": "5279dcae8d5f14463f350c83d6d4dd0b",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/e0_bs.png": {
+    "mtime": 1779676235.8361049,
+    "ast_hash": "c40597b483c1768026a4a7529ccaebc3",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/VBP_System_Architecture_Overview.drawio.png": {
+    "mtime": 1779676235.8347464,
+    "ast_hash": "8a01c92e5b1e4fe3f0f0eba8b1d24997",
+    "semantic_hash": ""
+  },
+  "doc/validated-brain-emulation-in-silico/Figures/VBP_EM_Render_Pipeline.drawio.png": {
+    "mtime": 1779676235.8344035,
+    "ast_hash": "ddc306f806322406b3388dfc3e2bf21f",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/Deriving-whole-brain-emulation.png": {
+    "mtime": 1779676235.8251166,
+    "ast_hash": "259f5921c78825a270349df9b24c0df8",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/to-animal-brains.jpg": {
+    "mtime": 1779676235.828141,
+    "ast_hash": "31958893c72046ac142f22e5e9deeac0",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/e0_bs_recorded.png": {
+    "mtime": 1779676235.8261106,
+    "ast_hash": "5279dcae8d5f14463f350c83d6d4dd0b",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/e0_bs.png": {
+    "mtime": 1779676235.8259192,
+    "ast_hash": "c40597b483c1768026a4a7529ccaebc3",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/success-criteria.jpg": {
+    "mtime": 1779676235.8279755,
+    "ast_hash": "9d68847f32bf43e18d6babcd4c39f9d8",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/VBP_System_Architecture_Overview.drawio.png": {
+    "mtime": 1779676235.8243954,
+    "ast_hash": "8a01c92e5b1e4fe3f0f0eba8b1d24997",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/VBP_EM_Render_Pipeline.drawio.png": {
+    "mtime": 1779676235.824054,
+    "ast_hash": "ddc306f806322406b3388dfc3e2bf21f",
+    "semantic_hash": ""
+  },
+  "doc/a-whole-brain-emulation-challenge/Figures/challenge-process.jpg": {
+    "mtime": 1779676235.8253238,
+    "ast_hash": "e4990270b5592e553e1ff4d1eae02a11",
+    "semantic_hash": ""
+  },
+  "src/models/xor_bs/xor_bs_circuit.jpg": {
+    "mtime": 1779676235.8571465,
+    "ast_hash": "4f7bc45d7b6c94dc4c0d5342dd7f7455",
+    "semantic_hash": ""
+  }
+}

@@ -1,0 +1,1252 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_if_with_stdp_py",
+      "label": "IF_with_stdp.py",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_if_with_stdp_netmorph_syn",
+      "label": "Netmorph_Syn",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L68"
+    },
+    {
+      "id": "components_if_with_stdp_netmorph_syn_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "components_if_with_stdp_compute_normalization",
+      "label": "compute_normalization()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L95"
+    },
+    {
+      "id": "components_if_with_stdp_g_norm",
+      "label": "g_norm()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L102"
+    },
+    {
+      "id": "components_if_with_stdp_presyn",
+      "label": "PreSyn",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L128"
+    },
+    {
+      "id": "components_if_with_stdp_presyn_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L129"
+    },
+    {
+      "id": "components_if_with_stdp_presyn_b_nmda",
+      "label": ".B_NMDA()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L176"
+    },
+    {
+      "id": "components_if_with_stdp_presyn_update",
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L181"
+    },
+    {
+      "id": "components_if_with_stdp_presyn_stdp_update",
+      "label": ".stdp_update()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L189"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron",
+      "label": "IF_neuron",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L216"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L217"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_set_presyn",
+      "label": ".set_presyn()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L336"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_spike",
+      "label": ".spike()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L339"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_check_spiking",
+      "label": ".check_spiking()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L374"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_conductances",
+      "label": ".update_conductances()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L387"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_currents",
+      "label": ".update_currents()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L416"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_membrane_potential_forward_euler",
+      "label": ".update_membrane_potential_forward_Euler()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L428"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "label": ".update_membrane_potential_exponential_Euler_Rm()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L434"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "label": ".update_membrane_potential_exponential_Euler_Cm()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L442"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_adaptive_threshold",
+      "label": ".update_adaptive_threshold()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L455"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "label": ".update_with_classical_reset_clamp()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L466"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "label": ".update_with_reset_options()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L480"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_update",
+      "label": ".update()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L516"
+    },
+    {
+      "id": "components_if_with_stdp_if_neuron_record",
+      "label": ".record()",
+      "file_type": "code",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L531"
+    },
+    {
+      "id": "components_if_with_stdp_rationale_103",
+      "label": "Compute total synaptic conductance at time t from all spikes.     The history_de",
+      "file_type": "rationale",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "components_if_with_stdp_rationale_190",
+      "label": "Computes the synaptic weight change using an exponential STDP rule.         Retu",
+      "file_type": "rationale",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L190"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "time",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "components_if_with_stdp_netmorph_syn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L68",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_netmorph_syn",
+      "target": "components_if_with_stdp_netmorph_syn_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "components_if_with_stdp_compute_normalization",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L95",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "components_if_with_stdp_g_norm",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "components_if_with_stdp_presyn",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L128",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn",
+      "target": "components_if_with_stdp_presyn_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn",
+      "target": "components_if_with_stdp_presyn_b_nmda",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L176",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn",
+      "target": "components_if_with_stdp_presyn_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L181",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn",
+      "target": "components_if_with_stdp_presyn_stdp_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L189",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_if_with_stdp_py",
+      "target": "components_if_with_stdp_if_neuron",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L217",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_set_presyn",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L336",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_spike",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L339",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_check_spiking",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L374",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_conductances",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L387",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_currents",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L416",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_forward_euler",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L428",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L434",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L442",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_adaptive_threshold",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L455",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L466",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L480",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_update",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L516",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron",
+      "target": "components_if_with_stdp_if_neuron_record",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L531",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn_init",
+      "target": "components_if_with_stdp_compute_normalization",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn_update",
+      "target": "components_if_with_stdp_presyn_b_nmda",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_presyn_update",
+      "target": "components_if_with_stdp_g_norm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_init",
+      "target": "components_if_with_stdp_compute_normalization",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L315",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_spike",
+      "target": "components_if_with_stdp_presyn_stdp_update",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L372",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_check_spiking",
+      "target": "components_if_with_stdp_if_neuron_spike",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L377",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_conductances",
+      "target": "components_if_with_stdp_if_neuron_update",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L392",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_conductances",
+      "target": "components_if_with_stdp_g_norm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L396",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "target": "components_if_with_stdp_if_neuron_update_currents",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L467",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_forward_euler",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L473",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "target": "components_if_with_stdp_if_neuron_update_adaptive_threshold",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L475",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "target": "components_if_with_stdp_if_neuron_check_spiking",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L490",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L494",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_update_currents",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L499",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_update_membrane_potential_forward_euler",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L501",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_update_adaptive_threshold",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L503",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "target": "components_if_with_stdp_if_neuron_check_spiking",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L514",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update",
+      "target": "components_if_with_stdp_if_neuron_update_conductances",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L522",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update",
+      "target": "components_if_with_stdp_if_neuron_update_with_classical_reset_clamp",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L525",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_if_neuron_update",
+      "target": "components_if_with_stdp_if_neuron_update_with_reset_options",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L527",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_rationale_103",
+      "target": "components_if_with_stdp_g_norm",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L103",
+      "weight": 1.0
+    },
+    {
+      "source": "components_if_with_stdp_rationale_190",
+      "target": "components_if_with_stdp_presyn_stdp_update",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L190",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_if_with_stdp_netmorph_syn_init",
+      "callee": "int",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L77"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_compute_normalization",
+      "callee": "ValueError",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L97"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_compute_normalization",
+      "callee": "log",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L98"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_compute_normalization",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L99"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_compute_normalization",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L99"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_g_norm",
+      "callee": "reversed",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L119"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_g_norm",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L122"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_g_norm",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L122"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L164"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L165"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L165"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L166"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L166"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L167"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L167"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L168"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L169"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L169"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L170"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L170"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L171"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L171"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L173"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_b_nmda",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_update",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L184"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_update",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L186"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_stdp_update",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L196"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_stdp_update",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L205"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_presyn_stdp_update",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L207"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L220"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L220"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L234"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L236"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L305"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L306"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L307"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L308"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L309"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L310"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "zeros",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L312"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L319"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L319"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L320"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L320"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L321"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L321"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L323"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L323"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L324"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L324"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L325"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L325"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L327"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L327"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L328"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L328"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L329"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L329"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L331"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L331"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L332"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L332"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_init",
+      "callee": "str",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L333"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_spike",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L344"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_check_spiking",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L375"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_check_spiking",
+      "callee": "pop",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L378"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_conductances",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L398"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_conductances",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L404"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_conductances",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L410"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_conductances",
+      "callee": "max",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L413"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_conductances",
+      "callee": "min",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L413"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L436"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L438"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L439"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_rm",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L440"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L444"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "callee": "sum",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L450"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_membrane_potential_exponential_euler_cm",
+      "callee": "exp",
+      "is_member_call": true,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L453"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update_adaptive_threshold",
+      "callee": "max",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L459"
+    },
+    {
+      "caller_nid": "components_if_with_stdp_if_neuron_update",
+      "callee": "max",
+      "is_member_call": false,
+      "source_file": "src/components/IF_with_stdp.py",
+      "source_location": "L520"
+    }
+  ]
+}

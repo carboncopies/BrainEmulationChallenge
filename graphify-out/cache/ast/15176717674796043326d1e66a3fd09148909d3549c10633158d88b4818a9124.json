@@ -1,0 +1,962 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "label": "xor_sc_groundtruth.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "label": "set_connection_data()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146"
+    },
+    {
+      "id": "float",
+      "label": "float",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "label": "set_neuron_soma()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L170"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "label": "dendrite_root_start_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L177"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "label": "axon_root_start_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L180"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_axon_root_end_np",
+      "label": "axon_root_end_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L183"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "label": "set_neuron_dendrite_branch()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "label": "set_neuron_axon_branch()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "label": "branch_intersect_receptor_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L204"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "label": "dendrite_branch_deflected_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L207"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "label": "dendrite_point_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L210"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_dendrite_branch_points_np",
+      "label": "set_dendrite_branch_points_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L221"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "label": "axon_point_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L225"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_set_axon_branch_points_np",
+      "label": "set_axon_branch_points_np()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L238"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_make_shape",
+      "label": "make_shape()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L381"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_neuron_builder",
+      "label": "neuron_builder()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L447"
+    },
+    {
+      "id": "xor_sc_xor_sc_groundtruth_find_cell_with_id",
+      "label": "find_cell_with_id()",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L569"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L569"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "json",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L146",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L177",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L180",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_axon_root_end_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_root_end_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L204",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L207",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L207",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "target": "float",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L207",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_dendrite_branch_points_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_dendrite_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_dendrite_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L221",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L225",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_set_axon_branch_points_np",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_axon_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_axon_branch_points_np",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L238",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_make_shape",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L381",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_neuron_builder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L447",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_neuron_builder",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L447",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_sc_xor_sc_groundtruth_py",
+      "target": "xor_sc_xor_sc_groundtruth_find_cell_with_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L569",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_find_cell_with_id",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L569",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_find_cell_with_id",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L569",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L213",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L215",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L217",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_dendrite_branch_points_np",
+      "target": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L228",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_axon_root_end_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "target": "xor_sc_xor_sc_groundtruth_branch_intersect_receptor_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L234",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L236",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_sc_xor_sc_groundtruth_set_axon_branch_points_np",
+      "target": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L239",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_connection_data",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L152"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L174"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_soma",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L175"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_dendrite_root_start_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L178"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_axon_root_start_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L181"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_axon_root_end_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L184"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L191"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L192"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_dendrite_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L193"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L200"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L201"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_set_neuron_axon_branch",
+      "callee": "tolist",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L202"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_dendrite_branch_deflected_np",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L208"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_dendrite_point_np",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L219"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_axon_point_np",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L236"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_make_shape",
+      "callee": "BGNES_sphere_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L384"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_make_shape",
+      "callee": "BGNES_cylinder_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L388"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_make_shape",
+      "callee": "BGNES_box_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L394"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_neuron_builder",
+      "callee": "BGNES_SC_neuron_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L451"
+    },
+    {
+      "caller_nid": "xor_sc_xor_sc_groundtruth_find_cell_with_id",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_sc/xor_sc_groundtruth.py",
+      "source_location": "L570"
+    }
+  ]
+}

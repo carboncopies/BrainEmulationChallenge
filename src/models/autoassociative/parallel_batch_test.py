@@ -285,7 +285,7 @@ while runs_incomplete(batchinfo):
                 sleep(1.0)
                 continue
 
-            if NetmorphStatus == "None":
+            if NetmorphStatus == "None" or NetmorphStatus == "Failed":
                 netmorphrun['status'] = 'failed'
                 print('...a run failed')
             elif NetmorphStatus == "Done":

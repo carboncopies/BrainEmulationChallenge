@@ -1,0 +1,463 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_common_bsalignednc_py",
+      "label": "_BSAlignedNC.py",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc",
+      "label": "_BSAlignedNC",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "neuralcircuit",
+      "label": "NeuralCircuit",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_init_cells",
+      "label": ".init_cells()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L28"
+    },
+    {
+      "id": "geometry",
+      "label": "Geometry",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L28"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_get_cell_centers",
+      "label": ".get_cell_centers()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L40"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "label": ".prepare_Set_Weight()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L46"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_encode",
+      "label": ".Encode()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L64"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_set_spontaneous_activity",
+      "label": ".set_spontaneous_activity()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_to_dict",
+      "label": ".to_dict()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L85"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_from_dict",
+      "label": ".from_dict()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L96"
+    },
+    {
+      "id": "common_bsalignednc_bsalignednc_show",
+      "label": ".show()",
+      "file_type": "code",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L105"
+    },
+    {
+      "id": "common_bsalignednc_rationale_13",
+      "label": "Generate a neural circuit composed of ball-and-stick neurons that are     connec",
+      "file_type": "rationale",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L13"
+    },
+    {
+      "id": "common_bsalignednc_rationale_75",
+      "label": "Expects a list of tuples where each tuple associates a mean and stdev         sp",
+      "file_type": "rationale",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L75"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_common_bsalignednc_py",
+      "target": "src_components_common_geometry_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_bsalignednc_py",
+      "target": "src_components_common_neuralcircuit_py",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_common_bsalignednc_py",
+      "target": "common_bsalignednc_bsalignednc",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "neuralcircuit",
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_init_cells",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_init_cells",
+      "target": "geometry",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_get_cell_centers",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_encode",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_encode",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_encode",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_set_spontaneous_activity",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_to_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_from_dict",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc",
+      "target": "common_bsalignednc_bsalignednc_show",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_init_cells",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_bsalignednc_show",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_rationale_13",
+      "target": "common_bsalignednc_bsalignednc",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "common_bsalignednc_rationale_75",
+      "target": "common_bsalignednc_bsalignednc_set_spontaneous_activity",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L75",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init",
+      "callee": "super",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L21"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L29"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "equal_slice_bounds",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L30"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "self.compObjRef['soma']",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L31"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "self.compObjRef['axon']",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L32"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "self.compObjRef['neuron']",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L33"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_init_cells",
+      "callee": "add_cell",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L38"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_get_cell_centers",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L43"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_get_cell_centers",
+      "callee": "get_cell_center",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L43"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L47"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_prepare_set_weight",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_encode",
+      "callee": "Set_Weight",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L70"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_set_spontaneous_activity",
+      "callee": "Exception",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L82"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_from_dict",
+      "callee": "self.compObjRef['neuron']",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L101"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_from_dict",
+      "callee": "add_cell",
+      "is_member_call": true,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L103"
+    },
+    {
+      "caller_nid": "common_bsalignednc_bsalignednc_show",
+      "callee": "PlotInfo",
+      "is_member_call": false,
+      "source_file": "src/components/common/_BSAlignedNC.py",
+      "source_location": "L106"
+    }
+  ]
+}

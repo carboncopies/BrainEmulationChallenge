@@ -38,6 +38,19 @@ This project is built on the BrainGenix platform for WBE research. We specifical
  - [NES](https://gitlab.braingenix.org/carboncopies/BrainGenix-NES)
  - [API](https://gitlab.braingenix.org/carboncopies/BrainGenix-API)
 
+## Local server integration
+
+For local development, run BrainGenix-API and BrainGenix-NES first, then run challenge scripts against the local API endpoint. The Python dependencies are listed in `requirements.txt`.
+
+Example:
+
+```bash
+python3 -m venv venv
+./venv/bin/pip install -r requirements.txt
+cd src/models/xor_scnm
+./Run.sh -H localhost -P 8000
+```
+
 
 ## License
 

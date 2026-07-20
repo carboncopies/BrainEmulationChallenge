@@ -1,0 +1,1341 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "label": "netmorph2nes.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "legacy_netmorph2nes_make_filenames",
+      "label": "make_filenames()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "legacy_netmorph2nes_alt_load_data_from_file",
+      "label": "alt_load_data_from_file()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "legacy_netmorph2nes_nodedata",
+      "label": "nodedata",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L41"
+    },
+    {
+      "id": "legacy_netmorph2nes_nodedata_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L42"
+    },
+    {
+      "id": "legacy_netmorph2nes_load_data_from_file",
+      "label": "load_data_from_file()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L60"
+    },
+    {
+      "id": "legacy_netmorph2nes_load_netmorph_data",
+      "label": "load_netmorph_data()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L72"
+    },
+    {
+      "id": "legacy_netmorph2nes_vec3d",
+      "label": "vec3d",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L81"
+    },
+    {
+      "id": "legacy_netmorph2nes_vec3d_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L82"
+    },
+    {
+      "id": "legacy_netmorph2nes_vec3d_point",
+      "label": ".point()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L86"
+    },
+    {
+      "id": "legacy_netmorph2nes_segment",
+      "label": "segment",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L89"
+    },
+    {
+      "id": "legacy_netmorph2nes_segment_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L90"
+    },
+    {
+      "id": "legacy_netmorph2nes_make_segments",
+      "label": "make_segments()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "legacy_netmorph2nes_soma",
+      "label": "soma",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L122"
+    },
+    {
+      "id": "legacy_netmorph2nes_soma_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L123"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L123"
+    },
+    {
+      "id": "legacy_netmorph2nes_soma_point",
+      "label": ".point()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L133"
+    },
+    {
+      "id": "legacy_netmorph2nes_make_somas",
+      "label": "make_somas()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L136"
+    },
+    {
+      "id": "legacy_netmorph2nes_synapse",
+      "label": "synapse",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L147"
+    },
+    {
+      "id": "legacy_netmorph2nes_synapse_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L148"
+    },
+    {
+      "id": "legacy_netmorph2nes_synapse_postsyn_receptor_point",
+      "label": ".postsyn_receptor_point()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L168"
+    },
+    {
+      "id": "legacy_netmorph2nes_synapse_presyn_spine_point",
+      "label": ".presyn_spine_point()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L170"
+    },
+    {
+      "id": "legacy_netmorph2nes_make_synapses",
+      "label": "make_synapses()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L173"
+    },
+    {
+      "id": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "label": "netmorph_to_somas_segments_synapses()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L182"
+    },
+    {
+      "id": "legacy_netmorph2nes_neuron",
+      "label": "neuron",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L190"
+    },
+    {
+      "id": "legacy_netmorph2nes_neuron_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L191"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome",
+      "label": "connectome",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L198"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome_init",
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L199"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome_inputs",
+      "label": ".inputs()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L210"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome_clear_shown",
+      "label": ".clear_shown()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L216"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome_show_connections",
+      "label": ".show_connections()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L219"
+    },
+    {
+      "id": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "label": ".show_connections_depth()",
+      "file_type": "code",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_make_filenames",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_make_filenames",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_alt_load_data_from_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_alt_load_data_from_file",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_nodedata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L41",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_nodedata",
+      "target": "legacy_netmorph2nes_nodedata_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_nodedata_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L42",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_load_data_from_file",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_load_data_from_file",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L60",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_load_netmorph_data",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_vec3d",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L81",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_vec3d",
+      "target": "legacy_netmorph2nes_vec3d_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L82",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_vec3d",
+      "target": "legacy_netmorph2nes_vec3d_point",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L86",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_segment",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_segment",
+      "target": "legacy_netmorph2nes_segment_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_segment_init",
+      "target": "legacy_netmorph2nes_nodedata",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_segment_init",
+      "target": "legacy_netmorph2nes_nodedata",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L90",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_make_segments",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L109",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_soma",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_soma",
+      "target": "legacy_netmorph2nes_soma_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_soma_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L123",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_soma",
+      "target": "legacy_netmorph2nes_soma_point",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L133",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_make_somas",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L136",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_synapse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_synapse",
+      "target": "legacy_netmorph2nes_synapse_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_synapse_init",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L148",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_synapse",
+      "target": "legacy_netmorph2nes_synapse_postsyn_receptor_point",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L168",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_synapse",
+      "target": "legacy_netmorph2nes_synapse_presyn_spine_point",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L170",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_make_synapses",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L173",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L182",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_neuron",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_neuron",
+      "target": "legacy_netmorph2nes_neuron_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_neuron_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_neuron_init",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L191",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_scnm_legacy_netmorph2nes_py",
+      "target": "legacy_netmorph2nes_connectome",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L198",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome",
+      "target": "legacy_netmorph2nes_connectome_init",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L199",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome",
+      "target": "legacy_netmorph2nes_connectome_inputs",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L210",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome",
+      "target": "legacy_netmorph2nes_connectome_clear_shown",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L216",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome",
+      "target": "legacy_netmorph2nes_connectome_show_connections",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L219",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome",
+      "target": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L229",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_nodedata_init",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_load_data_from_file",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_load_data_from_file",
+      "target": "legacy_netmorph2nes_nodedata",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_load_netmorph_data",
+      "target": "legacy_netmorph2nes_load_data_from_file",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L76",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_load_netmorph_data",
+      "target": "legacy_netmorph2nes_alt_load_data_from_file",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_segment_init",
+      "target": "legacy_netmorph2nes_vec3d",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L91",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_make_segments",
+      "target": "legacy_netmorph2nes_segment",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L119",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_soma_init",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_make_somas",
+      "target": "legacy_netmorph2nes_soma",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L142",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_synapse_init",
+      "target": "int",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_make_synapses",
+      "target": "legacy_netmorph2nes_synapse",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L178",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "legacy_netmorph2nes_make_filenames",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "legacy_netmorph2nes_load_netmorph_data",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "legacy_netmorph2nes_make_segments",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L185",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "legacy_netmorph2nes_make_somas",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L186",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_netmorph_to_somas_segments_synapses",
+      "target": "legacy_netmorph2nes_make_synapses",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L187",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_init",
+      "target": "legacy_netmorph2nes_neuron",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L203",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L222",
+      "weight": 1.0
+    },
+    {
+      "source": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "target": "str",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L232",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L26"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L27"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "read",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L28"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L29"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L30"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L34"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L35"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L36"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L37"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_alt_load_data_from_file",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L38"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L47"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L48"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L49"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L51"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L53"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L54"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_nodedata_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L58"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L61"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "open",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L62"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "read",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L63"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L64"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L66"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L66"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "split",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L67"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_load_data_from_file",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L68"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "update",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L111"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "update",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L112"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "update",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L113"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "update",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L114"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "items",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L116"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_segments",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L119"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L124"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L124"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L129"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L130"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L131"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_soma_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L132"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_somas",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_somas",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_somas",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L140"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_somas",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L141"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_somas",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L143"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L149"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L150"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L150"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L153"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L154"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L155"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L156"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L157"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_synapse_init",
+      "callee": "float",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L158"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_synapses",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_synapses",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_synapses",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L176"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_synapses",
+      "callee": "range",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L177"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_make_synapses",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L179"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_neuron_init",
+      "callee": "set",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L194"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_neuron_init",
+      "callee": "set",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L195"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_init",
+      "callee": "add",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L208"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_init",
+      "callee": "add",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L209"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_inputs",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L213"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_inputs",
+      "callee": "append",
+      "is_member_call": true,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L214"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_show_connections",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L222"
+    },
+    {
+      "caller_nid": "legacy_netmorph2nes_connectome_show_connections_depth",
+      "callee": "len",
+      "is_member_call": false,
+      "source_file": "src/models/xor_scnm/legacy/netmorph2nes.py",
+      "source_location": "L232"
+    }
+  ]
+}

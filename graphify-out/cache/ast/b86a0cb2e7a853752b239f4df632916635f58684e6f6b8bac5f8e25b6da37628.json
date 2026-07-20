@@ -1,0 +1,128 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_test_drawing_py",
+      "label": "test_drawing.py",
+      "file_type": "code",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_test_drawing_show_voxel",
+      "label": "show_voxel()",
+      "file_type": "code",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L12"
+    },
+    {
+      "id": "components_test_drawing_show_voxels",
+      "label": "show_voxels()",
+      "file_type": "code",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L19"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "matplotlib_pyplot",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "mpl_toolkits_mplot3d",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "prototyping_spatial",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "prototyping_geometry",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "components_test_drawing_show_voxel",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_drawing_py",
+      "target": "components_test_drawing_show_voxels",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "components_test_drawing_show_voxels",
+      "target": "components_test_drawing_show_voxel",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L21",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "components_test_drawing_show_voxel",
+      "callee": "array",
+      "is_member_call": true,
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L14"
+    },
+    {
+      "caller_nid": "components_test_drawing_show_voxel",
+      "callee": "list",
+      "is_member_call": false,
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L14"
+    },
+    {
+      "caller_nid": "components_test_drawing_show_voxel",
+      "callee": "plot_voxel",
+      "is_member_call": false,
+      "source_file": "src/components/test_drawing.py",
+      "source_location": "L17"
+    }
+  ]
+}

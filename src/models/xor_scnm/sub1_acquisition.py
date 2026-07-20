@@ -34,6 +34,7 @@ Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disab
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-runtime_ms", default=500, type=float, help="Runtime of functional experiment (ms)")
 Parser.add_argument("-timeout_s", default=120.0, type=float, help="RunAndWait timeout (s)")
+Parser.add_argument("-groundtruth", action='store_true', help="Run as ground-truth for comparative output")
 Args = Parser.parse_args()
 
 def save_nes_recording_csv(recording_dict: dict, out_csv: str) -> None:
@@ -147,20 +148,22 @@ except Exception as e:
 ### Modify Model to create divergent SUB      ###
 ### ========================================= ###
 
-editpars = {
-    #"MembranePotential_mV": ,
-    #"RestingPotential_mV": ,
-    #"SpikeThreshold_mV": ,
-    #"DecayTime_ms": ,
-    "AfterHyperpolarizationAmplitude_mV": 0.0, # see default value neuron_Vahp_mV in README.md
-}
+if not Args.groundtruth:
 
-try:
-    res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
-    print("Modified model into divergent submitted emulation")
-    print('')
-except Exception as e:
-    vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
+    editpars = {
+        #"MembranePotential_mV": ,
+        #"RestingPotential_mV": ,
+        #"SpikeThreshold_mV": ,
+        #"DecayTime_ms": ,
+        "AfterHyperpolarizationAmplitude_mV": 0.0, # see default value neuron_Vahp_mV in README.md
+    }
+
+    try:
+        res_modify = MySim.EditSCNeuron(_NeuronIDs=[], _EditPars=editpars) # empty list of neuron IDs means all neurons
+        print("Modified model into divergent submitted emulation by changing dynamic parameters.")
+        print('')
+    except Exception as e:
+        vbp.ErrorExit(DBdata, 'NES error: failed to edit model '+str(e))
 
 ### ========================================= ###
 ### Dynamic Data Acquisition                  ###
@@ -218,7 +221,10 @@ except Exception as e:
 recording_dict = None
 try:
     recording_dict = MySim.GetRecording()
-    csv_path = f"{savefolder}/groundtruth-Vm.csv"
+    if Args.groundtruth:
+        csv_path = f"{savefolder}/groundtruth-Vm.csv"
+    else:
+        csv_path = f"{savefolder}/sub1-Vm.csv"
     save_nes_recording_csv(recording_dict, csv_path)
     print("Saved recording CSV:", csv_path)
     vbp.AddOutputToDB(DBdata, "recording_csv", csv_path)
@@ -231,7 +237,10 @@ try:
     spike_resp = MySim.GetSpikeTimes()
     spike_dict = spike_resp.get("SpikeTimes", {})
 
-    spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
+    if Args.groundtruth:
+        spike_csv_path = f"{savefolder}/groundtruth-spikes.csv"
+    else:
+        spike_csv_path = f"{savefolder}/sub1-spikes.csv"
 
     with open(spike_csv_path, "w", newline="") as f:
         writer = csv.writer(f)

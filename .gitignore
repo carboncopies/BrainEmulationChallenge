@@ -4,6 +4,8 @@ __pycache__/
 *$py.class
 .SimulationHandle
 /venv/
+.DS_Store
+*.log
 
 # C extensions
 *.so

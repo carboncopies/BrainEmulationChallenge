@@ -1,0 +1,222 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_xor_bs_xor_bs_simplified_py",
+      "label": "xor_bs_simplified.py",
+      "file_type": "code",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "xor_bs_xor_bs_simplified_neuron_builder",
+      "label": "neuron_builder()",
+      "file_type": "code",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L260"
+    },
+    {
+      "id": "str",
+      "label": "str",
+      "file_type": "code",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L260"
+    },
+    {
+      "id": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "label": "find_cell_with_id()",
+      "file_type": "code",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L467"
+    },
+    {
+      "id": "int",
+      "label": "int",
+      "file_type": "code",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L467"
+    },
+    {
+      "id": "xor_bs_xor_bs_simplified_rationale_468",
+      "label": "Enhanced cell lookup with debug output",
+      "file_type": "rationale",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L468"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "datetime",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "xor_bs_xor_bs_simplified_neuron_builder",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_bs_xor_bs_simplified_neuron_builder",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_bs_xor_bs_simplified_neuron_builder",
+      "target": "str",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_xor_bs_xor_bs_simplified_py",
+      "target": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L467",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "target": "int",
+      "relation": "references",
+      "context": "parameter_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L467",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "target": "str",
+      "relation": "references",
+      "context": "return_type",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L467",
+      "weight": 1.0
+    },
+    {
+      "source": "xor_bs_xor_bs_simplified_rationale_468",
+      "target": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L468",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": [
+    {
+      "caller_nid": "xor_bs_xor_bs_simplified_neuron_builder",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L261"
+    },
+    {
+      "caller_nid": "xor_bs_xor_bs_simplified_neuron_builder",
+      "callee": "BGNES_BS_neuron_create",
+      "is_member_call": true,
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L262"
+    },
+    {
+      "caller_nid": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "callee": "keys",
+      "is_member_call": true,
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L469"
+    },
+    {
+      "caller_nid": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L471"
+    },
+    {
+      "caller_nid": "xor_bs_xor_bs_simplified_find_cell_with_id",
+      "callee": "print",
+      "is_member_call": false,
+      "source_file": "src/models/xor_bs/xor_bs_simplified.py",
+      "source_location": "L473"
+    }
+  ]
+}

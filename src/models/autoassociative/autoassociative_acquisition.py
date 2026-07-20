@@ -95,16 +95,32 @@ DBdata = vbp.InitExpDB(
     _initOUT = {
     })
 
+print('=======================================================')
+print('WARNING:')
+print('This script does not yet carry out correct encoding and')
+print('retrieval testing for engrams.')
+print('Doing so depends on having a working Connectome script.')
+print('Right now, this script is used only to collect structure')
+print('data for visualization.')
+print('Actual autoassiciative encoding/retrieval is presently')
+print('demonstrated with the LIFtest.py script that uses a')
+print('manually implemented connectome.')
+print('=======================================================')
+tempexcludeactivitytest = True
+
 ### ========================================= ###
 ### Retrieve Model                            ###
 ### ========================================= ###
 
 # Find pattern IDs corresponding with the modelname
 DBconnectome = vbp.GetMostRecentDBEntryOUT(DBdata, 'connectome', False, Args.modelname, exit_on_error=True)
-if 'IOIDs' not in DBconnectome:
-    vbp.ErrorExit(DBdata, 'Experiments database error: Missing IOIDs in most recent entry for modelname '+str(Args.modelname))
-PatternIdentifiers = DBconnectome['IOIDs']
-print('Loaded pattern identifiers.')
+
+if not tempexcludeactivitytest:
+
+    if 'IOIDs' not in DBconnectome:
+        vbp.ErrorExit(DBdata, 'Experiments database error: Missing IOIDs in most recent entry for modelname '+str(Args.modelname))
+    PatternIdentifiers = DBconnectome['IOIDs']
+    print('Loaded pattern identifiers.')
 
 
 # Create Client Configuration For Local Simulation
@@ -173,7 +189,7 @@ if not Args.simID:
 ### Dynamic Data Acquisition                  ###
 ### ========================================= ###
 
-if not Args.simID:
+if not tempexcludeactivitytest and not Args.simID:
     # Prepare model for data acquisition
     TotalElectrodes:int = 0
     TotalCARenders:int = 0

@@ -1,0 +1,54 @@
+{
+  "nodes": [
+    {
+      "id": "src_components_test_receptors_py",
+      "label": "test_receptors.py",
+      "file_type": "code",
+      "source_file": "src/components/test_receptors.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_components_test_receptors_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_receptors.py",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_receptors_py",
+      "target": "prototyping_syntr_quantal_release",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_receptors.py",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_receptors_py",
+      "target": "prototyping_ampa_receptor",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_receptors.py",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_test_receptors_py",
+      "target": "prototyping_nmda_receptor",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/components/test_receptors.py",
+      "source_location": "L17",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}

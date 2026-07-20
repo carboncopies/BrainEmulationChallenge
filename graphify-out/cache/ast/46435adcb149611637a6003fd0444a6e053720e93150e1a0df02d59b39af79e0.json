@@ -1,0 +1,104 @@
+{
+  "nodes": [
+    {
+      "id": "src_models_autoassociative_deletesimtest_py",
+      "label": "deletesimtest.py",
+      "file_type": "code",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L1"
+    }
+  ],
+  "edges": [
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "numpy",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "time",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "base64",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L26",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "argparse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L27",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "vbpcommon",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "braingenix_bg_api",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "sys",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "pathlib",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "src_models_autoassociative_deletesimtest_py",
+      "target": "nes_interfaces_kgtrecords",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "src/models/autoassociative/deletesimtest.py",
+      "source_location": "L36",
+      "weight": 1.0
+    }
+  ],
+  "raw_calls": []
+}
