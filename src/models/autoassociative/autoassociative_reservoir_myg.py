@@ -37,8 +37,7 @@ Parser.add_argument("-Host", default="localhost", type=str, help="Host to connec
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-modelfile", type=str, help="File to read model instructions from")
-Parser.add_argument("-modelname", default="autoassociative", type=str, help="Name of neuronal circuit model to save")
-
+Parser.add_argument("-modelname", default="autoassociative_myg", type=str, help="Name of neuronal circuit model to save")
 Parser.add_argument("-DoOBJ", default=False, type=bool, help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", default=False, type=bool, help="Netmorph should produce Blender output")
 Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/blender", type=str, help="Path to Blender executable")
@@ -49,7 +48,6 @@ Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to 
 Parser.add_argument("-growdays", type=int, help="Number of days Netmorph growth")
 # Parser.add_argument("-days", type=int, help="Number of days Netmorph growth")
 Parser.add_argument("-pyramidal", type=int, help="The size of the pyramidal neuron population")
-Parser.add_argument("-interneuron", type=int, help="The size of the interneuron population")
 Parser.add_argument("-minneuronseparation", type=int, help="Minimum center-to-center separation of neurons in um.")
 Parser.add_argument("-shapeRadius", type=int, help="Together radius and thickness determine the volume of a disc-shaped region in which cells are uniform randomly placed. ")
 Parser.add_argument("-shapeThickness", type=int, help="Together radius and thickness determine the volume of a disc-shaped region in which cells are uniform randomly placed. ")
@@ -107,10 +105,6 @@ PYRAMIDAL_POP='''
 In.pyramidal=%d;
 '''
 
-INTERNEURON_POP='''
-In.interneuron=%d;
-'''
-
 MIN_NEURON_SEPARATION='''
 In.minneuronseparation=%d;
 '''
@@ -136,8 +130,6 @@ if Args.growdays:
     modelcontent += GROWDAYS % Args.growdays
 if Args.pyramidal:
     modelcontent += PYRAMIDAL_POP % Args.pyramidal
-if Args.interneuron:
-    modelcontent += INTERNEURON_POP % Args.interneuron
 if Args.minneuronseparation:
     modelcontent += MIN_NEURON_SEPARATION % Args.minneuronseparation        
 if Args.shapeRadius:
