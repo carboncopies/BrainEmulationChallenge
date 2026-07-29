@@ -87,8 +87,12 @@ if [ "$SKIP_ACQUISITION" = false ]; then
  
     GT_FOLDER=$(find_latest_with "groundtruth-spikes.csv")
     SUB_FOLDER=$(find_latest_with "sub-spikes.csv")
+    GT_FOLDER_OOD=$(find_latest_with "groundtruth-spikes_ood_jitter.csv")
+    SUB_FOLDER_OOD=$(find_latest_with "sub-spikes_ood_jitter.csv")
     echo "  GT  folder: $GT_FOLDER"
     echo "  SUB folder: $SUB_FOLDER"
+    echo "  GT_OOD  folder: $GT_FOLDER_OOD"
+    echo "  SUB_OOD folder: $SUB_FOLDER_OOD"
 else
     if [ -z "$GT_FOLDER" ]; then
         GT_FOLDER=$(find_latest_with "groundtruth-spikes.csv")
@@ -96,9 +100,17 @@ else
     if [ -z "$SUB_FOLDER" ]; then
         SUB_FOLDER=$(find_latest_with "sub-spikes.csv")
     fi
+    if [ -z "$GT_FOLDER_OOD" ]; then
+        GT_FOLDER_ODD=$(find_latest_with "groundtruth-spikes_ood_jitter.csv")
+    fi
+    if [ -z "$SUB_FOLDER_OOD" ]; then
+        SUB_FOLDER_ODD=$(find_latest_with "sub-spikes_ood_jitter.csv")
+    fi
     echo "[Step 1/4] Skipping acquisition."
     echo "  Using GT  folder: $GT_FOLDER"
     echo "  Using SUB folder: $SUB_FOLDER"
+    echo "  Using GT folder OOD: $GT_FOLDER_OOD"
+    echo "  Using SUB folder OOD: $SUB_FOLDER_OOD"
 fi
  
 if [ -z "$GT_FOLDER" ]; then
@@ -107,6 +119,15 @@ if [ -z "$GT_FOLDER" ]; then
 fi
 if [ -z "$SUB_FOLDER" ]; then
     echo "ERROR: No SUB acquisition folder found (need sub-spikes.csv in output/*-acquisition)"
+    exit 1
+fi
+
+if [ -z "$GT_FOLDER_OOD" ]; then
+    echo "ERROR: No GT out of domain  acquisition folder found (need groundtruth-spikes_ood_jitter.csv in output/*-acquisition)"
+    exit 1
+fi
+if [ -z "$SUB_FOLDER_OOD" ]; then
+    echo "ERROR: No SUB out of domain acquisition folder found (need sub-spikes_ood_jitter.csv in output/*-acquisition)"
     exit 1
 fi
  
@@ -120,6 +141,18 @@ done
 for f in sub-Vm.csv sub-spikes.csv trial_map.json; do
     if [ ! -f "$SUB_FOLDER/$f" ]; then
         echo "ERROR: Missing $f in $SUB_FOLDER"
+        exit 1
+    fi
+done
+for f in groundtruth-Vm_ood_jitter.csv groundtruth-spikes_ood_jitter.csv trial_map.json; do
+    if [ ! -f "$GT_FOLDER_OOD/$f" ]; then
+        echo "ERROR: Missing $f in $GT_FOLDER_OOD"
+        exit 1
+    fi
+done
+for f in sub-Vm_ood_jitter.csv sub-spikes_ood_jitter.csv trial_map.json; do
+    if [ ! -f "$SUB_FOLDER_OOD/$f" ]; then
+        echo "ERROR: Missing $f in $SUB_FOLDER_OOD"
         exit 1
     fi
 done
@@ -148,15 +181,22 @@ echo ""
 
 echo "[Step 3/4] Building HDF5 file..."
 
-GT_H5_FOLDER="output/GT_h5"
-SUB_H5_FOLDER="output/SUB_h5"
+GT_H5_FOLDER="output/GT"
+SUB_H5_FOLDER="output/SUB"
+GT_OOD_H5_FOLDER="output/GT_OOD"
+SUB_OOD_H5_FOLDER="output/SUB_OOD"
 mkdir -p "$GT_H5_FOLDER" "$SUB_H5_FOLDER"
 
 GT_H5="$GT_H5_FOLDER/groundtruth.h5"
 SUB_H5="$SUB_H5_FOLDER/sub.h5"
+GT_OOD_H5="$GT_OOD_H5_FOLDER/groundtruth_ood.h5"
+SUB_OOD_H5="$SUB_OOD_H5_FOLDER/sub_ood.h5"
 
 if [ -f "$GT_H5" ];  then echo "  Removing old $GT_H5";  rm "$GT_H5";  fi
 if [ -f "$SUB_H5" ]; then echo "  Removing old $SUB_H5"; rm "$SUB_H5"; fi
+if [ -f "$GT_OOD_H5" ];  then echo "  Removing old $GT_OOD_H5";  rm "$GT_OOD_H5";  fi
+if [ -f "$SUB_OOD_H5" ]; then echo "  Removing old $SUB_OOD_H5"; rm "$SUB_OOD_H5"; fi
+
  
 # SUB reuses GT's network_config.json (same network, modified neuron params)
 NET_CONFIG_PATH="$GT_FOLDER/network_config.json"
@@ -192,9 +232,44 @@ converter = build_h5(
 )
 converter.build()
 "
+
+echo "  Building GT_OOD H5..."
+python -c "
+import sys
+sys.path.insert(0, '.')
+from build_h5 import build_h5
+ 
+converter = build_h5(
+    vm_csv='$GT_FOLDER_OOD/groundtruth-Vm_ood_jitter.csv',
+    spikes_csv='$GT_FOLDER_OOD/groundtruth-spikes_ood_jitter.csv',
+    net_con='$NET_CONFIG_PATH',
+    t_map='$GT_FOLDER_OOD/trial_map.json',
+    h5_file_path='$GT_OOD_H5',
+)
+converter.build()
+"
+ 
+echo "  Building SUB_OOD H5..."
+python -c "
+import sys
+sys.path.insert(0, '.')
+from build_h5 import build_h5
+ 
+converter = build_h5(
+    vm_csv='$SUB_FOLDER_OOD/sub-Vm_ood_jitter.csv',
+    spikes_csv='$SUB_FOLDER_OOD/sub-spikes_ood_jitter.csv',
+    net_con='$NET_CONFIG_PATH',
+    t_map='$SUB_FOLDER_OOD/trial_map.json',
+    h5_file_path='$SUB_OOD_H5',
+)
+converter.build()
+"
+
  
 echo "  GT  → $GT_H5"
 echo "  SUB → $SUB_H5"
+echo "  GT_OOD  → $GT_OOD_H5"
+echo "  SUB_OOD → $SUB_OOD_H5"
 echo ""
 
 # ---- Step 4: Run metrics ----
