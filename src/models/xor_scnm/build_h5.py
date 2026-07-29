@@ -206,6 +206,10 @@ if __name__ == "__main__":
                        if os.path.exists(os.path.join(input_dir, f, "groundtruth-spikes.csv"))), None)
     sub_folder = next((f for f in all_dirs
                        if os.path.exists(os.path.join(input_dir, f, "sub-spikes.csv"))), None)
+    gt_folder_ood  = next((f for f in all_dirs
+                       if os.path.exists(os.path.join(input_dir, f, "groundtruth-spikes_ood_jitter.csv"))), None)
+    sub_folder_ood = next((f for f in all_dirs
+                       if os.path.exists(os.path.join(input_dir, f, "sub-spikes_ood_jitter.csv"))), None)
 
     if not gt_folder:
         print("ERROR: No groundtruth *-acquisition folder found in output/")
@@ -213,13 +217,23 @@ if __name__ == "__main__":
     if not sub_folder:
         print("ERROR: No sub *-acquisition folder found in output/")
         exit(1)
+    if not gt_folder_ood:
+        print("ERROR: No groundtruth_ood *-acquisition folder found in output/")
+        exit(1)
+    if not sub_folder_ood:
+        print("ERROR: No sub_ood *-acquisition folder found in output/")
+        exit(1)
 
     gt_dir  = os.path.join(input_dir, gt_folder)
     sub_dir = os.path.join(input_dir, sub_folder)
+    gt_dir_ood  = os.path.join(input_dir, gt_folder_ood)
+    sub_dir_ood = os.path.join(input_dir, sub_folder_ood)
     print(f"GT  dir: {gt_dir}")
     print(f"SUB dir: {sub_dir}")
+    print(f"GT  dir ood : {gt_dir_ood}")
+    print(f"SUB dir ood: {sub_dir_ood}")
 
-    gt_output_folder = os.path.join(input_dir, "GT_h5")
+    gt_output_folder = os.path.join(input_dir, "GT")
 
     gt_converter = build_h5(
         vm_csv       = os.path.join(gt_dir, "groundtruth-Vm.csv"),
@@ -231,7 +245,7 @@ if __name__ == "__main__":
 
     gt_converter.build()
 
-    sub_output_folder = os.path.join(input_dir, "SUB_h5")
+    sub_output_folder = os.path.join(input_dir, "SUB")
 
     sub_converter = build_h5(
         vm_csv       = os.path.join(sub_dir, "sub-Vm.csv"),
@@ -239,6 +253,29 @@ if __name__ == "__main__":
         net_con      = os.path.join(gt_dir, "network_config.json"),
         t_map        = os.path.join(sub_dir, "trial_map.json"),
         h5_file_path = os.path.join(sub_output_folder, "sub.h5")
+    )
+    sub_converter.build()
+
+    gt_output_folder_ood = os.path.join(input_dir, "GT_OOD")
+
+    gt_converter = build_h5(
+        vm_csv       = os.path.join(gt_dir_ood, "groundtruth-Vm_ood_jitter.csv"),
+        spikes_csv   = os.path.join(gt_dir_ood, "groundtruth-spikes_ood_jitter.csv"),
+        net_con      = os.path.join(gt_dir, "network_config.json"),
+        t_map        = os.path.join(gt_dir_ood, "trial_map.json"),
+        h5_file_path = os.path.join(gt_output_folder, "groundtruth_ood.h5")
+    )
+
+    gt_converter.build()
+
+    sub_output_folder_ood = os.path.join(input_dir, "SUB_OOD")
+
+    sub_converter = build_h5(
+        vm_csv       = os.path.join(sub_dir_ood, "sub-Vm_ood_jitter.csv"),
+        spikes_csv   = os.path.join(sub_dir_ood, "sub-spikes_ood_jitter.csv"),
+        net_con      = os.path.join(gt_dir, "network_config.json"),
+        t_map        = os.path.join(sub_dir_ood, "trial_map.json"),
+        h5_file_path = os.path.join(sub_output_folder, "sub_ood.h5")
     )
     sub_converter.build()
 
