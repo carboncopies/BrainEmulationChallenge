@@ -1,10 +1,6 @@
 """
 Weighted overall GT vs SUB score (/100) for the XOR metrics dashboard.
-<<<<<<< Updated upstream
-Category scores (0–10) × category weights → overall /100.
-=======
 Uses evaluation profiles (black-box I/O vs full emulation) and optional simulated-neuron scope.
->>>>>>> Stashed changes
 """
 
 from __future__ import annotations
@@ -29,35 +25,6 @@ from pdf_report import (
     _psth_summary,
     _spike_times,
 )
-<<<<<<< Updated upstream
-
-# Category weights (sum = 27); overall /100 = weighted avg category score × 10.
-CATEGORY_WEIGHTS: Dict[str, float] = {
-    "behavior": 20.0,
-    "spiking": 2.0,
-    "membrane": 1.0,
-    "structure": 4.0,
-}
-
-CATEGORY_METRICS: Dict[str, List[str]] = {
-    "behavior": ["behavior"],
-    "spiking": [
-        "fano_delta",
-        "isi_cv_delta",
-        "ks",
-        "multi_scale_corr",
-        "psth_corr",
-        "psth_rmse",
-        "raster_jaccard",
-        "schreiber",
-        "vr_distance",
-    ],
-    "membrane": ["vm_median_corr"],
-    "structure": ["granger_jaccard", "xcorr_matrix_corr"],
-}
-
-IO_NEURONS = ("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E")
-=======
 from scoring_profiles import (
     CATEGORY_METRICS,
     IO_NEURONS,
@@ -94,7 +61,6 @@ def load_sub_manifest(sub_path: str) -> Optional[Dict[str, Any]]:
         except (OSError, json.JSONDecodeError, TypeError):
             continue
     return None
->>>>>>> Stashed changes
 
 
 def _score_high(x: Optional[float], lo: float, hi: float) -> float:
@@ -127,13 +93,9 @@ def _load_truth_table(h5_path: str) -> dict:
     candidates = [
         os.path.join(base, "network_config.json"),
         os.path.join(os.path.dirname(base), "network_config.json"),
-<<<<<<< Updated upstream
-        os.path.join(base, "GT", "network_config.json"),
-=======
         os.path.join(base, "GT_h5", "network_config.json"),
         os.path.join(base, "GT", "network_config.json"),
         os.path.join(base, "output", "GT_h5", "network_config.json"),
->>>>>>> Stashed changes
         os.path.join(base, "output", "GT", "network_config.json"),
     ]
     for path in candidates:
@@ -177,11 +139,6 @@ def _out_spike_col(cfg: pd.DataFrame, data: pd.DataFrame) -> str:
     return "E_spike"
 
 
-<<<<<<< Updated upstream
-def _io_spike_cols(spike_cols: List[str]) -> List[str]:
-    names = {c.replace("_spike", "") for c in spike_cols}
-    return [f"{n}_spike" for n in IO_NEURONS if n in names]
-=======
 def _labels_to_spike_cols(labels: List[str], available: set) -> List[str]:
     cols = []
     for lab in labels:
@@ -245,7 +202,6 @@ def resolve_scoring_scope(
         "scope_note": scope_note,
         "include_structure": bool(profile.get("include_structure", False)),
     }
->>>>>>> Stashed changes
 
 
 def _pooled_behavior_accuracy(
@@ -283,11 +239,8 @@ def _raster_jaccard(
     spike_cols: List[str],
     trial_len: int,
 ) -> float:
-<<<<<<< Updated upstream
-=======
     if not spike_cols:
         return float("nan")
->>>>>>> Stashed changes
     inter = union = 0
     tids = sorted(set(gt_data["trial_id"].unique()) & set(sub_data["trial_id"].unique()))
     for tid in tids:
@@ -311,18 +264,6 @@ def _raster_jaccard(
     return float(inter / union) if union > 0 else 1.0
 
 
-<<<<<<< Updated upstream
-def _bin_counts(vec, bin_ms: float, fs_hz: float) -> np.ndarray:
-    x = np.asarray(vec, int)
-    bs = max(1, int(round(bin_ms * fs_hz / 1000.0)))
-    nb = len(x) // bs
-    if nb == 0:
-        return np.zeros(0, dtype=float)
-    return x[: nb * bs].reshape(nb, bs).sum(1).astype(float)
-
-
-=======
->>>>>>> Stashed changes
 def _safe_pearson(a, b) -> float:
     a, b = np.asarray(a, float), np.asarray(b, float)
     if a.size != b.size or a.size == 0 or np.nanvar(a) <= 0 or np.nanvar(b) <= 0:
@@ -332,17 +273,10 @@ def _safe_pearson(a, b) -> float:
     return float(np.nansum((a - am) * (b - bm)) / d) if d > 0 else float("nan")
 
 
-<<<<<<< Updated upstream
-def _psth_io_means(
-    gt_data,
-    sub_data,
-    io_cols: List[str],
-=======
 def _psth_means(
     gt_data,
     sub_data,
     neuron_cols: List[str],
->>>>>>> Stashed changes
     patterns: List[str],
     common_ids: dict,
     trial_len: int,
@@ -350,11 +284,7 @@ def _psth_means(
     bin_ms: float = 5.0,
 ) -> Tuple[float, float]:
     rs, rmses = [], []
-<<<<<<< Updated upstream
-    for col in io_cols:
-=======
     for col in neuron_cols:
->>>>>>> Stashed changes
         df = _psth_summary(gt_data, sub_data, col, patterns, common_ids, trial_len, fs_hz, bin_ms)
         if df.empty:
             continue
@@ -366,11 +296,7 @@ def _psth_means(
 
 
 def _ks_max(spike_cols, gt_spikes, sub_spikes, patterns) -> float:
-<<<<<<< Updated upstream
-    if ks_2samp is None:
-=======
     if ks_2samp is None or not spike_cols:
->>>>>>> Stashed changes
         return float("nan")
     stats = []
     for col in spike_cols:
@@ -383,9 +309,6 @@ def _ks_max(spike_cols, gt_spikes, sub_spikes, patterns) -> float:
     return float(np.max(stats)) if stats else 0.0
 
 
-<<<<<<< Updated upstream
-def _isi_fano_deltas(gt_spikes, sub_spikes, cfg, gt_data, patterns) -> Tuple[float, float]:
-=======
 def _isi_fano_deltas(
     gt_spikes,
     sub_spikes,
@@ -394,17 +317,13 @@ def _isi_fano_deltas(
     patterns,
     scope_labels: Optional[List[str]] = None,
 ) -> Tuple[float, float]:
->>>>>>> Stashed changes
     gt_df = _isi_fano_summary(gt_spikes, cfg, gt_data, patterns)
     sub_df = _isi_fano_summary(sub_spikes, cfg, gt_data, patterns)
     if gt_df.empty or sub_df.empty:
         return float("nan"), float("nan")
     merged = gt_df.merge(sub_df, on=["neuron", "pattern"], suffixes=("_gt", "_sub"))
-<<<<<<< Updated upstream
-=======
     if scope_labels:
         merged = merged[merged["neuron"].astype(str).isin(scope_labels)]
->>>>>>> Stashed changes
     if merged.empty:
         return float("nan"), float("nan")
     cv_delta = merged[["ISI_CV_gt", "ISI_CV_sub"]].dropna()
@@ -436,11 +355,8 @@ def _schreiber_mean(
     fs_hz: float,
     sigma_ms: float = 10.0,
 ) -> float:
-<<<<<<< Updated upstream
-=======
     if not neuron_cols:
         return float("nan")
->>>>>>> Stashed changes
     kernel = _gaussian_kernel(sigma_ms, fs_hz)
     rs = []
     for p in patterns:
@@ -465,27 +381,17 @@ def _schreiber_mean(
     return float(np.mean(rs)) if rs else float("nan")
 
 
-<<<<<<< Updated upstream
-def _msc_mean_io(
-    gt_data,
-    sub_data,
-    io_cols: List[str],
-=======
 def _msc_mean(
     gt_data,
     sub_data,
     neuron_cols: List[str],
->>>>>>> Stashed changes
     patterns: List[str],
     common_ids: dict,
     trial_len: int,
     dt_ms: float,
 ) -> float:
-<<<<<<< Updated upstream
-=======
     if not neuron_cols:
         return float("nan")
->>>>>>> Stashed changes
     sigma_vals = np.array([1.0, 5.0, 10.0, 20.0, 50.0], dtype=float)
     rs = []
 
@@ -502,11 +408,7 @@ def _msc_mean(
         for tid in common_ids[p]:
             gt_df = _get_trial(gt_data, tid)
             sb_df = _get_trial(sub_data, tid)
-<<<<<<< Updated upstream
-            for neuron in io_cols:
-=======
             for neuron in neuron_cols:
->>>>>>> Stashed changes
                 if neuron not in gt_df.columns or neuron not in sb_df.columns:
                     continue
                 a = gt_df[neuron].to_numpy(float)[:trial_len]
@@ -565,21 +467,13 @@ def _vr_mean_output(
 def _vm_median_corr(
     gt_data: pd.DataFrame,
     sub_data: pd.DataFrame,
-<<<<<<< Updated upstream
-=======
     vm_cols: List[str],
->>>>>>> Stashed changes
     patterns: List[str],
     common_ids: dict,
     trial_len: int,
 ) -> float:
-<<<<<<< Updated upstream
-    """Mean Pearson r between GT and SUB median Vm traces (I/O neurons)."""
-    vm_cols = [f"{n}_vm" for n in IO_NEURONS if f"{n}_vm" in gt_data.columns and f"{n}_vm" in sub_data.columns]
-=======
     if not vm_cols:
         return float("nan")
->>>>>>> Stashed changes
     rs = []
     for col in vm_cols:
         for p in patterns:
@@ -611,12 +505,8 @@ def _xcorr_matrix_corr(
     trial_len: int,
     max_lag: int = 15,
 ) -> float:
-<<<<<<< Updated upstream
-    """Pearson r between flattened mean cross-correlogram matrices (GT vs SUB)."""
-=======
     if len(spike_cols) < 1:
         return float("nan")
->>>>>>> Stashed changes
 
     def xcorr_norm(a, b, lag_max):
         if a.size == 0 or b.size == 0:
@@ -673,22 +563,6 @@ def _xcorr_matrix_corr(
     return float(np.mean(rs)) if rs else float("nan")
 
 
-<<<<<<< Updated upstream
-def _build_category_tables(
-    subscores: Dict[str, float],
-) -> Tuple[pd.DataFrame, pd.DataFrame, float]:
-    metric_rows = []
-    category_rows = []
-    weighted_sum = 0.0
-    weight_sum = sum(CATEGORY_WEIGHTS.values())
-
-    for cat, weight in CATEGORY_WEIGHTS.items():
-        metrics = CATEGORY_METRICS[cat]
-        subs = [subscores[m] for m in metrics if m in subscores]
-        cat_score = float(np.mean(subs)) if subs else 0.0
-        weighted = cat_score * weight
-        weighted_sum += weighted
-=======
 def _metric_included(profile_id: str, metric: str) -> bool:
     profile = get_profile(profile_id)
     if metric in profile.get("excluded_metrics", set()):
@@ -725,7 +599,6 @@ def _build_category_tables(
         weighted = cat_score * weight
         weighted_sum += weighted
         weight_sum += weight
->>>>>>> Stashed changes
         category_rows.append(
             {
                 "Category": cat,
@@ -734,9 +607,6 @@ def _build_category_tables(
                 "Weighted Points": round(weighted, 3),
             }
         )
-<<<<<<< Updated upstream
-        for m in metrics:
-=======
 
     for cat, metrics in CATEGORY_METRICS.items():
         weight = float(cat_weights.get(cat, 0.0))
@@ -745,34 +615,20 @@ def _build_category_tables(
             reason = "included" if included else (
                 "excluded (profile)" if m in excluded else "category weight 0"
             )
->>>>>>> Stashed changes
             metric_rows.append(
                 {
                     "Category": cat,
                     "Metric": m,
                     "Subscore (0-10)": round(subscores.get(m, 0.0), 3),
-<<<<<<< Updated upstream
-                }
-            )
-
-    # Weighted average of category scores on 0–10 scale → ×10 for /100 display.
-=======
                     "In score": "Yes" if included else "No",
                     "Note": reason if not included else "",
                 }
             )
 
->>>>>>> Stashed changes
     overall = (weighted_sum / weight_sum * 10.0) if weight_sum > 0 else 0.0
     return pd.DataFrame(category_rows), pd.DataFrame(metric_rows), round(overall, 1)
 
 
-<<<<<<< Updated upstream
-def compute_overall_score(gt_path: str, sub_path: str) -> Dict[str, Any]:
-    """Return overall /100, category + metric tables, and raw metric values."""
-    gt_path = os.path.abspath(gt_path)
-    sub_path = os.path.abspath(sub_path)
-=======
 def compute_overall_score(
     gt_path: str,
     sub_path: str,
@@ -784,7 +640,6 @@ def compute_overall_score(
     sub_path = os.path.abspath(sub_path)
     profile_id = profile_id if profile_id in SCORING_PROFILES else "blackbox_io"
     profile = get_profile(profile_id)
->>>>>>> Stashed changes
 
     gt_data = pd.read_hdf(gt_path, "/data")
     gt_spikes = pd.read_hdf(gt_path, "/spikes_raw")
@@ -798,42 +653,12 @@ def compute_overall_score(
     dt_ms = 1000.0 / fs_hz
     patterns = [_normalize_pattern(p) for p in tmap["case"].unique()]
     common_ids = {p: tmap[tmap["case"].astype(str) == str(p)]["trial_id"].tolist() for p in patterns}
-<<<<<<< Updated upstream
-    spike_cols = sorted(
-=======
     spike_cols_all = sorted(
->>>>>>> Stashed changes
         {c for c in gt_data.columns if c.endswith("_spike")}
         | {c for c in sub_data.columns if c.endswith("_spike")}
     )
     truth = _load_truth_table(gt_path)
     out_col = _out_spike_col(cfg, gt_data)
-<<<<<<< Updated upstream
-    io_cols = _io_spike_cols(spike_cols) or [out_col]
-
-    raw: Dict[str, float] = {}
-    raw["behavior"] = _pooled_behavior_accuracy(sub_data, out_col, tmap, patterns, trial_len, truth)
-    raw["raster_jaccard"] = _raster_jaccard(gt_data, sub_data, spike_cols, trial_len)
-    psth_r, psth_rmse = _psth_io_means(
-        gt_data, sub_data, io_cols, patterns, common_ids, trial_len, fs_hz
-    )
-    raw["psth_corr"] = psth_r
-    raw["psth_rmse"] = psth_rmse
-    raw["ks"] = _ks_max(spike_cols, gt_spikes, sub_spikes, patterns)
-    cv_d, fano_d = _isi_fano_deltas(gt_spikes, sub_spikes, cfg, gt_data, patterns)
-    raw["isi_cv_delta"] = cv_d
-    raw["fano_delta"] = fano_d
-    raw["multi_scale_corr"] = _msc_mean_io(
-        gt_data, sub_data, io_cols, patterns, common_ids, trial_len, dt_ms
-    )
-    raw["schreiber"] = _schreiber_mean(
-        gt_data, sub_data, io_cols, patterns, common_ids, trial_len, fs_hz
-    )
-    gt_trials = [_get_trial(gt_data, tid) for tid in sorted(gt_data["trial_id"].unique())]
-    sub_trials = [_get_trial(sub_data, tid) for tid in sorted(sub_data["trial_id"].unique())]
-    gc = _granger_jaccard(gt_trials, sub_trials, spike_cols, fs_hz)
-    raw["granger_jaccard"] = float(gc.get("jaccard", float("nan")))
-=======
 
     scope = resolve_scoring_scope(
         profile_id, simulated_neurons, cfg, gt_data, sub_data, spike_cols_all
@@ -861,19 +686,10 @@ def compute_overall_score(
     raw["schreiber"] = _schreiber_mean(
         gt_data, sub_data, scoped_spike, patterns, common_ids, trial_len, fs_hz
     )
->>>>>>> Stashed changes
     raw["vr_distance"] = _vr_mean_output(
         gt_data, sub_data, out_col, patterns, common_ids, trial_len
     )
     raw["vm_median_corr"] = _vm_median_corr(
-<<<<<<< Updated upstream
-        gt_data, sub_data, patterns, common_ids, trial_len
-    )
-    raw["xcorr_matrix_corr"] = _xcorr_matrix_corr(
-        gt_data, sub_data, spike_cols, patterns, common_ids, trial_len
-    )
-
-=======
         gt_data, sub_data, scope["vm_cols"], patterns, common_ids, trial_len
     )
 
@@ -889,7 +705,6 @@ def compute_overall_score(
         raw["granger_jaccard"] = float("nan")
         raw["xcorr_matrix_corr"] = float("nan")
 
->>>>>>> Stashed changes
     subscores: Dict[str, float] = {
         "behavior": _score_high(raw["behavior"], 0.5, 1.0),
         "raster_jaccard": _score_high(raw["raster_jaccard"], 0.3, 1.0),
@@ -906,26 +721,19 @@ def compute_overall_score(
         "xcorr_matrix_corr": _score_high(raw["xcorr_matrix_corr"], 0.5, 1.0),
     }
 
-<<<<<<< Updated upstream
-    categories, metric_subscores, overall = _build_category_tables(subscores)
-=======
     categories, metric_subscores, overall = _build_category_tables(subscores, profile_id)
 
->>>>>>> Stashed changes
     return {
         "overall": overall,
         "categories": categories,
         "metric_subscores": metric_subscores,
         "raw": raw,
         "subscores": subscores,
-<<<<<<< Updated upstream
-=======
         "profile_id": profile_id,
         "profile_label": profile["label"],
         "profile_description": profile["description"],
         "scope_note": scope["scope_note"],
         "scope_labels": scope_labels,
         "simulated_neurons": simulated_neurons or [],
->>>>>>> Stashed changes
     }
 

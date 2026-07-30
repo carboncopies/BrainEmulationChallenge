@@ -1,10 +1,16 @@
 """
 XOR Neural Network Metrics Dashboard
 =====================================
-Run:  streamlit run xor_dashboard.py
-Place groundtruth.h5 in the same directory as this script (or set paths in the sidebar).
-Optional: network_config.json with a truth_table block (same layout as in_domain_metrics.ipynb)
-next to the H5 or under GT / output/GT — overrides the built-in XOR truth table for metrics.
+Run:  streamlit run dashboard.py
+
+Default HDF5 layout (beside this script, first existing wins):
+  output/GT_h5/groundtruth.h5      — in-domain GT
+  output/SUB_h5/sub.h5             — in-domain SUB
+  output/GT_OOD/groundtruth_ood.h5 — out-of-domain GT
+  output/SUB_OOD/sub_ood.h5        — out-of-domain SUB
+
+Override any path in the sidebar. Optional: network_config.json with a truth_table
+block next to the GT H5 or under GT_h5 / GT_OOD / output/GT_h5.
 """
 
 import streamlit as st
@@ -26,12 +32,15 @@ def _load_pdf_generator():
         os.path.join(script_dir, "pdfreport.py"),
         os.path.normpath(os.path.join(script_dir, "..", "METRICS", "pdf_report.py")),
         os.path.normpath(os.path.join(script_dir, "..", "..", "METRICS", "pdf_report.py")),
+        os.path.normpath(os.path.join(script_dir, "..", "..", "..", "METRICS", "pdf_report.py")),
+        # When dashboard lives under output/METRICS after run_pipeline.sh
+        os.path.normpath(os.path.join(script_dir, "..", "..", "src", "models", "xor_scnm", "pdf_report.py")),
     ]
     module_path = next((p for p in candidates if os.path.isfile(p)), None)
     if module_path is None:
         return None, (
-            "pdf_report.py is missing. Copy METRICS/pdf_report.py into the same "
-            f"folder as dashboard.py ({script_dir})."
+            "pdf_report.py is missing. Copy it next to dashboard.py "
+            f"(looked in {script_dir} and METRICS/)."
         )
     try:
         spec = importlib.util.spec_from_file_location("xor_pdf_report", module_path)
@@ -41,15 +50,21 @@ def _load_pdf_generator():
         spec.loader.exec_module(mod)
         if not getattr(mod, "_HAS_REPORTLAB", True):
             return None, (
-                "reportlab is not installed in the Python environment that runs Streamlit. "
-                "Run: python -m pip install reportlab"
+                "reportlab is not installed for the Python that runs Streamlit. "
+                "Install with: python -m pip install reportlab"
             )
         fn = getattr(mod, "generate_pdf_report", None)
         if fn is None:
             return None, f"generate_pdf_report() not found in {module_path}"
         return fn, None
+    except ModuleNotFoundError as exc:
+        missing = getattr(exc, "name", None) or str(exc)
+        return None, (
+            f"PDF dependency missing: {missing}. "
+            f"Install it in the Streamlit env (e.g. python -m pip install {missing})."
+        )
     except Exception as exc:
-        return None, f"PDF module error: {exc}"
+        return None, f"PDF module error ({module_path}): {exc}"
 
 
 generate_pdf_report, PDF_EXPORT_ERROR = _load_pdf_generator()
@@ -65,32 +80,15 @@ def _load_scoring_module():
     ]
     module_path = next((p for p in candidates if os.path.isfile(p)), None)
     if module_path is None:
-<<<<<<< Updated upstream
-        return None, "dashboard_scoring.py is missing beside dashboard.py."
-    try:
-        spec = importlib.util.spec_from_file_location("xor_dashboard_scoring", module_path)
-        if spec is None or spec.loader is None:
-            return None, f"Could not load scoring module from {module_path}"
-=======
         return None, {}, None, None, "dashboard_scoring.py is missing beside dashboard.py."
     try:
         spec = importlib.util.spec_from_file_location("xor_dashboard_scoring", module_path)
         if spec is None or spec.loader is None:
             return None, {}, None, None, f"Could not load scoring module from {module_path}"
->>>>>>> Stashed changes
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         fn = getattr(mod, "compute_overall_score", None)
         if fn is None:
-<<<<<<< Updated upstream
-            return None, f"compute_overall_score() not found in {module_path}"
-        return fn, None
-    except Exception as exc:
-        return None, f"Scoring module error: {exc}"
-
-
-compute_overall_score_fn, SCORING_ERROR = _load_scoring_module()
-=======
             return None, {}, None, None, f"compute_overall_score() not found in {module_path}"
         profiles = getattr(mod, "SCORING_PROFILES", {})
         parse_fn = getattr(mod, "parse_simulated_neurons", None)
@@ -109,7 +107,6 @@ compute_overall_score_fn, SCORING_ERROR = _load_scoring_module()
 ) = _load_scoring_module()
 if SCORING_ERROR:
     compute_overall_score_fn = None
->>>>>>> Stashed changes
 
 # ──────────────────────────────────────────────────────────────
 # PAGE CONFIG
@@ -893,7 +890,8 @@ def _legend_below(y=-0.20, x=0, xanchor="left"):
 
 
 def _title_top(text):
-    return dict(text=text, x=0, xanchor="left", y=0.98, yanchor="top")
+    # Left-aligned; keep title short in callers — modebar sits top-right in narrow Both columns.
+    return dict(text=text, x=0, xanchor="left", y=0.98, yanchor="top", font=dict(size=13))
 
 
 def apply_title_legend_layout(
@@ -970,6 +968,7 @@ PLOTLY_CONFIG = {
     "displayModeBar": True,
     "displaylogo": False,
     "responsive": True,
+    "scrollZoom": True,
     "modeBarButtonsToRemove": ["lasso2d", "select2d"],
 }
 
@@ -1041,8 +1040,16 @@ def _first_existing_file(candidates: list) -> str:
 
 def resolve_default_h5_paths(script_dir: str) -> tuple:
     """
-    Pick GT/SUB H5 defaults — tries pipeline output layout first (xor_scnm VM),
-    then METRICS-style files beside the script.
+    Pick in-domain / out-of-domain GT+SUB H5 defaults.
+
+    Canonical xor_scnm VM layout::
+
+        output/GT_h5/groundtruth.h5
+        output/SUB_h5/sub.h5
+        output/GT_OOD/groundtruth_ood.h5
+        output/SUB_OOD/sub_ood.h5
+
+    Returns (gt_indomain, sub_indomain, gt_ood, sub_ood).
     """
     base = os.path.abspath(script_dir)
     gt_candidates = [
@@ -1057,14 +1064,286 @@ def resolve_default_h5_paths(script_dir: str) -> tuple:
         os.path.join(base, "output", "SUB_h5", "substitute.h5"),
         os.path.join(base, "output", "SUB", "sub.h5"),
         os.path.join(base, "output", "SUB", "substitute.h5"),
+        os.path.join(base, "SUB_h5", "sub.h5"),
         os.path.join(base, "substitute.h5"),
         os.path.join(base, "sub.h5"),
     ]
+    gt_ood_candidates = [
+        os.path.join(base, "output", "GT_OOD", "groundtruth_ood.h5"),
+        os.path.join(base, "output", "GT_OOD", "groundtruth.h5"),
+        os.path.join(base, "output", "GT_h5", "groundtruth_ood.h5"),
+        os.path.join(base, "GT_OOD", "groundtruth_ood.h5"),
+        os.path.join(base, "groundtruth_ood.h5"),
+    ]
+    sub_ood_candidates = [
+        os.path.join(base, "output", "SUB_OOD", "sub_ood.h5"),
+        os.path.join(base, "output", "SUB_OOD", "sub.h5"),
+        os.path.join(base, "output", "SUB_OOD", "substitute.h5"),
+        os.path.join(base, "output", "SUB_h5", "sub_ood.h5"),
+        os.path.join(base, "output", "OOD_SUB", "sub_ood.h5"),
+        os.path.join(base, "SUB_OOD", "sub_ood.h5"),
+        os.path.join(base, "sub_ood.h5"),
+    ]
     gt_path = _first_existing_file(gt_candidates)
     sub_path = _first_existing_file(sub_candidates)
-    if not os.path.isfile(sub_path):
-        sub_path = gt_path
-    return gt_path, sub_path
+    gt_ood_path = _first_existing_file(gt_ood_candidates)
+    sub_ood_path = _first_existing_file(sub_ood_candidates)
+    return gt_path, sub_path, gt_ood_path, sub_ood_path
+
+
+COMPARE_MODE_INDOMAIN = "indomain"
+COMPARE_MODE_OOD = "ood"
+COMPARE_MODE_BOTH = "both"
+COMPARE_MODE_LABELS = {
+    COMPARE_MODE_INDOMAIN: "In-domain only",
+    COMPARE_MODE_OOD: "Out-of-domain only",
+    COMPARE_MODE_BOTH: "Both (side by side)",
+}
+
+# Set while rendering a SUB panel (used to uniquify Streamlit widget keys).
+_CURRENT_SUB_KEY = ""
+
+
+def _wk(base: str) -> str:
+    """Widget key unique per SUB panel when comparing both."""
+    if _CURRENT_SUB_KEY:
+        return f"{base}__{_CURRENT_SUB_KEY}"
+    return base
+
+
+_PLOTLY_SEQ = 0
+
+
+def _plotly_chart(fig, **kwargs):
+    """Plotly chart with a stable unique key per ID/OOD panel (for Both mode)."""
+    global _PLOTLY_SEQ
+    _PLOTLY_SEQ += 1
+    key = kwargs.pop("key", None) or _wk(f"plotly_{_PLOTLY_SEQ}")
+    kwargs.setdefault("use_container_width", True)
+    kwargs.setdefault("config", PLOTLY_CONFIG)
+    st.plotly_chart(fig, key=key, **kwargs)
+
+
+def _inject_side_by_side_zoom_sync() -> None:
+    """
+    Link zoom/pan between left (in-domain) and right (OOD) Plotly charts.
+    Pairs charts by index within each side-by-side Streamlit column row.
+    Runs in a components iframe but operates on window.parent (Streamlit DOM).
+    """
+    components.html(
+        """
+<script>
+(function () {
+  const doc = window.parent.document;
+  const Plotly = window.parent.Plotly;
+  if (!doc || !Plotly) return;
+
+  function plotsIn(root) {
+    return Array.from(root.querySelectorAll(".js-plotly-plot"));
+  }
+
+  function rangeUpdate(ed) {
+    const u = {};
+    if (!ed) return u;
+    for (const k of Object.keys(ed)) {
+      if (
+        k.indexOf("range") !== -1 ||
+        k.indexOf("autorange") !== -1 ||
+        k.indexOf("rangeslider") !== -1
+      ) {
+        u[k] = ed[k];
+      }
+    }
+    return u;
+  }
+
+  function bindDynamic(src) {
+    if (src._xorZoomListenerAttached) return;
+    src._xorZoomListenerAttached = true;
+    src.on("plotly_relayout", function (ed) {
+      const dst = src._xorZoomPaired;
+      if (!dst || src._xorZoomLock || dst._xorZoomLock) return;
+      const u = rangeUpdate(ed);
+      if (!Object.keys(u).length) return;
+      src._xorZoomLock = true;
+      dst._xorZoomLock = true;
+      Promise.resolve(Plotly.relayout(dst, u)).finally(function () {
+        src._xorZoomLock = false;
+        dst._xorZoomLock = false;
+      });
+    });
+  }
+
+  function columnChildren(block) {
+    // Streamlit column wrappers: prefer explicit column testid, else direct children with plots
+    let cols = Array.from(block.querySelectorAll(':scope > [data-testid="column"]'));
+    if (cols.length < 2) {
+      cols = Array.from(block.children).filter(function (c) {
+        return c && c.querySelector && c.querySelector(".js-plotly-plot");
+      });
+    }
+    return cols;
+  }
+
+  function linkAll() {
+    const blocks = doc.querySelectorAll('[data-testid="stHorizontalBlock"]');
+    blocks.forEach(function (block) {
+      const cols = columnChildren(block);
+      if (cols.length < 2) return;
+      const left = plotsIn(cols[0]);
+      const right = plotsIn(cols[1]);
+      const n = Math.min(left.length, right.length);
+      for (let i = 0; i < n; i++) {
+        left[i]._xorZoomPaired = right[i];
+        right[i]._xorZoomPaired = left[i];
+        bindDynamic(left[i]);
+        bindDynamic(right[i]);
+      }
+    });
+  }
+
+  linkAll();
+  let tries = 0;
+  const timer = setInterval(function () {
+    linkAll();
+    if (++tries > 60) clearInterval(timer);
+  }, 200);
+
+  if (!doc._xorZoomObserver) {
+    let scheduled = null;
+    doc._xorZoomObserver = new MutationObserver(function () {
+      if (scheduled) return;
+      scheduled = setTimeout(function () {
+        scheduled = null;
+        linkAll();
+      }, 100);
+    });
+    doc._xorZoomObserver.observe(doc.body, { childList: true, subtree: true });
+  }
+})();
+</script>
+        """,
+        height=1,
+        width=0,
+    )
+
+
+def _apply_sub_view(view: dict) -> None:
+    """Bind active GT+SUB arrays/paths used by metric pages for one domain."""
+    global gt_data, gt_spikes, gt_path
+    global sub_data, sub_spikes, sub_path, same_h5_file, spike_cols, _CURRENT_SUB_KEY
+    global cfg, tmap, meta, truth_raw, truth_json_path, truth_effective
+    global trial_len, fs_hz, MS_PER_SAMPLE, patterns, common_ids
+    gt_data = view["gt_data"]
+    gt_spikes = view["gt_spikes"]
+    gt_path = view["gt_path"]
+    sub_data = view["data"]
+    sub_spikes = view["spikes"]
+    sub_path = view["path"]
+    same_h5_file = view["same_h5"]
+    spike_cols = view["spike_cols"]
+    _CURRENT_SUB_KEY = view["key"]
+    cfg = view["cfg"]
+    tmap = view["tmap"]
+    meta = view["meta"]
+    truth_raw = view["truth_raw"]
+    truth_json_path = view["truth_json_path"]
+    truth_effective = view["truth_effective"]
+    trial_len = view["trial_len"]
+    fs_hz = view["fs_hz"]
+    MS_PER_SAMPLE = view["ms_per_sample"]
+    patterns = view["patterns"]
+    common_ids = view["common_ids"]
+
+
+def _run_for_each_sub(fn) -> None:
+    """
+    Render ``fn`` once (single SUB mode) or twice in columns (both mode).
+    ``fn`` should read module-level ``sub_data`` / ``sub_spikes`` / ``sub_path``.
+    In Both mode, ID/OOD Plotly charts get linked zoom/pan.
+    """
+    global _PLOTLY_SEQ
+    views = SUB_VIEWS
+    if len(views) == 1:
+        _PLOTLY_SEQ = 0
+        _apply_sub_view(views[0])
+        fn()
+        return
+    cols = st.columns(2, gap="large")
+    for col, view in zip(cols, views):
+        with col:
+            st.markdown(
+                f'<div style="font-size:0.95rem;font-weight:700;color:#e6edf3;padding:4px 0 2px;">'
+                f'{html.escape(view["label"])}</div>',
+                unsafe_allow_html=True,
+            )
+            st.caption(
+                f"{os.path.basename(view['gt_path'])} vs {os.path.basename(view['path'])}"
+            )
+            _PLOTLY_SEQ = 0  # same chart index order on left and right for pairing
+            _apply_sub_view(view)
+            fn()
+    _inject_side_by_side_zoom_sync()
+
+
+def render_overview_score_block(
+    gt_path: str,
+    sub_path: str,
+    profile_id: str,
+    sim_tuple: tuple,
+    *,
+    same_h5: bool,
+    heading=None,
+) -> None:
+    """Render overall score + category/metric tables for one GT–SUB pair."""
+    if heading:
+        st.markdown(f"**{heading}**")
+        st.caption(os.path.basename(sub_path))
+    with st.spinner("Computing overall emulation score…"):
+        _score = _cached_overall_score(
+            gt_path,
+            sub_path,
+            _h5_mtime(gt_path),
+            _h5_mtime(sub_path),
+            profile_id,
+            sim_tuple,
+            SCORE_CACHE_VERSION,
+        )
+    _overall = float(_score["overall"])
+    _categories = _score["categories"]
+    _metric_subscores = _score["metric_subscores"]
+    _score_color = "#3fb950" if _overall >= 85 else "#ffa657" if _overall >= 60 else "#f85149"
+    if heading is None:
+        st.markdown("**Overall emulation score**")
+    st.caption(
+        f"Profile: **{_score.get('profile_label', profile_id)}** · "
+        f"{_score.get('scope_note', '')}"
+    )
+    if _score.get("simulated_neurons"):
+        st.caption(
+            "Simulated neurons in scope: "
+            + ", ".join(_score["simulated_neurons"])
+        )
+    _sc1, _sc2 = st.columns([1, 2])
+    with _sc1:
+        st.markdown(
+            f"""
+            <div class="kpi-card" style="text-align:center;padding:20px 16px;">
+                <div class="kpi-label">Overall Score</div>
+                <div class="kpi-value" style="font-size:2.4rem;color:{_score_color};">{_overall:.1f} / 100</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+    with _sc2:
+        st.markdown("**Category score breakdown**")
+        show_table(_categories)
+    st.markdown("**Metric subscores**")
+    show_scroll_table(_metric_subscores, max_height=320 if heading else 380)
+    if same_h5:
+        st.caption(
+            "GT and SUB use the same H5 — expect ~100/100 if scoring logic matches self-consistency."
+        )
 
 
 def load_metadata(h5_path):
@@ -1103,11 +1382,7 @@ def _cached_pdf_report(gt_path: str, sub_path: str, gt_mtime: float, sub_mtime: 
     return generate_pdf_report(gt_path, sub_path)
 
 
-<<<<<<< Updated upstream
-SCORE_CACHE_VERSION = 2
-=======
 SCORE_CACHE_VERSION = 3
->>>>>>> Stashed changes
 
 
 @st.cache_data(show_spinner=True)
@@ -1116,12 +1391,6 @@ def _cached_overall_score(
     sub_path: str,
     gt_mtime: float,
     sub_mtime: float,
-<<<<<<< Updated upstream
-    cache_version: int = SCORE_CACHE_VERSION,
-) -> dict:
-    del cache_version  # bust cache when scoring schema changes
-    result = compute_overall_score_fn(gt_path, sub_path)
-=======
     profile_id: str,
     simulated_neurons_key: tuple,
     cache_version: int = SCORE_CACHE_VERSION,
@@ -1134,49 +1403,68 @@ def _cached_overall_score(
         profile_id=profile_id,
         simulated_neurons=sim_list,
     )
->>>>>>> Stashed changes
     if "categories" not in result or "metric_subscores" not in result:
         raise RuntimeError("Scoring module returned an outdated payload — update dashboard_scoring.py")
     return result
 
 
-def render_sidebar_pdf_download(gt_path: str, sub_path: str) -> None:
+def render_sidebar_pdf_download(gt_path: str, sub_views: list) -> None:
     """PDF export in the sidebar so it does not overlap Deploy / Rerun."""
     st.markdown(
         '<div style="font-size:0.68rem;color:#8b949e;padding:6px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Export</div>',
         unsafe_allow_html=True,
     )
+    # Re-try load so a fixed install (reportlab / pdf_report.py) is picked up after rerun.
+    global generate_pdf_report, PDF_EXPORT_ERROR
     if generate_pdf_report is None:
-        reason = html.escape(PDF_EXPORT_ERROR or "PDF export unavailable")
+        generate_pdf_report, PDF_EXPORT_ERROR = _load_pdf_generator()
+    if generate_pdf_report is None:
+        reason = PDF_EXPORT_ERROR or "PDF export unavailable"
         st.markdown(
-            f'<span class="pdf-sidebar-status" title="{reason}">PDF unavailable</span>',
+            f'<span class="pdf-sidebar-status">PDF unavailable</span>',
             unsafe_allow_html=True,
         )
+        st.caption(reason)
+        if "reportlab" in reason.lower():
+            st.code("python -m pip install reportlab", language="bash")
+        elif "pdf_report.py is missing" in reason:
+            st.code(
+                "cp /path/to/METRICS/pdf_report.py /path/to/dashboard/folder/",
+                language="bash",
+            )
         return
-    try:
-        pdf_bytes = _cached_pdf_report(
-            gt_path,
-            sub_path,
-            _h5_mtime(gt_path),
-            _h5_mtime(sub_path),
-        )
-        st.session_state.pop("pdf_last_error", None)
-        st.download_button(
-            "Download PDF",
-            data=pdf_bytes,
-            file_name=f"XOR_GT_vs_SUB_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf",
-            mime="application/pdf",
-            key="download_pdf_report",
-            use_container_width=True,
-            help="Download summary report with tables and key charts.",
-        )
-    except Exception as exc:
-        err = html.escape(str(exc))
-        st.session_state["pdf_last_error"] = str(exc)
-        st.markdown(
-            f'<span class="pdf-sidebar-status" title="{err}">PDF failed</span>',
-            unsafe_allow_html=True,
-        )
+    for view in sub_views:
+        label = view["label"]
+        sub_path = view["path"]
+        view_gt = view.get("gt_path", gt_path)
+        btn_key = f"download_pdf_report__{view['key']}"
+        try:
+            pdf_bytes = _cached_pdf_report(
+                view_gt,
+                sub_path,
+                _h5_mtime(view_gt),
+                _h5_mtime(sub_path),
+            )
+            st.session_state.pop("pdf_last_error", None)
+            st.download_button(
+                f"PDF · {label}" if len(sub_views) > 1 else "Download PDF",
+                data=pdf_bytes,
+                file_name=(
+                    f"XOR_GT_vs_{view['key']}_report_"
+                    f"{datetime.now().strftime('%Y%m%d_%H%M%S')}.pdf"
+                ),
+                mime="application/pdf",
+                key=btn_key,
+                use_container_width=True,
+                help=f"Summary report for {label}: {os.path.basename(sub_path)}",
+            )
+        except Exception as exc:
+            err = html.escape(str(exc))
+            st.session_state["pdf_last_error"] = str(exc)
+            st.markdown(
+                f'<span class="pdf-sidebar-status" title="{err}">PDF failed ({html.escape(label)})</span>',
+                unsafe_allow_html=True,
+            )
 
 
 @st.cache_data
@@ -1190,17 +1478,12 @@ def load_truth_table_json(h5_path):
     candidates = [
         os.path.join(base, "network_config.json"),
         os.path.join(os.path.dirname(base), "network_config.json"),
-<<<<<<< Updated upstream
-        os.path.join(base, "GT", "network_config.json"),
-        os.path.join(os.path.dirname(base), "GT", "network_config.json"),
-=======
         os.path.join(base, "GT_h5", "network_config.json"),
         os.path.join(os.path.dirname(base), "GT_h5", "network_config.json"),
         os.path.join(base, "GT", "network_config.json"),
         os.path.join(os.path.dirname(base), "GT", "network_config.json"),
         os.path.join(base, "output", "GT_h5", "network_config.json"),
         os.path.join(os.path.dirname(base), "output", "GT_h5", "network_config.json"),
->>>>>>> Stashed changes
         os.path.join(base, "output", "GT", "network_config.json"),
         os.path.join(os.path.dirname(base), "output", "GT", "network_config.json"),
     ]
@@ -1416,40 +1699,77 @@ with st.sidebar:
     """, unsafe_allow_html=True)
 
     _metrics_dir = os.path.dirname(os.path.abspath(__file__))
-<<<<<<< Updated upstream
-    default_path = os.path.join(_metrics_dir, "groundtruth.h5")
-    _default_sub = os.path.join(_metrics_dir, "substitute.h5")
-    default_sub_path = _default_sub if os.path.isfile(_default_sub) else default_path
-=======
-    default_path, default_sub_path = resolve_default_h5_paths(_metrics_dir)
->>>>>>> Stashed changes
+    (
+        default_gt_path,
+        default_sub_path,
+        default_gt_ood_path,
+        default_ood_path,
+    ) = resolve_default_h5_paths(_metrics_dir)
+    st.markdown(
+        '<div style="font-size:0.68rem;color:#8b949e;padding:6px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Comparison</div>',
+        unsafe_allow_html=True,
+    )
+    if "compare_mode" not in st.session_state:
+        st.session_state.compare_mode = COMPARE_MODE_INDOMAIN
+    compare_mode = st.selectbox(
+        "Domain view",
+        options=[COMPARE_MODE_INDOMAIN, COMPARE_MODE_OOD, COMPARE_MODE_BOTH],
+        format_func=lambda k: COMPARE_MODE_LABELS[k],
+        key="compare_mode",
+        help=(
+            "In-domain: GT_h5 + SUB_h5. Out-of-domain: GT_OOD + SUB_OOD "
+            "(separate ground truth from in-domain)."
+        ),
+    )
     st.markdown(
         '<div style="font-size:0.68rem;color:#8b949e;padding:6px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Data paths</div>',
         unsafe_allow_html=True,
     )
-    gt_path = st.text_input(
-        "Ground truth data",
-        value=default_path,
+    gt_indomain_path = st.text_input(
+        "In-domain GT",
+        value=default_gt_path,
         key="path_gt_h5",
-        help="H5 with GT voltage/spikes; network_config and trial_map are taken from this file.",
+        help="Default: output/GT_h5/groundtruth.h5.",
     )
-    sub_path = st.text_input(
-        "Submission (SUB) data",
+    sub_indomain_path = st.text_input(
+        "In-domain SUB",
         value=default_sub_path,
         key="path_sub_h5",
-        help="H5 with submission /data and /spikes_raw. If substitute.h5 exists beside this script, it is used by default (IF black-box SUB from the pipeline).",
+        help="Default: output/SUB_h5/sub.h5.",
     )
-    _same = os.path.normpath(os.path.abspath(gt_path)) == os.path.normpath(os.path.abspath(sub_path))
-    st.caption("Using one H5 for both GT and SUB (self-check)." if _same else "GT and SUB load from different files.")
+    gt_ood_path = st.text_input(
+        "Out-of-domain GT",
+        value=default_gt_ood_path,
+        key="path_gt_ood_h5",
+        help="Default: output/GT_OOD/groundtruth_ood.h5. Used only for OOD / Both views.",
+    )
+    sub_ood_path = st.text_input(
+        "Out-of-domain SUB",
+        value=default_ood_path,
+        key="path_sub_ood_h5",
+        help="Default: output/SUB_OOD/sub_ood.h5. Used only for OOD / Both views.",
+    )
+    if compare_mode == COMPARE_MODE_INDOMAIN:
+        st.caption("In-domain: `GT_h5` vs `SUB_h5`.")
+    elif compare_mode == COMPARE_MODE_OOD:
+        st.caption("Out-of-domain: `GT_OOD` vs `SUB_OOD` (not the in-domain GT).")
+    else:
+        st.caption("Both: left = GT_h5/SUB_h5 · right = GT_OOD/SUB_OOD.")
 
-<<<<<<< Updated upstream
-=======
+    _manifest_sub = (
+        sub_ood_path if compare_mode == COMPARE_MODE_OOD else sub_indomain_path
+    )
+
     if compute_overall_score_fn is not None and SCORING_PROFILES:
         st.markdown(
             '<div style="font-size:0.68rem;color:#8b949e;padding:12px 2px 2px;text-transform:uppercase;letter-spacing:0.07em;">Scoring profile</div>',
             unsafe_allow_html=True,
         )
-        _manifest = load_sub_manifest_fn(sub_path) if load_sub_manifest_fn and os.path.isfile(sub_path) else None
+        _manifest = (
+            load_sub_manifest_fn(_manifest_sub)
+            if load_sub_manifest_fn and os.path.isfile(_manifest_sub)
+            else None
+        )
         _profile_ids = list(SCORING_PROFILES.keys())
         _default_profile = "blackbox_io"
         if isinstance(_manifest, dict) and _manifest.get("evaluation_profile") in _profile_ids:
@@ -1485,7 +1805,6 @@ with st.sidebar:
     elif SCORING_ERROR:
         st.caption(f"Scoring unavailable: {SCORING_ERROR}")
 
->>>>>>> Stashed changes
     st.markdown('<div class="nav-section">Metrics</div>', unsafe_allow_html=True)
 
     for icon, label, key in METRICS:
@@ -1496,40 +1815,86 @@ with st.sidebar:
             st.session_state.active_metric = key
             st.rerun()
 
-    render_sidebar_pdf_download(gt_path, sub_path)
-    if st.session_state.get("pdf_last_error"):
-        st.error(f"PDF export failed:\n\n{st.session_state['pdf_last_error']}")
-
-    st.markdown("---")
-    st.markdown('<div style="font-size:0.72rem;color:#8b949e;padding:0 14px;">v2.0 · Streamlit Dashboard</div>',
-                unsafe_allow_html=True)
-
 # ──────────────────────────────────────────────────────────────
 # LOAD DATA
 # ──────────────────────────────────────────────────────────────
-for _label, _path in (("Ground truth", gt_path), ("Submission (SUB)", sub_path)):
+def _build_domain_view(key: str, label: str, gt_file: str, sub_file: str) -> dict:
+    """Load one GT/SUB pair and package everything metrics need for that domain."""
+    g_data, g_spikes, s_data, s_spikes, g_cfg, g_tmap, g_meta = load_h5_pair(gt_file, sub_file)
+    t_raw, t_json = load_truth_table_json(gt_file)
+    t_eff = normalize_truth_rows(t_raw)
+    t_len = int(g_meta["trial_len_ms"])
+    f_hz = float(g_meta["fs_hz"])
+    ms_ps = 1000.0 / f_hz
+    pats = [normalize_pattern(p) for p in g_tmap["case"].unique()]
+    c_ids = {
+        p: g_tmap[g_tmap["case"].astype(str) == str(p)]["trial_id"].tolist() for p in pats
+    }
+    return {
+        "key": key,
+        "label": label,
+        "gt_path": os.path.abspath(gt_file),
+        "path": os.path.abspath(sub_file),
+        "gt_data": g_data,
+        "gt_spikes": g_spikes,
+        "data": s_data,
+        "spikes": s_spikes,
+        "cfg": g_cfg,
+        "tmap": g_tmap,
+        "meta": g_meta,
+        "truth_raw": t_raw,
+        "truth_json_path": t_json,
+        "truth_effective": t_eff,
+        "trial_len": t_len,
+        "fs_hz": f_hz,
+        "ms_per_sample": ms_ps,
+        "patterns": pats,
+        "common_ids": c_ids,
+        "same_h5": os.path.normpath(os.path.abspath(gt_file))
+        == os.path.normpath(os.path.abspath(sub_file)),
+        "spike_cols": sorted(
+            set(get_spike_cols(g_cfg, g_data)) | set(get_spike_cols(g_cfg, s_data))
+        ),
+    }
+
+
+_paths_needed = []
+if compare_mode in (COMPARE_MODE_INDOMAIN, COMPARE_MODE_BOTH):
+    _paths_needed.append(("In-domain GT", gt_indomain_path))
+    _paths_needed.append(("In-domain SUB", sub_indomain_path))
+if compare_mode in (COMPARE_MODE_OOD, COMPARE_MODE_BOTH):
+    _paths_needed.append(("Out-of-domain GT", gt_ood_path))
+    _paths_needed.append(("Out-of-domain SUB", sub_ood_path))
+
+for _label, _path in _paths_needed:
     if not os.path.exists(_path):
         st.error(f"{_label} file not found: `{_path}`\n\nUpdate the path in the sidebar.")
         st.stop()
 
-same_h5_file = os.path.normpath(os.path.abspath(gt_path)) == os.path.normpath(
-    os.path.abspath(sub_path)
-)
-
 with st.spinner("Loading data…"):
-    gt_data, gt_spikes, sub_data, sub_spikes, cfg, tmap, meta = load_h5_pair(gt_path, sub_path)
-    truth_raw, truth_json_path = load_truth_table_json(gt_path)
+    SUB_VIEWS = []
+    if compare_mode in (COMPARE_MODE_INDOMAIN, COMPARE_MODE_BOTH):
+        SUB_VIEWS.append(
+            _build_domain_view("indomain", "In-domain", gt_indomain_path, sub_indomain_path)
+        )
+    if compare_mode in (COMPARE_MODE_OOD, COMPARE_MODE_BOTH):
+        SUB_VIEWS.append(
+            _build_domain_view("ood", "Out-of-domain", gt_ood_path, sub_ood_path)
+        )
 
-truth_effective = normalize_truth_rows(truth_raw)
-trial_len  = int(meta["trial_len_ms"])
-fs_hz      = float(meta["fs_hz"])
-MS_PER_SAMPLE = 1000.0 / fs_hz
-patterns   = [normalize_pattern(p) for p in tmap["case"].unique()]  # 00, 11, 01, 10
-spike_cols = sorted(set(get_spike_cols(cfg, gt_data)) | set(get_spike_cols(cfg, sub_data)))
-common_ids = {
-    p: tmap[tmap["case"].astype(str) == str(p)]["trial_id"].tolist() for p in patterns
-}
-active     = st.session_state.active_metric
+_apply_sub_view(SUB_VIEWS[0])
+
+with st.sidebar:
+    render_sidebar_pdf_download(gt_path, SUB_VIEWS)
+    if st.session_state.get("pdf_last_error"):
+        st.error(f"PDF export failed:\n\n{st.session_state['pdf_last_error']}")
+    st.markdown("---")
+    st.markdown(
+        '<div style="font-size:0.72rem;color:#8b949e;padding:0 14px;">v2.1 · Streamlit Dashboard</div>',
+        unsafe_allow_html=True,
+    )
+
+active = st.session_state.active_metric
 
 # ══════════════════════════════════════════════════════════════
 # OVERVIEW
@@ -1559,8 +1924,6 @@ if active == "overview":
         st.warning(f"Overall score unavailable: {SCORING_ERROR}")
     else:
         try:
-<<<<<<< Updated upstream
-=======
             _profile_id = st.session_state.get("scoring_profile_id", "blackbox_io")
             _sim_text = st.session_state.get("simulated_neurons_text", "")
             _sim_tuple = tuple(
@@ -1568,56 +1931,26 @@ if active == "overview":
                 if parse_simulated_neurons_fn
                 else []
             )
->>>>>>> Stashed changes
-            with st.spinner("Computing overall emulation score…"):
-                _score = _cached_overall_score(
-                    gt_path,
-                    sub_path,
-                    _h5_mtime(gt_path),
-                    _h5_mtime(sub_path),
-<<<<<<< Updated upstream
-=======
+            if len(SUB_VIEWS) > 1:
+                st.markdown("**Overall emulation scores · In-domain vs Out-of-domain**")
+                cols = st.columns(2, gap="large")
+                for col, view in zip(cols, SUB_VIEWS):
+                    with col:
+                        render_overview_score_block(
+                            view["gt_path"],
+                            view["path"],
+                            _profile_id,
+                            _sim_tuple,
+                            same_h5=view["same_h5"],
+                            heading=view["label"],
+                        )
+            else:
+                render_overview_score_block(
+                    SUB_VIEWS[0]["gt_path"],
+                    SUB_VIEWS[0]["path"],
                     _profile_id,
                     _sim_tuple,
->>>>>>> Stashed changes
-                    SCORE_CACHE_VERSION,
-                )
-            _overall = float(_score["overall"])
-            _categories = _score["categories"]
-            _metric_subscores = _score["metric_subscores"]
-            _score_color = "#3fb950" if _overall >= 85 else "#ffa657" if _overall >= 60 else "#f85149"
-            st.markdown("**Overall emulation score**")
-<<<<<<< Updated upstream
-=======
-            st.caption(
-                f"Profile: **{_score.get('profile_label', _profile_id)}** · "
-                f"{_score.get('scope_note', '')}"
-            )
-            if _score.get("simulated_neurons"):
-                st.caption(
-                    "Simulated neurons in scope: "
-                    + ", ".join(_score["simulated_neurons"])
-                )
->>>>>>> Stashed changes
-            _sc1, _sc2 = st.columns([1, 2])
-            with _sc1:
-                st.markdown(
-                    f"""
-                    <div class="kpi-card" style="text-align:center;padding:20px 16px;">
-                        <div class="kpi-label">Overall Score</div>
-                        <div class="kpi-value" style="font-size:2.4rem;color:{_score_color};">{_overall:.1f} / 100</div>
-                    </div>
-                    """,
-                    unsafe_allow_html=True,
-                )
-            with _sc2:
-                st.markdown("**Category score breakdown**")
-                show_table(_categories)
-            st.markdown("**Metric subscores**")
-            show_scroll_table(_metric_subscores, max_height=380)
-            if same_h5_file:
-                st.caption(
-                    "GT and SUB use the same H5 — expect ~100/100 if scoring logic matches self-consistency."
+                    same_h5=SUB_VIEWS[0]["same_h5"],
                 )
         except Exception as exc:
             st.error(f"Overall score computation failed: {exc}")
@@ -1674,2030 +2007,2084 @@ if active == "overview":
             margin=dict(l=45, r=15, t=50, b=40),
         )
         fig.update_yaxes(range=[0, ymax * 1.22], title="Count")
-        st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+        _plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
 
 # ══════════════════════════════════════════════════════════════
 # BEHAVIORAL
 # ══════════════════════════════════════════════════════════════
 elif active == "behavioral":
     st.markdown('<div class="section-title">🎯 Behavioral Accuracy</div>', unsafe_allow_html=True)
-    if truth_raw is not None:
-        st.caption(f"Truth table from `{truth_json_path}`.")
+    def _render_behavioral():
+        if truth_raw is not None:
+            st.caption(f"Truth table from `{truth_json_path}`.")
 
-    out_col = get_spike_cols(cfg, gt_data, role="output")[0]
+        out_col = get_spike_cols(cfg, gt_data, role="output")[0]
 
-    def summary_table(data, pattern):
-        """TP/FN/TN/FP per pattern — same logic as compute_confusion_matrix in the reference notebook."""
-        pattern = str(pattern)
-        row_truth = truth_effective.get(pattern) or TRUTH.get(
-            pattern, {"input_A": 0, "input_B": 0, "expected_output": 0}
-        )
-        want = row_truth["expected_output"]
-        TP = FN = TN = FP = 0
-        trials = get_trials_by_pattern(data, pattern)
-        if trials is not None:
-            for t in trials:
-                window = t[t["t_in_trial"] <= trial_len]
-                fired = window[out_col].sum() > 0
-                have = 1 if fired else 0
-                if want == 1 and have == 1:
-                    TP += 1
-                elif want == 1 and have == 0:
-                    FN += 1
-                elif want == 0 and have == 0:
-                    TN += 1
-                else:
-                    FP += 1
-        else:
-            for _, row in tmap[tmap["case"].astype(str) == pattern].iterrows():
-                t = get_trial(data, row["trial_id"])
-                fired = t[t["t_in_trial"] <= trial_len][out_col].sum() > 0
-                have = 1 if fired else 0
-                if want == 1 and have == 1:
-                    TP += 1
-                elif want == 1 and have == 0:
-                    FN += 1
-                elif want == 0 and have == 0:
-                    TN += 1
-                else:
-                    FP += 1
-        den = TP + FN + TN + FP
-        acc = (TP + TN) / den if den else 0.0
-        sens = (TP / (TP + FN)) if (TP + FN) else 0.0
-        spec = (TN / (TN + FP)) if (TN + FP) else 0.0
-        return TP, FN, TN, FP, acc, sens, spec
-
-    gt_rows = []
-    sub_rows = []
-    for p in patterns:
-        ps = normalize_pattern(p)
-        tr = truth_effective.get(ps) or TRUTH.get(
-            ps, {"input_A": 0, "input_B": 0, "expected_output": 0}
-        )
-        tp, fn, tn, fp, acc, sens, spec = summary_table(gt_data, ps)
-        gt_rows.append(
-            {
-                "Pattern": ps,
-                "Input A": tr["input_A"],
-                "Input B": tr["input_B"],
-                "Expected": tr["expected_output"],
-                "TP": tp,
-                "FN": fn,
-                "TN": tn,
-                "FP": fp,
-                "Accuracy": round(acc, 3),
-                "Sensitivity": round(sens, 3),
-                "Specificity": round(spec, 3),
-            }
-        )
-        tp, fn, tn, fp, acc, sens, spec = summary_table(sub_data, ps)
-        sub_rows.append(
-            {
-                "Pattern": ps,
-                "Input A": tr["input_A"],
-                "Input B": tr["input_B"],
-                "Expected": tr["expected_output"],
-                "TP": tp,
-                "FN": fn,
-                "TN": tn,
-                "FP": fp,
-                "Accuracy": round(acc, 3),
-                "Sensitivity": round(sens, 3),
-                "Specificity": round(spec, 3),
-            }
-        )
-
-    df_gt = pd.DataFrame(gt_rows)
-    df_sub = pd.DataFrame(sub_rows)
-
-    gt_sub_match = df_gt.equals(df_sub)
-    # Pooled accuracy over all trials — (TP+TN) / (TP+FN+TN+FP); same aggregation as summing notebook rows
-    tp_sum = int(df_gt["TP"].sum())
-    fn_sum = int(df_gt["FN"].sum())
-    tn_sum = int(df_gt["TN"].sum())
-    fp_sum = int(df_gt["FP"].sum())
-    den_all = tp_sum + fn_sum + tn_sum + fp_sum
-    overall = (tp_sum + tn_sum) / den_all if den_all else 0.0
-    badge = (
-        '<span class="badge-ok">✓ GT and SUB tables match</span>'
-        if gt_sub_match
-        else '<span class="badge-warn">GT and SUB differ</span>'
-    )
-    sub_tp_sum = int(df_sub["TP"].sum())
-    sub_fn_sum = int(df_sub["FN"].sum())
-    sub_tn_sum = int(df_sub["TN"].sum())
-    sub_fp_sum = int(df_sub["FP"].sum())
-    sub_overall = (sub_tp_sum + sub_tn_sum) / den_all if den_all else 0.0
-    _beh_insight = _insight_sub(overall_acc=sub_overall)
-    _match_insight = _insight_sub(gt_sub_match=gt_sub_match)
-    _fail_pats = df_sub.loc[
-        (df_sub["FN"] > 0) | (df_sub["FP"] > 0), "Pattern"
-    ].tolist() if len(df_sub) else []
-    show_dynamic_result(
-        [
-            f"SUB accuracy = {sub_overall:.1%} ({sub_tp_sum + sub_tn_sum}/{den_all} trials correct on E).",
-            _beh_insight.replace("Conclusion: ", ""),
-            f"GT accuracy = {overall:.1%} (reference).",
-            (
-                f"Failing SUB patterns: {', '.join(_fail_pats)}"
-                if _fail_pats
-                else "All XOR patterns pass on SUB."
-            ),
-            _match_insight.replace("Conclusion: ", ""),
-        ],
-        verdict=_verdict_from_acc(sub_overall),
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">SUB Accuracy</div>
-            <div class="kpi-value">{sub_overall:.1%}</div>
-            <div class="kpi-sub">pooled (TP+TN)/N · {_beh_insight}</div></div>
-        <div class="kpi-card"><div class="kpi-label">Output Neuron</div>
-            <div class="kpi-value" style="font-size:1rem;padding-top:6px">{out_col.replace('_spike','')}</div>
-            <div class="kpi-sub">XOR result neuron — primary pass/fail</div></div>
-        <div class="kpi-card"><div class="kpi-label">Status</div>
-            <div style="margin-top:8px">{badge}</div>
-            <div class="kpi-sub">{_match_insight}</div></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("**GT vs SUB Summary**")
-    col_t, col_c = st.columns([1, 1])
-    with col_t:
-        st.markdown("**GT Summary**")
-        show_table(df_gt)
-    with col_c:
-        st.markdown("**SUB Summary**")
-        show_table(df_sub)
-
-    st.markdown("**Behavioral Metrics per Pattern (GT vs SUB)**")
-    metrics = ["Accuracy", "Sensitivity", "Specificity"]
-    xs = [f"XOR_{p}" for p in df_gt["Pattern"]]
-    fig = make_subplots(rows=1, cols=3, subplot_titles=metrics)
-    for i, metric in enumerate(metrics):
-        fig.add_trace(
-            go.Bar(
-                name="GT",
-                x=xs,
-                y=df_gt[metric],
-                marker_color=PAL_GT,
-                text=[f"{v:.2f}" for v in df_gt[metric]],
-                textposition="outside",
-                legendgroup="gt",
-                showlegend=(i == 0),
-            ),
-            row=1,
-            col=i + 1,
-        )
-        fig.add_trace(
-            go.Bar(
-                name="SUB",
-                x=xs,
-                y=df_sub[metric],
-                marker_color=PAL_SUB,
-                text=[f"{v:.2f}" for v in df_sub[metric]],
-                textposition="outside",
-                legendgroup="sub",
-                showlegend=(i == 0),
-            ),
-            row=1,
-            col=i + 1,
-        )
-    apply_dark(fig)
-    apply_title_legend_layout(
-        fig,
-        legend_y=-0.16,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=52,
-        margin_bottom=90,
-        barmode="group",
-        height=400,
-    )
-    fig.update_yaxes(range=[0, 1.25])
-    st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
-
-# ══════════════════════════════════════════════════════════════
-# VM TRACES  (Stitched + Median ± IQR — matches PDF exactly)
-# ══════════════════════════════════════════════════════════════
-elif active == "vm_traces":
-    st.markdown('<div class="section-title">⚡ Membrane Potential Traces</div>', unsafe_allow_html=True)
-
-    active_vm = get_vm_cols(cfg, scope="active")
-    neuron_names = [c.replace("_vm","") for c in active_vm]
-
-    c1, c2, c3 = st.columns([2,2,2])
-    _io_vm = [n for n in neuron_names if n in ("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E")]
-    sel_neuron_vm = c1.selectbox(
-        "Neuron", neuron_names,
-        index=neuron_names.index(_io_vm[0]) if _io_vm and _io_vm[0] in neuron_names else 0,
-        key="vm_neuron",
-        help="Compare I/O neurons first (PyrIn_A, PyrIn_B1, PyrIn_B2, E). Interneurons may be flat in SUB.",
-    )
-    sel_pat_vm = c2.selectbox("Pattern", patterns, key="vm_pat", help="XOR input pattern: 00, 01, 10, 11.")
-    view_type     = c3.radio("View", ["Stitched + Median","Median ± IQR","Both"], horizontal=True, key="vm_view")
-
-    col_vm = f"{sel_neuron_vm}_vm"
-    ids_vm = common_ids[sel_pat_vm]
-
-    gt_trials  = [get_trial(gt_data,  tid) for tid in ids_vm]
-    sub_trials = [get_trial(sub_data, tid) for tid in ids_vm]
-
-    def stitch(trials, col):
-        chunks = [t[col].to_numpy(float)[:trial_len] for t in trials]
-        return np.concatenate(chunks) if chunks else np.array([])
-
-    def median_iqr(trials, col):
-        mat = [t[col].to_numpy(float)[:trial_len] for t in trials]
-        if not mat: return None,None,None
-        L = min(len(v) for v in mat)
-        M = np.vstack([v[:L] for v in mat])
-        return np.nanmedian(M,0), np.nanpercentile(M,25,0), np.nanpercentile(M,75,0)
-
-    def stitched_median(trials, col, color, name_prefix):
-        y = stitch(trials, col)
-        med, q25, q75 = median_iqr(trials, col)
-        traces = []
-        if y.size:
-            traces.append(go.Scatter(
-                x=list(range(len(y))), y=y.tolist(),
-                mode="lines", line=dict(color=color, width=0.8),
-                name=f"{name_prefix} stitched", opacity=0.85,
-                hovertemplate="t=%{x} ms<br>Vm=%{y:.3f} mV<extra></extra>"))
-        if med is not None:
-            reps = math.ceil(max(1,len(y))/trial_len)
-            med_tile = np.tile(med, reps)[:max(1,len(y))]
-            traces.append(go.Scatter(
-                x=list(range(len(med_tile))), y=med_tile.tolist(),
-                mode="lines", line=dict(color=color, width=1.8, dash="dash"),
-                name=f"{name_prefix} median",
-                hovertemplate="t=%{x} ms<br>median=%{y:.3f} mV<extra></extra>"))
-        # trial separators
-        seps = [dict(type="line", x0=k*trial_len, x1=k*trial_len, y0=0, y1=1,
-                     yref="paper", line=dict(color="#30363d",width=0.5))
-                for k in range(1, len(trials))]
-        return traces, seps
-
-    def median_iqr_trace(trials, col, color, name_prefix):
-        med, q25, q75 = median_iqr(trials, col)
-        if med is None: return []
-        t_ax = list(range(len(med)))
-        return [
-            go.Scatter(x=t_ax+t_ax[::-1],
-                       y=q75.tolist()+q25[::-1].tolist(),
-                       fill="toself", fillcolor=_hex_rgba(color, 0.2),
-                       line=dict(color="rgba(0,0,0,0)"),
-                       name=f"{name_prefix} IQR", showlegend=True,
-                       hoverinfo="skip"),
-            go.Scatter(x=t_ax, y=med.tolist(),
-                       mode="lines", line=dict(color=color,width=2),
-                       name=f"{name_prefix} median",
-                       hovertemplate="t=%{x} ms<br>median=%{y:.3f} mV<extra></extra>"),
-        ]
-
-    _vm_gt = stitch(gt_trials, col_vm)
-    _vm_sub = stitch(sub_trials, col_vm)
-    if _vm_gt.size and _vm_sub.size:
-        _n_vm = min(len(_vm_gt), len(_vm_sub))
-        _vm_rms = float(np.sqrt(np.mean((_vm_gt[:_n_vm] - _vm_sub[:_n_vm]) ** 2)))
-        _vm_ins = _insight_sub(rmse=_vm_rms)
-        show_metric_panel(
-            "vm_traces",
-            [
-                f"Neuron {sel_neuron_vm}, pattern {sel_pat_vm}, view {view_type}.",
-                f"Stitched Vm RMS(GT−SUB) = {_vm_rms:.4f} mV over {_n_vm} samples.",
-                _vm_ins.replace("Conclusion: ", ""),
-                (
-                    "Mapped I/O neuron — mismatch here matters for black-box SUB."
-                    if sel_neuron_vm in ("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E")
-                    else "Interneuron — flat SUB trace may be expected."
-                ),
-            ],
-            verdict="ok" if _vm_rms < 0.5 else "warn" if _vm_rms < 2.0 else "warn",
-        )
-    else:
-        show_metric_panel("vm_traces")
-
-    if view_type in ("Stitched + Median","Both"):
-        fig = make_subplots(
-            rows=2, cols=1,
-            subplot_titles=[
-                f"{sel_neuron_vm} — GT Stitched (pattern {sel_pat_vm}) with Median",
-                f"{sel_neuron_vm} — SUB Stitched (pattern {sel_pat_vm}) with Median",
-            ],
-            shared_xaxes=True,
-            shared_yaxes=True,
-            vertical_spacing=0.12,
-        )
-        gt_tr, gt_sep = stitched_median(gt_trials, col_vm, PAL_GT, "GT")
-        sb_tr, sb_sep = stitched_median(sub_trials, col_vm, PAL_SUB, "SUB")
-        for tr in gt_tr: fig.add_trace(tr, row=1, col=1)
-        for tr in sb_tr: fig.add_trace(tr, row=2, col=1)
-        for s in gt_sep: fig.add_shape(**s, row=1, col=1)
-        for s in sb_sep: fig.add_shape(**s, row=2, col=1)
-        apply_dark(fig)
-        fig.update_yaxes(title_text="Vm (mV)")
-        apply_title_legend_layout(
-            fig,
-            legend_y=-0.12,
-            legend_x=0.5,
-            legend_xanchor="center",
-            margin_top=52,
-            margin_bottom=95,
-            height=560,
-            hovermode="x unified",
-        )
-        fig.update_xaxes(title_text="Sample (ms)", row=2, col=1)
-        st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
-
-    if view_type in ("Median ± IQR","Both"):
-        fig2 = make_subplots(
-            rows=1, cols=2,
-            subplot_titles=[
-                f"{sel_neuron_vm} — Median ± IQR (GT) — Pattern {sel_pat_vm}",
-                f"{sel_neuron_vm} — Median ± IQR (SUB) — Pattern {sel_pat_vm}",
-            ],
-            shared_xaxes=True,
-            shared_yaxes=True,
-        )
-        for tr in median_iqr_trace(gt_trials, col_vm, PAL_GT, "GT"):
-            fig2.add_trace(tr, row=1, col=1)
-        for tr in median_iqr_trace(sub_trials, col_vm, PAL_SUB, "SUB"):
-            fig2.add_trace(tr, row=1, col=2)
-        apply_dark(fig2)
-        fig2.update_yaxes(title_text="Vm (mV)")
-        apply_gt_sub_subplot_layout(
-            fig2,
-            title=None,
-            n_cols=2,
-            x_title="Time within trial (ms)",
-            height=400,
-            hovermode="x unified",
-        )
-        st.plotly_chart(fig2, use_container_width=True, config=PLOTLY_CONFIG)
-
-# ══════════════════════════════════════════════════════════════
-# RASTER
-# ══════════════════════════════════════════════════════════════
-elif active == "raster":
-    st.markdown('<div class="section-title">🔬 Raster Plot</div>', unsafe_allow_html=True)
-
-    c1, c2 = st.columns([2,1])
-    filter_pat = c1.selectbox("Filter pattern", ["All"]+patterns, key="raster_pat_sel")
-    view_mode  = c2.radio("View", ["GT vs SUB overlay","Differences only"], horizontal=True)
-
-    gt_f  = gt_data[gt_data["case"] == filter_pat].reset_index(drop=True) if filter_pat != "All" else gt_data.reset_index(drop=True)
-    sub_f = sub_data[sub_data["case"] == filter_pat].reset_index(drop=True) if filter_pat != "All" else sub_data.reset_index(drop=True)
-    n_rows = min(len(gt_f), len(sub_f))
-    gt_f  = gt_f.iloc[:n_rows]; sub_f = sub_f.iloc[:n_rows]
-
-    fig = go.Figure()
-    total_diff = 0
-    RASTER_Y_OFF = 0.14  # separate GT/SUB so identical spikes do not hide one color
-
-    for row_i, col in enumerate(spike_cols):
-        neuron_name = col.replace("_spike","")
-        gt_sp  = np.where(gt_f[col].to_numpy(int)==1)[0] if col in gt_f.columns else np.array([])
-        sub_sp = np.where(sub_f[col].to_numpy(int)==1)[0] if col in sub_f.columns else np.array([])
-        diff_sp = np.setxor1d(gt_sp, sub_sp)
-        total_diff += len(diff_sp)
-
-        if view_mode == "GT vs SUB overlay":
-            y_gt  = row_i - RASTER_Y_OFF
-            y_sub = row_i + RASTER_Y_OFF
-            if len(gt_sp):
-                fig.add_trace(go.Scatter(
-                    x=gt_sp.tolist(), y=[y_gt]*len(gt_sp),
-                    mode="markers", marker=dict(symbol="line-ns", size=9, color=PAL_GT,
-                        line=dict(color=PAL_GT, width=1.4)),
-                    name="GT" if row_i==0 else None,
-                    showlegend=(row_i==0),
-                    hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>GT spike<extra></extra>"))
-            if len(sub_sp):
-                fig.add_trace(go.Scatter(
-                    x=sub_sp.tolist(), y=[y_sub]*len(sub_sp),
-                    mode="markers", marker=dict(symbol="line-ns", size=9, color=PAL_SUB,
-                        line=dict(color=PAL_SUB, width=1.4)),
-                    name="SUB" if row_i==0 else None,
-                    showlegend=(row_i==0),
-                    hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>SUB spike<extra></extra>"))
-        else:
-            if len(diff_sp):
-                fig.add_trace(go.Scatter(
-                    x=diff_sp.tolist(), y=[row_i]*len(diff_sp),
-                    mode="markers", marker=dict(symbol="line-ns", size=10, color=PAL_AUTO,
-                        line=dict(color=PAL_AUTO, width=1.2)),
-                    name="Δ" if row_i==0 else None,
-                    showlegend=(row_i==0),
-                    hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>Difference<extra></extra>"))
-
-    # pattern bands
-    for p in patterns:
-        p_trials = gt_data[gt_data["case"]==p]["trial_id"].unique() if filter_pat=="All" else \
-                   gt_data[(gt_data["case"]==p)&(gt_data["case"]==filter_pat)]["trial_id"].unique()
-        for tid in p_trials:
-            blk = gt_f[gt_f["trial_id"]==tid]
-            if blk.empty: continue
-            start = int(blk.index.min())
-            fig.add_vrect(x0=start, x1=start+trial_len,
-                fillcolor=PAT_COLORS.get(str(blk["case"].iloc[0]),"#58a6ff"),
-                opacity=0.05, layer="below", line_width=0)
-
-    # trial separators
-    total_trials = math.ceil(n_rows / trial_len)
-    for k in range(1, total_trials):
-        fig.add_vline(x=k*trial_len, line_color="#21262d", line_width=0.5)
-
-    out_sp = _out_spike_col(cfg, gt_data)
-    e_diff = 0
-    if out_sp in gt_f.columns and out_sp in sub_f.columns:
-        e_gt = np.where(gt_f[out_sp].to_numpy(int) == 1)[0]
-        e_sub = np.where(sub_f[out_sp].to_numpy(int) == 1)[0]
-        e_diff = len(np.setxor1d(e_gt, e_sub))
-    io_diff = 0
-    for _ioc in _io_spike_cols(spike_cols):
-        if _ioc in gt_f.columns and _ioc in sub_f.columns:
-            io_diff += len(np.setxor1d(
-                np.where(gt_f[_ioc].to_numpy(int) == 1)[0],
-                np.where(sub_f[_ioc].to_numpy(int) == 1)[0],
-            ))
-    show_dynamic_result(
-        [
-            f"Filter: pattern {filter_pat} · view: {view_mode}.",
-            f"Total spike mismatches (all neurons): {total_diff}.",
-            f"Output {out_sp.replace('_spike', '')} mismatches: {e_diff}.",
-            f"I/O neurons (PyrIn_A, B1, B2, E) mismatches: {io_diff}.",
-            _insight_sub(raster_diff=total_diff).replace("Conclusion: ", ""),
-        ],
-        verdict="ok" if e_diff == 0 and total_diff < 50 else "warn",
-    )
-
-    apply_dark(fig)
-    apply_title_legend_layout(
-        fig,
-        title=("Raster — GT (blue) vs SUB (orange)" if view_mode == "GT vs SUB overlay"
-               else f"Differences Only (GT ⊕ SUB) — {total_diff} differing spikes"),
-        legend_y=-0.14,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=58,
-        margin_bottom=88,
-        height=max(390, len(spike_cols) * 55 + 110),
-        yaxis=dict(tickmode="array", tickvals=list(range(len(spike_cols))),
-                   ticktext=[c.replace("_spike", "") for c in spike_cols]),
-        xaxis_title="Sample index (ms)",
-        hovermode="closest",
-    )
-    st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
-
-    if view_mode == "GT vs SUB overlay":
-        c1, c2, c3 = st.columns(3)
-        c1.metric("GT total spikes", int(sum(gt_data[c].sum() for c in spike_cols if c in gt_data)))
-        c2.metric("SUB total spikes", int(sum(sub_data[c].sum() for c in spike_cols if c in sub_data)))
-        c3.metric("Differing spikes", total_diff,
-                  delta="✓ Perfect" if total_diff==0 else f"⚠ {total_diff} diffs",
-                  delta_color="normal" if total_diff==0 else "inverse")
-
-# ══════════════════════════════════════════════════════════════
-# PSTH  — matches notebook output: per-neuron 4-panel + response-aligned
-# ══════════════════════════════════════════════════════════════
-elif active == "psth":
-    st.markdown('<div class="section-title">📈 PSTH — Peristimulus Time Histogram</div>', unsafe_allow_html=True)
-    show_metric_guide("psth")
-    st.markdown('<div class="section-subtitle">Average spike rate per bin across repetitions — GT (blue) vs SUB (orange)</div>', unsafe_allow_html=True)
-
-    BIN_MS = st.slider("Bin size (ms)", 1, 20, 5, key="psth_bin_ms")
-
-    def bin_counts(vec, bin_ms, fs):
-        x = np.asarray(vec, int)
-        bs = max(1, round(bin_ms/1000.0*fs))
-        nb = len(x)//bs
-        if nb==0: return np.zeros(0,float)
-        return x[:nb*bs].reshape(nb,bs).sum(1).astype(float)
-
-    def psth_for_col(data, col, bm):
-        out = {}
-        for p in patterns:
-            ids = common_ids[p]
-            mats = []
-            for tid in ids:
-                v = get_trial(data, tid)
-                if col not in v.columns: continue
-                mats.append(bin_counts(v[col].to_numpy(int), bm, fs_hz))
-            if mats:
-                L = min(len(m) for m in mats)
-                out[p] = np.nanmean(np.stack([m[:L] for m in mats]),0)
+        def summary_table(data, pattern):
+            """TP/FN/TN/FP per pattern — same logic as compute_confusion_matrix in the reference notebook."""
+            pattern = str(pattern)
+            row_truth = truth_effective.get(pattern) or TRUTH.get(
+                pattern, {"input_A": 0, "input_B": 0, "expected_output": 0}
+            )
+            want = row_truth["expected_output"]
+            TP = FN = TN = FP = 0
+            trials = get_trials_by_pattern(data, pattern)
+            if trials is not None:
+                for t in trials:
+                    window = t[t["t_in_trial"] <= trial_len]
+                    fired = window[out_col].sum() > 0
+                    have = 1 if fired else 0
+                    if want == 1 and have == 1:
+                        TP += 1
+                    elif want == 1 and have == 0:
+                        FN += 1
+                    elif want == 0 and have == 0:
+                        TN += 1
+                    else:
+                        FP += 1
             else:
-                out[p] = np.zeros(0)
-        return out
+                for _, row in tmap[tmap["case"].astype(str) == pattern].iterrows():
+                    t = get_trial(data, row["trial_id"])
+                    fired = t[t["t_in_trial"] <= trial_len][out_col].sum() > 0
+                    have = 1 if fired else 0
+                    if want == 1 and have == 1:
+                        TP += 1
+                    elif want == 1 and have == 0:
+                        FN += 1
+                    elif want == 0 and have == 0:
+                        TN += 1
+                    else:
+                        FP += 1
+            den = TP + FN + TN + FP
+            acc = (TP + TN) / den if den else 0.0
+            sens = (TP / (TP + FN)) if (TP + FN) else 0.0
+            spec = (TN / (TN + FP)) if (TN + FP) else 0.0
+            return TP, FN, TN, FP, acc, sens, spec
 
-    def safe_pearson(a,b):
-        a,b = np.asarray(a,float), np.asarray(b,float)
-        if a.size!=b.size or a.size==0 or np.nanvar(a)<=0 or np.nanvar(b)<=0: return np.nan
-        am,bm = np.nanmean(a), np.nanmean(b)
-        d = np.sqrt(np.nansum((a-am)**2)*np.nansum((b-bm)**2))
-        return float(np.nansum((a-am)*(b-bm))/d) if d>0 else np.nan
-
-    # neuron selector
-    active_neurons = [c.replace("_spike","") for c in spike_cols]
-    sel_psth_neuron = st.selectbox("Select neuron", active_neurons, key="psth_neuron_sel")
-    col_psth = f"{sel_psth_neuron}_spike"
-
-    gt_psth  = psth_for_col(gt_data,  col_psth, BIN_MS)
-    sub_psth = psth_for_col(sub_data, col_psth, BIN_MS)
-
-    # ---- 4-panel PSTH (one subplot per pattern, GT+SUB overlay) ----
-    fig = make_subplots(rows=1, cols=4,
-        subplot_titles=[f"pattern {p}" for p in patterns],
-        shared_yaxes=True)
-
-    summary_rows = []
-    for j, p in enumerate(patterns):
-        gt_h  = gt_psth.get(p, np.zeros(0))
-        sub_h = sub_psth.get(p, np.zeros(0))
-        L = min(len(gt_h), len(sub_h))
-        if L == 0: continue
-        t_ax = list(range(L))  # bin index (0, 1, 2...) — matches notebook x-axis
-        r = safe_pearson(gt_h[:L], sub_h[:L])
-        rmse = float(np.sqrt(np.nanmean((gt_h[:L]-sub_h[:L])**2)))
-        summary_rows.append({"pattern":p, "Pearson r":round(r,4) if not np.isnan(r) else None,
-                              "RMSE":round(rmse,6)})
-
-        fig.add_trace(go.Scatter(
-            x=t_ax, y=sub_h[:L].tolist(), mode="lines",
-            line=dict(color=PAL_SUB, width=2), name="SUB" if j==0 else None,
-            showlegend=(j==0),
-            hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"),
-            row=1, col=j+1)
-        fig.add_trace(go.Scatter(
-            x=t_ax, y=gt_h[:L].tolist(), mode="lines",
-            line=dict(color=PAL_GT, width=2.5, dash="dot"), name="GT" if j==0 else None,
-            showlegend=(j==0),
-            hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"),
-            row=1, col=j+1)
-
-    apply_dark(fig)
-    apply_gt_sub_subplot_layout(
-        fig,
-        title=f"PSTH — {sel_psth_neuron} (bin={BIN_MS} ms)",
-        n_cols=len(patterns),
-        x_title="bin",
-        y_title="spikes/bin",
-        height=380,
-        hovermode="x unified",
-    )
-    st.plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
-
-    if summary_rows:
-        _psth_rs = [r["Pearson r"] for r in summary_rows if r.get("Pearson r") is not None]
-        _psth_mean_r = float(np.mean(_psth_rs)) if _psth_rs else None
-        _worst_psth = min(
-            (r for r in summary_rows if r.get("Pearson r") is not None),
-            key=lambda r: r["Pearson r"],
-            default=None,
-        )
-        _psth_lines = [f"Neuron {sel_psth_neuron}, bin = {BIN_MS} ms."]
-        if _psth_mean_r is not None:
-            _psth_lines.append(f"Mean Pearson r across patterns = {_psth_mean_r:.4f}.")
-        if _worst_psth:
-            _psth_lines.append(
-                f"Weakest pattern {_worst_psth['pattern']}: r = {_worst_psth['Pearson r']:.4f}, "
-                f"RMSE = {_worst_psth.get('RMSE', '—')}."
+        gt_rows = []
+        sub_rows = []
+        for p in patterns:
+            ps = normalize_pattern(p)
+            tr = truth_effective.get(ps) or TRUTH.get(
+                ps, {"input_A": 0, "input_B": 0, "expected_output": 0}
             )
-        _psth_lines.append(
-            "GT and SUB fire on similar schedule."
-            if _psth_mean_r and _psth_mean_r > 0.85
-            else "Timing or rate differs — check raster/KS even if XOR passes."
-        )
-        show_metric_panel(
-            "psth",
-            _psth_lines,
-            verdict="ok" if _psth_mean_r and _psth_mean_r > 0.85 else "warn",
-        )
-
-    # ---- All neurons 4-panel grid ----
-    st.markdown("**All neurons overview**")
-    for col_n in spike_cols:
-        n_name = col_n.replace("_spike","")
-        gt_p   = psth_for_col(gt_data,  col_n, BIN_MS)
-        sub_p  = psth_for_col(sub_data, col_n, BIN_MS)
-        row_figs = make_subplots(rows=1, cols=4,
-            subplot_titles=[f"pattern {p}" for p in patterns], shared_yaxes=True)
-        for j, p in enumerate(patterns):
-            gt_h  = gt_p.get(p, np.zeros(0))
-            sub_h = sub_p.get(p, np.zeros(0))
-            L = min(len(gt_h), len(sub_h))
-            if L==0: continue
-            t_ax = list(range(L))  # bin index — matches notebook
-            row_figs.add_trace(go.Scatter(x=t_ax, y=sub_h[:L].tolist(), mode="lines",
-                line=dict(color=PAL_SUB, width=1.8), name="SUB" if j==0 else None,
-                showlegend=(j==0),
-                hovertemplate=f"bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
-            row_figs.add_trace(go.Scatter(x=t_ax, y=gt_h[:L].tolist(), mode="lines",
-                line=dict(color=PAL_GT, width=2.2, dash="dot"), name="GT" if j==0 else None, showlegend=(j==0),
-                hovertemplate=f"bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
-        apply_dark(row_figs)
-        apply_gt_sub_subplot_layout(
-            row_figs,
-            title=f"PSTH — {n_name} (bin={BIN_MS} ms)",
-            n_cols=len(patterns),
-            x_title="bin",
-            y_title="spikes/bin",
-            height=320,
-            hovermode="x unified",
-        )
-        st.plotly_chart(row_figs, use_container_width=True, config=PLOTLY_CONFIG)
-
-    if summary_rows:
-        st.markdown("**PSTH Summary Table**")
-        show_table(pd.DataFrame(summary_rows))
-
-    # ---- Response-aligned PSTH (output + intermediate neurons) ----
-    st.markdown("**Response-Aligned PSTH** (0 = earliest input, spiking patterns only)")
-    focus_neurons = [f"{n}_spike" for n in get_neurons(cfg, role=["intermediate","output"])]
-    resp_patterns = [p for p in patterns if TRUTH[p]["input_A"]>0 or TRUTH[p]["input_B"]>0]
-
-    for col_ra in focus_neurons:
-        n_name_ra = col_ra.replace("_spike","")
-        has_data = False
-        fig_ra = make_subplots(rows=1, cols=len(resp_patterns),
-            subplot_titles=[f"pattern {p}" for p in resp_patterns], shared_yaxes=True)
-        for j, p in enumerate(resp_patterns):
-            ids = common_ids[p]
-            rows_ra = []
-            for tid in ids:
-                t_df = get_trial(gt_data, tid)
-                if col_ra not in t_df.columns: continue
-                vec = t_df[col_ra].to_numpy(int)[:trial_len]
-                rows_ra.append(vec)
-            if not rows_ra: continue
-            L_ra = min(len(v) for v in rows_ra)
-            psth_ra = np.nanmean(np.stack([v[:L_ra] for v in rows_ra]),0)
-            if psth_ra.sum() == 0: continue
-            has_data = True
-            t_ra = list(range(L_ra))  # ms within trial (0..trial_len-1)
-            # sub first, then GT on top (dotted blue over solid orange when identical)
-            rows_sb = []
-            for tid in ids:
-                t_df2 = get_trial(sub_data, tid)
-                if col_ra not in t_df2.columns: continue
-                vec2 = t_df2[col_ra].to_numpy(int)[:trial_len]
-                rows_sb.append(vec2)
-            if rows_sb:
-                psth_sb = np.nanmean(np.stack([v[:L_ra] for v in rows_sb[:len(rows_ra)]]),0)
-                fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_sb[:L_ra].tolist(), mode="lines",
-                    line=dict(color=PAL_SUB, width=2), name="SUB" if j==0 else None,
-                    showlegend=(j==0),
-                    hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
-            fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_ra.tolist(), mode="lines",
-                line=dict(color=PAL_GT, width=2.5, dash="dot"), name="GT" if j==0 else None,
-                showlegend=(j==0),
-                hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
-
-        if has_data:
-            apply_dark(fig_ra)
-            apply_gt_sub_subplot_layout(
-                fig_ra,
-                title=f"Response-aligned PSTH — {n_name_ra} (0 = earliest input)",
-                n_cols=len(resp_patterns),
-                x_title="ms rel. to input",
-                y_title="spikes/sample",
-                height=360,
-                hovermode="x unified",
+            tp, fn, tn, fp, acc, sens, spec = summary_table(gt_data, ps)
+            gt_rows.append(
+                {
+                    "Pattern": ps,
+                    "Input A": tr["input_A"],
+                    "Input B": tr["input_B"],
+                    "Expected": tr["expected_output"],
+                    "TP": tp,
+                    "FN": fn,
+                    "TN": tn,
+                    "FP": fp,
+                    "Accuracy": round(acc, 3),
+                    "Sensitivity": round(sens, 3),
+                    "Specificity": round(spec, 3),
+                }
             )
-            st.plotly_chart(fig_ra, use_container_width=True, config=PLOTLY_CONFIG)
+            tp, fn, tn, fp, acc, sens, spec = summary_table(sub_data, ps)
+            sub_rows.append(
+                {
+                    "Pattern": ps,
+                    "Input A": tr["input_A"],
+                    "Input B": tr["input_B"],
+                    "Expected": tr["expected_output"],
+                    "TP": tp,
+                    "FN": fn,
+                    "TN": tn,
+                    "FP": fp,
+                    "Accuracy": round(acc, 3),
+                    "Sensitivity": round(sens, 3),
+                    "Specificity": round(spec, 3),
+                }
+            )
 
-# ══════════════════════════════════════════════════════════════
-# ISI
-# ══════════════════════════════════════════════════════════════
-elif active == "isi":
-    st.markdown('<div class="section-title">⏱ ISI & Fano Factor</div>', unsafe_allow_html=True)
-    show_metric_guide("isi")
+        df_gt = pd.DataFrame(gt_rows)
+        df_sub = pd.DataFrame(sub_rows)
 
-    try:
-        from scipy.stats import wasserstein_distance as wdist
-    except ImportError:
-        wdist = None
-
-    @st.cache_data
-    def compute_isi(spikes_path):
-        spk = pd.read_hdf(spikes_path, "/spikes_raw")
-        d   = pd.read_hdf(spikes_path, "/data")
-        cf  = pd.read_hdf(spikes_path, "/network_config")
-        tm  = pd.read_hdf(spikes_path, "/trial_map")
-        rows = []
-        for neuron in get_spiking_neurons(cf, d):
-            for p in sorted(tm["case"].unique()):
-                mask = (spk["label"]==neuron) & (spk["pattern"]==p)
-                st_arr = spk[mask]["spike_time_ms"].to_numpy()
-                all_reps = tm[tm["case"]==p]["rep"].unique()
-                counts = spk[mask].groupby("rep").size().reindex(all_reps,fill_value=0).to_numpy()
-                isi = np.diff(st_arr)
-                cv   = float(np.std(isi)/np.mean(isi)) if len(isi)>0 and np.mean(isi)>0 else None
-                fano = float(np.var(counts)/np.mean(counts)) if np.mean(counts)>0 else None
-                rows.append({"neuron":neuron,"pattern":p,"cv":cv,"fano":fano,"isi":isi})
-        return pd.DataFrame(rows)
-
-    with st.spinner("Computing ISI…"):
-        isi_gt_df = compute_isi(gt_path)
-        isi_sub_df = compute_isi(sub_path) if not same_h5_file else isi_gt_df
-
-    neurons_isi = isi_gt_df["neuron"].unique()
-
-    # CV + Fano summary bars
-    gt_cv = [isi_gt_df[isi_gt_df["neuron"] == n]["cv"].dropna().mean() for n in neurons_isi]
-    gt_fano = [isi_gt_df[isi_gt_df["neuron"] == n]["fano"].dropna().mean() for n in neurons_isi]
-    sub_cv = [isi_sub_df[isi_sub_df["neuron"] == n]["cv"].dropna().mean() for n in neurons_isi]
-    sub_fano = [isi_sub_df[isi_sub_df["neuron"] == n]["fano"].dropna().mean() for n in neurons_isi]
-
-    fig_cv = make_subplots(rows=1, cols=2,
-        subplot_titles=["ISI Coefficient of Variation (mean over patterns)",
-                        "Fano Factor (Var/Mean)"])
-    for vals, col_r, title_r in [(gt_cv, 1, "ISI CV"), (gt_fano, 2, "Fano")]:
-        fig_cv.add_trace(go.Bar(
-            x=list(neurons_isi), y=vals,
-            marker_color=PAL_GT, name="GT",
-            text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
-            textposition="outside",
-            hovertemplate=f"%{{x}}<br>GT {title_r}=%{{y:.4f}}<extra></extra>",
-            legendgroup="gt",
-            showlegend=(col_r == 1),
-        ), row=1, col=col_r)
-    if not same_h5_file:
-        for vals, col_r, title_r in [(sub_cv, 1, "ISI CV"), (sub_fano, 2, "Fano")]:
-            fig_cv.add_trace(go.Bar(
-                x=list(neurons_isi), y=vals,
-                marker_color=PAL_SUB, name="SUB",
-                text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
-                textposition="outside",
-                hovertemplate=f"%{{x}}<br>SUB {title_r}=%{{y:.4f}}<extra></extra>",
-                legendgroup="sub",
-                showlegend=(col_r == 1),
-            ), row=1, col=col_r)
-    apply_dark(fig_cv)
-    apply_title_legend_layout(
-        fig_cv,
-        legend_y=-0.16,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=52,
-        margin_bottom=90,
-        height=400,
-        hovermode="x",
-        barmode="group" if not same_h5_file else "relative",
-    )
-    fig_cv.update_xaxes(tickangle=30)
-    st.plotly_chart(fig_cv, use_container_width=True, config=PLOTLY_CONFIG)
-
-    # Per-neuron ISI histogram
-    st.markdown("**ISI Distribution per Neuron × Pattern**")
-    c1, c2 = st.columns(2)
-    sel_isi_n = c1.selectbox("Neuron", list(neurons_isi), key="isi_n")
-    sel_isi_p = c2.selectbox("Pattern", patterns, key="isi_p")
-
-    row_gt = isi_gt_df[(isi_gt_df["neuron"] == sel_isi_n) & (isi_gt_df["pattern"] == sel_isi_p)]
-    row_sub = isi_sub_df[(isi_sub_df["neuron"] == sel_isi_n) & (isi_sub_df["pattern"] == sel_isi_p)]
-
-    if not row_gt.empty:
-        isi_arr_gt = row_gt["isi"].values[0]
-        cv_val = row_gt["cv"].values[0]
-        fano_val = row_gt["fano"].values[0]
-        isi_arr_sub = row_sub["isi"].values[0] if not row_sub.empty else np.array([])
-        cv_sub = row_sub["cv"].values[0] if not row_sub.empty else None
-        fano_sub = row_sub["fano"].values[0] if not row_sub.empty else None
-        w_val = None
-        if wdist and len(isi_arr_gt) > 0 and len(isi_arr_sub) > 0:
-            w_val = wdist(isi_arr_gt, isi_arr_sub)
-        elif wdist and same_h5_file and len(isi_arr_gt) > 0:
-            w_val = wdist(isi_arr_gt, isi_arr_gt)
-
-        _w_ins = _insight_sub(wasserstein=w_val) if w_val is not None else ""
-        show_metric_panel(
-            "isi",
+        gt_sub_match = df_gt.equals(df_sub)
+        # Pooled accuracy over all trials — (TP+TN) / (TP+FN+TN+FP); same aggregation as summing notebook rows
+        tp_sum = int(df_gt["TP"].sum())
+        fn_sum = int(df_gt["FN"].sum())
+        tn_sum = int(df_gt["TN"].sum())
+        fp_sum = int(df_gt["FP"].sum())
+        den_all = tp_sum + fn_sum + tn_sum + fp_sum
+        overall = (tp_sum + tn_sum) / den_all if den_all else 0.0
+        badge = (
+            '<span class="badge-ok">✓ GT and SUB tables match</span>'
+            if gt_sub_match
+            else '<span class="badge-warn">GT and SUB differ</span>'
+        )
+        sub_tp_sum = int(df_sub["TP"].sum())
+        sub_fn_sum = int(df_sub["FN"].sum())
+        sub_tn_sum = int(df_sub["TN"].sum())
+        sub_fp_sum = int(df_sub["FP"].sum())
+        sub_overall = (sub_tp_sum + sub_tn_sum) / den_all if den_all else 0.0
+        _beh_insight = _insight_sub(overall_acc=sub_overall)
+        _match_insight = _insight_sub(gt_sub_match=gt_sub_match)
+        _fail_pats = df_sub.loc[
+            (df_sub["FN"] > 0) | (df_sub["FP"] > 0), "Pattern"
+        ].tolist() if len(df_sub) else []
+        show_dynamic_result(
             [
-                f"Neuron {sel_isi_n}, pattern {sel_isi_p}.",
-                f"CV: GT={cv_val:.4f}" + (f", SUB={cv_sub:.4f}" if cv_sub is not None else "") if cv_val is not None else "",
-                f"Fano: GT={fano_val:.4f}" + (f", SUB={fano_sub:.4f}" if fano_sub is not None else "") if fano_val is not None else "",
+                f"SUB accuracy = {sub_overall:.1%} ({sub_tp_sum + sub_tn_sum}/{den_all} trials correct on E).",
+                _beh_insight.replace("Conclusion: ", ""),
+                f"GT accuracy = {overall:.1%} (reference).",
                 (
-                    f"Wasserstein(ISI) = {w_val:.4f} — {_w_ins.replace('Conclusion: ', '')}"
-                    if w_val is not None
-                    else "Wasserstein: not enough ISIs in GT and SUB."
+                    f"Failing SUB patterns: {', '.join(_fail_pats)}"
+                    if _fail_pats
+                    else "All XOR patterns pass on SUB."
                 ),
+                _match_insight.replace("Conclusion: ", ""),
             ],
-            verdict="ok" if w_val is not None and w_val < 1.0 else "warn",
+            verdict=_verdict_from_acc(sub_overall),
         )
         st.markdown(f"""
         <div class="kpi-row">
-            <div class="kpi-card"><div class="kpi-label">CV (GT)</div>
-                <div class="kpi-value">{f"{cv_val:.4f}" if cv_val is not None else "—"}</div></div>
-            <div class="kpi-card"><div class="kpi-label">Fano (GT)</div>
-                <div class="kpi-value">{f"{fano_val:.4f}" if fano_val is not None else "—"}</div></div>
-            <div class="kpi-card"><div class="kpi-label">CV (SUB)</div>
-                <div class="kpi-value">{f"{cv_sub:.4f}" if cv_sub is not None else "—"}</div></div>
-            <div class="kpi-card"><div class="kpi-label">Fano (SUB)</div>
-                <div class="kpi-value">{f"{fano_sub:.4f}" if fano_sub is not None else "—"}</div></div>
-            <div class="kpi-card"><div class="kpi-label">Wasserstein (GT vs SUB ISI)</div>
-                <div class="kpi-value">{f"{w_val:.4f}" if w_val is not None else "—"}</div>
-                <div class="kpi-sub">{_w_ins or ("✓ ≈ 0 (same file)" if same_h5_file and w_val is not None and w_val < 1e-6 else "")}</div></div>
+            <div class="kpi-card"><div class="kpi-label">SUB Accuracy</div>
+                <div class="kpi-value">{sub_overall:.1%}</div>
+                <div class="kpi-sub">pooled (TP+TN)/N · {_beh_insight}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Output Neuron</div>
+                <div class="kpi-value" style="font-size:1rem;padding-top:6px">{out_col.replace('_spike','')}</div>
+                <div class="kpi-sub">XOR result neuron — primary pass/fail</div></div>
+            <div class="kpi-card"><div class="kpi-label">Status</div>
+                <div style="margin-top:8px">{badge}</div>
+                <div class="kpi-sub">{_match_insight}</div></div>
         </div>
         """, unsafe_allow_html=True)
 
-        if len(isi_arr_gt) > 0 or len(isi_arr_sub) > 0:
-            fig_isi = go.Figure()
-            _add_gt_sub_histogram(fig_isi, isi_arr_gt, isi_arr_sub, n_bins=20)
-            apply_dark(fig_isi)
+        st.markdown("**GT vs SUB Summary**")
+        col_t, col_c = st.columns([1, 1])
+        with col_t:
+            st.markdown("**GT Summary**")
+            show_table(df_gt)
+        with col_c:
+            st.markdown("**SUB Summary**")
+            show_table(df_sub)
+
+        st.markdown("**Behavioral Metrics per Pattern (GT vs SUB)**")
+        metrics = ["Accuracy", "Sensitivity", "Specificity"]
+        xs = [f"XOR_{p}" for p in df_gt["Pattern"]]
+        fig = make_subplots(rows=1, cols=3, subplot_titles=metrics)
+        for i, metric in enumerate(metrics):
+            fig.add_trace(
+                go.Bar(
+                    name="GT",
+                    x=xs,
+                    y=df_gt[metric],
+                    marker_color=PAL_GT,
+                    text=[f"{v:.2f}" for v in df_gt[metric]],
+                    textposition="outside",
+                    legendgroup="gt",
+                    showlegend=(i == 0),
+                ),
+                row=1,
+                col=i + 1,
+            )
+            fig.add_trace(
+                go.Bar(
+                    name="SUB",
+                    x=xs,
+                    y=df_sub[metric],
+                    marker_color=PAL_SUB,
+                    text=[f"{v:.2f}" for v in df_sub[metric]],
+                    textposition="outside",
+                    legendgroup="sub",
+                    showlegend=(i == 0),
+                ),
+                row=1,
+                col=i + 1,
+            )
+        apply_dark(fig)
+        apply_title_legend_layout(
+            fig,
+            legend_y=-0.16,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=52,
+            margin_bottom=90,
+            barmode="group",
+            height=400,
+        )
+        fig.update_yaxes(range=[0, 1.25])
+        _plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_behavioral)
+
+# ══════════════════════════════════════════════════════════════
+# VM TRACES  (Stitched + Median ± IQR — matches PDF exactly)
+
+# ══════════════════════════════════════════════════════════════
+
+elif active == "vm_traces":
+    st.markdown('<div class="section-title">⚡ Membrane Potential Traces</div>', unsafe_allow_html=True)
+    def _render_vm_traces():
+
+        active_vm = get_vm_cols(cfg, scope="active")
+        neuron_names = [c.replace("_vm","") for c in active_vm]
+
+        c1, c2, c3 = st.columns([2,2,2])
+        _io_vm = [n for n in neuron_names if n in ("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E")]
+        sel_neuron_vm = c1.selectbox(
+            "Neuron", neuron_names,
+            index=neuron_names.index(_io_vm[0]) if _io_vm and _io_vm[0] in neuron_names else 0,
+            key=_wk("vm_neuron"),
+            help="Compare I/O neurons first (PyrIn_A, PyrIn_B1, PyrIn_B2, E). Interneurons may be flat in SUB.",
+        )
+        sel_pat_vm = c2.selectbox("Pattern", patterns, key=_wk("vm_pat"), help="XOR input pattern: 00, 01, 10, 11.")
+        view_type     = c3.radio("View", ["Stitched + Median","Median ± IQR","Both"], horizontal=True, key=_wk("vm_view"))
+
+        col_vm = f"{sel_neuron_vm}_vm"
+        ids_vm = common_ids[sel_pat_vm]
+
+        gt_trials  = [get_trial(gt_data,  tid) for tid in ids_vm]
+        sub_trials = [get_trial(sub_data, tid) for tid in ids_vm]
+
+        def stitch(trials, col):
+            chunks = [t[col].to_numpy(float)[:trial_len] for t in trials]
+            return np.concatenate(chunks) if chunks else np.array([])
+
+        def median_iqr(trials, col):
+            mat = [t[col].to_numpy(float)[:trial_len] for t in trials]
+            if not mat: return None,None,None
+            L = min(len(v) for v in mat)
+            M = np.vstack([v[:L] for v in mat])
+            return np.nanmedian(M,0), np.nanpercentile(M,25,0), np.nanpercentile(M,75,0)
+
+        def stitched_median(trials, col, color, name_prefix):
+            y = stitch(trials, col)
+            med, q25, q75 = median_iqr(trials, col)
+            traces = []
+            if y.size:
+                traces.append(go.Scatter(
+                    x=list(range(len(y))), y=y.tolist(),
+                    mode="lines", line=dict(color=color, width=0.8),
+                    name=f"{name_prefix} stitched", opacity=0.85,
+                    hovertemplate="t=%{x} ms<br>Vm=%{y:.3f} mV<extra></extra>"))
+            if med is not None:
+                reps = math.ceil(max(1,len(y))/trial_len)
+                med_tile = np.tile(med, reps)[:max(1,len(y))]
+                traces.append(go.Scatter(
+                    x=list(range(len(med_tile))), y=med_tile.tolist(),
+                    mode="lines", line=dict(color=color, width=1.8, dash="dash"),
+                    name=f"{name_prefix} median",
+                    hovertemplate="t=%{x} ms<br>median=%{y:.3f} mV<extra></extra>"))
+            # trial separators
+            seps = [dict(type="line", x0=k*trial_len, x1=k*trial_len, y0=0, y1=1,
+                         yref="paper", line=dict(color="#30363d",width=0.5))
+                    for k in range(1, len(trials))]
+            return traces, seps
+
+        def median_iqr_trace(trials, col, color, name_prefix):
+            med, q25, q75 = median_iqr(trials, col)
+            if med is None: return []
+            t_ax = list(range(len(med)))
+            return [
+                go.Scatter(x=t_ax+t_ax[::-1],
+                           y=q75.tolist()+q25[::-1].tolist(),
+                           fill="toself", fillcolor=_hex_rgba(color, 0.2),
+                           line=dict(color="rgba(0,0,0,0)"),
+                           name=f"{name_prefix} IQR", showlegend=True,
+                           hoverinfo="skip"),
+                go.Scatter(x=t_ax, y=med.tolist(),
+                           mode="lines", line=dict(color=color,width=2),
+                           name=f"{name_prefix} median",
+                           hovertemplate="t=%{x} ms<br>median=%{y:.3f} mV<extra></extra>"),
+            ]
+
+        _vm_gt = stitch(gt_trials, col_vm)
+        _vm_sub = stitch(sub_trials, col_vm)
+        if _vm_gt.size and _vm_sub.size:
+            _n_vm = min(len(_vm_gt), len(_vm_sub))
+            _vm_rms = float(np.sqrt(np.mean((_vm_gt[:_n_vm] - _vm_sub[:_n_vm]) ** 2)))
+            _vm_ins = _insight_sub(rmse=_vm_rms)
+            show_metric_panel(
+                "vm_traces",
+                [
+                    f"Neuron {sel_neuron_vm}, pattern {sel_pat_vm}, view {view_type}.",
+                    f"Stitched Vm RMS(GT−SUB) = {_vm_rms:.4f} mV over {_n_vm} samples.",
+                    _vm_ins.replace("Conclusion: ", ""),
+                    (
+                        "Mapped I/O neuron — mismatch here matters for black-box SUB."
+                        if sel_neuron_vm in ("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E")
+                        else "Interneuron — flat SUB trace may be expected."
+                    ),
+                ],
+                verdict="ok" if _vm_rms < 0.5 else "warn" if _vm_rms < 2.0 else "warn",
+            )
+        else:
+            show_metric_panel("vm_traces")
+
+        if view_type in ("Stitched + Median","Both"):
+            fig = make_subplots(
+                rows=2, cols=1,
+                subplot_titles=[
+                    f"{sel_neuron_vm} — GT Stitched (pattern {sel_pat_vm}) with Median",
+                    f"{sel_neuron_vm} — SUB Stitched (pattern {sel_pat_vm}) with Median",
+                ],
+                shared_xaxes=True,
+                shared_yaxes=True,
+                vertical_spacing=0.12,
+            )
+            gt_tr, gt_sep = stitched_median(gt_trials, col_vm, PAL_GT, "GT")
+            sb_tr, sb_sep = stitched_median(sub_trials, col_vm, PAL_SUB, "SUB")
+            for tr in gt_tr: fig.add_trace(tr, row=1, col=1)
+            for tr in sb_tr: fig.add_trace(tr, row=2, col=1)
+            for s in gt_sep: fig.add_shape(**s, row=1, col=1)
+            for s in sb_sep: fig.add_shape(**s, row=2, col=1)
+            apply_dark(fig)
+            fig.update_yaxes(title_text="Vm (mV)")
             apply_title_legend_layout(
-                fig_isi,
-                title=f"{sel_isi_n} : ISI Distribution (Pattern {sel_isi_p})",
-                legend_y=-0.24,
+                fig,
+                legend_y=-0.12,
                 legend_x=0.5,
                 legend_xanchor="center",
-                margin_top=58,
+                margin_top=52,
                 margin_bottom=95,
-                barmode="group",
-                height=380,
-                xaxis_title="ISI (ms)",
-                yaxis_title="Count",
+                height=560,
                 hovermode="x unified",
             )
-            st.plotly_chart(fig_isi, use_container_width=True, config=PLOTLY_CONFIG)
-        else:
-            st.info("No spikes for this neuron/pattern.")
+            fig.update_xaxes(title_text="Sample (ms)", row=2, col=1)
+            _plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+
+        if view_type in ("Median ± IQR","Both"):
+            fig2 = make_subplots(
+                rows=1, cols=2,
+                subplot_titles=[
+                    f"{sel_neuron_vm} — Median ± IQR (GT) — Pattern {sel_pat_vm}",
+                    f"{sel_neuron_vm} — Median ± IQR (SUB) — Pattern {sel_pat_vm}",
+                ],
+                shared_xaxes=True,
+                shared_yaxes=True,
+            )
+            for tr in median_iqr_trace(gt_trials, col_vm, PAL_GT, "GT"):
+                fig2.add_trace(tr, row=1, col=1)
+            for tr in median_iqr_trace(sub_trials, col_vm, PAL_SUB, "SUB"):
+                fig2.add_trace(tr, row=1, col=2)
+            apply_dark(fig2)
+            fig2.update_yaxes(title_text="Vm (mV)")
+            apply_gt_sub_subplot_layout(
+                fig2,
+                title=None,
+                n_cols=2,
+                x_title="Time within trial (ms)",
+                height=400,
+                hovermode="x unified",
+            )
+            _plotly_chart(fig2, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_vm_traces)
+
+# ══════════════════════════════════════════════════════════════
+# RASTER
+
+# ══════════════════════════════════════════════════════════════
+
+elif active == "raster":
+    st.markdown('<div class="section-title">🔬 Raster Plot</div>', unsafe_allow_html=True)
+    def _render_raster():
+
+        c1, c2 = st.columns([2,1])
+        filter_pat = c1.selectbox("Filter pattern", ["All"]+patterns, key=_wk("raster_pat_sel"))
+        view_mode  = c2.radio("View", ["GT vs SUB overlay","Differences only"], horizontal=True, key=_wk("raster_view"))
+
+        gt_f  = gt_data[gt_data["case"] == filter_pat].reset_index(drop=True) if filter_pat != "All" else gt_data.reset_index(drop=True)
+        sub_f = sub_data[sub_data["case"] == filter_pat].reset_index(drop=True) if filter_pat != "All" else sub_data.reset_index(drop=True)
+        n_rows = min(len(gt_f), len(sub_f))
+        gt_f  = gt_f.iloc[:n_rows]; sub_f = sub_f.iloc[:n_rows]
+
+        fig = go.Figure()
+        total_diff = 0
+        RASTER_Y_OFF = 0.14  # separate GT/SUB so identical spikes do not hide one color
+
+        for row_i, col in enumerate(spike_cols):
+            neuron_name = col.replace("_spike","")
+            gt_sp  = np.where(gt_f[col].to_numpy(int)==1)[0] if col in gt_f.columns else np.array([])
+            sub_sp = np.where(sub_f[col].to_numpy(int)==1)[0] if col in sub_f.columns else np.array([])
+            diff_sp = np.setxor1d(gt_sp, sub_sp)
+            total_diff += len(diff_sp)
+
+            if view_mode == "GT vs SUB overlay":
+                y_gt  = row_i - RASTER_Y_OFF
+                y_sub = row_i + RASTER_Y_OFF
+                if len(gt_sp):
+                    fig.add_trace(go.Scatter(
+                        x=gt_sp.tolist(), y=[y_gt]*len(gt_sp),
+                        mode="markers", marker=dict(symbol="line-ns", size=9, color=PAL_GT,
+                            line=dict(color=PAL_GT, width=1.4)),
+                        name="GT" if row_i==0 else None,
+                        showlegend=(row_i==0),
+                        hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>GT spike<extra></extra>"))
+                if len(sub_sp):
+                    fig.add_trace(go.Scatter(
+                        x=sub_sp.tolist(), y=[y_sub]*len(sub_sp),
+                        mode="markers", marker=dict(symbol="line-ns", size=9, color=PAL_SUB,
+                            line=dict(color=PAL_SUB, width=1.4)),
+                        name="SUB" if row_i==0 else None,
+                        showlegend=(row_i==0),
+                        hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>SUB spike<extra></extra>"))
+            else:
+                if len(diff_sp):
+                    fig.add_trace(go.Scatter(
+                        x=diff_sp.tolist(), y=[row_i]*len(diff_sp),
+                        mode="markers", marker=dict(symbol="line-ns", size=10, color=PAL_AUTO,
+                            line=dict(color=PAL_AUTO, width=1.2)),
+                        name="Δ" if row_i==0 else None,
+                        showlegend=(row_i==0),
+                        hovertemplate=f"<b>{neuron_name}</b><br>t=%{{x}} ms<br>Difference<extra></extra>"))
+
+        # pattern bands
+        for p in patterns:
+            p_trials = gt_data[gt_data["case"]==p]["trial_id"].unique() if filter_pat=="All" else \
+                       gt_data[(gt_data["case"]==p)&(gt_data["case"]==filter_pat)]["trial_id"].unique()
+            for tid in p_trials:
+                blk = gt_f[gt_f["trial_id"]==tid]
+                if blk.empty: continue
+                start = int(blk.index.min())
+                fig.add_vrect(x0=start, x1=start+trial_len,
+                    fillcolor=PAT_COLORS.get(str(blk["case"].iloc[0]),"#58a6ff"),
+                    opacity=0.05, layer="below", line_width=0)
+
+        # trial separators
+        total_trials = math.ceil(n_rows / trial_len)
+        for k in range(1, total_trials):
+            fig.add_vline(x=k*trial_len, line_color="#21262d", line_width=0.5)
+
+        out_sp = _out_spike_col(cfg, gt_data)
+        e_diff = 0
+        if out_sp in gt_f.columns and out_sp in sub_f.columns:
+            e_gt = np.where(gt_f[out_sp].to_numpy(int) == 1)[0]
+            e_sub = np.where(sub_f[out_sp].to_numpy(int) == 1)[0]
+            e_diff = len(np.setxor1d(e_gt, e_sub))
+        io_diff = 0
+        for _ioc in _io_spike_cols(spike_cols):
+            if _ioc in gt_f.columns and _ioc in sub_f.columns:
+                io_diff += len(np.setxor1d(
+                    np.where(gt_f[_ioc].to_numpy(int) == 1)[0],
+                    np.where(sub_f[_ioc].to_numpy(int) == 1)[0],
+                ))
+        show_dynamic_result(
+            [
+                f"Filter: pattern {filter_pat} · view: {view_mode}.",
+                f"Total spike mismatches (all neurons): {total_diff}.",
+                f"Output {out_sp.replace('_spike', '')} mismatches: {e_diff}.",
+                f"I/O neurons (PyrIn_A, B1, B2, E) mismatches: {io_diff}.",
+                _insight_sub(raster_diff=total_diff).replace("Conclusion: ", ""),
+            ],
+            verdict="ok" if e_diff == 0 and total_diff < 50 else "warn",
+        )
+
+        apply_dark(fig)
+        apply_title_legend_layout(
+            fig,
+            title=("Raster — GT (blue) vs SUB (orange)" if view_mode == "GT vs SUB overlay"
+                   else f"Differences Only (GT ⊕ SUB) — {total_diff} differing spikes"),
+            legend_y=-0.14,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=58,
+            margin_bottom=88,
+            height=max(390, len(spike_cols) * 55 + 110),
+            yaxis=dict(tickmode="array", tickvals=list(range(len(spike_cols))),
+                       ticktext=[c.replace("_spike", "") for c in spike_cols]),
+            xaxis_title="Sample index (ms)",
+            hovermode="closest",
+        )
+        _plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+
+        if view_mode == "GT vs SUB overlay":
+            c1, c2, c3 = st.columns(3)
+            c1.metric("GT total spikes", int(sum(gt_data[c].sum() for c in spike_cols if c in gt_data)))
+            c2.metric("SUB total spikes", int(sum(sub_data[c].sum() for c in spike_cols if c in sub_data)))
+            c3.metric("Differing spikes", total_diff,
+                      delta="✓ Perfect" if total_diff==0 else f"⚠ {total_diff} diffs",
+                      delta_color="normal" if total_diff==0 else "inverse")
+    _run_for_each_sub(_render_raster)
+
+# ══════════════════════════════════════════════════════════════
+# PSTH  — matches notebook output: per-neuron 4-panel + response-aligned
+
+# ══════════════════════════════════════════════════════════════
+
+elif active == "psth":
+    st.markdown('<div class="section-title">📈 PSTH — Peristimulus Time Histogram</div>', unsafe_allow_html=True)
+    def _render_psth():
+        show_metric_guide("psth")
+        st.markdown('<div class="section-subtitle">Average spike rate per bin across repetitions — GT (blue) vs SUB (orange)</div>', unsafe_allow_html=True)
+
+        BIN_MS = st.slider("Bin size (ms)", 1, 20, 5, key=_wk("psth_bin_ms"))
+
+        def bin_counts(vec, bin_ms, fs):
+            x = np.asarray(vec, int)
+            bs = max(1, round(bin_ms/1000.0*fs))
+            nb = len(x)//bs
+            if nb==0: return np.zeros(0,float)
+            return x[:nb*bs].reshape(nb,bs).sum(1).astype(float)
+
+        def psth_for_col(data, col, bm):
+            out = {}
+            for p in patterns:
+                ids = common_ids[p]
+                mats = []
+                for tid in ids:
+                    v = get_trial(data, tid)
+                    if col not in v.columns: continue
+                    mats.append(bin_counts(v[col].to_numpy(int), bm, fs_hz))
+                if mats:
+                    L = min(len(m) for m in mats)
+                    out[p] = np.nanmean(np.stack([m[:L] for m in mats]),0)
+                else:
+                    out[p] = np.zeros(0)
+            return out
+
+        def safe_pearson(a,b):
+            a,b = np.asarray(a,float), np.asarray(b,float)
+            if a.size!=b.size or a.size==0 or np.nanvar(a)<=0 or np.nanvar(b)<=0: return np.nan
+            am,bm = np.nanmean(a), np.nanmean(b)
+            d = np.sqrt(np.nansum((a-am)**2)*np.nansum((b-bm)**2))
+            return float(np.nansum((a-am)*(b-bm))/d) if d>0 else np.nan
+
+        # neuron selector
+        active_neurons = [c.replace("_spike","") for c in spike_cols]
+        sel_psth_neuron = st.selectbox("Select neuron", active_neurons, key=_wk("psth_neuron_sel"))
+        col_psth = f"{sel_psth_neuron}_spike"
+
+        gt_psth  = psth_for_col(gt_data,  col_psth, BIN_MS)
+        sub_psth = psth_for_col(sub_data, col_psth, BIN_MS)
+
+        # ---- 4-panel PSTH (one subplot per pattern, GT+SUB overlay) ----
+        fig = make_subplots(rows=1, cols=4,
+            subplot_titles=[f"pattern {p}" for p in patterns],
+            shared_yaxes=True)
+
+        summary_rows = []
+        for j, p in enumerate(patterns):
+            gt_h  = gt_psth.get(p, np.zeros(0))
+            sub_h = sub_psth.get(p, np.zeros(0))
+            L = min(len(gt_h), len(sub_h))
+            if L == 0: continue
+            t_ax = list(range(L))  # bin index (0, 1, 2...) — matches notebook x-axis
+            r = safe_pearson(gt_h[:L], sub_h[:L])
+            rmse = float(np.sqrt(np.nanmean((gt_h[:L]-sub_h[:L])**2)))
+            summary_rows.append({"pattern":p, "Pearson r":round(r,4) if not np.isnan(r) else None,
+                                  "RMSE":round(rmse,6)})
+
+            fig.add_trace(go.Scatter(
+                x=t_ax, y=sub_h[:L].tolist(), mode="lines",
+                line=dict(color=PAL_SUB, width=2), name="SUB" if j==0 else None,
+                showlegend=(j==0),
+                hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"),
+                row=1, col=j+1)
+            fig.add_trace(go.Scatter(
+                x=t_ax, y=gt_h[:L].tolist(), mode="lines",
+                line=dict(color=PAL_GT, width=2.5, dash="dot"), name="GT" if j==0 else None,
+                showlegend=(j==0),
+                hovertemplate=f"Pattern {p}<br>bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"),
+                row=1, col=j+1)
+
+        apply_dark(fig)
+        apply_gt_sub_subplot_layout(
+            fig,
+            title=f"PSTH — {sel_psth_neuron} (bin={BIN_MS} ms)",
+            n_cols=len(patterns),
+            x_title="bin",
+            y_title="spikes/bin",
+            height=380,
+            hovermode="x unified",
+        )
+        _plotly_chart(fig, use_container_width=True, config=PLOTLY_CONFIG)
+
+        if summary_rows:
+            _psth_rs = [r["Pearson r"] for r in summary_rows if r.get("Pearson r") is not None]
+            _psth_mean_r = float(np.mean(_psth_rs)) if _psth_rs else None
+            _worst_psth = min(
+                (r for r in summary_rows if r.get("Pearson r") is not None),
+                key=lambda r: r["Pearson r"],
+                default=None,
+            )
+            _psth_lines = [f"Neuron {sel_psth_neuron}, bin = {BIN_MS} ms."]
+            if _psth_mean_r is not None:
+                _psth_lines.append(f"Mean Pearson r across patterns = {_psth_mean_r:.4f}.")
+            if _worst_psth:
+                _psth_lines.append(
+                    f"Weakest pattern {_worst_psth['pattern']}: r = {_worst_psth['Pearson r']:.4f}, "
+                    f"RMSE = {_worst_psth.get('RMSE', '—')}."
+                )
+            _psth_lines.append(
+                "GT and SUB fire on similar schedule."
+                if _psth_mean_r and _psth_mean_r > 0.85
+                else "Timing or rate differs — check raster/KS even if XOR passes."
+            )
+            show_metric_panel(
+                "psth",
+                _psth_lines,
+                verdict="ok" if _psth_mean_r and _psth_mean_r > 0.85 else "warn",
+            )
+
+        # ---- All neurons 4-panel grid ----
+        st.markdown("**All neurons overview**")
+        for col_n in spike_cols:
+            n_name = col_n.replace("_spike","")
+            gt_p   = psth_for_col(gt_data,  col_n, BIN_MS)
+            sub_p  = psth_for_col(sub_data, col_n, BIN_MS)
+            row_figs = make_subplots(rows=1, cols=4,
+                subplot_titles=[f"pattern {p}" for p in patterns], shared_yaxes=True)
+            for j, p in enumerate(patterns):
+                gt_h  = gt_p.get(p, np.zeros(0))
+                sub_h = sub_p.get(p, np.zeros(0))
+                L = min(len(gt_h), len(sub_h))
+                if L==0: continue
+                t_ax = list(range(L))  # bin index — matches notebook
+                row_figs.add_trace(go.Scatter(x=t_ax, y=sub_h[:L].tolist(), mode="lines",
+                    line=dict(color=PAL_SUB, width=1.8), name="SUB" if j==0 else None,
+                    showlegend=(j==0),
+                    hovertemplate=f"bin=%{{x}}<br>SUB=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+                row_figs.add_trace(go.Scatter(x=t_ax, y=gt_h[:L].tolist(), mode="lines",
+                    line=dict(color=PAL_GT, width=2.2, dash="dot"), name="GT" if j==0 else None, showlegend=(j==0),
+                    hovertemplate=f"bin=%{{x}}<br>GT=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+            apply_dark(row_figs)
+            apply_gt_sub_subplot_layout(
+                row_figs,
+                title=f"PSTH — {n_name} (bin={BIN_MS} ms)",
+                n_cols=len(patterns),
+                x_title="bin",
+                y_title="spikes/bin",
+                height=320,
+                hovermode="x unified",
+            )
+            _plotly_chart(row_figs, use_container_width=True, config=PLOTLY_CONFIG)
+
+        if summary_rows:
+            st.markdown("**PSTH Summary Table**")
+            show_table(pd.DataFrame(summary_rows))
+
+        # ---- Response-aligned PSTH (output + intermediate neurons) ----
+        st.markdown("**Response-Aligned PSTH** (0 = earliest input, spiking patterns only)")
+        focus_neurons = [f"{n}_spike" for n in get_neurons(cfg, role=["intermediate","output"])]
+        resp_patterns = [p for p in patterns if TRUTH[p]["input_A"]>0 or TRUTH[p]["input_B"]>0]
+
+        for col_ra in focus_neurons:
+            n_name_ra = col_ra.replace("_spike","")
+            has_data = False
+            fig_ra = make_subplots(rows=1, cols=len(resp_patterns),
+                subplot_titles=[f"pattern {p}" for p in resp_patterns], shared_yaxes=True)
+            for j, p in enumerate(resp_patterns):
+                ids = common_ids[p]
+                rows_ra = []
+                for tid in ids:
+                    t_df = get_trial(gt_data, tid)
+                    if col_ra not in t_df.columns: continue
+                    vec = t_df[col_ra].to_numpy(int)[:trial_len]
+                    rows_ra.append(vec)
+                if not rows_ra: continue
+                L_ra = min(len(v) for v in rows_ra)
+                psth_ra = np.nanmean(np.stack([v[:L_ra] for v in rows_ra]),0)
+                if psth_ra.sum() == 0: continue
+                has_data = True
+                t_ra = list(range(L_ra))  # ms within trial (0..trial_len-1)
+                # sub first, then GT on top (dotted blue over solid orange when identical)
+                rows_sb = []
+                for tid in ids:
+                    t_df2 = get_trial(sub_data, tid)
+                    if col_ra not in t_df2.columns: continue
+                    vec2 = t_df2[col_ra].to_numpy(int)[:trial_len]
+                    rows_sb.append(vec2)
+                if rows_sb:
+                    psth_sb = np.nanmean(np.stack([v[:L_ra] for v in rows_sb[:len(rows_ra)]]),0)
+                    fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_sb[:L_ra].tolist(), mode="lines",
+                        line=dict(color=PAL_SUB, width=2), name="SUB" if j==0 else None,
+                        showlegend=(j==0),
+                        hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+                fig_ra.add_trace(go.Scatter(x=t_ra, y=psth_ra.tolist(), mode="lines",
+                    line=dict(color=PAL_GT, width=2.5, dash="dot"), name="GT" if j==0 else None,
+                    showlegend=(j==0),
+                    hovertemplate=f"t=%{{x}} ms<br>rate=%{{y:.3f}}<extra></extra>"), row=1, col=j+1)
+
+            if has_data:
+                apply_dark(fig_ra)
+                apply_gt_sub_subplot_layout(
+                    fig_ra,
+                    title=f"Response-aligned PSTH — {n_name_ra} (0 = earliest input)",
+                    n_cols=len(resp_patterns),
+                    x_title="ms rel. to input",
+                    y_title="spikes/sample",
+                    height=360,
+                    hovermode="x unified",
+                )
+                _plotly_chart(fig_ra, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_psth)
+
+# ══════════════════════════════════════════════════════════════
+# ISI
+
+# ══════════════════════════════════════════════════════════════
+
+elif active == "isi":
+    st.markdown('<div class="section-title">⏱ ISI & Fano Factor</div>', unsafe_allow_html=True)
+    def _render_isi():
+        show_metric_guide("isi")
+
+        try:
+            from scipy.stats import wasserstein_distance as wdist
+        except ImportError:
+            wdist = None
+
+        @st.cache_data
+        def compute_isi(spikes_path):
+            spk = pd.read_hdf(spikes_path, "/spikes_raw")
+            d   = pd.read_hdf(spikes_path, "/data")
+            cf  = pd.read_hdf(spikes_path, "/network_config")
+            tm  = pd.read_hdf(spikes_path, "/trial_map")
+            rows = []
+            for neuron in get_spiking_neurons(cf, d):
+                for p in sorted(tm["case"].unique()):
+                    mask = (spk["label"]==neuron) & (spk["pattern"]==p)
+                    st_arr = spk[mask]["spike_time_ms"].to_numpy()
+                    all_reps = tm[tm["case"]==p]["rep"].unique()
+                    counts = spk[mask].groupby("rep").size().reindex(all_reps,fill_value=0).to_numpy()
+                    isi = np.diff(st_arr)
+                    cv   = float(np.std(isi)/np.mean(isi)) if len(isi)>0 and np.mean(isi)>0 else None
+                    fano = float(np.var(counts)/np.mean(counts)) if np.mean(counts)>0 else None
+                    rows.append({"neuron":neuron,"pattern":p,"cv":cv,"fano":fano,"isi":isi})
+            return pd.DataFrame(rows)
+
+        with st.spinner("Computing ISI…"):
+            isi_gt_df = compute_isi(gt_path)
+            isi_sub_df = compute_isi(sub_path) if not same_h5_file else isi_gt_df
+
+        neurons_isi = isi_gt_df["neuron"].unique()
+
+        # CV + Fano summary bars
+        gt_cv = [isi_gt_df[isi_gt_df["neuron"] == n]["cv"].dropna().mean() for n in neurons_isi]
+        gt_fano = [isi_gt_df[isi_gt_df["neuron"] == n]["fano"].dropna().mean() for n in neurons_isi]
+        sub_cv = [isi_sub_df[isi_sub_df["neuron"] == n]["cv"].dropna().mean() for n in neurons_isi]
+        sub_fano = [isi_sub_df[isi_sub_df["neuron"] == n]["fano"].dropna().mean() for n in neurons_isi]
+
+        fig_cv = make_subplots(
+            rows=1,
+            cols=2,
+            subplot_titles=["ISI CV (mean)", "Fano Factor"],
+            horizontal_spacing=0.12,
+        )
+        for vals, col_r, title_r in [(gt_cv, 1, "ISI CV"), (gt_fano, 2, "Fano")]:
+            fig_cv.add_trace(go.Bar(
+                x=list(neurons_isi), y=vals,
+                marker_color=PAL_GT, name="GT",
+                text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
+                textposition="outside",
+                hovertemplate=f"%{{x}}<br>GT {title_r}=%{{y:.4f}}<extra></extra>",
+                legendgroup="gt",
+                showlegend=(col_r == 1),
+            ), row=1, col=col_r)
+        if not same_h5_file:
+            for vals, col_r, title_r in [(sub_cv, 1, "ISI CV"), (sub_fano, 2, "Fano")]:
+                fig_cv.add_trace(go.Bar(
+                    x=list(neurons_isi), y=vals,
+                    marker_color=PAL_SUB, name="SUB",
+                    text=[f"{v:.3f}" if v is not None and not np.isnan(v) else "—" for v in vals],
+                    textposition="outside",
+                    hovertemplate=f"%{{x}}<br>SUB {title_r}=%{{y:.4f}}<extra></extra>",
+                    legendgroup="sub",
+                    showlegend=(col_r == 1),
+                ), row=1, col=col_r)
+        apply_dark(fig_cv)
+        apply_title_legend_layout(
+            fig_cv,
+            legend_y=-0.16,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=64,
+            margin_bottom=90,
+            height=400,
+            hovermode="x",
+            barmode="group" if not same_h5_file else "relative",
+        )
+        fig_cv.update_annotations(font=dict(size=12))
+        fig_cv.update_xaxes(tickangle=30)
+        _plotly_chart(fig_cv, use_container_width=True, config=PLOTLY_CONFIG)
+
+        # Per-neuron ISI histogram
+        st.markdown("**ISI Distribution per Neuron × Pattern**")
+        c1, c2 = st.columns(2)
+        sel_isi_n = c1.selectbox("Neuron", list(neurons_isi), key=_wk("isi_n"))
+        sel_isi_p = c2.selectbox("Pattern", patterns, key=_wk("isi_p"))
+
+        row_gt = isi_gt_df[(isi_gt_df["neuron"] == sel_isi_n) & (isi_gt_df["pattern"] == sel_isi_p)]
+        row_sub = isi_sub_df[(isi_sub_df["neuron"] == sel_isi_n) & (isi_sub_df["pattern"] == sel_isi_p)]
+
+        if not row_gt.empty:
+            isi_arr_gt = row_gt["isi"].values[0]
+            cv_val = row_gt["cv"].values[0]
+            fano_val = row_gt["fano"].values[0]
+            isi_arr_sub = row_sub["isi"].values[0] if not row_sub.empty else np.array([])
+            cv_sub = row_sub["cv"].values[0] if not row_sub.empty else None
+            fano_sub = row_sub["fano"].values[0] if not row_sub.empty else None
+            w_val = None
+            if wdist and len(isi_arr_gt) > 0 and len(isi_arr_sub) > 0:
+                w_val = wdist(isi_arr_gt, isi_arr_sub)
+            elif wdist and same_h5_file and len(isi_arr_gt) > 0:
+                w_val = wdist(isi_arr_gt, isi_arr_gt)
+
+            _w_ins = _insight_sub(wasserstein=w_val) if w_val is not None else ""
+            show_metric_panel(
+                "isi",
+                [
+                    f"Neuron {sel_isi_n}, pattern {sel_isi_p}.",
+                    f"CV: GT={cv_val:.4f}" + (f", SUB={cv_sub:.4f}" if cv_sub is not None else "") if cv_val is not None else "",
+                    f"Fano: GT={fano_val:.4f}" + (f", SUB={fano_sub:.4f}" if fano_sub is not None else "") if fano_val is not None else "",
+                    (
+                        f"Wasserstein(ISI) = {w_val:.4f} — {_w_ins.replace('Conclusion: ', '')}"
+                        if w_val is not None
+                        else "Wasserstein: not enough ISIs in GT and SUB."
+                    ),
+                ],
+                verdict="ok" if w_val is not None and w_val < 1.0 else "warn",
+            )
+            st.markdown(f"""
+            <div class="kpi-row">
+                <div class="kpi-card"><div class="kpi-label">CV (GT)</div>
+                    <div class="kpi-value">{f"{cv_val:.4f}" if cv_val is not None else "—"}</div></div>
+                <div class="kpi-card"><div class="kpi-label">Fano (GT)</div>
+                    <div class="kpi-value">{f"{fano_val:.4f}" if fano_val is not None else "—"}</div></div>
+                <div class="kpi-card"><div class="kpi-label">CV (SUB)</div>
+                    <div class="kpi-value">{f"{cv_sub:.4f}" if cv_sub is not None else "—"}</div></div>
+                <div class="kpi-card"><div class="kpi-label">Fano (SUB)</div>
+                    <div class="kpi-value">{f"{fano_sub:.4f}" if fano_sub is not None else "—"}</div></div>
+                <div class="kpi-card"><div class="kpi-label">Wasserstein (GT vs SUB ISI)</div>
+                    <div class="kpi-value">{f"{w_val:.4f}" if w_val is not None else "—"}</div>
+                    <div class="kpi-sub">{_w_ins or ("✓ ≈ 0 (same file)" if same_h5_file and w_val is not None and w_val < 1e-6 else "")}</div></div>
+            </div>
+            """, unsafe_allow_html=True)
+
+            if len(isi_arr_gt) > 0 or len(isi_arr_sub) > 0:
+                fig_isi = go.Figure()
+                _add_gt_sub_histogram(fig_isi, isi_arr_gt, isi_arr_sub, n_bins=20)
+                apply_dark(fig_isi)
+                apply_title_legend_layout(
+                    fig_isi,
+                    title=f"{sel_isi_n} : ISI Distribution (Pattern {sel_isi_p})",
+                    legend_y=-0.24,
+                    legend_x=0.5,
+                    legend_xanchor="center",
+                    margin_top=58,
+                    margin_bottom=95,
+                    barmode="group",
+                    height=380,
+                    xaxis_title="ISI (ms)",
+                    yaxis_title="Count",
+                    hovermode="x unified",
+                )
+                _plotly_chart(fig_isi, use_container_width=True, config=PLOTLY_CONFIG)
+            else:
+                st.info("No spikes for this neuron/pattern.")
+    _run_for_each_sub(_render_isi)
 
 # ══════════════════════════════════════════════════════════════
 # KS
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "ks":
     st.markdown('<div class="section-title">📉 KS Test — Spike Time Distributions</div>', unsafe_allow_html=True)
-    show_metric_guide("ks")
+    def _render_ks():
+        show_metric_guide("ks")
 
-    try:
-        from scipy.stats import ks_2samp
-    except ImportError:
-        st.error("scipy required for KS test."); st.stop()
+        try:
+            from scipy.stats import ks_2samp
+        except ImportError:
+            st.error("scipy required for KS test."); st.stop()
 
-    ks_rows = []
-    for col in spike_cols:
-        lbl = col.replace("_spike","")
-        for p in patterns:
-            gt_t = spike_times_for(gt_spikes, lbl, p)
-            sub_t = spike_times_for(sub_spikes, lbl, p)
-            if len(gt_t)>0 and len(sub_t)>0:
-                ks, pv = ks_2samp(gt_t, sub_t)
-            else:
-                ks, pv = None, None
-            ks_rows.append({"neuron":col,"pattern":normalize_pattern(p),
-                             "gt_spikes":len(gt_t),"sub_spikes":len(sub_t),
-                             "ks_stat":round(ks,4) if ks is not None else None,
-                             "p_value":round(pv,4) if pv is not None else None})
-    ks_df = pd.DataFrame(ks_rows)
-    valid = ks_df["ks_stat"].dropna()
-    ks_max_val = float(valid.max()) if len(valid) else 0.0
-    ks_ok = ks_max_val < 1e-6
-    ks_badge = (
-        '<span class="badge-ok">✓ KS = 0</span>'
-        if ks_ok
-        else f'<span class="badge-warn">✗ max KS = {ks_max_val:.4f}</span>'
-    )
+        ks_rows = []
+        for col in spike_cols:
+            lbl = col.replace("_spike","")
+            for p in patterns:
+                gt_t = spike_times_for(gt_spikes, lbl, p)
+                sub_t = spike_times_for(sub_spikes, lbl, p)
+                if len(gt_t)>0 and len(sub_t)>0:
+                    ks, pv = ks_2samp(gt_t, sub_t)
+                else:
+                    ks, pv = None, None
+                ks_rows.append({"neuron":col,"pattern":normalize_pattern(p),
+                                 "gt_spikes":len(gt_t),"sub_spikes":len(sub_t),
+                                 "ks_stat":round(ks,4) if ks is not None else None,
+                                 "p_value":round(pv,4) if pv is not None else None})
+        ks_df = pd.DataFrame(ks_rows)
+        valid = ks_df["ks_stat"].dropna()
+        ks_max_val = float(valid.max()) if len(valid) else 0.0
+        ks_ok = ks_max_val < 1e-6
+        ks_badge = (
+            '<span class="badge-ok">✓ KS = 0</span>'
+            if ks_ok
+            else f'<span class="badge-warn">✗ max KS = {ks_max_val:.4f}</span>'
+        )
 
-    _ks_insight = _insight_sub(ks_max=ks_max_val)
-    _worst_ks = None
-    if len(valid):
-        _worst_ks = ks_df.loc[ks_df["ks_stat"].idxmax()]
-    _ks_io = ks_df[ks_df["neuron"].isin(_io_spike_cols(spike_cols))]["ks_stat"].dropna()
-    _ks_io_max = float(_ks_io.max()) if len(_ks_io) else None
-    show_dynamic_result(
-        [
-            f"Max KS over all neuron×pattern = {ks_max_val:.4f}.",
-            (
-                f"Worst cell: {_worst_ks['neuron']} @ pattern {_worst_ks['pattern']} "
-                f"(KS={_worst_ks['ks_stat']:.4f}, p={_worst_ks['p_value']})."
-                if _worst_ks is not None else "No valid KS pairs."
-            ),
-            (
-                f"Max KS on I/O neurons only = {_ks_io_max:.4f}."
-                if _ks_io_max is not None else ""
-            ),
-            _ks_insight.replace("Conclusion: ", ""),
-        ],
-        verdict="ok" if ks_max_val < 0.2 else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Max KS stat</div>
-            <div class="kpi-value">{ks_max_val:.4f}</div>
-            <div class="kpi-sub">0 = identical distributions · {_ks_insight}</div></div>
-        <div class="kpi-card"><div class="kpi-label">Status</div>
-            <div style="margin-top:8px">{ks_badge}</div>
-            <div class="kpi-sub">Focus heatmap on E_spike and input rows</div></div>
-    </div>
-    """, unsafe_allow_html=True)
+        _ks_insight = _insight_sub(ks_max=ks_max_val)
+        _worst_ks = None
+        if len(valid):
+            _worst_ks = ks_df.loc[ks_df["ks_stat"].idxmax()]
+        _ks_io = ks_df[ks_df["neuron"].isin(_io_spike_cols(spike_cols))]["ks_stat"].dropna()
+        _ks_io_max = float(_ks_io.max()) if len(_ks_io) else None
+        show_dynamic_result(
+            [
+                f"Max KS over all neuron×pattern = {ks_max_val:.4f}.",
+                (
+                    f"Worst cell: {_worst_ks['neuron']} @ pattern {_worst_ks['pattern']} "
+                    f"(KS={_worst_ks['ks_stat']:.4f}, p={_worst_ks['p_value']})."
+                    if _worst_ks is not None else "No valid KS pairs."
+                ),
+                (
+                    f"Max KS on I/O neurons only = {_ks_io_max:.4f}."
+                    if _ks_io_max is not None else ""
+                ),
+                _ks_insight.replace("Conclusion: ", ""),
+            ],
+            verdict="ok" if ks_max_val < 0.2 else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Max KS stat</div>
+                <div class="kpi-value">{ks_max_val:.4f}</div>
+                <div class="kpi-sub">0 = identical distributions · {_ks_insight}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Status</div>
+                <div style="margin-top:8px">{ks_badge}</div>
+                <div class="kpi-sub">Focus heatmap on E_spike and input rows</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Heatmap KS stat: neuron × pattern
-    piv, pat_labels = pivot_by_pattern(ks_df, "neuron", "ks_stat", patterns)
-    fig_heat = go.Figure(go.Heatmap(
-        z=piv.values.tolist(), x=pat_labels, y=list(piv.index),
-        colorscale="YlOrRd", hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>KS=%{z:.4f}<extra></extra>",
-        text=[[f"{v:.4f}" for v in row] for row in piv.values],
-        texttemplate="%{text}",
-    ))
-    apply_dark(fig_heat)
-    apply_pattern_heatmap_axes(fig_heat, pat_labels)
-    fig_heat.update_layout(
-        height=360,
-        title=_title_top("KS Statistic — neuron × pattern (0 = perfect)"),
-        margin=dict(l=55, r=20, t=58, b=50),
-    )
-    st.plotly_chart(fig_heat, use_container_width=True, config=PLOTLY_CONFIG)
+        # Heatmap KS stat: neuron × pattern
+        piv, pat_labels = pivot_by_pattern(ks_df, "neuron", "ks_stat", patterns)
+        fig_heat = go.Figure(go.Heatmap(
+            z=piv.values.tolist(), x=pat_labels, y=list(piv.index),
+            colorscale="YlOrRd", hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>KS=%{z:.4f}<extra></extra>",
+            text=[[f"{v:.4f}" for v in row] for row in piv.values],
+            texttemplate="%{text}",
+        ))
+        apply_dark(fig_heat)
+        apply_pattern_heatmap_axes(fig_heat, pat_labels)
+        fig_heat.update_layout(
+            height=360,
+            title=_title_top("KS · neuron × pattern"),
+            margin=dict(l=55, r=20, t=72, b=50),
+        )
+        _plotly_chart(fig_heat, use_container_width=True, config=PLOTLY_CONFIG)
 
-    # ECDF viewer
-    st.markdown("**ECDF Viewer**")
-    c1, c2 = st.columns(2)
-    sel_ks_n = c1.selectbox("Neuron", spike_cols, key="ks_n")
-    sel_ks_p = c2.selectbox("Pattern", patterns, key="ks_p")
-    lbl2 = sel_ks_n.replace("_spike","")
-    gt_t2 = spike_times_for(gt_spikes, lbl2, sel_ks_p)
-    sub_t2 = spike_times_for(sub_spikes, lbl2, sel_ks_p)
+        # ECDF viewer
+        st.markdown("**ECDF Viewer**")
+        c1, c2 = st.columns(2)
+        sel_ks_n = c1.selectbox("Neuron", spike_cols, key=_wk("ks_n"))
+        sel_ks_p = c2.selectbox("Pattern", patterns, key=_wk("ks_p"))
+        lbl2 = sel_ks_n.replace("_spike","")
+        gt_t2 = spike_times_for(gt_spikes, lbl2, sel_ks_p)
+        sub_t2 = spike_times_for(sub_spikes, lbl2, sel_ks_p)
 
-    fig_ecdf = go.Figure()
-    if len(sub_t2)>0:
-        ss = np.sort(sub_t2)
-        fig_ecdf.add_trace(go.Scatter(x=ss.tolist(), y=(np.arange(1,len(ss)+1)/len(ss)).tolist(),
-            mode="lines", line=dict(color=PAL_SUB,width=2,dash="dash"), name="SUB",
-            hovertemplate="t=%{x:.3f} ms<br>ECDF=%{y:.3f}<extra>SUB</extra>"))
-    if len(gt_t2)>0:
-        gs = np.sort(gt_t2)
-        fig_ecdf.add_trace(go.Scatter(x=gs.tolist(), y=(np.arange(1,len(gs)+1)/len(gs)).tolist(),
-            mode="lines", line=dict(color=PAL_GT,width=2.5), name="GT",
-            hovertemplate="t=%{x:.3f} ms<br>ECDF=%{y:.3f}<extra>GT</extra>"))
-    apply_dark(fig_ecdf)
-    apply_title_legend_layout(
-        fig_ecdf,
-        title=f"{sel_ks_n} — ECDF (pattern {sel_ks_p})",
-        legend_y=-0.24,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=58,
-        margin_bottom=95,
-        height=380,
-        xaxis_title="t_in_trial (ms)",
-        yaxis_title="Cumulative fraction of spikes",
-        hovermode="x unified",
-    )
-    st.plotly_chart(fig_ecdf, use_container_width=True, config=PLOTLY_CONFIG)
+        fig_ecdf = go.Figure()
+        if len(sub_t2)>0:
+            ss = np.sort(sub_t2)
+            fig_ecdf.add_trace(go.Scatter(x=ss.tolist(), y=(np.arange(1,len(ss)+1)/len(ss)).tolist(),
+                mode="lines", line=dict(color=PAL_SUB,width=2,dash="dash"), name="SUB",
+                hovertemplate="t=%{x:.3f} ms<br>ECDF=%{y:.3f}<extra>SUB</extra>"))
+        if len(gt_t2)>0:
+            gs = np.sort(gt_t2)
+            fig_ecdf.add_trace(go.Scatter(x=gs.tolist(), y=(np.arange(1,len(gs)+1)/len(gs)).tolist(),
+                mode="lines", line=dict(color=PAL_GT,width=2.5), name="GT",
+                hovertemplate="t=%{x:.3f} ms<br>ECDF=%{y:.3f}<extra>GT</extra>"))
+        apply_dark(fig_ecdf)
+        apply_title_legend_layout(
+            fig_ecdf,
+            title=f"{sel_ks_n} — ECDF (pattern {sel_ks_p})",
+            legend_y=-0.24,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=58,
+            margin_bottom=95,
+            height=380,
+            xaxis_title="t_in_trial (ms)",
+            yaxis_title="Cumulative fraction of spikes",
+            hovermode="x unified",
+        )
+        _plotly_chart(fig_ecdf, use_container_width=True, config=PLOTLY_CONFIG)
 
-    st.markdown("**Full KS Table**")
-    show_scroll_table(ks_df, max_height=420)
+        st.markdown("**Full KS Table**")
+        show_scroll_table(ks_df, max_height=420)
+    _run_for_each_sub(_render_ks)
 
 # ══════════════════════════════════════════════════════════════
 # PSP COUNTS (in_domain_metrics.ipynb — peak detection on Vm)
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "psp_counts":
     st.markdown('<div class="section-title">🔺 PSP Counts — Peak Detection (Vm)</div>', unsafe_allow_html=True)
-    show_metric_guide("psp_counts")
-    st.markdown(
-        '<div class="section-subtitle">EPSP/IPSP counts via scipy.find_peaks on baseline-subtracted traces (notebook parameters)</div>',
-        unsafe_allow_html=True,
-    )
-    try:
-        from scipy.signal import find_peaks
-    except ImportError:
-        st.error("scipy is required for PSP peak detection.")
-        st.stop()
+    def _render_psp_counts():
+        show_metric_guide("psp_counts")
+        st.markdown(
+            '<div class="section-subtitle">EPSP/IPSP counts via scipy.find_peaks on baseline-subtracted traces (notebook parameters)</div>',
+            unsafe_allow_html=True,
+        )
+        try:
+            from scipy.signal import find_peaks
+        except ImportError:
+            st.error("scipy is required for PSP peak detection.")
+            st.stop()
 
-    PEAK_PROMINENCE = 0.5
-    MIN_PEAK_DISTANCE_MS = 2
-    BASELINE_PRE_MS = 10
-    CLIP_TO_RESP_WINDOW = True
+        PEAK_PROMINENCE = 0.5
+        MIN_PEAK_DISTANCE_MS = 2
+        BASELINE_PRE_MS = 10
+        CLIP_TO_RESP_WINDOW = True
 
-    def _baseline_subtracted(vec, pre_ms=BASELINE_PRE_MS):
-        v = np.asarray(vec, float)
-        e = min(int(trial_len) - 1, int(pre_ms))
-        s = 0
-        base = float(np.nanmedian(v[s : e + 1]))
-        return v - base
+        def _baseline_subtracted(vec, pre_ms=BASELINE_PRE_MS):
+            v = np.asarray(vec, float)
+            e = min(int(trial_len) - 1, int(pre_ms))
+            s = 0
+            base = float(np.nanmedian(v[s : e + 1]))
+            return v - base
 
-    def _detect_psp_counts(v0, lo, hi):
-        v = np.asarray(v0, float)
-        use_lo = int(max(0, lo)) if CLIP_TO_RESP_WINDOW else 0
-        use_hi = int(min(len(v) - 1, hi)) if CLIP_TO_RESP_WINDOW else len(v) - 1
-        if use_hi < use_lo:
-            return 0, 0
-        seg = v[use_lo : use_hi + 1]
-        dist = max(1, int(MIN_PEAK_DISTANCE_MS))
-        p_up, _ = find_peaks(seg, prominence=PEAK_PROMINENCE, distance=dist)
-        p_down, _ = find_peaks(-seg, prominence=PEAK_PROMINENCE, distance=dist)
-        return int(p_up.size), int(p_down.size)
+        def _detect_psp_counts(v0, lo, hi):
+            v = np.asarray(v0, float)
+            use_lo = int(max(0, lo)) if CLIP_TO_RESP_WINDOW else 0
+            use_hi = int(min(len(v) - 1, hi)) if CLIP_TO_RESP_WINDOW else len(v) - 1
+            if use_hi < use_lo:
+                return 0, 0
+            seg = v[use_lo : use_hi + 1]
+            dist = max(1, int(MIN_PEAK_DISTANCE_MS))
+            p_up, _ = find_peaks(seg, prominence=PEAK_PROMINENCE, distance=dist)
+            p_down, _ = find_peaks(-seg, prominence=PEAK_PROMINENCE, distance=dist)
+            return int(p_up.size), int(p_down.size)
 
-    vm_cols_psp = get_vm_cols(cfg, scope="all")
-    lo_w, hi_w = 0, int(trial_len)
-    rows_counts = []
-    with st.spinner("Counting PSP peaks (all patterns × neurons × trials)…"):
-        for patt in patterns:
-            ids = tmap[tmap["case"].astype(str) == str(patt)]["trial_id"].tolist()
-            if not ids:
-                continue
-            for col in vm_cols_psp:
-                epsp_gt = ipsp_gt = epsp_sb = ipsp_sb = 0
-                for tid in ids:
-                    gt_df = get_trial(gt_data, tid)
-                    sb_df = get_trial(sub_data, tid)
-                    if col not in gt_df.columns or col not in sb_df.columns:
-                        continue
-                    vbs = _baseline_subtracted(gt_df[col].to_numpy(float))
-                    n_up, n_dn = _detect_psp_counts(vbs, lo_w, hi_w)
-                    epsp_gt += n_up
-                    ipsp_gt += n_dn
-                    vbs2 = _baseline_subtracted(sb_df[col].to_numpy(float))
-                    n_up2, n_dn2 = _detect_psp_counts(vbs2, lo_w, hi_w)
-                    epsp_sb += n_up2
-                    ipsp_sb += n_dn2
-                rows_counts.append(
-                    dict(
-                        pattern=str(patt),
-                        neuron=col.replace("_vm", ""),
-                        n_trials=len(ids),
-                        EPSP_GT=epsp_gt,
-                        EPSP_SUB=epsp_sb,
-                        IPSP_GT=ipsp_gt,
-                        IPSP_SUB=ipsp_sb,
+        vm_cols_psp = get_vm_cols(cfg, scope="all")
+        lo_w, hi_w = 0, int(trial_len)
+        rows_counts = []
+        with st.spinner("Counting PSP peaks (all patterns × neurons × trials)…"):
+            for patt in patterns:
+                ids = tmap[tmap["case"].astype(str) == str(patt)]["trial_id"].tolist()
+                if not ids:
+                    continue
+                for col in vm_cols_psp:
+                    epsp_gt = ipsp_gt = epsp_sb = ipsp_sb = 0
+                    for tid in ids:
+                        gt_df = get_trial(gt_data, tid)
+                        sb_df = get_trial(sub_data, tid)
+                        if col not in gt_df.columns or col not in sb_df.columns:
+                            continue
+                        vbs = _baseline_subtracted(gt_df[col].to_numpy(float))
+                        n_up, n_dn = _detect_psp_counts(vbs, lo_w, hi_w)
+                        epsp_gt += n_up
+                        ipsp_gt += n_dn
+                        vbs2 = _baseline_subtracted(sb_df[col].to_numpy(float))
+                        n_up2, n_dn2 = _detect_psp_counts(vbs2, lo_w, hi_w)
+                        epsp_sb += n_up2
+                        ipsp_sb += n_dn2
+                    rows_counts.append(
+                        dict(
+                            pattern=str(patt),
+                            neuron=col.replace("_vm", ""),
+                            n_trials=len(ids),
+                            EPSP_GT=epsp_gt,
+                            EPSP_SUB=epsp_sb,
+                            IPSP_GT=ipsp_gt,
+                            IPSP_SUB=ipsp_sb,
+                        )
                     )
+
+        psp_df = (
+            pd.DataFrame(rows_counts).sort_values(["pattern", "neuron"]).reset_index(drop=True)
+            if rows_counts
+            else pd.DataFrame(
+                columns=["pattern", "neuron", "n_trials", "EPSP_GT", "EPSP_SUB", "IPSP_GT", "IPSP_SUB"]
+            )
+        )
+
+        match_psp = (
+            psp_df.empty
+            or (
+                (psp_df["EPSP_GT"] == psp_df["EPSP_SUB"]).all()
+                and (psp_df["IPSP_GT"] == psp_df["IPSP_SUB"]).all()
+            )
+        )
+        badge_psp = (
+            '<span class="badge-ok">✓ Counts match</span>'
+            if match_psp
+            else '<span class="badge-warn">Differ</span>'
+        )
+        _psp_io = psp_df[
+            psp_df["neuron"].astype(str).isin(("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E"))
+        ] if not psp_df.empty else psp_df
+        _psp_io_mm = 0
+        if not _psp_io.empty:
+            _psp_io_mm = int(
+                ((_psp_io["EPSP_GT"] != _psp_io["EPSP_SUB"]) | (_psp_io["IPSP_GT"] != _psp_io["IPSP_SUB"])).sum()
+            )
+        show_dynamic_result(
+            [
+                f"Rows compared: {len(psp_df)} (pattern × neuron).",
+                "All EPSP/IPSP counts match GT." if match_psp else "Some EPSP/IPSP counts differ from GT.",
+                _insight_sub(psp_io_mismatch=_psp_io_mm).replace("Conclusion: ", ""),
+            ],
+            verdict="ok" if match_psp else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Rows</div>
+                <div class="kpi-value">{len(psp_df)}</div>
+                <div class="kpi-sub">pattern × neuron</div></div>
+            <div class="kpi-card"><div class="kpi-label">Prominence</div>
+                <div class="kpi-value">{PEAK_PROMINENCE}</div>
+                <div class="kpi-sub">mV · min dist {MIN_PEAK_DISTANCE_MS} ms</div></div>
+            <div class="kpi-card"><div class="kpi-label">GT vs SUB</div>
+                <div style="margin-top:8px">{badge_psp}</div></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown("**PSP counts (GT vs SUB)**")
+        show_scroll_table(psp_df, max_height=420)
+
+        def _psp_heatmap(piv, pat_labels, title, colorscale, hover_label):
+            fig_h = go.Figure(
+                go.Heatmap(
+                    z=piv.values.tolist(),
+                    x=pat_labels,
+                    y=piv.index.tolist(),
+                    colorscale=colorscale,
+                    hovertemplate=f"Neuron=%{{y}}<br>Pattern=%{{x}}<br>{hover_label}=%{{z}}<extra></extra>",
+                )
+            )
+            apply_dark(fig_h)
+            apply_pattern_heatmap_axes(fig_h, pat_labels)
+            fig_h.update_layout(
+                height=360,
+                title=_title_top(title),
+                margin=dict(l=55, r=20, t=58, b=50),
+            )
+            return fig_h
+
+        if not psp_df.empty:
+            st.markdown("**EPSP counts heatmaps (GT vs SUB)**")
+            piv_epsp_gt, pat_labels = pivot_by_pattern(psp_df, "neuron", "EPSP_GT", patterns)
+            piv_epsp_sub, _ = pivot_by_pattern(psp_df, "neuron", "EPSP_SUB", patterns)
+            piv_epsp_sub = piv_epsp_sub.reindex(index=piv_epsp_gt.index, fill_value=0)
+            _hc1, _hc2 = st.columns(2)
+            with _hc1:
+                _plotly_chart(
+                    _psp_heatmap(piv_epsp_gt, pat_labels, "EPSP counts (GT) — neuron × pattern", "Blues", "EPSP_GT"),
+                    use_container_width=True,
+                    config=PLOTLY_CONFIG,
+                )
+            with _hc2:
+                _plotly_chart(
+                    _psp_heatmap(piv_epsp_sub, pat_labels, "EPSP counts (SUB) — neuron × pattern", "Oranges", "EPSP_SUB"),
+                    use_container_width=True,
+                    config=PLOTLY_CONFIG,
                 )
 
-    psp_df = (
-        pd.DataFrame(rows_counts).sort_values(["pattern", "neuron"]).reset_index(drop=True)
-        if rows_counts
-        else pd.DataFrame(
-            columns=["pattern", "neuron", "n_trials", "EPSP_GT", "EPSP_SUB", "IPSP_GT", "IPSP_SUB"]
-        )
-    )
-
-    match_psp = (
-        psp_df.empty
-        or (
-            (psp_df["EPSP_GT"] == psp_df["EPSP_SUB"]).all()
-            and (psp_df["IPSP_GT"] == psp_df["IPSP_SUB"]).all()
-        )
-    )
-    badge_psp = (
-        '<span class="badge-ok">✓ Counts match</span>'
-        if match_psp
-        else '<span class="badge-warn">Differ</span>'
-    )
-    _psp_io = psp_df[
-        psp_df["neuron"].astype(str).isin(("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E"))
-    ] if not psp_df.empty else psp_df
-    _psp_io_mm = 0
-    if not _psp_io.empty:
-        _psp_io_mm = int(
-            ((_psp_io["EPSP_GT"] != _psp_io["EPSP_SUB"]) | (_psp_io["IPSP_GT"] != _psp_io["IPSP_SUB"])).sum()
-        )
-    show_dynamic_result(
-        [
-            f"Rows compared: {len(psp_df)} (pattern × neuron).",
-            "All EPSP/IPSP counts match GT." if match_psp else "Some EPSP/IPSP counts differ from GT.",
-            _insight_sub(psp_io_mismatch=_psp_io_mm).replace("Conclusion: ", ""),
-        ],
-        verdict="ok" if match_psp else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Rows</div>
-            <div class="kpi-value">{len(psp_df)}</div>
-            <div class="kpi-sub">pattern × neuron</div></div>
-        <div class="kpi-card"><div class="kpi-label">Prominence</div>
-            <div class="kpi-value">{PEAK_PROMINENCE}</div>
-            <div class="kpi-sub">mV · min dist {MIN_PEAK_DISTANCE_MS} ms</div></div>
-        <div class="kpi-card"><div class="kpi-label">GT vs SUB</div>
-            <div style="margin-top:8px">{badge_psp}</div></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    st.markdown("**PSP counts (GT vs SUB)**")
-    show_scroll_table(psp_df, max_height=420)
-
-    def _psp_heatmap(piv, pat_labels, title, colorscale, hover_label):
-        fig_h = go.Figure(
-            go.Heatmap(
-                z=piv.values.tolist(),
-                x=pat_labels,
-                y=piv.index.tolist(),
-                colorscale=colorscale,
-                hovertemplate=f"Neuron=%{{y}}<br>Pattern=%{{x}}<br>{hover_label}=%{{z}}<extra></extra>",
-            )
-        )
-        apply_dark(fig_h)
-        apply_pattern_heatmap_axes(fig_h, pat_labels)
-        fig_h.update_layout(
-            height=360,
-            title=_title_top(title),
-            margin=dict(l=55, r=20, t=58, b=50),
-        )
-        return fig_h
-
-    if not psp_df.empty:
-        st.markdown("**EPSP counts heatmaps (GT vs SUB)**")
-        piv_epsp_gt, pat_labels = pivot_by_pattern(psp_df, "neuron", "EPSP_GT", patterns)
-        piv_epsp_sub, _ = pivot_by_pattern(psp_df, "neuron", "EPSP_SUB", patterns)
-        piv_epsp_sub = piv_epsp_sub.reindex(index=piv_epsp_gt.index, fill_value=0)
-        _hc1, _hc2 = st.columns(2)
-        with _hc1:
-            st.plotly_chart(
-                _psp_heatmap(piv_epsp_gt, pat_labels, "EPSP counts (GT) — neuron × pattern", "Blues", "EPSP_GT"),
-                use_container_width=True,
-                config=PLOTLY_CONFIG,
-            )
-        with _hc2:
-            st.plotly_chart(
-                _psp_heatmap(piv_epsp_sub, pat_labels, "EPSP counts (SUB) — neuron × pattern", "Oranges", "EPSP_SUB"),
-                use_container_width=True,
-                config=PLOTLY_CONFIG,
-            )
-
-        st.markdown("**IPSP counts heatmaps (GT vs SUB)**")
-        piv_ipsp_gt, _ = pivot_by_pattern(psp_df, "neuron", "IPSP_GT", patterns)
-        piv_ipsp_sub, _ = pivot_by_pattern(psp_df, "neuron", "IPSP_SUB", patterns)
-        piv_ipsp_sub = piv_ipsp_sub.reindex(index=piv_ipsp_gt.index, fill_value=0)
-        _hi1, _hi2 = st.columns(2)
-        with _hi1:
-            st.plotly_chart(
-                _psp_heatmap(piv_ipsp_gt, pat_labels, "IPSP counts (GT) — neuron × pattern", "Blues", "IPSP_GT"),
-                use_container_width=True,
-                config=PLOTLY_CONFIG,
-            )
-        with _hi2:
-            st.plotly_chart(
-                _psp_heatmap(piv_ipsp_sub, pat_labels, "IPSP counts (SUB) — neuron × pattern", "Oranges", "IPSP_SUB"),
-                use_container_width=True,
-                config=PLOTLY_CONFIG,
-            )
+            st.markdown("**IPSP counts heatmaps (GT vs SUB)**")
+            piv_ipsp_gt, _ = pivot_by_pattern(psp_df, "neuron", "IPSP_GT", patterns)
+            piv_ipsp_sub, _ = pivot_by_pattern(psp_df, "neuron", "IPSP_SUB", patterns)
+            piv_ipsp_sub = piv_ipsp_sub.reindex(index=piv_ipsp_gt.index, fill_value=0)
+            _hi1, _hi2 = st.columns(2)
+            with _hi1:
+                _plotly_chart(
+                    _psp_heatmap(piv_ipsp_gt, pat_labels, "IPSP counts (GT) — neuron × pattern", "Blues", "IPSP_GT"),
+                    use_container_width=True,
+                    config=PLOTLY_CONFIG,
+                )
+            with _hi2:
+                _plotly_chart(
+                    _psp_heatmap(piv_ipsp_sub, pat_labels, "IPSP counts (SUB) — neuron × pattern", "Oranges", "IPSP_SUB"),
+                    use_container_width=True,
+                    config=PLOTLY_CONFIG,
+                )
+    _run_for_each_sub(_render_psp_counts)
 
 # ══════════════════════════════════════════════════════════════
 # VAN ROSSUM
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "van_rossum":
     st.markdown('<div class="section-title">🌊 Van Rossum Distance</div>', unsafe_allow_html=True)
-    show_metric_guide("van_rossum")
+    def _render_van_rossum():
+        show_metric_guide("van_rossum")
 
-    tau_ms = st.slider("τ (ms)", 5, 100, 20, key="vr_tau_sl", help="Time constant τ: smaller = stricter spike timing match.")
+        tau_ms = st.slider("τ (ms)", 5, 100, 20, key=_wk("vr_tau_sl"), help="Time constant τ: smaller = stricter spike timing match.")
 
-    def vr_dist(tx, ty, tau):
-        Nx,Ny = tx.size, ty.size
-        if Nx==0 and Ny==0: return 0.0
-        if Nx==0 or Ny==0: return float(np.sqrt((Nx+Ny)/(2.0*tau)))
-        diffs = np.abs(tx[:,None]-ty[None,:])
-        sxy = np.exp(-diffs/float(tau)).sum()
-        return float(np.sqrt(max((Nx+Ny-2.0*sxy)/(2.0*tau),0.0)))
+        def vr_dist(tx, ty, tau):
+            Nx,Ny = tx.size, ty.size
+            if Nx==0 and Ny==0: return 0.0
+            if Nx==0 or Ny==0: return float(np.sqrt((Nx+Ny)/(2.0*tau)))
+            diffs = np.abs(tx[:,None]-ty[None,:])
+            sxy = np.exp(-diffs/float(tau)).sum()
+            return float(np.sqrt(max((Nx+Ny-2.0*sxy)/(2.0*tau),0.0)))
 
-    records = []
-    for p in patterns:
-        for tid in common_ids[p]:
-            gt_df = get_trial(gt_data, tid)
-            sb_df = get_trial(sub_data, tid)
-            for neuron in spike_cols:
-                mg = (gt_df["t_in_trial"]>=0)&(gt_df["t_in_trial"]<trial_len)&(gt_df[neuron]==1)
-                ms = (sb_df["t_in_trial"]>=0)&(sb_df["t_in_trial"]<trial_len)&(sb_df[neuron]==1)
-                tx = gt_df.loc[mg,"t_in_trial"].to_numpy(float)
-                ty = sb_df.loc[ms,"t_in_trial"].to_numpy(float)
-                records.append({"pattern": normalize_pattern(p), "trial_id": tid, "neuron": neuron,
-                                 "VR": vr_dist(tx, ty, tau_ms), "GT_spikes": tx.size, "SUB_spikes": ty.size})
+        records = []
+        for p in patterns:
+            for tid in common_ids[p]:
+                gt_df = get_trial(gt_data, tid)
+                sb_df = get_trial(sub_data, tid)
+                for neuron in spike_cols:
+                    mg = (gt_df["t_in_trial"]>=0)&(gt_df["t_in_trial"]<trial_len)&(gt_df[neuron]==1)
+                    ms = (sb_df["t_in_trial"]>=0)&(sb_df["t_in_trial"]<trial_len)&(sb_df[neuron]==1)
+                    tx = gt_df.loc[mg,"t_in_trial"].to_numpy(float)
+                    ty = sb_df.loc[ms,"t_in_trial"].to_numpy(float)
+                    records.append({"pattern": normalize_pattern(p), "trial_id": tid, "neuron": neuron,
+                                     "VR": vr_dist(tx, ty, tau_ms), "GT_spikes": tx.size, "SUB_spikes": ty.size})
 
-    vr_df = pd.DataFrame(records)
-    vr_pat = (
-        vr_df.groupby("pattern")["VR"]
-        .agg(["mean", "median", "max"])
-        .reindex(patterns)
-        .reset_index()
-    )
-    vr_pat.columns = ["pattern", "VR_mean", "VR_median", "VR_max"]
+        vr_df = pd.DataFrame(records)
+        vr_pat = (
+            vr_df.groupby("pattern")["VR"]
+            .agg(["mean", "median", "max"])
+            .reindex(patterns)
+            .reset_index()
+        )
+        vr_pat.columns = ["pattern", "VR_mean", "VR_median", "VR_max"]
 
-    max_vr = float(vr_df["VR"].max()) if len(vr_df) else 0.0
-    vr_ok = max_vr < 1e-6
-    vr_badge = (
-        '<span class="badge-ok">✓ VR = 0</span>'
-        if vr_ok
-        else f'<span class="badge-warn">✗ max VR = {max_vr:.6f}</span>'
-    )
-    _vr_insight = _insight_sub(vr_max=max_vr)
-    _out_sp_vr = _out_spike_col(cfg, gt_data)
-    _vr_e = float(vr_df.loc[vr_df["neuron"] == _out_sp_vr, "VR"].max()) if len(vr_df) else max_vr
-    _vr_e_ins = _insight_sub(vr_max=_vr_e)
-    _worst_vr = vr_df.loc[vr_df["VR"].idxmax()] if len(vr_df) else None
-    show_dynamic_result(
-        [
-            f"τ = {tau_ms} ms · max VR (all neurons) = {max_vr:.6f}.",
-            f"Output {_out_sp_vr.replace('_spike', '')} max VR = {_vr_e:.6f} — {_vr_e_ins.replace('Conclusion: ', '')}",
-            (
-                f"Global worst: {_worst_vr['neuron']} pattern {_worst_vr['pattern']} VR={_worst_vr['VR']:.6f}."
-                if _worst_vr is not None else ""
-            ),
-        ],
-        verdict="ok" if _vr_e < 0.05 else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Max VR Distance</div>
-            <div class="kpi-value">{max_vr:.6f}</div>
-            <div class="kpi-sub">0 = identical · {_vr_insight}</div></div>
-        <div class="kpi-card"><div class="kpi-label">τ used</div>
-            <div class="kpi-value">{tau_ms} ms</div>
-            <div class="kpi-sub">Check E_spike row in heatmap first</div></div>
-        <div class="kpi-card"><div class="kpi-label">Status</div>
-            <div style="margin-top:8px">{vr_badge}</div></div>
-    </div>
-    """, unsafe_allow_html=True)
+        max_vr = float(vr_df["VR"].max()) if len(vr_df) else 0.0
+        vr_ok = max_vr < 1e-6
+        vr_badge = (
+            '<span class="badge-ok">✓ VR = 0</span>'
+            if vr_ok
+            else f'<span class="badge-warn">✗ max VR = {max_vr:.6f}</span>'
+        )
+        _vr_insight = _insight_sub(vr_max=max_vr)
+        _out_sp_vr = _out_spike_col(cfg, gt_data)
+        _vr_e = float(vr_df.loc[vr_df["neuron"] == _out_sp_vr, "VR"].max()) if len(vr_df) else max_vr
+        _vr_e_ins = _insight_sub(vr_max=_vr_e)
+        _worst_vr = vr_df.loc[vr_df["VR"].idxmax()] if len(vr_df) else None
+        show_dynamic_result(
+            [
+                f"τ = {tau_ms} ms · max VR (all neurons) = {max_vr:.6f}.",
+                f"Output {_out_sp_vr.replace('_spike', '')} max VR = {_vr_e:.6f} — {_vr_e_ins.replace('Conclusion: ', '')}",
+                (
+                    f"Global worst: {_worst_vr['neuron']} pattern {_worst_vr['pattern']} VR={_worst_vr['VR']:.6f}."
+                    if _worst_vr is not None else ""
+                ),
+            ],
+            verdict="ok" if _vr_e < 0.05 else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Max VR Distance</div>
+                <div class="kpi-value">{max_vr:.6f}</div>
+                <div class="kpi-sub">0 = identical · {_vr_insight}</div></div>
+            <div class="kpi-card"><div class="kpi-label">τ used</div>
+                <div class="kpi-value">{tau_ms} ms</div>
+                <div class="kpi-sub">Check E_spike row in heatmap first</div></div>
+            <div class="kpi-card"><div class="kpi-label">Status</div>
+                <div style="margin-top:8px">{vr_badge}</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    vr_mean = vr_df.groupby(["neuron", "pattern"])["VR"].mean().reset_index()
-    piv, pat_labels = pivot_by_pattern(vr_mean, "neuron", "VR", patterns)
-    fig_vr = go.Figure(go.Heatmap(
-        z=piv.values.tolist(), x=pat_labels, y=list(piv.index),
-        colorscale="YlOrRd",
-        hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>VR=%{z:.6f}<extra></extra>",
-        text=[[f"{v:.4f}" for v in row] for row in piv.values],
-        texttemplate="%{text}",
-    ))
-    apply_dark(fig_vr)
-    apply_pattern_heatmap_axes(fig_vr, pat_labels)
-    fig_vr.update_layout(
-        height=360,
-        title=_title_top("Van Rossum (mean) — neuron × pattern"),
-        margin=dict(l=55, r=20, t=58, b=50),
-    )
-    st.plotly_chart(fig_vr, use_container_width=True, config=PLOTLY_CONFIG)
+        vr_mean = vr_df.groupby(["neuron", "pattern"])["VR"].mean().reset_index()
+        piv, pat_labels = pivot_by_pattern(vr_mean, "neuron", "VR", patterns)
+        fig_vr = go.Figure(go.Heatmap(
+            z=piv.values.tolist(), x=pat_labels, y=list(piv.index),
+            colorscale="YlOrRd",
+            hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>VR=%{z:.6f}<extra></extra>",
+            text=[[f"{v:.4f}" for v in row] for row in piv.values],
+            texttemplate="%{text}",
+        ))
+        apply_dark(fig_vr)
+        apply_pattern_heatmap_axes(fig_vr, pat_labels)
+        fig_vr.update_layout(
+            height=360,
+            title=_title_top("Van Rossum (mean)"),
+            margin=dict(l=55, r=20, t=58, b=50),
+        )
+        _plotly_chart(fig_vr, use_container_width=True, config=PLOTLY_CONFIG)
 
-    c1, c2 = st.columns(2)
-    with c1:
-        st.markdown("**VR by Pattern**")
-        show_table(vr_pat.round(6))
-    with c2:
-        st.markdown("**VR by Neuron**")
-        vr_neuron = vr_df.groupby("neuron")["VR"].agg(["mean","median"]).reset_index()
-        show_table(vr_neuron.round(6))
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("**VR by Pattern**")
+            show_table(vr_pat.round(6))
+        with c2:
+            st.markdown("**VR by Neuron**")
+            vr_neuron = vr_df.groupby("neuron")["VR"].agg(["mean","median"]).reset_index()
+            show_table(vr_neuron.round(6))
+    _run_for_each_sub(_render_van_rossum)
 
 # ══════════════════════════════════════════════════════════════
 # MULTI-SCALE CORRELATION (in_domain_metrics.ipynb)
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "msc":
     st.markdown('<div class="section-title">📐 Multi-Scale Correlation</div>', unsafe_allow_html=True)
-    show_metric_guide("msc")
-    st.markdown(
-        '<div class="section-subtitle">Gaussian-smoothed spike trains: Pearson r between GT and SUB vs kernel σ (ms)</div>',
-        unsafe_allow_html=True,
-    )
-
-    lo_ms = 0
-    hi_ms = int(trial_len)
-    sigma_max = st.slider("Max σ (ms)", 10, 200, 100, key="msc_sig_max")
-    sigma_vals_ms = np.arange(1, sigma_max + 1, dtype=float)
-    dt_ms = MS_PER_SAMPLE
-
-    def _window_indices(df, lo_idx, hi_idx):
-        n = len(df)
-        if n == 0:
-            return 0, 0
-        lo = int(max(0, lo_idx))
-        hi = int(min(n, hi_idx))
-        return lo, hi
-
-    def _get_bin_window(df, col, lo_idx, hi_idx):
-        if df is None or df.empty or (col not in df.columns):
-            return np.zeros(0, dtype=float)
-        arr = df[col].to_numpy()
-        hi_idx = min(hi_idx, len(arr))
-        if lo_idx >= hi_idx:
-            return np.zeros(0, dtype=float)
-        return arr[lo_idx:hi_idx].astype(float)
-
-    def _gauss_kernel_sigma_samp(sig_samp):
-        ksz = max(3, int(round(6.0 * sig_samp)))
-        if ksz % 2 == 0:
-            ksz += 1
-        x = np.linspace(-3.0 * sig_samp, 3.0 * sig_samp, ksz)
-        g = np.exp(-(x**2) / 2.0)
-        g /= g.sum()
-        return g
-
-    def _pearson_r_safe(a, b):
-        va = float(np.var(a))
-        vb = float(np.var(b))
-        if va == 0.0 and vb == 0.0:
-            return 1.0
-        if va == 0.0 or vb == 0.0:
-            return 0.0
-        ca = a - float(np.mean(a))
-        cb = b - float(np.mean(b))
-        denom = math.sqrt(float(np.sum(ca * ca)) * float(np.sum(cb * cb)))
-        if denom == 0.0:
-            return 0.0
-        return float(np.sum(ca * cb) / denom)
-
-    def _msc_curve_for_trial_neuron(gt_df, sb_df, neuron, lo_i, hi_i, sigma_vals, dt_m):
-        lo_idx, hi_idx = _window_indices(gt_df, lo_i, hi_i)
-        a = _get_bin_window(gt_df, neuron, lo_idx, hi_idx)
-        b = _get_bin_window(sb_df, neuron, lo_idx, hi_idx)
-        sa = int(a.sum())
-        sb_ = int(b.sum())
-        if sa == 0 and sb_ == 0:
-            return np.ones_like(sigma_vals, dtype=float), True, False
-        if (sa == 0 and sb_ > 0) or (sa > 0 and sb_ == 0):
-            return np.zeros_like(sigma_vals, dtype=float), False, True
-        r = np.zeros_like(sigma_vals, dtype=float)
-        for k, sigma_ms in enumerate(sigma_vals):
-            sig_samp = max(1e-6, float(sigma_ms / dt_m))
-            g = _gauss_kernel_sigma_samp(sig_samp)
-            ca = np.convolve(a, g, mode="same")
-            cb = np.convolve(b, g, mode="same")
-            r[k] = _pearson_r_safe(ca, cb)
-        return r, False, False
-
-    sc_msc = [c for c in spike_cols if c in gt_data.columns]
-    if not sc_msc:
-        st.warning("No spike columns found on `/data` for multi-scale correlation.")
-        st.stop()
-    per_pattern_per_neuron_curves = {p: {n: [] for n in sc_msc} for p in patterns}
-    all_records_neu = {n: [] for n in sc_msc}
-    silent_both = {p: {n: 0 for n in sc_msc} for p in patterns}
-    silent_one = {p: {n: 0 for n in sc_msc} for p in patterns}
-    counts_trials = {p: 0 for p in patterns}
-    neuron_tot_trials = {n: 0 for n in sc_msc}
-    neuron_both_silent = {n: 0 for n in sc_msc}
-    neuron_one_silent = {n: 0 for n in sc_msc}
-
-    with st.spinner("Multi-scale correlation (trials × neurons × σ)…"):
-        for patt in patterns:
-            ids = common_ids[patt]
-            if not ids:
-                continue
-            counts_trials[patt] = len(ids)
-            for tid in ids:
-                gt_df = get_trial(gt_data, tid)
-                sb_df = get_trial(sub_data, tid)
-                for neu in sc_msc:
-                    neuron_tot_trials[neu] += 1
-                    r_vec, is_both_silent, is_one_silent = _msc_curve_for_trial_neuron(
-                        gt_df, sb_df, neu, lo_ms, hi_ms, sigma_vals_ms, dt_ms
-                    )
-                    per_pattern_per_neuron_curves[patt][neu].append(r_vec)
-                    all_records_neu[neu].extend(r_vec.tolist())
-                    if is_both_silent:
-                        silent_both[patt][neu] += 1
-                        neuron_both_silent[neu] += 1
-                    if is_one_silent:
-                        silent_one[patt][neu] += 1
-                        neuron_one_silent[neu] += 1
-
-    rows_patt = []
-    for patt in patterns:
-        vals = []
-        bs = os_ = 0
-        tot_trials_for_pattern = counts_trials[patt] * len(sc_msc) if counts_trials[patt] > 0 else 0
-        if counts_trials[patt] > 0:
-            for neu in sc_msc:
-                curves = per_pattern_per_neuron_curves[patt][neu]
-                if curves:
-                    vals.extend(np.concatenate(curves).tolist())
-                    bs += silent_both[patt][neu]
-                    os_ += silent_one[patt][neu]
-        if vals:
-            arr = np.asarray(vals, dtype=float)
-            rows_patt.append(
-                {
-                    "pattern": patt,
-                    "n_trials": counts_trials[patt],
-                    "rows": int(arr.size),
-                    "r_mean": float(np.mean(arr)),
-                    "r_median": float(np.median(arr)),
-                    "both_silent_pct": float(100.0 * (bs / tot_trials_for_pattern))
-                    if tot_trials_for_pattern > 0
-                    else np.nan,
-                    "one_silent_pct": float(100.0 * (os_ / tot_trials_for_pattern))
-                    if tot_trials_for_pattern > 0
-                    else np.nan,
-                }
-            )
-    pattern_summary = pd.DataFrame(
-        rows_patt,
-        columns=[
-            "pattern",
-            "n_trials",
-            "rows",
-            "r_mean",
-            "r_median",
-            "both_silent_pct",
-            "one_silent_pct",
-        ],
-    )
-
-    rows_neu = []
-    for neu in sc_msc:
-        vals = np.asarray(all_records_neu[neu], dtype=float)
-        tot_trials = neuron_tot_trials[neu]
-        if vals.size > 0 and tot_trials > 0:
-            rows_neu.append(
-                {
-                    "neuron": neu,
-                    "rows": int(vals.size),
-                    "r_mean": float(np.mean(vals)),
-                    "r_median": float(np.median(vals)),
-                    "both_silent_pct": float(100.0 * neuron_both_silent[neu] / tot_trials),
-                    "one_silent_pct": float(100.0 * neuron_one_silent[neu] / tot_trials),
-                }
-            )
-    neuron_summary = pd.DataFrame(
-        rows_neu,
-        columns=["neuron", "rows", "r_mean", "r_median", "both_silent_pct", "one_silent_pct"],
-    )
-
-    rmean_all = float(pattern_summary["r_mean"].mean()) if not pattern_summary.empty else 1.0
-    _e_msc = _out_spike_col(cfg, gt_data)
-    _e_msc_row = neuron_summary[neuron_summary["neuron"] == _e_msc] if not neuron_summary.empty else pd.DataFrame()
-    _e_msc_r = float(_e_msc_row["r_mean"].iloc[0]) if len(_e_msc_row) else rmean_all
-    show_dynamic_result(
-        [
-            f"σ range 1–{sigma_max} ms · pooled mean r (patterns) = {rmean_all:.4f}.",
-            f"Output {_e_msc.replace('_spike', '')} mean r = {_e_msc_r:.4f}.",
-            _insight_sub(msc_r=_e_msc_r).replace("Conclusion: ", ""),
-        ],
-        verdict="ok" if _e_msc_r > 0.85 else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Mean r (patterns)</div>
-            <div class="kpi-value">{rmean_all:.4f}</div>
-            <div class="kpi-sub">pooled mean of pattern r_mean</div></div>
-        <div class="kpi-card"><div class="kpi-label">σ range</div>
-            <div class="kpi-value">1–{sigma_max}</div>
-            <div class="kpi-sub">ms</div></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    c_a, c_b = st.columns(2)
-    with c_a:
-        st.markdown("**Pattern summary**")
-        show_table(pattern_summary)
-    with c_b:
-        st.markdown("**Neuron summary**")
-        show_table(neuron_summary)
-
-    sel_msc_pat = st.selectbox("Pattern (mean r vs σ)", patterns, key="msc_pat_sel")
-    fig_msc = go.Figure()
-    neu_colors = px.colors.qualitative.Set2
-    for ni, neu in enumerate(sc_msc):
-        curves = per_pattern_per_neuron_curves[sel_msc_pat][neu]
-        if not curves:
-            continue
-        C = np.vstack(curves)
-        mean_curve = np.mean(C, axis=0)
-        col = neu_colors[ni % len(neu_colors)]
-        fig_msc.add_trace(
-            go.Scatter(
-                x=sigma_vals_ms.tolist(),
-                y=mean_curve.tolist(),
-                mode="lines",
-                name=neu.replace("_spike", ""),
-                line=dict(width=1.8, color=col),
-                hovertemplate=f"<b>{neu.replace('_spike', '')}</b><br>σ: %{{x:.0f}} ms<br>Pearson r: %{{y:.4f}}<extra></extra>",
-            )
+    def _render_msc():
+        show_metric_guide("msc")
+        st.markdown(
+            '<div class="section-subtitle">Gaussian-smoothed spike trains: Pearson r between GT and SUB vs kernel σ (ms)</div>',
+            unsafe_allow_html=True,
         )
-    apply_dark(fig_msc)
-    fig_msc.update_layout(
-        height=520,
-        title=dict(
-            text=f"Multi-scale correlation — pattern {sel_msc_pat} (mean over trials)",
-            x=0,
-            xanchor="left",
-            y=0.98,
-        ),
-        xaxis_title="σ (ms)",
-        yaxis_title="Pearson r",
-        yaxis=dict(range=[-0.05, 1.05]),
-        margin=dict(l=55, r=20, t=70, b=130),
-        legend=dict(
-            orientation="h",
-            yanchor="top",
-            y=-0.35,
-            x=0,
-            xanchor="left",
-            bgcolor="#161b22",
-            bordercolor="#30363d",
-            borderwidth=1,
-            font=dict(size=10),
-        ),
-    )
-    st.plotly_chart(fig_msc, use_container_width=True, config=PLOTLY_CONFIG)
+
+        lo_ms = 0
+        hi_ms = int(trial_len)
+        sigma_max = st.slider("Max σ (ms)", 10, 200, 100, key=_wk("msc_sig_max"))
+        sigma_vals_ms = np.arange(1, sigma_max + 1, dtype=float)
+        dt_ms = MS_PER_SAMPLE
+
+        def _window_indices(df, lo_idx, hi_idx):
+            n = len(df)
+            if n == 0:
+                return 0, 0
+            lo = int(max(0, lo_idx))
+            hi = int(min(n, hi_idx))
+            return lo, hi
+
+        def _get_bin_window(df, col, lo_idx, hi_idx):
+            if df is None or df.empty or (col not in df.columns):
+                return np.zeros(0, dtype=float)
+            arr = df[col].to_numpy()
+            hi_idx = min(hi_idx, len(arr))
+            if lo_idx >= hi_idx:
+                return np.zeros(0, dtype=float)
+            return arr[lo_idx:hi_idx].astype(float)
+
+        def _gauss_kernel_sigma_samp(sig_samp):
+            ksz = max(3, int(round(6.0 * sig_samp)))
+            if ksz % 2 == 0:
+                ksz += 1
+            x = np.linspace(-3.0 * sig_samp, 3.0 * sig_samp, ksz)
+            g = np.exp(-(x**2) / 2.0)
+            g /= g.sum()
+            return g
+
+        def _pearson_r_safe(a, b):
+            va = float(np.var(a))
+            vb = float(np.var(b))
+            if va == 0.0 and vb == 0.0:
+                return 1.0
+            if va == 0.0 or vb == 0.0:
+                return 0.0
+            ca = a - float(np.mean(a))
+            cb = b - float(np.mean(b))
+            denom = math.sqrt(float(np.sum(ca * ca)) * float(np.sum(cb * cb)))
+            if denom == 0.0:
+                return 0.0
+            return float(np.sum(ca * cb) / denom)
+
+        def _msc_curve_for_trial_neuron(gt_df, sb_df, neuron, lo_i, hi_i, sigma_vals, dt_m):
+            lo_idx, hi_idx = _window_indices(gt_df, lo_i, hi_i)
+            a = _get_bin_window(gt_df, neuron, lo_idx, hi_idx)
+            b = _get_bin_window(sb_df, neuron, lo_idx, hi_idx)
+            sa = int(a.sum())
+            sb_ = int(b.sum())
+            if sa == 0 and sb_ == 0:
+                return np.ones_like(sigma_vals, dtype=float), True, False
+            if (sa == 0 and sb_ > 0) or (sa > 0 and sb_ == 0):
+                return np.zeros_like(sigma_vals, dtype=float), False, True
+            r = np.zeros_like(sigma_vals, dtype=float)
+            for k, sigma_ms in enumerate(sigma_vals):
+                sig_samp = max(1e-6, float(sigma_ms / dt_m))
+                g = _gauss_kernel_sigma_samp(sig_samp)
+                ca = np.convolve(a, g, mode="same")
+                cb = np.convolve(b, g, mode="same")
+                r[k] = _pearson_r_safe(ca, cb)
+            return r, False, False
+
+        sc_msc = [c for c in spike_cols if c in gt_data.columns]
+        if not sc_msc:
+            st.warning("No spike columns found on `/data` for multi-scale correlation.")
+            st.stop()
+        per_pattern_per_neuron_curves = {p: {n: [] for n in sc_msc} for p in patterns}
+        all_records_neu = {n: [] for n in sc_msc}
+        silent_both = {p: {n: 0 for n in sc_msc} for p in patterns}
+        silent_one = {p: {n: 0 for n in sc_msc} for p in patterns}
+        counts_trials = {p: 0 for p in patterns}
+        neuron_tot_trials = {n: 0 for n in sc_msc}
+        neuron_both_silent = {n: 0 for n in sc_msc}
+        neuron_one_silent = {n: 0 for n in sc_msc}
+
+        with st.spinner("Multi-scale correlation (trials × neurons × σ)…"):
+            for patt in patterns:
+                ids = common_ids[patt]
+                if not ids:
+                    continue
+                counts_trials[patt] = len(ids)
+                for tid in ids:
+                    gt_df = get_trial(gt_data, tid)
+                    sb_df = get_trial(sub_data, tid)
+                    for neu in sc_msc:
+                        neuron_tot_trials[neu] += 1
+                        r_vec, is_both_silent, is_one_silent = _msc_curve_for_trial_neuron(
+                            gt_df, sb_df, neu, lo_ms, hi_ms, sigma_vals_ms, dt_ms
+                        )
+                        per_pattern_per_neuron_curves[patt][neu].append(r_vec)
+                        all_records_neu[neu].extend(r_vec.tolist())
+                        if is_both_silent:
+                            silent_both[patt][neu] += 1
+                            neuron_both_silent[neu] += 1
+                        if is_one_silent:
+                            silent_one[patt][neu] += 1
+                            neuron_one_silent[neu] += 1
+
+        rows_patt = []
+        for patt in patterns:
+            vals = []
+            bs = os_ = 0
+            tot_trials_for_pattern = counts_trials[patt] * len(sc_msc) if counts_trials[patt] > 0 else 0
+            if counts_trials[patt] > 0:
+                for neu in sc_msc:
+                    curves = per_pattern_per_neuron_curves[patt][neu]
+                    if curves:
+                        vals.extend(np.concatenate(curves).tolist())
+                        bs += silent_both[patt][neu]
+                        os_ += silent_one[patt][neu]
+            if vals:
+                arr = np.asarray(vals, dtype=float)
+                rows_patt.append(
+                    {
+                        "pattern": patt,
+                        "n_trials": counts_trials[patt],
+                        "rows": int(arr.size),
+                        "r_mean": float(np.mean(arr)),
+                        "r_median": float(np.median(arr)),
+                        "both_silent_pct": float(100.0 * (bs / tot_trials_for_pattern))
+                        if tot_trials_for_pattern > 0
+                        else np.nan,
+                        "one_silent_pct": float(100.0 * (os_ / tot_trials_for_pattern))
+                        if tot_trials_for_pattern > 0
+                        else np.nan,
+                    }
+                )
+        pattern_summary = pd.DataFrame(
+            rows_patt,
+            columns=[
+                "pattern",
+                "n_trials",
+                "rows",
+                "r_mean",
+                "r_median",
+                "both_silent_pct",
+                "one_silent_pct",
+            ],
+        )
+
+        rows_neu = []
+        for neu in sc_msc:
+            vals = np.asarray(all_records_neu[neu], dtype=float)
+            tot_trials = neuron_tot_trials[neu]
+            if vals.size > 0 and tot_trials > 0:
+                rows_neu.append(
+                    {
+                        "neuron": neu,
+                        "rows": int(vals.size),
+                        "r_mean": float(np.mean(vals)),
+                        "r_median": float(np.median(vals)),
+                        "both_silent_pct": float(100.0 * neuron_both_silent[neu] / tot_trials),
+                        "one_silent_pct": float(100.0 * neuron_one_silent[neu] / tot_trials),
+                    }
+                )
+        neuron_summary = pd.DataFrame(
+            rows_neu,
+            columns=["neuron", "rows", "r_mean", "r_median", "both_silent_pct", "one_silent_pct"],
+        )
+
+        rmean_all = float(pattern_summary["r_mean"].mean()) if not pattern_summary.empty else 1.0
+        _e_msc = _out_spike_col(cfg, gt_data)
+        _e_msc_row = neuron_summary[neuron_summary["neuron"] == _e_msc] if not neuron_summary.empty else pd.DataFrame()
+        _e_msc_r = float(_e_msc_row["r_mean"].iloc[0]) if len(_e_msc_row) else rmean_all
+        show_dynamic_result(
+            [
+                f"σ range 1–{sigma_max} ms · pooled mean r (patterns) = {rmean_all:.4f}.",
+                f"Output {_e_msc.replace('_spike', '')} mean r = {_e_msc_r:.4f}.",
+                _insight_sub(msc_r=_e_msc_r).replace("Conclusion: ", ""),
+            ],
+            verdict="ok" if _e_msc_r > 0.85 else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Mean r (patterns)</div>
+                <div class="kpi-value">{rmean_all:.4f}</div>
+                <div class="kpi-sub">pooled mean of pattern r_mean</div></div>
+            <div class="kpi-card"><div class="kpi-label">σ range</div>
+                <div class="kpi-value">1–{sigma_max}</div>
+                <div class="kpi-sub">ms</div></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        c_a, c_b = st.columns(2)
+        with c_a:
+            st.markdown("**Pattern summary**")
+            show_table(pattern_summary)
+        with c_b:
+            st.markdown("**Neuron summary**")
+            show_table(neuron_summary)
+
+        sel_msc_pat = st.selectbox("Pattern (mean r vs σ)", patterns, key=_wk("msc_pat_sel"))
+        fig_msc = go.Figure()
+        neu_colors = px.colors.qualitative.Set2
+        for ni, neu in enumerate(sc_msc):
+            curves = per_pattern_per_neuron_curves[sel_msc_pat][neu]
+            if not curves:
+                continue
+            C = np.vstack(curves)
+            mean_curve = np.mean(C, axis=0)
+            col = neu_colors[ni % len(neu_colors)]
+            fig_msc.add_trace(
+                go.Scatter(
+                    x=sigma_vals_ms.tolist(),
+                    y=mean_curve.tolist(),
+                    mode="lines",
+                    name=neu.replace("_spike", ""),
+                    line=dict(width=1.8, color=col),
+                    hovertemplate=f"<b>{neu.replace('_spike', '')}</b><br>σ: %{{x:.0f}} ms<br>Pearson r: %{{y:.4f}}<extra></extra>",
+                )
+            )
+        apply_dark(fig_msc)
+        fig_msc.update_layout(
+            height=520,
+            title=dict(
+                text=f"Multi-scale correlation — pattern {sel_msc_pat} (mean over trials)",
+                x=0,
+                xanchor="left",
+                y=0.98,
+            ),
+            xaxis_title="σ (ms)",
+            yaxis_title="Pearson r",
+            yaxis=dict(range=[-0.05, 1.05]),
+            margin=dict(l=55, r=20, t=70, b=130),
+            legend=dict(
+                orientation="h",
+                yanchor="top",
+                y=-0.35,
+                x=0,
+                xanchor="left",
+                bgcolor="#161b22",
+                bordercolor="#30363d",
+                borderwidth=1,
+                font=dict(size=10),
+            ),
+        )
+        _plotly_chart(fig_msc, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_msc)
 
 # ══════════════════════════════════════════════════════════════
 # SCHREIBER
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "schreiber":
     st.markdown('<div class="section-title">🔗 Schreiber Similarity</div>', unsafe_allow_html=True)
-    show_metric_guide("schreiber")
+    def _render_schreiber():
+        show_metric_guide("schreiber")
 
-    sigma_ms = st.slider("σ (ms)", 2, 50, 10, key="sch_sig_sl", help="Gaussian blur width: larger σ compares coarser firing envelopes.")
+        sigma_ms = st.slider("σ (ms)", 2, 50, 10, key=_wk("sch_sig_sl"), help="Gaussian blur width: larger σ compares coarser firing envelopes.")
 
-    def gaussian_kernel(sigma, fs):
-        dt = 1000.0/fs
-        ksz = max(3, int(round(6.0*sigma/dt)))
-        if ksz%2==0: ksz+=1
-        half = ksz//2
-        t = (np.arange(ksz)-half)*dt
-        g = np.exp(-0.5*(t/sigma)**2).astype(np.float32)
-        g /= g.sum(); return g
+        def gaussian_kernel(sigma, fs):
+            dt = 1000.0/fs
+            ksz = max(3, int(round(6.0*sigma/dt)))
+            if ksz%2==0: ksz+=1
+            half = ksz//2
+            t = (np.arange(ksz)-half)*dt
+            g = np.exp(-0.5*(t/sigma)**2).astype(np.float32)
+            g /= g.sum(); return g
 
-    def schreiber(a, b, kernel):
-        ca = np.convolve(a, kernel, mode="same")
-        cb = np.convolve(b, kernel, mode="same")
-        num = float(np.dot(ca,cb))
-        den = float(np.sqrt(np.dot(ca,ca)*np.dot(cb,cb)))
-        if den==0: return np.nan
-        return max(-1.0, min(1.0, num/den))
+        def schreiber(a, b, kernel):
+            ca = np.convolve(a, kernel, mode="same")
+            cb = np.convolve(b, kernel, mode="same")
+            num = float(np.dot(ca,cb))
+            den = float(np.sqrt(np.dot(ca,ca)*np.dot(cb,cb)))
+            if den==0: return np.nan
+            return max(-1.0, min(1.0, num/den))
 
-    kernel = gaussian_kernel(sigma_ms, fs_hz)
+        kernel = gaussian_kernel(sigma_ms, fs_hz)
 
-    rows_sch = []
-    for p in patterns:
-        for tid in common_ids[p]:
-            gt_df = get_trial(gt_data, tid); sb_df = get_trial(sub_data, tid)
-            for neuron in spike_cols:
-                mg = (gt_df["t_in_trial"]>=0)&(gt_df["t_in_trial"]<trial_len)
-                ms = (sb_df["t_in_trial"]>=0)&(sb_df["t_in_trial"]<trial_len)
-                a = gt_df.loc[mg,neuron].to_numpy(np.float32) if neuron in gt_df.columns else np.zeros(0,np.float32)
-                b = sb_df.loc[ms,neuron].to_numpy(np.float32) if neuron in sb_df.columns else np.zeros(0,np.float32)
-                if a.size==0 or b.size==0: continue
-                r = schreiber(a, b, kernel)
-                rows_sch.append({"pattern":p,"neuron":neuron,"r":r})
-
-    sch_df = pd.DataFrame(rows_sch)
-    min_r = sch_df["r"].dropna().min() if not sch_df.empty else np.nan
-    min_r_disp = float(min_r) if not sch_df.empty and not np.isnan(min_r) else float("nan")
-    _out_sch = _out_spike_col(cfg, gt_data)
-    _e_sch = sch_df[sch_df["neuron"] == _out_sch]["r"].dropna()
-    _e_min_sch = float(_e_sch.min()) if len(_e_sch) else min_r_disp
-    _sch_ok = not np.isnan(_e_min_sch) and _e_min_sch > 0.95
-    _sch_badge = (
-        '<span class="badge-ok">✓ r ≈ 1.0 on E</span>'
-        if _sch_ok
-        else f'<span class="badge-warn">✗ E min r = {_e_min_sch:.4f}</span>'
-        if not np.isnan(_e_min_sch)
-        else '<span class="badge-warn">no data</span>'
-    )
-    show_dynamic_result(
-        [
-            f"σ = {sigma_ms} ms · global min r = {min_r_disp:.4f}" if not np.isnan(min_r_disp) else "No Schreiber pairs computed.",
-            (
-                f"Output {_out_sch.replace('_spike', '')} min r = {_e_min_sch:.4f} — "
-                + _insight_sub(sch_r=_e_min_sch).replace("Conclusion: ", "")
-                if not np.isnan(_e_min_sch) else ""
-            ),
-        ],
-        verdict="ok" if _sch_ok else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Min Schreiber r</div>
-            <div class="kpi-value">{"—" if np.isnan(min_r_disp) else f"{min_r_disp:.4f}"}</div>
-            <div class="kpi-sub">1.0 = identical shape · {_insight_sub(sch_r=_e_min_sch) if not np.isnan(_e_min_sch) else ''}</div></div>
-        <div class="kpi-card"><div class="kpi-label">Status</div>
-            <div style="margin-top:8px">{_sch_badge}</div></div>
-    </div>
-    """, unsafe_allow_html=True)
-
-    if not sch_df.empty:
-        sch_df["pattern"] = sch_df["pattern"].map(normalize_pattern)
-        piv_sch = sch_df.groupby(["neuron", "pattern"])["r"].mean().unstack(fill_value=np.nan)
-        pat_labels = [p for p in patterns if p in piv_sch.columns]
-        pat_labels += [c for c in piv_sch.columns if c not in pat_labels]
-        piv_sch = piv_sch.reindex(columns=pat_labels)
-        fig_sch = go.Figure(go.Heatmap(
-            z=piv_sch.values.tolist(), x=pat_labels, y=list(piv_sch.index),
-            colorscale="RdYlGn", zmin=0, zmax=1,
-            hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>r=%{z:.4f}<extra></extra>",
-            text=[[f"{v:.4f}" if not np.isnan(v) else "—" for v in row] for row in piv_sch.values],
-            texttemplate="%{text}",
-        ))
-        apply_dark(fig_sch)
-        apply_pattern_heatmap_axes(fig_sch, pat_labels)
-        fig_sch.update_layout(
-            height=360,
-            title=_title_top(f"Schreiber Similarity (mean r, σ={sigma_ms}ms)"),
-            margin=dict(l=55, r=20, t=58, b=50),
-        )
-        st.plotly_chart(fig_sch, use_container_width=True, config=PLOTLY_CONFIG)
-
-        # Per-pattern bar: median r + usable fraction
-        st.markdown("**Schreiber per Pattern (median r vs. usable fraction)**")
+        rows_sch = []
         for p in patterns:
-            p_data = sch_df[sch_df["pattern"]==p]
-            if p_data.empty: continue
-            fig_sp = go.Figure()
-            fig_sp.add_trace(go.Scatter(
-                x=[c.replace("_spike","") for c in p_data["neuron"]],
-                y=p_data["r"].tolist(),
-                mode="markers+lines",
-                marker=dict(size=10, color=PAL_GT, symbol="circle"),
-                line=dict(color=PAL_GT, width=1.5),
-                name="Median r",
-                hovertemplate="%{x}<br>r=%{y:.4f}<extra></extra>"))
-            apply_dark(fig_sp)
-            fig_sp.update_layout(height=240, title=f"Schreiber (σ={sigma_ms} ms) — Pattern {p}",
-                yaxis=dict(range=[0,1.1]), xaxis_title="Neuron", yaxis_title="Schreiber r")
-            st.plotly_chart(fig_sp, use_container_width=True, config=PLOTLY_CONFIG)
+            for tid in common_ids[p]:
+                gt_df = get_trial(gt_data, tid); sb_df = get_trial(sub_data, tid)
+                for neuron in spike_cols:
+                    mg = (gt_df["t_in_trial"]>=0)&(gt_df["t_in_trial"]<trial_len)
+                    ms = (sb_df["t_in_trial"]>=0)&(sb_df["t_in_trial"]<trial_len)
+                    a = gt_df.loc[mg,neuron].to_numpy(np.float32) if neuron in gt_df.columns else np.zeros(0,np.float32)
+                    b = sb_df.loc[ms,neuron].to_numpy(np.float32) if neuron in sb_df.columns else np.zeros(0,np.float32)
+                    if a.size==0 or b.size==0: continue
+                    r = schreiber(a, b, kernel)
+                    rows_sch.append({"pattern":p,"neuron":neuron,"r":r})
+
+        sch_df = pd.DataFrame(rows_sch)
+        min_r = sch_df["r"].dropna().min() if not sch_df.empty else np.nan
+        min_r_disp = float(min_r) if not sch_df.empty and not np.isnan(min_r) else float("nan")
+        _out_sch = _out_spike_col(cfg, gt_data)
+        _e_sch = sch_df[sch_df["neuron"] == _out_sch]["r"].dropna()
+        _e_min_sch = float(_e_sch.min()) if len(_e_sch) else min_r_disp
+        _sch_ok = not np.isnan(_e_min_sch) and _e_min_sch > 0.95
+        _sch_badge = (
+            '<span class="badge-ok">✓ r ≈ 1.0 on E</span>'
+            if _sch_ok
+            else f'<span class="badge-warn">✗ E min r = {_e_min_sch:.4f}</span>'
+            if not np.isnan(_e_min_sch)
+            else '<span class="badge-warn">no data</span>'
+        )
+        show_dynamic_result(
+            [
+                f"σ = {sigma_ms} ms · global min r = {min_r_disp:.4f}" if not np.isnan(min_r_disp) else "No Schreiber pairs computed.",
+                (
+                    f"Output {_out_sch.replace('_spike', '')} min r = {_e_min_sch:.4f} — "
+                    + _insight_sub(sch_r=_e_min_sch).replace("Conclusion: ", "")
+                    if not np.isnan(_e_min_sch) else ""
+                ),
+            ],
+            verdict="ok" if _sch_ok else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Min Schreiber r</div>
+                <div class="kpi-value">{"—" if np.isnan(min_r_disp) else f"{min_r_disp:.4f}"}</div>
+                <div class="kpi-sub">1.0 = identical shape · {_insight_sub(sch_r=_e_min_sch) if not np.isnan(_e_min_sch) else ''}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Status</div>
+                <div style="margin-top:8px">{_sch_badge}</div></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        if not sch_df.empty:
+            sch_df["pattern"] = sch_df["pattern"].map(normalize_pattern)
+            piv_sch = sch_df.groupby(["neuron", "pattern"])["r"].mean().unstack(fill_value=np.nan)
+            pat_labels = [p for p in patterns if p in piv_sch.columns]
+            pat_labels += [c for c in piv_sch.columns if c not in pat_labels]
+            piv_sch = piv_sch.reindex(columns=pat_labels)
+            fig_sch = go.Figure(go.Heatmap(
+                z=piv_sch.values.tolist(), x=pat_labels, y=list(piv_sch.index),
+                colorscale="RdYlGn", zmin=0, zmax=1,
+                hovertemplate="Neuron=%{y}<br>Pattern=%{x}<br>r=%{z:.4f}<extra></extra>",
+                text=[[f"{v:.4f}" if not np.isnan(v) else "—" for v in row] for row in piv_sch.values],
+                texttemplate="%{text}",
+            ))
+            apply_dark(fig_sch)
+            apply_pattern_heatmap_axes(fig_sch, pat_labels)
+            fig_sch.update_layout(
+                height=360,
+                title=_title_top(f"Schreiber r (σ={sigma_ms} ms)"),
+                margin=dict(l=55, r=20, t=58, b=50),
+            )
+            _plotly_chart(fig_sch, use_container_width=True, config=PLOTLY_CONFIG)
+
+            # Per-pattern bar: median r + usable fraction
+            st.markdown("**Schreiber per Pattern (median r vs. usable fraction)**")
+            for p in patterns:
+                p_data = sch_df[sch_df["pattern"]==p]
+                if p_data.empty: continue
+                fig_sp = go.Figure()
+                fig_sp.add_trace(go.Scatter(
+                    x=[c.replace("_spike","") for c in p_data["neuron"]],
+                    y=p_data["r"].tolist(),
+                    mode="markers+lines",
+                    marker=dict(size=10, color=PAL_GT, symbol="circle"),
+                    line=dict(color=PAL_GT, width=1.5),
+                    name="Median r",
+                    hovertemplate="%{x}<br>r=%{y:.4f}<extra></extra>"))
+                apply_dark(fig_sp)
+                fig_sp.update_layout(height=240, title=f"Schreiber (σ={sigma_ms} ms) — Pattern {p}",
+                    yaxis=dict(range=[0,1.1]), xaxis_title="Neuron", yaxis_title="Schreiber r")
+                _plotly_chart(fig_sp, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_schreiber)
 
 # ══════════════════════════════════════════════════════════════
 # VM MISMATCH
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "vm_mismatch":
     st.markdown('<div class="section-title">⚡ Membrane Potential Mismatch (RMS Δ)</div>', unsafe_allow_html=True)
-    show_metric_guide("vm_mismatch")
+    def _render_vm_mismatch():
+        show_metric_guide("vm_mismatch")
 
-    vm_active = get_vm_cols(cfg, scope="active")
-    mismatch_rows = []
-    for col in vm_active:
-        rms_vals = []
-        for p in patterns:
-            for tid in common_ids[p]:
-                g = get_trial(gt_data, tid)[col].to_numpy(float)
-                s = get_trial(sub_data, tid)[col].to_numpy(float)
-                n = min(len(g),len(s))
-                if n==0: continue
-                d = g[:n]-s[:n]
-                rms_vals.append(float(np.sqrt(np.nanmean(d*d))))
-        mismatch_rows.append({"neuron":col.replace("_vm",""),
-                               "RMS_mean":np.mean(rms_vals) if rms_vals else 0.0,
-                               "RMS_max":np.max(rms_vals) if rms_vals else 0.0})
+        vm_active = get_vm_cols(cfg, scope="active")
+        mismatch_rows = []
+        for col in vm_active:
+            rms_vals = []
+            for p in patterns:
+                for tid in common_ids[p]:
+                    g = get_trial(gt_data, tid)[col].to_numpy(float)
+                    s = get_trial(sub_data, tid)[col].to_numpy(float)
+                    n = min(len(g),len(s))
+                    if n==0: continue
+                    d = g[:n]-s[:n]
+                    rms_vals.append(float(np.sqrt(np.nanmean(d*d))))
+            mismatch_rows.append({"neuron":col.replace("_vm",""),
+                                   "RMS_mean":np.mean(rms_vals) if rms_vals else 0.0,
+                                   "RMS_max":np.max(rms_vals) if rms_vals else 0.0})
 
-    mm_df = pd.DataFrame(mismatch_rows)
-    max_rms = float(mm_df["RMS_max"].max()) if len(mm_df) else 0.0
-    _rms_ok = max_rms < 1e-6
-    _rms_badge = (
-        '<span class="badge-ok">✓ RMS ≈ 0</span>'
-        if _rms_ok
-        else f'<span class="badge-warn">✗ max RMS = {max_rms:.4f} mV</span>'
-    )
-    _rms_insight = _insight_sub(rmse=max_rms)
-    _io_mm = mm_df[mm_df["neuron"].isin(("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E"))]
-    _io_max_rms = float(_io_mm["RMS_max"].max()) if len(_io_mm) else max_rms
-    _io_mean_rms = float(_io_mm["RMS_mean"].mean()) if len(_io_mm) else max_rms
-    _worst_io = _io_mm.loc[_io_mm["RMS_max"].idxmax()] if len(_io_mm) else None
-    show_dynamic_result(
-        [
-            f"Max RMS Δ (all neurons) = {max_rms:.4f} mV.",
-            f"I/O neurons mean RMS = {_io_mean_rms:.4f} mV, max = {_io_max_rms:.4f} mV.",
-            (
-                f"Worst I/O: {_worst_io['neuron']} max RMS = {_worst_io['RMS_max']:.4f} mV."
-                if _worst_io is not None else ""
-            ),
-            _insight_sub(rmse=_io_max_rms).replace("Conclusion: ", ""),
-        ],
-        verdict="ok" if _io_max_rms < 0.5 else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">Max RMS Δ</div>
-            <div class="kpi-value">{max_rms:.4f}</div>
-            <div class="kpi-sub">mV · 0 = identical Vm · {_rms_insight}</div></div>
-        <div class="kpi-card"><div class="kpi-label">Status</div>
-            <div style="margin-top:8px">{_rms_badge}</div>
-            <div class="kpi-sub">Interpret PyrIn_A, B1, B2, E — not silent interneurons</div></div>
-    </div>
-    """, unsafe_allow_html=True)
+        mm_df = pd.DataFrame(mismatch_rows)
+        max_rms = float(mm_df["RMS_max"].max()) if len(mm_df) else 0.0
+        _rms_ok = max_rms < 1e-6
+        _rms_badge = (
+            '<span class="badge-ok">✓ RMS ≈ 0</span>'
+            if _rms_ok
+            else f'<span class="badge-warn">✗ max RMS = {max_rms:.4f} mV</span>'
+        )
+        _rms_insight = _insight_sub(rmse=max_rms)
+        _io_mm = mm_df[mm_df["neuron"].isin(("PyrIn_A", "PyrIn_B1", "PyrIn_B2", "E"))]
+        _io_max_rms = float(_io_mm["RMS_max"].max()) if len(_io_mm) else max_rms
+        _io_mean_rms = float(_io_mm["RMS_mean"].mean()) if len(_io_mm) else max_rms
+        _worst_io = _io_mm.loc[_io_mm["RMS_max"].idxmax()] if len(_io_mm) else None
+        show_dynamic_result(
+            [
+                f"Max RMS Δ (all neurons) = {max_rms:.4f} mV.",
+                f"I/O neurons mean RMS = {_io_mean_rms:.4f} mV, max = {_io_max_rms:.4f} mV.",
+                (
+                    f"Worst I/O: {_worst_io['neuron']} max RMS = {_worst_io['RMS_max']:.4f} mV."
+                    if _worst_io is not None else ""
+                ),
+                _insight_sub(rmse=_io_max_rms).replace("Conclusion: ", ""),
+            ],
+            verdict="ok" if _io_max_rms < 0.5 else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">Max RMS Δ</div>
+                <div class="kpi-value">{max_rms:.4f}</div>
+                <div class="kpi-sub">mV · 0 = identical Vm · {_rms_insight}</div></div>
+            <div class="kpi-card"><div class="kpi-label">Status</div>
+                <div style="margin-top:8px">{_rms_badge}</div>
+                <div class="kpi-sub">Interpret PyrIn_A, B1, B2, E — not silent interneurons</div></div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    fig_mm = go.Figure()
-    fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_mean"],
-        name="Mean RMS Δ", marker_color=PAL_VM_MEAN,
-        hovertemplate="%{x}<br>Mean RMS=%{y:.6f} mV<extra></extra>"))
-    fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_max"],
-        name="Max RMS Δ", marker_color=PAL_VM_MAX,
-        hovertemplate="%{x}<br>Max RMS=%{y:.6f} mV<extra></extra>"))
-    apply_dark(fig_mm)
-    apply_title_legend_layout(
-        fig_mm,
-        title="Vm Mismatch per Neuron",
-        legend_y=-0.24,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=58,
-        margin_bottom=100,
-        height=430,
-        barmode="group",
-        xaxis_title="Neuron",
-        yaxis_title="RMS Δ (mV)",
-    )
-    st.plotly_chart(fig_mm, use_container_width=True, config=PLOTLY_CONFIG)
-    show_table(mm_df.round(8))
+        fig_mm = go.Figure()
+        fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_mean"],
+            name="Mean RMS Δ", marker_color=PAL_VM_MEAN,
+            hovertemplate="%{x}<br>Mean RMS=%{y:.6f} mV<extra></extra>"))
+        fig_mm.add_trace(go.Bar(x=mm_df["neuron"], y=mm_df["RMS_max"],
+            name="Max RMS Δ", marker_color=PAL_VM_MAX,
+            hovertemplate="%{x}<br>Max RMS=%{y:.6f} mV<extra></extra>"))
+        apply_dark(fig_mm)
+        apply_title_legend_layout(
+            fig_mm,
+            title="Vm Mismatch per Neuron",
+            legend_y=-0.24,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=58,
+            margin_bottom=100,
+            height=430,
+            barmode="group",
+            xaxis_title="Neuron",
+            yaxis_title="RMS Δ (mV)",
+        )
+        _plotly_chart(fig_mm, use_container_width=True, config=PLOTLY_CONFIG)
+        show_table(mm_df.round(8))
+    _run_for_each_sub(_render_vm_mismatch)
 
 # ══════════════════════════════════════════════════════════════
 # CROSS-CORRELOGRAM
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "xcorr":
     st.markdown('<div class="section-title">🔀 Cross-Correlogram (CCG)</div>', unsafe_allow_html=True)
-    show_metric_guide("xcorr")
+    def _render_xcorr():
+        show_metric_guide("xcorr")
 
-    MAX_LAG = st.slider("Max lag (ms)", 5, 50, 15, key="xcorr_lag_sl",
-                        help="Lag window in ms for cross-correlation bars in each cell.")
-    sel_xcorr_pat = st.selectbox("Pattern", patterns, key="xcorr_pat_sel")
-    dataset_choice = st.radio("Dataset", ["GT","SUB","Both"], horizontal=True, key="xcorr_ds")
+        MAX_LAG = st.slider("Max lag (ms)", 5, 50, 15, key=_wk("xcorr_lag_sl"),
+                            help="Lag window in ms for cross-correlation bars in each cell.")
+        sel_xcorr_pat = st.selectbox("Pattern", patterns, key=_wk("xcorr_pat_sel"))
+        dataset_choice = st.radio("Dataset", ["GT","SUB","Both"], horizontal=True, key=_wk("xcorr_ds"))
 
-    def xcorr_norm(a, b, max_lag):
-        if a.size==0 or b.size==0:
-            lags = np.arange(-max_lag,max_lag+1,dtype=int)
-            return lags, np.zeros(lags.size)
-        W = int(min(a.size,b.size))
-        if W<=1:
-            lags = np.arange(-max_lag,max_lag+1,dtype=int)
-            return lags, np.zeros_like(lags,float)
-        L = int(min(max_lag,W-1))
-        full = np.correlate(a.astype(float),b.astype(float),mode="full")
-        l_full = np.arange(-(W-1),W,dtype=int)
-        sel = (l_full>=-L)&(l_full<=L)
-        lags = l_full[sel]; counts = full[sel].astype(float)
-        eff = (W-np.abs(lags)).astype(float); eff[eff<=0]=np.nan
-        cc = np.where(np.isfinite(eff),counts/eff,0.0)
-        return lags, cc
+        def xcorr_norm(a, b, max_lag):
+            if a.size==0 or b.size==0:
+                lags = np.arange(-max_lag,max_lag+1,dtype=int)
+                return lags, np.zeros(lags.size)
+            W = int(min(a.size,b.size))
+            if W<=1:
+                lags = np.arange(-max_lag,max_lag+1,dtype=int)
+                return lags, np.zeros_like(lags,float)
+            L = int(min(max_lag,W-1))
+            full = np.correlate(a.astype(float),b.astype(float),mode="full")
+            l_full = np.arange(-(W-1),W,dtype=int)
+            sel = (l_full>=-L)&(l_full<=L)
+            lags = l_full[sel]; counts = full[sel].astype(float)
+            eff = (W-np.abs(lags)).astype(float); eff[eff<=0]=np.nan
+            cc = np.where(np.isfinite(eff),counts/eff,0.0)
+            return lags, cc
 
-    ids_xcorr = common_ids[sel_xcorr_pat]
-    n_sc = len(spike_cols)
-    labels_short = [c.replace("_spike","") for c in spike_cols]
+        ids_xcorr = common_ids[sel_xcorr_pat]
+        n_sc = len(spike_cols)
+        labels_short = [c.replace("_spike","") for c in spike_cols]
 
-    def build_ccg_matrix(data, ids):
-        mat = {}
-        for tid in ids:
-            df = get_trial(data, tid)
-            for i, ci in enumerate(spike_cols):
-                for j, cj in enumerate(spike_cols):
-                    ai = df[ci].to_numpy(int)[:trial_len].astype(np.int8) if ci in df.columns else np.zeros(trial_len,np.int8)
-                    bj = df[cj].to_numpy(int)[:trial_len].astype(np.int8) if cj in df.columns else np.zeros(trial_len,np.int8)
-                    lgs, cc = xcorr_norm(ai, bj, MAX_LAG)
-                    key = (i,j)
-                    if key not in mat: mat[key] = []
-                    mat[key].append(cc)
-        return {k: np.nanmean(np.vstack(v),0) for k,v in mat.items()}, lgs
+        def build_ccg_matrix(data, ids):
+            mat = {}
+            for tid in ids:
+                df = get_trial(data, tid)
+                for i, ci in enumerate(spike_cols):
+                    for j, cj in enumerate(spike_cols):
+                        ai = df[ci].to_numpy(int)[:trial_len].astype(np.int8) if ci in df.columns else np.zeros(trial_len,np.int8)
+                        bj = df[cj].to_numpy(int)[:trial_len].astype(np.int8) if cj in df.columns else np.zeros(trial_len,np.int8)
+                        lgs, cc = xcorr_norm(ai, bj, MAX_LAG)
+                        key = (i,j)
+                        if key not in mat: mat[key] = []
+                        mat[key].append(cc)
+            return {k: np.nanmean(np.vstack(v),0) for k,v in mat.items()}, lgs
 
-    datasets = []
-    if dataset_choice in ("GT","Both"):
-        datasets.append(("GT", gt_data, PAL_GT))
-    if dataset_choice in ("SUB","Both"):
-        datasets.append(("SUB", sub_data, PAL_SUB))
+        datasets = []
+        if dataset_choice in ("GT","Both"):
+            datasets.append(("GT", gt_data, PAL_GT))
+        if dataset_choice in ("SUB","Both"):
+            datasets.append(("SUB", sub_data, PAL_SUB))
 
-    show_dynamic_result(
-        [
-            f"Pattern {sel_xcorr_pat}, max_lag = {MAX_LAG} ms, showing: {dataset_choice}.",
-            "Compare peak positions on I/O cells (E, PyrIn_A, B1, B2) between GT and SUB runs.",
-            "Purple diagonal = autocorrelation; blue/orange = cross-correlation.",
-            "GT-only peaks on PyrMid/Int without SUB peaks are expected for black-box SUB.",
-        ],
-        verdict="neutral",
-    )
-
-    for ds_name, ds_data, ds_color in datasets:
-        ccg_mat, lags = build_ccg_matrix(ds_data, ids_xcorr)
-        lags_list = lags.tolist()
-
-        fig_ccg = make_subplots(rows=n_sc, cols=n_sc,
-            row_titles=labels_short, column_titles=labels_short,
-            shared_xaxes=True, shared_yaxes=True,
-            vertical_spacing=0.02, horizontal_spacing=0.02)
-
-        for i in range(n_sc):
-            for j in range(n_sc):
-                cc = ccg_mat.get((i,j), np.zeros(len(lags_list)))
-                color = PAL_AUTO if i == j else ds_color
-                fig_ccg.add_trace(go.Bar(x=lags_list, y=cc.tolist(),
-                    marker_color=color, showlegend=False,
-                    hovertemplate=f"{labels_short[i]}→{labels_short[j]}<br>lag=%{{x}} ms<br>cc=%{{y:.5f}}<extra></extra>"),
-                    row=i+1, col=j+1)
-
-        fig_ccg.add_trace(go.Scatter(
-            x=[None], y=[None], mode="markers",
-            marker=dict(color=ds_color, size=10), name=f"Cross-corr ({ds_name})",
-        ))
-        fig_ccg.add_trace(go.Scatter(
-            x=[None], y=[None], mode="markers",
-            marker=dict(color=PAL_AUTO, size=10), name="Autocorr (diagonal)",
-        ))
-        apply_dark(fig_ccg)
-        cell_sz = max(100, 600 // n_sc)
-        apply_title_legend_layout(
-            fig_ccg,
-            title=f"Cross Correlogram — {ds_name} (Pattern {sel_xcorr_pat}, max_lag={MAX_LAG} ms)",
-            legend_y=-0.08,
-            legend_x=0.5,
-            legend_xanchor="center",
-            margin_top=72,
-            margin_bottom=110,
-            margin_left=80,
-            margin_right=20,
-            height=cell_sz * n_sc + 140,
-            bargap=0,
+        show_dynamic_result(
+            [
+                f"Pattern {sel_xcorr_pat}, max_lag = {MAX_LAG} ms, showing: {dataset_choice}.",
+                "Compare peak positions on I/O cells (E, PyrIn_A, B1, B2) between GT and SUB runs.",
+                "Purple diagonal = autocorrelation; blue/orange = cross-correlation.",
+                "GT-only peaks on PyrMid/Int without SUB peaks are expected for black-box SUB.",
+            ],
+            verdict="neutral",
         )
-        for ax in fig_ccg.layout:
-            if ax.startswith("xaxis"):
-                fig_ccg.layout[ax].update(showticklabels=False, gridcolor="#21262d")
-            if ax.startswith("yaxis"):
-                fig_ccg.layout[ax].update(showticklabels=False, gridcolor="#21262d")
-        st.plotly_chart(fig_ccg, use_container_width=True, config=PLOTLY_CONFIG)
+
+        for ds_name, ds_data, ds_color in datasets:
+            ccg_mat, lags = build_ccg_matrix(ds_data, ids_xcorr)
+            lags_list = lags.tolist()
+
+            fig_ccg = make_subplots(rows=n_sc, cols=n_sc,
+                row_titles=labels_short, column_titles=labels_short,
+                shared_xaxes=True, shared_yaxes=True,
+                vertical_spacing=0.02, horizontal_spacing=0.02)
+
+            for i in range(n_sc):
+                for j in range(n_sc):
+                    cc = ccg_mat.get((i,j), np.zeros(len(lags_list)))
+                    color = PAL_AUTO if i == j else ds_color
+                    fig_ccg.add_trace(go.Bar(x=lags_list, y=cc.tolist(),
+                        marker_color=color, showlegend=False,
+                        hovertemplate=f"{labels_short[i]}→{labels_short[j]}<br>lag=%{{x}} ms<br>cc=%{{y:.5f}}<extra></extra>"),
+                        row=i+1, col=j+1)
+
+            fig_ccg.add_trace(go.Scatter(
+                x=[None], y=[None], mode="markers",
+                marker=dict(color=ds_color, size=10), name=f"Cross-corr ({ds_name})",
+            ))
+            fig_ccg.add_trace(go.Scatter(
+                x=[None], y=[None], mode="markers",
+                marker=dict(color=PAL_AUTO, size=10), name="Autocorr (diagonal)",
+            ))
+            apply_dark(fig_ccg)
+            cell_sz = max(100, 600 // n_sc)
+            apply_title_legend_layout(
+                fig_ccg,
+                title=f"Cross Correlogram — {ds_name} (Pattern {sel_xcorr_pat}, max_lag={MAX_LAG} ms)",
+                legend_y=-0.08,
+                legend_x=0.5,
+                legend_xanchor="center",
+                margin_top=72,
+                margin_bottom=110,
+                margin_left=80,
+                margin_right=20,
+                height=cell_sz * n_sc + 140,
+                bargap=0,
+            )
+            for ax in fig_ccg.layout:
+                if ax.startswith("xaxis"):
+                    fig_ccg.layout[ax].update(showticklabels=False, gridcolor="#21262d")
+                if ax.startswith("yaxis"):
+                    fig_ccg.layout[ax].update(showticklabels=False, gridcolor="#21262d")
+            _plotly_chart(fig_ccg, use_container_width=True, config=PLOTLY_CONFIG)
+    _run_for_each_sub(_render_xcorr)
 
 # ══════════════════════════════════════════════════════════════
 # GRANGER
+
 # ══════════════════════════════════════════════════════════════
+
 elif active == "granger":
     st.markdown('<div class="section-title">🕸 Granger Causality</div>', unsafe_allow_html=True)
-    show_metric_guide("granger")
+    def _render_granger():
+        show_metric_guide("granger")
 
-    try:
-        from scipy.stats import f as _f_dist; _HAS_SCIPY=True
-    except: _HAS_SCIPY=False
+        try:
+            from scipy.stats import f as _f_dist; _HAS_SCIPY=True
+        except: _HAS_SCIPY=False
 
-    c1,c2,c3 = st.columns(3)
-    gc_bin  = c1.slider("Bin (ms)", 2, 20, 5, key="gc_bin_sl")
-    gc_lag  = c2.slider("Lag (bins)", 3, 20, 10, key="gc_lag_sl")
-    gc_alpha = c3.select_slider(
-        "FDR α",
-        options=[0.001, 0.005, 0.01, 0.02, 0.05, 0.10, 0.15, 0.20],
-        value=0.05,
-        key="gc_a_sl",
-        help="False-discovery rate threshold for significant Granger links. Lower = stricter.",
-    )
-    sel_gc_pat = st.selectbox("Pattern", patterns, key="gc_pat_sel")
+        c1,c2,c3 = st.columns(3)
+        gc_bin  = c1.slider("Bin (ms)", 2, 20, 5, key=_wk("gc_bin_sl"))
+        gc_lag  = c2.slider("Lag (bins)", 3, 20, 10, key=_wk("gc_lag_sl"))
+        gc_alpha = c3.select_slider(
+            "FDR α",
+            options=[0.001, 0.005, 0.01, 0.02, 0.05, 0.10, 0.15, 0.20],
+            value=0.05,
+            key=_wk("gc_a_sl"),
+            help="False-discovery rate threshold for significant Granger links. Lower = stricter.",
+        )
+        sel_gc_pat = st.selectbox("Pattern", patterns, key=_wk("gc_pat_sel"))
 
-    def lag_design(y, X_lags, lag):
-        T = y.shape[0]
-        if T<=lag: return np.zeros(0), np.zeros((0,lag+1)), np.zeros((0,2*lag+1))
-        Y = y[lag:]
-        def _lags(v): return np.column_stack([v[lag-k-1:T-k-1] for k in range(lag)])
-        Ylags=_lags(y); Xlags=_lags(X_lags)
-        R=np.column_stack([np.ones(T-lag),Ylags])
-        F=np.column_stack([R,Xlags])
-        return Y,R,F
+        def lag_design(y, X_lags, lag):
+            T = y.shape[0]
+            if T<=lag: return np.zeros(0), np.zeros((0,lag+1)), np.zeros((0,2*lag+1))
+            Y = y[lag:]
+            def _lags(v): return np.column_stack([v[lag-k-1:T-k-1] for k in range(lag)])
+            Ylags=_lags(y); Xlags=_lags(X_lags)
+            R=np.column_stack([np.ones(T-lag),Ylags])
+            F=np.column_stack([R,Xlags])
+            return Y,R,F
 
-    def ols_rss(design,target):
-        if design.shape[0]==0: return np.nan
-        beta,*_=np.linalg.lstsq(design,target,rcond=None)
-        resid=target-design@beta
-        return float(np.dot(resid,resid))
+        def ols_rss(design,target):
+            if design.shape[0]==0: return np.nan
+            beta,*_=np.linalg.lstsq(design,target,rcond=None)
+            resid=target-design@beta
+            return float(np.dot(resid,resid))
 
-    def granger_pair(y,x,lag):
-        Y,R,F=lag_design(y,x,lag)
-        if Y.size==0: return dict(effect=np.nan,p=np.nan)
-        rr=ols_rss(R,Y); rf=ols_rss(F,Y)
-        if not(np.isfinite(rr) and np.isfinite(rf) and rf>0): return dict(effect=np.nan,p=np.nan)
-        eff=np.log(rr/rf); p=np.nan
-        if _HAS_SCIPY:
-            d1=F.shape[1]-R.shape[1]; d2=F.shape[0]-F.shape[1]
-            if d1>0 and d2>0: p=float(_f_dist.sf(((rr-rf)/d1)/(rf/d2),d1,d2))
-        return dict(effect=float(eff),p=p)
+        def granger_pair(y,x,lag):
+            Y,R,F=lag_design(y,x,lag)
+            if Y.size==0: return dict(effect=np.nan,p=np.nan)
+            rr=ols_rss(R,Y); rf=ols_rss(F,Y)
+            if not(np.isfinite(rr) and np.isfinite(rf) and rf>0): return dict(effect=np.nan,p=np.nan)
+            eff=np.log(rr/rf); p=np.nan
+            if _HAS_SCIPY:
+                d1=F.shape[1]-R.shape[1]; d2=F.shape[0]-F.shape[1]
+                if d1>0 and d2>0: p=float(_f_dist.sf(((rr-rf)/d1)/(rf/d2),d1,d2))
+            return dict(effect=float(eff),p=p)
 
-    def bh_fdr(pvals,alpha):
-        p=np.asarray(pvals,float); m=np.sum(np.isfinite(p))
-        if m==0: return np.full_like(p,np.nan)
-        order=np.argsort(np.where(np.isfinite(p),p,np.inf))
-        ranks=np.empty_like(order); ranks[order]=np.arange(1,len(p)+1)
-        q=np.full_like(p,np.nan)
-        q_work=np.where(np.isfinite(p),p*m/ranks,np.nan)
-        prev=np.inf
-        for idx in order[::-1]:
-            if np.isfinite(q_work[idx]): prev=min(prev,q_work[idx]); q[idx]=prev
-        return q
+        def bh_fdr(pvals,alpha):
+            p=np.asarray(pvals,float); m=np.sum(np.isfinite(p))
+            if m==0: return np.full_like(p,np.nan)
+            order=np.argsort(np.where(np.isfinite(p),p,np.inf))
+            ranks=np.empty_like(order); ranks[order]=np.arange(1,len(p)+1)
+            q=np.full_like(p,np.nan)
+            q_work=np.where(np.isfinite(p),p*m/ranks,np.nan)
+            prev=np.inf
+            for idx in order[::-1]:
+                if np.isfinite(q_work[idx]): prev=min(prev,q_work[idx]); q[idx]=prev
+            return q
 
-    def bin_block(trials, sc, bm):
-        pieces=[]
-        for df in trials:
-            block=df[sc].to_numpy(int)
-            W=block.shape[0]
-            B=int(np.ceil(W*MS_PER_SAMPLE/bm))
-            binned=np.zeros((B,len(sc)),float)
-            for b in range(B):
-                lo=int(round((b*bm)/MS_PER_SAMPLE)); hi=min(int(round(((b+1)*bm)/MS_PER_SAMPLE)),W)
-                if lo<hi: binned[b]=block[lo:hi].sum(0)
-            pieces.append(binned)
-        return np.vstack(pieces) if pieces else np.zeros((0,len(sc)))
+        def bin_block(trials, sc, bm):
+            pieces=[]
+            for df in trials:
+                block=df[sc].to_numpy(int)
+                W=block.shape[0]
+                B=int(np.ceil(W*MS_PER_SAMPLE/bm))
+                binned=np.zeros((B,len(sc)),float)
+                for b in range(B):
+                    lo=int(round((b*bm)/MS_PER_SAMPLE)); hi=min(int(round(((b+1)*bm)/MS_PER_SAMPLE)),W)
+                    if lo<hi: binned[b]=block[lo:hi].sum(0)
+                pieces.append(binned)
+            return np.vstack(pieces) if pieces else np.zeros((0,len(sc)))
 
-    def gc_for_trials(trials, sc, bm, lag, alpha, min_spk=10):
-        X=bin_block(trials,sc,bm); N=len(sc)
-        if X.shape[0]<lag+5: return np.full((N,N),np.nan), np.zeros((N,N),bool)
-        ok=X.sum(0)>=min_spk
-        Xz=X.copy().astype(float)
-        for j in range(N):
-            if ok[j]:
-                mu=Xz[:,j].mean(); sd=Xz[:,j].std(ddof=1)
-                Xz[:,j]=(Xz[:,j]-mu)/(sd if sd>0 else 1.0)
-            else: Xz[:,j]=0.0
-        M_eff=np.full((N,N),np.nan); M_p=np.full((N,N),np.nan)
-        for j in range(N):
-            if not ok[j]: continue
-            for i in range(N):
-                if i==j or not ok[i]: continue
-                res=granger_pair(Xz[:,j],Xz[:,i],lag)
-                M_eff[j,i]=res["effect"]; M_p[j,i]=res["p"]
-        q=bh_fdr(M_p.ravel(),alpha).reshape(M_p.shape)
-        usable=np.isfinite(M_eff)&np.isfinite(q)&(q<=alpha)
-        return M_eff, usable
+        def gc_for_trials(trials, sc, bm, lag, alpha, min_spk=10):
+            X=bin_block(trials,sc,bm); N=len(sc)
+            if X.shape[0]<lag+5: return np.full((N,N),np.nan), np.zeros((N,N),bool)
+            ok=X.sum(0)>=min_spk
+            Xz=X.copy().astype(float)
+            for j in range(N):
+                if ok[j]:
+                    mu=Xz[:,j].mean(); sd=Xz[:,j].std(ddof=1)
+                    Xz[:,j]=(Xz[:,j]-mu)/(sd if sd>0 else 1.0)
+                else: Xz[:,j]=0.0
+            M_eff=np.full((N,N),np.nan); M_p=np.full((N,N),np.nan)
+            for j in range(N):
+                if not ok[j]: continue
+                for i in range(N):
+                    if i==j or not ok[i]: continue
+                    res=granger_pair(Xz[:,j],Xz[:,i],lag)
+                    M_eff[j,i]=res["effect"]; M_p[j,i]=res["p"]
+            q=bh_fdr(M_p.ravel(),alpha).reshape(M_p.shape)
+            usable=np.isfinite(M_eff)&np.isfinite(q)&(q<=alpha)
+            return M_eff, usable
 
-    with st.spinner("Running Granger causality…"):
-        ids_gc = common_ids[sel_gc_pat]
-        gt_gc  = [get_trial(gt_data, tid) for tid in ids_gc]
-        sb_gc  = [get_trial(sub_data, tid) for tid in ids_gc]
-        sc_valid = [c for c in spike_cols if c in gt_data.columns]
-        eff_gt, use_gt = gc_for_trials(gt_gc, sc_valid, gc_bin, gc_lag, gc_alpha)
-        eff_sb, use_sb = gc_for_trials(sb_gc, sc_valid, gc_bin, gc_lag, gc_alpha)
+        with st.spinner("Running Granger causality…"):
+            ids_gc = common_ids[sel_gc_pat]
+            gt_gc  = [get_trial(gt_data, tid) for tid in ids_gc]
+            sb_gc  = [get_trial(sub_data, tid) for tid in ids_gc]
+            sc_valid = [c for c in spike_cols if c in gt_data.columns]
+            eff_gt, use_gt = gc_for_trials(gt_gc, sc_valid, gc_bin, gc_lag, gc_alpha)
+            eff_sb, use_sb = gc_for_trials(sb_gc, sc_valid, gc_bin, gc_lag, gc_alpha)
 
-    labels_gc = [c.replace("_spike","") for c in sc_valid]
-    e_gt = int(use_gt.sum()-np.trace(use_gt)); e_sb = int(use_sb.sum()-np.trace(use_sb))
-    inter = int((use_gt&use_sb).sum()-np.trace(use_gt&use_sb))
-    union = int((use_gt|use_sb).sum()-np.trace(use_gt|use_sb))
-    jacc = inter/union if union>0 else 1.0
+        labels_gc = [c.replace("_spike","") for c in sc_valid]
+        e_gt = int(use_gt.sum()-np.trace(use_gt)); e_sb = int(use_sb.sum()-np.trace(use_sb))
+        inter = int((use_gt&use_sb).sum()-np.trace(use_gt&use_sb))
+        union = int((use_gt|use_sb).sum()-np.trace(use_gt|use_sb))
+        jacc = inter/union if union>0 else 1.0
 
-    _gc_insight = _insight_sub(jaccard=jacc)
-    show_dynamic_result(
-        [
-            f"Pattern {sel_gc_pat} · bin={gc_bin} ms · lag={gc_lag} · α={gc_alpha}.",
-            f"GT edges = {e_gt}, SUB edges = {e_sb}, overlap = {inter}, Jaccard = {jacc:.3f}.",
-            _gc_insight.replace("Conclusion: ", ""),
-            "Low Jaccard is normal for black-box SUB (different internal neurons).",
-        ],
-        verdict="ok" if jacc > 0.5 else "warn",
-    )
-    st.markdown(f"""
-    <div class="kpi-row">
-        <div class="kpi-card"><div class="kpi-label">GT edges</div><div class="kpi-value">{e_gt}</div>
-            <div class="kpi-sub">significant source→target links</div></div>
-        <div class="kpi-card"><div class="kpi-label">SUB edges</div><div class="kpi-value">{e_sb}</div>
-            <div class="kpi-sub">fewer edges normal for black-box</div></div>
-        <div class="kpi-card"><div class="kpi-label">Overlap</div><div class="kpi-value">{inter}</div>
-            <div class="kpi-sub">links in both maps</div></div>
-        <div class="kpi-card"><div class="kpi-label">Jaccard</div>
-            <div class="kpi-value">{jacc:.3f}</div>
-            <div class="kpi-sub">{_gc_insight}</div></div>
+        _gc_insight = _insight_sub(jaccard=jacc)
+        show_dynamic_result(
+            [
+                f"Pattern {sel_gc_pat} · bin={gc_bin} ms · lag={gc_lag} · α={gc_alpha}.",
+                f"GT edges = {e_gt}, SUB edges = {e_sb}, overlap = {inter}, Jaccard = {jacc:.3f}.",
+                _gc_insight.replace("Conclusion: ", ""),
+                "Low Jaccard is normal for black-box SUB (different internal neurons).",
+            ],
+            verdict="ok" if jacc > 0.5 else "warn",
+        )
+        st.markdown(f"""
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-label">GT edges</div><div class="kpi-value">{e_gt}</div>
+                <div class="kpi-sub">significant source→target links</div></div>
+            <div class="kpi-card"><div class="kpi-label">SUB edges</div><div class="kpi-value">{e_sb}</div>
+                <div class="kpi-sub">fewer edges normal for black-box</div></div>
+            <div class="kpi-card"><div class="kpi-label">Overlap</div><div class="kpi-value">{inter}</div>
+                <div class="kpi-sub">links in both maps</div></div>
+            <div class="kpi-card"><div class="kpi-label">Jaccard</div>
+                <div class="kpi-value">{jacc:.3f}</div>
+                <div class="kpi-sub">{_gc_insight}</div></div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        def gc_heatmap(M, mask, title):
+            display = np.where(mask, M, np.nan)
+            text = [[f"{v:.1f}" if not np.isnan(v) else "" for v in row] for row in display]
+            fig = go.Figure(go.Heatmap(
+                z=display.tolist(), x=labels_gc, y=labels_gc,
+                colorscale="Magma", text=text, texttemplate="%{text}",
+                hovertemplate="From=%{x}<br>To=%{y}<br>GC=%{z:.2f}<extra></extra>"))
+            apply_dark(fig)
+            fig.update_layout(
+                height=380,
+                title=_title_top(title),
+                margin=dict(l=55, r=20, t=58, b=50),
+            )
+            return fig
+
+        col1, col2 = st.columns(2)
+        with col1:
+            _plotly_chart(gc_heatmap(eff_gt, use_gt, f"GT — Pattern {sel_gc_pat}"), use_container_width=True, config=PLOTLY_CONFIG)
+        with col2:
+            _plotly_chart(gc_heatmap(eff_sb, use_sb, f"SUB — Pattern {sel_gc_pat}"), use_container_width=True, config=PLOTLY_CONFIG)
+
+        # degree bar
+        outdeg = use_sb.sum(0); indeg = use_sb.sum(1)
+        fig_deg = go.Figure()
+        fig_deg.add_trace(go.Bar(x=labels_gc, y=outdeg.tolist(), name="out-degree", marker_color=PAL_GC_OUT,
+            hovertemplate="%{x}<br>out=%{y}<extra></extra>"))
+        fig_deg.add_trace(go.Bar(x=labels_gc, y=indeg.tolist(), name="in-degree", marker_color=PAL_GC_IN,
+            hovertemplate="%{x}<br>in=%{y}<extra></extra>"))
+        apply_dark(fig_deg)
+        apply_title_legend_layout(
+            fig_deg,
+            title=f"Degree (significant @ q≤{gc_alpha}) — SUB, Pattern {sel_gc_pat}",
+            legend_y=-0.26,
+            legend_x=0.5,
+            legend_xanchor="center",
+            margin_top=62,
+            margin_bottom=100,
+            height=380,
+            barmode="group",
+            xaxis_title="Neuron",
+            yaxis_title="Degree",
+        )
+        _plotly_chart(fig_deg, use_container_width=True, config=PLOTLY_CONFIG)
+
+        # All-pattern summary
+        st.markdown("**Granger Summary — All Patterns**")
+        gc_sum_rows = []
+        for p in patterns:
+            ids_p = common_ids[p]
+            gt_t = [get_trial(gt_data,tid) for tid in ids_p]
+            sb_t = [get_trial(sub_data,tid) for tid in ids_p]
+            _, u_gt = gc_for_trials(gt_t, sc_valid, gc_bin, gc_lag, gc_alpha)
+            _, u_sb = gc_for_trials(sb_t, sc_valid, gc_bin, gc_lag, gc_alpha)
+            eg=int(u_gt.sum()-np.trace(u_gt)); es=int(u_sb.sum()-np.trace(u_sb))
+            it=int((u_gt&u_sb).sum()-np.trace(u_gt&u_sb))
+            un=int((u_gt|u_sb).sum()-np.trace(u_gt|u_sb))
+            j=it/un if un>0 else 1.0
+            gc_sum_rows.append({"pattern":p,"edges_GT":eg,"edges_SUB":es,"overlap":it,"jaccard":round(j,4)})
+        show_table(pd.DataFrame(gc_sum_rows))
+
+    # ──────────────────────────────────────────────────────────────
+    # FOOTER
+    # ──────────────────────────────────────────────────────────────
+    st.markdown("""
+    <div style="margin-top:3rem;padding:1rem;border-top:1px solid #21262d;
+        font-size:0.75rem;color:#8b949e;font-family:'IBM Plex Mono',monospace;">
+        XOR Network Metrics Dashboard · GT vs GT · Streamlit
     </div>
     """, unsafe_allow_html=True)
-
-    def gc_heatmap(M, mask, title):
-        display = np.where(mask, M, np.nan)
-        text = [[f"{v:.1f}" if not np.isnan(v) else "" for v in row] for row in display]
-        fig = go.Figure(go.Heatmap(
-            z=display.tolist(), x=labels_gc, y=labels_gc,
-            colorscale="Magma", text=text, texttemplate="%{text}",
-            hovertemplate="From=%{x}<br>To=%{y}<br>GC=%{z:.2f}<extra></extra>"))
-        apply_dark(fig)
-        fig.update_layout(
-            height=380,
-            title=_title_top(title),
-            margin=dict(l=55, r=20, t=58, b=50),
-        )
-        return fig
-
-    col1, col2 = st.columns(2)
-    with col1:
-        st.plotly_chart(gc_heatmap(eff_gt, use_gt, f"GT — Pattern {sel_gc_pat}"), use_container_width=True, config=PLOTLY_CONFIG)
-    with col2:
-        st.plotly_chart(gc_heatmap(eff_sb, use_sb, f"SUB — Pattern {sel_gc_pat}"), use_container_width=True, config=PLOTLY_CONFIG)
-
-    # degree bar
-    outdeg = use_sb.sum(0); indeg = use_sb.sum(1)
-    fig_deg = go.Figure()
-    fig_deg.add_trace(go.Bar(x=labels_gc, y=outdeg.tolist(), name="out-degree", marker_color=PAL_GC_OUT,
-        hovertemplate="%{x}<br>out=%{y}<extra></extra>"))
-    fig_deg.add_trace(go.Bar(x=labels_gc, y=indeg.tolist(), name="in-degree", marker_color=PAL_GC_IN,
-        hovertemplate="%{x}<br>in=%{y}<extra></extra>"))
-    apply_dark(fig_deg)
-    apply_title_legend_layout(
-        fig_deg,
-        title=f"Degree (significant @ q≤{gc_alpha}) — SUB, Pattern {sel_gc_pat}",
-        legend_y=-0.26,
-        legend_x=0.5,
-        legend_xanchor="center",
-        margin_top=62,
-        margin_bottom=100,
-        height=380,
-        barmode="group",
-        xaxis_title="Neuron",
-        yaxis_title="Degree",
-    )
-    st.plotly_chart(fig_deg, use_container_width=True, config=PLOTLY_CONFIG)
-
-    # All-pattern summary
-    st.markdown("**Granger Summary — All Patterns**")
-    gc_sum_rows = []
-    for p in patterns:
-        ids_p = common_ids[p]
-        gt_t = [get_trial(gt_data,tid) for tid in ids_p]
-        sb_t = [get_trial(sub_data,tid) for tid in ids_p]
-        _, u_gt = gc_for_trials(gt_t, sc_valid, gc_bin, gc_lag, gc_alpha)
-        _, u_sb = gc_for_trials(sb_t, sc_valid, gc_bin, gc_lag, gc_alpha)
-        eg=int(u_gt.sum()-np.trace(u_gt)); es=int(u_sb.sum()-np.trace(u_sb))
-        it=int((u_gt&u_sb).sum()-np.trace(u_gt&u_sb))
-        un=int((u_gt|u_sb).sum()-np.trace(u_gt|u_sb))
-        j=it/un if un>0 else 1.0
-        gc_sum_rows.append({"pattern":p,"edges_GT":eg,"edges_SUB":es,"overlap":it,"jaccard":round(j,4)})
-    show_table(pd.DataFrame(gc_sum_rows))
-
-# ──────────────────────────────────────────────────────────────
-# FOOTER
-# ──────────────────────────────────────────────────────────────
-st.markdown("""
-<div style="margin-top:3rem;padding:1rem;border-top:1px solid #21262d;
-    font-size:0.75rem;color:#8b949e;font-family:'IBM Plex Mono',monospace;">
-    XOR Network Metrics Dashboard · GT vs GT · Streamlit
-</div>
-""", unsafe_allow_html=True)
+    _run_for_each_sub(_render_granger)
 
