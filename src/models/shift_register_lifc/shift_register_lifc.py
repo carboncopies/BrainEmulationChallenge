@@ -1,4 +1,4 @@
-#!/Users/apple/fun_project/BrainEmulationChallenge/venv/bin/python
+#!/usr/bin/env python3
 # shift_register_lifc.py
 # 8-bit SIPO Shift Register (v12.1 - Single-Pulse Clock Sync)
 # Architecture: High-Tau Integration (Tau=500ms) for Priming + Single-Pulse Sync-CLK.
@@ -21,6 +21,15 @@ Parser.add_argument("-Port", default=8000, type=int, help="Port number to connec
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-Seed", default=0, type=int, help="Set random seed")
+Parser.add_argument("-WClkP", default=0.05, type=float, help="CLK→P synaptic weight")
+Parser.add_argument("-WDinP0", default=14.0, type=float, help="Din→P0 synaptic weight")
+Parser.add_argument("-WPNextP", default=0.05, type=float, help="P→nextP synaptic weight")
+Parser.add_argument("-WPQ", default=40.0, type=float, help="P→Q synaptic weight")
+Parser.add_argument("-InterstageDelay", default=495.0, type=float, help="Inter-stage onset delay (ms)")
+Parser.add_argument("-ClockPeriod", default=500.0, type=float, help="Clock period (ms)")
+Parser.add_argument("-MasterRm", default=5000.0, type=float, help="Master neuron membrane resistance (MOhm)")
+Parser.add_argument("-Pattern", default="1,1,0,0,1,1,0,1", type=str, help="Comma-separated 8-bit input pattern")
+Parser.add_argument("-Debug", default=False, action="store_true", help="Print Vm trace for all stages after run")
 Args = Parser.parse_args()
 
 # Initialize
@@ -81,7 +90,7 @@ def mkComp(name, sid, Rm=100, Cm=100):
 
 s_comps = {}
 for n in n_pos:
-    Rm, Cm = (5000, 100) if 'P' in n else (100, 100)
+    Rm, Cm = (Args.MasterRm, 100) if 'P' in n else (100, 100)
     s_comps[n] = mkComp(f'{n}_S_L', somas[n].ID, Rm, Cm)
 a_comps = {n: mkComp(f'{n}_A_L', axons[n].ID) for n in axons}
 
@@ -125,17 +134,17 @@ syn_b = {c: mkBox(f'S_{c}', n_pos['CLK']) for c in ax_conns}
 
 # Weights: CLK=14, Prime=14. Sum=28 > 20. CLK Alone=14 < 20.
 for i in range(stages):
-    mkRec(f'R_CP{i}', a_comps[f'CLK_P{i}'].ID, s_comps[f'P{i}'].ID, 'AMPA', 200, 14, 0, syn_b[f'CLK_P{i}'].ID)
-    mkRec(f'R_PQ{i}', a_comps[f'P{i}_Q{i}'].ID, s_comps[f'Q{i}'].ID, 'AMPA', 200, 40, 2, syn_b[f'P{i}_Q{i}'].ID)
-    if i == 0: mkRec('R_DP0', a_comps['Din_P0'].ID, s_comps['P0'].ID, 'AMPA', 200, 14, 0, syn_b['Din_P0'].ID)
-    if i < stages-1: mkRec(f'R_PP{i}', a_comps[f'P{i}_P{i+1}'].ID, s_comps[f'P{i+1}'].ID, 'AMPA', 200, 14, 495, syn_b[f'P{i}_P{i+1}'].ID)
+    mkRec(f'R_CP{i}', a_comps[f'CLK_P{i}'].ID, s_comps[f'P{i}'].ID, 'AMPA', 200, Args.WClkP, 0, syn_b[f'CLK_P{i}'].ID)
+    mkRec(f'R_PQ{i}', a_comps[f'P{i}_Q{i}'].ID, s_comps[f'Q{i}'].ID, 'AMPA', 200, Args.WPQ, 2, syn_b[f'P{i}_Q{i}'].ID)
+    if i == 0: mkRec('R_DP0', a_comps['Din_P0'].ID, s_comps['P0'].ID, 'AMPA', 200, Args.WDinP0, 0, syn_b['Din_P0'].ID)
+    if i < stages-1: mkRec(f'R_PP{i}', a_comps[f'P{i}_P{i+1}'].ID, s_comps[f'P{i+1}'].ID, 'AMPA', 200, Args.WPNextP, Args.InterstageDelay, syn_b[f'P{i}_P{i+1}'].ID)
 
-# Pattern: 1, 1, 0, 0, 1, 1, 0, 1
+# Pattern: 1, 1, 0, 0, 1, 1, 0, 1 (default; override with -Pattern)
 # Bit=1: Burst (10 spikes, 5ms). CLK: Single Pulse.
-pattern = [1, 1, 0, 0, 1, 1, 0, 1] 
+pattern = [int(b) for b in Args.Pattern.split(",")]
 t_fire = []
 for i, bit in enumerate(pattern):
-    t_clk = 200 + i * 500
+    t_clk = int(round(200 + i * Args.ClockPeriod))
     t_fire.append((t_clk, neurons['CLK'].ID))
     if bit:
         for b_idx in range(10): t_fire.append((t_clk + b_idx*5, neurons['Din'].ID))
@@ -144,12 +153,48 @@ MySim.SetSpecificAPTimes(t_fire)
 MySim.RecordAll(-1); MySim.RunAndWait(Runtime_ms=4500, timeout_s=300.0)
 rec = MySim.GetRecording()
 
-# Verify
+# Verify — window anchored to last CLK so Q0 burst (3ms post-CLK) and
+# Q7 burst (25ms pre-CLK via chain) both fall inside.
+t_last_clk = int(round(200 + (stages - 1) * Args.ClockPeriod))  # ms; equals Vm index because Dt=1ms
 bits = []
 for i in range(stages-1, -1, -1):
     vm = rec['Recording']['neurons'][str(neurons[f'Q{i}'].ID)]['Vm_mV']
-    has_spiked = any(v > -20 for v in vm[-500:]) 
+    has_spiked = any(v > -20 for v in vm[t_last_clk - 50 : t_last_clk + 100])
     bits.append(1 if has_spiked else 0)
+bits_correct = sum(b == e for b, e in zip(bits, pattern))
+accuracy = bits_correct / stages
 print(f"Observed final pattern [Q7-Q0]: {bits}")
-if bits == [1, 1, 0, 0, 1, 1, 0, 1]: print("VERIFICATION: [ PASS ]")
-else: print("VERIFICATION: [ FAIL ]")
+print(f"Expected               [Q7-Q0]: {pattern}")
+print(f"SCORE bits_correct={bits_correct} accuracy={accuracy:.3f}")
+
+if Args.Debug:
+    def _spike_ts(vm, thresh=-50):
+        in_sp, ts = False, []
+        for t, v in enumerate(vm):
+            if v > thresh and not in_sp: ts.append(t); in_sp = True
+            elif v <= thresh: in_sp = False
+        return ts
+
+    clk_ts = sorted(set(t for t, nid in t_fire if nid == neurons['CLK'].ID))
+    din_ts = sorted(set(t for t, nid in t_fire if nid == neurons['Din'].ID))
+    win_lo, win_hi = t_last_clk - 50, t_last_clk + 100
+    print(f"\n=== DEBUG TRACE ===")
+    print(f"CLK pulses (ms): {clk_ts}")
+    print(f"Din spikes (ms): {din_ts}")
+    print(f"Readout window:  [{win_lo}, {win_hi}) ms  (last CLK={t_last_clk})")
+    for i in range(stages):
+        exp = pattern[stages - 1 - i]
+        obs_i = bits[stages - 1 - i]
+        tag = '  *** WRONG' if obs_i != exp else ''
+        vm_p = rec['Recording']['neurons'][str(neurons[f'P{i}'].ID)]['Vm_mV']
+        vm_q = rec['Recording']['neurons'][str(neurons[f'Q{i}'].ID)]['Vm_mV']
+        sp_p = _spike_ts(vm_p)
+        sp_q = _spike_ts(vm_q)
+        pre_vm = [round(vm_p[ct - 1], 1) if ct > 0 else None for ct in clk_ts]
+        win_spikes_q = [t for t in sp_q if win_lo <= t < win_hi]
+        first_in_win = win_spikes_q[0] if win_spikes_q else 'none'
+        print(f"\nQ{i}  exp={exp}  obs={obs_i}{tag}")
+        print(f"  P{i} spikes (ms): {sp_p}")
+        print(f"  Q{i} spikes (ms): {sp_q}")
+        print(f"  Q{i} first spike in readout window: {first_in_win}")
+        print(f"  Vm_P{i} 1ms before each CLK {clk_ts}: {pre_vm}")
