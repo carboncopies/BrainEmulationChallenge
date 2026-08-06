@@ -109,6 +109,34 @@ def plot_t_Vm(t_ms, Vm_cells, savefolder: str, figspecs:dict={'figsize':(6,6),'l
     except:
         print('plot_t_Vm Error: Unable to store plot in '+savefolder+'/groundtruth-Vm')
 
+def plot_weights(weightmatrix, savefolder: str, nameappend:str, figspecs:dict={'figsize':(6,6),'linewidth':0.5, 'figext': 'pdf'}, vmin=None, vmax=None, cmap='viridis'):
+    import numpy as np
+
+    if vmin is None:
+        vmin = np.min(weightmatrix)
+    if vmax is None:
+        vmax = np.max(weightmatrix)
+
+    plt.figure(figsize=figspecs['figsize'])
+    im = plt.imshow(weightmatrix, origin='lower', aspect='auto',
+                    vmin=vmin, vmax=vmax, cmap=cmap)
+    plt.colorbar(im, label='Weight')
+    plt.xlabel('Postsynaptic neuron index')
+    plt.ylabel('Presynaptic neuron index')
+    plt.title('Synaptic Weight Matrix')
+    plt.tight_layout()
+    #plt.show()
+    plt.draw()
+
+    if not isdir(savefolder):
+        makedirs(savefolder)
+
+    filepath = savefolder+'/connections'+nameappend+'.'+figspecs['figext']
+    try:
+        plt.savefig(filepath, dpi=300)
+    except:
+        print('plot_weights Error: Unable to store plot in '+filepath)
+
 def plot_recorded(savefolder: str, data:dict, figspecs:dict={'figsize':(6,6),'linewidth':0.5}, cell_titles:list=None):
 
     t_ms, Vm_cells = extract_t_Vm(data)
