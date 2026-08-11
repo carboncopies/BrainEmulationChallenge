@@ -1,0 +1,339 @@
+# nesvbp-mushroombody
+# Derived directly from nesvbp-autoassociative (Randal A. Koene 20240628)
+# by editing region/population setup for a three-layer expand-converge
+# mushroom-body-style circuit:
+#   PN  (input, projection neurons from antennal lobe)  -- type: pyramidal
+#   KC  (expansion / pattern separation, Kenyon cells)  -- type: bipolar
+#   MBON (convergence, mushroom body output neurons)    -- type: pyramidal
+#
+# PASS 1 (this version): no chemical factors -- relying only on the
+# default cell_attraction "attracted to next region defined" behavior
+# (regions=PN KC MBON; -> PN axons attracted to KC, KC axons to MBON).
+# The detailed_chemical_factors/attractedto/attractors block from the
+# original reference is kept below, commented out, for PASS 2.
+#
+# Run this from the mushroombody model directory via the Python
+# reservoir script, e.g.:
+#   ./drosophila_resevoir.py -modelfile nesvbp-mushroombody
+
+# Duration, granularity, deterministic
+# Granularity dt is expressed in seconds
+
+days=21;
+dt=100;
+randomseed=0;
+enable_completion_requirements=false;
+use_soma_detailing=true;
+
+# SOMA INITIALIZATION PARAMETERS
+# Unchanged from nesvbp-autoassociative. Applies to pyramidal-typed
+# populations (PN, MBON) -- KC is bipolar-typed and unaffected by
+# pyramidal-specific basal/apical settings.
+
+pia_attraction_repulsion_hypothesis=true;
+
+use_specified_basal_direction=true;
+specified_basal_direction_relx=0.001;
+specified_basal_direction_rely=0;
+specified_basal_direction_relz=-1;
+
+pyramidal.min_basal=4;
+pyramidal.max_basal=8;
+
+pyramidal.basal.minangle=0;
+pyramidal.basal.maxangle=1.5;
+
+pyramidal.basal.force_model=surface_division;
+
+# Min-Max range of initial segment length (L0)
+# For dendrites, the default is 9-11 um.
+all_axons.L0=15,25;
+
+# SOMA PLACEMENT PARAMETERS
+# Three regions instead of the reference's single "In" region.
+# neurons=0 (general pool) plus each <region>.neurons=0 below ensures
+# population sizes come entirely from the explicit <region>.<type>
+# declarations.
+#
+# GEOMETRY NOTE: region spacing (PN centerZ=0, KC centerZ=-500,
+# MBON centerZ=-1000) is scaled so that edge-to-edge gaps (~570-630 um)
+# stay within plausible axon reach at this file's all_axons elongation
+# rate over 21 days (~945 um naive max), matching the ~1.5-1.7x
+# reach/gap margin used in the manual's own validated Ch.7 example.
+# An earlier draft spaced regions ~1300-1550 um apart, which the same
+# calculation shows axons could NOT have plausibly crossed.
+
+shape=regions;
+regions=PN KC MBON;
+neurons=0;
+
+# PN layer: input population, acts as "antennal lobe output"
+PN.shape=disc;
+PN.neurons=0;
+PN.pyramidal=50;
+PN.minneuronseparation=40;
+PN.centerZ=0;
+PN.shape.radius=300;
+PN.shape.thickness=60;
+
+# KC layer: expansion population. bipolar type chosen (min_basal=
+# max_basal=1 by default) to approximate the real KC's minimal,
+# claw-like dendritic elaboration, rather than a branchy pyramidal-
+# style tree. Spread over a bigger volume than PN/MBON so each KC's
+# small dendritic field only overlaps a handful of PN axon terminals.
+KC.shape=disc;
+KC.neurons=0;
+KC.bipolar=200;
+KC.minneuronseparation=25;
+KC.centerZ=-500;
+KC.shape.radius=700;
+KC.shape.thickness=200;
+
+# MBON layer: convergence population. Kept spatially small relative
+# to the KC axon field reaching it, since KC->MBON convergence should
+# be dense.
+MBON.shape=disc;
+MBON.neurons=0;
+MBON.pyramidal=34;
+MBON.minneuronseparation=60;
+MBON.centerZ=-1000;
+MBON.shape.radius=300;
+MBON.shape.thickness=60;
+
+# ENVIRONMENT PHYSICS
+# Unchanged from nesvbp-autoassociative. Sphere radius (50mm) and
+# center are both far outside our region span (Z=0 to Z=-1000), so
+# this boundary should be effectively non-constraining for our
+# circuit's scale -- kept for fidelity to the validated reference
+# rather than removed.
+environment_physics=pia;
+pia.physical_boundary=spherical;
+pia.spherical_center=0,0,-50000;
+pia.spherical_radius=50000;
+pia.spherical_maxrange=100;
+pia.spherical_c_repulse=0.2;
+
+# UNIVERSAL SET ELONGATION PARAMETERS
+# Unchanged from nesvbp-autoassociative.
+arbor_elongation_model=van_Pelt;
+growth_F=0.39;
+growth_nu0=0.00013889;
+F_competes_with=same_arbor;
+terminal_segment_elongation_model=BESTL;
+tsem.PDF=delta;
+elongation_rate_initialization_model=length_distribution;
+
+# UNIVERSAL SET BRANCHING MODEL PARAMETERS
+branching_model=van_Pelt;
+min_node_interval=2.0;
+branch_angle_model=Balanced_Forces;
+
+# TURNING MODEL PARAMETERS
+TSTM=linear_rate;
+turn_separation=5.0;
+
+# DIRECTION MODEL PARAMETERS
+direction_model=segment_history_tension;
+veeranglemin=0.0;
+veeranglemax=0.75;
+dirhistory_selection=none;
+
+# AXONS DIRECTION MODEL PARAMETERS
+# By default, axons of neurons in one region are attracted to the
+# centroid of the NEXT region defined in "regions=" above: here that
+# means PN axons -> KC, and KC axons -> MBON. This is PASS 1's only
+# steering mechanism (no chemical factors yet).
+all_axons.direction_model=segment_history_tension;
+all_axons.dm_label=axondm;
+all_axons.axondm.dm_weight=0.2;
+all_axons.axondm.direction_model=cell_attraction;
+
+# --- PASS 2 (not active yet): chemical-factor-based attraction ---
+# Uncomment to compare against the plain cell_attraction result above.
+# Factor label (e.g. NGF_A) presumed arbitrary; unconfirmed -- ask
+# before relying on this for real.
+#detailed_chemical_factors=true;
+#soma_attraction_weight=0.0;
+#PN.attractedto=NGF_A;
+#KC.attractors=NGF_A;
+#KC.attractedto=NGF_B;
+#MBON.attractors=NGF_B;
+
+# AXONS ELONGATION MODEL PARAMETERS
+# Unchanged from nesvbp-autoassociative. ~45 um/day.
+all_axons.arbor_elongation_model=van_Pelt;
+all_axons.growth_nu0=0.0005208333;
+all_axons.growth_F=0.16;
+all_axons.F_competes_with=same_arbor;
+all_axons.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+all_axons.eri.PDF=normal;
+all_axons.eri.PDF.mean=0.00021367265496506256;
+all_axons.eri.PDF.std=0.0003978;
+
+# AXONS BRANCHING MODEL PARAMETERS
+# Unchanged from nesvbp-autoassociative.
+all_axons.branching_model=van_Pelt;
+all_axons.B_inf=13.21658;
+all_axons.E_competes_with=same_arbor;
+all_axons.E=0.319251;
+all_axons.tau=1681541;
+all_axons.TSBM=van_Pelt;
+all_axons.S=-0.20538;
+
+# DENDRITE ELONGATION MODEL PARAMETERS
+# Unchanged base values from nesvbp-autoassociative (~7.9 um/day,
+# mean 6 um post-branch length). KC/MBON-specific overrides follow
+# below to differentiate "claw" vs "bushy" dendrite morphology.
+all_dendrites.terminal_segment_elongation_model=nonnorm_BESTL;
+all_dendrites.tsem.PDF=delta;
+all_dendrites.tsem.PDF.value=0;
+all_dendrites.tsem.branch.PDF=normal;
+all_dendrites.tsem.branch.PDF.mean=6;
+all_dendrites.tsem.branch.PDF.std=5;
+all_dendrites.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+all_dendrites.eri.PDF=normal;
+all_dendrites.eri.PDF.mean=0.0000914464;
+all_dendrites.eri.PDF.std=0.0000365786;
+
+# DENDRITES BRANCHING MODEL PARAMETERS
+# Unchanged base values from nesvbp-autoassociative.
+all_dendrites.branching_model=van_Pelt;
+all_dendrites.B_inf=2.52;
+all_dendrites.tau=259680;
+all_dendrites.E_competes_with=same_arbor;
+all_dendrites.E=0.73;
+all_dendrites.TSBM=van_Pelt;
+
+# MUSHROOM-BODY-SPECIFIC DEVIATIONS FROM THE REFERENCE:
+# KC dendrites deliberately short/few branches -> "claw" morphology.
+KC.all_dendrites.eri.PDF.mean=0.00003;
+KC.all_dendrites.B_inf=1.2;
+
+# MBON dendrites deliberately larger/bushier -> dense convergence target.
+MBON.all_dendrites.eri.PDF.mean=0.00012;
+MBON.all_dendrites.B_inf=3.5;
+
+# COMMAND SUBSTITUTION
+substitute=APD:all_apical_pyramidal_dendrites;
+
+# APICAL DENDRITE TRUNK FIBER BRANCHING MODELS
+# Unchanged from nesvbp-autoassociative. Applies to PN and MBON
+# (pyramidal-typed); KC (bipolar-typed) has no apical dendrite.
+APD.branching_model=van_Pelt;
+APD.B_inf=0.1;
+APD.tau=400000;
+APD.E=0;
+APD.E_competes_with=same_arbor;
+
+# APICAL DENDRITE TRUNK FIBER ELONGATION MODELS
+APD.terminal_segment_elongation_model=pyrAD_BESTLNN;
+APD.tsem.trunklength.PDF=normal;
+APD.tsem.trunklength.PDF.mean=80;
+APD.tsem.trunklength.PDF.std=2;
+APD.tsem.prefix=pyr1;
+APD.tsem.PDF=delta;
+APD.tsem.PDF.value=0;
+APD.tsem.branch.PDF=normal;
+APD.tsem.branch.PDF.mean=6;
+APD.tsem.branch.PDF.std=1;
+APD.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+APD.eri.PDF=normal;
+APD.eri.PDF.mean=0.0010208333;
+APD.eri.PDF.std=0.000256;
+
+# APICAL DENDRITE TRUNK FIBER DIRECTION MODELS
+APD.direction_model=segment_history_tension;
+APD.veeranglemin=0.0;
+APD.veeranglemax=0.1;
+
+# PLACEMENT OF OBLIQUE BRANCHES ON APICAL DENDRITES
+APD.tsem.obliques.PDF=normal;
+APD.tsem.obliques.PDF.mean=5;
+APD.tsem.obliques.PDF.std=1;
+APD.tsem.obliqueangle.PDF=normal;
+APD.tsem.obliqueangle.PDF.mean=0;
+APD.tsem.obliqueangle.PDF.std=1;
+
+# APICAL TUFT FIBERS ELONGATION MODELS
+pyr1.tuft.terminal_segment_elongation_model=nonnorm_BESTL;
+pyr1.tuft.tsem.branch.PDF=normal;
+pyr1.tuft.tsem.branch.PDF.mean=6;
+pyr1.tuft.tsem.branch.PDF.std=1;
+pyr1.tuft.tsem.PDF=delta;
+pyr1.tuft.tsem.PDF.value=0;
+pyr1.tuft.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+pyr1.tuft.eri.PDF=normal;
+pyr1.tuft.eri.PDF.mean=0.0003889;
+pyr1.tuft.eri.PDF.std=0.000004;
+
+# APICAL TUFT FIBERS BRANCHING MODELS
+pyr1.tuft.TSBM=van_Pelt_specBM;
+pyr1.tuft.S=1;
+pyr1.tuft.branching_model=van_Pelt;
+pyr1.tuft.B_inf=25;
+pyr1.tuft.tau=400000;
+pyr1.tuft.E=0.3;
+pyr1.tuft.E_competes_with=same_arbor;
+
+# APICAL OBLIQUE FIBERS ELONGATION MODELS
+pyr1.oblique.terminal_segment_elongation_model=nonnorm_BESTL;
+pyr1.oblique.tsem.branch.PDF=normal;
+pyr1.oblique.tsem.branch.PDF.mean=6;
+pyr1.oblique.tsem.branch.PDF.std=1;
+pyr1.oblique.tsem.PDF=delta;
+pyr1.oblique.tsem.PDF.value=0;
+pyr1.oblique.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+pyr1.oblique.eri.PDF=normal;
+pyr1.oblique.eri.PDF.mean=0.0002;
+pyr1.oblique.eri.PDF.std=0.000001;
+
+# APICAL OBLIQUE FIBERS BRANCHING MODELS
+pyr1.oblique.TSBM=van_Pelt_specBM;
+pyr1.oblique.S=1;
+pyr1.oblique.branching_model=van_Pelt;
+pyr1.oblique.B_inf=1.5;
+pyr1.oblique.tau=500000;
+pyr1.oblique.E=0.3;
+pyr1.oblique.E_competes_with=same_arbor;
+
+# GENERAL SIMULATION PARAMETERS
+fibreswithturns=true;
+branchatinitlength=false;
+branchinsegment=true;
+Abranchesatturns=false;
+Dbranchesatturns=false;
+candidate_synapses=true;
+
+fibrediameter=true;
+neurite_diameter_model=rall;
+
+# CANDIDATE SYNAPSE MAX DISTANCE, PER PRE/POST TYPE PAIR
+# The reference example only ever connects pyramidal<->pyramidal and
+# pyramidal<->interneuron pairs (D_synmax default of 1um only covers
+# pyramidal->pyramidal). Our circuit introduces KC as bipolar-typed,
+# so PN(pyramidal)->KC(bipolar) and KC(bipolar)->MBON(pyramidal) pairs
+# need their own explicit D_synmax or candidate synapses may not form
+# between these type pairs at all.
+D_synmax.pyramidal.bipolar=8;
+D_synmax.bipolar.pyramidal=8;
+D_synmax.pyramidal.pyramidal=6;
+
+# SIMULATION RUNTIME AND SAMPLING PARAMETERS
+sample_dt=4320;
+statsattr_collect_statistics=true;
+
+# TEXTUAL OUTPUT DATA PARAMETERS
+outattr_show_progress=true;
+outattr_make_full_Txt=true;
+outattr_Txt_sequence=false;
+outattr_Txt_separate_files=true;
+outattr_track_synaptogenesis=true;
+outattr_track_nodegenesis=true;
+outattr_show_stats=true;
+
+NES_output=true;
+
+# GRAPHICAL VISUALIZATION PARAMETERS
+outattr_show_figure=false;
+figattr_make_full_Fig=false;
+figuresequence=false;
