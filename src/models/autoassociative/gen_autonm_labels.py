@@ -69,6 +69,7 @@ def get_Args():
 # Load samples parameter values from Excel file, return data frame and column identifiers
 def get_sample_data(Args)->tuple:
     df = pds.read_excel(open(Args.excel,'rb'))
+    df.columns = df.columns.str.strip() # Sheet headers can carry stray whitespace (e.g. 'dm.weight ').
     print(df.head(10))
     print(df.shape)
     return df, df.columns
