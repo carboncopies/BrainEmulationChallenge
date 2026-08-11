@@ -84,8 +84,9 @@ else:
 
 # Modify Netmorph model content based on overrides
 ARCHITECTURE_MODIFY = '''
-In.pyramidal=%d;
-In.interneuron=%d;
+Input.pyramidal=%d;
+V1.pyramidal=%d;
+Interneuron.interneuron=%d;
 '''
 
 NETMORPH_OBJ = '''
@@ -105,17 +106,11 @@ days=%d;
 
 FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
-PATTERNSIZE=8
-CUESIZE=4
-EMBEDMULTIPLE=2
+N_INPUT = 64    # 8x8 input patch
+N_V1 = 100      # V1 excitatory units
+N_INTERNEURON = 1  # pooled interneuron
 
-# The following requisite combined peak conductance available
-# between each pre-post pair of pyramidal neurons was derived
-# from results in LIFtest.py.
-RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT = 27.44
-PREPOSTGPEAKSUMTARGET = RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT / CUESIZE
-
-modelcontent += ARCHITECTURE_MODIFY % (EMBEDMULTIPLE*PATTERNSIZE*Args.Patterns, PATTERNSIZE*Args.Patterns)
+modelcontent += ARCHITECTURE_MODIFY % (N_INPUT, N_V1, N_INTERNEURON)
 if Args.DoOBJ:
     modelcontent += NETMORPH_OBJ % (Args.BevelDepth, Args.BevelDepth)
 if Args.DoBlend:

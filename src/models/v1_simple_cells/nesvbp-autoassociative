@@ -55,17 +55,37 @@ all_axons.L0=15,25;
 # is simply the sum of pyramidal neurons and interneurons.
 
 shape=regions;
-regions=In;
+regions=Input,V1,Interneuron;
 
-# 3D appearance of each region
-In.shape=disc;
-In.neurons=0;
-In.pyramidal=16;
-In.interneuron=16;
-In.minneuronseparation=10;
-In.centerZ=-300;
-In.shape.radius=100;
-In.shape.thickness=20;
+# Input layer: standing in for the 8x8 patch (64 "pixels")
+Input.shape=disc;
+Input.neurons=0;
+Input.pyramidal=64;
+Input.interneuron=0;
+Input.minneuronseparation=10;
+Input.centerZ=-300;
+Input.shape.radius=100;
+Input.shape.thickness=20;
+
+# V1 layer: 100 excitatory units
+V1.shape=disc;
+V1.neurons=0;
+V1.pyramidal=100;
+V1.interneuron=0;
+V1.minneuronseparation=10;
+V1.centerZ=-200;
+V1.shape.radius=100;
+V1.shape.thickness=20;
+
+# Interneuron layer: 1 pooled inhibitory unit
+Interneuron.shape=disc;
+Interneuron.neurons=0;
+Interneuron.pyramidal=0;
+Interneuron.interneuron=1;
+Interneuron.minneuronseparation=10;
+Interneuron.centerZ=-150;
+Interneuron.shape.radius=50;
+Interneuron.shape.thickness=20;
 
 # REGION SPECIFIC AND NEURON TYPE SPECIFIC MODEL PARAMETERS
 
@@ -143,8 +163,21 @@ all_axons.axondm.direction_model=cell_attraction;
 detailed_chemical_factors=true;
 soma_attraction_weight=0.0;
 
-In.attractedto=NGF_A;
-In.attractors=NGF_A;
+# Pathway 1: Input -> V1 (feedforward)
+Input.attractedto=NGF_V1;
+V1.attractors=NGF_V1;
+
+# Pathway 2: V1 -> V1 (lateral, short-range)
+V1.attractedto=NGF_V1lateral;
+V1.attractors=NGF_V1lateral;
+
+# Pathway 3: V1 -> Interneuron (excitatory drive)
+V1.attractedto=NGF_Interneuron;
+Interneuron.attractors=NGF_Interneuron;
+
+# Pathway 4: Interneuron -> V1 (inhibitory feedback)
+Interneuron.attractedto=NGF_V1fb;
+V1.attractors=NGF_V1fb;
 
 #idx.In.pyramidal.0.attractedto=NGF_A;
 
@@ -176,12 +209,12 @@ all_axons.TSBM=van_Pelt;
 all_axons.S=-0.20538;
 
 # In REGION AXON BRANCHING MODEL (attempting more branches)
-In.all_axons.branching_model=van_Pelt;
-In.all_axons.B_inf=10.0;
-In.all_axons.tau=319680;
-In.all_axons.E_competes_with=same_arbor;
-In.all_axons.E=0.5;
-In.all_axons.TSBM=van_Pelt;
+#In.all_axons.branching_model=van_Pelt;
+#In.all_axons.B_inf=10.0;
+#In.all_axons.tau=319680;
+#In.all_axons.E_competes_with=same_arbor;
+#In.all_axons.E=0.5;
+#In.all_axons.TSBM=van_Pelt;
 
 # DENDRITE ELONGATION MODEL PARAMETERS
 # Elongation of growth cones of basal dendrites is governed by a
