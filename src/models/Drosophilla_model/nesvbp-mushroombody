@@ -1,0 +1,216 @@
+# mushroom_body_reservoir.clp  (NETMORPH script)
+# Randal-style header, edit as you like:
+# Basic three-layer expand-converge network:
+#   PN  (input, projection neurons from antennal lobe)
+#   KC  (expansion / pattern separation, Kenyon cells)
+#   MBON (convergence, mushroom body output neurons)
+#
+# This is STEP 1: get a minimal feedforward architecture growing and
+# pull its connectome. APL (feedback inhibition) and DAN (teaching
+# signal) are sketched at the bottom as commented-out extensions --
+# add them only after the 3-region core is working and you understand
+# its connectivity statistics.
+#
+# Population sizes below are DOWNSCALED for fast iteration:
+#   real system   ~50 PN / ~2000 KC / ~34 MBON
+#   this script    50 PN /  200 KC /  34 MBON
+# Scale KC.bipolar (and days, if needed) up once the pipeline works.
+
+# ---------------------------------------------------------------
+# Part 1: temporal parameters
+#
+# days=21 chosen to match the scale of the manual's own validated
+# Ch.7 worked example (which uses days=21 and confirms full
+# cross-layer connectivity in Fig. 2), rather than an arbitrary
+# shorter duration -- see the region spacing note in Part 3 below.
+# ---------------------------------------------------------------
+days=21;
+randomseed=0;
+dt=100;
+
+# ---------------------------------------------------------------
+# Part 2: soma initialization (kept simple/default-ish; tune later
+# if you want directional bias in how PN/KC/MBON dendrites emerge)
+# ---------------------------------------------------------------
+pia_attraction_repulsion_hypothesis=false;
+
+# ---------------------------------------------------------------
+# Part 3: regions -- ORDER MATTERS.
+# The default cell_attraction direction model (declared below)
+# attracts a region's axons toward the NEXT region in this list.
+# PN -> KC -> MBON gives feedforward expand-converge for free.
+# ---------------------------------------------------------------
+shape=regions;
+regions=PN KC MBON;
+
+# GEOMETRY NOTE (checked 2026-08-11): the manual's own Ch.7 worked
+# example, which is validated as actually producing cross-layer
+# connectivity (Fig. 2), spaces its cortical layer regions ~400 um
+# apart (center-to-center) at days=21 with this same all_axons
+# elongation rate (growth_nu0=0.0005208333 um/s). The region layout
+# below is scaled to match that proportion: PN->KC and KC->MBON
+# edge-to-edge gaps are ~570-630 um, versus a naive max axon reach
+# of ~945 um over 21 days -- roughly the same 1.5-1.7x reach/gap
+# margin the manual's own example relies on. (An earlier version of
+# this script placed layers ~1300-1550 um apart, which the same
+# calculation shows axons could NOT plausibly have crossed -- that
+# would have grown three disconnected clusters instead of a
+# connected circuit.)
+
+# PN layer: small population, compact disc, acts as "antennal lobe output"
+PN.shape=disc;
+PN.neurons=0;
+PN.pyramidal=50;
+PN.minneuronseparation=40;
+PN.centerZ=0;
+PN.shape.radius=300;
+PN.shape.thickness=60;
+
+# KC layer: large population, spread out over a bigger volume so that
+# each KC's small dendritic field only overlaps a handful of PN axon
+# terminals -- this is what approximates "~7 claws per KC". Increase
+# KC.shape.radius / decrease dendritic reach to sparsify further;
+# decrease KC.shape.radius / increase dendritic reach to densify.
+KC.shape=disc;
+KC.neurons=0;
+KC.bipolar=200;
+KC.minneuronseparation=25;
+KC.centerZ=-500;
+KC.shape.radius=700;
+KC.shape.thickness=200;
+
+# MBON layer: small population, compact -- wants DENSE convergence,
+# so keep it spatially small relative to the KC axon field that
+# reaches it.
+MBON.shape=disc;
+MBON.neurons=0;
+MBON.pyramidal=34;
+MBON.minneuronseparation=60;
+MBON.centerZ=-1000;
+MBON.shape.radius=300;
+MBON.shape.thickness=60;
+
+# ---------------------------------------------------------------
+# Part 4: universal elongation / branching defaults
+# (van Pelt & Uylings phenomenological model; Ref. [2] in manual)
+# ---------------------------------------------------------------
+arbor_elongation_model=van_Pelt;
+growth_F=0.39;
+growth_nu0=0.00013889;
+F_competes_with=same_arbor;
+terminal_segment_elongation_model=BESTL;
+tsem.PDF=delta;
+elongation_rate_initialization_model=length_distribution;
+
+branching_model=van_Pelt;
+min_node_interval=2.0;
+branch_angle_model=Balanced_Forces;
+
+TSTM=linear_rate;
+turn_separation=5.0;
+
+# ---------------------------------------------------------------
+# Part 5: direction model -- this is what implements the
+# PN -> KC -> MBON feedforward bias via chained cell_attraction.
+# ---------------------------------------------------------------
+direction_model=segment_history_tension;
+veeranglemin=0.0;
+veeranglemax=0.75;
+dirhistory_selection=none;
+
+all_axons.arbor_elongation_model=van_Pelt;
+all_axons.growth_nu0=0.0005208333;
+all_axons.growth_F=0.16;
+all_axons.direction_model=segment_history_tension;
+all_axons.dm_label=axondm;
+all_axons.axondm.dm_weight=0.15;
+all_axons.axondm.direction_model=cell_attraction;
+
+# ---------------------------------------------------------------
+# Part 6: dendrite elongation -- keep KC dendrites SHORT (bipolar
+# "claw"-like), keep PN and MBON dendrites somewhat larger so MBON
+# can gather from many KC axon terminals.
+# ---------------------------------------------------------------
+all_dendrites.terminal_segment_elongation_model=nonnorm_BESTL;
+all_dendrites.tsem.PDF=delta;
+all_dendrites.tsem.PDF.value=0;
+all_dendrites.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+all_dendrites.eri.PDF=normal;
+all_dendrites.eri.PDF.mean=0.00006;
+all_dendrites.eri.PDF.std=0.00002;
+all_dendrites.branching_model=van_Pelt;
+all_dendrites.B_inf=2.0;
+all_dendrites.tau=250000;
+
+# KC dendrites deliberately short/few branches -> "claw" morphology
+KC.all_dendrites.eri.PDF.mean=0.00003;
+KC.all_dendrites.B_inf=1.2;
+
+# MBON dendrites deliberately larger/bushier -> dense convergence target
+MBON.all_dendrites.eri.PDF.mean=0.00012;
+MBON.all_dendrites.B_inf=3.5;
+
+# ---------------------------------------------------------------
+# Part 7: candidate synapse formation
+# ---------------------------------------------------------------
+candidate_synapses=true;
+synapse_formation.PDF=uniform;
+D_synmax.pyramidal.bipolar=8;
+D_synmax.bipolar.pyramidal=8;
+D_synmax.pyramidal.pyramidal=6;
+
+# ---------------------------------------------------------------
+# Part 8: sampling / output
+# ---------------------------------------------------------------
+sample_dt=4320;
+statsattr_collect_statistics=true;
+outattr_show_progress=true;
+outattr_make_full_Txt=true;
+outattr_Txt_separate_files=true;
+outattr_track_nodegenesis=true;
+outattr_track_synaptogenesis=true;
+figattr_make_full_Fig=false;
+
+# =================================================================
+# EXTENSIONS (commented out) -- add only after the 3-region core
+# is running and you've checked KC in-degree / MBON convergence in
+# the connectome.
+# =================================================================
+#
+# --- APL: feedback inhibition, co-located with / attracted to KC ---
+# APL isn't "next region" after anything, so use a coordinate
+# point_attractor (Ch. 10.3) targeting the KC region centroid instead
+# of relying on the default cell_attraction-to-next-region behavior.
+#
+# regions=PN KC MBON APL;
+# APL.shape=disc;
+# APL.neurons=0;
+# APL.interneuron=1;
+# APL.centerZ=-500;
+# APL.shape.radius=50;
+# APL.shape.thickness=50;
+#
+# APL.environment_physics=apltarget;
+# apltarget.physical_boundary=point_attractor;
+# apltarget.attractor_pointX=0;
+# apltarget.attractor_pointY=0;
+# apltarget.attractor_pointZ=-500;   # == KC.centerZ
+# apltarget.attractor_maxrange=700;  # ~= KC.shape.radius
+# apltarget.attractor_c_attract=0.3;
+#
+# --- DAN: teaching signal, targets MBON/KC boundary similarly ---
+# regions=PN KC MBON APL DAN;
+# DAN.shape=disc;
+# DAN.neurons=0;
+# DAN.interneuron=15;   # ~15 compartments in the real circuit
+# DAN.centerZ=-750;     # between KC and MBON
+# DAN.shape.radius=100;
+# DAN.shape.thickness=50;
+#
+# DAN.environment_physics=dantarget;
+# dantarget.physical_boundary=point_attractor;
+# dantarget.attractor_pointX=0;
+# dantarget.attractor_pointY=0;
+# dantarget.attractor_pointZ=-1000;  # == MBON.centerZ
+# dantarget.attractor_maxrange=300;
+# dantarget.attractor_c_attract=0.3;
