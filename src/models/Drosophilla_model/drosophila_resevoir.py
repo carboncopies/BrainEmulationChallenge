@@ -66,7 +66,7 @@ Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-NumPN", default=50, type=int, help="Number of PN (projection neuron / input) cells")
-Parser.add_argument("-NumKC", default=200, type=int, help="Number of KC (Kenyon cell / expansion) cells")
+Parser.add_argument("-NumKC", default=2000, type=int, help="Number of KC (Kenyon cell / expansion) cells")
 Parser.add_argument("-NumMBON", default=34, type=int, help="Number of MBON (output / convergence) cells")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
@@ -228,12 +228,8 @@ vbp.UpdateExpsDB(DBdata)
 # ]
 try:
     connections_dict = MySim.GetConnectome()
-    if not vbp.PlotAndStoreConnections(connections_dict, 'output', 'mushroom_body_reservoir_weights', FIGSPECS):
-        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity weights')
-    if not vbp.PlotAndStoreConnections(connections_dict, 'output', 'mushroom_body_reservoir_numreceptors', FIGSPECS, usematrix='numreceptors'):
-        vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity number of receptors')
-except:
-    vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome')
+except Exception as e:
+    vbp.ErrorExit(DBdata, 'NES error: failed to receive model connectome: '+repr(e))
 
 
 def get_population_indices(connections_dict:dict, num_pn:int, num_kc:int, num_mbon:int)->dict:

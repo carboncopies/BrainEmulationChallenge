@@ -1,0 +1,43 @@
+{
+  "reservoir": [
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260811133443"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "NetmorphOutput/7c4cba0e-d0f0-4bcb-8ca7-85d1b08887a0/"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260811133443"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "NetmorphOutput/7c4cba0e-d0f0-4bcb-8ca7-85d1b08887a0/",
+        "error": "NES error: failed to receive model connectome"
+      }
+    }
+  ]
+}

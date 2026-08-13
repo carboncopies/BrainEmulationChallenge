@@ -83,10 +83,10 @@ PN.shape.thickness=60;
 # small dendritic field only overlaps a handful of PN axon terminals.
 KC.shape=disc;
 KC.neurons=0;
-KC.bipolar=200;
+KC.bipolar=2000;
 KC.minneuronseparation=25;
 KC.centerZ=-500;
-KC.shape.radius=700;
+KC.shape.radius=400;
 KC.shape.thickness=200;
 
 # MBON layer: convergence population. Kept spatially small relative
