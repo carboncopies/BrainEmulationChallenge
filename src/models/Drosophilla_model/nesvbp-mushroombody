@@ -83,7 +83,7 @@ PN.shape.thickness=60;
 # small dendritic field only overlaps a handful of PN axon terminals.
 KC.shape=disc;
 KC.neurons=0;
-KC.bipolar=2000;
+KC.bipolar=200;
 KC.minneuronseparation=25;
 KC.centerZ=-500;
 KC.shape.radius=400;
@@ -152,12 +152,12 @@ all_axons.axondm.direction_model=cell_attraction;
 # Uncomment to compare against the plain cell_attraction result above.
 # Factor label (e.g. NGF_A) presumed arbitrary; unconfirmed -- ask
 # before relying on this for real.
-#detailed_chemical_factors=true;
-#soma_attraction_weight=0.0;
-#PN.attractedto=NGF_A;
-#KC.attractors=NGF_A;
-#KC.attractedto=NGF_B;
-#MBON.attractors=NGF_B;
+detailed_chemical_factors=true;
+soma_attraction_weight=0.0;
+PN.attractedto=NGF_A;
+KC.attractors=NGF_A;
+KC.attractedto=NGF_B;
+MBON.attractors=NGF_B;
 
 # AXONS ELONGATION MODEL PARAMETERS
 # Unchanged from nesvbp-autoassociative. ~45 um/day.
