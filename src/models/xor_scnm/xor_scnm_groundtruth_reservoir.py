@@ -145,8 +145,10 @@ print(" -- Netmorph output files directory is "+str(RunResponse["NetmorphOutputD
 try:
     MySim.ModelSave(Args.modelname)
     print(" -- Neuronal Circuit Model saved as "+Args.modelname)
-except:
-    vbp.ErrorExit(DBdata, 'NES error: Model save failed')
+except Exception as e:
+    print(" -- DEBUG: ModelSave exception detail:", repr(e))
+    vbp.ErrorExit(DBdata, 'NES error: Model save failed') 
+    
 
 # Retrieve gzipped Blender file if one was requested
 if Args.DoBlend:
