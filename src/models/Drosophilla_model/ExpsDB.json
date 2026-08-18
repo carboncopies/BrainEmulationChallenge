@@ -38,6 +38,25 @@
         "NetmorphOutputDirectory": "NetmorphOutput/7c4cba0e-d0f0-4bcb-8ca7-85d1b08887a0/",
         "error": "NES error: failed to receive model connectome"
       }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "2000",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260812224333"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "NetmorphOutput/c4fae2a3-4d64-4066-967c-c4411c2cfe2a/"
+      }
     }
   ]
 }
