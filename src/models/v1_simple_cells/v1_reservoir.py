@@ -1,5 +1,5 @@
 #!../../../venv/bin/python
-# autoassociative_reservoir.py
+# v1_reservoir.py
 # Randal A. Koene, 20250620, 20250811
 
 # This script is STEP 1 in the creation of realistic
@@ -40,8 +40,8 @@ Parser = argparse.ArgumentParser(description="BrainGenix-API Simple Python Test 
 Parser.add_argument("-Host", default="localhost", type=str, help="Host to connect to")
 Parser.add_argument("-Port", default=8000, type=int, help="Port number to connect to")
 Parser.add_argument("-UseHTTPS", default=False, type=bool, help="Enable or disable HTTPS")
-Parser.add_argument("-modelfile", default="nesvbp-autoassociative", type=str, help="File to read model instructions from")
-Parser.add_argument("-modelname", default="autoassociative", type=str, help="Name of neuronal circuit model to save")
+Parser.add_argument("-modelfile", default="nesvbp-v1", type=str, help="File to read model instructions from")
+Parser.add_argument("-modelname", default="v1", type=str, help="Name of neuronal circuit model to save")
 Parser.add_argument("-growdays", default=20, type=int, help="Number of days Netmorph growth")
 Parser.add_argument("-DoOBJ", action='store_true', help="Netmorph should produce OBJ output")
 Parser.add_argument("-DoBlend", action='store_true', help="Netmorph should produce Blender output")
@@ -105,6 +105,9 @@ days=%d;
 '''
 
 FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
+
+#not a 100% on this number yet
+PREPOSTGPEAKSUMTARGET = 39
 
 N_INPUT = 64    # 8x8 input patch
 N_V1 = 100      # V1 excitatory units
