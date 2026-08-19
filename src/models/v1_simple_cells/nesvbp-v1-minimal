@@ -155,45 +155,19 @@ dirhistory_selection=none;
 # other region of neurons. By default, the axons of neurons in one
 # region are attracted to the neurons in the next region defined,
 # here from In to Mid and from Mid to Out.
-all_axons.direction_model=segment_history_tension;
-all_axons.dm_label=axondm;
-all_axons.axondm.dm_weight=0.2;
-all_axons.axondm.direction_model=cell_attraction;
 
 detailed_chemical_factors=true;
 soma_attraction_weight=0.0;
 
-; # Pathway 1: Input -> V1 (feedforward)
-; Input.attractedto=NGF_V1;
-; V1.attractors=NGF_V1;
-
-; # Pathway 2: V1 -> V1 (lateral, short-range)
-; V1.attractedto=NGF_V1lateral;
-; V1.attractors=NGF_V1lateral;
-
-; # Pathway 3: V1 -> Interneuron (excitatory drive)
-; V1.attractedto=NGF_Interneuron;
-; Interneuron.attractors=NGF_Interneuron;
-
-; # Pathway 4: Interneuron -> V1 (inhibitory feedback)
-; Interneuron.attractedto=NGF_V1fb;
-; V1.attractors=NGF_V1fb;
-
 # Pathway 1: Input -> V1 (feedforward)
+
 # Pathway 2: V1 -> V1 (lateral, short-range)
+
 # Pathway 3: V1 -> Interneuron (excitatory drive)
+
 # Pathway 4: Interneuron -> V1 (inhibitory feedback)
 
-Input.attractedto=NGF_V1;
-V1.attractedto=NGF_V1lateral,NGF_Interneuron;
-Interneuron.attractedto=NGF_V1fb;
 
-V1.attractors=NGF_V1,NGF_V1lateral,NGF_V1fb;
-Interneuron.attractors=NGF_Interneuron;
-
-#idx.In.pyramidal.0.attractedto=NGF_A;
-
-#idx.Out.pyramidal.0.attractors=NGF_A;
 
 # AXONS ELONGATION MODEL PARAMETERS
 # Note that the specifications here do not apply to Mid interneuron

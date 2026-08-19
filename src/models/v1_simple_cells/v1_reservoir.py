@@ -161,6 +161,7 @@ print('Options specified')
 
 # Run Netmorph
 RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
+print("DEBUG full RunResponse:", RunResponse)
 if not RunResponse["Success"]:
     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
@@ -235,6 +236,15 @@ def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
     return pyramidal, gpeaksummatrix
 
 pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
+
+#diagnostic block
+nonzero = gpeaksummatrix[gpeaksummatrix > 0]
+print("Nonzero pre-post pyramidal GPeakSum count:", len(nonzero))
+print("Min:", nonzero.min() if len(nonzero) else None)
+print("Max:", nonzero.max() if len(nonzero) else None)
+print("Mean:", nonzero.mean() if len(nonzero) else None)
+print("Median:", np.median(nonzero) if len(nonzero) else None)
+
 proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
 attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
 plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
