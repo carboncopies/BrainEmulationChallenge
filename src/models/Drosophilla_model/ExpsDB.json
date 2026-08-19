@@ -57,6 +57,25 @@
         "modelname": "mushroombody",
         "NetmorphOutputDirectory": "NetmorphOutput/c4fae2a3-4d64-4066-967c-c4411c2cfe2a/"
       }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "2000",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260818165927"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "NetmorphOutput/67e8dd21-f189-4563-a1bf-2d0b529a4c78/"
+      }
     }
   ]
 }
