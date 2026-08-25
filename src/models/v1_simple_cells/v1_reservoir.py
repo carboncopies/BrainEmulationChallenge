@@ -70,7 +70,6 @@ DBdata = vbp.InitExpDB(
     })
 
 # Load Netmorph model file
-modelcontent = 'kjhskdjfhkjhs'
 
 if Args.modelfile:
     try:
@@ -107,7 +106,7 @@ days=%d;
 FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
 #not a 100% on this number yet
-PREPOSTGPEAKSUMTARGET = 39
+PREPOSTGPEAKSUMTARGET = 3.24
 
 N_INPUT = 64    # 8x8 input patch
 N_V1 = 100      # V1 excitatory units
@@ -161,7 +160,6 @@ print('Options specified')
 
 # Run Netmorph
 RunResponse = MySim.Netmorph_RunAndWait(modelcontent, _NeuronClass='LIFC')
-print("DEBUG full RunResponse:", RunResponse)
 if not RunResponse["Success"]:
     vbp.ErrorExit(DBdata, 'NES.Netmorph error: Netmorph reservoir build failed with status response:'+str(RunResponse["NetmorphStatus"]))
 
@@ -238,12 +236,56 @@ def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
 pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
 
 #diagnostic block
-nonzero = gpeaksummatrix[gpeaksummatrix > 0]
-print("Nonzero pre-post pyramidal GPeakSum count:", len(nonzero))
-print("Min:", nonzero.min() if len(nonzero) else None)
-print("Max:", nonzero.max() if len(nonzero) else None)
-print("Mean:", nonzero.mean() if len(nonzero) else None)
-print("Median:", np.median(nonzero) if len(nonzero) else None)
+# nonzero = gpeaksummatrix[gpeaksummatrix > 0]
+# print("Nonzero pre-post pyramidal GPeakSum count:", len(nonzero))
+# print("Min:", nonzero.min() if len(nonzero) else None)
+# print("Max:", nonzero.max() if len(nonzero) else None)
+# print("Mean:", nonzero.mean() if len(nonzero) else None)
+# print("Median:", np.median(nonzero) if len(nonzero) else None)
+
+#pathway split diagnostics
+INPUT_RANGE = range(0, N_INPUT)
+V1_RANGE = range(N_INPUT, N_INPUT + N_V1)
+INTERNEURON_RANGE = range(N_INPUT + N_V1, N_INPUT + N_V1 + N_INTERNEURON)
+
+numneurons = len(connections_before_dict["ConnectionGPeakSum"])
+print("Total neurons in connectome:", numneurons, "(expected %d)" % (N_INPUT + N_V1 + N_INTERNEURON))
+
+# need to fill in derived per-pathway conductance targets here
+# so can replace PREPOSTGPEAKSUMTARGET's single flat value.
+PATHWAY_TARGETS = {
+    'Input->V1': PREPOSTGPEAKSUMTARGET,        # feedforward -- placeholder, replace with derived value
+    'V1->V1': PREPOSTGPEAKSUMTARGET,           # lateral -- placeholder
+    'V1->Interneuron': PREPOSTGPEAKSUMTARGET,  # excitatory drive -- placeholder
+    'Interneuron->V1': PREPOSTGPEAKSUMTARGET,  # inhibitory feedback -- placeholder
+}
+
+def split_pathways(matrix, input_range, v1_range, interneuron_range):
+    return {
+        'Input->V1': matrix[np.ix_(input_range, v1_range)],
+        'V1->V1': matrix[np.ix_(v1_range, v1_range)],
+        'V1->Interneuron': matrix[np.ix_(v1_range, interneuron_range)],
+        'Interneuron->V1': matrix[np.ix_(interneuron_range, v1_range)],
+    }
+
+def report_pathway_stats(pathways, targets):
+    for name, submatrix in pathways.items():
+        nonzero = submatrix[submatrix > 0]
+        count = len(nonzero)
+        target = targets.get(name)
+        print("\n[%s]" % name)
+        print("  Nonzero connections:", count)
+        if count:
+            print("  Min: %.5f  Max: %.5f  Mean: %.5f  Median: %.5f" %
+                  (nonzero.min(), nonzero.max(), nonzero.mean(), np.median(nonzero)))
+        if target is not None:
+            at_target = int((submatrix >= target).sum())
+            print("  At/above target (%.4f): %d" % (target, at_target))
+        else:
+            print("  (no target set)")
+
+pathways = split_pathways(gpeaksummatrix, INPUT_RANGE, V1_RANGE, INTERNEURON_RANGE)
+report_pathway_stats(pathways, PATHWAY_TARGETS)
 
 proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
 attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
