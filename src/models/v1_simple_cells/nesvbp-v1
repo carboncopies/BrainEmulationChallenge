@@ -184,6 +184,7 @@ soma_attraction_weight=0.0;
 # Pathway 3: V1 -> Interneuron (excitatory drive)
 # Pathway 4: Interneuron -> V1 (inhibitory feedback)
 
+#usable connections defined
 Input.attractedto=NGF_V1;
 V1.attractedto=NGF_V1lateral,NGF_Interneuron;
 Interneuron.attractedto=NGF_V1fb;
