@@ -83,7 +83,7 @@ PN.shape.thickness=60;
 # small dendritic field only overlaps a handful of PN axon terminals.
 KC.shape=disc;
 KC.neurons=0;
-KC.bipolar=200;
+KC.pyramidal=200;
 KC.minneuronseparation=25;
 KC.centerZ=-500;
 KC.shape.radius=400;
@@ -99,6 +99,15 @@ MBON.minneuronseparation=60;
 MBON.centerZ=-1000;
 MBON.shape.radius=300;
 MBON.shape.thickness=60;
+
+#APL: interneuron that lives inside KC
+APL.shape=disc;
+APL.neurons=0;
+APL.interneuron=1;
+APL.minneuronseparation=25;
+APL.centerZ=-500;
+APL.shape.radius=400;
+APL.shape.thickness=200;
 
 # ENVIRONMENT PHYSICS
 # Unchanged from nesvbp-autoassociative. Sphere radius (50mm) and
@@ -148,16 +157,18 @@ all_axons.dm_label=axondm;
 all_axons.axondm.dm_weight=0.2;
 all_axons.axondm.direction_model=cell_attraction;
 
-# --- PASS 2 (not active yet): chemical-factor-based attraction ---
-# Uncomment to compare against the plain cell_attraction result above.
-# Factor label (e.g. NGF_A) presumed arbitrary; unconfirmed -- ask
-# before relying on this for real.
+# Chemical-factor-based attraction
+#NGF_A: PN and APL both seek KC
+#NGF_B: KC seeks both APL and MBON
 detailed_chemical_factors=true;
 soma_attraction_weight=0.0;
 PN.attractedto=NGF_A;
 KC.attractors=NGF_A;
 KC.attractedto=NGF_B;
 MBON.attractors=NGF_B;
+APL.attractors=NGF_B;
+APL.attractedto=NGF_A;
+
 
 # AXONS ELONGATION MODEL PARAMETERS
 # Unchanged from nesvbp-autoassociative. ~45 um/day.
@@ -203,15 +214,6 @@ all_dendrites.tau=259680;
 all_dendrites.E_competes_with=same_arbor;
 all_dendrites.E=0.73;
 all_dendrites.TSBM=van_Pelt;
-
-# MUSHROOM-BODY-SPECIFIC DEVIATIONS FROM THE REFERENCE:
-# KC dendrites deliberately short/few branches -> "claw" morphology.
-KC.all_dendrites.eri.PDF.mean=0.00003;
-KC.all_dendrites.B_inf=1.2;
-
-# MBON dendrites deliberately larger/bushier -> dense convergence target.
-MBON.all_dendrites.eri.PDF.mean=0.00012;
-MBON.all_dendrites.B_inf=3.5;
 
 # COMMAND SUBSTITUTION
 substitute=APD:all_apical_pyramidal_dendrites;
@@ -279,7 +281,7 @@ pyr1.tuft.E_competes_with=same_arbor;
 pyr1.oblique.terminal_segment_elongation_model=nonnorm_BESTL;
 pyr1.oblique.tsem.branch.PDF=normal;
 pyr1.oblique.tsem.branch.PDF.mean=6;
-pyr1.oblique.tsem.branch.PDF.std=1;
+44444pyr1.oblique.tsem.branch.PDF.std=1;
 pyr1.oblique.tsem.PDF=delta;
 pyr1.oblique.tsem.PDF.value=0;
 pyr1.oblique.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
@@ -314,9 +316,9 @@ neurite_diameter_model=rall;
 # so PN(pyramidal)->KC(bipolar) and KC(bipolar)->MBON(pyramidal) pairs
 # need their own explicit D_synmax or candidate synapses may not form
 # between these type pairs at all.
-D_synmax.pyramidal.bipolar=8;
-D_synmax.bipolar.pyramidal=8;
 D_synmax.pyramidal.pyramidal=6;
+D_synmax.pyramidal.interneuron=8;
+D_synmax.interneuron.pyramidal=8;
 
 # SIMULATION RUNTIME AND SAMPLING PARAMETERS
 sample_dt=4320;
