@@ -120,7 +120,6 @@ ARCHITECTURE_MODIFY = '''
 PN.pyramidal=%d;
 KC.pyramidal=%d;
 MBON.pyramidal=%d;
-APL.interneuron=%d;
 '''
 
 NETMORPH_OBJ = '''
