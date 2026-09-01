@@ -66,10 +66,18 @@ Parser.add_argument("-BlendExec", default="/home/rkoene/blender-4.1.1-linux-x64/
 Parser.add_argument("-BevelDepth", default=0.1, type=float, help="Blender neurite bevel depth")
 Parser.add_argument("-ExpsDB", default="./ExpsDB.json", type=str, help="Path to experiments database JSON file")
 Parser.add_argument("-NumPN", default=50, type=int, help="Number of PN (projection neuron / input) cells")
-Parser.add_argument("-NumKC", default=2000, type=int, help="Number of KC (Kenyon cell / expansion) cells")
+Parser.add_argument("-NumKC", default=200, type=int, help="Number of KC (Kenyon cell / expansion) cells")
 Parser.add_argument("-NumMBON", default=34, type=int, help="Number of MBON (output / convergence) cells")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
+Parser.add_argument("-PNKCGPeakSumTarget", type=float,
+    help="Required combined AMPA peak conductance (PREPOSTGPEAKSUMTARGET-equivalent) for a PN->KC "
+         "pair to count as a 'usable connection'. No default on purpose: the original autoassociative "
+         "value (RETRIEVALPEAKCONDUCTANCEATMAXWEIGHT/CUESIZE) was derived for engram-retrieval-via-cue, "
+         "which has no equivalent in a pattern-separation task -- pick this deliberately, don't guess.")
+Parser.add_argument("-KCMBONGPeakSumTarget", type=float,
+    help="Same as -PNKCGPeakSumTarget, but for the KC->MBON pathway. May reasonably differ from the "
+         "PN->KC target since the two pathways have very different intended connectivity densities.") 
 Args = Parser.parse_args()
 
 if Args.DoBlend:
@@ -110,8 +118,9 @@ else:
 # command declarations replace earlier ones (manual Ch. 3, Table 1).
 ARCHITECTURE_MODIFY = '''
 PN.pyramidal=%d;
-KC.bipolar=%d;
+KC.pyramidal=%d;
 MBON.pyramidal=%d;
+APL.interneuron=%d;
 '''
 
 NETMORPH_OBJ = '''
@@ -308,5 +317,31 @@ if len(kc_to_mbon_values) > 0:
         float(np.mean(kc_to_mbon_values)), min(kc_to_mbon_values), max(kc_to_mbon_values)))
 else:
     print('KC->MBON in-degree: no MBON neurons found -- check population index assumption')
+
+def usable_connections_method2(gpeaksummatrix:np.ndarray, PREPOSTGPEAKSUMTARGET:float)->int:
+    '''
+    Adaptation of usable_connections_method2 from gen_autonm_labels.py.
+    That version rebuilds a pyramidal-only AMPA gpeaksummatrix from scratch;
+    here we reuse the gpeaksummatrix already computed by get_convergence_stats.
+    Returns the count of pre-post pairs whose combined AMPA peak conductance
+    meets or exceeds PREPOSTGPEAKSUMTARGET.
+    '''
+    attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
+    return int(attargetgpeaksum.sum())
+
+
+if Args.PNKCGPeakSumTarget is not None:
+    pn_kc_usable = usable_connections_method2(pn_kc_gpeaksum, Args.PNKCGPeakSumTarget)
+    print('PN->KC usable connections (>= target g_sum_peak of %.2f): %d out of %d structural pairs' % (
+        Args.PNKCGPeakSumTarget, pn_kc_usable, pn_kc_gpeaksum.size))
+else:
+    print('PN->KC usable connections: skipped')
+
+if Args.KCMBONGPeakSumTarget is not None:
+    kc_mbon_usable = usable_connections_method2(kc_mbon_gpeaksum, Args.KCMBONGPeakSumTarget)
+    print('KC->MBON usable connections (>= target g_sum_peak of %.2f): %d out of %d structural pairs' % (
+        Args.KCMBONGPeakSumTarget, kc_mbon_usable, kc_mbon_gpeaksum.size))
+else:
+    print('KC->MBON usable connections: skipped')
 
 print(" -- Done.")
