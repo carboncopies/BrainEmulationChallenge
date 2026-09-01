@@ -64,7 +64,7 @@ all_axons.L0=15,25;
 # calculation shows axons could NOT have plausibly crossed.
 
 shape=regions;
-regions=PN KC MBON;
+regions=PN KC MBON APL;
 neurons=0;
 
 # PN layer: input population, acts as "antennal lobe output"
@@ -153,9 +153,9 @@ dirhistory_selection=none;
 # means PN axons -> KC, and KC axons -> MBON. This is PASS 1's only
 # steering mechanism (no chemical factors yet).
 all_axons.direction_model=segment_history_tension;
-all_axons.dm_label=axondm;
-all_axons.axondm.dm_weight=0.2;
-all_axons.axondm.direction_model=cell_attraction;
+#all_axons.dm_label=axondm;
+#all_axons.axondm.dm_weight=0.2;
+#all_axons.axondm.direction_model=cell_attraction;
 
 # Chemical-factor-based attraction
 #NGF_A: PN and APL both seek KC
@@ -220,7 +220,7 @@ substitute=APD:all_apical_pyramidal_dendrites;
 
 # APICAL DENDRITE TRUNK FIBER BRANCHING MODELS
 # Unchanged from nesvbp-autoassociative. Applies to PN and MBON
-# (pyramidal-typed); KC (bipolar-typed) has no apical dendrite.
+# (pyramidal-typed); KC (pyramidal-typed) has no apical dendrite.
 APD.branching_model=van_Pelt;
 APD.B_inf=0.1;
 APD.tau=400000;
