@@ -163,34 +163,21 @@ all_axons.axondm.direction_model=cell_attraction;
 detailed_chemical_factors=true;
 soma_attraction_weight=0.0;
 
-; # Pathway 1: Input -> V1 (feedforward)
-; Input.attractedto=NGF_V1;
-; V1.attractors=NGF_V1;
-
-; # Pathway 2: V1 -> V1 (lateral, short-range)
-; V1.attractedto=NGF_V1lateral;
-; V1.attractors=NGF_V1lateral;
-
-; # Pathway 3: V1 -> Interneuron (excitatory drive)
-; V1.attractedto=NGF_Interneuron;
-; Interneuron.attractors=NGF_Interneuron;
-
-; # Pathway 4: Interneuron -> V1 (inhibitory feedback)
-; Interneuron.attractedto=NGF_V1fb;
-; V1.attractors=NGF_V1fb;
-
 # Pathway 1: Input -> V1 (feedforward)
-# Pathway 2: V1 -> V1 (lateral, short-range)
-# Pathway 3: V1 -> Interneuron (excitatory drive)
-# Pathway 4: Interneuron -> V1 (inhibitory feedback)
-
-#usable connections defined
 Input.attractedto=NGF_V1;
-V1.attractedto=NGF_V1lateral,NGF_Interneuron;
-Interneuron.attractedto=NGF_V1fb;
+V1.attractors=NGF_V1;
 
-V1.attractors=NGF_V1,NGF_V1lateral,NGF_V1fb;
+# Pathway 2: V1 -> V1 (lateral, short-range)
+V1.attractedto=NGF_V1lateral;
+V1.attractors=NGF_V1lateral;
+
+# Pathway 3: V1 -> Interneuron (excitatory drive)
+V1.attractedto=NGF_Interneuron;
 Interneuron.attractors=NGF_Interneuron;
+
+# Pathway 4: Interneuron -> V1 (inhibitory feedback)
+Interneuron.attractedto=NGF_V1fb;
+V1.attractors=NGF_V1fb;
 
 #idx.In.pyramidal.0.attractedto=NGF_A;
 

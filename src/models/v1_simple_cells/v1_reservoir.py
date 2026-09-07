@@ -70,6 +70,7 @@ DBdata = vbp.InitExpDB(
     })
 
 # Load Netmorph model file
+modelcontent = 'kjhskdjfhkjhs'
 
 if Args.modelfile:
     try:
@@ -105,8 +106,8 @@ days=%d;
 
 FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 
-#derived from passive membrane params in LIFtest.py
-PREPOSTGPEAKSUMTARGET = 4.00
+#not a 100% on this number yet
+PREPOSTGPEAKSUMTARGET = 39
 
 N_INPUT = 64    # 8x8 input patch
 N_V1 = 100      # V1 excitatory units
@@ -234,65 +235,6 @@ def get_prepost_pyramidal_AMPA(connections_dict:dict)->tuple:
     return pyramidal, gpeaksummatrix
 
 pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
-
-#diagnostic block
-# nonzero = gpeaksummatrix[gpeaksummatrix > 0]
-# print("Nonzero pre-post pyramidal GPeakSum count:", len(nonzero))
-# print("Min:", nonzero.min() if len(nonzero) else None)
-# print("Max:", nonzero.max() if len(nonzero) else None)
-# print("Mean:", nonzero.mean() if len(nonzero) else None)
-# print("Median:", np.median(nonzero) if len(nonzero) else None)
-
-#pathway split diagnostics
-INPUT_RANGE = range(0, N_INPUT)
-V1_RANGE = range(N_INPUT, N_INPUT + N_V1)
-INTERNEURON_RANGE = range(N_INPUT + N_V1, N_INPUT + N_V1 + N_INTERNEURON)
-
-numneurons = len(connections_before_dict["ConnectionGPeakSum"])
-print("Total neurons in connectome:", numneurons, "(expected %d)" % (N_INPUT + N_V1 + N_INTERNEURON))
-
-# need to fill in derived per-pathway conductance targets here
-# so can replace PREPOSTGPEAKSUMTARGET's single flat value.
-PATHWAY_TARGETS = {
-    'Input->V1': 4.0,          # single-connection AMPA threshold
-    'V1->V1': 1.3,             # 30-50% of feedforward -- sweep 1.0-1.6
-    'V1->Interneuron': 0.4,    # 4.0 nS / ~10 co-active V1 units
-    'Interneuron->V1': None,   # filled in below from the actual connectome
-}
-
-def split_pathways(matrix, input_range, v1_range, interneuron_range):
-    return {
-        'Input->V1': matrix[np.ix_(input_range, v1_range)],
-        'V1->V1': matrix[np.ix_(v1_range, v1_range)],
-        'V1->Interneuron': matrix[np.ix_(v1_range, interneuron_range)],
-        'Interneuron->V1': matrix[np.ix_(interneuron_range, v1_range)],
-    }
-
-def report_pathway_stats(pathways, targets):
-    for name, submatrix in pathways.items():
-        nonzero = submatrix[submatrix > 0]
-        count = len(nonzero)
-        target = targets.get(name)
-        print("\n[%s]" % name)
-        print("  Nonzero connections:", count)
-        if count:
-            print("  Min: %.5f  Max: %.5f  Mean: %.5f  Median: %.5f" %
-                  (nonzero.min(), nonzero.max(), nonzero.mean(), np.median(nonzero)))
-        if target is not None:
-            at_target = int((submatrix >= target).sum())
-            print("  At/above target (%.4f): %d" % (target, at_target))
-        else:
-            print("  (no target set)")
-
-pathways = split_pathways(gpeaksummatrix, INPUT_RANGE, V1_RANGE, INTERNEURON_RANGE)
-report_pathway_stats(pathways, PATHWAY_TARGETS)
-
-if 'g4_min' in dir() and g4_min is not None:
-    PATHWAY_TARGETS['Interneuron->V1'] = (g4_min + g4_max) / 2
-    report_pathway_stats({'Interneuron->V1': pathways['Interneuron->V1']}, PATHWAY_TARGETS)
-else:
-    print("\n[Interneuron->V1] target not set -- needs connectome-based calibration (not yet run).")
-
 proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
 attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
 plot_weights(proportiontargetgpeaksum, 'output', 'autoassociative_reservoir_proptarget', FIGSPECS)
