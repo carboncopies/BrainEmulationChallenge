@@ -165,7 +165,7 @@ else:
         Cfg.SpikeDepolarization_mV = 30
 
         Cfg.UpdateMethod = 'ExpEulerCm'
-        Cfg.ResetMethod = 'After' # Both 'ToVm' and 'After' work well here # 'ToVm', 'Onset', 'After'
+        Cfg.ResetMethod = 'ToVm' # Both 'ToVm' and 'After' work well here # 'ToVm', 'Onset', 'After'
 
         Cfg.AfterHyperpolarizationReversalPotential_mV = E_AHP
 
@@ -184,7 +184,7 @@ else:
         Cfg.AfterHyperpolarizationSaturationModel = 'clip' # 'clip', 'sigmoidal'
 
         Cfg.FatigueThreshold = 300 # 0 means not applied
-        Cfg.FatigueRecoveryTime_ms = 70 # 150 # 1000
+        Cfg.FatigueRecoveryTime_ms = 1000 # 150 # 1000
 
         Cfg.AfterDepolarizationReversalPotential_mV = E_ADP
         Cfg.AfterDepolarizationRise_ms = tau_rise_ADP
