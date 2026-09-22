@@ -109,6 +109,9 @@ FIGSPECS={ 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }
 #not a 100% on this number yet
 PREPOSTGPEAKSUMTARGET = 39
 
+#placeholder pending LIFtest.py sweep for V1->Interneuron activation threshold
+V1INT_GPEAKSUM_TARGET = 39
+
 N_INPUT = 64    # 8x8 input patch
 N_V1 = 100      # V1 excitatory units
 N_INTERNEURON = 1  # pooled interneuron
@@ -250,12 +253,34 @@ def get_input_v1_AMPA(connections_dict, input_neuron_ids, v1_neuron_ids):
                     gpeaksummatrix[pre][post] += gpeaksum[pre][i]
     return gpeaksummatrix
 
+def get_v1_interneuron_AMPA(connections_dict, v1_neuron_ids, interneuron_ids):
+    numneurons = len(connections_dict["ConnectionGPeakSum"])
+    types = connections_dict['ConnectionTypes']
+    targets = connections_dict['ConnectionTargets']
+    gpeaksum = connections_dict['ConnectionGPeakSum']
+    gpeaksummatrix = np.zeros((numneurons, numneurons))
+    for pre in v1_neuron_ids:
+        for i in range(len(gpeaksum[pre])):
+            if types[pre][i] == 1:  # AMPA
+                post = targets[pre][i]
+                if post in interneuron_ids:
+                    gpeaksummatrix[pre][post] += gpeaksum[pre][i]
+    return gpeaksummatrix
+
 INPUTPREPOSTGPEAKSUMTARGET = 1.333  # nS, per-pair Input->V1 target
 input_neuron_ids = list(range(0, N_INPUT))
 v1_neuron_ids = set(range(N_INPUT, N_INPUT + N_V1))
+interneuron_ids = set(range(N_INPUT + N_V1, N_INPUT + N_V1 + N_INTERNEURON))   # ADD THIS LINE
 gpeaksummatrix_iv1 = get_input_v1_AMPA(connections_before_dict, input_neuron_ids, v1_neuron_ids)
 attarget_iv1 = (gpeaksummatrix_iv1 >= INPUTPREPOSTGPEAKSUMTARGET)
 print('Number of Input->V1 pairs at target g_sum_peak: %d' % int(attarget_iv1.sum()))
+gpeaksummatrix_iv1 = get_input_v1_AMPA(connections_before_dict, input_neuron_ids, v1_neuron_ids)
+attarget_iv1 = (gpeaksummatrix_iv1 >= INPUTPREPOSTGPEAKSUMTARGET)
+print('Number of Input->V1 pairs at target g_sum_peak: %d' % int(attarget_iv1.sum()))
+
+gpeaksummatrix_v1int = get_v1_interneuron_AMPA(connections_before_dict, v1_neuron_ids, interneuron_ids)
+attarget_v1int = (gpeaksummatrix_v1int >= V1INT_GPEAKSUM_TARGET)
+print('Number of V1->Interneuron pairs at target g_sum_peak: %d' % int(attarget_v1int.sum()))
 
 pyramidal, gpeaksummatrix = get_prepost_pyramidal_AMPA(connections_before_dict)
 proportiontargetgpeaksum = gpeaksummatrix / PREPOSTGPEAKSUMTARGET
