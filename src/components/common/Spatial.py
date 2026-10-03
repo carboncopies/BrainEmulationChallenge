@@ -47,7 +47,7 @@ def vec3add(v1:tuple, v2:tuple)->tuple:
     return ( v1[0]+v2[0], v1[1]+v2[1], v1[2]+v2[2] )
 
 def vec3sub(v:tuple, vsub:tuple)->tuple:
-    return ( v1[0]-v2[0], v1[1]-v2[1], v1[2]-v2[2] )
+    return ( v[0]-vsub[0], v[1]-vsub[1], v[2]-vsub[2] )
 
 def get_cube_vertices(cube_definition:list)->np.array:
     # Interpret the minimal cube definition:
