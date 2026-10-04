@@ -2,6 +2,8 @@
 #
 # Build: install requirements.txt on a clean Python and byte-compile every
 #        file (see Tools/CI/check_syntax.py for the known-broken list).
+#        Client_Pin: the PythonClient submodule must point at a tagged release
+#        (Tools/PinClient.sh --check; pin with Tools/PinClient.sh <tag>).
 # Test:  unit tests in tests/. These cover pure helpers only; running the
 #        challenge models needs a live BrainGenix API + NES and is not done here.
 
@@ -30,6 +32,17 @@ Build:
   script:
     - python -m pip install -r requirements.txt
     - python Tools/CI/check_syntax.py
+
+Client_Pin:
+  stage: Build
+  # Reads the pinned commit from this repo's tree and PythonClient's tags with
+  # git ls-remote, so the submodule is never cloned. The slim image has no git.
+  cache: []
+  before_script:
+    - apt-get update -qq && apt-get install -yqq --no-install-recommends git > /dev/null
+    - git config --global --add safe.directory "$CI_PROJECT_DIR"
+  script:
+    - bash Tools/PinClient.sh --check
 
 Unit_Tests:
   stage: Test
