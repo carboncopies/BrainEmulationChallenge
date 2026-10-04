@@ -1,0 +1,42 @@
+# CI for the Brain Emulation Challenge.
+#
+# Build: install requirements.txt on a clean Python and byte-compile every
+#        file (see Tools/CI/check_syntax.py for the known-broken list).
+# Test:  unit tests in tests/. These cover pure helpers only; running the
+#        challenge models needs a live BrainGenix API + NES and is not done here.
+
+default:
+  image: python:3.11-slim
+  tags:
+    - linux
+
+variables:
+  # Tests don't use the PythonClient submodule, and it lives in another group.
+  GIT_SUBMODULE_STRATEGY: none
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  MPLBACKEND: Agg
+
+stages:
+  - Build
+  - Test
+
+cache:
+  key: pip-$CI_JOB_IMAGE
+  paths:
+    - .cache/pip
+
+Build:
+  stage: Build
+  script:
+    - python -m pip install -r requirements.txt
+    - python Tools/CI/check_syntax.py
+
+Unit_Tests:
+  stage: Test
+  script:
+    - python -m pip install -r requirements.txt pytest
+    - python -m pytest tests -v --junitxml=report.xml
+  artifacts:
+    when: always
+    reports:
+      junit: report.xml
