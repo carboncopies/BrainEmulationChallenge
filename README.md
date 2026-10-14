@@ -37,6 +37,19 @@ To participate in the challenge, please review the challenge levels and associat
 This project is built on the BrainGenix platform for WBE research. We specifically use the following components from BrainGenix:
  - [NES](https://gitlab.braingenix.org/carboncopies/BrainGenix-NES)
  - [API](https://gitlab.braingenix.org/carboncopies/BrainGenix-API)
+ - [PythonClient](https://gitlab.braingenix.org/carboncopies/BrainGenix/NES/PythonClient), as the `PythonClient` submodule
+
+### Changing the PythonClient version
+
+The submodule is pinned to a tagged PythonClient release. To move it, name the tag:
+
+```bash
+./Tools/PinClient.sh --list     # available releases
+./Tools/PinClient.sh 1.1.0      # check out that tag and commit the pin
+./Tools/PinClient.sh --check    # which release is pinned (CI runs this)
+```
+
+Then push the branch and open an MR. CI fails if the submodule points at an untagged commit.
 
 ## Local server integration
 
