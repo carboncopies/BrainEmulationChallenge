@@ -122,7 +122,7 @@ def preflight(params:dict, warnings:list)->dict:
     if params.get('shape') == 'regions':
         if 'regions' not in params:
             warnings.append('shape=regions but no regions parameter')
-        regionnames = [ r.strip() for r in params.get('regions', '').split(',') if r.strip() ]
+        regionnames = params.get('regions', '').split()
         for region in regionnames:
             pyramidal = int_param(params, region+'.pyramidal', warnings)
             interneuron = int_param(params, region+'.interneuron', warnings)
