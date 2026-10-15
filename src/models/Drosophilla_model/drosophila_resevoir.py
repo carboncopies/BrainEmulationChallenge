@@ -202,7 +202,9 @@ try:
     MySim.ModelSave(Args.modelname)
     print(" -- Neuronal Circuit Model saved as "+Args.modelname)
 except:
-    vbp.ErrorExit(DBdata, 'NES error: Model save failed')
+    import traceback
+    traceback.print_exc()
+    vbp.ErrorExit(DBdata, 'NES error: Model save failed: '+repr(e))
 
 # Retrieve gzipped Blender file if one was requested
 if Args.DoBlend:
