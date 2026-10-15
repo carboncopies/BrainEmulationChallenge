@@ -76,6 +76,197 @@
         "modelname": "mushroombody",
         "NetmorphOutputDirectory": "NetmorphOutput/67e8dd21-f189-4563-a1bf-2d0b529a4c78/"
       }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260901002603"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "NES.Client error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /Auth/GetToken (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260901004350"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "NES.Client error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /Auth/GetToken (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260901004824"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "NES.Client error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /Auth/GetToken (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260901005136"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "NES.Client error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /Auth/GetToken (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": null,
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260925094234"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "missing modelfile"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260925094420"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "error": "NES.Client error: HTTPConnectionPool(host='localhost', port=8000): Max retries exceeded with url: /Auth/GetToken (Caused by NewConnectionError(\"HTTPConnection(host='localhost', port=8000): Failed to establish a new connection: [Errno 111] Connection refused\"))"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260925095541"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/54dbd15d-72b8-43d0-8f7e-d6ed797650b7/"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20260925211210"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/8e6a246d-bad7-4f1b-90a4-a5f560491f28/"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261014032442"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/c2a8e9c9-771e-4840-975f-b3ed780de30f/",
+        "error": "NES error: Model save failed"
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "growdays_override": "None",
+        "NumPN": "50",
+        "NumKC": "200",
+        "NumMBON": "34",
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261014043451"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody_t2744",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/dc35d892-96d4-45cb-93c1-581f9faecdac/"
+      }
     }
   ]
 }
