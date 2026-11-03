@@ -69,8 +69,10 @@ def get_Args():
     Parser.add_argument("-STDP", action="store_true", help="Enable STDP")
     Parser.add_argument("-excel", default="NetmorphParOptim/MushroomBody_ParSpace_700_samples.xlsx", type=str, help="Path to parameter samples Excel file")
     Parser.add_argument("-ignorecols", default=[], nargs='*', type=str, help="Spreadsheet columns NOT to apply as Netmorph directives")
-    Parser.add_argument("-PNKCGPeakSumTarget", default=SINGLECELLDRIVEGPEAKSUM, type=float, help="Combined AMPA peak conductance for a PN->KC pair to count as usable (def: %.2f)" % SINGLECELLDRIVEGPEAKSUM)
-    Parser.add_argument("-KCMBONGPeakSumTarget", default=SINGLECELLDRIVEGPEAKSUM, type=float, help="Combined AMPA peak conductance for a KC->MBON pair to count as usable (def: %.2f)" % SINGLECELLDRIVEGPEAKSUM)
+    Parser.add_argument("-PNKCInputs", default=7, type=int, help="Number of PN cells meant to drive a KC together (def: 7)")
+    Parser.add_argument("-KCMBONInputs", default=1, type=int, help="Number of KC cells meant to drive an MBON together (def: 1)")
+    Parser.add_argument("-PNKCGPeakSumTarget", type=float, help="Combined AMPA peak conductance for a PN->KC pair to count as usable (def: %.2f / PNKCInputs)" % SINGLECELLDRIVEGPEAKSUM)
+    Parser.add_argument("-KCMBONGPeakSumTarget", type=float, help="Combined AMPA peak conductance for a KC->MBON pair to count as usable (def: %.2f / KCMBONInputs)" % SINGLECELLDRIVEGPEAKSUM)
     Parser.add_argument("-fitcpus", action="store_true", help="Fit batches to the number of logical CPUs available")
     Parser.add_argument("-deleteresident", action="store_true", help="Delete completed server-resident simulations to run more samples")
     Parser.add_argument("-batchlimit", default=0, type=int, help="Never run more than this many at once (def: 0, means no limit)")
@@ -183,13 +185,27 @@ def get_convergence_stats(connections_dict:dict, pre_idx:list, post_idx:list)->t
 
     return indegree, gpeaksummatrix
 
-# --- From drosophila_resevoir.py
+# Conductances are sums of fixed per-synapse values in float32, so a pair
+# with exactly the target number of synapses can fall a hair below a target
+# computed in float64 (e.g. 4*0.98 vs 27.44/7). Compare with a tolerance.
+GPEAKSUMRELTOL = 1e-4
+
+# --- From drosophila_resevoir.py (with comparison tolerance)
 def usable_connections_method2(gpeaksummatrix:np.ndarray, PREPOSTGPEAKSUMTARGET:float)->int:
-    attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET)
+    attargetgpeaksum = (gpeaksummatrix >= PREPOSTGPEAKSUMTARGET*(1.0-GPEAKSUMRELTOL))
     return int(attargetgpeaksum.sum())
 
+# Number of postsynaptic neurons that their k strongest presynaptic partners
+# together can drive (combined g_sum_peak >= SINGLECELLDRIVEGPEAKSUM).
+def drivable_post_neurons(gpeaksummatrix:np.ndarray, k:int)->int:
+    if gpeaksummatrix.size == 0:
+        return 0
+    k = min(k, gpeaksummatrix.shape[0])
+    topk = -np.sort(-gpeaksummatrix, axis=0)[:k, :] # strongest k pre per post column
+    return int((topk.sum(axis=0) >= SINGLECELLDRIVEGPEAKSUM*(1.0-GPEAKSUMRELTOL)).sum())
+
 # Score every pathway in PATHWAYS. Returns a dict of label values, or None on failure.
-def score_pathways(MySim, gpeaksumtargets:dict)->dict:
+def score_pathways(MySim, gpeaksumtargets:dict, pathinputs:dict)->dict:
     global batchrun
     regions = get_region_neurons(MySim)
     if regions is None:
@@ -215,6 +231,9 @@ def score_pathways(MySim, gpeaksumtargets:dict)->dict:
         indegree, gpeaksummatrix = get_convergence_stats(connections_dict, pre_idx, post_idx)
         labels['usable_'+pathlabel] = usable_connections_method2(gpeaksummatrix, gpeaksumtargets[pathlabel])
         labels['pairs_'+pathlabel] = len(pre_idx)*len(post_idx)
+        labels['drivable_'+pathlabel] = drivable_post_neurons(gpeaksummatrix, pathinputs[pathlabel])
+        print('%s: %d of %d %s neurons drivable by their %d strongest %s inputs' % (
+            pathlabel, labels['drivable_'+pathlabel], len(post_idx), postreg, pathinputs[pathlabel], prereg))
         # Diagnostics: how many pairs connect at all, and how strong the strongest is
         connected = gpeaksummatrix[gpeaksummatrix > 0]
         labels['connected_'+pathlabel] = int(connected.size)
@@ -228,6 +247,7 @@ def score_pathways(MySim, gpeaksumtargets:dict)->dict:
     return labels
 
 LABELKEYS = ['usable_PNKC', 'usable_KCMBON', 'pairs_PNKC', 'pairs_KCMBON',
+             'drivable_PNKC', 'drivable_KCMBON',
              'connected_PNKC', 'connected_KCMBON', 'maxg_PNKC', 'maxg_KCMBON',
              'n_PN', 'n_KC', 'n_MBON']
 
@@ -265,7 +285,7 @@ def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)
                 check_succeeded = False
 
         print('...checking connectome for run %d' % netmorphrun['runID'])
-        labels = score_pathways(MySim, evalcriteriadata['gpeaksumtargets'])
+        labels = score_pathways(MySim, evalcriteriadata['gpeaksumtargets'], evalcriteriadata['pathinputs'])
         if labels is None:
             check_succeeded = False
             labels = {k: -1 for k in LABELKEYS}
@@ -412,11 +432,19 @@ if __name__ == '__main__':
         "ExpsDB": Args.ExpsDB,
     }
 
+    # A pair is usable when it carries its share of the conductance needed
+    # to drive the postsynaptic neuron, given how many inputs should do so together.
+    pathinputs = {'PNKC': Args.PNKCInputs, 'KCMBON': Args.KCMBONInputs}
+    gpeaksumtargets = {
+        'PNKC': Args.PNKCGPeakSumTarget if Args.PNKCGPeakSumTarget is not None else SINGLECELLDRIVEGPEAKSUM/Args.PNKCInputs,
+        'KCMBON': Args.KCMBONGPeakSumTarget if Args.KCMBONGPeakSumTarget is not None else SINGLECELLDRIVEGPEAKSUM/Args.KCMBONInputs,
+    }
+    for pathlabel in gpeaksumtargets:
+        print('%s: usable pair at g_sum_peak >= %.2f, drivable post neuron with %d inputs' % (pathlabel, gpeaksumtargets[pathlabel], pathinputs[pathlabel]))
+
     EVALCRITERIADATA = {
-        "gpeaksumtargets": {
-            'PNKC': Args.PNKCGPeakSumTarget,
-            'KCMBON': Args.KCMBONGPeakSumTarget,
-        },
+        "gpeaksumtargets": gpeaksumtargets,
+        "pathinputs": pathinputs,
         "savemodels": Args.savemodels,
     }
 
