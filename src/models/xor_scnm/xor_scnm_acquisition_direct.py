@@ -20,6 +20,7 @@ import argparse
 import math
 import json
 import os
+import sys
 
 import vbpcommon as vbp
 #from BrainGenix.BG_API import BG_API_Setup
@@ -27,6 +28,11 @@ import vbpcommon as vbp
 import BrainGenix.NES as NES
 import BrainGenix
 from BrainGenix.Tools.StackStitcher import StackStitcher, CaImagingStackStitcher
+
+# Set by the Neuroglancer step; read after the render loop.
+NGerror = False
+DatasetHandle = None
+NeuroglancerURL = None
 #from BrainGenix.Tools.NeuroglancerConverter import NeuroglancerConverter
 
 def PointsInCircum(r, n=100):
@@ -726,8 +732,10 @@ if (Args.RenderEM):
                 print(f"URL: {NeuroglancerURL}")
                 vbp.AddOutputToDB(DBdata, 'NeuroglancerDataHandle', DatasetHandle)
                 vbp.AddOutputToDB(DBdata, 'NeuroglancerURL', NeuroglancerURL)
-            except:
-                vbp.ErrorToDB(DBdata, 'NES error: Failed to generate Neuroglancer data set')
+            except Exception as e:
+                vbp.ErrorToDB(DBdata, 'NES error: Failed to generate Neuroglancer data set: ' + str(e))
+                print(f"ERROR: Neuroglancer dataset generation failed: {e}")
+                NGerror = True
 
         TotalEMRenders += 1
 
@@ -760,3 +768,6 @@ except Exception as e:
 
 print(" -- Done.")
 
+# A failed Neuroglancer conversion or meshing step must fail the run, not just the DB entry.
+if NGerror:
+    sys.exit(1)
