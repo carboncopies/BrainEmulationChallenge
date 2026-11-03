@@ -215,10 +215,21 @@ def score_pathways(MySim, gpeaksumtargets:dict)->dict:
         indegree, gpeaksummatrix = get_convergence_stats(connections_dict, pre_idx, post_idx)
         labels['usable_'+pathlabel] = usable_connections_method2(gpeaksummatrix, gpeaksumtargets[pathlabel])
         labels['pairs_'+pathlabel] = len(pre_idx)*len(post_idx)
-        print('%s: %d usable pairs out of %d (g_sum_peak >= %.2f)' % (pathlabel, labels['usable_'+pathlabel], labels['pairs_'+pathlabel], gpeaksumtargets[pathlabel]))
+        # Diagnostics: how many pairs connect at all, and how strong the strongest is
+        connected = gpeaksummatrix[gpeaksummatrix > 0]
+        labels['connected_'+pathlabel] = int(connected.size)
+        labels['maxg_'+pathlabel] = float(connected.max()) if connected.size > 0 else 0.0
+        print('%s: %d usable pairs out of %d (g_sum_peak >= %.2f), %d connected, max g_sum_peak %.2f' % (
+            pathlabel, labels['usable_'+pathlabel], labels['pairs_'+pathlabel], gpeaksumtargets[pathlabel],
+            labels['connected_'+pathlabel], labels['maxg_'+pathlabel]))
+        if connected.size > 0:
+            print('%s connected-pair g_sum_peak quantiles (10/50/90/99%%): %s' % (
+                pathlabel, str(np.round(np.quantile(connected, [0.1, 0.5, 0.9, 0.99]), 2))))
     return labels
 
-LABELKEYS = ['usable_PNKC', 'usable_KCMBON', 'pairs_PNKC', 'pairs_KCMBON', 'n_PN', 'n_KC', 'n_MBON']
+LABELKEYS = ['usable_PNKC', 'usable_KCMBON', 'pairs_PNKC', 'pairs_KCMBON',
+             'connected_PNKC', 'connected_KCMBON', 'maxg_PNKC', 'maxg_KCMBON',
+             'n_PN', 'n_KC', 'n_MBON']
 
 # Return 'failed', 'completed' or 'running', percent done, check succeeded
 def evaluate_state_and_check_connectome(netmorphrun:dict, evalcriteriadata:dict)->tuple:
