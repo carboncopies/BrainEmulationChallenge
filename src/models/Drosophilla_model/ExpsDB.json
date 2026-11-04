@@ -267,6 +267,410 @@
         "modelname": "mushroombody_t2744",
         "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/dc35d892-96d4-45cb-93c1-581f9faecdac/"
       }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "0",
+        "directives": {
+          "days": "20",
+          "KC.shape.radius": "600",
+          "KC.shape.thickness": "500",
+          "KC.minneuronseparation": "15",
+          "KC.pyramidal": "64"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103094128"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0000",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/f5133259-1d06-4834-a164-2e34355138e8/",
+        "usable_PNKC": 2,
+        "usable_KCMBON": 1,
+        "pairs_PNKC": 3200,
+        "pairs_KCMBON": 2176,
+        "n_PN": 50,
+        "n_KC": 64,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "1",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "500",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103094128"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0001",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/f28c9baf-2a53-414e-b04e-176f98e36b0d/",
+        "usable_PNKC": 2,
+        "usable_KCMBON": 1,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "2",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "400",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "KC.pyramidal": "24"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103094128"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0002",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/0bdf9398-8d24-4389-8abb-30c73cfd58bc/",
+        "usable_PNKC": 0,
+        "usable_KCMBON": 0,
+        "pairs_PNKC": 1200,
+        "pairs_KCMBON": 816,
+        "n_PN": 50,
+        "n_KC": 24,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "3",
+        "directives": {
+          "days": "22",
+          "KC.shape.radius": "250",
+          "KC.shape.thickness": "100",
+          "KC.minneuronseparation": "10",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103094128"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0003",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/1ada03c7-f546-4a1a-8fc5-3f4351fd2fe4/",
+        "usable_PNKC": 1,
+        "usable_KCMBON": 1,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "0",
+        "directives": {
+          "days": "20",
+          "KC.shape.radius": "600",
+          "KC.shape.thickness": "500",
+          "KC.minneuronseparation": "15",
+          "KC.pyramidal": "64"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103104330"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0000",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/128fff50-d90e-4497-ba8e-9ea4907517ab/",
+        "usable_PNKC": 2,
+        "usable_KCMBON": 1,
+        "pairs_PNKC": 3200,
+        "pairs_KCMBON": 2176,
+        "connected_PNKC": 571,
+        "connected_KCMBON": 339,
+        "maxg_PNKC": 41.15998458862305,
+        "maxg_KCMBON": 35.27998733520508,
+        "n_PN": 50,
+        "n_KC": 64,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "1",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "500",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103104330"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0001",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/9ef7af6a-bda4-42c6-a30d-a771f2880c51/",
+        "usable_PNKC": 2,
+        "usable_KCMBON": 0,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "connected_PNKC": 1397,
+        "connected_KCMBON": 1210,
+        "maxg_PNKC": 34.29998779296875,
+        "maxg_KCMBON": 20.579994201660156,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "2",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "400",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "KC.pyramidal": "24"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103104330"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0002",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/5a16226c-ba60-4c09-8ef6-0d32ddb27423/",
+        "usable_PNKC": 0,
+        "usable_KCMBON": 0,
+        "pairs_PNKC": 1200,
+        "pairs_KCMBON": 816,
+        "connected_PNKC": 349,
+        "connected_KCMBON": 215,
+        "maxg_PNKC": 21.559993743896484,
+        "maxg_KCMBON": 17.639995574951172,
+        "n_PN": 50,
+        "n_KC": 24,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "3",
+        "directives": {
+          "days": "22",
+          "KC.shape.radius": "250",
+          "KC.shape.thickness": "100",
+          "KC.minneuronseparation": "10",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103104330"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0003",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/2d1c9eda-dbbc-4629-adc8-c970422c1f63/",
+        "usable_PNKC": 0,
+        "usable_KCMBON": 1,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "connected_PNKC": 1993,
+        "connected_KCMBON": 1334,
+        "maxg_PNKC": 26.459991455078125,
+        "maxg_KCMBON": 53.89997863769531,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "0",
+        "directives": {
+          "days": "20",
+          "KC.shape.radius": "600",
+          "KC.shape.thickness": "500",
+          "KC.minneuronseparation": "15",
+          "all_axons.axondm.dm_weight": "0.2",
+          "KC.pyramidal": "64"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103115648"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0000",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/af65e5e0-6fc9-4b42-a523-e139381dc483/",
+        "usable_PNKC": 375,
+        "usable_KCMBON": 47,
+        "pairs_PNKC": 3200,
+        "pairs_KCMBON": 2176,
+        "drivable_PNKC": 29,
+        "drivable_KCMBON": 16,
+        "connected_PNKC": 869,
+        "connected_KCMBON": 1213,
+        "maxg_PNKC": 102.90010833740234,
+        "maxg_KCMBON": 116.62015533447266,
+        "n_PN": 50,
+        "n_KC": 64,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "1",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "500",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "all_axons.axondm.dm_weight": "0.7",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103115648"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0001",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/36e057e0-dbc8-4930-a0a9-487d3069e7cb/",
+        "usable_PNKC": 1087,
+        "usable_KCMBON": 452,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "drivable_PNKC": 57,
+        "drivable_KCMBON": 28,
+        "connected_PNKC": 2003,
+        "connected_KCMBON": 2485,
+        "maxg_PNKC": 541.94189453125,
+        "maxg_KCMBON": 318.5003356933594,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "2",
+        "directives": {
+          "days": "23",
+          "KC.shape.radius": "400",
+          "KC.shape.thickness": "400",
+          "KC.minneuronseparation": "20",
+          "all_axons.axondm.dm_weight": "0.2",
+          "KC.pyramidal": "24"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103115648"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0002",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/84f36ae8-0eed-4f43-abd8-3481e43349e8/",
+        "usable_PNKC": 435,
+        "usable_KCMBON": 19,
+        "pairs_PNKC": 1200,
+        "pairs_KCMBON": 816,
+        "drivable_PNKC": 20,
+        "drivable_KCMBON": 10,
+        "connected_PNKC": 699,
+        "connected_KCMBON": 546,
+        "maxg_PNKC": 87.22005462646484,
+        "maxg_KCMBON": 66.63998413085938,
+        "n_PN": 50,
+        "n_KC": 24,
+        "n_MBON": 34
+      }
+    },
+    {
+      "IN": {
+        "modelfile": "nesvbp-mushroombody",
+        "sample": "3",
+        "directives": {
+          "days": "22",
+          "KC.shape.radius": "250",
+          "KC.shape.thickness": "100",
+          "KC.minneuronseparation": "10",
+          "all_axons.axondm.dm_weight": "0.9",
+          "KC.pyramidal": "120"
+        },
+        "scriptversion": [
+          "reservoir-0.2.0"
+        ],
+        "datetime": [
+          "20261103115648"
+        ]
+      },
+      "OUT": {
+        "modelname": "mushroombody0003",
+        "NetmorphOutputDirectory": "/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/f8feddc5-40e7-4de5-87ab-43b102b3cc3d/",
+        "usable_PNKC": 2427,
+        "usable_KCMBON": 475,
+        "pairs_PNKC": 6000,
+        "pairs_KCMBON": 4080,
+        "drivable_PNKC": 97,
+        "drivable_KCMBON": 12,
+        "connected_PNKC": 3962,
+        "connected_KCMBON": 2244,
+        "maxg_PNKC": 477.2621154785156,
+        "maxg_KCMBON": 493.92230224609375,
+        "n_PN": 50,
+        "n_KC": 120,
+        "n_MBON": 34
+      }
     }
   ]
 }
