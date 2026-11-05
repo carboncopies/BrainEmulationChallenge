@@ -233,8 +233,7 @@ def truthtable(loop, net, spacing, n=N):
     loop.schedule(sorted(pairs, key=lambda x: x[0]))
     end = t0 + len(combos) * spacing + spacing
     loop.sim.RunFor(end - loop.t_ms, 1.0)
-    while loop.sim.GetStatus()['IsSimulating']:
-        import time; time.sleep(0.01)
+    loop.wait_idle(timeout_s=300)
     resp = loop.sim.GetSpikeTimes()
     data = resp['SpikeTimes'] or {}
     up = np.array(spikes_of(data, net.UP.ID)); dn = np.array(spikes_of(data, net.DOWN.ID))

@@ -56,13 +56,20 @@ class ClosedLoop:
             r = self.sim.SetSpecificAPTimes([[float(t), int(n)] for t, n in pairs])
             assert r.get('StatusCode', 0) == 0, r
 
+    def wait_idle(self, timeout_s=60.0):
+        """Poll GetStatus until the sim is not simulating; raise on timeout."""
+        deadline = time.perf_counter() + timeout_s
+        while self.sim.GetStatus()['IsSimulating']:
+            if time.perf_counter() > deadline:
+                raise TimeoutError('simulation still busy after %.0f s' % timeout_s)
+            time.sleep(self.poll_s)
+
     def run_tick(self, tick_ms, dt_ms=1.0):
         """Advance tick_ms, wait with fast polling, return {id: [new spike times]}."""
         t0 = time.perf_counter()
         r = self.sim.RunFor(tick_ms, dt_ms)
         assert r.get('StatusCode', 0) == 0, r
-        while self.sim.GetStatus()['IsSimulating']:
-            time.sleep(self.poll_s)
+        self.wait_idle()
         new = self.new_spikes()
         self.lat_ms.append((time.perf_counter() - t0) * 1000.0)
         self.t_ms += tick_ms

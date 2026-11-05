@@ -47,8 +47,12 @@ ExpEulerCm, no sAHP/ADP/fAHP/adaptive threshold. See comments in `pong_handwired
 - Ticks run as `RunFor(20 ms, dt 1 ms)`; AP times must be integer-ms to land on the grid.
 
 ## Run
-    ./Run.sh -P 8100 -m truthtable
-    ./Run.sh -P 8100 -m play -t 1000 -s 1
+    # 8000 is the repo-wide default port (Run.sh default, as in the other models).
+    # On ccfbgworkserver01 the dev stack for this work is on 8100, hence -P 8100.
+    # The worktree has no venv: point PYTHON at the shared one.
+    export PYTHON=~/BrainGenix/BrainEmulationChallenge/venv/bin/python
+    ./Run.sh -P 8100 -m truthtable            # add -S 20 for 20 ms combo spacing
+    ./Run.sh -P 8100 -m play -t 1000 -s 1 -O output
     python3 -m pytest test_pong_env.py
 Results JSON goes to `output/` (gitignored).
 
