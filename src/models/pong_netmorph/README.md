@@ -383,3 +383,39 @@ The transplant costs 67 ms/tick against 39 ms for the hand-wired net, the same a
   g1 (GABA paddle) was not run.
 - NES follow-up: make the grown LIFC defaults (`struct LIFCNeuronPars`, `NetmorphManagerThread.cpp`) configurable from the Netmorph/NES config and let `LIFC/Edit` change
   ResetMethod, fAHP/sAHP/ADP, fatigue and adaptive-threshold fields. Then this transplant is a plain "edit the grown model" (no rebuild), and persisting edited weights in `ModelSave` would make it storable.
+
+# Neuroglancer views (`pong_neuroglancer.py`)
+
+    python pong_neuroglancer.py -Model handwired|g2|transplant [-Resolution_um 0.5] [-SubdivideSize 1]
+    python pong_neuroglancer.py -Model g2 -BBoxOnly       # print bounding box + voxel estimate, no render
+
+Builds/loads the model (handwired: `pong_handwired.build`; g2: `ModelLoad('johnjose-pong-g2')`;
+transplant: `pong_transplant.build` from `transplant_recipe.json` + g2 connectome), then runs the xor_scnm
+acquisition calls: EM render (segmentation and meshes on), `PrepareNeuroglancerDataset`, `WaitForConversion`,
+`GetNeuroglancerDatasetURL(_ForceURLBase='http://localhost:8100')`. It prints `Dataset Handle:` and `URL:`
+and writes `output/ng_<model>.json`. Port 8100 (private stack) only. No sim is run; geometry exists after build.
+
+Viewing: the URLs use the API base `http://localhost:8100`. In VS Code Remote-SSH port 8100 is normally
+forwarded automatically when you open the link (otherwise add it in the Ports panel); from a plain shell use
+`ssh -L 8100:localhost:8100 ccfbgworkserver01`.
+
+Bounding boxes (um) and voxel counts at the chosen resolution:
+
+| Model | Extent (um) | Resolution | Voxels |
+|---|---|---|---|
+| handwired | 148 x 180 x 218 | 0.5 | 4.7e7 |
+| g2 | 1630 x 1274 x 1377 | 1.0 (2.3e10 voxels at 0.5, too many) | 2.9e9 |
+| transplant | 640 x 376 x 461 | 0.5 | 8.9e8 |
+
+## Status: not yet rendered (NES crash)
+First attempt (handwired, 0.5 um, sim 193) crashed the private NES during the render, at "Voxel Array Does Not
+Exist Yet Or Is Wrong Size, (Re)Creating":
+`terminate called after throwing an instance of 'std::out_of_range'  what(): vector::_M_range_check: __n (which is 40097548) >= this->size() (which is 172)`
+(`pong-stack/nes.log`). The client sees `MakePostQuery request returned error: 204` afterwards. The NES on 8100
+has to be restarted before any further attempt, so no dataset UUIDs or URLs exist yet.
+
+| Model | UUID | URL | Resolution | Render time |
+|---|---|---|---|---|
+| handwired | - | - | 0.5 | crashed NES after 10 s |
+| g2 | - | - | - | not run |
+| transplant | - | - | - | not run |
