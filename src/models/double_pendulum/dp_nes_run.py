@@ -36,8 +36,9 @@ class StopRun(Exception):
 class Recorder:
     """Wraps a controller: records obs and force per tick, enforces a wall-clock budget."""
 
-    def __init__(self, ctl, budget_s=None):
+    def __init__(self, ctl, budget_s=None, progress=None, every=50):
         self.ctl, self.budget_s = ctl, budget_s
+        self.progress, self.every, self.n_up = progress, every, 0
         self.obs, self.F, self.wall = [], [], []
         self.t0 = time.perf_counter()
 
@@ -49,6 +50,16 @@ class Recorder:
         self.obs.append(np.array(obs, float))
         self.F.append(f)
         self.wall.append(time.perf_counter() - t)
+        n = len(self.F)
+        up = max(abs(obs[1]), abs(obs[2])) <= np.radians(10.0)   # obs = (x, th1, th2, ...) at tick start
+        self.n_up += int(up)
+        if self.progress and n % self.every == 0:
+            line = ('tick %d  sim %.2f s  wall/tick %.3f s (last %d)  elapsed %.0f s  upright %.3f  |th1| %.2f deg  |th2| %.2f deg'
+                    % (n, n * 0.01, np.mean(self.wall[-self.every:]), self.every, time.perf_counter() - self.t0,
+                       self.n_up / n, np.degrees(abs(obs[1])), np.degrees(abs(obs[2]))))
+            with open(self.progress, 'a') as fh:
+                fh.write(line + '\n')
+            print(line, flush=True)
         return f
 
 
@@ -118,11 +129,11 @@ def metrics(m):
     return {k: m[k] for k in KEYS}
 
 
-def run_nes(T, delay, seed, budget_min, name):
+def run_nes(T, delay, seed, budget_min, name, read='full', progress=None):
     rec = load_recipe()
-    ctl, net = dp_nes.make_controller(name, seed=seed, rec=rec)
+    ctl, net = dp_nes.make_controller(name, seed=seed, rec=rec, read=read)
     print('built in %.1f s' % net['build_s'], flush=True)
-    rc = Recorder(ctl, budget_s=budget_min * 60.0 if budget_min else None)
+    rc = Recorder(ctl, budget_s=budget_min * 60.0 if budget_min else None, progress=progress)
     t0 = time.perf_counter()
     completed = True
     try:
@@ -137,12 +148,13 @@ def run_nes(T, delay, seed, budget_min, name):
     wall = time.perf_counter() - t0
     ticks = len(rc.F)
     L = ctl.loop
-    out = dict(kind='nes', T_requested=T, T_simulated=ticks * 0.01, completed=completed, ticks=ticks,
+    out = dict(kind='nes', read=read, T_requested=T, T_simulated=ticks * 0.01, completed=completed, ticks=ticks,
                delay=delay, seed=seed, wall_s=wall, build_s=net['build_s'], metrics=m,
                enc_clipped_ticks=ctl.enc.n_clipped, mean_spikes_per_tick=ctl.n_spikes / max(1, ticks),
                tick_wall_s_mean=float(np.mean(rc.wall)),
                sched_ms=float(np.mean(L.t_sched) * 1000), run_ms=float(np.mean(L.t_run) * 1000),
                read_ms=float(np.mean(L.t_read) * 1000),
+               response_bytes_mean=float(np.mean(L.bytes_hist)) if L.bytes_hist else None,
                tick_wall_s_by_100=[float(np.mean(rc.wall[i:i + 100])) for i in range(0, ticks, 100)],
                force=[float(f) for f in rc.F])
     return out
@@ -170,6 +182,8 @@ if __name__ == '__main__':
     ap.add_argument('--reps', type=int, default=5)
     ap.add_argument('--budget-min', type=float, default=40.0)
     ap.add_argument('--out', default=None)
+    ap.add_argument('--read', default='full', choices=['full', 'window'])
+    ap.add_argument('--progress', default=None, help='progress log path (every 50 ticks)')
     a = ap.parse_args()
     os.makedirs(OUT, exist_ok=True)
     if a.latency:
@@ -185,6 +199,6 @@ if __name__ == '__main__':
         print(json.dumps(metrics(r['metrics']), indent=1))
         json.dump(r, open(a.out or os.path.join(OUT, 'standin_T%g_d%d_s%d.json' % (a.T, a.delay, a.seed)), 'w'), indent=1)
     if a.run:
-        r = run_nes(a.T, a.delay, a.seed, a.budget_min, 'johnjose-dp-run-s%d' % a.seed)
+        r = run_nes(a.T, a.delay, a.seed, a.budget_min, 'johnjose-dp-run-s%d' % a.seed, read=a.read, progress=a.progress)
         print(json.dumps({k: v for k, v in r.items() if k != 'force'}, indent=1))
         json.dump(r, open(a.out or os.path.join(OUT, 'nes_T%g_d%d_s%d.json' % (a.T, a.delay, a.seed)), 'w'), indent=1)

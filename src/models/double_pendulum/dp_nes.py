@@ -47,6 +47,7 @@ HOST, PORT = '127.0.0.1', 8100          # private stack only
 CAP_NS = 20.0                           # PeakConductance of every receptor (never reached)
 RISE_MS, DECAY_MS, ONSET_MS = 0.5, 3.0, 1.0
 CHUNK = 400
+WINDOW_OFFSET_MS = float(os.environ.get('DP_WINDOW_OFFSET_MS', 0.0))   # SinceTime_ms = tick start + this (0.0 exact, 0.5 drops ~10%: dp_nes_check_window.py)
 # Hand adjustment A2 (weightspace_log.md): decoder constant x 1/1.6906. Measured on the NES net with
 # the stand-in's A1 recipe (24 random states ~ N(0,(0.5 sigma)^2), seed 7, 2-tick means): measured
 # force / target force = 1.6906 (rmse 0.34 N after the slope). Set DP_NES_C_ADJUST=1 for the raw net.
@@ -246,6 +247,7 @@ class NESLoop:
         self.n_push = len(net['push_ids'])
         self.counts = {i: 0 for i in self.out_ids}
         self.in_hist_len = 0
+        self.bytes_hist = []
         self.total_hist_len = 0
         self.t_sched, self.t_run, self.t_read, self.n_pairs = [], [], [], []
 
@@ -284,7 +286,21 @@ class NESLoop:
         self.n_pairs.append(len(pairs))
         return npush, npull
 
+    def _windowed_request(self, since_ms):
+        """Simulation/GetSpikeTimes with SinceTime_ms and NeuronIDs (the PythonClient's
+        GetSpikeTimes has neither argument), built like the client does. Returns (response
+        dict, response bytes)."""
+        import requests
+        h = self.sim.RequestHandler
+        body = [dict(ReqID=h.RequestID, **{'Simulation/GetSpikeTimes': {
+            'SimulationID': self.sim.ID, 'SinceTime_ms': float(since_ms), 'NeuronIDs': self.out_ids}})]
+        h.RequestID += 1
+        resp = requests.post('%s/NES?AuthKey=%s' % (h.URIBase, h.Token), json=body)
+        return resp.json()[0], len(resp.content)
+
     def _read_new(self):
+        if self.read == 'window':
+            return self._read_window()
         resp = self.sim.GetSpikeTimes()
         assert resp['StatusCode'] == 0, resp
         data = resp.get('SpikeTimes') or {}
@@ -299,6 +315,21 @@ class NESLoop:
                 npush += new
             else:
                 npull += new
+        return npush, npull
+
+    def _read_window(self):
+        # window = the tick just run: simulation times t0 .. t0+STEPS (t0 = tick start, self.t_ms
+        # is only advanced after the read). Spikes of the tick are stamped t0 .. t0+STEPS-1, so
+        # SinceTime_ms = t0 is exact (verified against the full read, dp_nes_check_window.py).
+        t0 = self.t_ms
+        resp, nbytes = self._windowed_request(t0 + WINDOW_OFFSET_MS)
+        assert resp['StatusCode'] == 0, resp
+        data = resp.get('SpikeTimes') or {}
+        self.last_bytes = nbytes
+        self.bytes_hist.append(nbytes)
+        self.last_window = {nid: data[str(nid)]['tSpike_ms'] for nid in self.out_ids}
+        npush = sum(len(self.last_window[i]) for i in self.out_ids[:self.n_push])
+        npull = sum(len(self.last_window[i]) for i in self.out_ids[self.n_push:])
         return npush, npull
 
     def raw_history_probe(self):

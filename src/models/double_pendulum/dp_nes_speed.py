@@ -34,11 +34,12 @@ if __name__ == '__main__':
     ap.add_argument('--probes', default='1,50,100,200,300')
     ap.add_argument('--out', default=os.path.join(HERE, 'output', 'nes_speed.json'))
     ap.add_argument('--name', default='johnjose-dp-speed')
+    ap.add_argument('--read', default=None, choices=['full', 'window', 'none'])
     ap.add_argument('--noread', action='store_true', help='diagnostic: never call GetSpikeTimes (does the run time still grow?)')
     a = ap.parse_args()
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     rec = load_recipe()
-    ctl, net = dp_nes.make_controller(a.name, seed=0, rec=rec, read='none' if a.noread else 'full')
+    ctl, net = dp_nes.make_controller(a.name, seed=0, rec=rec, read=a.read or ('none' if a.noread else 'full'))
     print('build %.1f s: %d neurons, %d receptors, w_eff %.3f..%.3f nS (charge scale %.4f)' % (
         net['build_s'], net['n_neurons'], net['n_receptors'], net['w_eff_min'], net['w_eff_max'],
         dp_nes.CHARGE_SCALE))
@@ -51,7 +52,7 @@ if __name__ == '__main__':
     for k in range(1, a.ticks + 1):
         f = ctl(0.5 * sig * rng.standard_normal(6))
         sched_total += ctl.loop.n_pairs[-1]
-        if k in probes and not a.noread:
+        if k in probes and not a.noread and a.read != 'window':
             probe_out[k] = ctl.loop.raw_history_probe()
             print('tick %d: history %s' % (k, probe_out[k]))
         if k % 50 == 0:
@@ -77,8 +78,10 @@ if __name__ == '__main__':
         slope, icpt = np.polyfit(x, np.asarray(arr) * 1000.0, 1)
         res['fit_' + name] = dict(slope_ms_per_tick=float(slope), intercept_ms=float(icpt))
     # check that every scheduled input spike was recorded
-    pr = None if a.noread else L.raw_history_probe()
+    pr = None if (a.noread or a.read == 'window') else L.raw_history_probe()
     res['final_probe'] = pr
+    res['read_mode'] = a.read or ('none' if a.noread else 'full')
+    res['window_response_bytes_last'] = getattr(L, 'last_bytes', None)
     res['scheduled_input_spikes'] = int(sched_total)
     res['sim_time_ms'] = L.t_ms
     res['wall_s'] = time.perf_counter() - t_wall0

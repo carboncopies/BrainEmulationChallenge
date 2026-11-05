@@ -219,3 +219,57 @@ One seed, 7 s: this shows the NES net holds the pendulum under the same disturba
 Encoder clipped on 0 of 720 ticks; mean 417 output spikes per tick (stand-in about 372). The budget stop replays the
 seeded episode with the recorded forces (observations checked identical) so the metrics cover exactly the time reached.
 Run: `python3 dp_nes_speed.py`, `python3 dp_nes_run.py --latency | --calibrate | --run --T 10 --delay 2 | --standin`.
+
+## Phase 3b: windowed spike read (per-tick cost stops growing), 10 s run
+
+NES build: `~/BrainGenix/wt/nes-spikewindow` (`feature/windowed-getspiketimes`, `9a8bdfb92` + `5d91103a1`:
+`Simulation/GetSpikeTimes` takes optional `SinceTime_ms` (spikes with t >= it) and `NeuronIDs`; both absent gives the old
+response). The existing binary predated the source commits (built 23:27, sources 23:51 to 23:57), so it was **rebuilt**
+(`cmake --build Build --target BrainGenix-NES -j8`; the old one kept as `Binaries/BrainGenix-NES.prev`). That NES reports
+API version 1.0.1, and the local `BrainGenix-API` binary (1.0.0) answers 204 (version mismatch), so the API was rebuilt from
+`origin/master` (`50b06777e`, only the 1.0.1 bump and a checksum-polling change vs the old binary) in a separate worktree
+`~/BrainGenix/wt/api-v101`; no existing binary was touched.
+
+Private stack `~/BrainGenix/wt/dp-stack` (`api/`, `nes/`, `Source/Core/Config/users.json` symlink, `nes-out/`, logs
+`api.log`, `nes.log`), tmux session `dp-stack` (windows `api`, `nes`). API 127.0.0.1:8100; NES 8101 and callback 8099
+bind 0.0.0.0 (#72; the config has no host option for them). The client needs requests_futures: run with
+`~/BrainGenix/BrainEmulationChallenge/venv/bin/python`.
+
+Client: `NESLoop(read='window')` posts the request itself (`_windowed_request`; the PythonClient has neither argument) with
+`SinceTime_ms` = tick start and `NeuronIDs` = the 222 outputs. Output spikes of a tick are stamped t0 .. t0+9 ms, so the
+tick-start offset is exact (an offset of 0.5 ms drops the ones stamped t0, about 10%).
+`dp_nes_check_window.py`, 40 ticks, 16059 output spikes: per neuron, the windowed list equals the new part of the full
+read's list exactly (times and counts) on every tick. Response: 7.4 to 7.7 kB per tick, against 0.92 MB at tick 30 for the
+full read (grows to 10 MB by tick 300).
+
+Speed, 300 ticks, same random observations as 3a, ms (`dp_nes_speed.py --read window`, `output/nes_speed_windowed.json`):
+
+| | schedule | run | read | total |
+|---|---|---|---|---|
+| mean over 300 | 55 | 940 | 14 | 1011 |
+| p95 | 104 | 1487 | 30 | 1566 |
+| ticks 1-50 | 41 | 283 | 10 | 336 |
+| ticks 251-300 | 65 | 1343 | 17 | 1428 |
+
+(3a, full read: total 2039 mean, 561 at ticks 1-50, 3096 at 251-300.) The read is now 10 to 17 ms (still a slope of 0.024
+ms per tick: the filter walks each output neuron's history). `RunFor` is unchanged and now the whole cost; in the closed
+loop it flattens at about 1.1 to 1.2 s per tick from tick 150 on.
+
+10 s run (seed 0, disturbance on, ctrl_dt 10 ms, delay 2, U1 + A2 as is, `--read window`, `output/nes_T10_windowed.log`
+progress every 50 ticks, `output/nes_T10_windowed.json`): completed 10.00 s simulated, 1000 ticks, **1056 s wall** (0.56 s per
+tick for ticks 1-100, 1.05 to 1.21 after; 40 ms schedule, 1002 ms run, 10.5 ms read, 8.0 kB response, mean).
+
+| controller | T (s) | upright | RMS th1 (deg) | RMS th2 (deg) | RMS force (N) | peak force (N) | drift (m) | fall |
+|---|---|---|---|---|---|---|---|---|
+| NES, windowed | 10 | 1.000 | 1.21 | 0.72 | 1.66 | 11.1 | 0.157 | none |
+| stand-in | 10 | 1.000 | 1.18 | 0.78 | 1.91 | 14.2 | 0.151 | none |
+
+Same dynamics as 3a: the first 720 forces are identical to 3a's (max difference 0.0 N; metrics over 7.2 s equal 3a's to
+three digits), as expected, since the read does not touch the network. No recalibration (U1, A2 unchanged). Encoder clipped on 0
+ticks; 417 output spikes per tick (stand-in 371). One seed.
+
+Projection from this run (about 0.56 s per tick for the first 100 ticks, then about 1.1 to 1.2 s; not measured beyond
+1000 ticks): 30 s about 55 to 60 min, 180 s about 5.5 to 6 h. If `RunFor` keeps creeping up past 1000 ticks (the last
+100 ticks were at 1.21 s) these rise; the `g_norm` history cut named in 3a is still untested.
+Run: `python3 dp_nes_check_window.py`, `python3 dp_nes_speed.py --read window`,
+`python3 dp_nes_run.py --run --T 10 --read window --progress output/nes_T10_windowed.log --out output/nes_T10_windowed.json`.
