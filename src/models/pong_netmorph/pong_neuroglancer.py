@@ -33,7 +33,7 @@ def parse(argv=None):
     p.add_argument('-Recipe', default='transplant_recipe.json')
     p.add_argument('-Connectome', default='output/%s_connectome.json' % G2_MODEL)
     p.add_argument('-Resolution_um', default=0.5, type=float)
-    p.add_argument('-SubdivideSize', default=1, type=int, help='divide the bounding box by this (as in xor_scnm)')
+    p.add_argument('-SubdivideSize', default=10, type=int, help='divide the bounding box by this (as in xor_scnm)')
     p.add_argument('-NeuroglancerURLBase', default='http://localhost:8100')
     p.add_argument('-NoSegmentation', action='store_true')
     p.add_argument('-NoMeshes', action='store_true')
