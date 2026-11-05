@@ -126,6 +126,12 @@ partly (42/64 truth table vs 64/64 hand-wired).
    tuned model scores 42/64 at 100 ms spacing and 54/64 at 600 ms.
 5. `Client.LoadSimulation` has a bug (`Response` undefined), not used.
 
+Evidence (verifier): fact 1 `LIFCNeuron.cpp:543-558` (also zeroes the pair's NMDA receptor; the batch
+call stops at the first failing pair, `Simulation.cpp:1385-1388`); fact 2 `Neuron.cpp:152-155`; fact 3
+`LIFCSaver`, `Simulation.cpp:716-718`, saves `LIFCReceptorBase`, not the edited `LIFCReceptorData` weight;
+fact 4 `Structs/Neuron.h:398-406`; fact 5 PythonClient `Client.py:344-347`. `effective_strength_nS` in
+recipes now reports min(weight*g_peak, g_peak_sum) (recipes written before this commit store the uncapped value).
+
 ## Wiring fidelity (neuron-pair level, intended = 88 edges for the AMPA variant, 104 for GABA)
 | Growth | Config | pairs present | intended present | unintended | precision | recall |
 |---|---|---|---|---|---|---|
@@ -163,6 +169,13 @@ D->DOWN set to 20 nS (capped by g_peak_sum); UP/DOWN membrane resistance raised 
 `LIFC/Edit` (their inputs are 2-20 nS, a single comparator spike did not fire them). The excitatory
 coincidence design replaces step 1's inhibition because of fact 1. The Rm edit is a neuron edit, not
 a weight edit; without it the same calibration reaches 28/64.
+
+## Caveats on the numbers
+- `calibrate()` picks k from probes that cover all 64 truth-table combinations, so the tuned 42/64 is
+  IN-SAMPLE. The play results are the out-of-sample measure and are near chance (0.47 seed 1 vs random
+  0.23, 0.52 seed 2 vs random 0.36).
+- The headline G2 uses a different design from step 1 (excitatory-coincidence paddle cells, 88-edge
+  spec) instead of step 1's GABA inhibition, because of NES fact 1.
 
 ## Conclusions
 - Growth alone (no weight writing): 10/64, chance-level play. Netmorph delivered the topology's

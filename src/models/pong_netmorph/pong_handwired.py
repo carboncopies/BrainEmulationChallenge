@@ -223,6 +223,9 @@ def load_model_net(sim, model, n=N, recipe_dir='output'):
     sim.SetSTDP(_DoSTDP=False)
     sim.ModelLoad(model)  # for a tuned model this is the grown model; the recipe is applied below
     recipe_path = os.path.join(recipe_dir, '%s_recipe.json' % model)
+    if 'tuned' in model and not os.path.exists(recipe_path):
+        raise FileNotFoundError('model %s needs its tuning recipe %s (ModelSave does not store tuned strengths); '
+                                'refusing to run the untuned grown model' % (model, recipe_path))
     if os.path.exists(recipe_path):
         # ModelSave does not persist per-pair strength edits, so tuned models are grown model + recipe.
         import pong_netmorph_tune as TU

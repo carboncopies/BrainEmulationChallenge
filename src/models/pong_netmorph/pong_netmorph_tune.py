@@ -202,7 +202,7 @@ def calibrate(sim, summ, rec, kgrid, spacing=100):
 
 
 def effective_strengths(sim, role):
-    """Per role pair: sum of weight*g_peak_sum (sign by transmitter) after tuning, read back from the server."""
+    """Per role pair: sum of min(weight*g_peak_sum, g_peak_sum) (sign by transmitter) after tuning, read back from the server."""
     c = sim.GetConnectome()
     eff = {}
     for pre, (tg, ty, gp_, w) in enumerate(zip(c['ConnectionTargets'], c['ConnectionTypes'],
@@ -211,7 +211,7 @@ def effective_strengths(sim, role):
             if k == AN.NMDA:
                 continue
             key = '%s>%s' % (role[pre], role[post])
-            eff[key] = eff.get(key, 0.0) + g * ww * (-1 if k == AN.GABA else 1)
+            eff[key] = eff.get(key, 0.0) + min(g * ww, g) * (-1 if k == AN.GABA else 1)  # peak capped at g_peak_sum (Neuron.cpp:152-155)
     return eff, c
 
 
