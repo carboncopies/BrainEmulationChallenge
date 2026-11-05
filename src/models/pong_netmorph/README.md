@@ -232,10 +232,10 @@ Neuron edits: used relays R 3000 MOhm, C 0.5 pF, Vrest -53 mV; UP and DOWN ident
 
 ## Results
 Blind (one evaluation, recipe written from the connectome alone, first design: MILP with shared relays, weights up to caps): truth table 40/64, play seed 1 x 500: 11/30 = 0.37 (random 0.23).
-Diagnostic: 20 stack runs (seeds 1-2 only for play): 10 truth tables, 6 single-input probes, 1 forced-relay output probe, 1 play, 1 truth table at 20 ms (+ 1 more truth table);
+Diagnostic: 20 stack runs (play only seed 2): 11 truth tables (10 at 100 ms, 1 at 20 ms), 7 single-input probes, 1 forced-relay output probe, 1 play run;
 every edit a hand edit (list above and `output/weightspace_log.md`, gitignored). Key edits: gap via Vrest instead of Vth; relay equalisation attempt (all inputs 0.95 nS, abandoned: relays then fire once at scattered latencies);
 output stage R/C; disjoint ball/paddle relays + coincident bursts; strong pairs only (gmin 2.9) with L1-error MILP; common-mode deficit shift; c = 0.8 -> 1.1.
-Forward-pass budget: 22 stack evaluations in total (blind 1 + 20 diagnostic + 1 blind play), about 1.6k closed-loop ticks plus ~9 x 64 truth-table presentations.
+Forward-pass budget before the final: 2 blind evaluations (truth table + 500-tick play) + 20 diagnostic runs = 11 x 64 truth-table presentations + 7 x 16 single-input probes + 1 forced-relay probe + 500 closed-loop ticks, i.e. about 1.5k simulated ticks of 20-100 ms; no gradient or search loop.
 
 Final (recipe frozen, held-out seeds 101-103 x 1000 ticks, private stack :8100):
 | Model | truth table 100 ms | truth table 20 ms | play 101 | play 102 | play 103 | mean |
