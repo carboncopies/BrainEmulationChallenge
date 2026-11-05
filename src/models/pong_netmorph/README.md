@@ -255,3 +255,39 @@ Edited: of 526 grown AMPA pairs, 56 (10.6%) written non-zero (all changed from g
 - What would likely fix it: NES edit of ResetMethod/adaptive floor/fAHP (limit C4), GABA strength setters (C1) for real inhibition instead of a conductance-sum, and
   persisted edits in ModelSave (C3). With those, the MILP spec above should transfer; without them the 20 ms regime is not reachable by weights alone.
 - Honest caveat: 20 diagnostic runs used the 64-combination truth table (100 ms) as the main signal, so 56/64 is in-sample; the play numbers are the held-out measure.
+
+## Step 3b: tick length
+
+Hypothesis: grown neurons keep a Netmorph adaptive-threshold floor (+1 mV per spike, ~500 ms recovery) that NES cannot edit, so decisions
+every 20 ms of sim time accumulate it. If each game tick simulates more time (`-TickMs`, default 20; one `env.step` per tick, input bursts at the
+start of each tick, readout = new UP/DOWN spikes over the whole tick), neurons recover between decisions. This is an encoding/timing change only.
+**The weights did not change: `weightspace_recipe.json` is the frozen step-3 recipe in every run below.**
+
+Dev runs (seed 1, 500 ticks unless noted; action_mismatches counts ticks differing from the sign(ball bin - paddle bin) rule):
+| TickMs | hit rate | action_mismatches /500 | wall ms/tick |
+|---|---|---|---|
+| 20 (seed 1) | 0.367 | 327 | 64 |
+| 20 (seed 2) | 0.452 | 304 | 61 |
+| 100 | 0.433 | 357 | 88 |
+| 200 | 0.400 | 336 | 105 |
+| 300 | 0.367 | 324 | 131 |
+
+(Hit rates are over only ~30 episodes per run, so differences of 0.05 to 0.1 are noise.) Longer ticks did not reduce mismatches at all, so no tick length
+was better than another. 100 ms was kept for the final as the smallest value that matches the 100 ms truth-table regime (56/64). Wall clock per tick
+grows with tick length (about 0.35 ms per simulated ms on top of ~55 ms fixed), so it is not free.
+
+Final (seeds 201-203 x 1000 ticks, same stack, held out from the dev seeds):
+| Model | play 201 | play 202 | play 203 | mean | mismatches (of 1000) | ms/tick |
+|---|---|---|---|---|---|---|
+| hand-wired, 100 ms ticks | 0.966 | 0.949 | 0.932 | 0.949 | 0, 0, 0 | 43 |
+| step 3, 20 ms ticks | 0.492 | 0.475 | 0.339 | 0.435 | 656, 635, 637 | 66 |
+| step 3, 100 ms ticks | 0.305 | 0.407 | 0.356 | 0.356 | 700, 731, 725 | 89 |
+| random | 0.322 | 0.153 | 0.271 | 0.249 | | |
+
+Truth table at SpacingMs 100: 56/64 (unchanged from step 3).
+
+Conclusion: the hypothesis is not supported. Tick length 20 to 300 ms did not improve closed-loop play of the step-3 weights; 100 ms was
+no better than 20 ms (0.356 vs 0.435 mean, within noise and, if anything, worse). The truth table is 56/64 at 100 ms, yet play mismatches
+the bin rule on about 70% of ticks, so the adaptive-threshold floor accumulating across 20 ms ticks is not the main cause of the poor play.
+Not diagnosed here. Candidates to check next: errors at |ball - paddle| = 1 and ties, which dominate real game states (truth-table errors sit exactly there),
+and state carried over between ticks (relay recovery, residual UP/DOWN charge) that the isolated-row truth table does not exercise.

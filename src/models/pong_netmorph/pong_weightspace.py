@@ -23,6 +23,7 @@ Design (N = 8 bins; level = bin index):
 """
 import os
 import sys
+import time
 import json
 import argparse
 import itertools
@@ -230,11 +231,14 @@ def graded_truthtable(loop, net, spacing, log=print):
     return dict(correct=ok, total=len(combos), rows=rows)
 
 
-def run_play(loop, net, ticks, seed):
-    env = H.play(loop, net, ticks, 20, seed)
+def run_play(loop, net, ticks, seed, tick_ms=20):
+    t0 = time.time()
+    env = H.play(loop, net, ticks, tick_ms, seed)
+    wall = time.time() - t0
     rnd, ora = run_policy(random_policy, ticks, seed), run_policy(oracle_policy, ticks, seed)
     return dict(seed=seed, ticks=ticks, hits=env.hits, misses=env.misses, hit_rate=env.hit_rate(),
-                action_mismatches=env.action_mismatches, random=rnd.hit_rate(), oracle=ora.hit_rate())
+                action_mismatches=env.action_mismatches, tick_ms=tick_ms,
+                wall_ms_per_tick=1000.0 * wall / ticks, random=rnd.hit_rate(), oracle=ora.hit_rate())
 
 
 def probe_single(loop, net, spacing=100):
@@ -322,6 +326,7 @@ def parse(argv=None):
     p.add_argument('-Seed', default=1, type=int)
     p.add_argument('-Ticks', default=500, type=int)
     p.add_argument('-SpacingMs', default=100, type=int)
+    p.add_argument('-TickMs', default=20, type=int, help='simulated ms per game tick (play modes)')
     return p.parse_args(argv)
 
 
@@ -346,7 +351,7 @@ def main(argv=None):
         net = H.build(sim)
         loop = NL.ClosedLoop(sim, [net.UP.ID, net.DOWN.ID])
         if A.mode == 'handwired-play':
-            res = run_play(loop, net, A.Ticks, A.Seed)
+            res = run_play(loop, net, A.Ticks, A.Seed, A.TickMs)
             print(json.dumps(res))
             json.dump(res, open(os.path.join(A.Out, 'ws_handwired_play_s%d.json' % A.Seed), 'w'))
         else:
@@ -376,7 +381,7 @@ def main(argv=None):
         json.dump(res, open(os.path.join(A.Out, 'ws_truthtable_%d.json' % A.SpacingMs), 'w'))
         print('RESULT truthtable %d ms: %d/64' % (A.SpacingMs, res['correct']))
     else:
-        res = run_play(loop, net, A.Ticks, A.Seed)
+        res = run_play(loop, net, A.Ticks, A.Seed, A.TickMs)
         json.dump(res, open(os.path.join(A.Out, 'ws_play_s%d_n%d.json' % (A.Seed, A.Ticks)), 'w'))
         print('RESULT play', json.dumps(res))
     return 0
