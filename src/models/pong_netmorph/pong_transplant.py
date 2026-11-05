@@ -9,7 +9,7 @@ TRANSPLANT RULE (what keeps this honest):
   * with conductance <= the grown cap of that pair and type (sum of ConnectionGPeakSum over the pair's receptors of that type),
   * every other grown pair is simply not built (== zeroed),
   * somata sit at the grown soma positions; the 34 roles come from the grown Regions map.
-Not grown, written: neuron dynamics (the Netmorph defaults in NetmorphManagerThread.cpp:585-636 are replaced), receptor
+Not grown, written: neuron dynamics (the Netmorph defaults in struct LIFCNeuronPars in NetmorphManagerThread.cpp are replaced), receptor
 kinetics (rise 0.5 / decay 3 ms, as step 1), onset delay (1 ms, grown delays are not in the connectome JSON), the conductances.
 
   python pong_transplant.py solve     [-Connectome output/johnjose-pong-g2_connectome.json] [-Recipe transplant_recipe.json]
@@ -291,9 +291,20 @@ def build(sim, rec, summ):
         ac = compartment(r + '_Axon_LIFC', a.ID, pr['R_MOhm'], pr['C_pF'])
         nid[r] = neuron(r, sc.ID, ac.ID, pr['R_MOhm'], pr['C_pF'])
         comps[r] = (sc, ac)
+    pt_cache = AN.pair_table(summ)
     rp = rec['receptor']
+    _, _, cap_of = cap_table(summ)     # transplant rule checked against the connectome itself, not the recipe's grown_cap_nS
     for q in rec['pairs']:
-        assert q['type'] == 'AMPA' and q['g_nS'] <= q['grown_cap_nS'] + 1e-6
+        if q['type'] != 'AMPA':
+            raise ValueError('transplant rule: only AMPA grew for g2, recipe asks %s' % q['type'])
+        if q['pre'] not in ids or q['post'] not in ids:
+            raise ValueError('transplant rule: unknown role in %s->%s' % (q['pre'], q['post']))
+        pair = pt_cache.get((ids[q['pre']], ids[q['post']]))
+        if pair is None or pair['ampa'] <= 0:
+            raise ValueError('transplant rule: no grown AMPA pair %s->%s' % (q['pre'], q['post']))
+        if q['g_nS'] > cap_of(q['pre'], q['post']) + 1e-6:
+            raise ValueError('transplant rule: %s->%s g %.3f nS exceeds grown cap %.3f nS' %
+                             (q['pre'], q['post'], q['g_nS'], cap_of(q['pre'], q['post'])))
         name = '%s_%s_AMPA' % (q['pre'], q['post'])
         b = box(name, pos[q['post']])
         c = NES.Models.Connections.LIFCReceptor.Configuration()

@@ -316,7 +316,7 @@ Conclusion: the 56/64 truth table is a smooth-order, once-per-cell measurement; 
 
 Why: step 3 wrote a linear comparator onto the grown g2 network and play stayed near random (held-out 0.36-0.44), while the same
 weights on step-1 neurons are the hand-wired net. Step 3c located the failure in slow state carried across ticks. The cause is in NES, not in
-growth: `BrainGenix-NES/Source/Core/Netmorph/NetmorphManagerThread.cpp:585-636` gives every grown LIFC neuron hardcoded defaults (ToVm reset,
+growth: `struct LIFCNeuronPars` in `BrainGenix-NES/Source/Core/Netmorph/NetmorphManagerThread.cpp` (~lines 588-640 at NES master) gives every grown LIFC neuron hardcoded defaults (ToVm reset,
 fAHP 3 nS, sAHP 300 ms decay, ADP with 300 ms recovery and depletion, fatigue 1000 ms recovery, adaptive threshold with a floor that rises 1 mV per spike
 and recovers over 500 ms). They do not come from the Netmorph config and `LIFC/Edit` cannot change them. Step 4 therefore keeps everything Netmorph grew
 about connectivity and replaces only the neuron dynamics model.
@@ -368,6 +368,7 @@ Truth table: 64/64 at 100 ms, 64/64 at 20 ms, 64/64 shuffled at 20 ms (order see
 | step 4 transplant | 0.967 | 0.984 | 0.983 | 0.978 | 0, 0, 0 | 67.4 |
 | random | 0.200 | 0.180 | 0.237 | 0.206 | | |
 
+Independent verifier (seeds 401/402 x 1000): 0.935 / 0.966; shuffled truth table seed 23: 64/64; 0 transplant-rule violations over all 56 receptors.
 Hand-wired truth table re-run at the end: 64/64 at 100 ms and 20 ms (step 1 unchanged). Pairs used: 56 of 526 grown AMPA pairs (10.6%); 470 (89.4%) not built.
 All 34 neurons are replaced. Hand-wired and transplant hit rates are identical because both follow the bin rule on every tick (the misses are 8-bin quantisation, as in step 1).
 The transplant costs 67 ms/tick against 39 ms for the hand-wired net, the same as step 3 on grown neurons (cause not investigated; likely the larger spike history returned by GetSpikeTimes).
@@ -380,5 +381,5 @@ The transplant costs 67 ms/tick against 39 ms for the hand-wired net, the same a
 - Caveats: AMPA-only comparator (g2), no inhibition, a threshold-at-7.4c output instead of step 1's GABA veto; relay and output cells use non-default R/C (one set per class, listed in the recipe);
   the offline model and the blind run agreed exactly, so the diagnostic budget was barely used and the weight-space margins (0.4c at ties) were not stressed beyond shuffled orders at 20 ms.
   g1 (GABA paddle) was not run.
-- NES follow-up: make the grown LIFC defaults (`LIFCNeuronPars`, `NetmorphManagerThread.cpp:585-636`) configurable from the Netmorph/NES config and let `LIFC/Edit` change
+- NES follow-up: make the grown LIFC defaults (`struct LIFCNeuronPars`, `NetmorphManagerThread.cpp`) configurable from the Netmorph/NES config and let `LIFC/Edit` change
   ResetMethod, fAHP/sAHP/ADP, fatigue and adaptive-threshold fields. Then this transplant is a plain "edit the grown model" (no rebuild), and persisting edited weights in `ModelSave` would make it storable.
