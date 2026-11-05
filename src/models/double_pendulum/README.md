@@ -273,3 +273,29 @@ Projection from this run (about 0.56 s per tick for the first 100 ticks, then ab
 100 ticks were at 1.21 s) these rise; the `g_norm` history cut named in 3a is still untested.
 Run: `python3 dp_nes_check_window.py`, `python3 dp_nes_speed.py --read window`,
 `python3 dp_nes_run.py --run --T 10 --read window --progress output/nes_T10_windowed.log --out output/nes_T10_windowed.json`.
+
+### 30 s runs, seeds 0, 1, 2 (windowed read)
+
+Same settings as the 10 s run (disturbance on, ctrl_dt 10 ms, delay 2, U1 + A2, no recalibration; seeds 1 and 2 are eval
+seeds, nothing was tuned on them). Files: `output/nes_T30_windowed[_s1|_s2].log/.json`, `output/standin_T30_d2_s{0,1,2}.json`.
+All six runs completed 30.00 s with no fall (upright 1.000); encoder clipped on 0 ticks.
+
+| seed | controller | RMS th1 (deg) | RMS th2 (deg) | RMS force (N) | peak force (N) | drift (m) |
+|---|---|---|---|---|---|---|
+| 0 | NES | 1.13 | 0.73 | 1.42 | 11.1 | 0.222 |
+| 0 | stand-in | 1.23 | 0.91 | 1.54 | 14.2 | 0.234 |
+| 1 | NES | 1.08 | 0.73 | 1.38 | 8.7 | 0.215 |
+| 1 | stand-in | 1.21 | 0.90 | 1.44 | 9.5 | 0.243 |
+| 2 | NES | 1.17 | 0.75 | 1.66 | 10.2 | 0.217 |
+| 2 | stand-in | 1.35 | 0.99 | 1.70 | 12.0 | 0.272 |
+| mean | NES | 1.13 | 0.74 | 1.49 | 10.0 | 0.218 |
+| mean | stand-in | 1.26 | 0.94 | 1.56 | 11.9 | 0.249 |
+
+Wall: 3795 s (seed 0), 3715 s (seed 1), 3701 s (seed 2), 1.23 to 1.26 s per tick mean (about 1.2 s run, 12 ms read, 44 ms
+schedule, 8.3 kB response). `RunFor` did **not** keep creeping up past tick 1000: mean per tick for ticks 1000-2000 /
+2000-3000 was 1.27 / 1.26 (seed 0), 1.28 / 1.26 (1), 1.28 / 1.25 (2); the first 100 ticks cost 0.5 s. The seed 0 run showed
+1.75 to 1.91 s per tick over ticks 300-500, while another process on the box had load average above 100 (it fell back
+by tick 900); this is box contention, not NES. Over 100 ticks of the first minute the cost rises from 0.5 to the 1.25 s
+plateau reached by about tick 600 and stays flat, so wall-clock is linear: 180 s simulated is about 5.5 h at 1.1 to 1.25 s per tick
+(projection beyond 3000 ticks, unmeasured). One 30 s episode per seed is a small sample; the NES net is at or slightly
+better than the stand-in on every seed in these metrics.
