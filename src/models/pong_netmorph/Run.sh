@@ -14,6 +14,7 @@ while getopts "H:P:m:t:s:k:" opt; do
   esac
 done
 cd "$(dirname "$0")"
-PY=../../../venv/bin/python
+# Override with PYTHON=...; else the repo venv, else python3.
+PY=${PYTHON:-../../../venv/bin/python}
 [ -x "$PY" ] || PY=python3
 exec $PY pong_handwired.py -Host "$host" -Port "$port" -Mode "$mode" -Ticks "$ticks" -Seed "$seed" -TickMs "$tickms"

@@ -9,9 +9,6 @@ import sys
 import time
 import numpy as np
 
-_here = os.path.dirname(os.path.abspath(__file__))
-sys.path.insert(0, os.path.join(_here, '..', '..', 'components'))
-sys.path.insert(0, os.path.join(_here, '..', 'autoassociative'))
 import BrainGenix.NES as NES  # noqa: E402  (BrainGenix symlink in this dir)
 
 
