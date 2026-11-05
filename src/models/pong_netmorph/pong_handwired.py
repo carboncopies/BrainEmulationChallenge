@@ -302,7 +302,7 @@ def spikes_of(data, nid):
     return list(v)
 
 
-def play(loop, net, ticks, tick_ms, seed, n=N):
+def play(loop, net, ticks, tick_ms, seed, n=N, trace=None):
     env = PongEnv(seed)
     env.action_mismatches = 0  # ticks where the net disagreed with sign(ball_bin - paddle_bin)
     for k in range(ticks):
@@ -311,6 +311,11 @@ def play(loop, net, ticks, tick_ms, seed, n=N):
         loop.schedule(tick_input_times(net, t0, b, p))
         new = loop.run_tick(tick_ms)
         a = action_from(new, net)
+        if trace is not None:
+            ups, dns = new[net.UP.ID], new[net.DOWN.ID]
+            trace.append(dict(k=k, t0=t0, b=b, p=p, up=len(ups), down=len(dns), action=a, expected=(b > p) - (b < p),
+                              up_t=[round(x - t0, 2) for x in ups], down_t=[round(x - t0, 2) for x in dns],
+                              sim_t_after=loop.sim_time()))
         env.action_mismatches += (a != (b > p) - (b < p))
         env.step(a)
     return env

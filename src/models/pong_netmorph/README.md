@@ -291,3 +291,23 @@ no better than 20 ms (0.356 vs 0.435 mean, within noise and, if anything, worse)
 the bin rule on about 70% of ticks, so the adaptive-threshold floor accumulating across 20 ms ticks is not the main cause of the poor play.
 Not diagnosed here. Candidates to check next: errors at |ball - paddle| = 1 and ties, which dominate real game states (truth-table errors sit exactly there),
 and state carried over between ticks (relay recovery, residual UP/DOWN charge) that the isolated-row truth table does not exercise.
+
+## Step 3c: diagnosing play
+
+Recipe unchanged (frozen). Added only diagnostics: `play` writes a per-tick trace (`output/ws_play_trace_s<seed>.json`: b, p, nUP, nDOWN, action, expected, t0, spike times
+relative to t0, sim time after the tick), plus modes `shuffled` (64 combos in a fixed random order, `-Seed`) and `replay` (the play trace's (b,p) sequence run open-loop as a truth-table-style schedule).
+All on the private stack :8100. Play seed 3, 300 ticks, TickMs 100: hit rate 0.556 (10/18), 163/300 ticks differ from the bin rule (random 0.333).
+
+- H4 (bug in the play path): not supported. Every UP/DOWN spike falls 5-14 ms after its tick start (inside the tick); `t0` steps exactly 100 ms and sim time after each tick equals t0 + 100;
+  no scheduled time is below the current sim time; a second play run gave an identical trace; and the open-loop replay of the same (b,p) sequence with the truth-table code path
+  reproduced all 300 per-tick (nUP, nDOWN) pairs exactly (137/300 correct = 163 mismatches). Play and truth table read out identically, so the difference is in the inputs' sequence, not the code.
+- H1 (distribution): partly. |i-j| histogram in play: 0: 84, 1: 122, 2: 37, 3: 18, 4: 16, 5: 13, 6: 10 (69% of ticks at |i-j| <= 1; the truth table has 22/64 = 34% there). Mismatch rate by i-j:
+  -1: 0.53, 0: 0.65, +1: 0.28, |i-j| = 2: 0.15 (down) / 0.62 (up), i-j >= 3: 0.73-0.89 (n = 49). If every play tick took the action the truth table gave for its own (b,p) cell, 113/300 would mismatch (38%), so the distribution accounts for about 113 of the 163.
+- H2 (history/order): supported, and it is the larger remaining effect. Truth table, same weights: smooth ball-major order 56/64, fixed shuffled order (seed 7) 52/64. The play sequence replayed open-loop: 137/300 at 100 ms spacing and 110/300 at 500 ms
+  (131 of the 190 mismatches at |i-j| <= 1 but 59 of 94 ticks at |i-j| >= 2 wrong, where the truth table is 26/26 right). The truth table at 500 ms is still 56/64, so spacing alone is not the cause and a 500 ms recovery time does not remove it.
+  In play 27 of 37 repeated cells gave different (nUP, nDOWN) on different visits. Largest cell shifts: (b, p=1) is UP-driven 2 to 3 net spikes in the truth table but 0 to 0.6 in play (n = 9-13 each);
+  mismatch is 0.69 when the paddle bin is unchanged from the previous tick vs 0.39 when it changed. The slow state is probably the repeated-input adaptive floor of the same relays (not isolated here).
+- H3 (UP/DOWN bias): mostly not. Play actions: UP 84, DOWN 91, 0 125 against expected 120, 96, 84; 54 ticks are 0/0. The error is a surplus of 0 (net too weak), not a sign bias, but it makes the paddle stick: paddle bin 1 holds 105 of 300 ticks (82% mismatch there, 61 zero actions),
+  because (b,1) cells go quiet after repeated visits. P5/P6 UP-drive deficit is not visible as a separate effect (mismatch 0.42 and 0.27 there).
+
+Conclusion: the 56/64 truth table is a smooth-order, once-per-cell measurement; play dwells at |i-j| <= 1 and repeats the same cells, and carried state (time scale longer than 500 ms) weakens the output, so the programmed weights do not transfer. Future calibration should use shuffled/repeated schedules (and play-order) rather than the ordered 64-cell table.

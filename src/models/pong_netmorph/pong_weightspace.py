@@ -231,14 +231,38 @@ def graded_truthtable(loop, net, spacing, log=print):
     return dict(correct=ok, total=len(combos), rows=rows)
 
 
-def run_play(loop, net, ticks, seed, tick_ms=20):
+def run_play(loop, net, ticks, seed, tick_ms=20, trace=None):
     t0 = time.time()
-    env = H.play(loop, net, ticks, tick_ms, seed)
+    env = H.play(loop, net, ticks, tick_ms, seed, trace=trace)
     wall = time.time() - t0
     rnd, ora = run_policy(random_policy, ticks, seed), run_policy(oracle_policy, ticks, seed)
     return dict(seed=seed, ticks=ticks, hits=env.hits, misses=env.misses, hit_rate=env.hit_rate(),
                 action_mismatches=env.action_mismatches, tick_ms=tick_ms,
                 wall_ms_per_tick=1000.0 * wall / ticks, random=rnd.hit_rate(), oracle=ora.hit_rate())
+
+
+def graded_schedule(loop, net, combos, spacing, log=print):
+    """Open-loop truth-table-style run of an explicit (b, p) sequence (any order, repeats allowed); same readout as graded_truthtable."""
+    t0 = loop.t_ms + 10
+    pairs = []
+    for k, (b, p) in enumerate(combos):
+        pairs += H.tick_input_times(net, t0 + k * spacing, b, p)
+    loop.schedule(sorted(pairs, key=lambda x: x[0]))
+    loop.sim.RunFor(t0 + len(combos) * spacing + spacing - loop.t_ms, 1.0)
+    loop.wait_idle(timeout_s=600)
+    data = loop.sim.GetSpikeTimes()['SpikeTimes'] or {}
+    up = np.array(H.spikes_of(data, net.UP.ID)); dn = np.array(H.spikes_of(data, net.DOWN.ID))
+    rows, ok = [], 0
+    for k, (b, p) in enumerate(combos):
+        s = t0 + k * spacing
+        nu = int(((up >= s) & (up < s + spacing)).sum()) if up.size else 0
+        nd = int(((dn >= s) & (dn < s + spacing)).sum()) if dn.size else 0
+        act = (nu > nd) - (nu < nd)
+        exp = (b > p) - (b < p)
+        ok += act == exp
+        rows.append(dict(k=k, b=b, p=p, up=nu, down=nd, action=act, expected=exp))
+    log('%d/%d correct' % (ok, len(combos)))
+    return dict(correct=ok, total=len(combos), rows=rows)
 
 
 def probe_single(loop, net, spacing=100):
@@ -317,7 +341,7 @@ def edit_stats(rec, summ):
 
 def parse(argv=None):
     p = argparse.ArgumentParser()
-    p.add_argument('mode', choices=['outchar', 'solve', 'truthtable', 'play', 'handwired-play', 'handwired-truthtable', 'probe', 'stats'])
+    p.add_argument('mode', choices=['shuffled', 'replay', 'outchar', 'solve', 'truthtable', 'play', 'handwired-play', 'handwired-truthtable', 'probe', 'stats'])
     p.add_argument('-Host', default='localhost')
     p.add_argument('-Port', default=8100, type=int)
     p.add_argument('-Out', default='output')
@@ -372,6 +396,20 @@ def main(argv=None):
         json.dump(out, open(os.path.join(A.Out, 'ws_probe.json'), 'w'))
         return 0
     loop = NL.ClosedLoop(sim, ids)
+    if A.mode == 'shuffled':
+        import random
+        combos = [(b, p) for b in range(N) for p in range(N)]
+        random.Random(A.Seed).shuffle(combos)
+        res = graded_schedule(loop, net, combos, A.SpacingMs)
+        json.dump(res, open(os.path.join(A.Out, 'ws_shuffled_s%d.json' % A.Seed), 'w'))
+        print('RESULT shuffled truthtable %d ms seed %d: %d/64' % (A.SpacingMs, A.Seed, res['correct']))
+        return 0
+    if A.mode == 'replay':
+        tr = json.load(open(os.path.join(A.Out, 'ws_play_trace_s%d.json' % A.Seed)))
+        res = graded_schedule(loop, net, [(r['b'], r['p']) for r in tr], A.SpacingMs)
+        json.dump(res, open(os.path.join(A.Out, 'ws_replay_s%d.json' % A.Seed), 'w'))
+        print('RESULT replay %d ticks %d ms: %d/%d' % (len(tr), A.SpacingMs, res['correct'], res['total']))
+        return 0
     if A.mode == 'outchar':
         out = outchar(loop, sim, rec, net)
         json.dump(out, open(os.path.join(A.Out, 'ws_outchar.json'), 'w'))
@@ -381,7 +419,9 @@ def main(argv=None):
         json.dump(res, open(os.path.join(A.Out, 'ws_truthtable_%d.json' % A.SpacingMs), 'w'))
         print('RESULT truthtable %d ms: %d/64' % (A.SpacingMs, res['correct']))
     else:
-        res = run_play(loop, net, A.Ticks, A.Seed, A.TickMs)
+        trace = []
+        res = run_play(loop, net, A.Ticks, A.Seed, A.TickMs, trace=trace)
+        json.dump(trace, open(os.path.join(A.Out, 'ws_play_trace_s%d.json' % A.Seed), 'w'))
         json.dump(res, open(os.path.join(A.Out, 'ws_play_s%d_n%d.json' % (A.Seed, A.Ticks)), 'w'))
         print('RESULT play', json.dumps(res))
     return 0
