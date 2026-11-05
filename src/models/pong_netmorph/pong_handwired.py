@@ -65,6 +65,8 @@ def parse_args(argv=None):
     p.add_argument("-Seed", default=1, type=int)
     p.add_argument("-SpacingMs", default=100, type=int, help="truthtable combo spacing")
     p.add_argument("-Out", default="output", type=str)
+    p.add_argument("-Model", default=None, type=str,
+                   help="load this saved (Netmorph grown / tuned) model instead of building the hand-wired net")
     for k in ("G_AMPA_IN", "G_GABA", "G_AMPA_OUT", "W_AMPA_IN", "W_GABA", "W_AMPA_OUT"):
         p.add_argument("-" + k, type=float, default=None)
     return p.parse_args(argv)
@@ -208,6 +210,37 @@ def build(sim, n=N):
     return net
 
 
+class Role:
+    """Minimal stand-in for an AddLIFCNeuron result: only .ID is used by the harness."""
+    def __init__(self, nid):
+        self.ID = nid
+
+
+def load_model_net(sim, model, n=N, recipe_dir='output'):
+    """Load a saved model and map neurons to roles through the Netmorph region names
+    (the grown config makes every role its own one-neuron region)."""
+    sim.SetLIFCAbstractedFunctional(_AbstractedFunctional=True)  # before receptors are rebuilt
+    sim.SetSTDP(_DoSTDP=False)
+    sim.ModelLoad(model)  # for a tuned model this is the grown model; the recipe is applied below
+    recipe_path = os.path.join(recipe_dir, '%s_recipe.json' % model)
+    if os.path.exists(recipe_path):
+        # ModelSave does not persist per-pair strength edits, so tuned models are grown model + recipe.
+        import pong_netmorph_tune as TU
+        TU.apply_recipe(sim, json.load(open(recipe_path)))
+        print('Applied tuning recipe %s' % recipe_path)
+    regions = sim.GetAbstractConnectome(Sparse=True)['Regions']
+    for r in ['UP', 'DOWN'] + ['%s%d' % (c, i) for c in 'BPUD' for i in range(n)]:
+        assert r in regions and len(regions[r]) == 1, 'role %s not found as a one-neuron region' % r
+    net = Net()
+    net.B = {i: Role(regions['B%d' % i][0]) for i in range(n)}
+    net.P = {i: Role(regions['P%d' % i][0]) for i in range(n)}
+    net.U = {i: Role(regions['U%d' % i][0]) for i in range(n)}
+    net.D = {i: Role(regions['D%d' % i][0]) for i in range(n)}
+    net.UP, net.DOWN = Role(regions['UP'][0]), Role(regions['DOWN'][0])
+    print('Loaded model %s: %d neurons mapped to roles' % (model, sum(len(v) for v in regions.values())))
+    return net
+
+
 def tick_input_times(net, t0, ball_bin, paddle_bin):
     """Absolute [t, id] spike pairs for one tick starting at t0 (sorted)."""
     pairs = []
@@ -287,19 +320,20 @@ def main(argv=None):
         if getattr(A, k) is not None:
             g[k] = getattr(A, k)
     client = NL.connect(A.Host, A.Port, A.UseHTTPS)
-    sim = NL.new_simulation(client, 'pong_handwired', seed=A.Seed)
-    net = build(sim)
+    sim = NL.new_simulation(client, 'pong_handwired' if not A.Model else 'pong_' + A.Model, seed=A.Seed)
+    net = build(sim) if not A.Model else load_model_net(sim, A.Model, recipe_dir=A.Out)
+    tag = '' if not A.Model else A.Model + '_'
     ids = [net.UP.ID, net.DOWN.ID]
     loop = NL.ClosedLoop(sim, ids)
     os.makedirs(A.Out, exist_ok=True)
-    params = dict(G_AMPA_IN=G_AMPA_IN, G_GABA=G_GABA, G_AMPA_OUT=G_AMPA_OUT,
+    params = dict(model=A.Model, G_AMPA_IN=G_AMPA_IN, G_GABA=G_GABA, G_AMPA_OUT=G_AMPA_OUT,
                   W_AMPA_IN=W_AMPA_IN, W_GABA=W_GABA, W_AMPA_OUT=W_AMPA_OUT,
                   AMPA=AMPA, GABA=GABA)
     if A.Mode == 'truthtable':
         res = truthtable(loop, net, A.SpacingMs)
         res['params'] = params
         res['spacing_ms'] = A.SpacingMs
-        json.dump(res, open(os.path.join(A.Out, 'truthtable_%d.json' % A.SpacingMs), 'w'), indent=1)
+        json.dump(res, open(os.path.join(A.Out, 'truthtable_%s%d.json' % (tag, A.SpacingMs)), 'w'), indent=1)
         return 0 if res['passed'] else 1
     # play
     env = play(loop, net, A.Ticks, A.TickMs, A.Seed)
@@ -314,7 +348,7 @@ def main(argv=None):
     print(json.dumps(res, indent=1))
     print('\nNetwork: %d hits, %d misses, hit rate %.3f | random %.3f | oracle %.3f | %.1f ms/tick mean, %.1f p95'
           % (env.hits, env.misses, env.hit_rate(), rnd.hit_rate(), ora.hit_rate(), lat['mean_ms'], lat['p95_ms']))
-    json.dump(res, open(os.path.join(A.Out, 'play_s%d_n%d.json' % (A.Seed, A.Ticks)), 'w'), indent=1)
+    json.dump(res, open(os.path.join(A.Out, 'play_%ss%d_n%d.json' % (tag, A.Seed, A.Ticks)), 'w'), indent=1)
     return 0
 
 
