@@ -117,3 +117,39 @@ delay (ticks)      0    1    2    3    4
 plain gain        40   20   10   10    5
 delay-aware gain  40   40   30   20   10
 ```
+
+
+## Phase 2: hand-derived spiking controller (Python stand-in, no NES)
+
+Files: `dp_codec.py` (encoder/decoder, swappable), `dp_spiking.py` (LIFC-like stand-in network + controller
+class for `dp_env.run`), `dp_derive.py` (K and closed-loop statistics -> every weight, writes
+`weights_recipe.json`; `weights_recipe_derived.json` is the pre-adjustment version), `dp_phase2.py` (CLI),
+`weightspace_log.md` (each number: derived vs hand adjustment), `test_dp_spiking.py`.
+
+Architecture: 6 states x (pos, neg) input populations of 256 spike sources (rates r0 +- g_i s_i, r0 = 150 Hz,
+regular spikes on the 1 ms grid) -> AMPA only -> push and pull groups of 111 clean LIFC neurons (Pong step-1
+parameters, 1 ms step); force = 0.0854 N x (push count - pull count) per 10 ms window. 3072 input neurons,
+222 output neurons, 1998 receptors, weights 0.21 to 1.88 nS. K_i sigma_i spans 11.6x (|K| 80x); the encoder
+gain g_i = r0/range_i takes the range and the weight carries only K_i range_i. Latency: encode and count
+in the same 10 ms window, force applied one tick later, plus 0.28 tick of measured lag: 1.28 ticks, run at
+delay 2. Weights are derived; one hand adjustment (decoder constant x 1/1.113).
+
+Measured, 180 s, disturbance on, ctrl_dt 10 ms, mean of seeds 0,1,2 (all upright 1.000, none fell):
+
+| delay (ticks) | controller | RMS th1 (deg) | RMS th2 (deg) | RMS force (N) | peak force (N) | max cart drift (m) |
+|---|---|---|---|---|---|---|
+| 2 | spiking | 1.16 | 0.84 | 1.49 | 15.1 | 0.26 |
+| 2 | LQR 10 ms | 1.04 | 0.70 | 1.18 | 12.9 | 0.24 |
+| 1 | spiking | 1.17 | 0.86 | 1.11 | 12.4 | 0.27 |
+| 1 | LQR 10 ms | 1.05 | 0.72 | 0.90 | 11.1 | 0.24 |
+
+Per-seed numbers are in `output/phase2.json` (delay 2) and `output/phase2_d1.json` (gitignored).
+Encoder clipping on the eval seeds: 3, 0 and 59 of 18000 ticks (the ranges come from seed 100).
+Run: `python3 dp_phase2.py [--delay D]`, `python3 dp_phase2.py --latency`, `python3 dp_derive.py`.
+
+Would not carry over to NES as is: single-exponential synapse (NES AMPA has a 0.5 ms rise), perfectly regular
+input trains and exact count readout (NES needs `SetSpecificAPTimes` per window plus `GetSpikeTimes`
+round trips, 27-35 ms per tick in Pong, which is over the 10 ms budget), arbitrary receptor values
+(grown pairs cap at `g_peak_sum`; setters write only AMPA), designed connectivity of 1998 receptors
+(Pong grew 526) and 3072 input neurons, and the clean LIFC parameters (R 100 MOhm, C 100 pF) must be
+applied through `LIFC/Edit` (no adaptation) as in Pong step 1. Real run time per window is not modelled.
