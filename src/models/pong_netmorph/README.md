@@ -311,3 +311,74 @@ All on the private stack :8100. Play seed 3, 300 ticks, TickMs 100: hit rate 0.5
   because (b,1) cells go quiet after repeated visits. P5/P6 UP-drive deficit is not visible as a separate effect (mismatch 0.42 and 0.27 there).
 
 Conclusion: the 56/64 truth table is a smooth-order, once-per-cell measurement; play dwells at |i-j| <= 1 and repeats the same cells, and carried state (time scale longer than 500 ms) weakens the output, so the programmed weights do not transfer. Future calibration should use shuffled/repeated schedules (and play-order) rather than the ordered 64-cell table.
+
+# Step 4: connectome transplant (`pong_transplant.py`, `transplant_recipe.json`)
+
+Why: step 3 wrote a linear comparator onto the grown g2 network and play stayed near random (held-out 0.36-0.44), while the same
+weights on step-1 neurons are the hand-wired net. Step 3c located the failure in slow state carried across ticks. The cause is in NES, not in
+growth: `BrainGenix-NES/Source/Core/Netmorph/NetmorphManagerThread.cpp:585-636` gives every grown LIFC neuron hardcoded defaults (ToVm reset,
+fAHP 3 nS, sAHP 300 ms decay, ADP with 300 ms recovery and depletion, fatigue 1000 ms recovery, adaptive threshold with a floor that rises 1 mV per spike
+and recovers over 500 ms). They do not come from the Netmorph config and `LIFC/Edit` cannot change them. Step 4 therefore keeps everything Netmorph grew
+about connectivity and replaces only the neuron dynamics model.
+
+## Transplant rule
+Built from `output/johnjose-pong-g2_connectome.json` (index = presynaptic id, `ConnectionTargets[pre]` = posts, types 1 AMPA, 2 GABA, 3 NMDA as in
+`pong_netmorph_analyze.py`; g2 has 526 AMPA pairs and 505 NMDA receptor entries on the same pairs, no GABA):
+1. A fresh simulation with the same 34 roles (`Regions` map), somata as spheres at the grown `SomaPositions`, step-1 clean LIFC neurons
+   (Onset reset, no fAHP/sAHP/ADP/fatigue/adaptive threshold).
+2. A receptor is built ONLY for a (pre, post) pair that exists in the grown connectome, ONLY of a type that grew for that pair, with conductance <= the
+   grown cap of that pair and type (sum of `ConnectionGPeakSum` over the pair's receptors of that type). `build()` asserts this for every receptor.
+3. Pairs not used are not built (== zeroed). NMDA is not used.
+Topology and strength limits are grown; weights, neuron dynamics, receptor kinetics (rise 0.5 / decay 3 ms) and onset delay (1 ms; grown delays are
+not in the connectome JSON) are written. Stated limit: this is not the grown neuron, it is the grown wiring diagram with step-1-class neurons.
+
+## Design (written blind, from the connectome only)
+Same linear comparator as step 3: relays U_k/D_k (the only pairs into UP/DOWN are U->UP and D->DOWN), UP drive = c(i + 7 - j), DOWN drive = c(7 - i + j),
+ball and paddle relays disjoint. The step-3 MILP is adapted (`solve_side`): relay output weight w_r <= cap(r, out), input->relay pairs need cap >= 0.97 nS,
+c is a MILP variable, then the max drive error is minimised at a fixed c. c = 2 nS/level was chosen (exact solution, zero drive error on both sides;
+the largest c with <= 12% error was 5.4, not used). What clean neurons change:
+- Relays are one neuron parameter set for all 16 hidden cells: R 1000 MOhm, C 3 pF (g_L 1 nS, tau 3 ms), Vrest/Vreset/Vth -70/-55/-50. High R makes the
+  weakest grown synapses (0.98 nS, one synapse) fire a relay per input spike; every input pair is written at 0.97 nS (identical for all inputs, so relays respond
+  identically). The old 2.9 nS cut is gone, which is what makes the UP-side paddle inputs P5, P6 deliverable without step 3's common-mode shift.
+- With weight 1 a receptor clamps at its peak (`Update_Conductance`, `min(g_peak_sum, ...)`), so a relay firing every 2 ms gives a plateau conductance = w_r at the output. The output
+  is a threshold element: UP and DOWN are one identical parameter set, g_L = 7.4c/0.4 (R 27 MOhm, C 74 pF, tau 2 ms), so V_ss crosses Vth at G = 7.4c. Tie drive 7c < 7.4c < 8c: at a tie nothing
+  fires on either side (UP = DOWN = 0 exactly), a win fires one side only. The readout stays sign(new UP spikes - new DOWN spikes).
+- Encoding: 3-spike bursts 3 ms apart, ball and paddle both at +1 ms.
+- Before the stack: an offline model of the NES update rule (ExpEulerCm, g_norm, clamp; written from the source, not fitted to any stack data) predicted 64/64 at 100 and 20 ms,
+  including a shuffled order.
+Assignment (relay: output nS <- inputs; full table with caps in `design.relays`): UP: U0 2 <- B1; U1 2 <- P1,P4,P6; U2 6 <- B3,B5,B7; U3 10 <- P0,P1,P2; U4 4 <- P0,P4,P5;
+U5 8 <- B4,B6,B7; U6 4 <- B2,B5,B6; U7 8 <- P3. DOWN: D0 10 <- B0,B1,B2; D1 6 <- P3,P5,P7; D2 8 <- P4,P6,P7; D3 4 <- B0,B5; D4 4 <- P2,P5,P6; D5 6 <- B3,B4;
+D6 2 <- B1,B3,B6; D7 2 <- P1. 56 receptors: 10 B->U, 10 B->D, 10 P->U, 10 P->D, 8 U->UP, 8 D->DOWN (mean written/cap 0.34).
+
+## Blind result (one evaluation, private stack :8100)
+Truth table 64/64 at 100 ms and 64/64 at 20 ms; play seed 1 x 500 at 20 ms tick: 30/30 = 1.00 (0 mismatches against the bin rule; random 0.233).
+It matched the offline prediction cell for cell.
+
+## Diagnostics
+4 stack runs (limit 12), seeds 2 and 5 only for play, no recipe edits (none were needed): shuffled truth table at 20 ms, orders seed 7 and 9: 64/64 and 64/64;
+play seed 2 x 1000: 56/60 = 0.933 (random 0.283); play seed 5 x 1000: 59/61 = 0.967 (random 0.164); 0 mismatches against the bin rule in both. Log: `output/transplant_log.md` (gitignored).
+
+## Final (recipe frozen, unchanged since the blind run; seeds 301-303 x 1000 ticks at 20 ms tick)
+Truth table: 64/64 at 100 ms, 64/64 at 20 ms, 64/64 shuffled at 20 ms (order seed 11).
+
+| Model | play 301 | play 302 | play 303 | mean | mismatches vs bin rule | ms/tick (mean) |
+|---|---|---|---|---|---|---|
+| hand-wired (step 1) | 0.967 | 0.984 | 0.983 | 0.978 | 0, 0, 0 | 39.5 |
+| step 3 weight-space on grown neurons | 0.450 | 0.475 | 0.407 | 0.444 | 628, 617, 632 | 67.4 |
+| step 4 transplant | 0.967 | 0.984 | 0.983 | 0.978 | 0, 0, 0 | 67.4 |
+| random | 0.200 | 0.180 | 0.237 | 0.206 | | |
+
+Hand-wired truth table re-run at the end: 64/64 at 100 ms and 20 ms (step 1 unchanged). Pairs used: 56 of 526 grown AMPA pairs (10.6%); 470 (89.4%) not built.
+All 34 neurons are replaced. Hand-wired and transplant hit rates are identical because both follow the bin rule on every tick (the misses are 8-bin quantisation, as in step 1).
+The transplant costs 67 ms/tick against 39 ms for the hand-wired net, the same as step 3 on grown neurons (cause not investigated; likely the larger spike history returned by GetSpikeTimes).
+
+## Conclusions
+- Target met: mean held-out play 0.978 (>= 0.85), truth table 64/64 at 20 ms (>= 60/64). The step-3 specification and solver were not at fault; the hardcoded neuron defaults were.
+  Same grown topology and caps, same kind of MILP assignment: 0.444 -> 0.978.
+- What Netmorph contributed: which pairs exist and their strength limits (enough for a full comparator through relays, using 10.6% of the grown pairs) and the soma layout.
+  What was written: every weight, the neuron model, kinetics, delays. Index specificity still did not come from growth (step 2).
+- Caveats: AMPA-only comparator (g2), no inhibition, a threshold-at-7.4c output instead of step 1's GABA veto; relay and output cells use non-default R/C (one set per class, listed in the recipe);
+  the offline model and the blind run agreed exactly, so the diagnostic budget was barely used and the weight-space margins (0.4c at ties) were not stressed beyond shuffled orders at 20 ms.
+  g1 (GABA paddle) was not run.
+- NES follow-up: make the grown LIFC defaults (`LIFCNeuronPars`, `NetmorphManagerThread.cpp:585-636`) configurable from the Netmorph/NES config and let `LIFC/Edit` change
+  ResetMethod, fAHP/sAHP/ADP, fatigue and adaptive-threshold fields. Then this transplant is a plain "edit the grown model" (no rebuild), and persisting edited weights in `ModelSave` would make it storable.
