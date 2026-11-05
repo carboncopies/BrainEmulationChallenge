@@ -199,3 +199,59 @@ a weight edit; without it the same calibration reaches 28/64.
 - Tuning: calibrate with the same spacing and ordering as play; add per-pair (not per-cell) scales;
   search over Rm for U/D cells too.
 - Only 30 hit/miss events per 500 ticks: hit rates have wide error bars.
+
+# Step 3: weight-space programming of the grown model (`johnjose-pong-g2`)
+
+Protocol (https://rikiyat.github.io/blog/weight-space-programming/): read the grown connectome (pairs and
+`g_peak_sum` caps), write weights directly from a spec, no optimiser, measure on held-out runs. Files:
+`pong_weightspace.py` (solver, recipe writer, evaluation: `solve | truthtable | play | handwired-play | probe | outchar | stats`) and
+`weightspace_recipe.json` (the frozen recipe: every grown AMPA pair with its written nS, neuron edits, input encoding).
+Replay: `python pong_weightspace.py truthtable -SpacingMs 100` and `play -Seed 101 -Ticks 1000` (loads g2, applies the recipe).
+The graded readout `sign(nUP - nDOWN)` is used for the truth table too (the step-1 truth table counts "both fired" as an error).
+
+## Design
+Linear comparator through relays: hidden cells U_k/D_k relay the inputs; U relays drive only UP, D relays only DOWN
+(that is what exists in g2). Required drive: UP = c*(i + 7-j), DOWN = c*(7-i + j), so UP - DOWN = 2c(i-j) and the tie gives equal counts.
+A MILP (scipy `milp`, deterministic, existing pairs only, input->relay cap >= 2.9 nS) picks, per side, relay output weights
+w_r <= 0.6*cap, and which inputs drive which relay. Ball and paddle inputs never share a relay (class variable), so both bursts can be
+coincident and conductances add at UP/DOWN. An input with no usable pair (UP side: P5 and P6, all caps < 2.9 nS) gets a common-mode
+deficit applied to BOTH sides, which keeps UP - DOWN for that input. Everything else (470 of 526 grown AMPA pairs, including all 125 recurrent
+hidden->hidden, U0->DOWN, D4->UP) is set to 0; 56 pairs are written non-zero (all differ from the grown value); 18 of 34 neurons get a LIFC/Edit.
+Final: c = 1.1 nS/level, input->relay min(cap, 10 nS), burst of 3 input spikes 3 ms apart, ball and paddle at +1 ms (declared in the recipe, same in
+every evaluation). Assignment table: `design.relays` in the recipe (relay, output nS, inputs), e.g. UP: U7 4.4 nS <- B6,B7 ... see file.
+Neuron edits: used relays R 3000 MOhm, C 0.5 pF, Vrest -53 mV; UP and DOWN identical: R 200 MOhm, C 10 pF.
+
+## Things learned from the diagnostics (NES facts, from source and probes)
+- `LIFC/Edit` cannot lower the threshold: Netmorph neurons start with an adaptive-threshold floor at -50 mV that only decays toward Vth. Gaps are set with Vrest.
+- The conductance of a pair is `min(g_peak_sum, w*g_peak_sum*g_norm)`, so summed pulses of one pair saturate at the cap.
+- Input->relay latency is pair specific (2-8 ms, grown onset delays); weak pairs (<~2 nS) fire a relay late or once for three spikes, strong ones fire at once.
+  Hence (a) designs that need relay counts or pulse timing from weak pairs fail, (b) only pairs >= 2.9 nS were used.
+- ToVm output cells fire about one spike per relay pulse above a threshold amplitude (forced-relay probe: 2.9 nS 0-1 spike, 5.8 nS 2, >= 8 nS 3, 23 nS 4),
+  not a charge-proportional count. The tie drive 7c is therefore placed mid-slope (c = 0.8 -> 51/64, c = 1.1 -> 56/64).
+- Floor +1 mV per spike (500 ms recovery) silences UP/DOWN when ticks come every 20 ms.
+
+## Results
+Blind (one evaluation, recipe written from the connectome alone, first design: MILP with shared relays, weights up to caps): truth table 40/64, play seed 1 x 500: 11/30 = 0.37 (random 0.23).
+Diagnostic: 20 stack runs (seeds 1-2 only for play): 10 truth tables, 6 single-input probes, 1 forced-relay output probe, 1 play, 1 truth table at 20 ms (+ 1 more truth table);
+every edit a hand edit (list above and `output/weightspace_log.md`, gitignored). Key edits: gap via Vrest instead of Vth; relay equalisation attempt (all inputs 0.95 nS, abandoned: relays then fire once at scattered latencies);
+output stage R/C; disjoint ball/paddle relays + coincident bursts; strong pairs only (gmin 2.9) with L1-error MILP; common-mode deficit shift; c = 0.8 -> 1.1.
+Forward-pass budget: 22 stack evaluations in total (blind 1 + 20 diagnostic + 1 blind play), about 1.6k closed-loop ticks plus ~9 x 64 truth-table presentations.
+
+Final (recipe frozen, held-out seeds 101-103 x 1000 ticks, private stack :8100):
+| Model | truth table 100 ms | truth table 20 ms | play 101 | play 102 | play 103 | mean |
+|---|---|---|---|---|---|---|
+| hand-wired (step 1) | 64/64 | 64/64 | 0.983 | 0.933 | 0.950 | 0.955 |
+| step 2 tuned (g2-cal-rm600) | 42/64 (in-sample) | not run | 0.466 | 0.450 | 0.583 | 0.500 |
+| step 3 weight-space (g2) | 56/64 | 35/64 | 0.362 | 0.400 | 0.467 | 0.410 |
+| random | | | 0.310 | 0.283 | 0.333 | 0.309 |
+
+Edited: of 526 grown AMPA pairs, 56 (10.6%) written non-zero (all changed from grown), 470 (89.4%) zeroed (100% of pairs touched, 34-neuron net, 18 neurons edited).
+
+## Conclusions
+- Target not met: mean held-out play 0.41 (target 0.85), truth table 56/64 at 100 ms (target 60/64). Step 3 is slightly above random and below the step-2 tuned model in closed loop.
+- The linear-comparator spec is sound (the 100 ms truth table went 40 -> 56/64 with reasoned edits, errors only at |i-j| = 1), but g2's default neuron dynamics defeat it:
+  at 20 ms spacing the adaptive-threshold floor silences UP/DOWN (35/64, mostly 0/0), which is also why play (661/1000 ticks differ from the bin rule) is poor.
+  The same weights on step-1 neurons (no adaptation) are the hand-wired net.
+- What would likely fix it: NES edit of ResetMethod/adaptive floor/fAHP (limit C4), GABA strength setters (C1) for real inhibition instead of a conductance-sum, and
+  persisted edits in ModelSave (C3). With those, the MILP spec above should transfer; without them the 20 ms regime is not reachable by weights alone.
+- Honest caveat: 20 diagnostic runs used the 64-combination truth table (100 ms) as the main signal, so 56/64 is in-sample; the play numbers are the held-out measure.

@@ -35,13 +35,21 @@ from pong_env import PongEnv, random_policy, oracle_policy, run_policy
 
 N = 8
 MODEL = 'johnjose-pong-g2'
-G_IN = 10.0          # nS target for input->relay pairs (capped by g_peak_sum)
+G_IN = 10.0          # nS target for input->relay pairs (capped by g_peak_sum): strong inputs saturate the relay (fires on every input spike,
+                     # fixed latency); probe 10: spike count and latency of a relay vary with input strength when inputs are weak
 
-ENCODING = dict(burst_spikes=2, isi_ms=2, paddle_offset_ms=1, ball_offset_ms=7)
-RELAY_EDIT = dict(MembraneResistance_MOhm=1000.0, MembraneCapacitance_pF=10.0,       # tau 10 ms; gap to threshold 10 mV so
-                  SpikeThreshold_mV=-60.0)                                           # even ~1 nS caps fire a relay
-OUT_EDIT = dict(MembraneResistance_MOhm=50.0, MembraneCapacitance_pF=400.0,          # tau 20 ms integrator, ~0.45 mV per nS-spike
-                SpikeThreshold_mV=-62.0, RefractoryPeriod_ms=3.0)                    # identical for UP and DOWN
+ENCODING = dict(burst_spikes=3, isi_ms=3, paddle_offset_ms=1, ball_offset_ms=1)   # coincident: ball and paddle relays are disjoint, conductances add at UP/DOWN
+# NOTE: Vth must stay at -50: Netmorph neurons start with an adaptive-threshold FLOOR at -50 that LIFC/Edit
+# cannot move (it only decays toward Vth), so lowering Vth does nothing and makes the floor drift. The gap to
+# threshold is set through Vrest instead.
+VTH = -50.0
+RELAY_EDIT = dict(MembraneResistance_MOhm=3000.0, MembraneCapacitance_pF=0.5, RestingPotential_mV=-53.0)       # tau 10 ms; Vrest per relay (gap rule below)
+OUT_EDIT = dict(MembraneResistance_MOhm=200.0, MembraneCapacitance_pF=10.0)         # identical for UP and DOWN. tau 1 ms: Vm tracks the
+# conductance-weighted target E = Vrest*gL/(gL+gs) (gL = 10 nS); the adaptive threshold (+2 mV/spike) turns the excess into a spike count
+GMIN = 2.9           # weakest input->relay cap used: weaker pairs fire the relay late/partially (probe 14) so pulses stop coinciding
+C_NS = 1.1           # nS per level: output characteristic (forced-relay probe 15): 5.8 nS pulse -> 2 spikes, >=8 -> 3, <3 -> 0-1, so tie drive 7c = 5.6 nS sits mid-slope
+W_FRAC = 0.6         # relay output weight <= 0.5 * g_peak_sum: two spikes 2 ms apart then sum linearly, no min() cap
+GAP_PER_NS = 1.5     # relay gap to threshold (mV) = min(6, 1.5 * weakest input cap in nS); probe: 5*cap left 1.96 nS inputs silent
 
 
 # --------------------------------------------------------------------------- solver
@@ -61,101 +69,110 @@ def side_levels(side):
     return {**{'B%d' % i: N - 1 - i for i in range(N)}, **{'P%d' % j: j for j in range(N)}}
 
 
-def solve_side(side, cap, gmin, c=None):
+def solve_side(side, cap, gmin, c, shift=None):
     """Exact MILP (scipy.optimize.milp, deterministic) on the EXISTING pairs only.
-    Unknowns: relay output weight w_r <= cap(r, out); a[x,r] = 1 iff input x drives relay r (needs
-    cap(x,r) >= gmin); y[x,r] = a*w_r. Constraint: sum_r y[x,r] = c * level(x) for every input x.
-    c=None: maximise c. c given: minimise the number of used input pairs. Returns (c, w, a) or None."""
+    Unknowns: relay output weight w_r <= W_FRAC*cap(r, out); z_r = class of relay r (0: serves ball inputs only,
+    1: paddle inputs only, so a ball and a paddle input never share a relay: no OR between simultaneous inputs);
+    a[x,r] = 1 iff input x drives relay r (needs cap(x,r) >= gmin); y[x,r] = a*w_r; e_x >= |sum_r y[x,r] - c*level(x)|.
+    Objective: minimise 1000*sum(e) + number of used input pairs. Returns (w, a, err) with err = {input: drive - target}."""
     from scipy.optimize import milp, LinearConstraint, Bounds
+    shift = shift or {}
     relays = ['%s%d' % ('U' if side == 'UP' else 'D', k) for k in range(N)]
-    out = 'UP' if side == 'UP' else 'DOWN'
+    out = side
     lev = side_levels(side)
     xs = sorted(lev)
     pairs = [(x, r) for x in xs for r in relays if cap(x, r) >= gmin - 1e-6 and cap(r, out) > 0]
-    nw, npair = len(relays), len(pairs)
-    # variable layout: w(nw) | c | a(npair) | y(npair)
-    iw, ic, ia, iy = 0, nw, nw + 1, nw + 1 + npair
-    nv = iy + npair
+    nw, npair, nx = len(relays), len(pairs), len(xs)
+    # variable layout: w(nw) | z(nw) | a(npair) | y(npair) | e(nx)
+    iw, iz, ia = 0, nw, 2 * nw
+    iy = ia + npair
+    ie = iy + npair
+    nv = ie + nx
     rows, lo, hi = [], [], []
     def row(): return np.zeros(nv)
     for k, (x, r) in enumerate(pairs):
-        cr = cap(r, out)
+        cr = W_FRAC * cap(r, out)
         wr = relays.index(r)
-        v = row(); v[iy + k] = 1; v[ia + k] = -cr; rows.append(v); lo.append(-np.inf); hi.append(0)        # y <= cap*a
-        v = row(); v[iy + k] = 1; v[iw + wr] = -1; rows.append(v); lo.append(-np.inf); hi.append(0)       # y <= w
+        v = row(); v[iy + k] = 1; v[ia + k] = -cr; rows.append(v); lo.append(-np.inf); hi.append(0)               # y <= cap*a
+        v = row(); v[iy + k] = 1; v[iw + wr] = -1; rows.append(v); lo.append(-np.inf); hi.append(0)              # y <= w
         v = row(); v[iy + k] = 1; v[iw + wr] = -1; v[ia + k] = -cr; rows.append(v); lo.append(-cr); hi.append(np.inf)  # y >= w-cap(1-a)
-    for x in xs:
-        v = row()
-        for k, (xx, r) in enumerate(pairs):
-            if xx == x:
-                v[iy + k] = 1
-        v[ic] = -lev[x]
-        rows.append(v); lo.append(0); hi.append(0)
-    ub = np.array([cap(r, out) for r in relays] + [50.0] + [1] * npair + [max(cap(r, out) for r in relays)] * npair)
-    lb = np.zeros(nv)
-    if c is not None:
-        lb[ic] = ub[ic] = c
-    integrality = np.array([0] * (nw + 1) + [1] * npair + [0] * npair)
+        v = row(); v[ia + k] = 1                                                                                  # class exclusivity
+        if x[0] == 'B':
+            v[iz + wr] = 1; rows.append(v); lo.append(-np.inf); hi.append(1)     # a + z <= 1
+        else:
+            v[iz + wr] = -1; rows.append(v); lo.append(-np.inf); hi.append(0)    # a <= z
+    for q, x in enumerate(xs):
+        for sign in (1, -1):
+            v = row()
+            for k, (xx, r) in enumerate(pairs):
+                if xx == x:
+                    v[iy + k] = sign
+            v[ie + q] = -1
+            rows.append(v); lo.append(-np.inf); hi.append(sign * (c * lev[x] - shift.get(x, 0.0)))   # +-(sum y - target) <= e
+    ub = np.array([W_FRAC * cap(r, out) for r in relays] + [1] * nw + [1] * npair
+                  + [W_FRAC * max(cap(r, out) for r in relays)] * npair + [1e3] * nx)
+    integrality = np.array([0] * nw + [1] * nw + [1] * npair + [0] * npair + [0] * nx)
     obj = np.zeros(nv)
-    if c is None:
-        obj[ic] = -1
-    else:
-        obj[ia:ia + npair] = 1
-    res = milp(obj, constraints=LinearConstraint(np.array(rows), lo, hi), integrality=integrality, bounds=Bounds(lb, ub))
-    if not res.success:
-        return None
+    obj[ia:ia + npair] = 1
+    obj[ie:ie + nx] = 1000
+    res = milp(obj, constraints=LinearConstraint(np.array(rows), lo, hi), integrality=integrality,
+               bounds=Bounds(np.zeros(nv), ub))
+    assert res.success, res.message
     w = {r: float(res.x[iw + k]) for k, r in enumerate(relays)}
     a = [(x, r) for k, (x, r) in enumerate(pairs) if res.x[ia + k] > 0.5]
-    return float(res.x[ic]), w, a
+    err = {x: float(sum(w[r] for xx, r in a if xx == x) - (c * lev[x] - shift.get(x, 0.0))) for x in xs}
+    return w, a, err
 
 
 def solve(summ):
-    """Highest gmin (weakest input->relay cap allowed) for which c >= 2 nS/level is feasible on both sides."""
+    """Pass 1: exact targets c*level. An input whose drive cannot be delivered on one side (no strong enough pair) has a
+    deficit; pass 2 lowers the target of that input on BOTH sides by the same amount (common-mode: UP - DOWN for
+    that input stays c*(level_UP - level_DOWN)), so the comparison is kept and only the operating point moves."""
     ids, pt, cap = cap_table(summ)
-    for gmin in (5.0, 4.0, 3.0, 2.0, 1.0, 0.9):
-        ru, rd = solve_side('UP', cap, gmin), solve_side('DOWN', cap, gmin)
-        print('gmin %.1f: c_max UP %s DOWN %s' % (gmin, ru and round(ru[0], 3), rd and round(rd[0], 3)))
-        if ru and rd and min(ru[0], rd[0]) >= 2.0:
-            break
-    assert ru and rd, 'no feasible assignment'
-    c = np.floor(min(ru[0], rd[0]) * 20) / 20     # common gain, 0.05 nS grid
-    su, sd = solve_side('UP', cap, gmin, c), solve_side('DOWN', cap, gmin, c)
-    return gmin, c, su, sd
+    p1 = {side: solve_side(side, cap, GMIN, C_NS) for side in ('UP', 'DOWN')}
+    shift = {}
+    for side in p1:
+        for x, e in p1[side][2].items():
+            shift[x] = max(shift.get(x, 0.0), -e)
+    shift = {x: round(v, 3) for x, v in shift.items() if v > 0.05}
+    print('pass 1 deficits (common-mode shift applied to both sides):', shift)
+    out = {}
+    for side in ('UP', 'DOWN'):
+        w, a, err = solve_side(side, cap, GMIN, C_NS, shift)
+        out[side] = (C_NS, w, a, err)
+        print(side, 'max |drive error| %.2f nS' % max(abs(v) for v in err.values()), {x: round(v, 2) for x, v in err.items() if abs(v) > 0.05})
+    return GMIN, C_NS, out['UP'], out['DOWN'], shift
 
 
-def build_recipe(summ, gmin, c, su, sd):
+def build_recipe(summ, gmin, c, su, sd, shift):
     ids, pt, cap = cap_table(summ)
     want = {}   # (pre role, post role) -> nS
     table = []
-    for side, (cs, w, a) in (('UP', su), ('DOWN', sd)):
-        out = side
+    for side, (cs, w, a, err) in (('UP', su), ('DOWN', sd)):
         used = sorted({r for _, r in a})
         for r in used:
-            want[(r, out)] = round(w[r], 3)
+            want[(r, side)] = round(w[r], 3)
         for x, r in a:
             want[(x, r)] = min(cap(x, r), G_IN)
         lev = side_levels(side)
         for r in used:
-            table.append(dict(side=side, relay=r, v_out_nS=round(w[r], 3),
-                              inputs={x: round(want[(x, r)], 2) for x, rr in a if rr == r}))
-        # verify the achieved drive is affine in the level
-        drive = {x: sum(want[(r, out)] for xx, r in a if xx == x) for x in lev}
-        err = max(abs(drive[x] - c * lev[x]) for x in lev)
-        assert err < 0.02, (side, err)
+            table.append(dict(side=side, relay=r, v_out_nS=round(w[r], 3), inputs=[x for x, rr in a if rr == r]))
+        drive = {x: sum(want[(r, side)] for xx, r in a if xx == x) for x in lev}
+        assert max(abs(drive[x] - (c * lev[x] - shift.get(x, 0.0)) - err[x]) for x in lev) < 0.02, side
+        for r in used:   # class exclusivity
+            assert len({x[0] for x, rr in a if rr == r}) == 1, (side, r)
     role = AN.role_of(summ)
-    pairs = []
-    for (a_, b_), v in sorted(pt.items()):
-        pairs.append([a_, b_, round(want.get((role[a_], role[b_]), 0.0), 3)])
+    pairs = [[a_, b_, round(want.get((role[a_], role[b_]), 0.0), 3)] for (a_, b_), v in sorted(pt.items())]
     unfound = [k for k in want if (ids[k[0]], ids[k[1]]) not in pt]
     assert not unfound, unfound
-    relays = sorted(ids['%s%d' % (s_, k)] for s_ in 'UD' for k in range(N))
+    used = sorted({r for side_ in (su, sd) for _, r in side_[2]})
+    edits = [dict(ids=sorted(ids[r] for r in used), pars=RELAY_EDIT)]   # identical edit for every used relay
     return dict(
         model=MODEL, regions=summ['Regions'],
-        design=dict(c_nS_per_level=c, gmin_nS=gmin, G_IN_nS=G_IN, relays=table,
-                    note='UP drive = c*(i + N-1-j), DOWN drive = c*(N-1-i + j) in relay-spike units'),
+        design=dict(c_nS_per_level=c, gmin_nS=gmin, G_IN_nS=G_IN, common_mode_shift_nS=shift, relays=table,
+                    note='UP drive = c*(i + N-1-j), DOWN drive = c*(N-1-i + j); ball and paddle inputs use disjoint relays'),
         encoding=ENCODING,
-        neuron_edits=[dict(ids=relays, pars=RELAY_EDIT),
-                      dict(ids=sorted([ids['UP'], ids['DOWN']]), pars=OUT_EDIT)],
+        neuron_edits=edits + [dict(ids=sorted([ids['UP'], ids['DOWN']]), pars=OUT_EDIT)],
         pairs=pairs)
 
 
@@ -242,8 +259,39 @@ def probe_single(loop, net, spacing=100):
         for nm, nid in cells.items():
             v = np.array(H.spikes_of(data, nid))
             row[nm] = int(((v >= s) & (v < s + spacing)).sum()) if v.size else 0
+            if row[nm]:
+                row[nm] = [round(float(t - s), 1) for t in v[(v >= s) & (v < s + spacing)]]
         out['%s%d' % (kind, i)] = row
     return out
+
+
+def outchar(loop, sim, rec, net, spacing=100):
+    """Diagnostic: force-spike subsets of relays directly (3 spikes ISI 3 ms) and count UP/DOWN spikes: output-stage characteristic."""
+    ids = {r: v[0] for r, v in rec['regions'].items()}
+    w = {t['relay']: t['v_out_nS'] for t in rec['design']['relays']}
+    subsets = [[r] for r in sorted(w)] + [['U7', 'U6'], ['U7', 'U6', 'U3'], ['U7', 'U6', 'U3', 'U5', 'U2'],
+                                           ['D2', 'D7'], ['D2', 'D7', 'D5'], ['D2', 'D7', 'D5', 'D0', 'D4']]
+    subsets = [s_ for s_ in subsets if all(r in w for r in s_)]
+    t0 = loop.t_ms + 10
+    pairs = []
+    for k, sub in enumerate(subsets):
+        for q in range(3):
+            for r in sub:
+                pairs.append([t0 + k * spacing + 1 + 3 * q, ids[r]])
+    loop.schedule(sorted(pairs, key=lambda x: x[0]))
+    loop.sim.RunFor(t0 + len(subsets) * spacing + spacing - loop.t_ms, 1.0)
+    loop.wait_idle(timeout_s=300)
+    data = loop.sim.GetSpikeTimes()['SpikeTimes'] or {}
+    res = []
+    for k, sub in enumerate(subsets):
+        s0 = t0 + k * spacing
+        row = {'relays': sub, 'sum_v_nS': round(sum(w[r] for r in sub), 2)}
+        for nm in ('UP', 'DOWN'):
+            v = np.array(H.spikes_of(data, ids[nm]))
+            row[nm] = [round(float(t - s0), 1) for t in v[(v >= s0) & (v < s0 + spacing)]] if v.size else []
+        res.append(row)
+        print(row)
+    return res
 
 
 def single_times(net, t0, kind, i):
@@ -265,7 +313,7 @@ def edit_stats(rec, summ):
 
 def parse(argv=None):
     p = argparse.ArgumentParser()
-    p.add_argument('mode', choices=['solve', 'truthtable', 'play', 'handwired-play', 'handwired-truthtable', 'probe', 'stats'])
+    p.add_argument('mode', choices=['outchar', 'solve', 'truthtable', 'play', 'handwired-play', 'handwired-truthtable', 'probe', 'stats'])
     p.add_argument('-Host', default='localhost')
     p.add_argument('-Port', default=8100, type=int)
     p.add_argument('-Out', default='output')
@@ -282,12 +330,12 @@ def main(argv=None):
     if A.mode in ('solve', 'stats'):
         summ = json.load(open(A.Connectome))
         if A.mode == 'solve':
-            gmin, c, su, sd = solve(summ)
-            rec = build_recipe(summ, gmin, c, su, sd)
+            gmin, c, su, sd, shift = solve(summ)
+            rec = build_recipe(summ, gmin, c, su, sd, shift)
             json.dump(rec, open(A.Recipe, 'w'), separators=(',', ':'))
             print('gmin %.1f nS  c %.2f nS/level' % (gmin, c))
             for t in rec['design']['relays']:
-                print(t['side'], t['relay'], 'v_out %.3f' % t['v_out_nS'], 'inputs(nS)', t['inputs'])
+                print(t['side'], t['relay'], 'v_out %.3f' % t['v_out_nS'], 'inputs', t['inputs'])
         rec = json.load(open(A.Recipe))
         print(json.dumps(edit_stats(rec, summ)))
         return 0
@@ -315,10 +363,14 @@ def main(argv=None):
         loop = NL.ClosedLoop(sim, ids)
         out = probe_single(loop, net)
         for k, row in out.items():
-            print(k, ' '.join('%s:%d' % (n, v) for n, v in row.items() if v))
+            print(k, ' '.join('%s:%s' % (n, v) for n, v in row.items() if v))
         json.dump(out, open(os.path.join(A.Out, 'ws_probe.json'), 'w'))
         return 0
     loop = NL.ClosedLoop(sim, ids)
+    if A.mode == 'outchar':
+        out = outchar(loop, sim, rec, net)
+        json.dump(out, open(os.path.join(A.Out, 'ws_outchar.json'), 'w'))
+        return 0
     if A.mode == 'truthtable':
         res = graded_truthtable(loop, net, A.SpacingMs)
         json.dump(res, open(os.path.join(A.Out, 'ws_truthtable_%d.json' % A.SpacingMs), 'w'))
