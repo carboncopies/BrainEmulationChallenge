@@ -2,7 +2,11 @@
 
 No search, no tuning loop. "derived" = a formula in `dp_derive.py` (numbers below are its
 output, stored in `weights_recipe_derived.json`). "hand adjustment" = a reasoned single change.
-There is exactly ONE hand adjustment (A1). Everything was measured on the Python stand-in only.
+There is one numerical hand adjustment (A1, a calibration of the decoder constant). Several structural
+and sizing choices were also made by measurement or by judgement, not by formula; they are listed under
+"Choices not derived" below. The weights themselves never changed after derivation. Everything was
+measured on the Python stand-in only, with sensor noise off (the controller sees the exact state, as
+the LQR baseline does).
 
 ## Derived (formula and numbers)
 | Parameter | Value | Source |
@@ -62,6 +66,21 @@ typical 1 nS grown synapse. Wanting to stay near 1 nS needs about twice the rece
 | id | change | before | after | why | measured effect |
 |---|---|---|---|---|---|
 | A1 | decoder constant c (N/spike), weights untouched | 0.09510 | 0.08542 (= before / 1.1132) | failure 2: derived slope 11% high | static gain ratio 1.113 -> 1.010 (fresh seed), RMSE 0.35 -> 0.14 N |
+
+A1 is a one-parameter calibration against the target law (regression slope on the built net, seeds 7 and 8),
+not a formula. The stated cause (continuous-time S vs the 1 ms stand-in) is plausible but untested.
+
+## Choices not derived (added after independent review)
+| item | value | how it was set |
+|---|---|---|
+| n_in | 32 -> 64 -> 256 per population | raised by measuring zero-state noise (failure 1c); the seeds used for that were not recorded |
+| encoder phases | random -> stratified | structural change after measuring noise (failure 1a) |
+| fan-out | random -> balanced | structural change after measuring ripple (failure 1b) |
+| v | 0.031 spikes^2 per neuron | measured once on an oversized build (n_out 595); consistent: 0.0177 sqrt(1190 v) = 0.108 N |
+| design constants | RANGE_MARGIN 1.25, r0 150 Hz, W_MAX 2 nS, noise target 0.25 N, Ge0 at half the refractory cap | judgement, not derived |
+
+The 0.25 N noise target is missed: zero-state force sd is 0.28-0.52 N depending on seed. No eval seed
+(0, 1, 2) was used for any calibration: stats seed 100, A1 seeds 7 and 8, connect_seed 12345.
 
 ## Force resolution, saturation and size (the add-on constraints)
 1. Force quantisation per tick: one net spike = c = 0.0854 N (was 0.2 N in the harness defaults; population of

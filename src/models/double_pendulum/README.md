@@ -143,7 +143,9 @@ Measured, 180 s, disturbance on, ctrl_dt 10 ms, mean of seeds 0,1,2 (all upright
 | 1 | spiking | 1.17 | 0.86 | 1.11 | 12.4 | 0.27 |
 | 1 | LQR 10 ms | 1.05 | 0.72 | 0.90 | 11.1 | 0.24 |
 
-Per-seed numbers are in `output/phase2.json` (delay 2) and `output/phase2_d1.json` (gitignored).
+Per-seed numbers are in `output/phase2.json` (delay 2; `dp_phase2.py --delay 2`) and `output/phase2_d1.json`
+(`dp_phase2.py --delay 1 --out output/phase2_d1.json`), both gitignored. Seed 2 is the hardest: spiking peak
+force 18.5 N at delay 2, and the encoder clipped on 59 (delay 2) and 96 (delay 1) of 18000 ticks.
 Encoder clipping on the eval seeds: 3, 0 and 59 of 18000 ticks (the ranges come from seed 100).
 Run: `python3 dp_phase2.py [--delay D]`, `python3 dp_phase2.py --latency`, `python3 dp_derive.py`.
 
