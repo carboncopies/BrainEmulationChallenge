@@ -155,3 +155,67 @@ round trips, 27-35 ms per tick in Pong, which is over the 10 ms budget), arbitra
 (grown pairs cap at `g_peak_sum`; setters write only AMPA), designed connectivity of 1998 receptors
 (Pong grew 526) and 3072 input neurons, and the clean LIFC parameters (R 100 MOhm, C 100 pF) must be
 applied through `LIFC/Edit` (no adaptation) as in Pong step 1. Real run time per window is not modelled.
+
+
+## Phase 3a: the phase-2 controller in NES (speed and first short run)
+
+Files: `dp_nes.py` (builder + `NESController`, lockstep tick), `dp_nes_speed.py` (step 1 CLI),
+`dp_nes_run.py` (latency, static calibration, closed-loop run and stand-in on the same settings). Private stack
+only (API 127.0.0.1:8100; the PythonClient is imported from the Pong worktree because this worktree's submodule is
+not checked out: `DP_PYTHONCLIENT` overrides). Results in `output/` (gitignored). Weight and parameter adjustments
+are logged in `weightspace_log.md` (U1 unit conversion, A2 decoder constant).
+
+Build (recipe as is, batched requests): 3294 LIFC neurons (3072 inputs + 2 x 111), 1998 AMPA receptors, **4.4 to 4.8 s**
+wall (shapes 1 s, compartments 1 s, neurons 1.5 s, receptors 1 s). The client's own `BatchCreate` for LIFC neurons and
+receptors references undefined classes (`SCNeuron`), so `dp_nes._batch` builds the request list itself.
+
+Per control tick (10 ms simulated, `SetSpecificAPTimes` of about 4600 input spikes, `RunFor(10, 1)` plus 2 ms status
+polling, `GetSpikeTimes`), 300 ticks, random observations 0.5 sigma (`dp_nes_speed.py`), ms:
+
+| | schedule | run | read | total |
+|---|---|---|---|---|
+| mean over 300 | 41 | 955 | 1042 | 2039 |
+| p95 | 53 | 1490 | 1896 | 3274 |
+| ticks 1-50 | 42 | 285 | 233 | 561 |
+| ticks 251-300 | 41 | 1264 | 1790 | 3096 |
+
+It grows with tick count. Schedule is flat. Read grows linearly (about 6 ms per tick per tick): `GetSpikeTimes` returns the
+full history of all 3294 neurons, 92% of it the input sources (1.38 M of 1.51 M spikes at tick 300; 10.1 MB response,
+0.09 MB at tick 1). Run also grows, with the same slope when `GetSpikeTimes` is never called (`--noread`: 284, 708,
+1008 ms for ticks 1-50, 51-100, 101-150, `output/nes_speed_noread.json`), then levels off near 1.2 to 1.3 s. So it is
+inside NES. Candidate cause (read from source, not isolated): `g_norm` in `Structs/Receptor.cpp` walks the presynaptic
+spike history backwards with `spike_dt_delta` = 1000 ms before it stops, per receptor per step. 720-tick run (below):
+mean 3.34 s/tick, 0.96 s for ticks 1-100, 5.3 s for 701-720.
+
+(a) The loop is lockstep. `dp_env.run` calls `controller(obs)` and blocks until it returns the force; the plant does not
+advance during the NES tick, and the actuation delay is counted in simulated control ticks, not wall time. Slowness
+costs wall-clock only, not balance. Simulated latency is the one 10 ms window plus the network lag.
+
+(b) Projection, using the per-tick growth measured in the 720-tick run (about 5.3 ms per tick per tick after tick 400):
+10 s simulated about 1.1 h (it took 40 min to reach 7.2 s); 30 s about 8 h (last tick about 17 s); 180 s about 245 h
+(last tick about 97 s, history response about 600 MB). Not feasible as is.
+
+Smallest fix, proposed only (not built, running NES untouched): `feature/windowed-getspiketimes` (`~/BrainGenix/wt/nes-spikewindow`)
+adds `SinceTime_ms` and `NeuronIDs` to `Simulation/GetSpikeTimes`; asking for the 222 output IDs since t0 makes the read
+constant (tens of ms) and removes the input sources from the response. Run would then stay near the 1.2 to 1.3 s plateau
+(expected about 1.3 s per tick: 30 s about 1.1 h, 180 s about 6.6 h, projections, unmeasured). The plateau itself would need
+the history cut in `g_norm` (`spike_dt_delta` 1000 ms to a few tens of ms, where the contribution is below `history_delta`);
+untested.
+
+Latency of the NES net (step response, 5 repetitions, `output/nes_latency.json`): first tick 0.47 of steady, then
+0.92, 1.04, 0.96; extra lag 0.60 tick, total 1.60 ticks (stand-in 1.28), so the delay used is **2** (same as phase 2).
+Static gain was 1.69x the stand-in's (see A2 in the log), zero-state force sd 0.18 N.
+
+First short run (disturbance on, seed 0, ctrl_dt 10 ms, delay 2, A2 applied; NES budget 40 min, so **7.2 s of the 10 s
+requested** was reached, 720 ticks, 2406 s wall, no fall). Stand-in on the identical settings for 7.2 s and for 10 s:
+
+| controller | T (s) | upright | RMS th1 (deg) | RMS th2 (deg) | RMS force (N) | peak force (N) | drift (m) | fall |
+|---|---|---|---|---|---|---|---|---|
+| NES | 7.2 | 1.000 | 1.28 | 0.71 | 1.82 | 11.1 | 0.104 | none |
+| stand-in | 7.2 | 1.000 | 1.26 | 0.78 | 2.17 | 14.2 | 0.087 | none |
+| stand-in | 10 | 1.000 | 1.18 | 0.78 | 1.91 | 14.2 | 0.151 | none |
+
+One seed, 7 s: this shows the NES net holds the pendulum under the same disturbance, not a statistical comparison.
+Encoder clipped on 0 of 720 ticks; mean 417 output spikes per tick (stand-in about 372). The budget stop replays the
+seeded episode with the recorded forces (observations checked identical) so the metrics cover exactly the time reached.
+Run: `python3 dp_nes_speed.py`, `python3 dp_nes_run.py --latency | --calibrate | --run --T 10 --delay 2 | --standin`.

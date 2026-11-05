@@ -105,3 +105,21 @@ The harness encoder is rectified with 8 hat neurons per sign and its decoder tak
 uses a DIFFERENTIAL code (r0 +- g s) because the linearisation about the operating point needs a common
 bias for push and pull; the rectified code adds a second-order error whenever two states disagree. Its
 scales and demo K were not used (placeholders for the 0.1 kg frictionless plant).
+
+## Phase 3a (NES) hand adjustments
+
+Measured on the NES build of the same network (`dp_nes.py`, private stack 8100). Weights in `weights_recipe.json`
+and the encoder are unchanged; only the translation to NES units and the decoder constant differ.
+
+| id | change | before | after | why | measured effect |
+|---|---|---|---|---|---|
+| U1 (unit conversion, not tuning) | NES receptor `PeakConductance_nS` = 20 (cap, never reached), `Weight` = w_nS x 0.8218 / 20 | w_eff = w_nS | w_eff = 0.8218 w_nS | NES AMPA (rise 0.5, decay 3 ms, peak-normalised) carries 4.29 ms nS per nS of peak; the stand-in's single exponential carries 3.528 ms nS (tau_e). Same charge per input spike. NES clips a pair at `min(PeakConductance, Weight x PeakConductance x gnorm)`, so with Weight 1 (Pong) the pair would saturate at one spike's peak; the large cap avoids that. | w_eff 0.175 to 1.542 nS; no clipping possible (max gnorm x w_eff about 3 nS < 20) |
+| A2 | decoder constant c (N/spike), weights untouched | 0.08542 | 0.05052 (= before / 1.6906) | NES net is 1.69x steeper than the derived law, with the stand-in at 1.01 after A1. Cause not isolated (candidates: NES refractory/reset handling, ExpEulerCm update, double-exponential synapse smoothing, 2 ms refractory on a 1 ms grid). Same mechanism as A1: one-parameter regression of measured on target force | seed 7 (24 random states ~ N(0,(0.5 sigma)^2), 2-tick means): slope 1.6906, rmse after slope 0.34 N. Verification with A2 applied, seed 8: slope 0.953, rmse 0.21 N. Zero-state force sd 0.18 N (20 clean ticks), mean -0.18 N |
+
+A2 is a calibration against the target law on the built net, as A1 was; eval seeds 0, 1, 2 were not used. Raw file:
+`output/nes_calib_raw_seed7.json`, `output/nes_calib_A2_seed8.json` (gitignored). `DP_NES_C_ADJUST=1` runs the raw net.
+
+NES timing facts that mattered (no design change needed for them): inputs are plain LIFC neurons driven by
+`SetSpecificAPTimes` (appends to the neuron's list, absolute times, one spike per update step per neuron);
+spikes scheduled at t0+10 ms are recorded in the next window with their own time (effect unchanged, onset delay
+1 ms). `GetSpikeTimes` also returns the input sources.
