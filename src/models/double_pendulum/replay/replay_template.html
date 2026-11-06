@@ -1,0 +1,167 @@
+<title>Pendulum Replay</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: control bar, two canvases side by side (pendulum | circuit), timeline strip below */
+:root{--bg:#f4f5f7;--panel:#fff;--fg:#1b2230;--mute:#5d6778;--line:#d9dde4;--push:#d1530f;--pull:#1e6bb8;--rod:#1b2230;--cart:#5d6778;--ok:#1d8a55;--bad:#c23a3a;--glow:#e5a100;
+--sans:'Schibsted Grotesk',system-ui,sans-serif;--mono:'JetBrains Mono',ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f141c;--panel:#171e29;--fg:#e6eaf0;--mute:#97a1b2;--line:#2b3547;--push:#ff8a4c;--pull:#5aa7ff;--rod:#e6eaf0;--cart:#97a1b2;--ok:#4cc98a;--bad:#ff7b7b;--glow:#ffd24a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f141c;--panel:#171e29;--fg:#e6eaf0;--mute:#97a1b2;--line:#2b3547;--push:#ff8a4c;--pull:#5aa7ff;--rod:#e6eaf0;--cart:#97a1b2;--ok:#4cc98a;--bad:#ff7b7b;--glow:#ffd24a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--sans);padding-block:20px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+h1{font-size:22px;margin:0;text-wrap:balance}
+.sub{color:var(--mute);font-size:14px;margin:4px 0 0;max-width:70ch;line-height:1.5}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.bar button,.bar select{font:inherit;font-size:14px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:7px 12px;cursor:pointer}
+.bar button.on{border-color:var(--fg);font-weight:600}
+.bar button:focus-visible,.bar select:focus-visible,input:focus-visible{outline:2px solid var(--pull);outline-offset:2px}
+.grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:14px}
+@media(max-width:820px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px;min-width:0}
+.card h2{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:0 0 6px;font-weight:600}
+canvas{width:100%;display:block}
+.stat{display:flex;flex-wrap:wrap;gap:6px 18px;font-family:var(--mono);font-size:13px;margin-top:6px;font-variant-numeric:tabular-nums}
+.note{font-size:13px;color:var(--mute);line-height:1.5}
+.badge{font-family:var(--mono);font-size:12px;padding:2px 8px;border-radius:99px;border:1px solid var(--line)}
+input[type=range]{flex:1;min-width:160px}
+</style>
+<div class="wrap">
+ <div><h1>Pendulum Replay</h1>
+ <p class="sub" id="sub">A 10-second look at the double pendulum being balanced. Pick a controller, press play, and watch the network neurons fire as the rods lean. Orange neurons push the cart right, blue neurons push it left.</p></div>
+ <div class="bar" id="tabs" role="tablist"></div>
+ <div class="bar" id="runs"></div>
+ <div class="bar">
+  <button id="play">Pause</button>
+  <label class="note" for="speed">Speed</label>
+  <select id="speed"><option value="0.1">0.1x (spikes visible)</option><option value="0.25" selected>0.25x</option><option value="1">1x real time</option></select>
+  <input type="range" id="scrub" min="0" max="999" value="0" aria-label="Time">
+  <span class="badge" id="tm">0.00 s</span>
+ </div>
+ <div class="grid">
+  <div class="card"><h2>Plant</h2><canvas id="cp" width="560" height="440"></canvas>
+   <div class="stat" id="st"></div></div>
+  <div class="card"><h2>Network circuit</h2><canvas id="cc" width="660" height="440"></canvas>
+   <p class="note" id="cn" style="margin:6px 0 0"></p></div>
+ </div>
+ <div class="card"><h2>Timeline (click to jump)</h2><canvas id="ct" width="1100" height="190"></canvas>
+  <p class="note" style="margin:6px 0 0">Lines: link 1 angle (solid), link 2 angle (dashed), ball string angle (dotted, ball tab only), in degrees, scale ±10°, the upright limit. Bars: force, scale ±20 N.</p></div>
+ <p class="note" id="prov"></p>
+</div>
+<script>
+const D0=__DATA__;const B0=__BALL__;
+let MODE='base',M=D0.meta,N=D0.meta.N,NO=M.n_out,POPS=M.pops,R0=M.r0,NP=12;
+function b64(s){const b=atob(s),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
+const RUNS_BASE=[
+ {k:'none',name:'No controller',net:false,note:'Nothing is pushing the cart. The pendulum falls over.'},
+ {k:'lqr',name:'Classical controller (LQR)',net:false,note:'The textbook controller computes the force from the six measurements. There is no network in this run, so the circuit stays dark.'},
+ {k:'spiking',name:'Spiking network (stand-in)',net:true,note:'Python stand-in using the same hand-derived weights as the NES build. Each dot is one output neuron; a dot lights when it fires in the current 10 ms step.'},
+ {k:'nes',name:'NES run replay',net:true,note:'Angles and forces are the recorded NES run (seed 0, 60 to 70 s). NES did not save spikes, so the lit neurons are recomputed by feeding those recorded states through the stand-in network with the same weights.'}];
+RUNS_BASE.forEach(r=>{r.src='base'});
+const RUNS_BALL=[
+ {k:'none',name:'No controller',net:false,src:'ball',note:'Nothing pushes the cart. With the ball attached the pendulum falls in under a second.'},
+ {k:'lqr6',name:'Old classical controller',net:false,src:'ball',note:'The earlier 6-measurement controller, unchanged. It cannot see the ball, and the extra weight swinging at the top makes it lose the pendulum.'},
+ {k:'net6',name:'Old hardwired network',net:false,src:'ball',note:'The earlier hardwired network with its original weights. Like the classical controller it cannot see the ball and falls. Its circuit is the 12-input one shown on the first tab, so it is not drawn here.'},
+ {k:'lqr8',name:'Retuned classical controller',net:false,src:'ball',note:'A new 8-measurement gain that also reads the ball angle and its speed. It holds the pendulum with the ball swinging.'},
+ {k:'net8',name:'Retuned hardwired network',net:true,src:'ball',note:'New hand-derived weights for 16 input groups (8 measurements, with the ball angle and speed added), built by the same formulas as before. Python stand-in, not NES.'}];
+let RUNS=RUNS_BASE;
+const data=r=>r.src=='ball'?B0[r.k]:D0[r.k];
+for(const r of RUNS_BASE.concat(RUNS_BALL)){if(r.net){const d=data(r);r.cnt=b64(d.counts);r.NO=r.src=='ball'?B0.meta.n_out:D0.meta.n_out}}
+const PROV={none_b:'Simulated, ball 0.1 kg on 0.3 m string, same kicks (seed 3).',lqr6:'Simulated with the ball, same kicks.',net6:'Python stand-in with the original weights, simulated with the ball.',lqr8:'Simulated with the ball, same kicks.',net8:'Python stand-in with newly derived weights, simulated with the ball. Not an NES run.',none:'Simulated, same kicks as the others (seed 3).',lqr:'Simulated, same kicks (seed 3), 10 ms control, one tick delay.',spiking:'Simulated with the Python stand-in (seed 3 kicks). Not an NES run.',nes:'Real NES closed-loop states and forces from the 180 s run, seed 0, ticks 6000 to 7000.'};
+let cur=2,t=0,playing=true,speed=0.25,last=0;
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const runsEl=document.getElementById('runs');
+function build(){runsEl.innerHTML='';RUNS.forEach((r,i)=>{const b=document.createElement('button');b.textContent=r.name;b.onclick=()=>{cur=i;t=0;sel()};r.btn=b;runsEl.appendChild(b)})}
+const tabsEl=document.getElementById('tabs');
+function setMode(m){MODE=m;const dm=m=='ball'?B0:D0;M=dm.meta;NO=M.n_out;POPS=M.pops;R0=M.r0;NP=m=='ball'?16:12;RUNS=m=='ball'?RUNS_BALL:RUNS_BASE;cur=RUNS.length-1;t=0;build();
+ [...tabsEl.children].forEach(b=>b.classList.toggle('on',b.dataset.m==m));
+ document.getElementById('sub').textContent=m=='ball'?'A 0.1 kg ball hangs from the tip of the upper rod on a 0.3 m string and swings freely. The earlier controllers know nothing about it. Compare them with versions rebuilt to measure the ball angle too.':'The two hardwired-network buttons run the spiking network with hand-derived weights. Pick a controller, press play, and watch the network neurons fire as the rods lean. Orange neurons push the cart right, blue neurons pull it left.';
+ sel()}
+[['base','Double pendulum'],['ball','With a ball on a string']].forEach(([m,l])=>{const b=document.createElement('button');b.textContent=l;b.dataset.m=m;b.onclick=()=>setMode(m);tabsEl.appendChild(b)});
+function sel(){RUNS.forEach((r,i)=>r.btn.classList.toggle('on',i==cur));document.getElementById('cn').textContent=RUNS[cur].note;document.getElementById('prov').textContent='Source: '+(MODE=='ball'&&RUNS[cur].k=='none'?PROV.none_b:PROV[RUNS[cur].k])+' Plant: cart 1 kg, two rods 0.5 m, 0.2 kg, force limit 20 N, random kicks about 1 N once per second'+(MODE=='ball'?', plus the ball.':'.')}
+document.getElementById('play').onclick=e=>{playing=!playing;e.target.textContent=playing?'Pause':'Play'};
+document.getElementById('speed').onchange=e=>speed=+e.target.value;
+const sc=document.getElementById('scrub');sc.oninput=()=>{t=+sc.value};
+document.getElementById('ct').addEventListener('click',e=>{const r=e.target.getBoundingClientRect();t=Math.max(0,Math.min(N-1,Math.floor((e.clientX-r.left)/r.width*N)))});
+const cp=document.getElementById('cp').getContext('2d'),cc=document.getElementById('cc').getContext('2d'),ct=document.getElementById('ct').getContext('2d');
+const D_LS=0.3;
+function drawPlant(S,F,ti){const c=cp,W=560,H=440;c.clearRect(0,0,W,H);
+ const s=S[ti],x=s[0],th1=s[1],th2=s[2],ppm=330,ox=W/2,gy=H-80;
+ c.strokeStyle=css('--line');c.lineWidth=2;c.beginPath();c.moveTo(20,gy+22);c.lineTo(W-20,gy+22);c.stroke();
+ c.fillStyle=css('--mute');c.font='11px JetBrains Mono, monospace';c.textAlign='center';
+ for(const m of [-0.6,-0.3,0,0.3,0.6]){const px=ox+m*ppm;c.beginPath();c.moveTo(px,gy+22);c.lineTo(px,gy+28);c.stroke();c.fillText(m+' m',px,gy+42)}
+ // upright guide
+ c.setLineDash([4,4]);c.strokeStyle=css('--line');c.beginPath();c.moveTo(ox+x*ppm,gy);c.lineTo(ox+x*ppm,gy-380);c.stroke();c.setLineDash([]);
+ const cx=ox+x*ppm,l=0.5*ppm;
+ // force arrow
+ const f=F[ti];c.fillStyle=f>=0?css('--push'):css('--pull');
+ const aw=Math.min(Math.abs(f)/20,1)*90;if(aw>2){const d=Math.sign(f);c.fillRect(Math.min(cx,cx+d*aw),gy+8,aw,6);c.beginPath();c.moveTo(cx+d*aw,gy+3);c.lineTo(cx+d*(aw+12),gy+11);c.lineTo(cx+d*aw,gy+19);c.fill()}
+ c.fillStyle=css('--cart');c.fillRect(cx-34,gy-8,68,30);
+ c.fillStyle=css('--mute');c.beginPath();c.arc(cx-20,gy+24,6,0,7);c.arc(cx+20,gy+24,6,0,7);c.fill();
+ const p1=[cx+l*Math.sin(th1),gy-8-l*Math.cos(th1)],p2=[p1[0]+l*Math.sin(th2),p1[1]-l*Math.cos(th2)];
+ c.strokeStyle=css('--rod');c.lineCap='round';c.lineWidth=9;c.beginPath();c.moveTo(cx,gy-8);c.lineTo(p1[0],p1[1]);c.stroke();
+ c.lineWidth=7;c.beginPath();c.moveTo(p1[0],p1[1]);c.lineTo(p2[0],p2[1]);c.stroke();
+ if(MODE=='ball'){const ph=s[3],Ls=D_LS*ppm,pb=[p2[0]+Ls*Math.sin(ph),p2[1]+Ls*Math.cos(ph)];
+  c.strokeStyle=css('--mute');c.lineWidth=1.5;c.beginPath();c.moveTo(p2[0],p2[1]);c.lineTo(pb[0],pb[1]);c.stroke();
+  c.fillStyle=css('--glow');c.strokeStyle=css('--rod');c.lineWidth=2;c.beginPath();c.arc(pb[0],pb[1],11,0,7);c.fill();c.stroke()}
+ c.fillStyle=css('--bg');for(const p of [[cx,gy-8],p1,p2]){c.beginPath();c.arc(p[0],p[1],4,0,7);c.fill()}
+ const d1=th1*57.2958,d2=th2*57.2958,up=Math.abs(d1)<=10&&Math.abs(d2)<=10;
+ document.getElementById('st').innerHTML=`<span>link 1 ${d1.toFixed(1)}°</span><span>link 2 ${d2.toFixed(1)}°</span><span>force ${f.toFixed(1)} N</span><span style="color:${up?css('--ok'):css('--bad')}">${up?'upright':'outside 10°'}</span>`}
+// circuit layout
+const lay=(()=>{const L=[];const colsX=[],ys=[];return L})();
+const POPPOS={};const popY=i=>34+i*(372/(NP-1));
+function drawNet(r,ti){const c=cc,W=660,H=440;c.clearRect(0,0,W,H);
+ const d=data(r),has=r.net;
+ const pushX=330,pullX=330+150,gx0=[pushX,pullX];const cols=10,gap=11,top=60;
+ // order populations: show 12 in index order
+ const names=Array(NP);POPS.forEach(p=>names[p.index]=p);
+ const rates=has?d.rates[ti]:null;
+ // group boxes
+ const cnt=has?r.cnt:null;let npush=0,npull=0;
+ const gcol=['--push','--pull'];
+ for(let g=0;g<2;g++){c.fillStyle=css(gcol[g]);c.font='600 12px Schibsted Grotesk, sans-serif';c.textAlign='left';c.fillText(g==0?'PUSH right ('+NO+' neurons)':'PULL left ('+NO+' neurons)',gx0[g],40)}
+ // synapse lines: from pop to group centre
+ POPS.forEach(p=>{const i=p.index,y=popY(i),g=p.side=='push'?0:1,tx=gx0[g]-6,ty=top+60+ (g?0:0);
+  const act=has?Math.max(0,(rates[i]-R0)/R0+0.15):0.15;
+  c.strokeStyle=css(gcol[g]);c.globalAlpha=0.12+0.5*Math.min(1,act);c.lineWidth=Math.max(0.6,p.k*p.w_nS*1.1);
+  c.beginPath();c.moveTo(150,y);c.bezierCurveTo(240,y,240,top+55,tx,top+55);c.stroke();c.globalAlpha=1});
+ // input pops
+ POPS.slice().sort((a,b)=>a.index-b.index).forEach(p=>{const i=p.index,y=popY(i),rt=has?rates[i]:R0,f=Math.min(1,Math.max(0,rt/(2*R0)));
+  c.fillStyle=css('--bg');c.strokeStyle=css(p.side=='push'?'--push':'--pull');c.lineWidth=2;c.beginPath();c.arc(150,y,11,0,7);c.fill();c.stroke();
+  c.globalAlpha=has?(0.15+0.85*f):0.12;c.fillStyle=css('--glow');c.beginPath();c.arc(150,y,9,0,7);c.fill();c.globalAlpha=1;
+  c.fillStyle=css('--fg');c.font='12px JetBrains Mono, monospace';c.textAlign='right';c.fillText(p.name,132,y+4);
+  if(has){c.fillStyle=css('--mute');c.textAlign='left';c.fillText(Math.round(rt),166,y+4)}});
+ c.fillStyle=css('--mute');c.font='11px Schibsted Grotesk, sans-serif';c.textAlign='left';c.fillText('state inputs, 256 neurons each (Hz)',20,20);
+ // output neurons
+ for(let g=0;g<2;g++){for(let j=0;j<NO;j++){const col=j%cols,row=Math.floor(j/cols),x=gx0[g]+col*gap+4,y=top+60+row*gap-12+(-0);
+   const n=has?cnt[ti*2*NO+g*NO+j]:0;if(g==0)npush+=n;else npull+=n;
+   c.fillStyle=css('--line');c.beginPath();c.arc(x,y,3.6,0,7);c.fill();
+   if(n>0){c.fillStyle=css(gcol[g]);c.globalAlpha=Math.min(1,0.55+0.25*n);c.beginPath();c.arc(x,y,4.6+n,0,7);c.fill();c.globalAlpha=1}}}
+ // decoder
+ const fx=pullX+120+0,fy=top+60; 
+ const F=d.F[ti];c.fillStyle=css('--mute');c.font='11px Schibsted Grotesk, sans-serif';c.textAlign='left';
+ c.fillText('spikes this 10 ms step',gx0[0],H-70);
+ c.font='600 15px JetBrains Mono, monospace';
+ if(has){c.fillStyle=css('--push');c.fillText('push '+npush,gx0[0],H-46);c.fillStyle=css('--pull');c.fillText('pull '+npull,gx0[0]+110,H-46);
+  c.fillStyle=css('--fg');c.fillText('force = '+(M.c||0.08542).toFixed(4)+' N x ('+npush+' − '+npull+') = '+((M.c||0.08542)*(npush-npull)).toFixed(2)+' N',gx0[0],H-22)}
+ else{c.fillStyle=css('--mute');c.fillText('no network in this run',gx0[0],H-46)}
+ if(has){c.fillStyle=css('--mute');c.font='11px Schibsted Grotesk, sans-serif';c.fillText('Positive angles raise the + inputs, which route to push.',20,H-8)}}
+function drawTL(r,ti){const c=ct,W=1100,H=190,d=data(r),m=34;c.clearRect(0,0,W,H);
+ const X=i=>m+(W-2*m)*i/N,mid=H/2-4;
+ c.strokeStyle=css('--line');c.lineWidth=1;c.beginPath();c.moveTo(m,mid);c.lineTo(W-m,mid);c.stroke();
+ c.fillStyle=css('--mute');c.font='11px JetBrains Mono, monospace';c.textAlign='center';for(let s=0;s<=10;s+=2){c.fillText(s+' s',X(s*100),H-6)}
+ // force bars
+ for(let i=0;i<N;i++){const f=d.F[i];c.fillStyle=css(f>=0?'--push':'--pull');c.globalAlpha=.45;const h=f/20*70;c.fillRect(X(i),mid-Math.max(h,0),Math.max(1,(W-2*m)/N),Math.abs(h));c.globalAlpha=1}
+ // angles
+ for(const [k,dash] of (MODE=='ball'?[[1,[]],[2,[5,4]],[3,[1,3]]]:[[1,[]],[2,[5,4]]])){c.setLineDash(dash);c.strokeStyle=css('--fg');c.lineWidth=1.6;c.beginPath();
+  for(let i=0;i<N;i++){const a=Math.max(-3,Math.min(3,d.s[i][k]*57.2958/10))*70;i?c.lineTo(X(i),mid-a):c.moveTo(X(i),mid-a)}c.stroke()}c.setLineDash([]);
+ c.strokeStyle=css('--bad');c.globalAlpha=.4;c.setLineDash([2,4]);for(const s of [-1,1]){c.beginPath();c.moveTo(m,mid-s*70);c.lineTo(W-m,mid-s*70);c.stroke()}c.setLineDash([]);c.globalAlpha=1;
+ c.textAlign='right';c.fillStyle=css('--mute');c.fillText('+10°',m-4,mid-66);c.fillText('−10°',m-4,mid+76);
+ c.strokeStyle=css('--fg');c.lineWidth=2;c.beginPath();c.moveTo(X(ti),6);c.lineTo(X(ti),H-18);c.stroke()}
+function frame(ts){const dt=(ts-last)/1000;last=ts;
+ if(playing){t+=dt*100*speed;if(t>=N)t=0}
+ const ti=Math.min(N-1,Math.floor(t)),r=RUNS[cur],d=data(r);
+ drawPlant(d.s,d.F,ti);drawNet(r,ti);drawTL(r,ti);sc.value=ti;
+ document.getElementById('tm').textContent=(ti/100).toFixed(2)+' s'+(r.k=='none'&&d.fall_s&&ti/100>=d.fall_s?'  fell':'');
+ requestAnimationFrame(frame)}
+setMode('base');requestAnimationFrame(ts=>{last=ts;frame(ts)});
+</script>
