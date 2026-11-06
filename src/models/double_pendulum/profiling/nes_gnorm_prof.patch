@@ -1,0 +1,122 @@
+diff --git a/Source/Core/Simulator/LIFCompartmental/LIFCNeuron.cpp b/Source/Core/Simulator/LIFCompartmental/LIFCNeuron.cpp
+index f838f12d5..b755f7d54 100644
+--- a/Source/Core/Simulator/LIFCompartmental/LIFCNeuron.cpp
++++ b/Source/Core/Simulator/LIFCompartmental/LIFCNeuron.cpp
+@@ -1,3 +1,4 @@
++#include <chrono>
+ #include <Simulator/Structs/Simulation.h>
+ #include <Simulator/LIFCompartmental/LIFCNeuron.h>
+ #include <Simulator/Structs/Receptor.h>
+@@ -257,6 +258,7 @@ void LIFCNeuron::update_conductances(float t) {
+     }
+     
+     // Update fAHP, sAHP, ADP conductances
++    auto _a0 = std::chrono::steady_clock::now(); unsigned long _ai0 = Connections::g_prof.iters;
+     float g_fAHP_linear = g_peak_fAHP_nS * Connections::g_norm(t, TAct_ms, tau_rise_fAHP_ms, tau_decay_fAHP_ms, norm_fAHP, 0);
+     float g_sAHP_linear = g_peak_sAHP_nS * Connections::g_norm(t, TAct_ms, tau_rise_sAHP_ms, tau_decay_sAHP_ms, norm_sAHP, 0);
+     if (build_data.AfterHyperpolarizationSaturationModel == CoreStructs::AHPCLIP) {
+@@ -267,7 +269,10 @@ void LIFCNeuron::update_conductances(float t) {
+         g_sAHP_nS = g_peak_sAHP_max_nS * (g_sAHP_linear / (g_sAHP_linear + Kd_sAHP_nS));
+     }
+     
++    auto _a1 = std::chrono::steady_clock::now(); unsigned long _ai1 = Connections::g_prof.iters;
++    Connections::g_prof.ahp_ns += std::chrono::duration<double,std::nano>(_a1-_a0).count(); Connections::g_prof.ahp_calls += 2; Connections::g_prof.ahp_iters += _ai1-_ai0;
+     float g_ADP_linear = g_peak_ADP_nS * Connections::g_norm(t, TAct_ms, tau_rise_ADP_ms, tau_decay_ADP_ms, norm_ADP, 0);
++    { auto _a2 = std::chrono::steady_clock::now(); Connections::g_prof.adp_ns += std::chrono::duration<double,std::nano>(_a2-_a1).count(); Connections::g_prof.adp_calls++; Connections::g_prof.adp_iters += Connections::g_prof.iters-_ai1; }
+     if (build_data.AfterDepolarizationSaturationModel == CoreStructs::ADPCLIP) {
+         g_ADP_nS = std::min(g_ADP_linear, g_peak_ADP_max_nS);
+     } else {
+@@ -480,7 +485,9 @@ void LIFCNeuron::Update(float t_ms, bool recording) {
+         fatigue = std::max(fatigue, 0.0f);
+     }
+     
++    auto _c0 = std::chrono::steady_clock::now();
+     update_conductances(t_ms);
++    Connections::g_prof.cond_ns += std::chrono::duration<double,std::nano>(std::chrono::steady_clock::now()-_c0).count();
+     
+     if (build_data.UpdateMethod == CoreStructs::CLASSICAL) {
+         update_with_classical_reset_clamp(t_ms);
+diff --git a/Source/Core/Simulator/Structs/Neuron.cpp b/Source/Core/Simulator/Structs/Neuron.cpp
+index b6fc19e24..1240a60cf 100644
+--- a/Source/Core/Simulator/Structs/Neuron.cpp
++++ b/Source/Core/Simulator/Structs/Neuron.cpp
+@@ -1,3 +1,4 @@
++#include <chrono>
+ //=================================================================//
+ // This file is part of the BrainGenix-NES Neuron Emulation System //
+ //=================================================================//
+@@ -147,6 +148,8 @@ float B_NMDA(float V, float Mg = 1.0) {
+ }
+ 
+ void LIFCReceptorData::Update_Conductance(float t, float Vm) {
++    auto _p0 = std::chrono::steady_clock::now(); unsigned long _i0 = Connections::g_prof.iters;
++    struct _G { std::chrono::steady_clock::time_point p0; unsigned long i0; ~_G(){ Connections::g_prof.syn_ns += std::chrono::duration<double,std::nano>(std::chrono::steady_clock::now()-p0).count(); Connections::g_prof.syn_calls++; Connections::g_prof.syn_iters += Connections::g_prof.iters - i0; } } _g{_p0,_i0};
+     auto& syn_times = SrcNeuronPtr->TAct_ms;
+     if (voltage_gated()) {
+         g_k = std::min(g_peak_sum_nS, B_NMDA(Vm) * weight * g_peak_sum_nS * 
+diff --git a/Source/Core/Simulator/Structs/Receptor.cpp b/Source/Core/Simulator/Structs/Receptor.cpp
+index b2fdcf855..5430e6f0d 100644
+--- a/Source/Core/Simulator/Structs/Receptor.cpp
++++ b/Source/Core/Simulator/Structs/Receptor.cpp
+@@ -16,6 +16,7 @@ float compute_normalization(float tau_rise, float tau_decay) {
+ }
+ 
+ // Function to compute normalized synaptic conductance for LIFC PSPs, fAHP, sAHP, ADP.
++ProfAcc g_prof;
+ float g_norm(float t, const std::vector<float>& spike_times, float tau_rise, float tau_decay, 
+              float norm, float onset_delay, float spike_dt_delta, float history_delta) {
+     t -= onset_delay;
+@@ -24,7 +25,7 @@ float g_norm(float t, const std::vector<float>& spike_times, float tau_rise, flo
+     
+     // Iterate in reverse to process most recent spikes first
+     for (auto it = spike_times.rbegin(); it != spike_times.rend(); ++it) {
+-        float spike_dt = t - *it;
++        g_prof.iters++; float spike_dt = t - *it;
+         if (spike_dt >= 0) {
+             float g_norm_contribution = exp(-spike_dt / tau_decay) - exp(-spike_dt / tau_rise);
+             if (spike_dt > spike_dt_delta && g_norm_contribution < history_delta) {
+diff --git a/Source/Core/Simulator/Structs/Receptor.h b/Source/Core/Simulator/Structs/Receptor.h
+index 33851a79a..a99318aca 100644
+--- a/Source/Core/Simulator/Structs/Receptor.h
++++ b/Source/Core/Simulator/Structs/Receptor.h
+@@ -73,6 +73,11 @@ struct Receptor: public ReceptorBase, public ReceptorCommonBase {
+     Receptor(const ReceptorBase& _Base): ReceptorBase(_Base) {}
+ };
+ 
++struct ProfAcc { // TEMPORARY profiling instrumentation (not for commit)
++    double syn_ns=0, ahp_ns=0, adp_ns=0, upd_ns=0, cond_ns=0, step_ns=0;
++    unsigned long syn_calls=0, ahp_calls=0, adp_calls=0, iters=0, syn_iters=0, ahp_iters=0, adp_iters=0, updates=0;
++};
++extern ProfAcc g_prof;
+ extern float compute_normalization(float tau_rise, float tau_decay);
+ 
+ extern float g_norm(float t, const std::vector<float>& spike_times, float tau_rise, float tau_decay,
+diff --git a/Source/Core/Simulator/Structs/Simulation.cpp b/Source/Core/Simulator/Structs/Simulation.cpp
+index c394d0823..9af64f72b 100644
+--- a/Source/Core/Simulator/Structs/Simulation.cpp
++++ b/Source/Core/Simulator/Structs/Simulation.cpp
+@@ -1,3 +1,5 @@
++#include <chrono>
++#include <cstdio>
+ #include <Simulator/Structs/Simulation.h>
+ 
+ #include <Simulator/Structs/RecordingElectrode.h>
+@@ -1762,6 +1764,8 @@ void Simulation::RunFor(float tRun_ms) {
+     sim_methods simmethod = simmethod_list_of_neurons;
+ 
+     unsigned long num_updates_called = 0;
++    Connections::g_prof = Connections::ProfAcc();
++    auto _r0 = std::chrono::steady_clock::now();
+     while (this->T_ms < tEnd_ms) {
+ 
+         // Track time-points for God's eye recording
+@@ -1814,6 +1818,9 @@ void Simulation::RunFor(float tRun_ms) {
+ 
+         this->T_ms += this->Dt_ms;
+     }
++    { double tot = std::chrono::duration<double,std::nano>(std::chrono::steady_clock::now()-_r0).count(); auto& g = Connections::g_prof;
++      fprintf(stderr, "PROF Dt_ms=%g steps_updates=%lu total_ms=%.3f cond_ms=%.3f syn_ms=%.3f ahp_ms=%.3f adp_ms=%.3f syn_calls=%lu ahp_calls=%lu adp_calls=%lu syn_iters=%lu ahp_iters=%lu adp_iters=%lu\n",
++        (double)Dt_ms, num_updates_called, tot/1e6, g.cond_ns/1e6, g.syn_ns/1e6, g.ahp_ns/1e6, g.adp_ns/1e6, g.syn_calls, g.ahp_calls, g.adp_calls, g.syn_iters, g.ahp_iters, g.adp_iters); fflush(stderr); }
+     Logger_->Log("Number of top-level Update() calls: "+std::to_string(num_updates_called), 3);
+     Logger_->Log("Total number of spikes on all neurons: "+std::to_string(TotalSpikes()), 3);
+ };

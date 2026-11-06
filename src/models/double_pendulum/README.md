@@ -299,3 +299,46 @@ by tick 900); this is box contention, not NES. Over 100 ticks of the first minut
 plateau reached by about tick 600 and stays flat, so wall-clock is linear: 180 s simulated is about 5.5 h at 1.1 to 1.25 s per tick
 (projection beyond 3000 ticks, unmeasured). One 30 s episode per seed is a small sample; the NES net is at or slightly
 better than the stand-in on every seed in these metrics.
+
+## Speed-up: where the NES tick goes, and a g_norm lookback cap (not adopted as-is)
+
+Profile of the unmodified NES (`nes-spikewindow`, v1.0.1, `Dt_ms` 1.0, i.e. 10 steps per tick) via a timing build of the same
+source (`profiling/nes_gnorm_prof.patch`: chrono counters around the `g_norm` callers, one `PROF` line per `RunFor` on
+stderr; `perf` is not permitted on this box, `perf_event_paranoid` 3). 700 ticks, `dp_nes_equiv.py --tag prof`, parsed with
+`dp_nes_compare.py --prof LOG`. The timing build gives spikes identical to the plain binary (deterministic).
+
+| per tick, ms | ticks 1-50 | ticks 601-700 |
+|---|---|---|
+| Python total (schedule + run + read) | 264 | 1109 |
+| NES stepping inside RunFor | 213 | 1062 |
+| synapse `g_norm` (Neuron.cpp:153,156, 1998 receptors) | 37 (17%) | 130 (12%) |
+| fAHP + sAHP `g_norm` (LIFCNeuron.cpp:260-261) | 105 (49%) | 628 (59%) |
+| ADP `g_norm` (LIFCNeuron.cpp:270) | 50 (23%) | 276 (26%) |
+| other stepping | 13 (6%) | 19 (2%) |
+| `g_norm` iterations per call (synapse / fAHP+sAHP / ADP) | 37 / 38 / 38 | 151 / 244 / 223 |
+
+(The remaining Python-side cost is about 30 ms schedule and 7 to 8 ms read per tick.) So about 97% of a plateau tick is `g_norm`, but
+only 12% of that is the synapse lookback the cap targets: 85% is the neuron's own fAHP/sAHP/ADP kernels, evaluated for all 3294 neurons
+every step even though every `*PeakConductance_nS` in this network is 0 (so the result is `0 * g_norm`). The growth over the first
+several hundred ticks is the spike history filling the lookback (1 s for synapses, 2 to 3 s for ADP/sAHP).
+
+Change tried (`~/BrainGenix/wt/nes-lookback`, branch `perf/gnorm-lookback`, `54f0a65fb`): in `g_norm`,
+`spike_dt_delta = min(spike_dt_delta, max(12 * max(tau_rise, tau_decay), 10 ms))`. It only affects kernels with 12 tau < 1000 ms
+(AMPA 3 ms -> 36 ms, fAHP 30 ms -> 360 ms); sAHP and ADP are unchanged. Dropped tail below 6.1e-6 of one spike's peak per spike,
+at most 3.7e-5 for a 1 spike per ms AMPA train. Same 700-tick fixed observation sequence for both binaries (ticks 1-300 random,
+301-450 six static states of 25 ticks, calibrate()-style seed 7, 451-700 random), windowed read:
+
+| | baseline | cap | speedup |
+|---|---|---|---|
+| ticks 1-50 total (sched / run / read) | 257.5 (36.3 / 210.4 / 9.0) | 222.9 (35.1 / 177.0 / 9.2) | 1.16x |
+| ticks 601-700 total (sched / run / read) | 1039.8 (37.0 / 991.1 / 10.0) | 811.4 (34.5 / 766.3 / 9.2) | 1.28x |
+| projected 30 s (3000 ticks) at plateau | 52 min | 41 min | |
+| projected 180 s (18000 ticks) at plateau | 5.2 h | 4.1 h | |
+
+**Behaviour is not identical.** The baseline is bit-reproducible (the timing build gives the same 290430 spikes), the cap run is not
+the same: 5 of 290430 output spikes differ (290425), all 1 ms shifts at threshold, first at tick 5 neuron 213 (t=41 ms against 42 ms,
+just after the first spike leaves the 36 ms window); 33 neuron-ticks differ (max 1 spike); force differs on 33 of 700 ticks, max
+|dF| 0.051 N (one spike, = 1 decoder count), mean |dF| 0.0024 N (RMS force 1.75 N). That is a rounding-level change in one
+neuron, not float noise, so the cap was stopped here and not tuned. A bit-identical alternative that would remove the 85%: skip the
+`g_peak * g_norm` AHP/ADP evaluation when the peak conductance is 0 (not implemented or measured).
+Scripts: `dp_nes_equiv.py --tag X` (records spikes and force per tick), `dp_nes_compare.py A B [--prof LOG]`.
