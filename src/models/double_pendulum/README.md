@@ -309,7 +309,7 @@ stderr; `perf` is not permitted on this box, `perf_event_paranoid` 3). 700 ticks
 
 | per tick, ms | ticks 1-50 | ticks 601-700 |
 |---|---|---|
-| Python total (schedule + run + read) | 264 | 1109 |
+| Python total (schedule + run + read) | 264 | 1116 |
 | NES stepping inside RunFor | 213 | 1062 |
 | synapse `g_norm` (Neuron.cpp:153,156, 1998 receptors) | 37 (17%) | 130 (12%) |
 | fAHP + sAHP `g_norm` (LIFCNeuron.cpp:260-261) | 105 (49%) | 628 (59%) |
