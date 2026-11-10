@@ -1,0 +1,73 @@
+P1 ENG18 BG0 INHon | G0 cue=[22, 29] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=2 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G0 cue=[22, 29, 51] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=2 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G0 cue=[29, 51, 63] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=2 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=18 | first_noncue_latency_ms=3.56 | last_pyr_spike_ms=15.97
+P1 ENG18 BG0 INHon | G1 cue=[8, 27] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=1 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G1 cue=[8, 27, 33] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=2 spikes=3 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G1 cue=[27, 33, 44] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=2 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=17 | first_noncue_latency_ms=3.60 | last_pyr_spike_ms=17.92
+P1 ENG18 BG0 INHon | G2 cue=[12, 17] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G2 cue=[12, 17, 19] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=1 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G2 cue=[17, 19, 50] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=1 spikes=1 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P1 ENG18 BG0 INHon | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=21 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=13 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=15.91
+P2 ENG18 BG0 INHoff | G0 cue=[22, 29] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G0 cue=[22, 29, 51] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G0 cue=[29, 51, 63] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=50 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=32.94
+P2 ENG18 BG0 INHoff | G1 cue=[8, 27] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G1 cue=[8, 27, 33] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G1 cue=[27, 33, 44] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=37 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=23.96
+P2 ENG18 BG0 INHoff | G2 cue=[12, 17] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=2 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G2 cue=[12, 17, 19] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G2 cue=[17, 19, 50] | noncue_fired=0/4 [] | uncued_cue_fired=[] | target_member_spikes=3 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=- | last_pyr_spike_ms=0.00
+P2 ENG18 BG0 INHoff | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=25 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=18.72
+P3 ENG18 BG0.01 INHon | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=18 | first_noncue_latency_ms=3.56 | last_pyr_spike_ms=15.98
+P3 ENG18 BG0.01 INHon | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=17 | first_noncue_latency_ms=3.60 | last_pyr_spike_ms=17.85
+P3 ENG18 BG0.01 INHon | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=21 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=13 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=16.00
+P4 ENG18 BG0.01 INHoff | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=50 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=33.09
+P4 ENG18 BG0.01 INHoff | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=37 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=23.96
+P4 ENG18 BG0.01 INHoff | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=25 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=18.72
+P5 ENG18 BG0.02 INHon | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=18 | first_noncue_latency_ms=3.56 | last_pyr_spike_ms=15.98
+P5 ENG18 BG0.02 INHon | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=17 | first_noncue_latency_ms=3.60 | last_pyr_spike_ms=17.85
+P5 ENG18 BG0.02 INHon | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=21 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=13 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=15.93
+P6 ENG18 BG0.02 INHoff | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=50 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=32.92
+P6 ENG18 BG0.02 INHoff | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=39 | other_group_members_fired=7 [4:8 18:8 20:8 22:1 29:7 59:8 63:8] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=46.40
+P6 ENG18 BG0.02 INHoff | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=25 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=18.67
+P7 ENG18 BG0.03 INHon | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=18 | first_noncue_latency_ms=3.56 | last_pyr_spike_ms=15.98
+P7 ENG18 BG0.03 INHon | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=28 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=17 | first_noncue_latency_ms=3.60 | last_pyr_spike_ms=17.85
+P7 ENG18 BG0.03 INHon | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=21 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=13 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=15.93
+P8 ENG18 BG0.03 INHoff | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=73 | other_group_members_fired=11 [33:8 39:6 41:10 42:10 44:9 60:7 0:6 12:6 21:6 37:6 49:7] | other_pyr_fired=7 spikes=11 [13, 24, 25, 31, 35, 47, 48] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=44.64
+P8 ENG18 BG0.03 INHoff | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=56 | other_group_members_fired=12 [4:10 18:10 20:10 22:2 29:8 59:10 63:9 0:6 12:6 21:7 37:6 49:7] | other_pyr_fired=7 spikes=11 [13, 24, 25, 31, 35, 47, 48] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.66 | last_pyr_spike_ms=43.52
+P8 ENG18 BG0.03 INHoff | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=30 | other_group_members_fired=13 [4:10 18:9 20:10 22:2 29:8 59:10 63:9 33:6 39:5 41:8 42:8 44:7 60:5] | other_pyr_fired=5 spikes=6 [24, 25, 31, 35, 48] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.67 | last_pyr_spike_ms=47.83
+P9 ENG18 BG0.05 INHon | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=56 | other_group_members_fired=11 [33:6 39:4 41:7 42:6 44:6 60:5 0:5 12:5 21:5 37:5 49:5] | other_pyr_fired=13 spikes=20 [13, 15, 24, 25, 31, 35, 38, 47, 48, 54] | int_fired=11 spikes=57 | first_noncue_latency_ms=3.76 | last_pyr_spike_ms=31.82
+P9 ENG18 BG0.05 INHon | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=42 | other_group_members_fired=12 [4:7 18:7 20:7 22:2 29:6 59:7 63:7 0:5 12:5 21:5 37:5 49:5] | other_pyr_fired=13 spikes=20 [13, 15, 24, 25, 31, 35, 38, 47, 48, 54] | int_fired=10 spikes=53 | first_noncue_latency_ms=3.70 | last_pyr_spike_ms=31.63
+P9 ENG18 BG0.05 INHon | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=17 | other_group_members_fired=0 [] | other_pyr_fired=0 spikes=0 [] | int_fired=5 spikes=12 | first_noncue_latency_ms=3.65 | last_pyr_spike_ms=13.87
+P10 ENG18 BG0.05 INHoff | G0 cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | uncued_cue_fired=[] | target_member_spikes=78 | other_group_members_fired=11 [33:9 39:8 41:12 42:11 44:10 60:8 0:8 12:7 21:8 37:8 49:9] | other_pyr_fired=18 spikes=46 [5, 13, 15, 24, 25, 31, 32, 35, 36, 38] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.55 | last_pyr_spike_ms=46.74
+P10 ENG18 BG0.05 INHoff | G1 cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | uncued_cue_fired=[] | target_member_spikes=66 | other_group_members_fired=12 [4:12 18:12 20:12 22:2 29:9 59:12 63:11 0:8 12:8 21:9 37:8 49:9] | other_pyr_fired=18 spikes=48 [5, 13, 15, 24, 25, 31, 32, 35, 36, 38] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.70 | last_pyr_spike_ms=46.60
+P10 ENG18 BG0.05 INHoff | G2 cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | uncued_cue_fired=[] | target_member_spikes=51 | other_group_members_fired=13 [4:12 18:12 20:12 22:2 29:9 59:12 63:11 33:9 39:8 41:11 42:11 44:9 60:8] | other_pyr_fired=18 spikes=45 [5, 13, 15, 24, 25, 31, 32, 35, 36, 38] | int_fired=0 spikes=0 | first_noncue_latency_ms=3.71 | last_pyr_spike_ms=47.81
+
+Interneuron spike times (ms rel. cue), phases 1 and 2, G0 events:
+P1 t=20 cue=[22, 29]
+  int 89: 1.91, 4.36
+P1 t=1020 cue=[22, 29, 51]
+  int 89: 1.72, 4.24
+P1 t=2020 cue=[29, 51, 63]
+  int 89: 1.61, 4.18
+P1 t=3020 cue=[22, 29, 51, 63]
+  int 77: 5.88, 8.60, 13.30
+  int 80: 10.05
+  int 82: 7.03, 11.75
+  int 89: 1.54, 4.09, 7.16, 10.21, 13.29, 16.34, 19.62
+  int 93: 4.07, 7.18, 10.40, 13.62, 16.74
+P2 t=12020 cue=[22, 29]
+  (no interneuron spikes)
+P2 t=13020 cue=[22, 29, 51]
+  (no interneuron spikes)
+P2 t=14020 cue=[29, 51, 63]
+  (no interneuron spikes)
+P2 t=15020 cue=[22, 29, 51, 63]
+  (no interneuron spikes)
+
+spikes outside all windows: 0
+cumulative spike totals per phase: P1=163, P2=299, P3=424, P4=536, P5=661, P6=823, P7=948, P8=1404, P9=1808, P10=2478

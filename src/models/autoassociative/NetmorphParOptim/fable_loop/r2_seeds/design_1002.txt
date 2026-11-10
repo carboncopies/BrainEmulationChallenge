@@ -1,0 +1,97 @@
+GROUP 0: members [0, 7, 9, 12, 15, 24, 25, 38] cue [12, 15, 24, 38] noncue [0, 7, 9, 25]
+  search score 32.3400 ; min cue->noncue pair nS 32.3400
+  ASSERT score>=4.5: PASS
+GROUP 1: members [18, 30, 31, 33, 42, 43, 58, 60] cue [18, 42, 43, 58] noncue [30, 31, 33, 60]
+  search score 11.7600 ; min cue->noncue pair nS 11.7600
+  ASSERT score>=4.5: PASS
+GROUP 2: members [17, 34, 36, 44, 50, 53, 55, 65] cue [17, 36, 53, 55] noncue [34, 44, 50, 65]
+  search score 6.8600 ; min cue->noncue pair nS 6.8600
+  ASSERT score>=4.5: PASS
+--- GROUP 0 detail
+ a. non-cue: id w_post S_post ; recurrent drive from other 3 noncue under ENG ; 
+   0: w_post=0.0778 S_post=352.80 recurrent_drive_ENG=8.69
+   7: w_post=0.1806 S_post=151.90 recurrent_drive_ENG=10.09
+   9: w_post=0.1728 S_post=158.76 recurrent_drive_ENG=10.16
+   25: w_post=0.1783 S_post=153.86 recurrent_drive_ENG=10.14
+   cue 12: drive from 4 noncue at w=1 = 0.98
+   cue 15: drive from 4 noncue at w=1 = 0.00
+   cue 24: drive from 4 noncue at w=1 = 31.36
+   cue 38: drive from 4 noncue at w=1 = 45.08
+ b. cue->cue pair sums (other 3 cue, w=1): 12:1.96, 15:4.90, 24:45.08, 38:53.90 ; max 53.90
+--- GROUP 1 detail
+ a. non-cue: id w_post S_post ; recurrent drive from other 3 noncue under ENG ; 
+   30: w_post=0.2393 S_post=114.66 recurrent_drive_ENG=15.24
+   31: w_post=0.5091 S_post=53.90 recurrent_drive_ENG=7.48
+   33: w_post=0.3011 S_post=91.14 recurrent_drive_ENG=18.00
+   60: w_post=0.4516 S_post=60.76 recurrent_drive_ENG=14.16
+   cue 18: drive from 4 noncue at w=1 = 22.54
+   cue 42: drive from 4 noncue at w=1 = 0.00
+   cue 43: drive from 4 noncue at w=1 = 0.00
+   cue 58: drive from 4 noncue at w=1 = 0.00
+ b. cue->cue pair sums (other 3 cue, w=1): 18:21.56, 42:1.96, 43:0.00, 58:0.98 ; max 21.56
+--- GROUP 2 detail
+ a. non-cue: id w_post S_post ; recurrent drive from other 3 noncue under ENG ; 
+   34: w_post=0.5490 S_post=49.98 recurrent_drive_ENG=8.61
+   44: w_post=0.6512 S_post=42.14 recurrent_drive_ENG=9.57
+   50: w_post=0.8750 S_post=31.36 recurrent_drive_ENG=9.43
+   65: w_post=0.7568 S_post=36.26 recurrent_drive_ENG=11.12
+   cue 17: drive from 4 noncue at w=1 = 11.76
+   cue 36: drive from 4 noncue at w=1 = 9.80
+   cue 53: drive from 4 noncue at w=1 = 1.96
+   cue 55: drive from 4 noncue at w=1 = 0.00
+ b. cue->cue pair sums (other 3 cue, w=1): 17:12.74, 36:6.86, 53:0.00, 55:1.96 ; max 12.74
+--- GROUP 0 c. interneurons (cue-only w1 / all8 w1 / cue-only INHfb / all8 INHfb): 67: 30.38 / 48.02 / 10.00 / 27.64; 77: 38.22 / 62.72 / 10.00 / 34.50; 85: 17.64 / 31.36 / 10.00 / 23.72
+ d. GABA per member (total from all int / from listed int):
+   0: total 395.20 ; listed 45.60
+   7: total 179.20 ; listed 24.80
+   9: total 168.80 ; listed 24.00
+   12: total 2.40 ; listed 0.00
+   15: total 4.80 ; listed 0.00
+   24: total 47.20 ; listed 3.20
+   25: total 151.20 ; listed 22.40
+   38: total 92.80 ; listed 6.40
+--- GROUP 1 c. interneurons (cue-only w1 / all8 w1 / cue-only INHfb / all8 INHfb): 67: 39.20 / 76.44 / 10.00 / 47.24; 76: 8.82 / 18.62 / 8.82 / 18.62; 77: 37.24 / 66.64 / 10.00 / 39.40; 85: 12.74 / 27.44 / 10.00 / 24.70
+ d. GABA per member (total from all int / from listed int):
+   18: total 36.80 ; listed 4.80
+   30: total 144.00 ; listed 26.40
+   31: total 41.60 ; listed 4.00
+   33: total 112.80 ; listed 18.40
+   42: total 2.40 ; listed 0.00
+   43: total 0.00 ; listed 0.00
+   58: total 2.40 ; listed 0.00
+   60: total 76.80 ; listed 8.80
+--- GROUP 2 c. interneurons (cue-only w1 / all8 w1 / cue-only INHfb / all8 INHfb): 67: 37.24 / 56.84 / 10.00 / 29.60; 76: 9.80 / 25.48 / 9.80 / 25.48; 77: 33.32 / 55.86 / 10.00 / 32.54; 85: 7.84 / 19.60 / 7.84 / 19.60
+ d. GABA per member (total from all int / from listed int):
+   17: total 36.80 ; listed 7.20
+   34: total 64.80 ; listed 10.40
+   36: total 28.80 ; listed 3.20
+   44: total 51.20 ; listed 4.00
+   50: total 36.00 ; listed 4.00
+   53: total 1.60 ; listed 0.00
+   55: total 5.60 ; listed 0.00
+   65: total 78.40 ; listed 18.40
+=== e. spread table (w=1)
+ G0->G1 targets [18, 30, 31, 33, 42, 43, 58, 60]
+   S8  [39.20, 184.24, 68.60, 173.46, 0.00, 0.00, 3.92, 112.70] max 184.24
+   SNC [13.72, 57.82, 22.54, 50.96, 0.00, 0.00, 0.98, 41.16] max 57.82
+ G0->G2 targets [17, 34, 36, 44, 50, 53, 55, 65]
+   S8  [49.98, 101.92, 26.46, 69.58, 62.72, 4.90, 8.82, 93.10] max 101.92
+   SNC [14.70, 36.26, 9.80, 25.48, 26.46, 0.98, 0.98, 19.60] max 36.26
+ G0 -> ungrouped pyr (43 cells) top8 S8/SNC: 23:45.08/13.72; 19:43.12/17.64; 37:34.30/14.70; 47:30.38/7.84; 48:26.46/8.82; 1:25.48/13.72; 11:24.50/9.80; 45:23.52/4.90
+   count ungrouped S8>=80: 0, >=140: 0, >=200: 0
+ G1->G0 targets [0, 7, 9, 12, 15, 24, 25, 38]
+   S8  [583.10, 245.00, 249.90, 7.84, 6.86, 90.16, 182.28, 126.42] max 583.10
+   SNC [230.30, 94.08, 99.96, 1.96, 2.94, 36.26, 69.58, 50.96] max 230.30
+ G1->G2 targets [17, 34, 36, 44, 50, 53, 55, 65]
+   S8  [59.78, 84.28, 18.62, 77.42, 40.18, 2.94, 7.84, 65.66] max 84.28
+   SNC [21.56, 23.52, 7.84, 27.44, 14.70, 0.00, 1.96, 22.54] max 27.44
+ G1 -> ungrouped pyr (43 cells) top8 S8/SNC: 23:52.92/16.66; 47:42.14/14.70; 48:35.28/13.72; 1:31.36/12.74; 16:30.38/11.76; 45:29.40/12.74; 37:27.44/10.78; 19:26.46/8.82
+   count ungrouped S8>=80: 0, >=140: 0, >=200: 0
+ G2->G0 targets [0, 7, 9, 12, 15, 24, 25, 38]
+   S8  [541.94, 206.78, 187.18, 4.90, 8.82, 59.78, 179.34, 88.20] max 541.94
+   SNC [214.62, 96.04, 80.36, 0.98, 2.94, 28.42, 72.52, 48.02] max 214.62
+ G2->G1 targets [18, 30, 31, 33, 42, 43, 58, 60]
+   S8  [53.90, 155.82, 48.02, 178.36, 2.94, 0.00, 1.96, 98.00] max 178.36
+   SNC [20.58, 59.78, 25.48, 76.44, 0.98, 0.00, 0.00, 47.04] max 76.44
+ G2 -> ungrouped pyr (43 cells) top8 S8/SNC: 23:44.10/21.56; 1:31.36/13.72; 37:30.38/12.74; 47:29.40/13.72; 19:27.44/10.78; 16:23.52/8.82; 45:22.54/8.82; 48:19.60/8.82
+   count ungrouped S8>=80: 0, >=140: 0, >=200: 0

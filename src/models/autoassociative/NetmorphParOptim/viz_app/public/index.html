@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Netmorph reservoir viewer</title>
+<link rel="stylesheet" href="style.css">
+<script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
+</head><body>
+<header>
+  <h1>Netmorph reservoir</h1>
+  <select id="runSel" aria-label="run"></select>
+  <span id="badge"></span>
+</header>
+<main>
+  <section id="view"><div id="canvasWrap"><canvas id="c"></canvas><div id="tip"></div></div>
+    <div class="controls">
+      <label>Edge width by <select id="metric"><option value="g_peak_sum">g_peak sum</option><option value="n_receptors">receptor count</option></select></label>
+      <label>Top edges <input id="topN" type="range" min="10" max="2000" value="400"><span id="topNv"></span></label>
+      <label>Color neurons by <select id="colorBy"><option value="type">type</option><option value="region">region</option></select></label>
+      <span id="classToggles"></span>
+    </div>
+    <div id="legend"></div>
+  </section>
+  <section id="side">
+    <h2>Summary</h2><div id="counts"></div><div id="notes" class="muted"></div>
+    <h2>Region to region <select id="mMetric"><option value="g_peak_sum">g_peak sum</option><option value="n_receptors">receptors</option><option value="connections">connections</option></select></h2>
+    <div id="matrix" class="scroll"></div>
+    <h2>DiCE suggested parameters</h2>
+    <div id="dice" class="scroll"></div>
+    <details><summary>Paste DiCE JSON</summary><textarea id="diceIn" rows="5" placeholder='{"parameters":[{"name":"x","current":1,"suggested":2}]}'></textarea><button id="diceBtn">Show</button></details>
+  </section>
+</main>
+<script type="module" src="app.js"></script>
+</body></html>

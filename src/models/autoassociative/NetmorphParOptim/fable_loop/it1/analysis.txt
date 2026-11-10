@@ -1,0 +1,34 @@
+==================== ref127
+SUMMARY {"dump": "/home/johnjose/cos/netmorph_work/bec/src/models/autoassociative/NetmorphParOptim/batchB/vviz4/sample_0000.json", "neurons": 94, "pyramidal": 67, "interneurons": 27, "pyr_pyr_ampa": {"ordered_pairs_possible": 4422, "pairs_present": 2939, "fraction_present": 0.6646313885119856, "mean_g_peak_sum_existing_nS": 7.552900997421781, "max_g_peak_sum_nS": 124.4601821899414, "pairs_ge_6.86nS": 928, "pairs_ge_27.44nS": 121, "total_g_peak_sum_nS": 22197.976031422615, "synapses_total": 22651}, "pyr_int_ampa": {"pairs": 70, "total_nS": 90.15999585390091, "max_pair_nS": 4.899999618530273, "interneurons_with_input": 14, "max_total_onto_one_int_nS": 40.179998099803925, "ints_ge_7.84nS": 3}, "int_pyr_gaba": {"pairs": 173, "total_nS": 173.59998965263367, "max_pair_nS": 3.1999998092651367, "pyr_with_inhibition": 45, "max_total_onto_one_pyr_nS": 16.799998998641968, "mean_total_onto_pyr_nS": 2.5910446216810996, "pyr_ge_16nS": 1, "pyr_ge_8nS": 6}, "int_int_gaba": {"pairs": 29, "total_nS": 26.399998426437378}, "g_per_receptor_median_nS": {"AMPA": 0.9799999509538923, "GABA": 0.7999999523162842, "NMDA": 0.550000011920929}, "as_built_weight_unique": [0.2]}
+SYN pyrpyr AMPA 22651 pyrpyr NMDA 20335 pyrint AMPA 92 intpyr GABA 217 intint GABA 33
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 2.9, 3.9, 5.9, 6.9, 11.8, 11.8, 40.2]
+ mean 3.339 median 0.980 zeros 13 >=7.84 3 >=13.84 1
+PYR incoming GABA from int: mean 2.591 median 1.600 max 16.800 zeros 22 >=8 6 >=16 1 >=40 0
+INT incoming GABA from int: mean 0.978 max 10.400 zeros 17
+PyrInt AMPA pairs 70 mean 1.288 max 4.900
+IntPyr GABA pairs 173 mean 1.003 max 3.200
+as-built weights all types: [0.2]
+==================== arm_a
+SUMMARY {"dump": "/home/johnjose/cos/netmorph_work/fable_loop/it1/viz_a/sample_0000.json", "neurons": 94, "pyramidal": 67, "interneurons": 27, "pyr_pyr_ampa": {"ordered_pairs_possible": 4422, "pairs_present": 2947, "fraction_present": 0.6664405246494799, "mean_g_peak_sum_existing_nS": 7.6148679863407445, "max_g_peak_sum_nS": 121.52017211914062, "pairs_ge_6.86nS": 937, "pairs_ge_27.44nS": 126, "total_g_peak_sum_nS": 22441.015955746174, "synapses_total": 22899}, "pyr_int_ampa": {"pairs": 397, "total_nS": 1183.8398923873901, "max_pair_nS": 27.439990997314453, "interneurons_with_input": 20, "max_total_onto_one_int_nS": 499.7999322414398, "ints_ge_7.84nS": 12}, "int_pyr_gaba": {"pairs": 958, "total_nS": 2664.799908399582, "max_pair_nS": 22.399995803833008, "pyr_with_inhibition": 64, "max_total_onto_one_pyr_nS": 213.60000133514404, "mean_total_onto_pyr_nS": 39.77313296118779, "pyr_ge_16nS": 39, "pyr_ge_8nS": 46}, "int_int_gaba": {"pairs": 182, "total_nS": 434.3999888896942}, "g_per_receptor_median_nS": {"AMPA": 0.9799999509538923, "GABA": 0.7999999523162842, "NMDA": 0.550000011920929}, "as_built_weight_unique": [0.2]}
+SYN pyrpyr AMPA 22899 pyrpyr NMDA 20573 pyrint AMPA 1208 intpyr GABA 3331 intint GABA 543
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.9, 5.9, 5.9, 6.9, 6.9, 8.8, 10.8, 15.7, 17.6, 19.6, 23.5, 68.6, 83.3, 94.1, 134.3, 175.4, 499.8]
+ mean 43.846 median 6.860 zeros 7 >=7.84 12 >=13.84 10
+PYR incoming GABA from int: mean 39.773 median 23.200 max 213.600 zeros 3 >=8 46 >=16 39 >=40 21
+INT incoming GABA from int: mean 16.089 max 161.600 zeros 9
+PyrInt AMPA pairs 397 mean 2.982 max 27.440
+IntPyr GABA pairs 958 mean 2.782 max 22.400
+as-built weights all types: [0.2]
+==================== arm_b
+SUMMARY {"dump": "/home/johnjose/cos/netmorph_work/fable_loop/it1/viz_b/sample_0000.json", "neurons": 94, "pyramidal": 67, "interneurons": 27, "pyr_pyr_ampa": {"ordered_pairs_possible": 4422, "pairs_present": 2951, "fraction_present": 0.6673450927182271, "mean_g_peak_sum_existing_nS": 7.56735206514809, "max_g_peak_sum_nS": 120.54016876220703, "pairs_ge_6.86nS": 942, "pairs_ge_27.44nS": 132, "total_g_peak_sum_nS": 22331.255944252014, "synapses_total": 22787}, "pyr_int_ampa": {"pairs": 640, "total_nS": 3554.459335207939, "max_pair_nS": 61.73997497558594, "interneurons_with_input": 22, "max_total_onto_one_int_nS": 1442.5595623254776, "ints_ge_7.84nS": 17}, "int_pyr_gaba": {"pairs": 1266, "total_nS": 8205.599141597748, "max_pair_nS": 73.59999084472656, "pyr_with_inhibition": 66, "max_total_onto_one_pyr_nS": 619.199836730957, "mean_total_onto_pyr_nS": 122.47162897907086, "pyr_ge_16nS": 52, "pyr_ge_8nS": 55}, "int_int_gaba": {"pairs": 274, "total_nS": 1203.1998734474182}, "g_per_receptor_median_nS": {"AMPA": 0.9799999594688416, "GABA": 0.7999999523162842, "NMDA": 0.550000011920929}, "as_built_weight_unique": [0.2]}
+SYN pyrpyr AMPA 22787 pyrpyr NMDA 20557 pyrint AMPA 3627 intpyr GABA 10257 intint GABA 1504
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 2.0, 2.0, 2.9, 3.9, 4.9, 11.8, 21.6, 25.5, 26.5, 27.4, 29.4, 29.4, 34.3, 46.1, 71.5, 77.4, 201.9, 214.6, 314.6, 394.0, 570.4, 1442.6]
+ mean 131.647 median 26.460 zeros 5 >=7.84 17 >=13.84 16
+PYR incoming GABA from int: mean 122.472 median 68.000 max 619.200 zeros 1 >=8 55 >=16 52 >=40 41
+INT incoming GABA from int: mean 44.563 max 480.800 zeros 6
+PyrInt AMPA pairs 640 mean 5.554 max 61.740
+IntPyr GABA pairs 1266 mean 6.482 max 73.600
+as-built weights all types: [0.2]
+COMPARE arm_a pyrpyr AMPA identical: False pos exactly identical: True pos allclose: True
+  corr pyrpyr AMPA: 0.9749  max pos diff 0.0000
+COMPARE arm_b pyrpyr AMPA identical: False pos exactly identical: True pos allclose: True
+  corr pyrpyr AMPA: 0.9724  max pos diff 0.0000

@@ -1,0 +1,17 @@
+==================== sim133_ref N 94
+SYN pyrpyr AMPA 22899 pyrint AMPA 1208 intpyr GABA 3331 intint GABA 543
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.9, 5.9, 5.9, 6.9, 6.9, 8.8, 10.8, 15.7, 17.6, 19.6, 23.5, 68.6, 83.3, 94.1, 134.3, 175.4, 499.8]
+ mean 43.846 zeros 7 count>=7.84 12 count>=13.84 10
+PYR incoming GABA from int: mean 39.773 median 23.200 max 213.600 count>=16 39
+==================== d03 N 94
+SYN pyrpyr AMPA 22761 pyrint AMPA 537 intpyr GABA 1441 intint GABA 201
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0, 2.0, 2.0, 2.9, 3.9, 3.9, 3.9, 4.9, 5.9, 6.9, 10.8, 33.3, 35.3, 40.2, 59.8, 80.4, 228.3]
+ mean 19.491 zeros 9 count>=7.84 7 count>=13.84 6
+PYR incoming GABA from int: mean 17.206 median 8.800 max 85.600 count>=16 26
+==================== d07 N 94
+SYN pyrpyr AMPA 22821 pyrint AMPA 2080 intpyr GABA 5775 intint GABA 868
+INT incoming AMPA from pyr sorted: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 2.0, 2.0, 2.9, 5.9, 9.8, 9.8, 11.8, 12.7, 13.7, 15.7, 18.6, 20.6, 35.3, 51.0, 107.8, 138.2, 174.4, 217.6, 314.6, 873.2]
+ mean 75.496 zeros 6 count>=7.84 16 count>=13.84 11
+PYR incoming GABA from int: mean 68.955 median 39.200 max 360.000 count>=16 45
+COMPARE d03 soma pos exactly identical: True allclose: True max pos diff 0.0000 | pyrpyr AMPA identical: False corr 0.9745
+COMPARE d07 soma pos exactly identical: True allclose: True max pos diff 0.0000 | pyrpyr AMPA identical: False corr 0.9749

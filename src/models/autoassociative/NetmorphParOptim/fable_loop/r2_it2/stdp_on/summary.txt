@@ -1,0 +1,194 @@
+FORCED SPIKE CHECK (segment 1): found 7/7 near expected absolute times; offsets ms min 0.0 max 0.0
+cumulative spikes per segment: S1=176, S2=2347, S3=3623, S4=4113, S5=4556
+
+G0 e1 3-cell cue=[22, 29, 51] | noncue_fired=0/4 [] | first_noncue_latency_ms=- | target_member_spikes=3 | per-member spikes [4:0 18:0 20:0 22:1 29:1 51:1 59:0 63:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=0 spikes=0 first_int_spike_ms=- | last_pyr_spike_ms=0.00
+G0 e2 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=3.55 | target_member_spikes=119 | per-member spikes [4:21 18:22 20:21 22:2 29:14 51:1 59:21 63:17] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=54 first_int_spike_ms=4.44 | last_pyr_spike_ms=83.44
+G0 e3 3-cell cue=[22, 29, 51] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=2.02 | target_member_spikes=171 | per-member spikes [4:33 18:33 20:32 22:3 29:17 51:1 59:32 63:20] | uncued_cue_fired=[63] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=67 first_int_spike_ms=3.31 | last_pyr_spike_ms=104.00
+G0 e4 3-cell cue=[29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.53 | target_member_spikes=202 | per-member spikes [4:40 18:40 20:39 22:3 29:18 51:1 59:40 63:21] | uncued_cue_fired=[22] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=71 first_int_spike_ms=2.05 | last_pyr_spike_ms=130.84
+G0 e5 2-cell cue=[22, 29] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.50 | target_member_spikes=193 | per-member spikes [4:38 18:37 20:37 22:3 29:19 51:0 59:38 63:21] | uncued_cue_fired=[63] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=72 first_int_spike_ms=2.17 | last_pyr_spike_ms=116.09
+G0 e6 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.37 | target_member_spikes=200 | per-member spikes [4:39 18:38 20:38 22:3 29:20 51:1 59:39 63:22] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=75 first_int_spike_ms=1.64 | last_pyr_spike_ms=120.95
+G0 e7 3-cell cue=[22, 29, 51] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.41 | target_member_spikes=201 | per-member spikes [4:39 18:38 20:38 22:3 29:21 51:1 59:39 63:22] | uncued_cue_fired=[63] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=76 first_int_spike_ms=1.91 | last_pyr_spike_ms=118.56
+G0 e8 2-cell cue=[22, 29] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.42 | target_member_spikes=204 | per-member spikes [4:40 18:39 20:39 22:3 29:21 51:0 59:40 63:22] | uncued_cue_fired=[63] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=76 first_int_spike_ms=1.96 | last_pyr_spike_ms=124.54
+G0 e9 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.35 | target_member_spikes=196 | per-member spikes [4:38 18:37 20:38 22:3 29:20 51:1 59:38 63:21] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=72 first_int_spike_ms=1.60 | last_pyr_spike_ms=120.92
+G0 e10 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.35 | target_member_spikes=166 | per-member spikes [4:29 18:31 20:32 22:3 29:20 51:1 59:30 63:20] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=6 spikes=66 first_int_spike_ms=1.59 | last_pyr_spike_ms=95.98
+G0 e11 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.34 | target_member_spikes=24 | per-member spikes [4:2 18:4 20:5 22:1 29:5 51:1 59:2 63:4] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=15 first_int_spike_ms=1.59 | last_pyr_spike_ms=13.92
+G0 e12 2-cell cue=[22, 29] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.40 | target_member_spikes=14 | per-member spikes [4:2 18:2 20:2 22:1 29:3 51:0 59:2 63:2] | uncued_cue_fired=[63] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=4 spikes=10 first_int_spike_ms=1.91 | last_pyr_spike_ms=6.48
+G1 e1 3-cell cue=[8, 27, 33] | noncue_fired=0/4 [] | first_noncue_latency_ms=- | target_member_spikes=3 | per-member spikes [8:1 27:1 33:1 39:0 41:0 42:0 44:0 60:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=0 spikes=0 first_int_spike_ms=- | last_pyr_spike_ms=0.00
+G1 e2 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=3.55 | target_member_spikes=33 | per-member spikes [8:1 27:1 33:5 39:4 41:6 42:5 44:6 60:5] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=4 spikes=17 first_int_spike_ms=4.40 | last_pyr_spike_ms=20.47
+G1 e3 3-cell cue=[8, 27, 33] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=2.93 | target_member_spikes=44 | per-member spikes [8:1 27:1 33:7 39:7 41:8 42:7 44:7 60:6] | uncued_cue_fired=[44] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=4 spikes=19 first_int_spike_ms=5.20 | last_pyr_spike_ms=29.00
+G1 e4 3-cell cue=[27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=2.61 | target_member_spikes=50 | per-member spikes [8:0 27:1 33:7 39:8 41:10 42:9 44:8 60:7] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=4 spikes=22 first_int_spike_ms=3.74 | last_pyr_spike_ms=30.88
+G1 e5 2-cell cue=[8, 27] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=2.59 | target_member_spikes=55 | per-member spikes [8:1 27:1 33:7 39:9 41:11 42:10 44:8 60:8] | uncued_cue_fired=[33, 44] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=25 first_int_spike_ms=5.42 | last_pyr_spike_ms=35.34
+G1 e6 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.67 | target_member_spikes=70 | per-member spikes [8:1 27:1 33:9 39:11 41:14 42:13 44:10 60:11] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=30 first_int_spike_ms=2.65 | last_pyr_spike_ms=41.45
+G1 e7 3-cell cue=[8, 27, 33] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.61 | target_member_spikes=104 | per-member spikes [8:1 27:1 33:13 39:18 41:21 42:20 44:14 60:16] | uncued_cue_fired=[44] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=32 first_int_spike_ms=3.37 | last_pyr_spike_ms=64.21
+G1 e8 2-cell cue=[8, 27] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.73 | target_member_spikes=109 | per-member spikes [8:1 27:1 33:13 39:20 41:22 42:21 44:14 60:17] | uncued_cue_fired=[33, 44] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=26 first_int_spike_ms=3.77 | last_pyr_spike_ms=66.64
+G1 e9 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.44 | target_member_spikes=123 | per-member spikes [8:1 27:1 33:15 39:22 41:24 42:24 44:16 60:20] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=30 first_int_spike_ms=2.21 | last_pyr_spike_ms=73.25
+G1 e10 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.40 | target_member_spikes=131 | per-member spikes [8:1 27:1 33:16 39:24 41:26 42:25 44:17 60:21] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=30 first_int_spike_ms=2.19 | last_pyr_spike_ms=78.59
+G1 e11 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.39 | target_member_spikes=130 | per-member spikes [8:1 27:1 33:16 39:23 41:26 42:25 44:17 60:21] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=30 first_int_spike_ms=2.17 | last_pyr_spike_ms=78.36
+G1 e12 2-cell cue=[8, 27] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.50 | target_member_spikes=132 | per-member spikes [8:1 27:1 33:16 39:24 41:26 42:26 44:17 60:21] | uncued_cue_fired=[33, 44] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=30 first_int_spike_ms=3.32 | last_pyr_spike_ms=80.80
+G2 e1 3-cell cue=[12, 17, 19] | noncue_fired=0/4 [] | first_noncue_latency_ms=- | target_member_spikes=3 | per-member spikes [0:0 12:1 17:1 19:1 21:0 37:0 49:0 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=0 spikes=0 first_int_spike_ms=- | last_pyr_spike_ms=0.00
+G2 e2 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=3.55 | target_member_spikes=19 | per-member spikes [0:3 12:3 17:1 19:1 21:4 37:3 49:3 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=11 first_int_spike_ms=4.54 | last_pyr_spike_ms=12.84
+G2 e3 3-cell cue=[12, 17, 19] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=4.96 | target_member_spikes=26 | per-member spikes [0:4 12:5 17:1 19:1 21:5 37:5 49:5 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=11 first_int_spike_ms=6.64 | last_pyr_spike_ms=21.65
+G2 e4 3-cell cue=[17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=4.31 | target_member_spikes=31 | per-member spikes [0:5 12:5 17:1 19:1 21:6 37:6 49:6 50:1] | uncued_cue_fired=[12] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=11 first_int_spike_ms=5.66 | last_pyr_spike_ms=24.51
+G2 e5 2-cell cue=[12, 17] | noncue_fired=0/4 [] | first_noncue_latency_ms=- | target_member_spikes=2 | per-member spikes [0:0 12:1 17:1 19:0 21:0 37:0 49:0 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=0 spikes=0 first_int_spike_ms=- | last_pyr_spike_ms=0.00
+G2 e6 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=2.62 | target_member_spikes=33 | per-member spikes [0:6 12:5 17:1 19:1 21:7 37:6 49:6 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=12 first_int_spike_ms=3.69 | last_pyr_spike_ms=23.79
+G2 e7 3-cell cue=[12, 17, 19] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=2.84 | target_member_spikes=38 | per-member spikes [0:7 12:6 17:1 19:1 21:8 37:7 49:8 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=4.44 | last_pyr_spike_ms=26.83
+G2 e8 2-cell cue=[12, 17] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=3.54 | target_member_spikes=37 | per-member spikes [0:7 12:6 17:1 19:0 21:8 37:7 49:8 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=5.46 | last_pyr_spike_ms=27.09
+G2 e9 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=2.10 | target_member_spikes=53 | per-member spikes [0:10 12:8 17:1 19:1 21:11 37:10 49:11 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=3.43 | last_pyr_spike_ms=38.61
+G2 e10 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=1.95 | target_member_spikes=53 | per-member spikes [0:10 12:8 17:1 19:1 21:11 37:10 49:11 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=10 first_int_spike_ms=3.36 | last_pyr_spike_ms=35.70
+G2 e11 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=1.87 | target_member_spikes=48 | per-member spikes [0:9 12:7 17:1 19:1 21:10 37:9 49:10 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=3.25 | last_pyr_spike_ms=30.34
+G2 e12 2-cell cue=[12, 17] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=2.27 | target_member_spikes=52 | per-member spikes [0:11 12:8 17:1 19:0 21:11 37:10 49:11 50:0] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=3.88 | last_pyr_spike_ms=38.84
+G0 final 4-cell cue=[22, 29, 51, 63] | noncue_fired=4/4 [4, 18, 20, 59] | first_noncue_latency_ms=1.33 | target_member_spikes=211 | per-member spikes [4:41 18:40 20:41 22:3 29:21 51:1 59:41 63:23] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=7 spikes=25 first_int_spike_ms=1.57 | last_pyr_spike_ms=129.86
+G1 final 4-cell cue=[8, 27, 33, 44] | noncue_fired=4/4 [39, 41, 42, 60] | first_noncue_latency_ms=1.36 | target_member_spikes=134 | per-member spikes [8:1 27:1 33:17 39:24 41:26 42:26 44:18 60:21] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=17 first_int_spike_ms=2.14 | last_pyr_spike_ms=78.37
+G2 final 4-cell cue=[12, 17, 19, 50] | noncue_fired=4/4 [0, 21, 37, 49] | first_noncue_latency_ms=1.75 | target_member_spikes=48 | per-member spikes [0:9 12:7 17:1 19:1 21:10 37:9 49:10 50:1] | uncued_cue_fired=[] | other_group_members_fired=0 | other_pyr_fired=0 | int_fired=5 spikes=8 first_int_spike_ms=2.95 | last_pyr_spike_ms=30.25
+
+B. WEIGHT TABLES (AMPA weight, pre rows -> post cols; "-" = no AMPA connection)
+ G0 cue->noncue weight @W0
+      cols        4       18       20       59
+  row  22   0.0778   0.0977   0.1208   0.0706
+  row  29   0.0765   0.0765   0.1351   0.0604
+  row  51   0.0918   0.1177   0.0957   0.0866
+  row  63   0.0665   0.0741   0.0778   0.0729
+ G0 cue->noncue weight @W1
+      cols        4       18       20       59
+  row  22   0.1645   0.1824   0.2016   0.1575
+  row  29   0.2787   0.2855   0.3366   0.2607
+  row  51   0.1373   0.1642   0.1418   0.1321
+  row  63   0.2678   0.2856   0.2792   0.2743
+ G0 cue->noncue weight @W2
+      cols        4       18       20       59
+  row  22   1.0000   1.0000   1.0000   1.0000
+  row  29   1.0000   1.0000   1.0000   1.0000
+  row  51   0.4949   0.5377   0.5208   0.4897
+  row  63   1.0000   1.0000   1.0000   1.0000
+ G0 cue->noncue weight @W5
+      cols        4       18       20       59
+  row  22   1.0000   1.0000   1.0000   1.0000
+  row  29   1.0000   1.0000   1.0000   1.0000
+  row  51   0.5519   0.5946   0.5778   0.5467
+  row  63   1.0000   1.0000   1.0000   1.0000
+ G0 cue->noncue nS (weight x g_peak_sum) @W0
+      cols        4       18       20       59
+  row  22   4.5000   4.5000   4.5000   4.5000
+  row  29   4.5000   4.5000   4.5000   4.5000
+  row  51   4.5000   4.5000   4.5000   4.5000
+  row  63   4.5000   4.5000   4.5000   4.5000
+ G0 cue->noncue nS (weight x g_peak_sum) @W1
+      cols        4       18       20       59
+  row  22   9.5122   8.4029   7.5072  10.0314
+  row  29  16.3892  16.7867  11.2170  19.4176
+  row  51   6.7287   6.2742   6.6706   6.8629
+  row  63  18.1100  17.3513  16.1432  16.9374
+ G0 cue->noncue nS (weight x g_peak_sum) @W2
+      cols        4       18       20       59
+  row  22  57.8200  46.0600  37.2400  63.7000
+  row  29  58.8000  58.8000  33.3200  74.4800
+  row  51  24.2521  20.5510  24.5003  25.4366
+  row  63  67.6200  60.7600  57.8200  61.7400
+ G0 cue->noncue nS (weight x g_peak_sum) @W5
+      cols        4       18       20       59
+  row  22  57.8200  46.0600  37.2400  63.7000
+  row  29  58.8000  58.8000  33.3200  74.4800
+  row  51  27.0436  22.7274  27.1786  28.3959
+  row  63  67.6200  60.7600  57.8200  61.7400
+ G1 cue->noncue weight @W0
+      cols       39       41       42       60
+  row   8   0.0370   0.2087   0.3061   0.0977
+  row  27   0.0706   0.2870   0.1837   0.1351
+  row  33   0.0820   0.2296   0.1913   0.1837
+  row  44   0.3827   0.1208   0.1093   0.5102
+ G1 cue->noncue weight @W2
+      cols       39       41       42       60
+  row   8   0.0370   0.2087   0.3061   0.0977
+  row  27   0.0706   0.2870   0.1837   0.1351
+  row  33   0.0820   0.2296   0.1913   0.1837
+  row  44   0.3827   0.1208   0.1093   0.5102
+ G1 cue->noncue weight @W3
+      cols       39       41       42       60
+  row   8   0.5479   0.7224   0.8122   0.5808
+  row  27   0.6277   0.8510   0.7381   0.6596
+  row  33   1.0000   1.0000   1.0000   1.0000
+  row  44   1.0000   1.0000   1.0000   1.0000
+ G1 cue->noncue weight @W5
+      cols       39       41       42       60
+  row   8   0.6043   0.7792   0.8689   0.6360
+  row  27   0.6841   0.9077   0.7948   0.7148
+  row  33   1.0000   1.0000   1.0000   1.0000
+  row  44   1.0000   1.0000   1.0000   1.0000
+ G2 cue->noncue weight @W0
+      cols        0       21       37       49
+  row  12   0.2701   0.2701   0.3280   0.2187
+  row  17   0.2551   0.4174   0.2870   0.2087
+  row  19   0.2870   0.3827   0.6560   0.3061
+  row  50   0.4174   0.2551   0.2296   0.3827
+ G2 cue->noncue weight @W3
+      cols        0       21       37       49
+  row  12   0.2701   0.2701   0.3280   0.2187
+  row  17   0.2551   0.4174   0.2870   0.2087
+  row  19   0.2870   0.3827   0.6560   0.3061
+  row  50   0.4174   0.2551   0.2296   0.3827
+ G2 cue->noncue weight @W4
+      cols        0       21       37       49
+  row  12   0.9586   1.0000   1.0000   0.9617
+  row  17   0.6566   0.8541   0.6951   0.6447
+  row  19   0.5996   0.7268   0.9756   0.6467
+  row  50   0.6609   0.5223   0.4762   0.6426
+ G2 cue->noncue weight @W5
+      cols        0       21       37       49
+  row  12   1.0000   1.0000   1.0000   1.0000
+  row  17   0.7076   0.9069   0.7459   0.6976
+  row  19   0.6507   0.7797   1.0000   0.6997
+  row  50   0.7120   0.5752   0.5270   0.6955
+ G0 @W0 noncue->noncue: n=12 min 0.1089 mean 0.1294 max 0.1564
+ G0 @W0 cue->cue: n=8 min 0.0000 mean 0.0000 max 0.0000
+ G0 @W0 noncue->cue: n=10 min 1.0000 mean 1.0000 max 1.0000
+ G0 @W5 noncue->noncue: n=12 min 1.0000 mean 1.0000 max 1.0000
+ G0 @W5 cue->cue: n=8 min 0.0294 mean 0.6270 max 1.0000
+ G0 @W5 noncue->cue: n=10 min 1.0000 mean 1.0000 max 1.0000
+ G1 @W0 noncue->noncue: n=12 min 0.1089 mean 0.2271 max 0.2917
+ G1 @W0 cue->cue: n=10 min 0.0000 mean 0.0000 max 0.0000
+ G1 @W0 noncue->cue: n=8 min 1.0000 mean 1.0000 max 1.0000
+ G1 @W5 noncue->noncue: n=12 min 1.0000 mean 1.0000 max 1.0000
+ G1 @W5 cue->cue: n=10 min 0.0000 mean 0.4198 max 1.0000
+ G1 @W5 noncue->cue: n=8 min 1.0000 mean 1.0000 max 1.0000
+ G2 @W0 noncue->noncue: n=12 min 0.4000 mean 0.4564 max 0.4912
+ G2 @W0 cue->cue: n=7 min 0.0000 mean 0.0000 max 0.0000
+ G2 @W0 noncue->cue: n=5 min 1.0000 mean 1.0000 max 1.0000
+ G2 @W5 noncue->noncue: n=12 min 1.0000 mean 1.0000 max 1.0000
+ G2 @W5 cue->cue: n=7 min 0.0000 mean 0.1401 max 0.3067
+ G2 @W5 noncue->cue: n=5 min 1.0000 mean 1.0000 max 1.0000
+
+W1 vs W0 AMPA pyr->pyr (2947 pairs): increased=36 decreased=0 largest_increase=0.2115 largest_decrease=0.0000
+W1 vs W0 AMPA pyr->pyr NOT within one group: changed=0 max_abs_change=0.0000
+W1 vs W0 AMPA pyr->int (397 pairs): increased=8 decreased=0 largest_increase=0.2093 largest_decrease=0.0000 max_abs_change=0.2093
+W2 vs W0 AMPA pyr->pyr (2947 pairs): increased=36 decreased=0 largest_increase=1.0000 largest_decrease=0.0000
+W2 vs W0 AMPA pyr->pyr NOT within one group: changed=0 max_abs_change=0.0000
+W2 vs W0 AMPA pyr->int (397 pairs): increased=8 decreased=0 largest_increase=0.8771 largest_decrease=0.0000 max_abs_change=0.8771
+W3 vs W0 AMPA pyr->pyr (2947 pairs): increased=71 decreased=0 largest_increase=1.0000 largest_decrease=0.0000
+W3 vs W0 AMPA pyr->pyr NOT within one group: changed=0 max_abs_change=0.0000
+W3 vs W0 AMPA pyr->int (397 pairs): increased=12 decreased=0 largest_increase=0.8771 largest_decrease=0.0000 max_abs_change=0.8771
+W4 vs W0 AMPA pyr->pyr (2947 pairs): increased=105 decreased=0 largest_increase=1.0000 largest_decrease=0.0000
+W4 vs W0 AMPA pyr->pyr NOT within one group: changed=0 max_abs_change=0.0000
+W4 vs W0 AMPA pyr->int (397 pairs): increased=19 decreased=0 largest_increase=0.8771 largest_decrease=0.0000 max_abs_change=0.8771
+W5 vs W0 AMPA pyr->pyr (2947 pairs): increased=105 decreased=0 largest_increase=1.0000 largest_decrease=0.0000
+W5 vs W0 AMPA pyr->pyr NOT within one group: changed=0 max_abs_change=0.0000
+W5 vs W0 AMPA pyr->int (397 pairs): increased=19 decreased=0 largest_increase=0.8771 largest_decrease=0.0000 max_abs_change=0.8771
+cue cells -> interneuron 89 AMPA pairs (W0, W5):
+  8->89: W0=0.2685 W5=0.6051
+  12->89: W0=0.4638 W5=0.6989
+  17->89: W0=0.4638 W5=0.6937
+  19->89: W0=0.4638 W5=0.6569
+  22->89: W0=0.1229 W5=1.0000
+  27->89: W0=0.2685 W5=0.6527
+  29->89: W0=0.1229 W5=1.0000
+  33->89: W0=0.2685 W5=0.8921
+  44->89: W0=0.2685 W5=0.8966
+  50->89: W0=0.4638 W5=0.6218
+  51->89: W0=0.1229 W5=0.5627
+  63->89: W0=0.1229 W5=1.0000
+connection types present: [1, 2, 3]
+unique GABA (non-AMPA/NMDA types, i.e. types not in {1,2}) weights at W5: [0.0]
+  type 1 unique weights W5: [0.0, 0.0294, 0.061, 0.1046, 0.1942, 0.1996, 0.2481, 0.2915, 0.3067, 0.3556, 0.4366, 0.4999]
+  type 2 unique weights W5: [0.2]
+  type 3 unique weights W5: [0.0]
+
+C. spikes outside all windows: 1 ; total spikes: 4556

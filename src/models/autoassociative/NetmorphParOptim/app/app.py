@@ -1,183 +1,137 @@
+"""Flask UI for Netmorph parameter optimization (single or joint multi-target).
+
+Backed by ../multi_target_optim.py (RandomForest per target + conservative 2.5th-percentile
+model + DiCE + biological-realism checks). No quantile_forest dependency any more.
+
+Environment:
+  NETMORPH_DATA       labeled xlsx/csv (default: Pyr->Pyr combined file)
+  NETMORPH_TARGETS    comma list of target columns (default: all known target columns present)
+  NETMORPH_TREES      RF trees (default 500; Phase2 notebook used 2000)
+  NETMORPH_SYNTHETIC  "1" -> use SYNTHETIC labels (pipeline testing only; UI shows a banner)
+"""
 import os
 import random
+import sys
+
 import numpy as np
 import pandas as pd
 from flask import Flask, request, jsonify, render_template
-from sklearn.model_selection import train_test_split
-from quantile_forest import RandomForestQuantileRegressor
-import dice_ml
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PARENT = os.path.dirname(BASE_DIR)
+sys.path.insert(0, PARENT)
+import bio_check  # noqa: E402
+import multi_target_optim as mto  # noqa: E402
 
 app = Flask(__name__)
+STATE = {"mtm": None}
+# Marianna's original UI default for dm.weight was 0.3-0.7; keep it as the UI default.
+UI_RANGE_OVERRIDES = {"dm.weight": [0.3, 0.7]}
 
-# Cache variables
-X_train = None
-y_train = None
-X_test = None
-y_test = None
-qrf = None
-cols = ['days', 'pyramidal', 'minneuronseparation', 'shape.radius', 'shape.thickness', 'dm.weight']
 
-class ConservativeModel:
-    def __init__(self, model, threshold):
-        self.model = model
-        self.threshold = threshold
-    
-    def predict(self, instances):
-        # We predict the 0.025 quantile (Lower Bound)
-        return self.model.predict(instances, quantiles=0.025)
+def init_model(force=False):
+    if STATE["mtm"] is not None and not force:
+        return STATE["mtm"]
+    synthetic = os.environ.get("NETMORPH_SYNTHETIC") == "1"
+    data = os.environ.get("NETMORPH_DATA", os.path.join(PARENT, "Phase1_1500_700_combined_labeled-RS20240628.xlsx"))
+    if synthetic:
+        raw = bio_check.clean_columns(pd.read_excel(os.path.join(PARENT, "ParameterSpace_700_samples-labeled.xlsx")))
+        df = mto.make_synthetic_labels(raw)
+    else:
+        df = bio_check.clean_columns(pd.read_excel(data))
+    env_t = os.environ.get("NETMORPH_TARGETS")
+    targets = env_t.split(",") if env_t else [t for t in mto.KNOWN_TARGETS if t in df.columns]
+    df, features = mto.load_labeled(df, targets)
+    print(f"Loading {'SYNTHETIC ' if synthetic else ''}data ({len(df)} rows), targets={targets}, features={features}")
+    mtm = mto.MultiTargetModel(targets, features, int(os.environ.get("NETMORPH_TREES", 500)), synthetic=synthetic).fit(df)
+    if not mtm.trained:
+        raise RuntimeError(f"no target could be trained: {mtm.report()}")
+    STATE["mtm"] = mtm
+    return mtm
 
-def init_model():
-    global X_train, y_train, X_test, y_test, qrf
-    
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    parent_dir = os.path.dirname(base_dir)
-    
-    df1_path = os.path.join(parent_dir, 'Phase1_1500_samples-labeled-RS20240628.xlsx')
-    df2_path = os.path.join(parent_dir, 'Phase0_700_samples-labeled-RS20240628.xlsx')
-    
-    print(f"Loading data from {df1_path} and {df2_path}...")
-    df1 = pd.read_excel(df1_path)
-    df2 = pd.read_excel(df2_path)
-    
-    df = pd.concat([df1, df2], keys=['t1', 't2'], axis=0)
-    if 'usable_conns1' in df.columns:
-        df.drop('usable_conns1', axis=1, inplace=True)
-    df.reset_index(drop=True, inplace=True)
-    
-    df = df[(df['usable_conns2'] <= 2500) & (df['usable_conns2'] >= 200)]
-    df.reset_index(drop=True, inplace=True)
-    
-    X_train, X_test, y_train, y_test = train_test_split(df[cols], df['usable_conns2'], test_size=0.2, random_state=42)
-    
-    print("Fitting RandomForestQuantileRegressor...")
-    qrf = RandomForestQuantileRegressor(
-        n_estimators=1000, 
-        bootstrap=True, 
-        max_samples=None, 
-        max_features=4, 
-        max_depth=20, 
-        min_samples_leaf=2, 
-        min_samples_split=5, 
-        oob_score=True, 
-        default_quantiles=0.025,
-        random_state=42
-    )
-    qrf.fit(X_train, y_train)
-    print("Model training completed successfully.")
 
-@app.route('/')
+def _default_thresholds(t):
+    return {"min": 500.0, "max": 2500.0} if t == "usable_conns2" else {"min": 300.0, "max": None}
+
+
+@app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template("index.html")
 
-@app.route('/api/default_values', methods=['GET'])
+
+@app.route("/api/config")
+def config():
+    mtm = init_model()
+    return jsonify({"features": mtm.features, "synthetic": mtm.synthetic, "report": mtm.report(),
+                    "trained_targets": mtm.trained, "target_labels": mto.KNOWN_TARGETS})
+
+
+@app.route("/api/default_values", methods=["GET"])
 def get_default_values():
-    if X_test is None:
-        init_model()
-    
-    # Select a random sample from the test set as default query instance
-    random_idx = random.randint(0, len(X_test) - 1)
-    sample_instance = X_test.iloc[random_idx].to_dict()
-    
-    # Calculate baseline predictions
-    sample_df = pd.DataFrame([sample_instance])[cols]
-    pred_median = float(qrf.predict(sample_df, quantiles=0.5)[0])
-    pred_lower = float(qrf.predict(sample_df, quantiles=0.025)[0])
-    
-    response = {
-        'query_instance': sample_instance,
-        'prediction': {
-            'median': pred_median,
-            'lower': pred_lower
-        },
-        'permitted_ranges': {
-            'days': [20, 25],
-            'pyramidal': [16, 128],
-            'minneuronseparation': [10, 15],
-            'shape.radius': [100, 200],
-            'shape.thickness': [20.0, 50.0],
-            'dm.weight': [0.3, 0.7]
-        },
-        'desired_range': [500.0, 2500.0],
-        'threshold': 500,
-        'features_to_vary': cols
-    }
-    return jsonify(response)
+    mtm = init_model()
+    first = mtm.models[mtm.trained[0]]
+    Xte = first.X_test[mtm.features]
+    inst = Xte.iloc[random.randint(0, len(Xte) - 1)].to_dict()
+    pr = {**mto.default_permitted_ranges(mtm.features), **UI_RANGE_OVERRIDES}
+    pr = {k: v for k, v in pr.items() if k in mtm.features}
+    q = first.pi(pd.DataFrame([inst]))[0]
+    t0 = _default_thresholds(first.target)
+    return jsonify({
+        "query_instance": inst,
+        "prediction": {"median": float(q[1]), "lower": float(q[0])},
+        "permitted_ranges": pr,
+        "desired_range": [t0["min"], t0["max"] or 2500.0],
+        "threshold": t0["min"],
+        "features_to_vary": mtm.features,
+        "features": mtm.features,
+        "synthetic": mtm.synthetic,
+        "targets": [{"name": t, "label": mto.KNOWN_TARGETS.get(t, t), "trained": t in mtm.trained,
+                     "test_r2": mtm.models[t].metrics.get("test_r2"),
+                     "n_rows": mtm.models[t].metrics.get("n_rows"),
+                     "default": _default_thresholds(t), "selected": t == mtm.trained[0]}
+                    for t in mtm.targets],
+    })
 
-@app.route('/api/generate', methods=['POST'])
+
+@app.route("/api/generate", methods=["POST"])
 def generate():
-    if X_train is None:
-        init_model()
-        
-    data = request.json
-    query_instance = data.get('query_instance')
-    total_CFs = int(data.get('total_CFs', 7))
-    desired_range = data.get('desired_range', [500.0, 2500.0])
-    threshold = float(data.get('threshold', 500.0))
-    permitted_range = data.get('permitted_range')
-    features_to_vary = data.get('features_to_vary', cols)
-    
-    # Preprocess permitted ranges to ensure lists are floats/ints
-    processed_permitted = {}
-    for k, v in permitted_range.items():
-        processed_permitted[k] = [float(v[0]), float(v[1])]
-    
-    query_df = pd.DataFrame([query_instance])[cols]
-    
-    # Run DiCE
-    conservative_model = ConservativeModel(qrf, threshold=threshold)
-    dice_model = dice_ml.Model(model=conservative_model, backend="sklearn", model_type="regressor")
-
-    dice_data = dice_ml.Data(
-        dataframe=pd.concat(
-            [X_train[cols].reset_index(drop=True), y_train.reset_index(drop=True)],
-            axis=1,
-        ),
-        continuous_features=cols,
-        outcome_name="usable_conns2",
-    )
-
-    exp = dice_ml.Dice(dice_data, dice_model, method="random")
-
+    mtm = init_model()
+    data = request.get_json(force=True)
     try:
-        dice_exp = exp.generate_counterfactuals(
-            query_df,
-            total_CFs=total_CFs,
-            desired_range=desired_range,
-            permitted_range=processed_permitted,
-            features_to_vary=features_to_vary,
-        )
-        cf_df = dice_exp.cf_examples_list[0].final_cfs_df.copy()
-        
-        # Calculate model predicted median and lower bounds for the generated counterfactuals
-        cf_records = []
-        for idx, row in cf_df.iterrows():
-            row_dict = row.to_dict()
-            cf_row_df = pd.DataFrame([row_dict])[cols]
-            row_dict['pred_median'] = float(qrf.predict(cf_row_df, quantiles=0.5)[0])
-            row_dict['pred_lower'] = float(qrf.predict(cf_row_df, quantiles=0.025)[0])
-            cf_records.append(row_dict)
-            
-        # Get query instance prediction
-        query_pred_median = float(qrf.predict(query_df, quantiles=0.5)[0])
-        query_pred_lower = float(qrf.predict(query_df, quantiles=0.025)[0])
-        
-        return jsonify({
-            'success': True,
-            'query_predictions': {
-                'median': query_pred_median,
-                'lower': query_pred_lower
-            },
-            'counterfactuals': cf_records
-        })
+        if data.get("targets"):          # multi-target payload: {"targets": {name: {min, max}}}
+            thresholds = {}
+            for t, th in data["targets"].items():
+                if t not in mtm.trained:
+                    return jsonify({"success": False, "error": f"target '{t}' has no trained model "
+                                    f"(too few labeled rows): {mtm.models.get(t).metrics if t in mtm.models else 'unknown'}"}), 400
+                mx = th.get("max")
+                thresholds[t] = {"min": float(th["min"]), "max": None if mx in (None, "") else float(mx)}
+        else:                            # legacy single-target payload (Pyr->Pyr)
+            dr = data.get("desired_range", [500.0, 2500.0])
+            first = "usable_conns2" if "usable_conns2" in mtm.trained else mtm.trained[0]
+            thresholds = {first: {"min": float(dr[0]), "max": float(dr[1])}}
+        feats = mtm.features
+        query = {f: float(data["query_instance"][f]) for f in feats}
+        permitted = {k: [float(v[0]), float(v[1])] for k, v in (data.get("permitted_range") or {}).items() if k in feats}
+        cfs = mto.generate_joint_cfs(mtm, thresholds, query=query, total_CFs=int(data.get("total_CFs", 7)),
+                                     permitted_range=permitted, features_to_vary=data.get("features_to_vary") or feats)
+        first_t = next(iter(thresholds))
+        q = mtm.models[first_t].pi(pd.DataFrame([query]))[0]
+        recs = []
+        for _, r in cfs.iterrows():
+            d = {k: (v.item() if hasattr(v, "item") else v) for k, v in r.to_dict().items()}
+            d["pred_median"], d["pred_lower"] = d[f"{first_t}__pred_median"], d[f"{first_t}__pred_lower"]  # legacy keys
+            recs.append(d)
+        return jsonify({"success": True, "synthetic": mtm.synthetic, "targets": list(thresholds),
+                        "thresholds": thresholds, "features": feats,
+                        "query_predictions": {"median": float(q[1]), "lower": float(q[0])},
+                        "counterfactuals": recs})
     except Exception as e:
         import traceback
         traceback.print_exc()
-        return jsonify({
-            'success': False,
-            'error': str(e)
-        }), 500
+        return jsonify({"success": False, "error": str(e)}), 500
 
-if __name__ == '__main__':
-    # Initialize the model on startup so first request is fast
+
+if __name__ == "__main__":
     init_model()
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host="0.0.0.0", port=5001, debug=True)

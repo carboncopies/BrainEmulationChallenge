@@ -51,6 +51,10 @@
                             <label for="q-pyramidal">Pyramidal</label>
                             <input type="number" id="q-pyramidal" step="1" required>
                         </div>
+                        <div class="input-group hidden" id="grp-q-interneuron">
+                            <label for="q-interneuron">Interneuron</label>
+                            <input type="number" id="q-interneuron" step="1">
+                        </div>
                         <div class="input-group">
                             <label for="q-minneuronseparation">Min Separation</label>
                             <input type="number" id="q-minneuronseparation" step="1" required>
@@ -68,6 +72,18 @@
                             <input type="number" id="q-dm-weight" step="0.01" required>
                         </div>
                     </div>
+                </div>
+
+                <!-- Targets (multi-target extension) -->
+                <div class="form-section">
+                    <h3><i class="fa-solid fa-bullseye"></i> Target(s) - joint optimization</h3>
+                    <div id="synthetic-banner" class="hidden" style="background:#7a1f1f;color:#fff;padding:6px 10px;border-radius:6px;margin-bottom:8px;font-weight:600;">
+                        SYNTHETIC LABELS - pipeline test only, not Netmorph results
+                    </div>
+                    <p class="table-subtitle">Tick the connection types to satisfy simultaneously. Min / Max apply to the conservative (2.5th percentile) prediction. Leave Max empty for no upper bound.</p>
+                    <table class="config-table"><thead><tr><th>Use</th><th>Target</th><th>Min</th><th>Max</th><th>Test R&sup2;</th></tr></thead>
+                    <tbody id="targets-body"></tbody></table>
+                    <label style="display:block;margin-top:6px;"><input type="checkbox" id="use-bio" checked> Reject candidates that violate hard biological constraints</label>
                 </div>
 
                 <!-- Optimization Settings -->
@@ -118,6 +134,12 @@
                                     <td><input type="number" id="range-min-pyramidal" value="16" step="1"></td>
                                     <td><input type="number" id="range-max-pyramidal" value="128" step="1"></td>
                                     <td><input type="checkbox" id="vary-pyramidal" checked class="vary-checkbox"></td>
+                                </tr>
+                                <tr data-feature="interneuron" id="row-interneuron" class="hidden">
+                                    <td><strong>Interneuron</strong></td>
+                                    <td><input type="number" id="range-min-interneuron" value="16" step="1"></td>
+                                    <td><input type="number" id="range-max-interneuron" value="136" step="1"></td>
+                                    <td><input type="checkbox" id="vary-interneuron" checked class="vary-checkbox"></td>
                                 </tr>
                                 <tr data-feature="minneuronseparation">
                                     <td><strong>Min Separation</strong></td>
@@ -186,11 +208,11 @@
                 <div id="results-output" class="hidden">
                     <div class="metrics-row">
                         <div class="metric-card">
-                            <span class="label">Query Predicted Median</span>
+                            <span class="label">Query Predicted Median (1st target)</span>
                             <span class="value" id="query-pred-median">-</span>
                         </div>
                         <div class="metric-card">
-                            <span class="label">Query Pred Lower Bound (95% PI)</span>
+                            <span class="label">Query Pred Lower Bound (1st target)</span>
                             <span class="value" id="query-pred-lower">-</span>
                         </div>
                     </div>
@@ -198,24 +220,7 @@
                     <div class="results-table-wrapper">
                         <h3>Diverse Counterfactual Set</h3>
                         <p class="table-subtitle"><i class="fa-solid fa-circle-info"></i> Values highlighted in <span class="highlight-swatch">cyan</span> differ from the query instance.</p>
-                        <table class="results-table" id="results-table">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Days</th>
-                                    <th>Pyramidal</th>
-                                    <th>Min Separation</th>
-                                    <th>Shape Radius</th>
-                                    <th>Shape Thickness</th>
-                                    <th>DM Weight</th>
-                                    <th>Pred Median</th>
-                                    <th>Pred Lower Bound</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Generated rows will go here -->
-                            </tbody>
-                        </table>
+                        <table class="results-table" id="results-table"><thead></thead><tbody></tbody></table>
                     </div>
                 </div>
             </div>
