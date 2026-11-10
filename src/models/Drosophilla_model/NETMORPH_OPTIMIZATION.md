@@ -168,3 +168,36 @@ The state and logs are in `smoke1/` and `smoke2/` (untracked).
 
 1. Run the full batch on the VM with `-fitcpus -deleteresident`.
 2. Give the labeled spreadsheet to Marianna.
+
+## Handoff to the VM session (2026-11-10)
+
+From the laptop session in which the work above was done:
+
+- **The full batch is running on the VM.** It was started with
+  `-fitcpus -deleteresident` and uses the NES/API servers already running in
+  Randal's tmux session. Let it run. Don't start a second batch or other
+  servers.
+  - `-batchlimit 60` was the plan, to leave a few CPUs for NES and the API.
+    64 parallel runs is acceptable; just expect slower API responses.
+  - Expect roughly 6 hours.
+- **If the batch is interrupted,** rerun the same command from this directory.
+  It resumes from `batchinfo_completed.json`. Don't delete that file
+  mid-batch.
+- **Progress:** `batch_state.json` shows the remaining count. In
+  `resource_checks.json`, `launch` counts the runs started and `failures`
+  should stay empty. NES and the API print little while Netmorph grows.
+- **Keep all the score columns.** Which one is used for model building is
+  decided later.
+- **Leave the thresholds alone:** PN→KC with 7 inputs (3.92 nS per pair),
+  KC→MBON with 1 input (27.44 nS).
+- **When the batch is done:**
+  1. Commit the updated `ExpsDB.json`. The labeled spreadsheet is gitignored;
+     ask Randal whether to force-add it.
+  2. Add a "Full batch" results section to this log: run time, completed and
+     failed counts, and the spread of `usable_PNKC` and `drivable_PNKC`
+     across samples.
+  3. Randal gives the spreadsheet to Marianna, mentioning the reproducibility
+     noise.
+- **Out of scope here:** the reproducibility issue (separate session; the
+  laptop keeps `smoke1/` and `smoke2/` for it) and the axon-wrapping check
+  (waiting for John and Richard's visualization tool).
