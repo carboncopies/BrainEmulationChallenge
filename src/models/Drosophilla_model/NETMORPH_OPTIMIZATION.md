@@ -237,6 +237,29 @@ Spread across samples:
   noise.
 - **Which score is primary.** `usable_PNKC` or `drivable_PNKC` (or a fraction of
   `pairs_PNKC` / `n_KC`) for the predictive model. To be decided with Marianna.
+- **The batch results are conditional on what was held fixed.** Keep this in
+  mind when planning and combining optimizations for several pathways.
+  - **PN → KC results are optimal only relative to the fixed PN layer** (50
+    cells, disc radius 300 µm, as planned in "Approach"). The strong
+    `KC.shape.radius` effect reflects how much of the KC disc lies under the PN
+    disc, so a different PN layer (radius, count, spacing) would probably move
+    the best KC settings. A later batch that varies PN parameters, or a joint
+    batch, is needed to find a general optimum for the pathway.
+  - **The KC → MBON columns are for reference only, not optimized results.**
+    MBON parameters were fixed, and the KC → MBON scores change only as a side
+    effect of the KC parameters and `dm.weight`. They mainly follow
+    `dm.weight` (ρ +0.59 drivable, +0.74 usable fraction), because the
+    single-KC threshold (27.44 nS, about 28 synapses on one pair) rewards
+    synapses piling up on a pair (axon wrapping). That threshold was a
+    provisional choice. The drivable fractions of the two pathways are slightly
+    anti-correlated (ρ -0.25), so settings that are good for PN → KC do not
+    carry over. That pathway needs its own batch that varies MBON parameters,
+    with a decided threshold.
+  - **Open question:** how to combine pathways. Options include optimizing them
+    one after another (each batch fixing the previous pathway's best settings),
+    a joint batch over all populations' parameters, or a combined score. Shared
+    parameters such as `dm.weight` and `days` affect every pathway, so the
+    pathways cannot be optimized fully independently.
 
 ## Next steps
 
