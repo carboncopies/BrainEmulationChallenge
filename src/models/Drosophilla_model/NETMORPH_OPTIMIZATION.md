@@ -153,6 +153,48 @@ The state and logs are in `smoke1/` and `smoke2/` (untracked).
   needed, synapse weights can be set to 0 to reduce the effective number.
 - Guidance barely changed Netmorph run time.
 
+## Full batch (all 700 samples, 2026-11-10)
+
+Ran on the VM with `./gen_autonm_labels.py -fitcpus -deleteresident` (64 runs
+in parallel, against the NES/API servers already running there), random seed
+20240628.
+
+- **Run time:** about 12 h 45 min (10:07 to 22:53), roughly 55 samples per
+  hour. That is twice the expected 6 hours, probably because each Netmorph run
+  is slower with 64 running at once.
+- **700 completed, 0 failed.** `resource_checks.json` recorded no failed
+  requests, and no score is -1 or empty.
+- **Results:**
+  `NetmorphParOptim/MushroomBody_ParSpace_700_samples-labeled-RS20240628.xlsx`
+  (force-added to git despite the `*-labeled-*` ignore rule, so the data is
+  kept) and `ExpsDB.json`.
+
+Spread across samples:
+
+| score | min | 10% | median | 90% | max |
+|---|---|---|---|---|---|
+| `usable_PNKC` | 31 | 226 | 615 | 1761 | 3582 |
+| `usable_PNKC` / `pairs_PNKC` | 0.03 | 0.09 | 0.19 | 0.45 | 0.71 |
+| `drivable_PNKC` | 4 | 11 | 33 | 70 | 114 |
+| `drivable_PNKC` / `n_KC` | 0.13 | 0.26 | 0.48 | 0.84 | 1.00 |
+| `n_KC` | 16 | 24 | 72 | 120 | 128 |
+| `usable_KCMBON` | 0 | 20 | 124 | 344 | 573 |
+| `drivable_KCMBON` (of 34) | 0 | 6 | 16 | 25 | 34 |
+| `maxg_PNKC` (nS) | 18 | 68 | 225 | 588 | 1574 |
+
+- Every sample has some usable and drivable PN → KC connectivity. None scored
+  0.
+- **`KC.shape.radius` dominates.** Its Spearman correlation with both PN → KC
+  fractions is -0.91. The other parameters correlate weakly (|ρ| ≤ 0.21):
+  `days` +0.17 to +0.21, `KC.shape.thickness` -0.16, `KC.pyramidal` -0.14 to
+  -0.19. `dm.weight` and `KC.minneuronseparation` show essentially none (|ρ| ≤
+  0.03). This does not match the smoke tests, where high `dm.weight` samples
+  looked stronger. In those four samples `dm.weight` likely varied together
+  with other parameters. The weak effect of `dm.weight` is worth a closer look,
+  and the reproducibility noise also needs to be kept in mind.
+- The strongest single PN → KC pairs reach up to 1574 nS (about 1600
+  synapses), which reinforces the axon-wrapping concern from smoke test 3.
+
 ## Open issues
 
 - **Runs are not reproducible with the same seed.** In smoke tests 1 and 2,
@@ -166,8 +208,10 @@ The state and logs are in `smoke1/` and `smoke2/` (untracked).
 
 ## Next steps
 
-1. Run the full batch on the VM with `-fitcpus -deleteresident`.
-2. Give the labeled spreadsheet to Marianna.
+1. ~~Run the full batch on the VM with `-fitcpus -deleteresident`.~~ Done; see
+   "Full batch" above.
+2. Give the labeled spreadsheet to Marianna, mentioning the reproducibility
+   noise and the dominance of `KC.shape.radius`.
 
 ## Handoff to the VM session (2026-11-10)
 
