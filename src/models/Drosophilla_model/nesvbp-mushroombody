@@ -6,11 +6,10 @@
 #   KC  (expansion / pattern separation, Kenyon cells)  -- type: bipolar
 #   MBON (convergence, mushroom body output neurons)    -- type: pyramidal
 #
-# PASS 1 (this version): no chemical factors -- relying only on the
-# default cell_attraction "attracted to next region defined" behavior
-# (regions=PN KC MBON; -> PN axons attracted to KC, KC axons to MBON).
-# The detailed_chemical_factors/attractedto/attractors block from the
-# original reference is kept below, commented out, for PASS 2.
+# Axon guidance: a cell_attraction direction model (label axondm)
+# contributes to all axon growth, steered by the chemical factors
+# below (NGF_A: PN and APL axons seek KC; NGF_B: KC axons seek MBON and
+# APL). Its contribution is set by all_axons.axondm.dm_weight.
 #
 # Run this from the mushroombody model directory via the Python
 # reservoir script, e.g.:
@@ -148,14 +147,13 @@ veeranglemax=0.75;
 dirhistory_selection=none;
 
 # AXONS DIRECTION MODEL PARAMETERS
-# By default, axons of neurons in one region are attracted to the
-# centroid of the NEXT region defined in "regions=" above: here that
-# means PN axons -> KC, and KC axons -> MBON. This is PASS 1's only
-# steering mechanism (no chemical factors yet).
+# segment_history_tension with a contributing cell_attraction model.
+# Note: the attractedto/attractors chemical factors below only act
+# through cell_attraction, so these three axondm lines must stay active.
 all_axons.direction_model=segment_history_tension;
-#all_axons.dm_label=axondm;
-#all_axons.axondm.dm_weight=0.2;
-#all_axons.axondm.direction_model=cell_attraction;
+all_axons.dm_label=axondm;
+all_axons.axondm.dm_weight=0.2;
+all_axons.axondm.direction_model=cell_attraction;
 
 # Chemical-factor-based attraction
 #NGF_A: PN and APL both seek KC
@@ -281,7 +279,7 @@ pyr1.tuft.E_competes_with=same_arbor;
 pyr1.oblique.terminal_segment_elongation_model=nonnorm_BESTL;
 pyr1.oblique.tsem.branch.PDF=normal;
 pyr1.oblique.tsem.branch.PDF.mean=6;
-44444pyr1.oblique.tsem.branch.PDF.std=1;
+pyr1.oblique.tsem.branch.PDF.std=1;
 pyr1.oblique.tsem.PDF=delta;
 pyr1.oblique.tsem.PDF.value=0;
 pyr1.oblique.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;

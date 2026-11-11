@@ -1,0 +1,5 @@
+# Batch run state written by gen_autonm_labels.py
+batchinfo_completed*.json
+batch_state.json
+resource_checks*.json
+NetmorphParOptim/*-labeled-*.xlsx

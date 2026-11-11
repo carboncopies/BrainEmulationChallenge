@@ -164,4 +164,5 @@ cython_debug/
 #.idea/
 
 output/
+VM-output/
 *.NES
