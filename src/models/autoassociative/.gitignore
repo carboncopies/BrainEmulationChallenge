@@ -1,3 +1,16 @@
 ValidationReports/*
 *.json
-*.xlsx
+*.venv
+*.ipynb_checkpoints
+*.log
+*.out
+*.err
+*.blend
+*.blend.gz
+*.png
+*.jpeg
+*.jpg
+
+
+
+  

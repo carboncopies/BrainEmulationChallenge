@@ -1,0 +1,9 @@
+flask
+pandas
+openpyxl
+scikit-learn==1.8.0
+quantile-forest==1.4.1
+dice-ml
+jinja2
+numpy
+matplotlib
