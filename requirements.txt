@@ -7,3 +7,4 @@ pandas
 joblib
 numpy==2.2.4
 psutil
+scipy
