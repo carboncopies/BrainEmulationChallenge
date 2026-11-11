@@ -190,10 +190,42 @@ Spread across samples:
   -0.19. `dm.weight` and `KC.minneuronseparation` show essentially none (|ρ| ≤
   0.03). This does not match the smoke tests, where high `dm.weight` samples
   looked stronger. In those four samples `dm.weight` likely varied together
-  with other parameters. The weak effect of `dm.weight` is worth a closer look,
-  and the reproducibility noise also needs to be kept in mind.
+  with other parameters. The reproducibility noise also needs to be kept in
+  mind. See "Interpretation" below.
 - The strongest single PN → KC pairs reach up to 1574 nS (about 1600
   synapses), which reinforces the axon-wrapping concern from smoke test 3.
+
+### Interpretation
+
+- **Radius matters through lateral overlap, not PN–KC distance.** The PN and KC
+  centers are fixed 500 µm apart. That spacing was already chosen to fit
+  Netmorph's mouse-derived axon reach, not *Drosophila* distances. The PN disc
+  has a fixed radius of 300 µm, while the KC radius varies from 200 to 800 µm.
+  The fraction of the KC disc under the PN footprint, (300 / radius)²,
+  correlates 0.9 with the drivable KC fraction. The fraction of PN–KC pairs with
+  any connection falls from 67% (radius 200–300) to 17% (radius 700–800).
+  `log(radius)` alone explains about 82% of the variance in both PN → KC
+  fractions. After removing it, longer growth (`days`, ρ ≈ +0.4 to +0.5) helps,
+  while more KCs and a thicker KC disc (ρ ≈ -0.2 to -0.35) hurt.
+- **`dm.weight` concentrates synapses rather than adding pairs.** The median of
+  `maxg_PNKC` rises from 91 nS (`dm.weight` 0.1–0.3) to 433 nS (0.6–1.0). The
+  median drivable KC fraction stays at 0.49–0.50. Netmorph's `cell_attraction`
+  sums a 1/distance² pull toward every KC dendrite segment and normalizes it, so
+  `dm.weight` sets only the strength of the pull, not its direction, and the
+  nearest dendrites dominate it. A small, persistent bias already steers axons to
+  the KC layer, and a stronger one mostly makes axons wrap the dendrites they
+  already reach.
+- **Decision for now:** this is acceptable as long as there are enough usable
+  and drivable connections. Excess synaptic input can be scaled down by setting
+  some synapse weights to 0. Making the morphology more realistic (less
+  wrapping) is deferred to later work.
+- **Modeling scope.** In effect, the current model is already a scaled,
+  mammalian-cell version of the mushroom body circuit, although the population
+  geometry was not systematically mapped from *Drosophila*. Note that KCs are
+  `KC.pyramidal` cells, despite the "bipolar" comment in
+  `nesvbp-mushroombody`. Whether to make this mammalian scaling deliberate, or
+  to model *Drosophila* more closely (which would need cell types Netmorph does
+  not have), is an open decision.
 
 ## Open issues
 
