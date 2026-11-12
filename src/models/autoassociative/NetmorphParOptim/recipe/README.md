@@ -66,3 +66,22 @@ Clean = full cue completes 4/4 non-cue cells, sub-threshold cues complete 0, no 
 Nothing broke inside the tested range. K above 5 is not possible with this rule on this 67-pyramidal-cell network; group size above 10 and
 size 10 robustness (margin of only ~0.6 nS below threshold) were not tested. Jitter, STDP and background-weight tolerance were not re-run here (see FABLE_LOOP_LOG).
 Controls (no programming), seeds 1001/1002/1003: two of three cues run away in each seed except seed 1002 where all three run away; the other cue stays near silent (0-1 non-cue cells, 5 spikes) in seeds 20240628/1001/1003.
+
+## Membrane-potential (Vm) traces (added 2026-11-12)
+Recording method: `Simulation.RecordAll(-1)`, `RunAndWait(Runtime_ms, Dt_ms)`, then `GetRecording()` returns `{t_ms, neurons{id:{Vm_mV}}}` (soma Vm of
+every neuron, one sample per step; LIFC cells are single-compartment so soma is the only Vm available; there is no read-back API for neuron
+parameters, so rest/threshold are taken from the NES source defaults and confirmed in the traces: rest -70.0 mV, base threshold -50 mV, spike peak 30 mV,
+absolute refractory 2 ms, post-spike undershoot about -74.5 mV; the threshold is adaptive in the simulator).
+```
+PYTHONPATH=<PythonClient> <venv>/bin/python seed20240628/vm_traces.py            # Dt 1 ms (same as the rasters) -> vm_traces.json
+PYTHONPATH=<PythonClient> <venv>/bin/python seed20240628/vm_traces.py --dt 0.1   # finest step tried -> vm_traces_dt0.1.json
+```
+Each case runs in a NEW simulation (fresh copy of fable-it1a-sim133, weights.json applied with read-back check, cue at sim t=20 ms, 70 ms run), the data is read, and the
+sim is deleted with `DeleteResidentByID` (own sims only). The 16 sims from the earlier recipe runs (ids 0-15) were also deleted. Cases: (a) G0 4-cell cue, (b) G0 3-cell cue
+[22,29,51], (c) G0 4-cell cue on the unpruned/unprogrammed model, (d) G1 4-cell cue. Recorded per case: the 8 members, the 6 interneurons with the strongest Pyr->Int drive from the
+members that also project back to them (selection and GABA conductances are in `interneuron_selection`; G0: 89, 93, 77, 82, 80, 90; G1: 89, 93, 82, 79, 80, 77), and 2 bystander pyramidal cells
+(G0: 48 and 31, the ungrouped cells with the largest as-grown input from G0; G1: 48 and 35). Times are ms relative to the first cue spike; Vm rounded to 0.1 mV, no subsampling (file sizes 52 KB / 327 KB).
+Findings: the Dt 1 ms spike times match demo_data.json exactly (max difference 0.002 ms; non-cue members first spike at 3.55 ms). Peak Vm of the G0 non-cue members before their first spike: 4-cell case
+-52.0 mV at the last 1 ms sample before the spike (spike at 3.55 ms; at Dt 0.1 the pre-spike peak is -50.3 mV), 3-cell case -51.1 mV at Dt 1 and -50.4 mV at Dt 0.1, i.e. the 3-cell cue ends only about 0.4-1.1 mV below threshold. At Dt 0.1 the first non-cue
+spike is at 3.57 ms (consistent), but later burst spikes differ from the Dt 1 rasters by up to 2.5 ms, so burst timing depends on the integration step; use the Dt 1 file for comparison with demo_data.json.
+Artifacts of the recording: a spike sample reads 30 mV and decays (30, 19.1, then reset to -70), and a sample clamped at exactly -50.0 can follow a spike (precise-spike-time triangulation); bystanders stay at -70.0 mV in cases a, b, d and fire in the unpruned control (c) along with the members (13 spikes in 40 ms).
