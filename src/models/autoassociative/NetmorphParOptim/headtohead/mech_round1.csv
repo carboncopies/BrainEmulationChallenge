@@ -1,0 +1,6 @@
+config_id,days,pyramidal,interneuron,minneuronseparation,shape.radius,shape.thickness,dm.weight,soft_clean,density,pyr_frac
+M1,25,70,30,12,113,50,1.0,True,49857.0,0.7
+M2,25,70,30,12,179,20,1.0,True,49672.0,0.7
+M3,25,70,30,12,142,32,1.0,True,49331.0,0.7
+M4,25,70,30,12,113,50,0.8,True,49857.0,0.7
+M5,25,70,18,12,106,50,1.0,True,49860.0,0.795

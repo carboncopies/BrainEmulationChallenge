@@ -1,0 +1,13 @@
+config_id,days,pyramidal,interneuron,minneuronseparation,shape.radius,shape.thickness,dm.weight,kind,soft_clean,density,pyr_frac,pred_wall_s
+H01,25,51,23,15,184,28,0.2,general,False,24848.0,0.689,365.0
+H02,21,28,20,11,142,47,0.7,general,False,16122.0,0.583,109.0
+H03,20,63,27,13,116,42,0.4,general,False,50691.0,0.7,295.0
+H04,24,33,16,10,161,23,0.8,general,False,26162.0,0.673,158.0
+H05,23,66,22,11,173,33,0.5,general,True,28361.0,0.75,396.0
+H06,21,42,26,13,100,44,0.9,general,False,49193.0,0.618,201.0
+H07,22,48,19,12,129,37,0.2,general,True,34637.0,0.716,219.0
+H08,24,17,29,14,194,26,0.7,general,False,14963.0,0.37,142.0
+H09,25,59,18,13,147,21,0.9,corner,False,54012.0,0.766,392.0
+H10,24,35,29,11,180,39,1.0,corner,False,16122.0,0.547,253.0
+H11,24,53,21,14,153,50,0.8,corner,True,20125.0,0.716,327.0
+H12,25,23,25,12,124,31,1.0,corner,False,32054.0,0.479,171.0

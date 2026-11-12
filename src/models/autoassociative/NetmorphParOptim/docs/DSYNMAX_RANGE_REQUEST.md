@@ -1,6 +1,6 @@
 # Request for an approved range for Netmorph D_synmax (interneuron pairs)
 
-**DRAFT - not sent** | 2026-11-09
+**SENT to Randal Koene by email 2026-11-11 (Marianna not yet contacted)** | 2026-11-09
 For: Randal Koene, Marianna Gabrielyan (NetMorph / BrainGenix). From: John.
 
 ## The ask
@@ -37,7 +37,7 @@ These tests ran on the NES simulator, using copies of sims 133 and 134 with prog
 
 ## Why 0.5 um, and caveats
 
-0.5 um gives a usable interneuron reservoir (1208 Pyr->Int and 3331 Int->Pyr synapses, against 92 and 217 at the default) with an inhibitory fraction that looks plausible. 1.0 um over-connects interneurons. This is a working value, not a validated one. The evidence comes from one geometry, one random seed and one trial per condition (the simulator was deterministic in repeats, to within one or two spikes). Recall is AMPA-only because the weight API zeroes NMDA on programmed Pyr->Pyr pairs; GABA weight is fixed at 0.2; STDP was off. Cue-size selectivity needs a narrow window (cue strength about 20% above threshold) and was not tested with jittered cues. Robustness tests have since been run; see 'Additional evidence (robustness round)' below.
+0.5 um gives a usable interneuron reservoir (1208 Pyr->Int and 3331 Int->Pyr synapses, against 92 and 217 at the default) with an inhibitory share of about 13% of input synapses onto pyramidal cells, which we have not yet checked against a reference value. At 1.0 um that share is about 45%, which we think is too high. This is a working value, not a validated one. The evidence comes from one geometry, one random seed and one trial per condition (the simulator was deterministic in repeats, to within one or two spikes). Recall is AMPA-only because the weight API zeroes NMDA on programmed Pyr->Pyr pairs; GABA weight is fixed at 0.2; STDP was off. Cue-size selectivity needs a narrow window (cue strength about 20% above threshold) and was not tested with jittered cues. Robustness tests have since been run; see 'Additional evidence (robustness round)' below.
 
 ## Additional evidence (robustness round)
 

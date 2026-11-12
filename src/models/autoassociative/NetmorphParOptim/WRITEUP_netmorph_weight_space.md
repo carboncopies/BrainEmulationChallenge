@@ -1,6 +1,6 @@
 # Netmorph configuration-space and weight-space programming: write-up
 
-Status: prototype. Written 2026-11-10. All results are from the shared NES server, one seed unless stated, and have not been peer reviewed.
+Status: prototype. Written 2026-11-10, updated 2026-11-11 with Phase E. All results are from the shared NES server, one seed unless stated, and have not been peer reviewed.
 
 ## 1. Problem
 
@@ -53,6 +53,17 @@ Every experiment had numeric predictions written and timestamped before the run,
 - Tolerated background with feedback-only inhibition: 0.02 / 0.03 / 0.03 / 0.05 at D_synmax 0.3 / 0.5 / 0.7 / 1.0; 0.01 everywhere without inhibition.
 - Conclusion: reasoning predicts sums and scaling laws over the connectome well, and sustained recurrent dynamics and timing poorly. Reasoning proposes, measurement calibrates.
 
+### Phase E. Head-to-head: mechanistic scaling law vs random forest + DiCE (sims 700-761; `headtohead/`, `docs/HEADTOHEAD_LOG.md`, `docs/SCOPE_headtohead.md`)
+Track 1 only: the 7 approved parameters, D_synmax at default. Pre-registered 2026-11-10 before any run; 62 runs, one growth at a time, all rc=0, no hard-limit violation, no timeout.
+- Arms: ML = random forest per target + DiCE (`multi_target_optim.py` style) trained on batch B; mechanistic = negative-binomial scaling law on pair count, volume, dm.weight and days, with analyst-chosen configs. Metric J = joint score over Pyr-Int, Int-Pyr, Int-Int and usable_conns2; targets T1 = 1.041, T2 (stretch) = 1.534.
+- Search (10 training runs each): best J 1.76 (law) vs 1.49 (forest); runs reaching T1 7 vs 5; T2 4 vs 0.
+- Nominations (3 configs per arm x 3 new seeds): mean J 1.19 (law) vs 0.71 (forest); T1 in 6/9 vs 1/9; T2 in 3/9 vs 0/9. Best config mean over 3 seeds: M1 1.42 (law) vs 0.96 (forest). No config reaches T2 on its mean.
+- Held-out prediction (12 configs x 2 seeds): the arms rank about equally (J Spearman 0.81 vs 0.79; no bootstrap interval excludes zero). The law is better calibrated (R2 on Pyr-Int and Int-Pyr about 0.55 vs -0.12 and -0.34; J MAE 0.17 vs 0.25).
+- Regression to the mean: the three best training configs lost 0.34-0.64 J on fresh seeds. Seed-to-seed noise is 50-70% on interneuron counts. Int-Int limited J in 13 of 18 nominated runs.
+- The law's edge came mostly from going to the size cap (70/30) and dm.weight 1.0, which the forest did not do. One comparison, 9 runs per arm: suggestive (about 2 standard errors), not established.
+- Analyst (Fable 5.2) pre-registered predictions: direction mostly right, sizes often wrong (e.g. predicted a 15-35% lead on mean J, observed 68%).
+- Server: runs 1.35x slower than the timing model (max 1.99x), available memory 138 -> 108 GB.
+
 ## 4. Limits and open problems
 
 - D_synmax has no team-approved range; 0.5 and 1.0 are modelling choices. A draft request to the team is in `docs/DSYNMAX_RANGE_REQUEST.md` (not sent).
@@ -68,7 +79,7 @@ Every experiment had numeric predictions written and timestamped before the run,
 - Code and reports: `src/models/autoassociative/` (this branch). New under `NetmorphParOptim/`: `multi_target_optim.py`, `bio_ranges.json`, `bio_check.py`, `batchB_models.py`, `weight_space/`, `fable_loop/` (scripts, analyses and small data per iteration), `viz_app/`, `docs/` (work log, Fable loop log with the prediction blocks, range request), `REPORT_*.md`.
 - Left out of the commit for size: per-sample raw output of the 100-sample batch (`NetmorphParOptim/batchB/`, 83 MB), `run_*`, `model_*` and `viz_*` raw dumps and `*.log` under `fable_loop/`, and any file above 1 MB there. Summaries (`batchB_labels_*.xlsx`, `analysis.txt`) are included. The full copy is in `/home/johnjose/cos/netmorph_work/`.
 - Base: branch `myg_autoassociative_20260325`, commit 57d23f2.
-- Shared NES server simulations: 22-132 (Phase A and B; sim 127 holds programmed weights) and 133-153 (Phases C and D). Pristine grown reservoirs saved on the server as `fable-it1a-sim133`, `fable-it1b-sim134`, `fable-r2-seed1001/1002/1003`, `fable-r2it4-d03`, `fable-r2it4-d07`. Nothing was deleted; simulations are shared with rkoene.
+- Shared NES server simulations: 700-761 (Phase E), 22-132 (Phase A and B; sim 127 holds programmed weights) and 133-153 (Phases C and D). Pristine grown reservoirs saved on the server as `fable-it1a-sim133`, `fable-it1b-sim134`, `fable-r2-seed1001/1002/1003`, `fable-r2it4-d03`, `fable-r2it4-d07`. Nothing was deleted; simulations are shared with rkoene.
 
 ## 6. How it was made
 
@@ -76,7 +87,7 @@ Orchestration, scripts and simulation runs: Claude Sonnet 5.5 (and Haiku for tri
 
 ## 7. Next steps
 
-1. Review and send the D_synmax range request, including the STDP question.
+1. D_synmax range request: emailed to Randal Koene on 2026-11-11 (Marianna not yet contacted); await the range, then run Track 2 (D_synmax added to the head-to-head).
 2. Tell Marianna about the dm.weight bug and the out-of-limit samples; re-run the Phase 0/1 importance analysis.
 3. Add samples aimed at Pyr-Int and Int-Int targets and retrain.
 4. Predict burst length from the connectome (fatigue and adaptive-threshold terms).
