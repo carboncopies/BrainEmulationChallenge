@@ -1,0 +1,126 @@
+{
+ "growth_row": {
+  "days": 25.0,
+  "pyramidal": 96.0,
+  "interneuron": 48.0,
+  "minneuronseparation": 10.0,
+  "shape.radius": 120.0,
+  "shape.thickness": 30.0,
+  "dm.weight": 0.9
+ },
+ "growth_hard_limits": "pass",
+ "growth_warnings": {
+  "warn_density": true,
+  "warn_pyr_fraction": true,
+  "warn_separation_vs_soma": true,
+  "bio_hard_violations": false,
+  "bio_soft_violations": true,
+  "bio_ok": true
+ },
+ "weights": {
+  "E1": {
+   "Pyr->Pyr": {
+    "n_programmed": 5533,
+    "n_zero": 5387,
+    "frac_zero": 0.9736,
+    "n_in_0_to_0p1": 6,
+    "n_in_0p1_to_1": 140,
+    "n_above_1": 0,
+    "min_nonzero": 0.05217993187336911,
+    "max": 1.0
+   },
+   "Pyr->Int": {
+    "n_programmed": 569,
+    "n_zero": 0,
+    "frac_zero": 0.0,
+    "n_in_0_to_0p1": 0,
+    "n_in_0p1_to_1": 569,
+    "n_above_1": 0,
+    "min_nonzero": 0.9276438385397883,
+    "max": 1.0
+   },
+   "all_in_0_1": true,
+   "unprogrammed": {
+    "note": "not programmable via API: Int->Pyr / Int->Int GABA stay at as-grown weight 0.2; NMDA on programmed Pyr->Pyr zeroed by the API; unprogrammed pairs (Int->*, not listed) keep as-grown 0.2"
+   }
+  },
+  "NI": {
+   "Pyr->Pyr": {
+    "n_programmed": 5533,
+    "n_zero": 5387,
+    "frac_zero": 0.9736,
+    "n_in_0_to_0p1": 6,
+    "n_in_0p1_to_1": 140,
+    "n_above_1": 0,
+    "min_nonzero": 0.05217993187336911,
+    "max": 1.0
+   },
+   "Pyr->Int": {
+    "n_programmed": 569,
+    "n_zero": 569,
+    "frac_zero": 1.0,
+    "n_in_0_to_0p1": 0,
+    "n_in_0p1_to_1": 0,
+    "n_above_1": 0,
+    "min_nonzero": null,
+    "max": 0.0
+   },
+   "all_in_0_1": true,
+   "unprogrammed": {
+    "note": "not programmable via API: Int->Pyr / Int->Int GABA stay at as-grown weight 0.2; NMDA on programmed Pyr->Pyr zeroed by the API; unprogrammed pairs (Int->*, not listed) keep as-grown 0.2"
+   }
+  },
+  "E1_bg0.03": {
+   "Pyr->Pyr": {
+    "n_programmed": 5533,
+    "n_zero": 26,
+    "frac_zero": 0.0047,
+    "n_in_0_to_0p1": 5367,
+    "n_in_0p1_to_1": 140,
+    "n_above_1": 0,
+    "min_nonzero": 0.029999999999999995,
+    "max": 1.0
+   },
+   "Pyr->Int": {
+    "n_programmed": 569,
+    "n_zero": 0,
+    "frac_zero": 0.0,
+    "n_in_0_to_0p1": 0,
+    "n_in_0p1_to_1": 569,
+    "n_above_1": 0,
+    "min_nonzero": 0.9276438385397883,
+    "max": 1.0
+   },
+   "all_in_0_1": true,
+   "unprogrammed": {
+    "note": "not programmable via API: Int->Pyr / Int->Int GABA stay at as-grown weight 0.2; NMDA on programmed Pyr->Pyr zeroed by the API; unprogrammed pairs (Int->*, not listed) keep as-grown 0.2"
+   }
+  },
+  "E1_bg0.05": {
+   "Pyr->Pyr": {
+    "n_programmed": 5533,
+    "n_zero": 26,
+    "frac_zero": 0.0047,
+    "n_in_0_to_0p1": 5367,
+    "n_in_0p1_to_1": 140,
+    "n_above_1": 0,
+    "min_nonzero": 0.049999999999999996,
+    "max": 1.0
+   },
+   "Pyr->Int": {
+    "n_programmed": 569,
+    "n_zero": 0,
+    "frac_zero": 0.0,
+    "n_in_0_to_0p1": 0,
+    "n_in_0p1_to_1": 569,
+    "n_above_1": 0,
+    "min_nonzero": 0.9276438385397883,
+    "max": 1.0
+   },
+   "all_in_0_1": true,
+   "unprogrammed": {
+    "note": "not programmable via API: Int->Pyr / Int->Int GABA stay at as-grown weight 0.2; NMDA on programmed Pyr->Pyr zeroed by the API; unprogrammed pairs (Int->*, not listed) keep as-grown 0.2"
+   }
+  }
+ }
+}

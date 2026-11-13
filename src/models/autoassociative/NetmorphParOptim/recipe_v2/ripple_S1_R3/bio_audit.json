@@ -1,0 +1,132 @@
+{
+ "R3_c0": {
+  "Pyr->Pyr": {
+   "n": 5533,
+   "n_zero": 5389,
+   "frac_zero": 0.974,
+   "n_0_to_0p1": 21,
+   "n_0p1_to_1": 123,
+   "n_above_1": 0,
+   "min_nonzero_w": 0.046254734003826264,
+   "max_w": 1.0,
+   "max_conductance_nS": 6.153846
+  },
+  "Pyr->Int": {
+   "n": 569,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 0,
+   "n_0p1_to_1": 569,
+   "n_above_1": 0,
+   "min_nonzero_w": 1.0,
+   "max_w": 1.0,
+   "max_conductance_nS": 4.9
+  },
+  "all_weights_in_0_1": true,
+  "n_pairs_total": 6102
+ },
+ "P_T18_L10_c0": {
+  "Pyr->Pyr": {
+   "n": 5533,
+   "n_zero": 5389,
+   "frac_zero": 0.974,
+   "n_0_to_0p1": 18,
+   "n_0p1_to_1": 126,
+   "n_above_1": 0,
+   "min_nonzero_w": 0.050459709822355925,
+   "max_w": 1.0,
+   "max_conductance_nS": 7.692308
+  },
+  "Pyr->Int": {
+   "n": 569,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 0,
+   "n_0p1_to_1": 569,
+   "n_above_1": 0,
+   "min_nonzero_w": 1.0,
+   "max_w": 1.0,
+   "max_conductance_nS": 4.9
+  },
+  "all_weights_in_0_1": true,
+  "n_pairs_total": 6102
+ },
+ "R3_c0.15": {
+  "Pyr->Pyr": {
+   "n": 5533,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 4178,
+   "n_0p1_to_1": 1355,
+   "n_above_1": 0,
+   "min_nonzero_w": 0.001117233867183923,
+   "max_w": 1.0,
+   "max_conductance_nS": 6.153846
+  },
+  "Pyr->Int": {
+   "n": 569,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 0,
+   "n_0p1_to_1": 569,
+   "n_above_1": 0,
+   "min_nonzero_w": 1.0,
+   "max_w": 1.0,
+   "max_conductance_nS": 4.9
+  },
+  "all_weights_in_0_1": true,
+  "n_pairs_total": 6102
+ },
+ "R3_c0.25": {
+  "Pyr->Pyr": {
+   "n": 5533,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 3448,
+   "n_0p1_to_1": 2085,
+   "n_above_1": 0,
+   "min_nonzero_w": 0.0018620564453065383,
+   "max_w": 1.0,
+   "max_conductance_nS": 6.153846
+  },
+  "Pyr->Int": {
+   "n": 569,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 0,
+   "n_0p1_to_1": 569,
+   "n_above_1": 0,
+   "min_nonzero_w": 1.0,
+   "max_w": 1.0,
+   "max_conductance_nS": 4.9
+  },
+  "all_weights_in_0_1": true,
+  "n_pairs_total": 6102
+ },
+ "R3_c0.5": {
+  "Pyr->Pyr": {
+   "n": 5533,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 2350,
+   "n_0p1_to_1": 3183,
+   "n_above_1": 0,
+   "min_nonzero_w": 0.0037241128906130767,
+   "max_w": 1.0,
+   "max_conductance_nS": 6.153846
+  },
+  "Pyr->Int": {
+   "n": 569,
+   "n_zero": 0,
+   "frac_zero": 0.0,
+   "n_0_to_0p1": 0,
+   "n_0p1_to_1": 569,
+   "n_above_1": 0,
+   "min_nonzero_w": 1.0,
+   "max_w": 1.0,
+   "max_conductance_nS": 4.9
+  },
+  "all_weights_in_0_1": true,
+  "n_pairs_total": 6102
+ }
+}

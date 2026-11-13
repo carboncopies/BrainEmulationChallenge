@@ -1,0 +1,4267 @@
+{
+ "E1": {
+  "experiment": "E1",
+  "label": "sensitivity study, D_synmax 0.5, not bio-realistic",
+  "groups": [
+   {
+    "members": [
+     1,
+     19,
+     23,
+     25,
+     33,
+     34,
+     48,
+     54
+    ],
+    "cue": [
+     1,
+     19,
+     23,
+     34
+    ]
+   },
+   {
+    "members": [
+     9,
+     13,
+     37,
+     52,
+     56,
+     60,
+     62,
+     65
+    ],
+    "cue": [
+     9,
+     52,
+     56,
+     62
+    ]
+   },
+   {
+    "members": [
+     2,
+     17,
+     24,
+     29,
+     31,
+     32,
+     43,
+     47
+    ],
+    "cue": [
+     2,
+     17,
+     29,
+     43
+    ]
+   },
+   {
+    "members": [
+     15,
+     21,
+     35,
+     38,
+     45,
+     51,
+     61,
+     63
+    ],
+    "cue": [
+     45,
+     51,
+     61,
+     63
+    ]
+   }
+  ],
+  "set_info": {
+   "n_pairs": 3344,
+   "n_pyr_int_diff_vs_weights_json": 46,
+   "n_pyr_pyr_diff_vs_weights_json": 236,
+   "n_pairs_not_in_weights_json": 0
+  },
+  "readback_mismatches_total": 0,
+  "n_sims": 12,
+  "singles": {
+   "0": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 3,
+    "last_member_spike": 7.335,
+    "last_activity": 7.559,
+    "spurious": 0
+   },
+   "1": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 2,
+    "last_member_spike": 4.033,
+    "last_activity": 8.513,
+    "spurious": 0
+   },
+   "2": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 3,
+    "last_member_spike": 7.818,
+    "last_activity": 8.543,
+    "spurious": 0
+   },
+   "3": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 2,
+    "last_member_spike": 8.445,
+    "last_activity": 9.136,
+    "spurious": 0
+   }
+  },
+  "runs": {
+   "order_0123_sep12": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.131,
+     4.085000000000001,
+     4.1569999999999965
+    ],
+    "int_spikes_window": [
+     3,
+     2,
+     4,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.131,
+     7.8210000000000015,
+     8.667000000000002
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.131,
+     7.8210000000000015,
+     8.667000000000002
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 44.667,
+    "last_any": 47.569,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 37
+   },
+   "order_0123_sep16": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.097000000000001,
+     4.0660000000000025,
+     4.115000000000002
+    ],
+    "int_spikes_window": [
+     3,
+     2,
+     4,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.097000000000001,
+     7.823999999999998,
+     8.509
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.097000000000001,
+     7.823999999999998,
+     8.509
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 56.509,
+    "last_any": 59.605,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 37
+   },
+   "order_0123_sep20": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.0760000000000005,
+     4.058,
+     4.079999999999998
+    ],
+    "int_spikes_window": [
+     3,
+     3,
+     3,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.0760000000000005,
+     7.823,
+     8.376000000000005
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.0760000000000005,
+     7.823,
+     8.376000000000005
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 68.376,
+    "last_any": 70.851,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 37
+   },
+   "shuffled_2031_sep16": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.096,
+     4.094999999999999,
+     4.084000000000003
+    ],
+    "int_spikes_window": [
+     4,
+     3,
+     2,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.818,
+     7.343,
+     8.384,
+     4.084000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.818,
+     7.343,
+     8.384,
+     4.084000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 52.084,
+    "last_any": 53.846,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 37
+   },
+   "order_0123_sep12_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.640999999999998,
+     4.486999999999998,
+     4.540999999999997
+    ],
+    "int_spikes_window": [
+     7,
+     4,
+     5,
+     2
+    ],
+    "burst_end_after_cue": [
+     12.692,
+     7.161999999999999,
+     10.529000000000003,
+     10.262
+    ],
+    "last_pyr_after_cue_in_window": [
+     8.954,
+     7.161999999999999,
+     10.529000000000003,
+     10.262
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 46.262,
+    "last_any": 46.262,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 18,
+    "total_pyr": 49
+   },
+   "order_0123_sep16_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.556000000000001,
+     4.482999999999997,
+     4.5020000000000024
+    ],
+    "int_spikes_window": [
+     7,
+     5,
+     5,
+     1
+    ],
+    "burst_end_after_cue": [
+     12.692,
+     8.533000000000001,
+     10.503999999999998,
+     9.996000000000002
+    ],
+    "last_pyr_after_cue_in_window": [
+     12.692,
+     8.533000000000001,
+     10.503999999999998,
+     9.996000000000002
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 57.996,
+    "last_any": 57.996,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 18,
+    "total_pyr": 51
+   },
+   "order_0123_sep20_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.503,
+     4.436,
+     4.450999999999993
+    ],
+    "int_spikes_window": [
+     7,
+     4,
+     4,
+     1
+    ],
+    "burst_end_after_cue": [
+     12.692,
+     8.367,
+     10.499000000000002,
+     9.995999999999995
+    ],
+    "last_pyr_after_cue_in_window": [
+     12.692,
+     8.367,
+     10.499000000000002,
+     9.995999999999995
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 69.996,
+    "last_any": 69.996,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 16,
+    "total_pyr": 51
+   },
+   "shuffled_2031_sep16_dt0.1": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.501999999999999,
+     4.499000000000002,
+     4.439999999999998
+    ],
+    "int_spikes_window": [
+     7,
+     5,
+     1,
+     4
+    ],
+    "burst_end_after_cue": [
+     10.491,
+     9.059000000000001,
+     10.046999999999997,
+     7.999000000000002
+    ],
+    "last_pyr_after_cue_in_window": [
+     10.491,
+     9.059000000000001,
+     10.046999999999997,
+     7.999000000000002
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 55.999,
+    "last_any": 57.493,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 17,
+    "total_pyr": 50
+   }
+  },
+  "all_complete_all4_dt1": true,
+  "all_complete_all4_dt0.1": true,
+  "robust_dt1": true,
+  "robust_dt0.1": true,
+  "verdict": "ROBUST SUCCESS",
+  "completion_counts_dt1": {
+   "order_0123_sep12": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "completion_counts_dt0.1": {
+   "order_0123_sep12_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "gaba_observed_from_singles": {
+   "spike_weighted_max": [
+    [
+     5.6,
+     9.6,
+     5.6,
+     8.8
+    ],
+    [
+     4.0,
+     7.2,
+     5.6,
+     4.8
+    ],
+    [
+     9.6,
+     9.6,
+     7.2,
+     8.8
+    ],
+    [
+     4.0,
+     7.2,
+     5.6,
+     4.8
+    ]
+   ],
+   "spike_weighted_mean": [
+    [
+     3.6,
+     7.0,
+     3.2,
+     6.4
+    ],
+    [
+     2.8,
+     3.6,
+     2.6,
+     3.6
+    ],
+    [
+     5.2,
+     6.6,
+     4.4,
+     6.8
+    ],
+    [
+     2.8,
+     3.6,
+     2.6,
+     3.6
+    ]
+   ],
+   "binary_mean": [
+    [
+     3.6,
+     7.0,
+     3.2,
+     6.4
+    ],
+    [
+     2.2,
+     2.2,
+     2.4,
+     2.6
+    ],
+    [
+     4.6,
+     5.2,
+     4.2,
+     5.8
+    ],
+    [
+     2.2,
+     2.2,
+     2.4,
+     2.6
+    ]
+   ],
+   "binary_max": [
+    [
+     5.6,
+     9.6,
+     5.6,
+     8.8
+    ],
+    [
+     4.0,
+     4.8,
+     4.8,
+     3.2
+    ],
+    [
+     8.8,
+     7.2,
+     6.4,
+     7.2
+    ],
+    [
+     4.0,
+     4.8,
+     4.8,
+     3.2
+    ]
+   ]
+  },
+  "gaba_max_offdiag_spike_weighted": 9.6,
+  "gaba_max_offdiag_binary_mean": 7.0,
+  "burst_end_by_group_dt1": {
+   "0": [
+    7.3,
+    7.3,
+    7.3,
+    7.3
+   ],
+   "1": [
+    4.1,
+    4.1,
+    4.1,
+    4.1
+   ],
+   "2": [
+    7.8,
+    7.8,
+    7.8,
+    7.8
+   ],
+   "3": [
+    8.7,
+    8.5,
+    8.4,
+    8.4
+   ]
+  },
+  "int_spikes_window_dt1": [
+   [
+    3,
+    2,
+    4,
+    2
+   ],
+   [
+    3,
+    2,
+    4,
+    2
+   ],
+   [
+    3,
+    3,
+    3,
+    2
+   ],
+   [
+    4,
+    3,
+    2,
+    2
+   ]
+  ],
+  "any_burst_not_terminated_dt1": false,
+  "bursts_over_40ms_dt1": [],
+  "comparisons": [
+   {
+    "quantity": "P(4/4) first memory 4/4 (all spacings)",
+    "predicted": 0.95,
+    "observed": [
+     4,
+     4,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 12 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 12 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 12 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 16 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 16 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 16 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 20 ms",
+    "predicted": 0.87,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 20 ms",
+    "predicted": 0.87,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 20 ms",
+    "predicted": 0.87,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G2 (position 1)",
+    "predicted": 0.95,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G0 (position 2)",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G3 (position 3)",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G1 (position 4)",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all memories complete in all 4 runs), Dt 1",
+    "predicted": 0.6,
+    "observed": true,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "latency of last non-cue (ms), Dt 1 all complete memories",
+    "predicted": [
+     4.0,
+     4.8
+    ],
+    "observed": [
+     4.03,
+     4.16
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end after cue (ms), last member spike, all memories, Dt 1",
+    "predicted": "range [4, 12] (P in range 0.70); >20 ms P 0.10",
+    "observed": "min 4.1 max 8.7; 16/16 inside range; 0 > 20 ms",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per recall, single-memory runs, Dt 1 (G0..)",
+    "predicted": "nominal [5, 5, 5, 4], range [3, 9]",
+    "observed": [
+     3,
+     3,
+     4,
+     3
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per cue window in 4 ordered runs (G in order), Dt 1",
+    "predicted": "same ranges (windows include tails of earlier recalls)",
+    "observed": [
+     [
+      3,
+      2,
+      4,
+      2
+     ],
+     [
+      3,
+      2,
+      4,
+      2
+     ],
+     [
+      3,
+      3,
+      3,
+      2
+     ],
+     [
+      4,
+      3,
+      2,
+      2
+     ]
+    ],
+    "mark": "n/a"
+   },
+   {
+    "quantity": "peak GABA onto another memory non-cue member: spike-weighted max, max off-diag (nS g_peak_sum, observed spikes from singles)",
+    "predicted": "nominal 15.2, range [8, 30]",
+    "observed": 9.6,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "same, binary mean (max off-diag)",
+    "predicted": "<= 9.6",
+    "observed": 7.0,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(a burst not terminated within 40 ms in some group)",
+    "predicted": 0.1,
+    "observed": "occurred: False []",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(interneurons silent in some recall)",
+    "predicted": 0.05,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(a single memory fails on its own)",
+    "predicted": 0.1,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(cross-talk or non-member pyramidal spikes), all runs",
+    "predicted": 0.03,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all complete at Dt 0.1 ms)",
+    "predicted": 0.5,
+    "observed": true,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(robust success)",
+    "predicted": 0.45,
+    "observed": true,
+    "mark": "MISS"
+   }
+  ],
+  "n_hit": 25,
+  "n_scored": 26
+ },
+ "E2": {
+  "experiment": "E2",
+  "label": "sensitivity study, D_synmax 0.5, not bio-realistic",
+  "groups": [
+   {
+    "members": [
+     4,
+     18,
+     20,
+     22,
+     29,
+     51,
+     59,
+     63
+    ],
+    "cue": [
+     22,
+     29,
+     51,
+     63
+    ]
+   },
+   {
+    "members": [
+     8,
+     27,
+     33,
+     39,
+     41,
+     42,
+     44,
+     60
+    ],
+    "cue": [
+     8,
+     27,
+     33,
+     44
+    ]
+   },
+   {
+    "members": [
+     0,
+     12,
+     17,
+     19,
+     21,
+     37,
+     49,
+     50
+    ],
+    "cue": [
+     12,
+     17,
+     19,
+     50
+    ]
+   },
+   {
+    "members": [
+     16,
+     24,
+     25,
+     35,
+     45,
+     48,
+     56,
+     64
+    ],
+    "cue": [
+     16,
+     45,
+     56,
+     64
+    ]
+   }
+  ],
+  "set_info": {
+   "n_pairs": 3344,
+   "n_pyr_int_diff_vs_weights_json": 155,
+   "n_pyr_pyr_diff_vs_weights_json": 33,
+   "n_pairs_not_in_weights_json": 0
+  },
+  "readback_mismatches_total": 0,
+  "n_sims": 12,
+  "singles": {
+   "0": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 14,
+    "ints_fired": 3,
+    "last_member_spike": 24.989,
+    "last_activity": 27.067,
+    "spurious": 0
+   },
+   "1": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 7,
+    "ints_fired": 1,
+    "last_member_spike": 21.414,
+    "last_activity": 23.85,
+    "spurious": 0
+   },
+   "2": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 3,
+    "last_member_spike": 7.795,
+    "last_activity": 8.463,
+    "spurious": 0
+   },
+   "3": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 1,
+    "last_member_spike": 12.369,
+    "last_activity": 14.939,
+    "spurious": 0
+   }
+  },
+  "runs": {
+   "order_0123_sep12": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.847000000000001,
+     4.25,
+     4.174999999999997
+    ],
+    "int_spikes_window": [
+     7,
+     6,
+     5,
+     2
+    ],
+    "burst_end_after_cue": [
+     25.034,
+     18.512,
+     7.8039999999999985,
+     12.515999999999998
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.682,
+     11.949000000000002,
+     7.8039999999999985,
+     12.515999999999998
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 48.516,
+    "last_any": 48.516,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 20,
+    "total_pyr": 92
+   },
+   "order_0123_sep16": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.8309999999999995,
+     4.213999999999999,
+     4.110999999999997
+    ],
+    "int_spikes_window": [
+     9,
+     6,
+     5,
+     2
+    ],
+    "burst_end_after_cue": [
+     25.018,
+     22.711,
+     7.796999999999997,
+     12.406999999999996
+    ],
+    "last_pyr_after_cue_in_window": [
+     15.966,
+     15.738,
+     7.796999999999997,
+     12.406999999999996
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 60.407,
+    "last_any": 60.407,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 22,
+    "total_pyr": 95
+   },
+   "order_0123_sep20": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.876000000000001,
+     4.2010000000000005,
+     4.0789999999999935
+    ],
+    "int_spikes_window": [
+     11,
+     7,
+     4,
+     1
+    ],
+    "burst_end_after_cue": [
+     24.997,
+     22.874000000000002,
+     7.793999999999997,
+     12.108000000000004
+    ],
+    "last_pyr_after_cue_in_window": [
+     19.467,
+     19.927,
+     7.793999999999997,
+     12.108000000000004
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 72.108,
+    "last_any": 72.108,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 23,
+    "total_pyr": 95
+   },
+   "shuffled_2031_sep16": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.254999999999999,
+     4.265000000000001,
+     4.6030000000000015
+    ],
+    "int_spikes_window": [
+     4,
+     9,
+     6,
+     6
+    ],
+    "burst_end_after_cue": [
+     7.795,
+     24.982,
+     13.076,
+     22.900999999999996
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.795,
+     15.969000000000001,
+     13.076,
+     22.900999999999996
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 70.901,
+    "last_any": 71.38,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 25,
+    "total_pyr": 97
+   },
+   "order_0123_sep12_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.379000000000001,
+     4.59,
+     4.637999999999998
+    ],
+    "int_spikes_window": [
+     7,
+     7,
+     9,
+     6
+    ],
+    "burst_end_after_cue": [
+     27.724,
+     22.817999999999998,
+     16.296999999999997,
+     15.103000000000002
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.966,
+     11.786999999999999,
+     11.494999999999997,
+     15.103000000000002
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 51.103,
+    "last_any": 51.579,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 29,
+    "total_pyr": 124
+   },
+   "order_0123_sep16_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.399999999999999,
+     4.560000000000002,
+     4.573999999999998
+    ],
+    "int_spikes_window": [
+     10,
+     7,
+     11,
+     3
+    ],
+    "burst_end_after_cue": [
+     27.688,
+     24.397,
+     16.191000000000003,
+     17.462000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     15.679,
+     15.34,
+     15.030999999999999,
+     17.462000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 65.462,
+    "last_any": 65.462,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 31,
+    "total_pyr": 128
+   },
+   "order_0123_sep20_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.489999999999998,
+     4.5319999999999965,
+     4.507999999999996
+    ],
+    "int_spikes_window": [
+     12,
+     7,
+     11,
+     2
+    ],
+    "burst_end_after_cue": [
+     27.675,
+     23.936999999999998,
+     16.143,
+     17.131
+    ],
+    "last_pyr_after_cue_in_window": [
+     18.987,
+     19.087000000000003,
+     16.143,
+     17.131
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 77.131,
+    "last_any": 77.131,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 32,
+    "total_pyr": 128
+   },
+   "shuffled_2031_sep16_dt0.1": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     6.318999999999999,
+     4.636000000000003,
+     5.655999999999999
+    ],
+    "int_spikes_window": [
+     11,
+     9,
+     9,
+     7
+    ],
+    "burst_end_after_cue": [
+     16.051,
+     32.653,
+     15.033000000000001,
+     24.372
+    ],
+    "last_pyr_after_cue_in_window": [
+     14.64,
+     15.459,
+     15.033000000000001,
+     24.372
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 72.372,
+    "last_any": 73.198,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 36,
+    "total_pyr": 131
+   }
+  },
+  "all_complete_all4_dt1": true,
+  "all_complete_all4_dt0.1": true,
+  "robust_dt1": true,
+  "robust_dt0.1": true,
+  "verdict": "ROBUST SUCCESS",
+  "completion_counts_dt1": {
+   "order_0123_sep12": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "completion_counts_dt0.1": {
+   "order_0123_sep12_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "gaba_observed_from_singles": {
+   "spike_weighted_max": [
+    [
+     72.0,
+     92.8,
+     30.4,
+     28.8
+    ],
+    [
+     39.2,
+     67.2,
+     16.8,
+     11.2
+    ],
+    [
+     34.4,
+     42.4,
+     16.8,
+     9.6
+    ],
+    [
+     22.4,
+     38.4,
+     9.6,
+     6.4
+    ]
+   ],
+   "spike_weighted_mean": [
+    [
+     56.0,
+     54.0,
+     22.8,
+     16.8
+    ],
+    [
+     23.8,
+     28.0,
+     9.8,
+     5.6
+    ],
+    [
+     26.8,
+     23.2,
+     10.4,
+     6.6
+    ],
+    [
+     13.6,
+     16.0,
+     5.6,
+     3.2
+    ]
+   ],
+   "binary_mean": [
+    [
+     15.6,
+     12.0,
+     5.8,
+     5.4
+    ],
+    [
+     3.4,
+     4.0,
+     1.4,
+     0.8
+    ],
+    [
+     23.4,
+     19.2,
+     9.0,
+     5.8
+    ],
+    [
+     3.4,
+     4.0,
+     1.4,
+     0.8
+    ]
+   ],
+   "binary_max": [
+    [
+     18.4,
+     18.4,
+     6.4,
+     8.0
+    ],
+    [
+     5.6,
+     9.6,
+     2.4,
+     1.6
+    ],
+    [
+     28.8,
+     32.8,
+     15.2,
+     8.8
+    ],
+    [
+     5.6,
+     9.6,
+     2.4,
+     1.6
+    ]
+   ]
+  },
+  "gaba_max_offdiag_spike_weighted": 92.8,
+  "gaba_max_offdiag_binary_mean": 23.4,
+  "burst_end_by_group_dt1": {
+   "0": [
+    25.0,
+    25.0,
+    25.0,
+    25.0
+   ],
+   "1": [
+    18.5,
+    22.7,
+    22.9,
+    22.9
+   ],
+   "2": [
+    7.8,
+    7.8,
+    7.8,
+    7.8
+   ],
+   "3": [
+    12.5,
+    12.4,
+    12.1,
+    13.1
+   ]
+  },
+  "int_spikes_window_dt1": [
+   [
+    7,
+    6,
+    5,
+    2
+   ],
+   [
+    9,
+    6,
+    5,
+    2
+   ],
+   [
+    11,
+    7,
+    4,
+    1
+   ],
+   [
+    4,
+    9,
+    6,
+    6
+   ]
+  ],
+  "any_burst_not_terminated_dt1": false,
+  "bursts_over_40ms_dt1": [],
+  "comparisons": [
+   {
+    "quantity": "P(4/4) first memory 4/4 (all spacings)",
+    "predicted": 0.97,
+    "observed": [
+     4,
+     4,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 12 ms",
+    "predicted": 0.35,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 12 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 12 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 16 ms",
+    "predicted": 0.35,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 16 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 16 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 20 ms",
+    "predicted": 0.4,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 20 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 20 ms",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G2 (position 1)",
+    "predicted": 0.97,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G0 (position 2)",
+    "predicted": 0.7,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G3 (position 3)",
+    "predicted": 0.85,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G1 (position 4)",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all memories complete in all 4 runs), Dt 1",
+    "predicted": 0.15,
+    "observed": true,
+    "mark": "MISS"
+   },
+   {
+    "quantity": "latency of last non-cue (ms), Dt 1 all complete memories",
+    "predicted": [
+     4.0,
+     6.5
+    ],
+    "observed": [
+     4.03,
+     4.88
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G0 (ms)",
+    "predicted": "range [18, 40] (P 0.55)",
+    "observed": "min 25.0 max 25.0; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G1 (ms)",
+    "predicted": "range [15, 40] (P 0.45)",
+    "observed": "min 18.5 max 22.9; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G2 (ms)",
+    "predicted": "range [5, 12] (P 0.80)",
+    "observed": "min 7.8 max 7.8; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G3 (ms)",
+    "predicted": "range [8, 25] (P 0.65)",
+    "observed": "min 12.1 max 13.1; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per recall, single-memory runs, Dt 1 (G0..)",
+    "predicted": "nominal [11, 5, 5, 5], range {'G0': [9, 16], 'G1': [5, 12], 'G2': [3, 6], 'G3': [4, 8]}",
+    "observed": [
+     14,
+     7,
+     4,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per cue window in 4 ordered runs (G in order), Dt 1",
+    "predicted": "same ranges (windows include tails of earlier recalls)",
+    "observed": [
+     [
+      7,
+      6,
+      5,
+      2
+     ],
+     [
+      9,
+      6,
+      5,
+      2
+     ],
+     [
+      11,
+      7,
+      4,
+      1
+     ],
+     [
+      4,
+      9,
+      6,
+      6
+     ]
+    ],
+    "mark": "n/a"
+   },
+   {
+    "quantity": "peak GABA G0 -> G1 spike-weighted max (nS)",
+    "predicted": "nominal 69.6, range [55, 110], baseline 176.8",
+    "observed": 92.8,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "G0 -> G1 binary mean (nS)",
+    "predicted": 12.0,
+    "observed": 12.0,
+    "mark": "n/a"
+   },
+   {
+    "quantity": "max any pair spike-weighted (nS)",
+    "predicted": 69.6,
+    "observed": 92.8,
+    "mark": "n/a"
+   },
+   {
+    "quantity": "P(a burst not terminated within 40 ms in some group)",
+    "predicted": 0.5,
+    "observed": "occurred: False []",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(interneurons silent in some recall)",
+    "predicted": 0.02,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(cross-talk or non-member pyramidal spikes), all runs",
+    "predicted": 0.03,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(total activity > 100 ms in some run)",
+    "predicted": 0.4,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all complete at Dt 0.1 ms)",
+    "predicted": 0.1,
+    "observed": true,
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(robust success)",
+    "predicted": 0.08,
+    "observed": true,
+    "mark": "MISS"
+   }
+  ],
+  "n_hit": 21,
+  "n_scored": 28
+ },
+ "E3": {
+  "experiment": "E3",
+  "label": "sensitivity study, D_synmax 0.5, not bio-realistic",
+  "groups": [
+   {
+    "members": [
+     1,
+     19,
+     23,
+     25,
+     33,
+     34,
+     48,
+     54
+    ],
+    "cue": [
+     1,
+     19,
+     23,
+     34
+    ]
+   },
+   {
+    "members": [
+     9,
+     13,
+     37,
+     52,
+     56,
+     60,
+     62,
+     65
+    ],
+    "cue": [
+     9,
+     52,
+     56,
+     62
+    ]
+   },
+   {
+    "members": [
+     2,
+     17,
+     24,
+     29,
+     31,
+     32,
+     43,
+     47
+    ],
+    "cue": [
+     2,
+     17,
+     29,
+     43
+    ]
+   },
+   {
+    "members": [
+     15,
+     21,
+     35,
+     38,
+     45,
+     51,
+     61,
+     63
+    ],
+    "cue": [
+     45,
+     51,
+     61,
+     63
+    ]
+   }
+  ],
+  "set_info": {
+   "n_pairs": 3344,
+   "n_pyr_int_diff_vs_weights_json": 152,
+   "n_pyr_pyr_diff_vs_weights_json": 236,
+   "n_pairs_not_in_weights_json": 0
+  },
+  "readback_mismatches_total": 0,
+  "n_sims": 12,
+  "singles": {
+   "0": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 3,
+    "last_member_spike": 7.335,
+    "last_activity": 7.559,
+    "spurious": 0
+   },
+   "1": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 2,
+    "last_member_spike": 4.033,
+    "last_activity": 8.513,
+    "spurious": 0
+   },
+   "2": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 3,
+    "last_member_spike": 7.818,
+    "last_activity": 8.543,
+    "spurious": 0
+   },
+   "3": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 2,
+    "last_member_spike": 8.445,
+    "last_activity": 9.136,
+    "spurious": 0
+   }
+  },
+  "runs": {
+   "order_0123_sep12": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.131,
+     4.085000000000001,
+     4.125999999999998
+    ],
+    "int_spikes_window": [
+     3,
+     2,
+     3,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.131,
+     7.811,
+     8.564
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.131,
+     7.811,
+     8.564
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 44.564,
+    "last_any": 47.348,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 37
+   },
+   "order_0123_sep16": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.097000000000001,
+     4.0660000000000025,
+     4.091000000000001
+    ],
+    "int_spikes_window": [
+     3,
+     2,
+     3,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.097000000000001,
+     7.813000000000002,
+     8.442999999999998
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.097000000000001,
+     7.813000000000002,
+     8.442999999999998
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 56.443,
+    "last_any": 59.511,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 37
+   },
+   "order_0123_sep20": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.0760000000000005,
+     4.058,
+     4.063000000000002
+    ],
+    "int_spikes_window": [
+     3,
+     3,
+     2,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.335,
+     4.0760000000000005,
+     7.814,
+     8.340000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.335,
+     4.0760000000000005,
+     7.814,
+     8.340000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 68.34,
+    "last_any": 70.817,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 37
+   },
+   "shuffled_2031_sep16": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.096,
+     4.100000000000001,
+     4.084000000000003
+    ],
+    "int_spikes_window": [
+     4,
+     3,
+     2,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.818,
+     7.337,
+     8.395000000000003,
+     4.084000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.818,
+     7.337,
+     8.395000000000003,
+     4.084000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 52.084,
+    "last_any": 53.845,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 37
+   },
+   "order_0123_sep12_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.597999999999999,
+     4.524000000000001,
+     4.496000000000002
+    ],
+    "int_spikes_window": [
+     6,
+     5,
+     3,
+     1
+    ],
+    "burst_end_after_cue": [
+     12.688,
+     8.649999999999999,
+     10.485999999999997,
+     10.027999999999999
+    ],
+    "last_pyr_after_cue_in_window": [
+     8.954,
+     8.649999999999999,
+     10.485999999999997,
+     10.027999999999999
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 46.028,
+    "last_any": 46.028,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 15,
+    "total_pyr": 50
+   },
+   "order_0123_sep16_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.530000000000001,
+     4.482999999999997,
+     4.460000000000001
+    ],
+    "int_spikes_window": [
+     6,
+     5,
+     3,
+     1
+    ],
+    "burst_end_after_cue": [
+     12.688,
+     8.477,
+     10.478000000000002,
+     10.005000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     12.688,
+     8.477,
+     10.478000000000002,
+     10.005000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 58.005,
+    "last_any": 58.005,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 15,
+    "total_pyr": 51
+   },
+   "order_0123_sep20_dt0.1": {
+    "order": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.486999999999998,
+     4.436,
+     4.438999999999993
+    ],
+    "int_spikes_window": [
+     6,
+     4,
+     3,
+     1
+    ],
+    "burst_end_after_cue": [
+     12.688,
+     8.187000000000001,
+     10.473999999999997,
+     9.991
+    ],
+    "last_pyr_after_cue_in_window": [
+     12.688,
+     8.187000000000001,
+     10.473999999999997,
+     9.991
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 69.991,
+    "last_any": 69.991,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 14,
+    "total_pyr": 51
+   },
+   "shuffled_2031_sep16_dt0.1": {
+    "order": [
+     2,
+     0,
+     3,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.472000000000001,
+     4.4979999999999976,
+     4.438000000000002
+    ],
+    "int_spikes_window": [
+     6,
+     4,
+     1,
+     4
+    ],
+    "burst_end_after_cue": [
+     10.472,
+     12.564,
+     10.048000000000002,
+     8.002000000000002
+    ],
+    "last_pyr_after_cue_in_window": [
+     10.472,
+     12.564,
+     10.048000000000002,
+     8.002000000000002
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 56.002,
+    "last_any": 57.493,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 15,
+    "total_pyr": 51
+   }
+  },
+  "all_complete_all4_dt1": true,
+  "all_complete_all4_dt0.1": true,
+  "robust_dt1": true,
+  "robust_dt0.1": true,
+  "verdict": "ROBUST SUCCESS",
+  "completion_counts_dt1": {
+   "order_0123_sep12": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "completion_counts_dt0.1": {
+   "order_0123_sep12_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "order_0123_sep20_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ],
+   "shuffled_2031_sep16_dt0.1": [
+    4,
+    4,
+    4,
+    4
+   ]
+  },
+  "gaba_observed_from_singles": {
+   "spike_weighted_max": [
+    [
+     5.6,
+     9.6,
+     5.6,
+     8.8
+    ],
+    [
+     4.0,
+     7.2,
+     5.6,
+     4.8
+    ],
+    [
+     9.6,
+     9.6,
+     7.2,
+     8.8
+    ],
+    [
+     4.0,
+     7.2,
+     5.6,
+     4.8
+    ]
+   ],
+   "spike_weighted_mean": [
+    [
+     3.6,
+     7.0,
+     3.2,
+     6.4
+    ],
+    [
+     2.8,
+     3.6,
+     2.6,
+     3.6
+    ],
+    [
+     5.2,
+     6.6,
+     4.4,
+     6.8
+    ],
+    [
+     2.8,
+     3.6,
+     2.6,
+     3.6
+    ]
+   ],
+   "binary_mean": [
+    [
+     3.6,
+     7.0,
+     3.2,
+     6.4
+    ],
+    [
+     2.2,
+     2.2,
+     2.4,
+     2.6
+    ],
+    [
+     4.6,
+     5.2,
+     4.2,
+     5.8
+    ],
+    [
+     2.2,
+     2.2,
+     2.4,
+     2.6
+    ]
+   ],
+   "binary_max": [
+    [
+     5.6,
+     9.6,
+     5.6,
+     8.8
+    ],
+    [
+     4.0,
+     4.8,
+     4.8,
+     3.2
+    ],
+    [
+     8.8,
+     7.2,
+     6.4,
+     7.2
+    ],
+    [
+     4.0,
+     4.8,
+     4.8,
+     3.2
+    ]
+   ]
+  },
+  "gaba_max_offdiag_spike_weighted": 9.6,
+  "gaba_max_offdiag_binary_mean": 7.0,
+  "burst_end_by_group_dt1": {
+   "0": [
+    7.3,
+    7.3,
+    7.3,
+    7.3
+   ],
+   "1": [
+    4.1,
+    4.1,
+    4.1,
+    4.1
+   ],
+   "2": [
+    7.8,
+    7.8,
+    7.8,
+    7.8
+   ],
+   "3": [
+    8.6,
+    8.4,
+    8.3,
+    8.4
+   ]
+  },
+  "int_spikes_window_dt1": [
+   [
+    3,
+    2,
+    3,
+    2
+   ],
+   [
+    3,
+    2,
+    3,
+    2
+   ],
+   [
+    3,
+    3,
+    2,
+    2
+   ],
+   [
+    4,
+    3,
+    2,
+    2
+   ]
+  ],
+  "any_burst_not_terminated_dt1": false,
+  "bursts_over_40ms_dt1": [],
+  "comparisons": [
+   {
+    "quantity": "P(4/4) first memory 4/4 (all spacings)",
+    "predicted": 0.95,
+    "observed": [
+     4,
+     4,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 12 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 12 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 12 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 16 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 16 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 16 ms",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 20 ms",
+    "predicted": 0.88,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 20 ms",
+    "predicted": 0.88,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) fourth memory (G3) at 20 ms",
+    "predicted": 0.88,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G2 (position 1)",
+    "predicted": 0.95,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G0 (position 2)",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G3 (position 3)",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G1 (position 4)",
+    "predicted": 0.86,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all memories complete in all 4 runs), Dt 1",
+    "predicted": 0.6,
+    "observed": true,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "latency of last non-cue (ms), Dt 1 all complete memories",
+    "predicted": [
+     4.0,
+     4.8
+    ],
+    "observed": [
+     4.03,
+     4.13
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end after cue (ms), last member spike, all memories, Dt 1",
+    "predicted": "range [4, 14] (P in range 0.68); >20 ms P 0.13",
+    "observed": "min 4.1 max 8.6; 16/16 inside range; 0 > 20 ms",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per recall, single-memory runs, Dt 1 (G0..)",
+    "predicted": "nominal [4, 4, 4, 3], range [2, 7]",
+    "observed": [
+     3,
+     3,
+     4,
+     3
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per cue window in 4 ordered runs (G in order), Dt 1",
+    "predicted": "same ranges (windows include tails of earlier recalls)",
+    "observed": [
+     [
+      3,
+      2,
+      3,
+      2
+     ],
+     [
+      3,
+      2,
+      3,
+      2
+     ],
+     [
+      3,
+      3,
+      2,
+      2
+     ],
+     [
+      4,
+      3,
+      2,
+      2
+     ]
+    ],
+    "mark": "n/a"
+   },
+   {
+    "quantity": "peak GABA onto another memory non-cue member: spike-weighted max, max off-diag (nS g_peak_sum, observed spikes from singles)",
+    "predicted": "nominal 11.2, range [5, 25]",
+    "observed": 9.6,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "same, binary mean (max off-diag)",
+    "predicted": "<= 7.0",
+    "observed": 7.0,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(a burst not terminated within 40 ms in some group)",
+    "predicted": 0.13,
+    "observed": "occurred: False []",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(interneurons silent in some recall)",
+    "predicted": 0.05,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(a single memory fails on its own)",
+    "predicted": 0.1,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(cross-talk or non-member pyramidal spikes), all runs",
+    "predicted": 0.03,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(all complete at Dt 0.1 ms)",
+    "predicted": 0.5,
+    "observed": true,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(robust success)",
+    "predicted": 0.45,
+    "observed": true,
+    "mark": "MISS"
+   }
+  ],
+  "n_hit": 25,
+  "n_scored": 26
+ },
+ "E4": {
+  "experiment": "E4",
+  "label": "sensitivity study, D_synmax 0.5, not bio-realistic",
+  "groups": [
+   {
+    "members": [
+     4,
+     18,
+     20,
+     22,
+     29,
+     51,
+     59,
+     63
+    ],
+    "cue": [
+     22,
+     29,
+     51,
+     63
+    ]
+   },
+   {
+    "members": [
+     8,
+     27,
+     33,
+     39,
+     41,
+     42,
+     44,
+     60
+    ],
+    "cue": [
+     8,
+     27,
+     33,
+     44
+    ]
+   },
+   {
+    "members": [
+     0,
+     12,
+     17,
+     19,
+     21,
+     37,
+     49,
+     50
+    ],
+    "cue": [
+     12,
+     17,
+     19,
+     50
+    ]
+   }
+  ],
+  "set_info": {
+   "n_pairs": 3344,
+   "n_pyr_int_diff_vs_weights_json": 113,
+   "n_pyr_pyr_diff_vs_weights_json": 0,
+   "n_pairs_not_in_weights_json": 0
+  },
+  "readback_mismatches_total": 0,
+  "n_sims": 11,
+  "singles": {
+   "0": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 14,
+    "ints_fired": 3,
+    "last_member_spike": 24.989,
+    "last_activity": 27.067,
+    "spurious": 0
+   },
+   "1": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 7,
+    "ints_fired": 1,
+    "last_member_spike": 21.414,
+    "last_activity": 23.85,
+    "spurious": 0
+   },
+   "2": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 3,
+    "last_member_spike": 7.795,
+    "last_activity": 8.463,
+    "spurious": 0
+   }
+  },
+  "runs": {
+   "order_012_sep12": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.847000000000001,
+     4.25
+    ],
+    "int_spikes_window": [
+     7,
+     6,
+     5
+    ],
+    "burst_end_after_cue": [
+     25.034,
+     18.512,
+     7.8039999999999985
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.682,
+     11.949000000000002,
+     7.8039999999999985
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 31.804,
+    "last_any": 32.793,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 18,
+    "total_pyr": 77
+   },
+   "order_012_sep16": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.8309999999999995,
+     4.213999999999999
+    ],
+    "int_spikes_window": [
+     9,
+     6,
+     5
+    ],
+    "burst_end_after_cue": [
+     25.018,
+     22.711,
+     7.796999999999997
+    ],
+    "last_pyr_after_cue_in_window": [
+     15.966,
+     15.738,
+     7.796999999999997
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 39.797,
+    "last_any": 39.797,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 20,
+    "total_pyr": 80
+   },
+   "order_012_sep20": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.876000000000001,
+     4.2010000000000005
+    ],
+    "int_spikes_window": [
+     11,
+     7,
+     4
+    ],
+    "burst_end_after_cue": [
+     24.997,
+     22.874000000000002,
+     7.793999999999997
+    ],
+    "last_pyr_after_cue_in_window": [
+     19.467,
+     19.927,
+     7.793999999999997
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 47.794,
+    "last_any": 47.794,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 22,
+    "total_pyr": 80
+   },
+   "shuffled_201_sep16": {
+    "order": [
+     2,
+     0,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.254999999999999,
+     4.926000000000002
+    ],
+    "int_spikes_window": [
+     4,
+     9,
+     8
+    ],
+    "burst_end_after_cue": [
+     7.795,
+     24.985999999999997,
+     21.459000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.795,
+     15.969000000000001,
+     21.459000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 53.459,
+    "last_any": 53.459,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 21,
+    "total_pyr": 79
+   },
+   "order_012_sep12_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.379000000000001,
+     4.59
+    ],
+    "int_spikes_window": [
+     7,
+     7,
+     13
+    ],
+    "burst_end_after_cue": [
+     27.724,
+     22.817999999999998,
+     16.296
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.966,
+     11.786999999999999,
+     16.296
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 40.296,
+    "last_any": 41.942,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 27,
+    "total_pyr": 104
+   },
+   "order_012_sep16_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.399999999999999,
+     4.560000000000002
+    ],
+    "int_spikes_window": [
+     10,
+     7,
+     12
+    ],
+    "burst_end_after_cue": [
+     27.688,
+     24.397,
+     16.191000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     15.679,
+     15.34,
+     16.191000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 48.191,
+    "last_any": 49.787,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 29,
+    "total_pyr": 107
+   },
+   "order_012_sep20_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     5.489999999999998,
+     4.5319999999999965
+    ],
+    "int_spikes_window": [
+     12,
+     7,
+     11
+    ],
+    "burst_end_after_cue": [
+     27.675,
+     23.936999999999998,
+     16.143
+    ],
+    "last_pyr_after_cue_in_window": [
+     18.987,
+     19.087000000000003,
+     16.143
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 56.143,
+    "last_any": 56.155,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 30,
+    "total_pyr": 107
+   },
+   "shuffled_201_sep16_dt0.1": {
+    "order": [
+     2,
+     0,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     6.318999999999999,
+     5.9140000000000015
+    ],
+    "int_spikes_window": [
+     11,
+     9,
+     12
+    ],
+    "burst_end_after_cue": [
+     16.051,
+     32.685,
+     24.610999999999997
+    ],
+    "last_pyr_after_cue_in_window": [
+     14.64,
+     15.459,
+     24.610999999999997
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 56.611,
+    "last_any": 56.611,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 32,
+    "total_pyr": 108
+   }
+  },
+  "all_complete_all4_dt1": true,
+  "all_complete_all4_dt0.1": true,
+  "robust_dt1": true,
+  "robust_dt0.1": true,
+  "verdict": "ROBUST SUCCESS",
+  "completion_counts_dt1": {
+   "order_012_sep12": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep16": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep20": [
+    4,
+    4,
+    4
+   ],
+   "shuffled_201_sep16": [
+    4,
+    4,
+    4
+   ]
+  },
+  "completion_counts_dt0.1": {
+   "order_012_sep12_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep16_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep20_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "shuffled_201_sep16_dt0.1": [
+    4,
+    4,
+    4
+   ]
+  },
+  "gaba_observed_from_singles": {
+   "spike_weighted_max": [
+    [
+     72.0,
+     92.8,
+     30.4
+    ],
+    [
+     39.2,
+     67.2,
+     16.8
+    ],
+    [
+     34.4,
+     42.4,
+     16.8
+    ]
+   ],
+   "spike_weighted_mean": [
+    [
+     56.0,
+     54.0,
+     22.8
+    ],
+    [
+     23.8,
+     28.0,
+     9.8
+    ],
+    [
+     26.8,
+     23.2,
+     10.4
+    ]
+   ],
+   "binary_mean": [
+    [
+     15.6,
+     12.0,
+     5.8
+    ],
+    [
+     3.4,
+     4.0,
+     1.4
+    ],
+    [
+     23.4,
+     19.2,
+     9.0
+    ]
+   ],
+   "binary_max": [
+    [
+     18.4,
+     18.4,
+     6.4
+    ],
+    [
+     5.6,
+     9.6,
+     2.4
+    ],
+    [
+     28.8,
+     32.8,
+     15.2
+    ]
+   ]
+  },
+  "gaba_max_offdiag_spike_weighted": 92.8,
+  "gaba_max_offdiag_binary_mean": 23.4,
+  "burst_end_by_group_dt1": {
+   "0": [
+    25.0,
+    25.0,
+    25.0,
+    25.0
+   ],
+   "1": [
+    18.5,
+    22.7,
+    22.9,
+    21.5
+   ],
+   "2": [
+    7.8,
+    7.8,
+    7.8,
+    7.8
+   ]
+  },
+  "int_spikes_window_dt1": [
+   [
+    7,
+    6,
+    5
+   ],
+   [
+    9,
+    6,
+    5
+   ],
+   [
+    11,
+    7,
+    4
+   ],
+   [
+    4,
+    9,
+    8
+   ]
+  ],
+  "any_burst_not_terminated_dt1": false,
+  "bursts_over_40ms_dt1": [],
+  "comparisons": [
+   {
+    "quantity": "P(4/4) first memory 4/4 (all spacings)",
+    "predicted": 0.97,
+    "observed": [
+     4,
+     4,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 12 ms",
+    "predicted": 0.35,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 12 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 16 ms",
+    "predicted": 0.35,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 16 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) second memory (G1) at 20 ms",
+    "predicted": 0.4,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(4/4) third memory (G2) at 20 ms",
+    "predicted": 0.8,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G2 (position 1)",
+    "predicted": 0.97,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G0 (position 2)",
+    "predicted": 0.7,
+    "observed": "4/4",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(4/4) shuffled, G1 (position 3)",
+    "predicted": 0.45,
+    "observed": "4/4",
+    "mark": "MISS"
+   },
+   {
+    "quantity": "P(all memories complete in all 4 runs), Dt 1",
+    "predicted": 0.18,
+    "observed": true,
+    "mark": "MISS"
+   },
+   {
+    "quantity": "burst end G0 (ms)",
+    "predicted": "range [18, 40] (P 0.55)",
+    "observed": "min 25.0 max 25.0; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G1 (ms)",
+    "predicted": "range [15, 40] (P 0.45)",
+    "observed": "min 18.5 max 22.9; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end G2 (ms)",
+    "predicted": "range [5, 12] (P 0.80)",
+    "observed": "min 7.8 max 7.8; 4/4 inside",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per recall, single-memory runs, Dt 1 (G0..)",
+    "predicted": "nominal [11, 5, 5], range {'G0': [9, 16], 'G1': [5, 12], 'G2': [3, 6]}",
+    "observed": [
+     14,
+     7,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per cue window in 4 ordered runs (G in order), Dt 1",
+    "predicted": "same ranges (windows include tails of earlier recalls)",
+    "observed": [
+     [
+      7,
+      6,
+      5
+     ],
+     [
+      9,
+      6,
+      5
+     ],
+     [
+      11,
+      7,
+      4
+     ],
+     [
+      4,
+      9,
+      8
+     ]
+    ],
+    "mark": "n/a"
+   },
+   {
+    "quantity": "peak GABA G0 -> G1 spike-weighted max (nS)",
+    "predicted": "nominal 69.6, range [55, 110], baseline 176.8",
+    "observed": 92.8,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "G0 -> G1 binary mean (nS)",
+    "predicted": 12.0,
+    "observed": 12.0,
+    "mark": "n/a"
+   },
+   {
+    "quantity": "max any pair spike-weighted (nS)",
+    "predicted": 69.6,
+    "observed": 92.8,
+    "mark": "n/a"
+   },
+   {
+    "quantity": "P(a burst not terminated within 40 ms in some group)",
+    "predicted": 0.45,
+    "observed": "occurred: False []",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(cross-talk or non-member pyramidal spikes), all runs",
+    "predicted": 0.03,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(robust success)",
+    "predicted": 0.1,
+    "observed": true,
+    "mark": "MISS"
+   }
+  ],
+  "n_hit": 13,
+  "n_scored": 19
+ },
+ "E4b": {
+  "experiment": "E4b",
+  "label": "sensitivity study, D_synmax 0.5, not bio-realistic",
+  "groups": [
+   {
+    "members": [
+     1,
+     9,
+     24,
+     25,
+     35,
+     43,
+     48,
+     56
+    ],
+    "cue": [
+     1,
+     9,
+     43,
+     56
+    ]
+   },
+   {
+    "members": [
+     21,
+     30,
+     46,
+     51,
+     58,
+     60,
+     63,
+     65
+    ],
+    "cue": [
+     30,
+     46,
+     51,
+     63
+    ]
+   },
+   {
+    "members": [
+     2,
+     13,
+     15,
+     16,
+     19,
+     27,
+     33,
+     54
+    ],
+    "cue": [
+     2,
+     16,
+     19,
+     27
+    ]
+   }
+  ],
+  "set_info": {
+   "n_pairs": 3344,
+   "n_pyr_int_diff_vs_weights_json": 38,
+   "n_pyr_pyr_diff_vs_weights_json": 201,
+   "n_pairs_not_in_weights_json": 0
+  },
+  "readback_mismatches_total": 0,
+  "n_sims": 11,
+  "singles": {
+   "0": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 6,
+    "ints_fired": 4,
+    "last_member_spike": 10.584,
+    "last_activity": 11.692,
+    "spurious": 0
+   },
+   "1": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 3,
+    "ints_fired": 2,
+    "last_member_spike": 7.93,
+    "last_activity": 8.613,
+    "spurious": 0
+   },
+   "2": {
+    "complete": true,
+    "latency": 4.033,
+    "int_spikes": 4,
+    "ints_fired": 3,
+    "last_member_spike": 7.859,
+    "last_activity": 8.684,
+    "spurious": 0
+   }
+  },
+  "runs": {
+   "order_012_sep12": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.221,
+     4.085000000000001
+    ],
+    "int_spikes_window": [
+     6,
+     2,
+     2
+    ],
+    "burst_end_after_cue": [
+     10.584,
+     7.989999999999998,
+     7.847000000000001
+    ],
+    "last_pyr_after_cue_in_window": [
+     10.584,
+     7.989999999999998,
+     7.847000000000001
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 31.847,
+    "last_any": 31.847,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 33
+   },
+   "order_012_sep16": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.155999999999999,
+     4.0660000000000025
+    ],
+    "int_spikes_window": [
+     6,
+     2,
+     2
+    ],
+    "burst_end_after_cue": [
+     10.584,
+     7.974,
+     7.841999999999999
+    ],
+    "last_pyr_after_cue_in_window": [
+     10.584,
+     7.974,
+     7.841999999999999
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 39.842,
+    "last_any": 40.404,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 33
+   },
+   "order_012_sep20": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.114000000000001,
+     4.054000000000002
+    ],
+    "int_spikes_window": [
+     6,
+     2,
+     3
+    ],
+    "burst_end_after_cue": [
+     10.584,
+     7.948,
+     7.840000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     10.584,
+     7.948,
+     7.840000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 47.84,
+    "last_any": 49.764,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 11,
+    "total_pyr": 33
+   },
+   "shuffled_201_sep16": {
+    "order": [
+     2,
+     0,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.033,
+     4.079000000000001,
+     4.094999999999999
+    ],
+    "int_spikes_window": [
+     4,
+     4,
+     2
+    ],
+    "burst_end_after_cue": [
+     7.859,
+     10.602,
+     7.962000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     7.859,
+     10.602,
+     7.962000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 39.962,
+    "last_any": 39.962,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 10,
+    "total_pyr": 33
+   },
+   "order_012_sep12_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.550000000000001,
+     4.474
+    ],
+    "int_spikes_window": [
+     6,
+     4,
+     5
+    ],
+    "burst_end_after_cue": [
+     11.912,
+     7.0120000000000005,
+     14.200000000000003
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.912,
+     7.0120000000000005,
+     14.200000000000003
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 38.2,
+    "last_any": 38.2,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 15,
+    "total_pyr": 43
+   },
+   "order_012_sep16_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.501999999999999,
+     4.439
+    ],
+    "int_spikes_window": [
+     7,
+     3,
+     4
+    ],
+    "burst_end_after_cue": [
+     11.912,
+     8.895,
+     13.96
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.912,
+     8.895,
+     13.96
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 45.96,
+    "last_any": 45.96,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 14,
+    "total_pyr": 44
+   },
+   "order_012_sep20_dt0.1": {
+    "order": [
+     0,
+     1,
+     2
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.469999999999999,
+     4.426000000000002
+    ],
+    "int_spikes_window": [
+     7,
+     3,
+     4
+    ],
+    "burst_end_after_cue": [
+     11.912,
+     8.671,
+     13.930999999999997
+    ],
+    "last_pyr_after_cue_in_window": [
+     11.912,
+     8.671,
+     13.930999999999997
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 53.931,
+    "last_any": 53.931,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 14,
+    "total_pyr": 44
+   },
+   "shuffled_201_sep16_dt0.1": {
+    "order": [
+     2,
+     0,
+     1
+    ],
+    "n_noncue": [
+     4,
+     4,
+     4
+    ],
+    "latency": [
+     4.408,
+     4.503,
+     4.466999999999999
+    ],
+    "int_spikes_window": [
+     8,
+     4,
+     3
+    ],
+    "burst_end_after_cue": [
+     14.031,
+     11.96,
+     8.631
+    ],
+    "last_pyr_after_cue_in_window": [
+     14.031,
+     11.96,
+     8.631
+    ],
+    "crosstalk": 0,
+    "spurious": 0,
+    "last_pyr": 40.631,
+    "last_any": 42.38,
+    "within100": true,
+    "not_terminated": false,
+    "all_complete": true,
+    "robust_ok": true,
+    "total_int": 15,
+    "total_pyr": 44
+   }
+  },
+  "all_complete_all4_dt1": true,
+  "all_complete_all4_dt0.1": true,
+  "robust_dt1": true,
+  "robust_dt0.1": true,
+  "verdict": "ROBUST SUCCESS",
+  "completion_counts_dt1": {
+   "order_012_sep12": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep16": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep20": [
+    4,
+    4,
+    4
+   ],
+   "shuffled_201_sep16": [
+    4,
+    4,
+    4
+   ]
+  },
+  "completion_counts_dt0.1": {
+   "order_012_sep12_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep16_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "order_012_sep20_dt0.1": [
+    4,
+    4,
+    4
+   ],
+   "shuffled_201_sep16_dt0.1": [
+    4,
+    4,
+    4
+   ]
+  },
+  "gaba_observed_from_singles": {
+   "spike_weighted_max": [
+    [
+     13.6,
+     14.4,
+     9.6
+    ],
+    [
+     4.0,
+     4.0,
+     4.0
+    ],
+    [
+     7.2,
+     9.6,
+     7.2
+    ]
+   ],
+   "spike_weighted_mean": [
+    [
+     9.2,
+     9.2,
+     8.2
+    ],
+    [
+     2.4,
+     2.2,
+     2.8
+    ],
+    [
+     4.4,
+     7.2,
+     5.0
+    ]
+   ],
+   "binary_mean": [
+    [
+     7.6,
+     8.0,
+     7.0
+    ],
+    [
+     1.6,
+     1.6,
+     2.2
+    ],
+    [
+     3.6,
+     6.6,
+     4.4
+    ]
+   ],
+   "binary_max": [
+    [
+     11.2,
+     12.8,
+     9.6
+    ],
+    [
+     2.4,
+     3.2,
+     4.0
+    ],
+    [
+     5.6,
+     9.6,
+     7.2
+    ]
+   ]
+  },
+  "gaba_max_offdiag_spike_weighted": 14.4,
+  "gaba_max_offdiag_binary_mean": 8.0,
+  "burst_end_by_group_dt1": {
+   "0": [
+    10.6,
+    10.6,
+    10.6,
+    10.6
+   ],
+   "1": [
+    8.0,
+    8.0,
+    7.9,
+    8.0
+   ],
+   "2": [
+    7.8,
+    7.8,
+    7.8,
+    7.9
+   ]
+  },
+  "int_spikes_window_dt1": [
+   [
+    6,
+    2,
+    2
+   ],
+   [
+    6,
+    2,
+    2
+   ],
+   [
+    6,
+    2,
+    3
+   ],
+   [
+    4,
+    4,
+    2
+   ]
+  ],
+  "any_burst_not_terminated_dt1": false,
+  "bursts_over_40ms_dt1": [],
+  "comparisons": [
+   {
+    "quantity": "P(all memories complete in all 4 runs), Dt 1",
+    "predicted": 0.7,
+    "observed": true,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "burst end after cue (ms), last member spike, all memories, Dt 1",
+    "predicted": "range [4, 12] (P in range 0.70); >20 ms P nan",
+    "observed": "min 7.8 max 10.6; 12/12 inside range; 0 > 20 ms",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per recall, single-memory runs, Dt 1 (G0..)",
+    "predicted": "nominal [5, 3, 5], range [2, 9]",
+    "observed": [
+     6,
+     3,
+     4
+    ],
+    "mark": "HIT"
+   },
+   {
+    "quantity": "interneuron spikes per cue window in 4 ordered runs (G in order), Dt 1",
+    "predicted": "same ranges (windows include tails of earlier recalls)",
+    "observed": [
+     [
+      6,
+      2,
+      2
+     ],
+     [
+      6,
+      2,
+      2
+     ],
+     [
+      6,
+      2,
+      3
+     ],
+     [
+      4,
+      4,
+      2
+     ]
+    ],
+    "mark": "n/a"
+   },
+   {
+    "quantity": "peak GABA onto another memory non-cue member: spike-weighted max, max off-diag (nS g_peak_sum, observed spikes from singles)",
+    "predicted": "nominal 13.6, range [4, 28]",
+    "observed": 14.4,
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(cross-talk or non-member pyramidal spikes), all runs",
+    "predicted": 0.03,
+    "observed": "occurred: False",
+    "mark": "HIT"
+   },
+   {
+    "quantity": "P(robust success)",
+    "predicted": 0.55,
+    "observed": true,
+    "mark": "HIT"
+   }
+  ],
+  "n_hit": 6,
+  "n_scored": 6
+ }
+}

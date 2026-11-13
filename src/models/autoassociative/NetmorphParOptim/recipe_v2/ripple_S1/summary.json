@@ -1,0 +1,1086 @@
+[
+{
+"variant": "E1",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": true,
+"member_spikes": [
+29,
+109,
+42,
+45
+],
+"int_spikes": [
+3,
+8,
+6,
+5
+],
+"other_pyr": 0,
+"lat": [
+4.03
+],
+"last_pyr": [
+20.8,
+68.9,
+33.8,
+33.8
+]
+},
+{
+"variant": "E1",
+"case": "o0123s12_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.34,
+"burst_end": [
+20.8,
+68.8,
+33.8,
+34.9
+],
+"member_spikes": [
+29,
+108,
+42,
+43
+],
+"int_spk": [
+2,
+8,
+8,
+17
+],
+"ct": 0,
+"spur": 0,
+"last": 80.8,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 222,
+"int_total": 35,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.32,
+"burst_end": [
+20.8,
+48.9,
+33.8,
+33.8
+],
+"member_spikes": [
+29,
+80,
+42,
+44
+],
+"int_spk": [
+2,
+8,
+8,
+15
+],
+"ct": 0,
+"spur": 0,
+"last": 81.8,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 195,
+"int_total": 33,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "o0123s20_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.26,
+"burst_end": [
+20.8,
+47.6,
+33.8,
+33.8
+],
+"member_spikes": [
+29,
+79,
+42,
+45
+],
+"int_spk": [
+3,
+5,
+11,
+11
+],
+"ct": 0,
+"spur": 0,
+"last": 93.8,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 195,
+"int_total": 30,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "sh2031s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.32,
+"burst_end": [
+33.8,
+20.9,
+34.6,
+69.0
+],
+"member_spikes": [
+42,
+29,
+45,
+109
+],
+"int_spk": [
+5,
+8,
+6,
+8
+],
+"ct": 0,
+"spur": 0,
+"last": 117.0,
+"le100": false,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 27,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "sub012s16_dt1",
+"complete": [
+4,
+4,
+4
+],
+"maxlat": 4.16,
+"burst_end": [
+20.8,
+49.0,
+33.7
+],
+"member_spikes": [
+29,
+80,
+42
+],
+"int_spk": [
+2,
+8,
+15
+],
+"ct": 0,
+"spur": 0,
+"last": 65.7,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 151,
+"int_total": 25,
+"ints": [
+113,
+117,
+126,
+129,
+134,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "o0123s12_dt0.1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.64,
+"burst_end": [
+26.7,
+71.4,
+37.8,
+35.9
+],
+"member_spikes": [
+37,
+126,
+53,
+47
+],
+"int_spk": [
+2,
+8,
+9,
+19
+],
+"ct": 0,
+"spur": 0,
+"last": 83.4,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 263,
+"int_total": 38,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1",
+"case": "o0123s20_dt0.1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.61,
+"burst_end": [
+26.3,
+63.3,
+37.5,
+35.0
+],
+"member_spikes": [
+37,
+116,
+53,
+47
+],
+"int_spk": [
+3,
+7,
+11,
+15
+],
+"ct": 0,
+"spur": 0,
+"last": 95.0,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 253,
+"int_total": 36,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1_bg0.03",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": false,
+"member_spikes": [
+58,
+121,
+81,
+67
+],
+"int_spikes": [
+48,
+55,
+55,
+53
+],
+"other_pyr": 113,
+"lat": [
+4.03,
+4.3,
+4.34,
+4.37
+],
+"last_pyr": [
+71.8,
+71.7,
+81.1,
+70.8
+]
+},
+{
+"variant": "E1_bg0.03",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+61.1,
+52.6,
+33.8,
+16.1
+],
+"member_spikes": [
+68,
+93,
+41,
+19
+],
+"int_spk": [
+8,
+30,
+11,
+9
+],
+"ct": 80,
+"spur": 59,
+"last": 68.6,
+"le100": true,
+"burst40": [
+0,
+1
+],
+"pyr_spk": 378,
+"int_total": 58,
+"ints": [
+100,
+102,
+113,
+117,
+120,
+123,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "E1_bg0.05",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": false,
+"member_spikes": [
+94,
+134,
+100,
+92
+],
+"int_spikes": [
+75,
+73,
+74,
+73
+],
+"other_pyr": 160,
+"lat": [
+4.03,
+4.43,
+4.46,
+4.5
+],
+"last_pyr": [
+89.8,
+79.7,
+82.7,
+81.8
+]
+},
+{
+"variant": "E1_bg0.05",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+82.3,
+74.4,
+48.4,
+33.4
+],
+"member_spikes": [
+94,
+126,
+60,
+34
+],
+"int_spk": [
+16,
+32,
+12,
+17
+],
+"ct": 96,
+"spur": 144,
+"last": 90.4,
+"le100": true,
+"burst40": [
+0,
+1,
+2
+],
+"pyr_spk": 578,
+"int_total": 77,
+"ints": [
+100,
+102,
+113,
+116,
+117,
+120,
+123,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "ES",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": true,
+"member_spikes": [
+29,
+109,
+42,
+45
+],
+"int_spikes": [
+3,
+8,
+6,
+5
+],
+"other_pyr": 0,
+"lat": [
+4.03
+],
+"last_pyr": [
+20.8,
+68.9,
+33.8,
+33.8
+]
+},
+{
+"variant": "ES",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.32,
+"burst_end": [
+20.8,
+48.9,
+33.8,
+33.8
+],
+"member_spikes": [
+29,
+80,
+42,
+44
+],
+"int_spk": [
+2,
+8,
+8,
+15
+],
+"ct": 0,
+"spur": 0,
+"last": 81.8,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 195,
+"int_total": 33,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "ES",
+"case": "sh2031s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.32,
+"burst_end": [
+33.8,
+20.9,
+34.6,
+69.0
+],
+"member_spikes": [
+42,
+29,
+45,
+109
+],
+"int_spk": [
+5,
+8,
+6,
+8
+],
+"ct": 0,
+"spur": 0,
+"last": 117.0,
+"le100": false,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 27,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "NI",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": true,
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spikes": [
+0,
+0,
+0,
+0
+],
+"other_pyr": 0,
+"lat": [
+4.03
+],
+"last_pyr": [
+23.1,
+68.9,
+33.7,
+34.4
+]
+},
+{
+"variant": "NI",
+"case": "o0123s12_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7,
+34.4
+],
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spk": [
+0,
+0,
+0,
+0
+],
+"ct": 0,
+"spur": 0,
+"last": 80.9,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 0,
+"ints": [],
+"ok": false
+},
+{
+"variant": "NI",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7,
+34.4
+],
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spk": [
+0,
+0,
+0,
+0
+],
+"ct": 0,
+"spur": 0,
+"last": 84.9,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 0,
+"ints": [],
+"ok": false
+},
+{
+"variant": "NI",
+"case": "o0123s20_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7,
+34.4
+],
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spk": [
+0,
+0,
+0,
+0
+],
+"ct": 0,
+"spur": 0,
+"last": 94.4,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 0,
+"ints": [],
+"ok": false
+},
+{
+"variant": "NI",
+"case": "sh2031s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+33.7,
+23.1,
+34.4,
+68.9
+],
+"member_spikes": [
+42,
+30,
+44,
+109
+],
+"int_spk": [
+0,
+0,
+0,
+0
+],
+"ct": 0,
+"spur": 0,
+"last": 116.9,
+"le100": false,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 0,
+"ints": [],
+"ok": false
+},
+{
+"variant": "NI",
+"case": "sub012s16_dt1",
+"complete": [
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7
+],
+"member_spikes": [
+30,
+109,
+42
+],
+"int_spk": [
+0,
+0,
+0
+],
+"ct": 0,
+"spur": 0,
+"last": 84.9,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 181,
+"int_total": 0,
+"ints": [],
+"ok": false
+},
+{
+"variant": "SG",
+"case": "single",
+"complete4": 4,
+"false3": 0,
+"clean": true,
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spikes": [
+3,
+8,
+6,
+5
+],
+"other_pyr": 0,
+"lat": [
+4.03
+],
+"last_pyr": [
+23.1,
+68.9,
+33.7,
+34.4
+]
+},
+{
+"variant": "SG",
+"case": "o0123s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7,
+34.4
+],
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spk": [
+2,
+8,
+12,
+19
+],
+"ct": 0,
+"spur": 0,
+"last": 84.9,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 41,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "SG",
+"case": "sh2031s16_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+33.7,
+23.1,
+34.4,
+68.9
+],
+"member_spikes": [
+42,
+30,
+44,
+109
+],
+"int_spk": [
+6,
+10,
+7,
+7
+],
+"ct": 0,
+"spur": 0,
+"last": 116.9,
+"le100": false,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 30,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"ok": false
+},
+{
+"variant": "SG",
+"case": "o0123s20_dt1",
+"complete": [
+4,
+4,
+4,
+4
+],
+"maxlat": 4.03,
+"burst_end": [
+23.1,
+68.9,
+33.7,
+34.4
+],
+"member_spikes": [
+30,
+109,
+42,
+44
+],
+"int_spk": [
+3,
+6,
+14,
+17
+],
+"ct": 0,
+"spur": 0,
+"last": 94.4,
+"le100": true,
+"burst40": [
+1
+],
+"pyr_spk": 225,
+"int_total": 40,
+"ints": [
+102,
+113,
+117,
+126,
+129,
+131,
+134,
+135,
+138,
+142
+],
+"ok": false
+}
+]

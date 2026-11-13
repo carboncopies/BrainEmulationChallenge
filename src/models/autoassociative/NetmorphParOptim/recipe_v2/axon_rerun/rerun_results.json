@@ -1,0 +1,238 @@
+{
+ "R0": {
+  "dir": "faa7adc9-fd5d-49f1-901a-f4371521775c",
+  "ncone_int_axon": 3560,
+  "per_cell": 74.2,
+  "bif_int_axon": 3512,
+  "bif_per_cell": 73.2,
+  "cones_int_dend": 1081,
+  "cones_pyr_axon": 6899,
+  "cones_pyr_dend": 5459,
+  "pyr_pyr": 73697,
+  "pyr_int": 550,
+  "int_pyr": 453,
+  "int_int": 273,
+  "drivable": 10,
+  "inhib_frac": 0.0061,
+  "report": [
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=13.22, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)",
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=13.22, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)"
+  ],
+  "soma_min": [
+   -115.3,
+   -115.9,
+   -314.7
+  ],
+  "soma_max": [
+   118.4,
+   117.0,
+   -285.2
+  ],
+  "cone_min": [
+   -107.6,
+   -56.6,
+   -346.2
+  ],
+  "cone_max": [
+   70.4,
+   49.5,
+   -246.0
+  ],
+  "cone_pcts": [
+   [
+    -29.6,
+    -36.0,
+    -323.6
+   ],
+   [
+    13.9,
+    -8.1,
+    -301.0
+   ],
+   [
+    40.4,
+    24.1,
+    -278.0
+   ]
+  ]
+ },
+ "R1": {
+  "dir": "f9bc8a19-9c13-4be8-98a3-3246c52ff912",
+  "ncone_int_axon": 19874,
+  "per_cell": 414.0,
+  "bif_int_axon": 19826,
+  "bif_per_cell": 413.0,
+  "cones_int_dend": 1096,
+  "cones_pyr_axon": 7015,
+  "cones_pyr_dend": 5364,
+  "pyr_pyr": 63342,
+  "pyr_int": 450,
+  "int_pyr": 1378,
+  "int_int": 877,
+  "drivable": 10,
+  "inhib_frac": 0.0213,
+  "report": [
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=26.00, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)",
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=26.00, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)"
+  ],
+  "soma_min": [
+   -115.3,
+   -115.9,
+   -314.7
+  ],
+  "soma_max": [
+   118.4,
+   117.0,
+   -285.2
+  ],
+  "cone_min": [
+   -73.8,
+   -85.6,
+   -359.4
+  ],
+  "cone_max": [
+   62.8,
+   101.0,
+   -252.1
+  ],
+  "cone_pcts": [
+   [
+    -26.3,
+    -32.8,
+    -320.8
+   ],
+   [
+    6.9,
+    4.1,
+    -297.9
+   ],
+   [
+    33.6,
+    39.4,
+    -276.7
+   ]
+  ]
+ },
+ "R2": {
+  "dir": "4d19757c-cddb-4b50-af01-44047742ebbe",
+  "ncone_int_axon": 61582,
+  "per_cell": 1283.0,
+  "bif_int_axon": 61534,
+  "bif_per_cell": 1282.0,
+  "cones_int_dend": 1108,
+  "cones_pyr_axon": 7156,
+  "cones_pyr_dend": 5388,
+  "pyr_pyr": 79955,
+  "pyr_int": 476,
+  "int_pyr": 4404,
+  "int_int": 2439,
+  "drivable": 10,
+  "inhib_frac": 0.0522,
+  "report": [
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=39.00, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)",
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=39.00, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)"
+  ],
+  "soma_min": [
+   -115.3,
+   -115.9,
+   -314.7
+  ],
+  "soma_max": [
+   118.4,
+   117.0,
+   -285.2
+  ],
+  "cone_min": [
+   -77.4,
+   -68.6,
+   -370.2
+  ],
+  "cone_max": [
+   76.2,
+   85.8,
+   -201.1
+  ],
+  "cone_pcts": [
+   [
+    -27.6,
+    -22.8,
+    -321.8
+   ],
+   [
+    10.6,
+    7.5,
+    -298.8
+   ],
+   [
+    40.1,
+    40.0,
+    -275.4
+   ]
+  ]
+ },
+ "R3": {
+  "dir": "0d639a6a-e60a-414c-8a6c-dfb854812386",
+  "ncone_int_axon": 3861,
+  "per_cell": 80.4,
+  "bif_int_axon": 3813,
+  "bif_per_cell": 79.4,
+  "cones_int_dend": 1175,
+  "cones_pyr_axon": 7129,
+  "cones_pyr_dend": 6054,
+  "pyr_pyr": 88580,
+  "pyr_int": 362,
+  "int_pyr": 540,
+  "int_int": 172,
+  "drivable": 10,
+  "inhib_frac": 0.0061,
+  "report": [
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=13.22, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)",
+   "Subset 'all_interneuron_axons.' branching model:  min_node_interval=0.000 van_Pelt (B_inf=13.22, tau=1681541.00, E=0.32)",
+   "Subset 'all_interneuron_axons.' TSBM:  van_Pelt (S=-0.21)"
+  ],
+  "soma_min": [
+   -115.2,
+   -116.6,
+   -314.9
+  ],
+  "soma_max": [
+   118.4,
+   119.1,
+   -285.1
+  ],
+  "cone_min": [
+   -51.6,
+   -64.6,
+   -346.8
+  ],
+  "cone_max": [
+   69.6,
+   62.7,
+   -253.0
+  ],
+  "cone_pcts": [
+   [
+    -30.8,
+    -39.5,
+    -320.6
+   ],
+   [
+    12.8,
+    -10.9,
+    -299.2
+   ],
+   [
+    39.2,
+    24.3,
+    -275.9
+   ]
+  ]
+ }
+}

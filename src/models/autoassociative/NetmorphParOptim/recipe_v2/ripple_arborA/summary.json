@@ -1,0 +1,551 @@
+[
+ {
+  "variant": "E1",
+  "case": "single-memory (4-cell completes / 3-cell does not)",
+  "completes_4cell": "4/4 groups",
+  "three_cell_false_completions": 0,
+  "all_clean": true,
+  "lat": [
+   4.03
+  ],
+  "member_spikes": [
+   11,
+   40,
+   40,
+   53
+  ],
+  "int_spikes": [
+   1,
+   3,
+   4,
+   4
+  ]
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s12_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.04,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.9,
+   26.7,
+   34.8
+  ],
+  "int_spikes_per_event": [
+   1,
+   1,
+   4,
+   11
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 70.8,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 17,
+  "ints_fired": [
+   99,
+   105,
+   117,
+   128,
+   129,
+   131,
+   134,
+   141
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s16_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.04,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.8,
+   26.7,
+   34.9
+  ],
+  "int_spikes_per_event": [
+   1,
+   1,
+   6,
+   6
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 82.9,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 14,
+  "ints_fired": [
+   99,
+   105,
+   117,
+   128,
+   129,
+   131
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s20_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.04,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.8,
+   26.7,
+   34.9
+  ],
+  "int_spikes_per_event": [
+   1,
+   3,
+   6,
+   2
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 94.9,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 12,
+  "ints_fired": [
+   117,
+   128,
+   129
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "sh2031s16_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.05,
+  "burst_end_after_cue_ms": [
+   26.7,
+   8.4,
+   34.9,
+   32.8
+  ],
+  "int_spikes_per_event": [
+   3,
+   4,
+   1,
+   8
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 80.8,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 16,
+  "ints_fired": [
+   99,
+   117,
+   128,
+   129,
+   131
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s12_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.43,
+  "burst_end_after_cue_ms": [
+   15.6,
+   35.0,
+   31.8,
+   31.8
+  ],
+  "int_spikes_per_event": [
+   2,
+   2,
+   4,
+   12
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 67.8,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 173,
+  "total_int_spikes": 20,
+  "ints_fired": [
+   99,
+   105,
+   117,
+   128,
+   129,
+   131,
+   134,
+   141
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s20_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.41,
+  "burst_end_after_cue_ms": [
+   15.6,
+   35.4,
+   31.8,
+   31.7
+  ],
+  "int_spikes_per_event": [
+   2,
+   2,
+   7,
+   6
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 91.7,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 175,
+  "total_int_spikes": 17,
+  "ints_fired": [
+   99,
+   105,
+   117,
+   128,
+   129,
+   131
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "o0123s16_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.42,
+  "burst_end_after_cue_ms": [
+   15.6,
+   36.1,
+   31.8,
+   31.8
+  ],
+  "int_spikes_per_event": [
+   2,
+   1,
+   7,
+   10
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 79.8,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 176,
+  "total_int_spikes": 20,
+  "ints_fired": [
+   99,
+   105,
+   117,
+   128,
+   129,
+   131,
+   134,
+   141
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "E1",
+  "case": "sh2031s16_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.42,
+  "burst_end_after_cue_ms": [
+   31.9,
+   15.6,
+   31.7,
+   35.6
+  ],
+  "int_spikes_per_event": [
+   3,
+   5,
+   1,
+   7
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 83.6,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 176,
+  "total_int_spikes": 16,
+  "ints_fired": [
+   99,
+   117,
+   128,
+   129,
+   131
+  ],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "single-memory (4-cell completes / 3-cell does not)",
+  "completes_4cell": "4/4 groups",
+  "three_cell_false_completions": 0,
+  "all_clean": true,
+  "lat": [
+   4.03
+  ],
+  "member_spikes": [
+   11,
+   40,
+   40,
+   53
+  ],
+  "int_spikes": [
+   0,
+   0,
+   0,
+   0
+  ]
+ },
+ {
+  "variant": "NI",
+  "case": "o0123s12_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.03,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.8,
+   26.7,
+   34.9
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 70.9,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "o0123s16_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.03,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.8,
+   26.7,
+   34.9
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 82.9,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "o0123s20_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.03,
+  "burst_end_after_cue_ms": [
+   8.4,
+   32.8,
+   26.7,
+   34.9
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 94.9,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "sh2031s16_dt1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.03,
+  "burst_end_after_cue_ms": [
+   26.7,
+   8.4,
+   34.9,
+   32.8
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 80.8,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 144,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "o0123s12_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.41,
+  "burst_end_after_cue_ms": [
+   15.6,
+   32.9,
+   31.8,
+   31.7
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 67.7,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 174,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ },
+ {
+  "variant": "NI",
+  "case": "o0123s20_dt0.1",
+  "memories_complete": [
+   4,
+   4,
+   4,
+   4
+  ],
+  "max_latency_ms": 4.41,
+  "burst_end_after_cue_ms": [
+   15.6,
+   32.8,
+   31.8,
+   31.7
+  ],
+  "int_spikes_per_event": [
+   0,
+   0,
+   0,
+   0
+  ],
+  "crosstalk": 0,
+  "spurious_nonmember_pyr": 0,
+  "last_spike_after_first_cue_ms": 91.7,
+  "within_100ms": true,
+  "terminates": true,
+  "total_pyr_spikes": 174,
+  "total_int_spikes": 0,
+  "ints_fired": [],
+  "ripple_success": true
+ }
+]
