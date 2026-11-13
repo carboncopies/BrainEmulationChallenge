@@ -1,0 +1,20 @@
+sim 237 {'sim_id': 237, 'model': 'v2-arbor-S1-inhP3', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2, 1.0], 'gaba_weights_on_load': [0.5], 'pyrint_w_on_load': [1.0], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+SG gaba 1542 0
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 237 {'ReqID': 2775, 'StatusCode': 0, 'TaskStatus': 0}
+P3_rip12_SG [(0, 4, 4.524, 4.524, 8, 4), (1, 4, 4.187999999999999, 4.187999999999999, 8, 5), (2, 4, 4.088999999999999, 4.088999999999999, 8, 3), (3, 4, 4.064999999999998, 4.064999999999998, 8, 3)] spur 0 ct 0 end 42.387 succ True

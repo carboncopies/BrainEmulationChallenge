@@ -1,0 +1,956 @@
+{
+"x2_rip12": {
+"factor": 2.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.21,
+4.15,
+4.24
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+1,
+2,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.24,
+"pyr_spk": 32,
+"int_total": 4,
+"success": true,
+"loaded_ok": true,
+"sim_id": 202
+},
+"x2_rip12_SG": {
+"factor": 2.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": true,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+2,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.06,
+"pyr_spk": 32,
+"int_total": 4,
+"success": true,
+"loaded_ok": true,
+"sim_id": 203
+},
+"x2_rip16": {
+"factor": 2.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.31,
+4.28,
+4.3
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 53.74,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 204
+},
+"x2_rip20": {
+"factor": 2.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.38,
+4.37,
+4.35
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 66.27,
+"pyr_spk": 32,
+"int_total": 2,
+"success": true,
+"loaded_ok": true,
+"sim_id": 205
+},
+"x2_sh16": {
+"factor": 2.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+2,
+0,
+3,
+1
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.35,
+4.27,
+4.35
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 55.61,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 206
+},
+"x2_single_c0": {
+"factor": 2.0,
+"kind": "single",
+"pairs": "R3_c0",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 200
+},
+"x2_single_c015": {
+"factor": 2.0,
+"kind": "single",
+"pairs": "R3_c0.15",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 201
+},
+"x2p5_rip12": {
+"factor": 2.5,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.22,
+4.17,
+4.29
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+1,
+2,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.29,
+"pyr_spk": 32,
+"int_total": 4,
+"success": true,
+"loaded_ok": true,
+"sim_id": 209
+},
+"x2p5_rip12_SG": {
+"factor": 2.5,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": true,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+2,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.06,
+"pyr_spk": 32,
+"int_total": 4,
+"success": true,
+"loaded_ok": true,
+"sim_id": 210
+},
+"x2p5_rip16": {
+"factor": 2.5,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.32,
+4.29,
+4.32
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 53.77,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 211
+},
+"x2p5_rip20": {
+"factor": 2.5,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.39,
+4.37,
+4.35
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 66.27,
+"pyr_spk": 32,
+"int_total": 2,
+"success": true,
+"loaded_ok": true,
+"sim_id": 212
+},
+"x2p5_sh16": {
+"factor": 2.5,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+2,
+0,
+3,
+1
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.36,
+4.27,
+4.37
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 55.69,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 213
+},
+"x2p5_single_c0": {
+"factor": 2.5,
+"kind": "single",
+"pairs": "R3_c0",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 207
+},
+"x2p5_single_c015": {
+"factor": 2.5,
+"kind": "single",
+"pairs": "R3_c0.15",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 208
+},
+"x5_rip12": {
+"factor": 5.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.25,
+4.64,
+4.19
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+1,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.19,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 189
+},
+"x5_rip12_SG": {
+"factor": 5.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": true,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+2,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.06,
+"pyr_spk": 32,
+"int_total": 4,
+"success": true,
+"loaded_ok": true,
+"sim_id": 190
+},
+"x5_rip16": {
+"factor": 5.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.34,
+4.33,
+4.39
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 53.88,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 193
+},
+"x5_rip20": {
+"factor": 5.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.4,
+4.39,
+4.45
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 66.48,
+"pyr_spk": 32,
+"int_total": 3,
+"success": true,
+"loaded_ok": true,
+"sim_id": 195
+},
+"x5_sh16": {
+"factor": 5.0,
+"kind": "ripple",
+"pairs": "R3_c0.15",
+"sg": false,
+"order": [
+2,
+0,
+3,
+1
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"burst_end": [
+4.52,
+4.43,
+4.29,
+4.5
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+0,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 52.5,
+"pyr_spk": 32,
+"int_total": 2,
+"success": true,
+"loaded_ok": true,
+"sim_id": 196
+},
+"x5_single_c0": {
+"factor": 5.0,
+"kind": "single",
+"pairs": "R3_c0",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 184
+},
+"x5_single_c015": {
+"factor": 5.0,
+"kind": "single",
+"pairs": "R3_c0.15",
+"sg": false,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 186
+},
+"x5_single_c0_SG": {
+"factor": 5.0,
+"kind": "single",
+"pairs": "R3_c0",
+"sg": true,
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"int_spikes": [
+1,
+1,
+1,
+1
+],
+"false3cell": 0,
+"spurious": 0,
+"crosstalk": 0,
+"all_clean": true,
+"loaded_ok": true,
+"sim_id": 199
+}
+}

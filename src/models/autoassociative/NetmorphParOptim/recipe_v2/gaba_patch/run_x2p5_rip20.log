@@ -1,0 +1,19 @@
+sim 212 {'sim_id': 212, 'model': 'v2-arbor-S1-gabax2p5', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.5], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 212 {'ReqID': 1305, 'StatusCode': 0, 'TaskStatus': 0}
+x2p5_rip20 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.385000000000002, 4.385000000000002, 8, 0), (2, 4, 4.369, 4.369, 8, 0), (3, 4, 4.350999999999999, 4.350999999999999, 8, 1)] spur 0 ct 0 end 66.268 succ True

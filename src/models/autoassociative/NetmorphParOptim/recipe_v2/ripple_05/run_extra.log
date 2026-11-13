@@ -1,0 +1,23 @@
+{"StatusCode":0,"AuthKey":"eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTQ1NDc5MDAsImlhdCI6MTc5NDUwNDcwMCwiaXNzIjoiQnJhaW5HZW5peCIsInJvbGUiOiJhZG1pbiIsInN1YiI6IkFkbW9uaXNoaW5nIn0.zC9vaOUKOtjojfejmK_woLvV8IRATy8erT4HL6ia8JU"}
+mem GB 351.1 diag_sep16_simultaneous_cues
+/home/johnjose/BrainGenix/BrainEmulationChallenge/venv/lib/python3.11/site-packages/yaspin/core.py:174: UserWarning: color, on_color and attrs are not supported when output stream is not a TTY
+  self._color = self._set_color(color) if color else color
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 41 {'ReqID': 580, 'StatusCode': 0, 'TaskStatus': 0}
+diag_sep16_simultaneous_cues [(0, 4, 3.55), (1, 1, None), (2, 4, 3.729999999999997), (3, 4, 3.6799999999999997)] False 57.875
+mem GB 350.9 diag_sep16_order_1_0_2_3
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 42 {'ReqID': 1170, 'StatusCode': 0, 'TaskStatus': 0}
+diag_sep16_order_1_0_2_3 [(1, 4, 3.55), (0, 0, None), (2, 4, 3.692999999999998), (3, 4, 3.7040000000000006)] False 62.929
+mem GB 350.8 diag_two_memory_G0_then_G1_at_32
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 43 {'ReqID': 1740, 'StatusCode': 0, 'TaskStatus': 0}
+diag_two_memory_G0_then_G1_at_32 [(0, 4, 3.55), (1, 4, 3.814)] True 49.86
+mem GB 350.6 diag_two_memory_G0_then_G1_at_48
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 44 {'ReqID': 2405, 'StatusCode': 0, 'TaskStatus': 0}
+diag_two_memory_G0_then_G1_at_48 [(0, 4, 3.55), (1, 4, 3.5989999999999966)] True 66.954
+mem GB 349.7 diag_two_memory_G0_then_G1_at_16
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 45 {'ReqID': 2977, 'StatusCode': 0, 'TaskStatus': 0}
+diag_two_memory_G0_then_G1_at_16 [(0, 4, 3.55), (1, 1, None)] False 21.694

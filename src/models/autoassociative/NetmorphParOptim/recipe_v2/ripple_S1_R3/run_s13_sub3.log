@@ -1,0 +1,19 @@
+sim 176 {'sim_id': 176, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 176 {'ReqID': 1122, 'StatusCode': 0, 'TaskStatus': 0}
+s13_sub3 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.303000000000001, 4.303000000000001, 8, 0), (2, 4, 4.268000000000001, 4.268000000000001, 8, 1)] spur 0 ct 0 end 38.997 succ True

@@ -1,0 +1,19 @@
+sim 238 {'sim_id': 238, 'model': 'v2-arbor-S1-inhP1u', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2, 1.0], 'gaba_weights_on_load': [0.5], 'pyrint_w_on_load': [1.0], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 238 {'ReqID': 1248, 'StatusCode': 0, 'TaskStatus': 0}
+P1u_rip12 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.199000000000002, 4.199000000000002, 8, 1), (2, 4, 4.100000000000001, 4.100000000000001, 8, 2), (3, 4, 4.131, 4.131, 8, 0)] spur 0 ct 0 end 40.131 succ True

@@ -1,0 +1,3 @@
+sim 254 {'sim_id': 254, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+deleted 254 {'ReqID': 1994, 'StatusCode': 0, 'TaskStatus': 0}
+s629_rip12_c0 [(0, 4, 4.524, 4.524, 8, 0), (1, 4, 4.524000000000001, 4.524000000000001, 8, 0), (2, 4, 4.524000000000001, 4.524000000000001, 8, 0), (3, 4, 4.524000000000001, 4.524000000000001, 8, 0)] spur 0 ct 0 end 40.524 succ True

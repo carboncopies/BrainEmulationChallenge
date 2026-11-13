@@ -1,0 +1,32 @@
+{
+ "sim_id": 183,
+ "modelload_response": "{'ReqID': 995, 'StatusCode': 0, 'TaskStatus': 0}",
+ "n_neurons": 144,
+ "AMPA": {
+  "n_pairs": 6102,
+  "weights_unique": [
+   0.2
+  ],
+  "gpeak_sum_total": 57292.75
+ },
+ "GABA": {
+  "n_pairs": 1542,
+  "weights_unique": [
+   0.4
+  ],
+  "gpeak_sum_total": 2418.4
+ },
+ "NMDA": {
+  "n_pairs": 5406,
+  "weights_unique": [
+   0.2
+  ],
+  "gpeak_sum_total": 28480.1
+ },
+ "gpeak_mismatch_vs_original_dump": 0,
+ "pairs_compared": 7644,
+ "GABA_pair_conductance_total_nS_now": 967.3599443101875,
+ "GABA_pair_conductance_total_nS_original": 483.67997336387634,
+ "ratio": 1.9999999950017258,
+ "deleted": "{'ReqID': 1005, 'StatusCode': 0, 'TaskStatus': 0}"
+}

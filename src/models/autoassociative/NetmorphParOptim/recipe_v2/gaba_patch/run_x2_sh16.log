@@ -1,0 +1,19 @@
+sim 206 {'sim_id': 206, 'model': 'v2-arbor-S1-gabax2', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.4], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 206 {'ReqID': 1161, 'StatusCode': 0, 'TaskStatus': 0}
+x2_sh16 [(2, 4, 4.524, 4.524, 8, 1), (0, 4, 4.347000000000001, 4.347000000000001, 8, 0), (3, 4, 4.267000000000003, 4.267000000000003, 8, 1), (1, 4, 4.3459999999999965, 4.3459999999999965, 8, 1)] spur 0 ct 0 end 55.606 succ True

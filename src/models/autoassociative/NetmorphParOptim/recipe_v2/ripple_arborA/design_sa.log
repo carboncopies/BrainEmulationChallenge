@@ -1,0 +1,35 @@
+restart 0 cost 226.34 best 226.34 1
+restart 1 cost 173.46 best 173.22 2
+restart 2 cost 176.36 best 173.22 3
+restart 3 cost 223.82 best 173.22 4
+restart 4 cost 224.44 best 173.22 5
+restart 5 cost 172.1 best 172.1 6
+restart 6 cost 177.14 best 172.1 7
+restart 7 cost 224.6 best 172.1 8
+restart 8 cost 227.74 best 172.1 9
+restart 9 cost 176.38 best 172.1 10
+restart 10 cost 225.92 best 172.1 11
+restart 11 cost 225.04 best 172.1 12
+restart 12 cost 222.44 best 172.1 13
+restart 13 cost 222.34 best 172.1 14
+restart 14 cost 224.74 best 172.1 15
+restart 15 cost 221.6 best 172.1 16
+restart 16 cost 223.74 best 172.1 17
+restart 17 cost 225.52 best 172.1 18
+restart 18 cost 223.84 best 172.1 19
+restart 19 cost 225.78 best 172.1 20
+restart 20 cost 224.58 best 172.1 21
+restart 21 cost 224.92 best 172.1 22
+restart 22 cost 228.58 best 172.1 23
+restart 23 cost 224.82 best 172.1 24
+restart 24 cost 225.82 best 172.1 25
+restart 25 cost 221.58 best 172.1 26
+restart 26 cost 223.64 best 172.1 27
+restart 27 cost 226.94 best 172.1 28
+restart 28 cost 226.04 best 172.1 32
+restart 29 cost 225.52 best 172.1 34
+[([3, 5, 13, 19, 33, 43, 49, 59], [5, 13, 19, 43]), ([6, 34, 42, 46, 52, 69, 92, 95], [6, 34, 42, 92]), ([4, 7, 9, 41, 64, 71, 83, 84], [4, 7, 64, 83]), ([0, 25, 28, 39, 44, 45, 67, 74], [25, 28, 67, 74])]
+[[4.8 4.8 1.6 0. ]
+ [4.8 4.8 1.6 0. ]
+ [2.4 2.4 0.8 0. ]
+ [4.8 4.8 1.6 0. ]]

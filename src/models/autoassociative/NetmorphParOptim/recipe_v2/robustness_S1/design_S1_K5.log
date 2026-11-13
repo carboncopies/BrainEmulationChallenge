@@ -1,0 +1,36 @@
+restart 0 cost 13.04 best 13.04 2
+restart 1 cost 13.04 best 12.92 4
+restart 2 cost 12.76 best 12.76 7
+restart 3 cost 15.84 best 12.76 9
+restart 4 cost 12.84 best 12.6 11
+restart 5 cost 15.68 best 12.6 14
+restart 6 cost 10.64 best 10.28 17
+restart 7 cost 9.36 best 9.36 19
+restart 8 cost 13.96 best 9.36 20
+restart 9 cost 13.32 best 9.36 22
+restart 10 cost 13.36 best 9.36 23
+restart 11 cost 9.96 best 9.36 25
+restart 12 cost 13.28 best 9.36 26
+restart 13 cost 13.12 best 9.36 28
+restart 14 cost 13.76 best 9.36 30
+restart 15 cost 16.2 best 9.36 31
+restart 16 cost 18.2 best 9.36 33
+restart 17 cost 16.32 best 9.36 34
+restart 18 cost 15.8 best 9.36 35
+restart 19 cost 16.6 best 9.36 37
+restart 20 cost 12.48 best 9.36 39
+restart 21 cost 15.12 best 9.36 40
+restart 22 cost 10.48 best 9.36 42
+restart 23 cost 12.88 best 9.36 43
+restart 24 cost 9.96 best 9.36 45
+restart 25 cost 15.36 best 9.36 46
+restart 26 cost 12.72 best 9.36 48
+restart 27 cost 10.12 best 9.36 51
+restart 28 cost 6.72 best 6.72 53
+restart 29 cost 9.44 best 6.72 55
+network cap-aware drivable ints (best 8 cells): 7 [102, 117, 129, 134, 135, 138, 142]
+{'group': 0, 'members': [18, 19, 21, 25, 38, 60, 71, 77], 'cue': [18, 21, 60, 71], 'noncue': [19, 25, 38, 77], 'min_pair': 7.839999675750732, 'drivable_ints': [117], 'own_inh_mean_nS': 0.5999999642372131}
+{'group': 1, 'members': [2, 12, 46, 51, 59, 73, 82, 85], 'cue': [2, 12, 51, 73], 'noncue': [46, 59, 82, 85], 'min_pair': 7.839999675750732, 'drivable_ints': [117, 129], 'own_inh_mean_nS': 3.1999998092651367}
+{'group': 2, 'members': [22, 30, 54, 66, 79, 86, 88, 91], 'cue': [22, 54, 66, 88], 'noncue': [30, 79, 86, 91], 'min_pair': 4.899999618530273, 'drivable_ints': [134], 'own_inh_mean_nS': 1.9999998807907104}
+{'group': 3, 'members': [0, 10, 33, 40, 50, 72, 92, 93], 'cue': [0, 10, 50, 93], 'noncue': [33, 40, 72, 92], 'min_pair': 4.899999618530273, 'drivable_ints': [117], 'own_inh_mean_nS': 0.9999999403953552}
+{'group': 4, 'members': [39, 41, 43, 47, 61, 62, 78, 89], 'cue': [41, 43, 61, 62], 'noncue': [39, 47, 78, 89], 'min_pair': 5.87999963760376, 'drivable_ints': [117, 142], 'own_inh_mean_nS': 1.5999999046325684}

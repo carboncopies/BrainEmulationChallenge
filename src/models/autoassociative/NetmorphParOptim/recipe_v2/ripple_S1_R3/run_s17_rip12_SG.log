@@ -1,0 +1,20 @@
+sim 180 {'sim_id': 180, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+SG gaba 1542 0
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 180 {'ReqID': 2782, 'StatusCode': 0, 'TaskStatus': 0}
+s17_rip12_SG [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.187999999999999, 4.187999999999999, 8, 2), (2, 4, 4.088999999999999, 4.088999999999999, 8, 1), (3, 4, 4.064999999999998, 4.064999999999998, 8, 0)] spur 0 ct 0 end 40.065 succ True

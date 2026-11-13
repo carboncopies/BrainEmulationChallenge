@@ -1,0 +1,1757 @@
+{
+"P1_rip12": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 42.0,
+"ints": [
+117
+],
+"success": true
+},
+"P1_rip12_SG": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 42.0,
+"ints": [
+117
+],
+"success": true
+},
+"P1_rip16": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.29,
+4.25,
+4.24
+],
+"burst_end": [
+4.52,
+4.29,
+4.25,
+4.24
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 54.81,
+"ints": [
+117
+],
+"success": true
+},
+"P1_rip20": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.37,
+4.35,
+4.35
+],
+"burst_end": [
+4.52,
+4.37,
+4.35,
+4.35
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 67.47,
+"ints": [
+117
+],
+"success": true
+},
+"P1_sh16": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+2,
+0,
+3,
+1
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.29,
+4.25,
+4.26
+],
+"burst_end": [
+4.52,
+4.29,
+4.25,
+4.26
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 52.26,
+"ints": [
+117
+],
+"success": true
+},
+"P1_single_c0": {
+"variant": "P1",
+"cfg": "c0",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P1_single_c015": {
+"variant": "P1",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P1_single_c025": {
+"variant": "P1",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P1_single_c025_SG": {
+"variant": "P1",
+"cfg": "c0.25",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P1_single_c05": {
+"variant": "P1",
+"cfg": "c0.5",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P1u_c025_cue3": {
+"variant": "P1u",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+3.98,
+6.0,
+3.82
+],
+"burst_end": [
+4.52,
+6.74,
+6.0,
+6.84
+],
+"member_spikes": [
+8,
+12,
+7,
+12
+],
+"int_spikes": [
+1,
+2,
+0,
+2
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 43.53,
+"ints": [
+117,
+134,
+142
+],
+"success": true
+},
+"P1u_rip12": {
+"variant": "P1u",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.2,
+4.1,
+4.13
+],
+"burst_end": [
+4.52,
+4.2,
+4.1,
+4.13
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+1,
+2,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.13,
+"ints": [
+117,
+134,
+142
+],
+"success": true
+},
+"P1u_rip12_SG": {
+"variant": "P1u",
+"cfg": "c0.15",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+1,
+2,
+1,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.06,
+"ints": [
+117,
+134,
+142
+],
+"success": true
+},
+"P1u_single_c025": {
+"variant": "P1u",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+1,
+1,
+1,
+1
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [
+117,
+134
+],
+"all_clean": true
+},
+"P1u_single_c025_SG": {
+"variant": "P1u",
+"cfg": "c0.25",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+1,
+1,
+1,
+1
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [
+117,
+134
+],
+"all_clean": true
+},
+"P1u_single_c05": {
+"variant": "P1u",
+"cfg": "c0.5",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+1,
+1,
+1,
+1
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [
+117,
+134
+],
+"all_clean": true
+},
+"P2_rip12": {
+"variant": "P2",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+1
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 42.0,
+"ints": [
+117
+],
+"success": true
+},
+"P2_single_c025": {
+"variant": "P2",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+0,
+0,
+0,
+0
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
+],
+"ints": [],
+"all_clean": true
+},
+"P3_c025_cue3": {
+"variant": "P3",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+0,
+4
+],
+"lat": [
+4.52,
+4.03,
+null,
+4.13
+],
+"burst_end": [
+4.52,
+7.92,
+1.0,
+4.13
+],
+"member_spikes": [
+8,
+12,
+3,
+8
+],
+"int_spikes": [
+4,
+5,
+2,
+3
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 41.76,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"success": false
+},
+"P3_rip12": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.26,
+4.16,
+4.17
+],
+"burst_end": [
+4.52,
+4.26,
+4.16,
+4.17
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+4,
+4,
+4,
+3
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 42.81,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"success": true
+},
+"P3_rip12_IS": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "IS",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+0,
+0,
+0,
+0
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 40.06,
+"ints": [],
+"success": true
+},
+"P3_rip12_SG": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"burst_end": [
+4.52,
+4.19,
+4.09,
+4.06
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+4,
+5,
+3,
+3
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 42.39,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"success": true
+},
+"P3_rip16": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.32,
+4.29,
+4.29
+],
+"burst_end": [
+4.52,
+4.32,
+4.29,
+4.29
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+4,
+4,
+3,
+4
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 55.17,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"success": true
+},
+"P3_rip20": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+0,
+1,
+2,
+3
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.38,
+4.37,
+4.37
+],
+"burst_end": [
+4.52,
+4.38,
+4.37,
+4.37
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+4,
+4,
+3,
+4
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 67.24,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"success": true
+},
+"P3_sh16": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "ripple",
+"dt": 1.0,
+"order": [
+2,
+0,
+3,
+1
+],
+"complete": [
+4,
+4,
+4,
+4
+],
+"lat": [
+4.52,
+4.33,
+4.35,
+4.28
+],
+"burst_end": [
+4.52,
+4.33,
+4.35,
+4.28
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"int_spikes": [
+3,
+4,
+3,
+2
+],
+"crosstalk": 0,
+"spurious": 0,
+"last": 54.97,
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"success": true
+},
+"P3_single_c0": {
+"variant": "P3",
+"cfg": "c0",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.54
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.62
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.6
+],
+"int_spikes_full": [
+4,
+4,
+3,
+5
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+1,
+0,
+0,
+0,
+1,
+1,
+1,
+1
+],
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"all_clean": true
+},
+"P3_single_c015": {
+"variant": "P3",
+"cfg": "c0.15",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.54
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.62
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.6
+],
+"int_spikes_full": [
+4,
+4,
+3,
+5
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+1,
+0,
+0,
+0,
+1,
+1,
+1,
+1
+],
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"all_clean": true
+},
+"P3_single_c025": {
+"variant": "P3",
+"cfg": "c0.25",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.54
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.62
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.6
+],
+"int_spikes_full": [
+4,
+4,
+3,
+5
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+1,
+0,
+0,
+0,
+1,
+1,
+1,
+1
+],
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"all_clean": true
+},
+"P3_single_c025_SG": {
+"variant": "P3",
+"cfg": "c0.25",
+"mode": "SG",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.52
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.5
+],
+"int_spikes_full": [
+4,
+4,
+5,
+5
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+1,
+0,
+0,
+0,
+1,
+1,
+1,
+1
+],
+"ints": [
+102,
+117,
+129,
+134,
+135,
+138,
+142
+],
+"all_clean": true
+},
+"P3_single_c05": {
+"variant": "P3",
+"cfg": "c0.5",
+"mode": "full",
+"loaded_ok": true,
+"readback_mismatch": 0,
+"kind": "single",
+"complete": [
+4,
+4,
+4,
+4
+],
+"latency": [
+4.52,
+4.52,
+4.52,
+4.54
+],
+"member_spikes": [
+8,
+8,
+8,
+8
+],
+"burst_end": [
+4.52,
+4.52,
+4.52,
+4.62
+],
+"last_pyr": [
+4.5,
+4.5,
+4.5,
+4.6
+],
+"int_spikes_full": [
+4,
+4,
+3,
+5
+],
+"false3_events": 0,
+"false3_cells": 0,
+"spurious": 0,
+"crosstalk": 0,
+"int_spikes_3cell": [
+1,
+0,
+0,
+0,
+1,
+1,
+1,
+1
+],
+"ints": [
+102,
+117,
+129,
+134,
+135,
+142
+],
+"all_clean": true
+}
+}

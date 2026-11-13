@@ -1,0 +1,19 @@
+sim 226 {'sim_id': 226, 'model': 'v2-arbor-S1-inhP1', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2, 1.0], 'gaba_weights_on_load': [0.5], 'pyrint_w_on_load': [1.0], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 226 {'ReqID': 1246, 'StatusCode': 0, 'TaskStatus': 0}
+P1_rip20 [(0, 4, 4.524, 4.524, 8, 0), (1, 4, 4.370000000000001, 4.370000000000001, 8, 0), (2, 4, 4.350999999999999, 4.350999999999999, 8, 0), (3, 4, 4.349000000000004, 4.349000000000004, 8, 1)] spur 0 ct 0 end 67.474 succ True

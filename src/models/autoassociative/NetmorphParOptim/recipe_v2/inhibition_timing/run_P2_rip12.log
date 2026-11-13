@@ -1,0 +1,19 @@
+sim 242 {'sim_id': 242, 'model': 'v2-arbor-S1-inhP2', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2, 1.0], 'gaba_weights_on_load': [1.0], 'pyrint_w_on_load': [1.0], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 242 {'ReqID': 1533, 'StatusCode': 0, 'TaskStatus': 0}
+P2_rip12 [(0, 4, 4.524, 4.524, 8, 0), (1, 4, 4.187999999999999, 4.187999999999999, 8, 0), (2, 4, 4.088999999999999, 4.088999999999999, 8, 0), (3, 4, 4.064999999999998, 4.064999999999998, 8, 1)] spur 0 ct 0 end 41.998 succ True

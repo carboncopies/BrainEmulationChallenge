@@ -1,0 +1,35 @@
+restart 0 cost 9.7 best 9.3 2
+restart 1 cost 9.0 best 8.9 4
+restart 2 cost 5.6 best 5.6 6
+restart 3 cost 10.15 best 5.6 8
+restart 4 cost 5.45 best 5.45 10
+restart 5 cost 5.55 best 5.45 13
+restart 6 cost 6.65 best 5.45 14
+restart 7 cost 7.3 best 5.45 15
+restart 8 cost 5.65 best 5.45 17
+restart 9 cost 13.35 best 5.45 18
+restart 10 cost 12.0 best 5.45 20
+restart 11 cost 9.3 best 5.45 21
+restart 12 cost 8.85 best 5.45 23
+restart 13 cost 9.3 best 5.45 24
+restart 14 cost 6.35 best 5.45 25
+restart 15 cost 3.45 best 3.3 27
+restart 16 cost 3.75 best 3.1 28
+restart 17 cost 7.0 best 3.1 30
+restart 18 cost 6.45 best 3.1 31
+restart 19 cost 9.45 best 3.1 32
+restart 20 cost 6.65 best 3.1 34
+restart 21 cost 6.85 best 3.1 35
+restart 22 cost 3.8 best 3.1 37
+restart 23 cost 9.6 best 3.1 38
+restart 24 cost 6.55 best 3.1 39
+restart 25 cost 10.15 best 3.1 41
+restart 26 cost 3.25 best 3.1 43
+restart 27 cost 6.25 best 3.1 46
+restart 28 cost 9.25 best 3.1 47
+restart 29 cost 6.65 best 3.1 49
+network cap-aware drivable ints (best 8 cells): 7 [102, 117, 129, 134, 135, 138, 142]
+{'group': 0, 'members': [0, 19, 40, 51, 72, 82, 85, 94], 'cue': [0, 51, 72, 94], 'noncue': [19, 40, 82, 85], 'min_pair': 5.87999963760376, 'drivable_ints': [117, 129], 'own_inh_mean_nS': 2.5999998450279236}
+{'group': 1, 'members': [32, 39, 43, 47, 61, 62, 66, 87], 'cue': [43, 61, 62, 66], 'noncue': [32, 39, 47, 87], 'min_pair': 4.899999618530273, 'drivable_ints': [117, 142], 'own_inh_mean_nS': 0.7999999523162842}
+{'group': 2, 'members': [27, 30, 59, 79, 84, 86, 88, 92], 'cue': [27, 79, 84, 88], 'noncue': [30, 59, 86, 92], 'min_pair': 4.899999618530273, 'drivable_ints': [134], 'own_inh_mean_nS': 1.1999999284744263}
+{'group': 3, 'members': [20, 25, 33, 49, 55, 73, 75, 76], 'cue': [20, 73, 75, 76], 'noncue': [25, 33, 49, 55], 'min_pair': 4.899999618530273, 'drivable_ints': [117], 'own_inh_mean_nS': 3.79999977350235}

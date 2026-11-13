@@ -1,0 +1,45 @@
+restart 0 cost -16.8 best -16.8 2
+restart 1 cost -13.6 best -16.8 3
+restart 2 cost -16.8 best -16.8 5
+restart 3 cost -14.6 best -16.8 7
+restart 4 cost -23.6 best -23.6 8
+restart 5 cost -15.2 best -23.6 9
+restart 6 cost -15.4 best -23.6 11
+restart 7 cost -22.4 best -23.6 12
+restart 8 cost -19.0 best -23.6 14
+restart 9 cost -12.2 best -23.6 15
+restart 10 cost -13.2 best -23.6 17
+restart 11 cost -17.0 best -23.6 18
+restart 12 cost -17.6 best -23.6 20
+restart 13 cost -12.6 best -23.6 21
+restart 14 cost -13.6 best -23.6 23
+restart 15 cost -21.6 best -23.6 24
+restart 16 cost -12.4 best -23.6 26
+restart 17 cost -15.4 best -23.6 27
+restart 18 cost -15.8 best -23.6 29
+restart 19 cost -15.0 best -23.6 30
+restart 20 cost -15.0 best -23.6 32
+restart 21 cost -16.8 best -23.6 33
+restart 22 cost -8.0 best -23.6 35
+restart 23 cost -14.2 best -23.6 36
+restart 24 cost -14.8 best -23.6 38
+restart 25 cost -18.8 best -23.6 39
+restart 26 cost -15.2 best -23.6 41
+restart 27 cost -14.0 best -23.6 42
+restart 28 cost -12.2 best -23.6 44
+restart 29 cost -8.2 best -23.6 45
+restart 30 cost -15.2 best -23.6 47
+restart 31 cost -18.4 best -23.6 49
+restart 32 cost -15.0 best -23.6 51
+restart 33 cost -15.2 best -23.6 52
+restart 34 cost -14.0 best -23.6 54
+restart 35 cost -15.8 best -23.6 55
+restart 36 cost -15.6 best -23.6 57
+restart 37 cost -12.8 best -23.6 59
+restart 38 cost -19.8 best -23.6 60
+restart 39 cost -18.8 best -23.6 61
+[([10, 26, 36, 39, 53, 79, 82, 89], [10, 26, 36, 53]), ([0, 19, 40, 59, 73, 84, 85, 86], [0, 59, 73, 86]), ([18, 22, 30, 33, 42, 47, 70, 91], [18, 22, 42, 70]), ([25, 49, 55, 61, 62, 67, 87, 92], [61, 62, 67, 87])]
+[[ 4.8  6.4  4.8  5.6]
+ [ 4.8  7.2  5.6  7.2]
+ [ 4.8  6.4  4.8  5.6]
+ [ 6.4 10.4  7.2  3.2]]

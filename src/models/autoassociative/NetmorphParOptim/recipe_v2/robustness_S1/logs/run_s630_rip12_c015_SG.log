@@ -1,0 +1,4 @@
+sim 263 {'sim_id': 263, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+SG gaba 1464 0
+deleted 263 {'ReqID': 3312, 'StatusCode': 0, 'TaskStatus': 0}
+s630_rip12_c015_SG [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.187999999999999, 4.187999999999999, 8, 0), (2, 4, 4.088999999999999, 4.088999999999999, 8, 0), (3, 4, 4.064999999999998, 4.064999999999998, 8, 0)] spur 0 ct 0 end 40.065 succ True

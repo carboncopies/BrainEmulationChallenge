@@ -1,0 +1,19 @@
+sim 205 {'sim_id': 205, 'model': 'v2-arbor-S1-gabax2', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.4], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 205 {'ReqID': 1277, 'StatusCode': 0, 'TaskStatus': 0}
+x2_rip20 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.3820000000000014, 4.3820000000000014, 8, 0), (2, 4, 4.366, 4.366, 8, 0), (3, 4, 4.349999999999994, 4.349999999999994, 8, 1)] spur 0 ct 0 end 66.268 succ True

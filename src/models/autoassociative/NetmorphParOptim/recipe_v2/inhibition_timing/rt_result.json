@@ -1,0 +1,62 @@
+{
+ "save": "{'ReqID': 1716, 'StatusCode': 0, 'TaskStatus': 0}",
+ "n_records": [
+  113267,
+  113267
+ ],
+ "fields_equal": {
+  "Src": true,
+  "Dst": true,
+  "Erev": true,
+  "Rise": true,
+  "Decay": true,
+  "G": true,
+  "W": true,
+  "Delay": true,
+  "NT": true
+ },
+ "same_after_sort": null,
+ "pi": {
+  "G": [
+   0.6363999843597412
+  ],
+  "W": [
+   1.0
+  ],
+  "Rise": [
+   0.5
+  ],
+  "Decay": [
+   3.0
+  ]
+ },
+ "gaba": {
+  "G": [
+   0.800000011920929
+  ],
+  "W": [
+   0.5
+  ],
+  "Rise": [
+   0.30000001192092896
+  ],
+  "Decay": [
+   3.299999952316284
+  ]
+ },
+ "pp": {
+  "G": [
+   0.9800000190734863
+  ],
+  "W": [
+   0.20000000298023224
+  ],
+  "Rise": [
+   0.5
+  ],
+  "Decay": [
+   3.0
+  ]
+ },
+ "rt_model_removed": true
+}

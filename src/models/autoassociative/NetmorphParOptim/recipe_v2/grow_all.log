@@ -1,0 +1,5 @@
+a Randal's 96/48 rc 0 wall 1260
+b h2h scaling-law corner rc 0 wall 802
+c smaller volume, denser rc 0 wall 701
+d higher interneuron fraction (40%) rc 0 wall 905
+e Randal's 96/48 with interneuron D_synmax 0.15 rc 0 wall 1067

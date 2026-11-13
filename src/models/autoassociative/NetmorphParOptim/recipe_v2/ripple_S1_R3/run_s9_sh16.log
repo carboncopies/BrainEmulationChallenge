@@ -1,0 +1,19 @@
+sim 172 {'sim_id': 172, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 172 {'ReqID': 1345, 'StatusCode': 0, 'TaskStatus': 0}
+s9_sh16 [(2, 4, 4.524, 4.524, 8, 1), (0, 4, 4.32, 4.32, 8, 0), (3, 4, 4.259, 4.259, 8, 1), (1, 4, 4.295999999999999, 4.295999999999999, 8, 1)] spur 0 ct 0 end 55.439 succ True

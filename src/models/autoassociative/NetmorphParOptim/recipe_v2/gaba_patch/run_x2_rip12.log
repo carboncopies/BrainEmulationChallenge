@@ -1,0 +1,19 @@
+sim 202 {'sim_id': 202, 'model': 'v2-arbor-S1-gabax2', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.4], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 202 {'ReqID': 1338, 'StatusCode': 0, 'TaskStatus': 0}
+x2_rip12 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.212, 4.212, 8, 1), (2, 4, 4.154, 4.154, 8, 2), (3, 4, 4.244999999999997, 4.244999999999997, 8, 0)] spur 0 ct 0 end 40.245 succ True

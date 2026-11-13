@@ -1,0 +1,19 @@
+sim 169 {'sim_id': 169, 'n_neurons': 144, 'weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 169 {'ReqID': 1385, 'StatusCode': 0, 'TaskStatus': 0}
+s6_rip12 [(0, 4, 4.524, 4.524, 8, 1), (1, 4, 4.199999999999999, 4.199999999999999, 8, 1), (2, 4, 4.122, 4.122, 8, 2), (3, 4, 4.152000000000001, 4.152000000000001, 8, 0)] spur 0 ct 0 end 40.152 succ True

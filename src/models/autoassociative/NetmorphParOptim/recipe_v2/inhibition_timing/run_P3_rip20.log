@@ -1,0 +1,25 @@
+sim 245 {'sim_id': 245, 'model': 'v2-arbor-S1-inhP3', 'n_neurons': 144, 'ampa_nmda_weights_on_load': [0.2, 1.0], 'gaba_weights_on_load': [0.5], 'pyrint_w_on_load': [1.0], 'pairs_missing': 0, 'g_mismatch': 0, 'loaded_ok': True}
+
+
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+
+                                                             
+deleted 245 {'ReqID': 1353, 'StatusCode': 0, 'TaskStatus': 0}
+P3_rip20 [(0, 4, 4.524, 4.524, 8, 4), (1, 4, 4.384, 4.384, 8, 4), (2, 4, 4.372, 4.372, 8, 3), (3, 4, 4.3700000000000045, 4.3700000000000045, 8, 4)] spur 0 ct 0 end 67.237 succ True
