@@ -1,5 +1,7 @@
 # Request for an approved range for Netmorph D_synmax (interneuron pairs)
 
+**SUPERSEDED (2026-11-13) by the team guidance: D_synmax maxima are 1.5 um pyramidal-pyramidal and 0.1-0.15 um for interneuron pairs (maxima only, minimum 0), not the 0.5 um proposed below. Where natural arborization conflicts with a built-in specification, natural arborization wins (Randal's rule). Caveat: interneurons have no spines, and spines are not in the EM output yet. The 0.5/1.0 um runs below are a sensitivity study only. `bio_ranges.json` is not changed until Randal confirms the maxima. Kept for the record.**
+
 **SENT to Randal Koene by email 2026-11-11 (Marianna not yet contacted)** | 2026-11-09
 For: Randal Koene, Marianna Gabrielyan (NetMorph / BrainGenix). From: John.
 

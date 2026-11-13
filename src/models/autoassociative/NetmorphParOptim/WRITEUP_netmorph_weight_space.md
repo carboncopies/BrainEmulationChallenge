@@ -64,9 +64,44 @@ Track 1 only: the 7 approved parameters, D_synmax at default. Pre-registered 202
 - Analyst (Fable 5.2) pre-registered predictions: direction mostly right, sizes often wrong (e.g. predicted a 15-35% lead on mean J, observed 68%).
 - Server: runs 1.35x slower than the timing model (max 1.99x), available memory 138 -> 108 GB.
 
+### Phase F. Bio-consistent networks and ripple test (`recipe_v2/`, run on our own NES)
+Source files: `recipe_v2/PHASE1.md`, `ARBOR_RESULTS.md`, `AXON_LEVER_FINDINGS.md`, `axon_rerun/`, `dendrite_rerun/`, `ripple_05/`, `ripple_arborA/`, `ripple_S1/`, `ripple_S1_R3/`, `FABLE_DESIGN_S1.md`, `CA3_NATURAL_RANGES.md`, `CA3_ARBOR_BOUNDS.md`, `roundtrip_test.py`. Raw growth outputs and saved models are not in the repo (size); copies are in `/home/johnjose/cos/netmorph_work/recipe_v2/`.
+
+**(a) D_synmax change.** Team guidance (via John): maxima are pyramidal 1.5 um and interneuron pairs 0.1-0.15 um (maxima only, minimum 0); interneurons have no spines; spines are not in the EM output yet; where the natural arborization conflicts with a built-in specification, the natural arborization wins (Randal's rule). All Phase F growths use D_synmax pyramidal-pyramidal 1.5 and the three interneuron pairs 0.1 (config e: 0.15). The earlier 0.5 and 1.0 um runs (Phases C-E, `ripple_05/`) are therefore a **sensitivity study only**, not bio-realistic. `bio_ranges.json` and `bio_check.py` were not changed, because the maxima are not yet confirmed by Randal.
+
+**(b) Phase 1 and arbor growth.** Five configurations at D_synmax 1.5/0.1 (e: 0.15) gave few drivable interneurons: 6/48, 2/30, 1/32, 2/46 and 8/48 (config e, 16.7%), against a 50% bar; inhibitory fraction onto pyramidal cells 0.5-1.0%. Pyr->Int counts scale with D_synmax, not with density (`PHASE1.md`). Arbor experiments on config a (dendrite lever A, axon levers B-D; `ARBOR_RESULTS.md`): the dendrite lever worked (Pyr->Int 227 -> 539, 10/48 drivable); the axon lever as first tried (shortening tau) did not raise Int->Pyr (298-542 vs 348 baseline). B, C and D were flagged because Pyr->Pyr moved more than the 5% rule.
+
+**(c) Key finding: B_inf, not tau, sets the interneuron axon total** (`AXON_LEVER_FINDINGS.md`, `axon_rerun/README.md`). Interneuron axon tau only shifts the timing of branching (median bifurcation time 14.6, 11.2, 6.6 d for A, B, D) and not the total. Raising `all_interneuron_axons.B_inf` does change it:
+
+| run | int axon cones per cell | Int->Pyr | inhibitory fraction | note |
+|---|---|---|---|---|
+| R0 (A, B_inf 13.22) | 74.2 | 453 | 0.61% | |
+| R1 (B_inf 26) | 414 | 1378 | 2.13% | Pyr->Pyr -14.1% (flag) |
+| R2 (B_inf 39) | 1283 | 4404 | 5.22% | about 6.8 h growth; passes the 3% bar, but probably too large |
+
+Drivable interneurons stay at 10/48, because they depend on Pyr->Int (dendrites). Cone positions showed no spatial pile-up at the disc edge, so the earlier 63-74 "ceiling" was the default B_inf, not geometry. Pyr->Pyr moves about +-20% from a seed change alone (R3: +20.2%), so the 5% flag is too strict for that quantity.
+Dendrites are at a natural ceiling: about 37 growth cones per interneuron (S1 36.9, S2 34.5, S3 35.4) against 10-39 dendritic bifurcations in the literature (Ascoli 2009, secondary extraction). Natural interneuron fraction is about 8-13% (CA1 7-11%; CA3 about 13% by one GAD65 count) against our 33% (48/144); with 16 interneurons (S3) Pyr->Int fell from 760 to 127 and 4/16 were drivable. (The brief mentioned 17%; no 17% interneuron configuration is in the source files, so S3 is reported as measured.)
+
+**(d) S1: best bio-consistent net** (saved model `v2-arbor-S10000`, `dendrite_rerun/`): 96 pyramidal / 48 interneurons, D_synmax 1.5/0.1, axon B_inf 26, dendrite B_inf 3.5, basal 6-10. Pyr->Int 760, Int->Pyr 1314, Int->Int 1709, inhibitory fraction 2.2%, 13/48 drivable by the old criterion (summed input of all 96 pyramids at weight 1 reaching 13.84 nS). The cap-aware criterion (a memory has only 4-8 cells and weights are at most 1) gives 7/48 for an 8-cell volley and 2/48 for a 4-cell cue (`ripple_S1/README.md`).
+
+**(e) Ripple results.**
+- Arbor A (`ripple_arborA/`): 4 memories recall and the ripple works at all 16 simulations; zeroing all Pyr->Int changes nothing material, so inhibition is irrelevant there (recurrent excitation only, bursts end intrinsically).
+- S1, standard recipe (`ripple_S1/`): recall 4/4 with no cross-talk, but every ripple case fails the pre-set 40 ms burst criterion (memory G1 bursts 47.6-69 ms; the shuffled order ends at 117 ms). GABA output zeroed (SG) gives identical pyramidal spikes to Pyr->Int zeroed (NI). A uniform background of 0.03 or 0.05 of grown weight gives spurious firing.
+- S1, recipe R3, designed by Fable's offline emulator (`FABLE_DESIGN_S1.md`, `ripple_S1_R3/`; 6 hits and 1 miss against the pre-registered predictions as reported to us; not re-scored here). Cue to non-cue 4.125 nS per pair (16.5 nS for 4 cells), loop cap 8 nS, background Pyr->Pyr capped at c nS per connection. Results at c = 0.15: single recall 4/4 memories complete; a 3-cell cue never completes a memory; the ripple succeeds at 12, 16 and 20 ms spacing and in the shuffled order; bursts last 4-7.5 ms; 0 cross-talk and 0 non-member pyramidal spikes. Background cap 0.15 nS is tolerated; 0.25 gives false completion from a 3-cell cue (4/4); 0.5 runs away (297 spurious pyramidal spikes).
+- GABA-silenced R3 runs behave identically (single recall and 12 ms ripple both succeed with the same completion): the memory is excitation-only and terminates intrinsically. Functional inhibition would need a settable GABA weight in NES plus roughly 50-60 Int->Pyr synapses per pyramidal cell from interneurons that an 8-cell memory can drive (S1 has 13.7 inhibitory synapses per pyramidal cell in total, median 3).
+
+**(f) Bio-limit caveats.**
+- The per-synapse reading of dm.weight 0.1-1.0 is breached by pruned zeros (97.4% of programmed Pyr->Pyr pairs in R3_c0) and by background weights below 0.1 (R3 c = 0.15: all but single-synapse pairs lie below 0.1). `dm_weight` is a growth parameter, so this is a breach only under the strict reading. **To ask Randal.**
+- The 100-1000 interneuron axon-tip band is an inference (Ascoli's 10-39 dendritic bifurcations times about 10, plus one cat V1 basket cell study), not a measured CA3 value. In `CA3_NATURAL_RANGES.md` and `CA3_ARBOR_BOUNDS.md` each literature number is marked READ, RECALLED or DERIVED; RECALLED values (for example 5-6% inhibitory fraction of CA1 pyramidal synapses, 10-15% CA3 interneuron fraction) are not verified.
+- The D_synmax maxima are not yet confirmed by Randal; spines are not in the EM output yet and interneurons have no spines.
+
+**(g) NES limits found** (cross-reference `docs/NES_API_GAPS_AND_SPEC.md`). `roundtrip_test.py` / `roundtrip_result.json`: weights edited with `SetPrePostStrength` do not survive ModelSave/ModelLoad (`ampa_edit_survived_saveload` false), so all Phase F runs apply weights after ModelLoad in the same session. GABA cannot be programmed: the call returns StatusCode 2 and in effect only zeroes GABA, and inside a batch it aborts the batch. AMPA programming zeroes NMDA on programmed pairs. Fix branch for ModelSave: `fix/modelsave-edited-weights` (not yet in a tag).
+
+**(h) Disclosure.** The R3 recipe was designed by Fable using an offline numpy emulator of the NES network written by Fable from the NES source constants (`recipe_v2/fable_design_S1/net.py`), validated only on arbor A (E1) before the S1 runs; the design memo states the emulator numbers are forecasts, not NES measurements. The emulator's validation on S1, with background, at a 16.5 nS cue or with GABA zeroed was not available when it was used (`FABLE_DESIGN_S1.md`, Not verified). All NES numbers above are from deterministic single runs, one seed.
+
 ## 4. Limits and open problems
 
-- D_synmax has no team-approved range; 0.5 and 1.0 are modelling choices. A draft request to the team is in `docs/DSYNMAX_RANGE_REQUEST.md` (not sent).
+- D_synmax: the 0.5 and 1.0 um values were modelling choices and are now a sensitivity study only; team guidance (maxima 1.5 pyramidal, 0.1-0.15 interneuron pairs) is used in Phase F but not yet confirmed by Randal, so `bio_ranges.json` is unchanged. `docs/DSYNMAX_RANGE_REQUEST.md` is superseded.
 - Specificity relies on pruning non-engram Pyr-Pyr weights to 0.03 or below, and cue-size selectivity relies on a threshold window of about +/-10-20%.
 - One reservoir geometry per D_synmax value except round 2's three extra seeds; one trial per condition (NES is deterministic here).
 - API gaps: AMPA programming zeroes NMDA on every programmed pair (no per-neurotransmitter endpoint), so recall is AMPA-only; GABA weights cannot be programmed (fixed 0.2); fatigue not editable; no compartment-ID query.
@@ -78,6 +113,7 @@ Track 1 only: the 7 approved parameters, D_synmax at default. Pre-registered 202
 
 - Code and reports: `src/models/autoassociative/` (this branch). New under `NetmorphParOptim/`: `multi_target_optim.py`, `bio_ranges.json`, `bio_check.py`, `batchB_models.py`, `weight_space/`, `fable_loop/` (scripts, analyses and small data per iteration), `viz_app/`, `docs/` (work log, Fable loop log with the prediction blocks, range request), `REPORT_*.md`.
 - Left out of the commit for size: per-sample raw output of the 100-sample batch (`NetmorphParOptim/batchB/`, 83 MB), `run_*`, `model_*` and `viz_*` raw dumps and `*.log` under `fable_loop/`, and any file above 1 MB there. Summaries (`batchB_labels_*.xlsx`, `analysis.txt`) are included. The full copy is in `/home/johnjose/cos/netmorph_work/`.
+- Phase F material: `NetmorphParOptim/recipe_v2/` (READMEs, scripts, small JSON, figures; files above 2 MB, raw growth outputs, saved models and large logs left out).
 - Base: branch `myg_autoassociative_20260325`, commit 57d23f2.
 - Shared NES server simulations: 700-761 (Phase E), 22-132 (Phase A and B; sim 127 holds programmed weights) and 133-153 (Phases C and D). Pristine grown reservoirs saved on the server as `fable-it1a-sim133`, `fable-it1b-sim134`, `fable-r2-seed1001/1002/1003`, `fable-r2it4-d03`, `fable-r2it4-d07`. Nothing was deleted; simulations are shared with rkoene.
 
