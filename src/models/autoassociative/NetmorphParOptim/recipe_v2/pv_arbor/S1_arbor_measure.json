@@ -1,0 +1,47 @@
+{
+ "missing_parent": 0,
+ "pyramidal_dendrite": {
+  "n": 96,
+  "len_mean": 21664.503454734015,
+  "len_median": 17959.741992354255,
+  "len_min": 6965.425831058899,
+  "len_max": 80973.4200335405,
+  "maxreach_mean": 690.6001789775246,
+  "maxreach_max": 788.0883365277322,
+  "p90reach_mean": 453.2634496781566,
+  "nodes_mean": 4264.947916666667
+ },
+ "pyramidal_axon": {
+  "n": 96,
+  "len_mean": 18875.511962406443,
+  "len_median": 18209.739225287274,
+  "len_min": 3784.898999311244,
+  "len_max": 42797.034691688066,
+  "maxreach_mean": 133.7040555676025,
+  "maxreach_max": 186.65091176726472,
+  "p90reach_mean": 101.3813547290617,
+  "nodes_mean": 3779.2708333333335
+ },
+ "interneuron_dendrite": {
+  "n": 48,
+  "len_mean": 7134.407068127769,
+  "len_median": 6956.327148945371,
+  "len_min": 4174.215469642793,
+  "len_max": 11667.472488709464,
+  "maxreach_mean": 315.2507032553305,
+  "maxreach_max": 397.02438970186637,
+  "p90reach_mean": 205.942938414918,
+  "nodes_mean": 1005.6666666666666
+ },
+ "interneuron_axon": {
+  "n": 48,
+  "len_mean": 77554.36276833103,
+  "len_median": 78876.16328345067,
+  "len_min": 38395.46479472937,
+  "len_max": 131697.13257914686,
+  "maxreach_mean": 132.66372592617893,
+  "maxreach_max": 184.6575039206798,
+  "p90reach_mean": 92.8066921945147,
+  "nodes_mean": 15619.958333333334
+ }
+}
