@@ -91,9 +91,9 @@ Dendrites are at a natural ceiling: about 37 growth cones per interneuron (S1 36
 - GABA-silenced R3 runs behave identically (single recall and 12 ms ripple both succeed with the same completion): the memory is excitation-only and terminates intrinsically. Functional inhibition would need a settable GABA weight in NES plus roughly 50-60 Int->Pyr synapses per pyramidal cell from interneurons that an 8-cell memory can drive (S1 has 13.7 inhibitory synapses per pyramidal cell in total, median 3).
 
 **(f) Bio-limit caveats.**
-- The per-synapse reading of dm.weight 0.1-1.0 is breached by pruned zeros (97.4% of programmed Pyr->Pyr pairs in R3_c0) and by background weights below 0.1 (R3 c = 0.15: all but single-synapse pairs lie below 0.1). `dm_weight` is a growth parameter, so this is a breach only under the strict reading. **To ask Randal.**
+- Resolved 2026-11-13 (Randal Koene, Phase H): `dm.weight` applies only to the growth parameter, so the 0.1-1.0 limit is not a per-synapse weight limit. Pruned zeros and the 0.15 nS background weights are therefore not a limit breach. (Earlier wording of this item treated it as an open question under a strict per-synapse reading; that reading is withdrawn.)
 - The 100-1000 interneuron axon-tip band is an inference (Ascoli's 10-39 dendritic bifurcations times about 10, plus one cat V1 basket cell study), not a measured CA3 value. In `CA3_NATURAL_RANGES.md` and `CA3_ARBOR_BOUNDS.md` each literature number is marked READ, RECALLED or DERIVED; RECALLED values (for example 5-6% inhibitory fraction of CA1 pyramidal synapses, 10-15% CA3 interneuron fraction) are not verified.
-- The D_synmax maxima are not yet confirmed by Randal; spines are not in the EM output yet and interneurons have no spines.
+- The D_synmax maxima were confirmed by Randal on 2026-11-13 (Phase H); spines are not in the EM output yet and interneurons have no spines.
 
 **(g) NES limits found** (cross-reference `docs/NES_API_GAPS_AND_SPEC.md`). `roundtrip_test.py` / `roundtrip_result.json`: weights edited with `SetPrePostStrength` do not survive ModelSave/ModelLoad (`ampa_edit_survived_saveload` false), so all Phase F runs apply weights after ModelLoad in the same session. GABA cannot be programmed: the call returns StatusCode 2 and in effect only zeroes GABA, and inside a batch it aborts the batch. AMPA programming zeroes NMDA on programmed pairs. Fix branch for ModelSave: `fix/modelsave-edited-weights` (not yet in a tag).
 
@@ -142,9 +142,21 @@ Not tested: Dt 0.1 on the new seeds; a 3-cell cue inside a ripple on seeds 629/6
 - Workaround: patch-via-model-file route for GABA settings (weight, kinetics; Pyr->Int AMPA peak conductance). Caveats: source-confirmed and round-trip verified for weight and kinetics (113,267 records identical); weight above 1 is clipped at PeakConductance; the reader locates the receptor array by an ID-sequence pattern and uses a 72-byte record layout from this NES build; edits must be made offline on a copy before ModelLoad; new growths still get the hard-coded 0.2 unless the source line at `NetmorphManagerThread.cpp:457` is changed (not done). This is a workaround, not a supported API.
 - Disclosure: all NES results are deterministic single runs; designs for seeds 629/630 and K = 5, 6 are one annealing result each.
 
+### Phase H: team replies 2026-11-13
+Randal Koene replied to the open questions. Source for the interneuron literature part: `recipe_v2/CA3_INTERNEURON_TYPES.md` (tags READ / DERIVED / RECALLED kept; partly RECALLED or from summarised fetches, spot-check before quoting). No NES runs in this phase.
+
+1. **D_synmax limits.** The proposed hard limits make sense: maximum only, minimum 0; pyramidal-pyramidal 1.5 um, interneuron pairs 0.15 um (0.1 used in our runs).
+2. **Interneuron morphometrics dataset.** Randal knows of no dataset source for CA3 interneuron morphometrics. He asked us to check the definition of total dendritic length and suggested the HBP / BlueBrain reconstructions. Result in `CA3_INTERNEURON_TYPES.md`: NeuroMorpho's `length` field is axon plus dendrite for cells with a traced axon, so it is not dendritic length; the BBP portal was not accessed (no tool route; its model is CA1); Hippocampome gives layer labels only.
+3. **Reference for CA3 interneuron types.** No preferred reference. He asked us to check the CA3 interneuron types and which does lateral inhibition. Literature headline (`CA3_INTERNEURON_TYPES.md`): PV basket cells are the most likely source (fast, large, short-latency IPSCs onto pyramidal cells, PV-PV reciprocity; READ, Kohus 2016); axo-axonic cells second; CCK basket, OLM and ivy/neurogliaform cells slow or dendritic. No source directly measured shut-off after a CA3 recall burst per type.
+4. **Gap from natural.** The gap is interneuron arbor extent and the high proportion of pyramidal cells contacted. NetMorph's default interneuron outgrowth may be wrong for PV basket cells (its statistics come from cultures). Reference values in the literature note: PV basket dendrite about 5,000-9,000 um, axon about 30,000-45,000 um working range (DERIVED from slice reconstructions, lower bounds).
+5. **dm.weight.** It applies only to the growth parameter, so the 0.1-1.0 limit is not a per-synapse weight limit. The 0.15 nS background weights and pruned zeros are not a limit breach. The earlier open-question wording (section 3, Phase F item on the per-synapse reading, the "Limits and open problems" section and the share page) is updated accordingly.
+6. **GABA and NMDA settings.** He would consider exposing GABA and NMDA settings in the interface: GABA with a maximum conductance and a weight 0-1; NMDA mostly relevant only for learning. This would remove the need for the model-file patch route of Phase G.
+
+**Housekeeping.** `bio_ranges.json` is gitignored (`*.json`), and the new D_synmax limits were added to local copies only. They are recorded in `docs/BIO_RANGES_DSYNMAX_ADDITION.md` so they are reproducible. `docs/DSYNMAX_RANGE_REQUEST.md` is marked answered.
+
 ## 4. Limits and open problems
 
-- D_synmax: the 0.5 and 1.0 um values were modelling choices and are now a sensitivity study only; team guidance (maxima 1.5 pyramidal, 0.1-0.15 interneuron pairs) is used in Phase F but not yet confirmed by Randal, so `bio_ranges.json` is unchanged. `docs/DSYNMAX_RANGE_REQUEST.md` is superseded.
+- D_synmax: the 0.5 and 1.0 um values were modelling choices and are now a sensitivity study only; team guidance (maxima 1.5 pyramidal, 0.1-0.15 interneuron pairs) was confirmed by Randal on 2026-11-13 (Phase H). `bio_ranges.json` is gitignored, so the entries are recorded in `docs/BIO_RANGES_DSYNMAX_ADDITION.md`. `docs/DSYNMAX_RANGE_REQUEST.md` is answered.
 - Specificity relies on pruning non-engram Pyr-Pyr weights to 0.03 or below, and cue-size selectivity relies on a threshold window of about +/-10-20%.
 - One reservoir geometry per D_synmax value except round 2's three extra seeds; one trial per condition (NES is deterministic here).
 - API gaps: AMPA programming zeroes NMDA on every programmed pair (no per-neurotransmitter endpoint), so recall is AMPA-only; GABA weights cannot be programmed through the API (fixed 0.2; a model-file patch route exists, Phase G); fatigue not editable; no compartment-ID query.
@@ -157,7 +169,7 @@ Not tested: Dt 0.1 on the new seeds; a 3-cell cue inside a ripple on seeds 629/6
 
 - Code and reports: `src/models/autoassociative/` (this branch). New under `NetmorphParOptim/`: `multi_target_optim.py`, `bio_ranges.json`, `bio_check.py`, `batchB_models.py`, `weight_space/`, `fable_loop/` (scripts, analyses and small data per iteration), `viz_app/`, `docs/` (work log, Fable loop log with the prediction blocks, range request), `REPORT_*.md`.
 - Left out of the commit for size: per-sample raw output of the 100-sample batch (`NetmorphParOptim/batchB/`, 83 MB), `run_*`, `model_*` and `viz_*` raw dumps and `*.log` under `fable_loop/`, and any file above 1 MB there. Summaries (`batchB_labels_*.xlsx`, `analysis.txt`) are included. The full copy is in `/home/johnjose/cos/netmorph_work/`.
-- Phase F and G material: `NetmorphParOptim/recipe_v2/` (READMEs, scripts, small JSON, figures; files above 2 MB, raw growth outputs, saved models and large logs left out). Phase G: `robustness_S1/`, `gaba_patch/` (patcher `patch_model.py`, reader `gabafile.py`), `inhibition_timing/`, `fable_design_S1/`, and the notes `GABA_LEVERS.md`, `LIT_INHIBITION_ENGRAMS.md`, `CA3_NATURAL_RANGES.md`, `CA3_ARBOR_BOUNDS.md`, `CA3_INTERNEURON_ARBOR_REFS.md`, `AXON_LEVER_FINDINGS.md`, `FABLE_DESIGN_S1.md`.
+- Phase F and G material: `NetmorphParOptim/recipe_v2/` (READMEs, scripts, small JSON, figures; files above 2 MB, raw growth outputs, saved models and large logs left out). Phase G: `robustness_S1/`, `gaba_patch/` (patcher `patch_model.py`, reader `gabafile.py`), `inhibition_timing/`, `fable_design_S1/`, and the notes `GABA_LEVERS.md`, `LIT_INHIBITION_ENGRAMS.md`, `CA3_NATURAL_RANGES.md`, `CA3_ARBOR_BOUNDS.md`, `CA3_INTERNEURON_ARBOR_REFS.md`, `AXON_LEVER_FINDINGS.md`, `FABLE_DESIGN_S1.md`. Phase H: `recipe_v2/CA3_INTERNEURON_TYPES.md`, `docs/BIO_RANGES_DSYNMAX_ADDITION.md`.
 - Base: branch `myg_autoassociative_20260325`, commit 57d23f2.
 - Shared NES server simulations: 700-761 (Phase E), 22-132 (Phase A and B; sim 127 holds programmed weights) and 133-153 (Phases C and D). Pristine grown reservoirs saved on the server as `fable-it1a-sim133`, `fable-it1b-sim134`, `fable-r2-seed1001/1002/1003`, `fable-r2it4-d03`, `fable-r2it4-d07`. Nothing was deleted; simulations are shared with rkoene.
 
@@ -167,7 +179,7 @@ Orchestration, scripts and simulation runs: Claude Sonnet 5.5 (and Haiku for tri
 
 ## 7. Next steps
 
-1. D_synmax range request: emailed to Randal Koene on 2026-11-11 (Marianna not yet contacted); await the range, then run Track 2 (D_synmax added to the head-to-head).
+1. D_synmax range request: answered by Randal Koene on 2026-11-13 (Phase H; hard maxima, minimum 0). Track 2 (D_synmax added to the head-to-head) can now run if wanted.
 2. Tell Marianna about the dm.weight bug and the out-of-limit samples; re-run the Phase 0/1 importance analysis.
 3. Add samples aimed at Pyr-Int and Int-Int targets and retrain.
 4. Predict burst length from the connectome (fatigue and adaptive-threshold terms).
