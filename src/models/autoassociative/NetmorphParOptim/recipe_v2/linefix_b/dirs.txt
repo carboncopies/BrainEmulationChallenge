@@ -1,0 +1,20 @@
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/5911f275-cb39-4c01-972d-af56dbc9b033
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/98c49431-e2ce-4543-a601-906fb6ae784e
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/5be815b3-af63-4e0b-a76a-5051e28715cf
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/7872542d-0045-4d52-a815-291762e811dc
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/893decd3-1f8d-4552-b1f1-0c14cf8be8c0
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/4b0a3e35-5db8-46e9-ae9f-ec2038351b3c
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/57bc1c51-d1cb-448c-bcfc-671e323a2520
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/1ef4a3d2-7c09-42d7-9941-9ecf7d1a4566
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/0ce88bc3-25af-4954-a6b4-2c348b5a4c94
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/140a8448-e42b-428c-b4d5-7b26b3c32b16
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/a9b22b82-f8e0-4e55-b7f9-2eb3c671e8ed
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/ca7f1dd8-380f-4065-beec-e2bfdcd00228
+/home/johnjose/BrainGenix/wt/linefix-instance/out/Admonishing/NetmorphOutput/7c0fa4af-ffc6-408f-bda7-2963c06b665d
+# S1_s31415_fix pass 1.5; 0.1; 0.1; 0.1;
+# S1_s27182_fix pass 1.5; 0.1; 0.1; 0.1;
+# V1_s31415_fix pass 1.5; 0.1; 0.1; 0.1;
+# V1_s27182_fix pass 1.5; 0.1; 0.1; 0.1;
+# V3_s31415_fix pass 1.5; 0.1; 0.1; 0.1;
+# V3_s27182_fix pass 1.5; 0.1; 0.1; 0.1;
+# V1n30_s16180_fix pass 1.5; 0.1; 0.1; 0.1;
