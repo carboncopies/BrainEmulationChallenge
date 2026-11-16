@@ -1,0 +1,11 @@
+--- a/Source/synapse_formation_model.cc
++++ b/Source/synapse_formation_model.cc
+@@ -376,7 +376,7 @@
+     }
+ 
+ 
+-    double frac_T_PQ = tx/qx;
++    double frac_T_PQ = tx/PQ; // linefix 2026-11-15: was tx/qx (qx = Qx-Px, world x-component); tx is a distance along the rotated axon axis of length PQ (= qx3)
+     double frac_U_RS = (ux - rx3)/(sx3 - rx3);
+ 
+     double Tx = Px + frac_T_PQ*(Qx - Px);

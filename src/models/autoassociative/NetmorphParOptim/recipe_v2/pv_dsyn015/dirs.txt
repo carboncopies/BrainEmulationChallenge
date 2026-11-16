@@ -1,0 +1,6 @@
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/00657198-0d99-4f4c-83f3-92bda8015f7a /var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/76cafa58-8a1c-4256-85ce-6001f4633ca9
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/76800c7f-ad04-4ba3-b482-f899b241c649 /var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/14b42938-3043-472b-8e05-6b71c35f592a
+/var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/73629008-a0dc-4aef-b2fd-bf1250e725d6 /var/lib/BrainGenix/NES/Admonishing/NetmorphOutput/c6bccdf0-31d9-472d-b340-5f8fd791f158
+# S1_s16180_d015 pass ['D_synmax.pyramidal.pyramidal=1.5;', 'D_synmax.pyramidal.interneuron=0.15;', 'D_synmax.interneuron.pyramidal=0.15;', 'D_synmax.interneuron.interneuron=0.15;']
+# V1_s16180_d015 pass ['D_synmax.pyramidal.pyramidal=1.5;', 'D_synmax.pyramidal.interneuron=0.15;', 'D_synmax.interneuron.pyramidal=0.15;', 'D_synmax.interneuron.interneuron=0.15;']
+# V3_s16180_d015 pass ['D_synmax.pyramidal.pyramidal=1.5;', 'D_synmax.pyramidal.interneuron=0.15;', 'D_synmax.interneuron.pyramidal=0.15;', 'D_synmax.interneuron.interneuron=0.15;']
