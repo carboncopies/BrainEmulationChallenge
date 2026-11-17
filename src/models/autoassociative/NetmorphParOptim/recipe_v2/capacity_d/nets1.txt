@@ -1,0 +1,17 @@
+n30_D0.0175_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1n30_s16180_p0d0175_i0d0495/viz/sample_0000.json
+n30_D0.0175_s27182 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1n30_s27182_p0d0175_i0d0495/viz/sample_0000.json
+n30_D0.0175_s31415 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1n30_s31415_p0d0175_i0d0495/viz/sample_0000.json
+V1_D0d01_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1_s16180_p0d01_i0d05/viz/sample_0000.json
+V1_D0d021_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1_s16180_p0d021_i0d05/viz/sample_0000.json
+V1_D0d05_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_c/grow_V1_s16180_p0d05_i0d05/viz/sample_0000.json
+S1_D1.5_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix/grow_S1_s16180_fix/viz/sample_0000.json
+V1_D1.5_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix/grow_V1_s16180_fix/viz/sample_0000.json
+V3_D1.5_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix/grow_V3_s16180_fix/viz/sample_0000.json
+S1_D1.5_s31415 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_S1_s31415_fix/viz/sample_0000.json
+S1_D1.5_s27182 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_S1_s27182_fix/viz/sample_0000.json
+V1_D1.5_s31415 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V1_s31415_fix/viz/sample_0000.json
+V1_D1.5_s27182 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V1_s27182_fix/viz/sample_0000.json
+V3_D1.5_s31415 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V3_s31415_fix/viz/sample_0000.json
+V3_D1.5_s27182 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V3_s27182_fix/viz/sample_0000.json
+n30_D1.5_s16180 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V1n30_s16180_fix/viz/sample_0000.json
+n30_D1.5_s31415 /home/johnjose/cos/netmorph_work/recipe_v2/linefix_b/grow_V1n30_s31415_fix/viz/sample_0000.json

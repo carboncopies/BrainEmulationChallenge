@@ -1,0 +1,1 @@
+config V3n24_s16180_p0d0175_i0d03 seed=16180 rc=0 wall=1790

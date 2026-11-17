@@ -1,0 +1,13 @@
+BAD feas_n30_D1.5_s16180.json
+BAD feas_n30_D1.5_s31415.json
+BAD feas_S1_D1.5_s16180.json
+BAD feas_S1_D1.5_s27182.json
+BAD feas_S1_D1.5_s31415.json
+BAD feas_thrV1_0.05.json
+BAD feas_V1_D0d05_s16180.json
+BAD feas_V1_D1.5_s16180.json
+BAD feas_V1_D1.5_s27182.json
+BAD feas_V1_D1.5_s31415.json
+BAD feas_V3_D1.5_s16180.json
+BAD feas_V3_D1.5_s27182.json
+BAD feas_V3_D1.5_s31415.json

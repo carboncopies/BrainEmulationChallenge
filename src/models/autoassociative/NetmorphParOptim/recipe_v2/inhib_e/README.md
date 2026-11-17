@@ -1,0 +1,42 @@
+# inhib_e: inhibitory fraction with fewer interneurons and lower interneuron D (seed 16180, scored 2026-11-17)
+Taken over from fable-knobs (out of credits). Inputs unchanged: TARGET.md (sourced within-patch target A 25-50%, a derived working band), PREREGISTRATION.md (written before launch, not edited), offline.py/offline_results.json. Mine: grow_pv.py (copy of capacity_d/grow_pv.py: paths, model prefix `v2-ihe-`, and four new configs V3n24, V3n20, V1n24, V1n20 = the V3/V1 recipes with 24 or 20 interneurons; nothing else changed, diff checked), analyze_pv.py + measure.py (paths and the same four configs), stats.py, thr02.py (thresholding), run_grow.sh (queue, <= 3 growth sims), pv_results.json, analyze_*.log, thr02_*.json, grow_*/.
+Patched build (line-379 fix), NES 8011 / API 8010 restarted per linefix/README.md; main NES/API untouched. All 6 growths rc 0, walls 1,313-1,790 s, bio_check pass, D_synmax read back from each .nibr.clp (pyramidal 0.0175, all three interneuron pairs 0.03 or 0.02), "Deleted resident simulation" in 6 of 6. Launched as preregistered (E1-E3 first, E4-E6 as slots freed); all verified running with advancing logs shortly after launch. No git, no email, no NES code changes.
+Literal readings used: "interneuron D" = the same value on Pyr->Int, Int->Pyr and Int->Int (as in grow_pv.py and the preregistration table); pyramidal D 0.0175 everywhere; V1 at interneuron D 0.02 was NOT grown (preregistration: thresholding E3/E4); bar 5 = 8 of 24 and 7 of 20; per-pair values are per connected pair; A = Int->Pyr / (Int->Pyr + Pyr->Pyr).
+
+## 1. Results (all seed 16180)
+| run | variant, Int, D_int | Pyr->Pyr p | Pyr->Pyr syn/pair | Pyr->Pyr syn | **A** (band 25-50%) | Int->Pyr /pair (bar 4-9) | Pyr->Int /pair (bar 1.5-4.5) | drivable 8-cell (bar >= 8 of 24, 7 of 20) | zero-input Ints | all 7 bars |
+|---|---|---|---|---|---|---|---|---|---|---|
+| E1 | V3, 24, 0.03 | 0.237 | 1.83 FAIL | 3,950 | 58.9% FAIL | 4.89 | 3.40 | 11 of 24 | 1 | no (bars 2, 7) |
+| E2 | V3, 20, 0.03 | 0.270 | 2.02 | 4,976 | 50.6% FAIL (by 0.6) | 4.78 | 5.45 FAIL | 13 of 20 | 0 | no (bars 4, 7) |
+| E3 | V1, 24, 0.03 | 0.250 | 1.68 FAIL | 3,838 | 50.2% FAIL (by 0.2) | 3.61 FAIL | 3.95 | 14 of 24 | 1 | no (bars 2, 3, 7) |
+| **E4** | **V1, 20, 0.03** | **0.236** | **1.93** | 4,158 | **46.8%** | **4.13** | **4.03** | **10 of 20** | 3 | **yes, all 7** |
+| E5 | V3, 24, 0.02 | 0.238 | 1.84 FAIL | 3,991 | 48.5% | 3.67 FAIL | 2.62 | 11 of 24 | 3 | no (bars 2, 3) |
+| E6 | V3, 20, 0.02 | 0.262 | 2.05 | 4,910 | 40.5% | 3.61 FAIL | 4.04 | 11 of 20 | 1 | no (bar 3) |
+Bar 1 (Pyr->Pyr p 0.1-0.3) passes in all six (0.236-0.270); bar 6 (bio_ranges.json) passes in all six. Int->Pyr connection probability 0.45-0.55 (D 0.03: 0.50, 0.55, 0.47, 0.46; D 0.02: 0.45, 0.48), Pyr->Int probability 0.39-0.54. Raw counts (Int->Pyr / Pyr->Int / Int->Int): E1 5,666/3,410/2,613; E2 5,088/5,600/3,102; E3 3,870/4,346/2,313; E4 3,655/2,997/1,469; E5 3,759/2,349/1,797; E6 3,335/3,670/2,030.
+Reference (30 interneurons, linefix_c Stage 2, D 0.0495): A 65-69%, drivable 16-17 of 30 (53-57%).
+**Answer.** Reducing the interneuron count to 20-24 and interneuron D to 0.02-0.03 brings A to 40-59%: inside the derived 25-50% band in E4, E5, E6 (46.8%, 48.5%, 40.5%), just outside in E2 and E3 (50.6%, 50.2%), and clearly outside only in E1 (58.9%). Only E4 (V1, 20 Int, D 0.03) passes all seven bars, and on a knife edge: syn/pair 1.93 against 1.9, Int->Pyr 4.13 against 4.
+Drivable vs interneuron count: fraction drivable 0.46-0.58 at 24 (14, 11, 11), 0.50-0.65 at 20 (10, 13, 11); the bar of one third is met in all six, and the fraction is no lower than at 30 interneurons (0.53-0.57). Zero-input interneurons 0-3.
+
+## 2. Thresholding checks and V1 at D 0.02 (thr02.py; grown D_int 0.03, thresholded to 0.02)
+Same arbors in E1/E5 and E2/E6 (pyramidal dendrite, pyramidal axon and interneuron axon lengths equal to 8 digits; same-seed arbors reproduced in these two pairs). Thresholded E1 at 0.02 vs grown E5: Int->Pyr 3,758 vs 3,759, Int->Pyr/pair 3.62 vs 3.67, Pyr->Int/pair 2.61 vs 2.62, A 48.8% vs 48.5%, drivable 10 vs 11. Thresholded E2 vs grown E6: Int->Pyr 3,405 vs 3,335 (+2.1%), A 40.6% vs 40.5%, Int->Pyr/pair 3.59 vs 3.61, Pyr->Int/pair 4.18 vs 4.04, drivable 11 vs 11. So thresholding is good to about 2% on counts (as in linefix_c).
+V1 at D 0.02 (thresholded, not grown): E3 -> A 39.9%, Int->Pyr/pair 2.77, Pyr->Int/pair 3.01, drivable 11 of 24; E4 -> A 36.9%, Int->Pyr/pair 3.20, Pyr->Int/pair 3.06, drivable 8 of 20. Both fail the Int->Pyr bar (< 4), as predicted.
+
+## 3. Prediction scoring (HIT inside the stated range, PARTIAL up to 25% beyond its edge, MISS otherwise)
+| run | A | Int->Pyr per pair | Pyr->Int per pair | drivable |
+|---|---|---|---|---|
+| E1 (58.1% / 5.37 / 3.24 / 16.0 central) | 58.9 vs 50-63 HIT | 4.89 vs 4.8-6.4 HIT | 3.40 vs 2.4-3.6 HIT | 11 vs 8-18 HIT |
+| E2 | 50.6 vs 46-59 HIT | 4.78 vs 4.8-6.4 PARTIAL (0.4% under) | 5.45 vs 2.4-3.6 MISS | 13 vs 7-15 HIT |
+| E3 | 50.2 vs 43-57 HIT | 3.61 vs 3.8-5.1 PARTIAL | 3.95 vs 2.4-3.2 PARTIAL (23% over) | 14 vs 7-14 HIT |
+| E4 | 46.8 vs 38-52 HIT | 4.13 vs 3.8-5.1 HIT | 4.03 vs 2.4-3.2 MISS (26% over) | 10 vs 6-12 HIT |
+| E5 | 48.5 vs 41-52 HIT | 3.67 vs 3.6-4.8 HIT | 2.62 vs 1.9-2.8 HIT | 11 vs 7-15 HIT |
+| E6 | 40.5 vs 37-47 HIT | 3.61 vs 3.6-4.8 HIT | 4.04 vs 1.9-2.8 MISS (44% over) | 11 vs 6-13 HIT |
+Common predictions: Pyr->Pyr p 0.22-0.33: 6 of 6 HIT (0.236-0.270). Pyr->Pyr syn/pair 1.8-2.3: 6 of 6 HIT (E3 1.68 is 7% below, PARTIAL). Pyr->Pyr synapses 4,000-6,200: E2, E4, E6 HIT; E1 3,950, E3 3,838, E5 3,991 PARTIAL (just below). Int->Pyr probability 0.40-0.56 (D 0.03) / 0.35-0.50 (D 0.02): 6 of 6 HIT. V1 at D 0.02 by thresholding: A 33-46 (24) HIT (39.9), 30-42 (20) HIT (36.9); Int->Pyr/pair 3.0-3.9 (24) PARTIAL (2.77) / HIT (3.20); drivable 4-10 (24) PARTIAL (11) / 4-9 (20) HIT (8); "fails the Int->Pyr bar" HIT.
+Totals over the 24 run-by-quantity cells: 17 HIT, 4 PARTIAL, 3 MISS. The three misses are all Pyr->Int per pair (E2, E4, E6), too high: Pyr->Int per pair was predicted from the 30-interneuron networks and is higher with fewer interneurons, where each remaining interneuron's axon-dendrite overlap is not diluted (not tested). Bar-7 expectations: E6 pass (75% predicted) HIT, E5 pass (55%) HIT, E4 pass (55%) HIT, E3 fail by 0.2 point (30% predicted pass, miss within noise), E2 fail by 0.6 point (25%), E1 fail (under 10%) HIT. "About 35% that at least one run passes all seven bars, most likely E6 or E4": one did (E4); E6 failed Int->Pyr per pair by 0.39 (predicted ~50% to pass at D 0.02). "What would count against the approach" (A above 50% in all six; Int->Pyr below 4 in both D 0.02 runs): the first did not happen; the second happened (E5 3.67, E6 3.61), so D 0.02 is below the floor for interneuron pairs and D 0.03 is the usable value.
+
+## 4. Honest limits
+- One seed (16180). The success of E4 rests on small margins (syn/pair 1.93 vs 1.9, Int->Pyr 4.13 vs 4, zero-input interneurons 3). Earlier seeds changed these quantities by 5-10% and moved passes to failures (linefix_c: seed 31415 missed the probability bar by 0.008). Seeds 27182 and 31415 were not run (preregistered: only after seed 16180 is scored).
+- A 25-50% is a derived band (TARGET.md section 3: one snippet-only figure for the local excitatory share, one unsourced assumption on local inhibition), not a measured one; E4's 46.8% is near the top of it. A remains a within-patch ratio of counted synapses and is not a census value.
+- 20 interneurons are 17% and 24 are 20% of 116/120 cells; CA3 has about 11.5% interneurons, and all grown interneurons are one perisomatic PV-basket-like class (over-represented several-fold). Reaching the band's middle would need about 12 interneurons (TARGET.md), not tested.
+- Each configuration is a new arbor realisation (a different cell count changes the pyramidal realisation); E1 vs E5 and E2 vs E6 are identical-arbor pairs and agree with thresholding, but the other cross-run comparisons (V1 vs V3, 24 vs 20) mix realisation noise with the design change.
+- Drivable 8-cell is the summed-conductance proxy from the dump (no dynamic simulation); recall dynamics on these networks were not run (the Experiment 1 recall protocol could be applied to E4).
+- Pyr->Pyr synapses per pair is low (1.7-2.05); capacity_d showed that this network family holds 1 memory of 8 cells at pyramidal D 0.0175.

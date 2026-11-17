@@ -1,0 +1,1 @@
+config V1n30_s27182_p0d05_i0d0495 seed=27182 rc=0 wall=1668

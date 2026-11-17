@@ -1,0 +1,8 @@
+{"StatusCode":0,"AuthKey":"eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTQ5NzI5NjIsImlhdCI6MTc5NDkyOTc2MiwiaXNzIjoiQnJhaW5HZW5peCIsInJvbGUiOiJhZG1pbiIsInN1YiI6IkFkbW9uaXNoaW5nIn0.yo7x3GmpU5QMMW-RJsHQr_xtPmB8HANnIVjRnBeIbxg"}
+sim 38
+{'sim_id': 38, 'model': 'v2-lfd-V1n30_s16180_p0d05_i0d04950000', 'n_neurons': 126, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'n_ampa_pairs': 5177, 'n_programmed': 5177, 'loaded_ok': True}
+/home/johnjose/BrainGenix/BrainEmulationChallenge/venv/lib/python3.11/site-packages/yaspin/core.py:174: UserWarning: color, on_color and attrs are not supported when output stream is not a TTY
+  self._color = self._set_color(color) if color else color
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.25)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.26)
+deleted 38 {'ReqID': 1061, 'StatusCode': 0, 'TaskStatus': 0}
+RIP_rip_2031_16_p0d05_s16180_sg0 ripple [(2, 4, 4), (0, 4, 4), (3, 4, 4), (1, 4, 4)] ct 0 spur 0 end 56.945 success True
