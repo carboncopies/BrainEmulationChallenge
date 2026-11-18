@@ -1,0 +1,11 @@
+{"StatusCode":0,"AuthKey":"eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTQ5OTYzNjIsImlhdCI6MTc5NDk1MzE2MiwiaXNzIjoiQnJhaW5HZW5peCIsInJvbGUiOiJhZG1pbiIsInN1YiI6IkFkbW9uaXNoaW5nIn0.EBBrq_vlKIj7s90lZVNGikpTyAi4G-o7nEthCYkzXxc"}
+sim 17
+{'sim_id': 17, 'model': 'v2-ihf-V1n20_s27182_p0d0175_i0d030000', 'n_neurons': 116, 'ampa_nmda_weights_on_load': [0.2], 'gaba_weights_on_load': [0.2], 'pairs_missing': 0, 'g_mismatch': 0, 'n_ampa_pairs': 2933, 'n_programmed': 2933, 'loaded_ok': True}
+SG 1011 0
+/home/johnjose/BrainGenix/BrainEmulationChallenge/venv/lib/python3.11/site-packages/yaspin/core.py:174: UserWarning: color, on_color and attrs are not supported when output stream is not a TTY
+  self._color = self._set_color(color) if color else color
+⠋ Waiting For Simulation Processing To Complete (0:00:00.00)                                                             ⠙ Waiting For Simulation Processing To Complete (0:00:00.08)                                                             ⠹ Waiting For Simulation Processing To Complete (0:00:00.16)                                                             ⠸ Waiting For Simulation Processing To Complete (0:00:00.24)                                                             ⠼ Waiting For Simulation Processing To Complete (0:00:00.32)                                                             ⠴ Waiting For Simulation Processing To Complete (0:00:00.40)                                                             ⠦ Waiting For Simulation Processing To Complete (0:00:00.48)                                                             ⠧ Waiting For Simulation Processing To Complete (0:00:00.56)                                                             ⠇ Waiting For Simulation Processing To Complete (0:00:00.64)                                                             ⠏ Waiting For Simulation Processing To Complete (0:00:00.72)                                                             OK Waiting For Simulation Processing To Complete (0:00:00.78)
+deleted 17 {'ReqID': 2036, 'StatusCode': 0, 'TaskStatus': 0}
+D44_s27182_c1.5_sg1 G0 full 4-cell 4 4 4.524 8 6 0 True
+D44_s27182_c1.5_sg1 G0 3-cell a 0 4 None 3 0 0 True
+D44_s27182_c1.5_sg1 G0 3-cell b 0 4 None 3 0 0 True
