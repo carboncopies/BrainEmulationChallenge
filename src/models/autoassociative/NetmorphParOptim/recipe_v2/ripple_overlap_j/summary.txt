@@ -1,0 +1,109 @@
+== OVERLAP: clean rate by design family, c, GABA ==
+F1 c 0.0  on  full cue: n  56 complete  56 clean  56 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F1 c 0.0  SG  full cue: n  56 complete  56 clean  56 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F1 c 0.15 on  full cue: n  56 complete  56 clean  55 | any-cross   1 full-cross   1 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F1 c 0.15 SG  full cue: n  56 complete  56 clean  55 | any-cross   1 full-cross   1 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F1 c 1.5  on  full cue: n  56 complete  56 clean  52 | any-cross   4 full-cross   4 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F1 c 1.5  SG  full cue: n  56 complete  56 clean  47 | any-cross   9 full-cross   9 nonmember-Pyr   0 | 3-cell: n 112 clean 112
+F2 c 0.0  on  full cue: n 167 complete 167 clean 102 | any-cross  65 full-cross  65 nonmember-Pyr   0 | 3-cell: n 334 clean 334
+F2 c 0.0  SG  full cue: n 167 complete 167 clean  95 | any-cross  72 full-cross  72 nonmember-Pyr   0 | 3-cell: n 334 clean 334
+F2 c 0.15 on  full cue: n 167 complete 167 clean  96 | any-cross  71 full-cross  71 nonmember-Pyr   0 | 3-cell: n 334 clean 334
+F2 c 0.15 SG  full cue: n 167 complete 167 clean  93 | any-cross  74 full-cross  74 nonmember-Pyr   0 | 3-cell: n 334 clean 334
+F2 c 1.5  on  full cue: n 167 complete 167 clean  49 | any-cross 118 full-cross 118 nonmember-Pyr   0 | 3-cell: n 334 clean 334
+F2 c 1.5  SG  full cue: n 167 complete 167 clean  42 | any-cross 125 full-cross 125 nonmember-Pyr   9 | 3-cell: n 334 clean 334
+F3 c 0.0  on  full cue: n 232 complete 232 clean 132 | any-cross 100 full-cross 100 nonmember-Pyr   0 | 3-cell: n 464 clean 464
+F3 c 0.0  SG  full cue: n 232 complete 232 clean 115 | any-cross 117 full-cross 117 nonmember-Pyr   0 | 3-cell: n 464 clean 464
+F3 c 0.15 on  full cue: n 232 complete 232 clean 120 | any-cross 112 full-cross 112 nonmember-Pyr   0 | 3-cell: n 464 clean 464
+F3 c 0.15 SG  full cue: n 232 complete 232 clean 109 | any-cross 123 full-cross 123 nonmember-Pyr   0 | 3-cell: n 464 clean 464
+F3 c 1.5  on  full cue: n 232 complete 232 clean  56 | any-cross 176 full-cross 176 nonmember-Pyr   1 | 3-cell: n 464 clean 464
+F3 c 1.5  SG  full cue: n 232 complete 232 clean  50 | any-cross 182 full-cross 182 nonmember-Pyr  20 | 3-cell: n 464 clean 464
+F8 c 0.0  on  full cue: n  10 complete  10 clean  10 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+F8 c 0.0  SG  full cue: n  10 complete  10 clean  10 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+F8 c 0.15 on  full cue: n  10 complete  10 clean  10 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+F8 c 0.15 SG  full cue: n  10 complete  10 clean  10 | any-cross   0 full-cross   0 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+F8 c 1.5  on  full cue: n  10 complete  10 clean   8 | any-cross   2 full-cross   2 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+F8 c 1.5  SG  full cue: n  10 complete  10 clean   3 | any-cross   7 full-cross   6 nonmember-Pyr   0 | 3-cell: n  20 clean  20
+== pair level: cued memory i, other memory j sharing s cells; fraction of (i,j) with any exclusive member of j firing (all c<=1.5) ==
+('F1', 0, 0) 0 / 138
+('F1', 0, 1) 20 / 696
+('F1', 1, 0) 2 / 138
+('F1', 1, 1) 30 / 696
+('F2', 0, 0) 450 / 825
+('F2', 0, 1) 1665 / 4242
+('F2', 0, 2) 1139 / 3981
+('F2', 1, 0) 504 / 825
+('F2', 1, 1) 1849 / 4242
+('F2', 1, 2) 1261 / 3981
+('F3', 0, 0) 1796 / 2460
+('F3', 0, 1) 15737 / 27303
+('F3', 0, 2) 7247 / 23379
+('F3', 0, 3) 1209 / 11298
+('F3', 1, 0) 1875 / 2460
+('F3', 1, 1) 16594 / 27303
+('F3', 1, 2) 7964 / 23379
+('F3', 1, 3) 1449 / 11298
+('F8', 0, 3) 3 / 84
+('F8', 1, 3) 21 / 84
+GABA on vs silenced: same clean/not-clean in 4118 of 4185 paired events
+
+== RIPPLE ==
+c 0 on
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 12.6 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 8.5 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  2 freq 272 dur(med) 15.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  3 freq 360 dur(med) 12.3 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 9.9 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+c 0 SG
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 12.6 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 8.5 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 7.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.1 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 152 dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3: 15 freq 308 dur(med) 15.7 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 223 dur(med) 11.7 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  9 freq 281 dur(med) 9.6 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+c 0.15 on
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 12.6 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 8.5 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  2 freq 272 dur(med) 15.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  3 freq 360 dur(med) 12.3 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 9.9 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+c 0.15 SG
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 12.6 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 8.5 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 7.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.1 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 152 dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3: 15 freq 308 dur(med) 15.7 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 223 dur(med) 11.7 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  9 freq 281 dur(med) 9.6 intfrac(med) 0.25 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+c 1.5 on
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 12.6 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 8.5 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 1 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 6.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 0 runaway 0
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  2 freq 272 dur(med) 15.9 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 1 runaway 0
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  5 freq 352 dur(med) 12.4 intfrac(med) 0.25 lock(med) 1.00 | cross 2 nonmem 7 runaway 2
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  5 freq 276 dur(med) 10.0 intfrac(med) 0.25 lock(med) 1.00 | cross 7 nonmem 11 runaway 2
+c 1.5 SG
+  control      n  34 replay   0 fracNC 0.00 | volleys>=3:  0 freq - dur(med) - intfrac(med) - lock(med) - | cross 0 nonmem 0 runaway 0
+  rip n2 f100  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 116 dur(med) 13.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 5 runaway 1
+  rip n2 f150  n  34 replay  34 fracNC 1.00 | volleys>=3:  4 freq 245 dur(med) 8.6 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 4 runaway 4
+  rip n2 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  0 freq - dur(med) 7.0 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 1 runaway 0
+  rip n2 f250  n  34 replay  34 fracNC 1.00 | volleys>=3:  1 freq 90 dur(med) 6.1 intfrac(med) 0.20 lock(med) 1.00 | cross 0 nonmem 1 runaway 1
+  rip n3 f100  n  34 replay  33 fracNC 0.97 | volleys>=3:  5 freq 264 dur(med) 21.0 intfrac(med) 0.15 lock(med) 1.00 | cross 0 nonmem 4 runaway 4
+  rip n3 f150  n  34 replay  34 fracNC 1.00 | volleys>=3: 20 freq 257 dur(med) 44.7 intfrac(med) 0.50 lock(med) 1.00 | cross 24 nonmem 23 runaway 20
+  rip n3 f200  n  34 replay  34 fracNC 1.00 | volleys>=3:  9 freq 280 dur(med) 12.9 intfrac(med) 0.25 lock(med) 1.00 | cross 9 nonmem 12 runaway 9
+  rip n3 f250  n  34 replay  34 fracNC 1.00 | volleys>=3: 20 freq 286 dur(med) 40.5 intfrac(med) 0.50 lock(med) 1.00 | cross 22 nonmem 23 runaway 20
