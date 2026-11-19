@@ -1,0 +1,1 @@
+config V1n20_s66666_p0d0175_i0d03 seed=66666 rc=0 wall=1539
