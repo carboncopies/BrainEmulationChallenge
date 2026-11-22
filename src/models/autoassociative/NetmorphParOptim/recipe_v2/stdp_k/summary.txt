@@ -1,0 +1,51 @@
+== SIMULATED: mean weight change by class (pooled pairs; n pairs) ==
+('A1', 10, 0.0) models 10 decreased 0 of 32273 | a_cue->noncue +0.1026 (224) b_noncue<->noncue +0.0002 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0505 (100) e_cue->Int +0.0265 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.00 | cap viol 0
+('A1', 10, 0.15) models 10 decreased 0 of 32273 | a_cue->noncue +0.1026 (224) b_noncue<->noncue +0.0002 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0505 (100) e_cue->Int +0.0265 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.00 | cap viol 0
+('A1', 100, 0.0) models 10 decreased 1 of 32273 | a_cue->noncue +0.3327 (224) b_noncue<->noncue +0.0036 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.5049 (100) e_cue->Int +0.1570 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other -0.0000 (380) | cue->noncue at cap 1.00 | cap viol 0
+('A1', 100, 0.15) models 10 decreased 1 of 32273 | a_cue->noncue +0.3327 (224) b_noncue<->noncue +0.0036 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.4749 (100) e_cue->Int +0.1570 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other -0.0000 (380) | cue->noncue at cap 1.00 | cap viol 0
+('A2', 10, 0.0) models 10 decreased 0 of 32273 | a_cue->noncue +0.0837 (224) b_noncue<->noncue +0.0009 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0706 (100) e_cue->Int +0.0294 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.01 | cap viol 0
+('A2', 10, 0.15) models 10 decreased 0 of 32273 | a_cue->noncue +0.0837 (224) b_noncue<->noncue +0.0009 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0706 (100) e_cue->Int +0.0294 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.01 | cap viol 0
+('A2', 100, 0.0) models 10 decreased 12 of 32273 | a_cue->noncue +0.2509 (224) b_noncue<->noncue +0.0036 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.4885 (100) e_cue->Int +0.1526 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other -0.0002 (380) | cue->noncue at cap 0.75 | cap viol 0
+('A2', 100, 0.15) models 10 decreased 12 of 32273 | a_cue->noncue +0.2509 (224) b_noncue<->noncue +0.0036 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.4465 (100) e_cue->Int +0.1526 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other -0.0002 (380) | cue->noncue at cap 0.75 | cap viol 0
+('ctrl', 0, 0.0) models 10 decreased 0 of 32273 | a_cue->noncue +0.0000 (224) b_noncue<->noncue +0.0000 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0000 (100) e_cue->Int +0.0000 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.00 | cap viol 0
+('ctrl', 0, 0.15) models 10 decreased 0 of 32273 | a_cue->noncue +0.0000 (224) b_noncue<->noncue +0.0000 (51) c_noncue->cue +0.0000 (53) d_cue->cue +0.0000 (100) e_cue->Int +0.0000 (903) f_between +0.0000 (990) g_nonmember +0.0000 (29572) h_other +0.0000 (380) | cue->noncue at cap 0.00 | cap viol 0
+
+== SIMULATED: training stability (non-member Pyr spikes per event) ==
+('A1', 10, 0.0) runaway events 0 of 280 max non-member/event 0 models with any runaway 0 int spikes/event first 2.3 last 2.5
+('A1', 10, 0.15) runaway events 0 of 280 max non-member/event 0 models with any runaway 0 int spikes/event first 2.3 last 2.5
+('A1', 100, 0.0) runaway events 0 of 2800 max non-member/event 0 models with any runaway 0 int spikes/event first 2.3 last 2.9
+('A1', 100, 0.15) runaway events 0 of 2800 max non-member/event 0 models with any runaway 0 int spikes/event first 2.3 last 2.9
+('A2', 10, 0.0) runaway events 0 of 280 max non-member/event 0 models with any runaway 0 int spikes/event first 2.8 last 4.7
+('A2', 10, 0.15) runaway events 0 of 280 max non-member/event 0 models with any runaway 0 int spikes/event first 2.8 last 4.7
+('A2', 100, 0.0) runaway events 0 of 2800 max non-member/event 0 models with any runaway 0 int spikes/event first 2.8 last 3.4
+('A2', 100, 0.15) runaway events 0 of 2800 max non-member/event 0 models with any runaway 0 int spikes/event first 2.8 last 3.4
+
+== SIMULATED: probe recall after training (memories; full completes / 3-cell cue completes (any non-cue fires) / non-member spike trials / cross) ==
+('A1', 10, 0.0) memories 28 full completes 28 3-cell completes (>=1 non-cue) 15 memories with non-member spikes 0 with cross 0
+('A1', 10, 0.15) memories 28 full completes 28 3-cell completes (>=1 non-cue) 15 memories with non-member spikes 0 with cross 0
+('A1', 100, 0.0) memories 28 full completes 28 3-cell completes (>=1 non-cue) 28 memories with non-member spikes 0 with cross 0
+('A1', 100, 0.15) memories 28 full completes 28 3-cell completes (>=1 non-cue) 28 memories with non-member spikes 0 with cross 0
+('A2', 10, 0.0) memories 28 full completes 28 3-cell completes (>=1 non-cue) 16 memories with non-member spikes 0 with cross 0
+('A2', 10, 0.15) memories 28 full completes 28 3-cell completes (>=1 non-cue) 16 memories with non-member spikes 0 with cross 0
+('A2', 100, 0.0) memories 28 full completes 28 3-cell completes (>=1 non-cue) 28 memories with non-member spikes 0 with cross 0
+('A2', 100, 0.15) memories 28 full completes 28 3-cell completes (>=1 non-cue) 28 memories with non-member spikes 0 with cross 0
+('ctrl', 0, 0.0) memories 28 full completes 28 3-cell completes (>=1 non-cue) 0 memories with non-member spikes 0 with cross 0
+('ctrl', 0, 0.15) memories 28 full completes 28 3-cell completes (>=1 non-cue) 0 memories with non-member spikes 0 with cross 0
+
+== OFFLINE (literature rules applied to the training spike trains; NOT simulated) ==
+L1_Song2000 ('A1', 10, 0.0) decreased 89 | a_cue->noncue +0.0436 b_noncue<->noncue -0.0228 c_noncue->cue -0.0458 d_cue->cue +0.0258 e_cue->Int +0.0108 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L1_Song2000 ('A1', 10, 0.15) decreased 135 | a_cue->noncue +0.0436 b_noncue<->noncue -0.0228 c_noncue->cue -0.0458 d_cue->cue +0.0031 e_cue->Int +0.0108 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L1_Song2000 ('A1', 100, 0.0) decreased 158 | a_cue->noncue +0.3294 b_noncue<->noncue -0.1808 c_noncue->cue -0.5593 d_cue->cue +0.2584 e_cue->Int +0.1365 f_between +0.0000 g_nonmember +0.0000 h_other -0.0207 | noncue->cue at 0: 0.00
+L1_Song2000 ('A1', 100, 0.15) decreased 204 | a_cue->noncue +0.3294 b_noncue<->noncue -0.1808 c_noncue->cue -0.5593 d_cue->cue +0.1992 e_cue->Int +0.1365 f_between +0.0000 g_nonmember +0.0000 h_other -0.0207 | noncue->cue at 0: 0.00
+L1_Song2000 ('A2', 10, 0.0) decreased 109 | a_cue->noncue +0.0642 b_noncue<->noncue -0.0231 c_noncue->cue -0.0685 d_cue->cue +0.0239 e_cue->Int +0.0222 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L1_Song2000 ('A2', 10, 0.15) decreased 134 | a_cue->noncue +0.0642 b_noncue<->noncue -0.0231 c_noncue->cue -0.0685 d_cue->cue +0.0018 e_cue->Int +0.0222 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L1_Song2000 ('A2', 100, 0.0) decreased 187 | a_cue->noncue +0.2507 b_noncue<->noncue -0.3181 c_noncue->cue -0.6665 d_cue->cue +0.2393 e_cue->Int +0.1332 f_between +0.0000 g_nonmember +0.0000 h_other -0.0498 | noncue->cue at 0: 0.16
+L1_Song2000 ('A2', 100, 0.15) decreased 212 | a_cue->noncue +0.2507 b_noncue<->noncue -0.3181 c_noncue->cue -0.6665 d_cue->cue +0.1966 e_cue->Int +0.1332 f_between +0.0000 g_nonmember +0.0000 h_other -0.0498 | noncue->cue at 0: 0.16
+L2_BiPoo_taus ('A1', 10, 0.0) decreased 89 | a_cue->noncue +0.0422 b_noncue<->noncue -0.0229 c_noncue->cue -0.0492 d_cue->cue +0.0256 e_cue->Int +0.0103 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A1', 10, 0.15) decreased 135 | a_cue->noncue +0.0422 b_noncue<->noncue -0.0229 c_noncue->cue -0.0492 d_cue->cue +0.0026 e_cue->Int +0.0103 f_between +0.0000 g_nonmember +0.0000 h_other -0.0001 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A1', 100, 0.0) decreased 167 | a_cue->noncue +0.3283 b_noncue<->noncue -0.1878 c_noncue->cue -0.5946 d_cue->cue +0.2563 e_cue->Int +0.1340 f_between +0.0000 g_nonmember +0.0000 h_other -0.0230 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A1', 100, 0.15) decreased 213 | a_cue->noncue +0.3283 b_noncue<->noncue -0.1878 c_noncue->cue -0.5946 d_cue->cue +0.1971 e_cue->Int +0.1340 f_between +0.0000 g_nonmember +0.0000 h_other -0.0230 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A2', 10, 0.0) decreased 111 | a_cue->noncue +0.0615 b_noncue<->noncue -0.0237 c_noncue->cue -0.0750 d_cue->cue +0.0219 e_cue->Int +0.0211 f_between +0.0000 g_nonmember +0.0000 h_other -0.0002 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A2', 10, 0.15) decreased 136 | a_cue->noncue +0.0615 b_noncue<->noncue -0.0237 c_noncue->cue -0.0750 d_cue->cue -0.0019 e_cue->Int +0.0211 f_between +0.0000 g_nonmember +0.0000 h_other -0.0002 | noncue->cue at 0: 0.00
+L2_BiPoo_taus ('A2', 100, 0.0) decreased 199 | a_cue->noncue +0.2504 b_noncue<->noncue -0.3582 c_noncue->cue -0.7237 d_cue->cue +0.2196 e_cue->Int +0.1278 f_between +0.0000 g_nonmember +0.0000 h_other -0.0580 | noncue->cue at 0: 0.33
+L2_BiPoo_taus ('A2', 100, 0.15) decreased 224 | a_cue->noncue +0.2504 b_noncue<->noncue -0.3582 c_noncue->cue -0.7237 d_cue->cue +0.1867 e_cue->Int +0.1278 f_between +0.0000 g_nonmember +0.0000 h_other -0.0580 | noncue->cue at 0: 0.33
