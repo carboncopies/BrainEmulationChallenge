@@ -1,0 +1,6 @@
+import time;t=time.time()
+import lpw_lib as L; print('import',time.time()-t,flush=True)
+G=L.load('s16180'); print('load',time.time()-t,flush=True)
+cfg=L.Cfg(G,**L.PRIMARY); print('cfg',time.time()-t,'hubs',cfg.hubs,flush=True)
+print('strong in-degree max', cfg.strong.sum(0).max(), 'sum', cfg.strong.sum(),flush=True)
+c=L.candidates(cfg,2); print('cands',len(c),time.time()-t,flush=True)

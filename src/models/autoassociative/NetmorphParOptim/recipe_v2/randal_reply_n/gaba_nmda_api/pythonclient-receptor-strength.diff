@@ -1,0 +1,91 @@
+From f25a201d6df31b183574ba17b384bd90459252cc Mon Sep 17 00:00:00 2001
+From: johnjose <jjose@carboncopies.org>
+Date: Mon, 23 Nov 2026 07:37:03 -0800
+Subject: [PATCH] Python client: optional Neurotransmitter argument for
+ SetPrePostStrength, BatchSetPrePostStrength, SetAllStrength
+
+Companion to the NES change (branch nes-receptor-strength). Neurotransmitter is
+"AMPA", "GABA" or "NMDA" (Batch: one string or a list with one entry per
+pair). Omitted: legacy behavior; the key is not sent.
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+---
+ BrainGenix/NES/Simulation/Simulation.py | 28 ++++++++++++++++++++++---
+ 1 file changed, 25 insertions(+), 3 deletions(-)
+
+diff --git a/BrainGenix/NES/Simulation/Simulation.py b/BrainGenix/NES/Simulation/Simulation.py
+index d4b88a9..91f7eab 100644
+--- a/BrainGenix/NES/Simulation/Simulation.py
++++ b/BrainGenix/NES/Simulation/Simulation.py
+@@ -409,7 +409,12 @@ class Simulation():
+         assert(Response != None)
+         return Response
+ 
+-    def SetPrePostStrength(self, PreSyn:int, PostSyn:int, Conductance_nS:float):
++    # Neurotransmitter (optional): "AMPA", "GABA" or "NMDA". If given, only the
++    # receptor group of that type between the pair is set (conductance =
++    # weight x summed peak conductance of that group) and groups of other types are
++    # left unchanged. If omitted (None): legacy behavior (first AMPA group set,
++    # all other receptor groups from PreSyn zeroed).
++    def SetPrePostStrength(self, PreSyn:int, PostSyn:int, Conductance_nS:float, Neurotransmitter:str=None):
+         QueryList:list = []
+         QueryList.append({
+             "Simulation/SetPrePostStrength": {
+@@ -419,11 +424,17 @@ class Simulation():
+                 "Conductance_nS": Conductance_nS,
+             }
+         })
++        if Neurotransmitter is not None:
++            QueryList[0]["Simulation/SetPrePostStrength"]["Neurotransmitter"] = Neurotransmitter
+         Response = self.RequestHandler.BuildPostQuery(QueryList, "/NES")[0]
+         assert(Response != None)
+         return Response
+ 
+-    def SetAllStrength(self, Conductance_nS:float):
++    # Neurotransmitter (optional): "AMPA", "GABA" or "NMDA". If given, only
++    # groups of that type are set (all pairs that have one); the others are
++    # unchanged. If omitted (None): legacy behavior (all AMPA pairs set, all
++    # NMDA and GABA zeroed).
++    def SetAllStrength(self, Conductance_nS:float, Neurotransmitter:str=None):
+         QueryList:list = []
+         QueryList.append({
+             "Simulation/SetAllStrength": {
+@@ -431,6 +442,8 @@ class Simulation():
+                 "Conductance_nS": Conductance_nS,
+             }
+         })
++        if Neurotransmitter is not None:
++            QueryList[0]["Simulation/SetAllStrength"]["Neurotransmitter"] = Neurotransmitter
+         Response = self.RequestHandler.BuildPostQuery(QueryList, "/NES")[0]
+         assert(Response != None)
+         return Response
+@@ -445,9 +458,16 @@ class Simulation():
+     # out for each PreSyn-PosSyn pair of neurons in the lists provided.
+     # Note: This API returns an error if connection modifications are
+     #       requested for connections that do not exist.
+-    def BatchSetPrePostStrength(self, PreSyn:list, PostSyn:list, Conductance_nS:list):
++    # Neurotransmitter (optional): one string ("AMPA", "GABA" or "NMDA") for all
++    # entries, or a list of such strings, one per pair. If given, only the
++    # receptor group of that type is set for that pair and other types are left
++    # unchanged. If omitted (None): legacy behavior (see above).
++    def BatchSetPrePostStrength(self, PreSyn:list, PostSyn:list, Conductance_nS:list, Neurotransmitter=None):
+         assert(len(PreSyn)==len(PostSyn))
+         assert(len(PreSyn)==len(Conductance_nS))
++        if isinstance(Neurotransmitter, (list, tuple)):
++            assert(len(Neurotransmitter)==len(PreSyn))
++            Neurotransmitter = list(Neurotransmitter)
+         QueryList:list = []
+         QueryList.append({
+             "Simulation/BatchSetPrePostStrength": {
+@@ -457,6 +477,8 @@ class Simulation():
+                 "Conductance_nS": Conductance_nS,
+             }
+         })
++        if Neurotransmitter is not None:
++            QueryList[0]["Simulation/BatchSetPrePostStrength"]["Neurotransmitter"] = Neurotransmitter
+         Response = self.RequestHandler.BuildPostQuery(QueryList, "/NES")[0]
+         assert(Response != None)
+         return Response
+-- 
+2.39.5
+

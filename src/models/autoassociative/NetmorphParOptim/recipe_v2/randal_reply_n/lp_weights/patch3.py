@@ -1,0 +1,5 @@
+p='lpw_lib.py'; s=open(p).read()
+s=s.replace("    def __init__(self, G, theta, H, lbw, hubmode='exclude'):\n","    def __init__(self, G, theta, H, lbw, hubmode='exclude', gapmin=None):\n")
+s=s.replace("self.theta = theta; self.H = H; self.lbw = lbw; self.gap = T - theta","self.theta = theta; self.H = H; self.lbw = lbw; self.gap = T - theta if gapmin is None else gapmin")
+s=s.replace("VARIANTS = {'primary': PRIMARY,","# POST-HOC variant (not preregistered): R3 pair rule (each cue pair >= 4.125) + cascade-threshold criterion (outsiders < 16.5), hubs as targets\nR3EQ = dict(theta=16.4, H=3 * T, lbw=0.1, hubmode='waive', gapmin=4.125)\nVARIANTS = {'primary': PRIMARY,")
+open(p,'w').write(s)

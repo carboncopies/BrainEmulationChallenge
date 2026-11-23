@@ -1,0 +1,5 @@
+s=open('extra_stats.py').read()
+s=s.replace("KEYS = ['s16180','s27182','s31415','s11111','s22222','s33333','s44444','s55555','s66666','s77777']","import sys\nKEYS = [sys.argv[1]]")
+s=s.replace(", ('Hinf_theta14', dict(L.PRIMARY, H=1e9, theta=14.0))","")
+s=s.replace("json.dump(rows, open('extra_stats.json', 'w'), indent=1)","json.dump(rows, open('extra_%s.json' % KEYS[0], 'w'), indent=1)")
+open('extra_stats.py','w').write(s)

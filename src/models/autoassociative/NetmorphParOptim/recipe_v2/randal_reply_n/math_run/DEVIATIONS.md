@@ -1,0 +1,4 @@
+# math_run DEVIATIONS (PREREGISTRATION.md is not edited)
+
+## D1 (2026-11-23, before any run): distributed-cue designs use the closed-form minimal weights, not a final LP
+The recall conditions for c-cell cues contain a "top-q sum" constraint (any sub-cue lacking 25% of the cue cells gives <= 12.375 nS). Representing it in the final LP needs auxiliary variables per memory and target. I implement it as a forced-value test (waterfill with the 0.1 lower bound, then the top-q check) and give the minimal weights as the design; they satisfy the constraints by construction, and an independent verifier re-checks bounds, caps and the cascade model. Pairs shared by two memories take the larger of their two requirements (slightly above the LP optimum; capacity counts are therefore lower bounds). Written in the preregistration section 5 already; recorded here for clarity.

@@ -1,0 +1,599 @@
+# This is a highly simplified example used to study the the creation
+# of autoassociative connections between pyramidal neurons in a region.
+#
+# Randal A. Koene 20240628
+#
+# Run this from the netmorph directory as follows:
+# ./netmorph "include=examples/nesvbp/nesvbp-autoassociative" "outattr_directory=examples/nesvbp/"
+
+# Duration, granularity, deterministic
+# Granularity dt is expressed in seconds
+
+days=20;
+dt=100;
+randomseed=20240628;
+enable_completion_requirements=false;
+use_soma_detailing=true;
+
+# SOMA INITIALIZATION PARAMETERS
+
+# Apical on opposite side of axon & basal.
+# Apical general direction of growth towards pia.
+pia_attraction_repulsion_hypothesis=true;
+
+# Start basal growth from specified vector from soma center
+# to center-of-mass of dendrite roots.
+use_specified_basal_direction=true;
+specified_basal_direction_relx=0.001;
+specified_basal_direction_rely=0;
+specified_basal_direction_relz=-1;
+
+# For each pyramidal cell, pick the number of basal dendrites
+# by uniform random selection between 4 and 8.
+pyramidal.min_basal=4;
+pyramidal.max_basal=8;
+
+# Angular deviation from center-of-mass vector possible for
+# dendrite emergence constrained between 0-1.5 radians.
+pyramidal.basal.minangle=0;
+pyramidal.basal.maxangle=1.5;
+
+# Distribute basal roots as if they repel each other within
+# the available area on the soma.
+pyramidal.basal.force_model=surface_division;
+
+# Min-Max range of initial segment length (L0)
+# For dendrites, the default is 9-11 um.
+# For axons, specified here:
+all_axons.L0=15,25;
+
+# SOMA PLACEMENT PARAMETERS
+# We are going to define 2 layers for our imaginary neuronal circuit.
+# In = Input layer containing only 1 pyramidal neuron
+# Out = Output layer containing only 1 pyramidal neuron
+# Setting .neurons=0 ensures that the total number of neurons
+# is simply the sum of pyramidal neurons and interneurons.
+
+shape=regions;
+regions=In;
+
+# 3D appearance of each region
+In.shape=disc;
+In.neurons=0;
+In.pyramidal=16;
+In.interneuron=16;
+In.minneuronseparation=10;
+In.centerZ=-300;
+In.shape.radius=100;
+In.shape.thickness=20;
+
+# REGION SPECIFIC AND NEURON TYPE SPECIFIC MODEL PARAMETERS
+
+# Interneuron axons do not use the default elongation and growth
+# parameters, instead they have a much slower elongation rate.
+#Mid.all_interneuron_axons.arbor_elongation_model=van_Pelt;
+#Mid.all_interneuron_axons.growth_nu0=0.0001;
+#Mid.all_interneuron_axons.growth_F=0.16;
+
+# ENVIRONMENT PHYSICS
+# Growth is bounded by a tissue boundary that is here defined to be
+# spherical with a 50 mm radius.
+# Note: We may wish to move the layers closer to the center of the
+# sphere to avoid bending of axons at the output layer.
+environment_physics=pia;
+pia.physical_boundary=spherical;
+pia.spherical_center=0,0,-50000;
+pia.spherical_radius=50000;
+pia.spherical_maxrange=100;
+pia.spherical_c_repulse=0.2;
+
+# UNIVERSAL SET ELONGATION PARAMETERS
+# Neurites compete for resources within the same arbor.
+# The BESTL model of terminal segment elongation takes into account
+# the position of a growth cone in a dendritic tree.
+# Perturbation parameter ‘delta’ function with mean 0 specifies that
+# elongation rates do not change between bifurcation points.
+# After bifurcation, elongation rate is uniform random selected with
+# mean of all other growth cone elongation rates and the greater of
+# two elongation rates is given to the longer branch.
+arbor_elongation_model=van_Pelt;
+growth_F=0.39;
+growth_nu0=0.00013889;
+F_competes_with=same_arbor;
+terminal_segment_elongation_model=BESTL;
+tsem.PDF=delta;
+elongation_rate_initialization_model=length_distribution;
+
+# UNIVERSAL SET BRANCHING MODEL PARAMETERS
+# Using default branching parameters of the van Pelt model.
+# A minimum node interval of 2 um is enforced.
+# The ‘Balanced_Forces’ model takes elongation rates into account
+# to select branching angles.
+branching_model=van_Pelt;
+min_node_interval=2.0;
+branch_angle_model=Balanced_Forces;
+
+# TURNING MODEL PARAMETERS
+# Stochastic turn events occur with a mean separation 5 um.
+TSTM=linear_rate;
+turn_separation=5.0;
+
+# DIRECTION MODEL PARAMETERS
+# Tensile influence is exerted on the direction of growth cones.
+# By setting dirhistory_selection to none, all history contributes.
+direction_model=segment_history_tension;
+veeranglemin=0.0;
+veeranglemax=0.75;
+dirhistory_selection=none;
+
+# AXONS DIRECTION MODEL PARAMETERS
+# A direction model is given the label ‘axondm’ and that model is
+# chained in with the overall tension model, applied to axons.
+# This additional contributor is ‘cell_attraction’ model. Its weight
+# of 0.05 is equal to the default weighting of the tension model.
+# Growth is attracted to the centroid location of an attractive
+# other region of neurons. By default, the axons of neurons in one
+# region are attracted to the neurons in the next region defined,
+# here from In to Mid and from Mid to Out.
+all_axons.direction_model=segment_history_tension;
+all_axons.dm_label=axondm;
+all_axons.axondm.dm_weight=0.2;
+all_axons.axondm.direction_model=cell_attraction;
+
+detailed_chemical_factors=true;
+soma_attraction_weight=0.0;
+
+#In.attractedto=NGF_A; (replaced by per-cell lines, randal_reply_n)
+#In.attractors=NGF_A; (replaced by per-cell lines)
+
+#idx.In.pyramidal.0.attractedto=NGF_A;
+
+#idx.Out.pyramidal.0.attractors=NGF_A;
+
+# AXONS ELONGATION MODEL PARAMETERS
+# Note that the specifications here do not apply to Mid interneuron
+# axons, which received specific parameters earlier.
+# The elongation rate for axons specified here, 0.000520833 μm/s,
+# leads to about 45 μm elongation per day.
+all_axons.arbor_elongation_model=van_Pelt;
+all_axons.growth_nu0=0.0005208333;
+all_axons.growth_F=0.16;
+all_axons.F_competes_with=same_arbor;
+all_axons.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+all_axons.eri.PDF=normal;
+all_axons.eri.PDF.mean=0.00021367265496506256;
+all_axons.eri.PDF.std=0.0003978;
+
+# AXONS BRANCHING MODEL PARAMETERS
+# Note that a larger time coefficient tau means higher probability of later branching,
+# while a smaller value means higher probability of earlier branching.
+all_axons.branching_model=van_Pelt;
+all_axons.B_inf=13.21658;
+all_axons.E_competes_with=same_arbor; 
+all_axons.E=0.319251;
+all_axons.tau=1681541;
+all_axons.TSBM=van_Pelt; 
+all_axons.S=-0.20538;
+
+# In REGION AXON BRANCHING MODEL (attempting more branches)
+In.all_axons.branching_model=van_Pelt;
+In.all_axons.B_inf=10.0;
+In.all_axons.tau=319680;
+In.all_axons.E_competes_with=same_arbor;
+In.all_axons.E=0.5;
+In.all_axons.TSBM=van_Pelt;
+
+# DENDRITE ELONGATION MODEL PARAMETERS
+# Elongation of growth cones of basal dendrites is governed by a
+# non-normalizing terminal segment elongation model.
+# A rate of 0.0000914464 μm/s means about 7.901 μm per day.
+# The mean length of a newly created terminal segment after a branch
+# point is 6 um.
+all_dendrites.terminal_segment_elongation_model=nonnorm_BESTL;
+all_dendrites.tsem.PDF=delta;
+all_dendrites.tsem.PDF.value=0;
+all_dendrites.tsem.branch.PDF=normal;
+all_dendrites.tsem.branch.PDF.mean=6;
+all_dendrites.tsem.branch.PDF.std=5;
+all_dendrites.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+all_dendrites.eri.PDF=normal;
+all_dendrites.eri.PDF.mean=0.0000914464;
+all_dendrites.eri.PDF.std=0.0000365786;
+
+# DENDRITES BRANCHING MODEL PARAMETERS
+# The mean number of branches is constrained (B_inf) and most
+# branching takes place during a short period of development (tau).
+all_dendrites.branching_model=van_Pelt;
+all_dendrites.B_inf=2.52;
+all_dendrites.tau=259680;
+all_dendrites.E_competes_with=same_arbor;
+all_dendrites.E=0.73;
+all_dendrites.TSBM=van_Pelt;
+
+# COMMAND SUBSTITUTION
+substitute=APD:all_apical_pyramidal_dendrites;
+
+# APICAL DENDRITE TRUNK FIBER BRANCHING MODELS
+# Branching on the trunk is very unlikely (B_inf).
+APD.branching_model=van_Pelt;
+APD.B_inf=0.1;
+APD.tau=400000;
+APD.E=0;
+APD.E_competes_with=same_arbor;
+
+# APICAL DENDRITE TRUNK FIBER ELONGATION MODELS
+# A model specific to apical dendrites is used (pyrAD_BESTLNN).
+# The label ‘pyr1’ is assigned to parameters for the oblique
+# branches.
+APD.terminal_segment_elongation_model=pyrAD_BESTLNN;
+APD.tsem.trunklength.PDF=normal;
+APD.tsem.trunklength.PDF.mean=80;
+APD.tsem.trunklength.PDF.std=2;
+APD.tsem.prefix=pyr1;
+APD.tsem.PDF=delta;
+APD.tsem.PDF.value=0;
+APD.tsem.branch.PDF=normal;
+APD.tsem.branch.PDF.mean=6;
+APD.tsem.branch.PDF.std=1;
+APD.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+APD.eri.PDF=normal;
+APD.eri.PDF.mean=0.0010208333;
+APD.eri.PDF.std=0.000256;
+
+# APICAL DENDRITE TRUNK FIBER DIRECTION MODELS
+APD.direction_model=segment_history_tension;
+APD.veeranglemin=0.0;
+APD.veeranglemax=0.1;
+
+# PLACEMENT OF OBLIQUE BRANCHES ON APICAL DENDRITES
+# A mean of 5 oblique branches appear at angles orthogonal to the
+# trunk.
+APD.tsem.obliques.PDF=normal;
+APD.tsem.obliques.PDF.mean=5;
+APD.tsem.obliques.PDF.std=1;
+APD.tsem.obliqueangle.PDF=normal;
+APD.tsem.obliqueangle.PDF.mean=0;
+APD.tsem.obliqueangle.PDF.std=1;
+
+# APICAL TUFT FIBERS ELONGATION MODELS
+# Their elongation 0.0003889 μm/s implies about 33.6 μm per day.
+pyr1.tuft.terminal_segment_elongation_model=nonnorm_BESTL;
+pyr1.tuft.tsem.branch.PDF=normal;
+pyr1.tuft.tsem.branch.PDF.mean=6;
+pyr1.tuft.tsem.branch.PDF.std=1;
+pyr1.tuft.tsem.PDF=delta;
+pyr1.tuft.tsem.PDF.value=0;
+pyr1.tuft.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+pyr1.tuft.eri.PDF=normal;
+pyr1.tuft.eri.PDF.mean=0.0003889;
+pyr1.tuft.eri.PDF.std=0.000004;
+
+# APICAL TUFT FIBERS BRANCHING MODELS
+pyr1.tuft.TSBM=van_Pelt_specBM;
+pyr1.tuft.S=1;
+pyr1.tuft.branching_model=van_Pelt;
+pyr1.tuft.B_inf=25;
+pyr1.tuft.tau=400000;
+pyr1.tuft.E=0.3;
+pyr1.tuft.E_competes_with=same_arbor;
+
+# APICAL OBLIQUE FIBERS ELONGATION MODELS
+# Elongation 0.0002 μm/s is about 17.28 μm per day.
+pyr1.oblique.terminal_segment_elongation_model=nonnorm_BESTL;
+pyr1.oblique.tsem.branch.PDF=normal;
+pyr1.oblique.tsem.branch.PDF.mean=6;
+pyr1.oblique.tsem.branch.PDF.std=1;
+pyr1.oblique.tsem.PDF=delta;
+pyr1.oblique.tsem.PDF.value=0;
+pyr1.oblique.elongation_rate_initialization_model=nonnorm_BESTL_length_distribution;
+pyr1.oblique.eri.PDF=normal;
+pyr1.oblique.eri.PDF.mean=0.0002;
+pyr1.oblique.eri.PDF.std=0.000001;
+
+# APICAL OBLIQUE FIBERS BRANCHING MODELS
+pyr1.oblique.TSBM=van_Pelt_specBM;
+pyr1.oblique.S=1;
+pyr1.oblique.branching_model=van_Pelt;
+pyr1.oblique.B_inf=1.5;
+pyr1.oblique.tau=500000;
+pyr1.oblique.E=0.3;
+pyr1.oblique.E_competes_with=same_arbor;
+
+# GENERAL SIMULATION PARAMETERS
+# Branching is not enforced at the root length of axons and dendrites
+# (branchatinitlength).
+# Branches can occur at any point in the piece of elongated fiber 
+# segment (branchinsegment).
+# Growth cones can make turns during growth between branch points
+# (fibreswithturns).
+# Turns do not probabilistically become branches (Abranchesatturns)
+# and (Dbranchesatturns).
+# Potential sites for synapses are not sought in this simulation
+# (candidate_synapses).
+fibreswithturns=true;
+branchatinitlength=false;
+branchinsegment=true;
+Abranchesatturns=false;
+Dbranchesatturns=false;
+candidate_synapses=true;
+
+fibrediameter=true;
+neurite_diameter_model=rall;
+
+# SIMULATION RUNTIME AND SAMPLING PARAMETERS
+# Data is collected at intervals of 4320 seconds.
+# This data is used to produce statistical output
+# (statsattr_collect_statistics).
+sample_dt=4320;
+statsattr_collect_statistics=true;
+
+# TEXTUAL OUTPUT DATA PARAMETERS
+outattr_show_progress=true;
+outattr_make_full_Txt=true;
+outattr_Txt_sequence=false;
+outattr_Txt_separate_files=true;
+outattr_track_synaptogenesis=true;
+outattr_track_nodegenesis=true;
+outattr_show_stats=true;
+
+NES_output=true;
+
+# GRAPHICAL VISUALIZATION PARAMETERS
+outattr_show_figure=false;
+figattr_make_full_Fig=false;
+figuresequence=false;
+
+D_synmax.pyramidal.pyramidal=0.0175;
+D_synmax.pyramidal.interneuron=0.03;
+D_synmax.interneuron.pyramidal=0.03;
+D_synmax.interneuron.interneuron=0.03;
+interneuron.min_basal=6;
+interneuron.max_basal=10;
+all_interneuron_dendrites.branching_model=van_Pelt;
+all_interneuron_dendrites.B_inf=3.5;
+all_interneuron_dendrites.tau=259680;
+all_interneuron_dendrites.E=0.73;
+all_interneuron_dendrites.E_competes_with=same_arbor;
+all_interneuron_dendrites.min_node_interval=2.0;
+all_interneuron_axons.branching_model=van_Pelt;
+all_interneuron_axons.B_inf=20;
+all_interneuron_axons.tau=1681541;
+all_interneuron_axons.E=0.319251;
+all_interneuron_axons.E_competes_with=same_arbor;
+all_interneuron_axons.min_node_interval=0.0;
+all_interneuron_axons.direction_model=segment_history_tension;
+all_interneuron_axons.dm_label=axondm;
+all_interneuron_axons.axondm.dm_weight=0.6;
+all_interneuron_axons.axondm.direction_model=cell_attraction;
+idx.In.pyramidal.0.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.0.attractedto=NGF_A;
+idx.In.pyramidal.1.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.1.attractedto=NGF_A;
+idx.In.pyramidal.2.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.2.attractedto=NGF_A;
+idx.In.pyramidal.3.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.3.attractedto=NGF_A;
+idx.In.pyramidal.4.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.4.attractedto=NGF_A;
+idx.In.pyramidal.5.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.5.attractedto=NGF_A;
+idx.In.pyramidal.6.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.6.attractedto=NGF_A;
+idx.In.pyramidal.7.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.7.attractedto=NGF_A;
+idx.In.pyramidal.8.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.8.attractedto=NGF_A;
+idx.In.pyramidal.9.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.9.attractedto=NGF_A;
+idx.In.pyramidal.10.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.10.attractedto=NGF_A;
+idx.In.pyramidal.11.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.11.attractedto=NGF_A;
+idx.In.pyramidal.12.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.12.attractedto=NGF_A;
+idx.In.pyramidal.13.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.13.attractedto=NGF_A;
+idx.In.pyramidal.14.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.14.attractedto=NGF_A;
+idx.In.pyramidal.15.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.15.attractedto=NGF_A;
+idx.In.pyramidal.16.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.16.attractedto=NGF_A;
+idx.In.pyramidal.17.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.17.attractedto=NGF_A;
+idx.In.pyramidal.18.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.18.attractedto=NGF_A;
+idx.In.pyramidal.19.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.19.attractedto=NGF_A;
+idx.In.pyramidal.20.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.20.attractedto=NGF_A;
+idx.In.pyramidal.21.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.21.attractedto=NGF_A;
+idx.In.pyramidal.22.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.22.attractedto=NGF_A;
+idx.In.pyramidal.23.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.23.attractedto=NGF_A;
+idx.In.pyramidal.24.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.24.attractedto=NGF_A;
+idx.In.pyramidal.25.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.25.attractedto=NGF_A;
+idx.In.pyramidal.26.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.26.attractedto=NGF_A;
+idx.In.pyramidal.27.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.27.attractedto=NGF_A;
+idx.In.pyramidal.28.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.28.attractedto=NGF_A;
+idx.In.pyramidal.29.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.29.attractedto=NGF_A;
+idx.In.pyramidal.30.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.30.attractedto=NGF_A;
+idx.In.pyramidal.31.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.31.attractedto=NGF_A;
+idx.In.pyramidal.32.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.32.attractedto=NGF_A;
+idx.In.pyramidal.33.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.33.attractedto=NGF_A;
+idx.In.pyramidal.34.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.34.attractedto=NGF_A;
+idx.In.pyramidal.35.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.35.attractedto=NGF_A;
+idx.In.pyramidal.36.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.36.attractedto=NGF_A;
+idx.In.pyramidal.37.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.37.attractedto=NGF_A;
+idx.In.pyramidal.38.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.38.attractedto=NGF_A;
+idx.In.pyramidal.39.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.39.attractedto=NGF_A;
+idx.In.pyramidal.40.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.40.attractedto=NGF_A;
+idx.In.pyramidal.41.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.41.attractedto=NGF_A;
+idx.In.pyramidal.42.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.42.attractedto=NGF_A;
+idx.In.pyramidal.43.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.43.attractedto=NGF_A;
+idx.In.pyramidal.44.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.44.attractedto=NGF_A;
+idx.In.pyramidal.45.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.45.attractedto=NGF_A;
+idx.In.pyramidal.46.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.46.attractedto=NGF_A;
+idx.In.pyramidal.47.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.47.attractedto=NGF_A;
+idx.In.pyramidal.48.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.48.attractedto=NGF_A;
+idx.In.pyramidal.49.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.49.attractedto=NGF_A;
+idx.In.pyramidal.50.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.50.attractedto=NGF_A;
+idx.In.pyramidal.51.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.51.attractedto=NGF_A;
+idx.In.pyramidal.52.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.52.attractedto=NGF_A;
+idx.In.pyramidal.53.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.53.attractedto=NGF_A;
+idx.In.pyramidal.54.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.54.attractedto=NGF_A;
+idx.In.pyramidal.55.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.55.attractedto=NGF_A;
+idx.In.pyramidal.56.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.56.attractedto=NGF_A;
+idx.In.pyramidal.57.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.57.attractedto=NGF_A;
+idx.In.pyramidal.58.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.58.attractedto=NGF_A;
+idx.In.pyramidal.59.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.59.attractedto=NGF_A;
+idx.In.pyramidal.60.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.60.attractedto=NGF_A;
+idx.In.pyramidal.61.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.61.attractedto=NGF_A;
+idx.In.pyramidal.62.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.62.attractedto=NGF_A;
+idx.In.pyramidal.63.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.63.attractedto=NGF_A;
+idx.In.pyramidal.64.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.64.attractedto=NGF_A;
+idx.In.pyramidal.65.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.65.attractedto=NGF_A;
+idx.In.pyramidal.66.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.66.attractedto=NGF_A;
+idx.In.pyramidal.67.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.67.attractedto=NGF_A;
+idx.In.pyramidal.68.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.68.attractedto=NGF_A;
+idx.In.pyramidal.69.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.69.attractedto=NGF_A;
+idx.In.pyramidal.70.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.70.attractedto=NGF_A;
+idx.In.pyramidal.71.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.71.attractedto=NGF_A;
+idx.In.pyramidal.72.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.72.attractedto=NGF_A;
+idx.In.pyramidal.73.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.73.attractedto=NGF_A;
+idx.In.pyramidal.74.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.74.attractedto=NGF_A;
+idx.In.pyramidal.75.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.75.attractedto=NGF_A;
+idx.In.pyramidal.76.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.76.attractedto=NGF_A;
+idx.In.pyramidal.77.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.77.attractedto=NGF_A;
+idx.In.pyramidal.78.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.78.attractedto=NGF_A;
+idx.In.pyramidal.79.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.79.attractedto=NGF_A;
+idx.In.pyramidal.80.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.80.attractedto=NGF_A;
+idx.In.pyramidal.81.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.81.attractedto=NGF_A;
+idx.In.pyramidal.82.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.82.attractedto=NGF_A;
+idx.In.pyramidal.83.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.83.attractedto=NGF_A;
+idx.In.pyramidal.84.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.84.attractedto=NGF_A;
+idx.In.pyramidal.85.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.85.attractedto=NGF_A;
+idx.In.pyramidal.86.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.86.attractedto=NGF_A;
+idx.In.pyramidal.87.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.87.attractedto=NGF_A;
+idx.In.pyramidal.88.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.88.attractedto=NGF_A;
+idx.In.pyramidal.89.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.89.attractedto=NGF_A;
+idx.In.pyramidal.90.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.90.attractedto=NGF_A;
+idx.In.pyramidal.91.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.91.attractedto=NGF_A;
+idx.In.pyramidal.92.attractors=NGF_A NGF_P0;
+idx.In.pyramidal.92.attractedto=NGF_A;
+idx.In.pyramidal.93.attractors=NGF_A NGF_P1;
+idx.In.pyramidal.93.attractedto=NGF_A;
+idx.In.pyramidal.94.attractors=NGF_A NGF_P2;
+idx.In.pyramidal.94.attractedto=NGF_A;
+idx.In.pyramidal.95.attractors=NGF_A NGF_P3;
+idx.In.pyramidal.95.attractedto=NGF_A;
+idx.In.interneuron.0.attractors=NGF_A;
+idx.In.interneuron.0.attractedto=NGF_P0;
+idx.In.interneuron.1.attractors=NGF_A;
+idx.In.interneuron.1.attractedto=NGF_P1;
+idx.In.interneuron.2.attractors=NGF_A;
+idx.In.interneuron.2.attractedto=NGF_P2;
+idx.In.interneuron.3.attractors=NGF_A;
+idx.In.interneuron.3.attractedto=NGF_P3;
+idx.In.interneuron.4.attractors=NGF_A;
+idx.In.interneuron.4.attractedto=NGF_P0;
+idx.In.interneuron.5.attractors=NGF_A;
+idx.In.interneuron.5.attractedto=NGF_P1;
+idx.In.interneuron.6.attractors=NGF_A;
+idx.In.interneuron.6.attractedto=NGF_P2;
+idx.In.interneuron.7.attractors=NGF_A;
+idx.In.interneuron.7.attractedto=NGF_P3;
+idx.In.interneuron.8.attractors=NGF_A;
+idx.In.interneuron.8.attractedto=NGF_P0;
+idx.In.interneuron.9.attractors=NGF_A;
+idx.In.interneuron.9.attractedto=NGF_P1;
+idx.In.interneuron.10.attractors=NGF_A;
+idx.In.interneuron.10.attractedto=NGF_P2;
+idx.In.interneuron.11.attractors=NGF_A;
+idx.In.interneuron.11.attractedto=NGF_P3;
+idx.In.interneuron.12.attractors=NGF_A;
+idx.In.interneuron.12.attractedto=NGF_P0;
+idx.In.interneuron.13.attractors=NGF_A;
+idx.In.interneuron.13.attractedto=NGF_P1;
+idx.In.interneuron.14.attractors=NGF_A;
+idx.In.interneuron.14.attractedto=NGF_P2;
+idx.In.interneuron.15.attractors=NGF_A;
+idx.In.interneuron.15.attractedto=NGF_P3;
+idx.In.interneuron.16.attractors=NGF_A;
+idx.In.interneuron.16.attractedto=NGF_P0;
+idx.In.interneuron.17.attractors=NGF_A;
+idx.In.interneuron.17.attractedto=NGF_P1;
+idx.In.interneuron.18.attractors=NGF_A;
+idx.In.interneuron.18.attractedto=NGF_P2;
+idx.In.interneuron.19.attractors=NGF_A;
+idx.In.interneuron.19.attractedto=NGF_P3;
