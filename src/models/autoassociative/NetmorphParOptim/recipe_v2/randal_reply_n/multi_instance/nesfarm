@@ -1,0 +1,3 @@
+#!/bin/bash
+# nesfarm CLI wrapper: runs nesfarm.py with the system python3 (standard library only).
+exec python3 "$(dirname "$(readlink -f "$0")")/nesfarm.py" "$@"

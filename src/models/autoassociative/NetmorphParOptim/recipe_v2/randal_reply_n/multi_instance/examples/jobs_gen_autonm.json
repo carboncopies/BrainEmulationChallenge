@@ -1,0 +1,20 @@
+{
+  "_comment": "One gen_autonm_labels.py batch per job. It grows up to 3 models at once (-batchlimit 3), so each job takes all 3 slots of an instance. One random seed per batch (the stock generator appends -randomseed to every row). It asks 'compare?' at the end: stdin answers n. Set BEC_PY, BEC_SRC, BEC_CLIENT, EXP before running.",
+  "defaults": {
+    "slots": 3,
+    "stdin": "n\n",
+    "cwd": "{job_dir}",
+    "env": {"PYTHONPATH": "$BEC_CLIENT:$BEC_SRC/models/autoassociative:$BEC_SRC/components"},
+    "timeout_s": 86400
+  },
+  "jobs": [
+    {"name": "grow_s66666",
+     "cmd": ["$BEC_PY", "$BEC_SRC/models/autoassociative/gen_autonm_labels.py", "-excel", "$EXP/samples_s66666.xlsx",
+             "-out", "{job_dir}/out.xlsx", "-modelfile", "$EXP/model_E4", "-modelname", "{tag}-{name}-",
+             "-deleteresident", "-batchlimit", "3", "-vizdir", "{job_dir}/viz", "-randomseed", "66666", "-Port", "{port}"]},
+    {"name": "grow_s77777",
+     "cmd": ["$BEC_PY", "$BEC_SRC/models/autoassociative/gen_autonm_labels.py", "-excel", "$EXP/samples_s77777.xlsx",
+             "-out", "{job_dir}/out.xlsx", "-modelfile", "$EXP/model_E4", "-modelname", "{tag}-{name}-",
+             "-deleteresident", "-batchlimit", "3", "-vizdir", "{job_dir}/viz", "-randomseed", "77777", "-Port", "{port}"]}
+  ]
+}

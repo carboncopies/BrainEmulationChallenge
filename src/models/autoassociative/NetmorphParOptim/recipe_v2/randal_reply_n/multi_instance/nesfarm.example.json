@@ -1,0 +1,21 @@
+{
+  "_comment": "Copy to ~/.config/nesfarm.json (or ./nesfarm.json, or pass --config). ${VAR:-default} is expanded. Keys starting with _ are ignored.",
+  "farm_root": "${NESFARM_ROOT:-~/.local/state/nesfarm}",
+  "api_binary": "${NESFARM_API_BINARY:-/path/to/BrainGenix-API}",
+  "users_json": "${NESFARM_USERS_JSON:-/path/to/BrainGenix-API/Source/Core/Config/users.json}",
+  "nes_venv": "",
+  "api_user": "Admonishing",
+  "api_password": "Instruction",
+  "max_cores": 48,
+  "max_ram_gb": 250,
+  "rss_restart_gb": 10,
+  "max_jobs_per_instance": 3,
+  "est_ram_gb_per_instance": 3,
+  "est_cores_per_instance": 2,
+  "port_stride": 10,
+  "protected_pids": [3156209, 1972355],
+  "job_stagger_s": 5,
+  "start_timeout_s": 90,
+  "nes_yaml": {"Network_NES_API_Host": "0.0.0.0", "VSDA_EM_PercentOfSysteMemoryLimit": 70, "VSDA_EM_MaxVoxelArraySize": 5000},
+  "default_job_env": {"OMP_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1", "MKL_NUM_THREADS": "1"}
+}

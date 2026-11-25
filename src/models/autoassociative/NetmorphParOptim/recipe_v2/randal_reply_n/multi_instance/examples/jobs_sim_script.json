@@ -1,0 +1,10 @@
+{
+  "_comment": "One simulation script per job, one slot each (up to 3 per instance). The script must take the API port and delete its sims in a finally block. Saved models the script loads must be visible to the instance: pass them with `nesfarm up --link-model <dir>`. Set BEC_PY and EXP before running.",
+  "defaults": {"cwd": "$EXP", "timeout_s": 7200},
+  "jobs": [
+    {"name": "BASE_s66666", "cmd": "$BEC_PY $EXP/p2_run.py 66666 BASE {port}"},
+    {"name": "CASC_s66666", "cmd": "$BEC_PY $EXP/p2_run.py 66666 CASC {port}"},
+    {"name": "E20_s66666",  "cmd": "$BEC_PY $EXP/p2_run.py 66666 E20 {port}"},
+    {"name": "BASE_s77777", "cmd": "$BEC_PY $EXP/p2_run.py 77777 BASE {port}"}
+  ]
+}
