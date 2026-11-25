@@ -1,0 +1,681 @@
+{
+ "model": "johnjose-pong-g2",
+ "connectome": "output/johnjose-pong-g2_connectome.json",
+ "design": {
+  "c_nS_per_level": 2.0,
+  "G_IN_nS": 0.97,
+  "T_frac": 7.4,
+  "delta": 0.12,
+  "relays": [
+   {
+    "side": "UP",
+    "relay": "U0",
+    "v_out_nS": 2.0,
+    "v_out_cap_nS": 2.94,
+    "inputs": [
+     "B1"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U1",
+    "v_out_nS": 2.0,
+    "v_out_cap_nS": 4.9,
+    "inputs": [
+     "P1",
+     "P4",
+     "P6"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U2",
+    "v_out_nS": 6.0,
+    "v_out_cap_nS": 6.86,
+    "inputs": [
+     "B3",
+     "B5",
+     "B7"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U3",
+    "v_out_nS": 10.0,
+    "v_out_cap_nS": 16.66,
+    "inputs": [
+     "P0",
+     "P1",
+     "P2"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U4",
+    "v_out_nS": 4.0,
+    "v_out_cap_nS": 5.88,
+    "inputs": [
+     "P0",
+     "P4",
+     "P5"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U5",
+    "v_out_nS": 8.0,
+    "v_out_cap_nS": 8.82,
+    "inputs": [
+     "B4",
+     "B6",
+     "B7"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U6",
+    "v_out_nS": 4.0,
+    "v_out_cap_nS": 22.54,
+    "inputs": [
+     "B2",
+     "B5",
+     "B6"
+    ]
+   },
+   {
+    "side": "UP",
+    "relay": "U7",
+    "v_out_nS": 8.0,
+    "v_out_cap_nS": 21.56,
+    "inputs": [
+     "P3"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D0",
+    "v_out_nS": 10.0,
+    "v_out_cap_nS": 11.76,
+    "inputs": [
+     "B0",
+     "B1",
+     "B2"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D1",
+    "v_out_nS": 6.0,
+    "v_out_cap_nS": 7.84,
+    "inputs": [
+     "P3",
+     "P5",
+     "P7"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D2",
+    "v_out_nS": 8.0,
+    "v_out_cap_nS": 22.54,
+    "inputs": [
+     "P4",
+     "P6",
+     "P7"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D3",
+    "v_out_nS": 4.0,
+    "v_out_cap_nS": 8.82,
+    "inputs": [
+     "B0",
+     "B5"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D4",
+    "v_out_nS": 4.0,
+    "v_out_cap_nS": 9.8,
+    "inputs": [
+     "P2",
+     "P5",
+     "P6"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D5",
+    "v_out_nS": 6.0,
+    "v_out_cap_nS": 13.72,
+    "inputs": [
+     "B3",
+     "B4"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D6",
+    "v_out_nS": 2.0,
+    "v_out_cap_nS": 5.88,
+    "inputs": [
+     "B1",
+     "B3",
+     "B6"
+    ]
+   },
+   {
+    "side": "DOWN",
+    "relay": "D7",
+    "v_out_nS": 2.0,
+    "v_out_cap_nS": 17.64,
+    "inputs": [
+     "P1"
+    ]
+   }
+  ],
+  "drives": [
+   {
+    "side": "UP",
+    "drive_nS": {
+     "B0": 0,
+     "B1": 2.0,
+     "B2": 4.0,
+     "B3": 6.0,
+     "B4": 8.0,
+     "B5": 10.0,
+     "B6": 12.0,
+     "B7": 14.0,
+     "P0": 14.0,
+     "P1": 12.0,
+     "P2": 10.0,
+     "P3": 8.0,
+     "P4": 6.0,
+     "P5": 4.0,
+     "P6": 2.0,
+     "P7": 0
+    },
+    "target_nS": {
+     "B0": 0.0,
+     "B1": 2.0,
+     "B2": 4.0,
+     "B3": 6.0,
+     "B4": 8.0,
+     "B5": 10.0,
+     "B6": 12.0,
+     "B7": 14.0,
+     "P0": 14.0,
+     "P1": 12.0,
+     "P2": 10.0,
+     "P3": 8.0,
+     "P4": 6.0,
+     "P5": 4.0,
+     "P6": 2.0,
+     "P7": 0.0
+    }
+   },
+   {
+    "side": "DOWN",
+    "drive_nS": {
+     "B0": 14.0,
+     "B1": 12.0,
+     "B2": 10.0,
+     "B3": 8.0,
+     "B4": 6.0,
+     "B5": 4.0,
+     "B6": 2.0,
+     "B7": 0,
+     "P0": 0,
+     "P1": 2.0,
+     "P2": 4.0,
+     "P3": 6.0,
+     "P4": 8.0,
+     "P5": 10.0,
+     "P6": 12.0,
+     "P7": 14.0
+    },
+    "target_nS": {
+     "B0": 14.0,
+     "B1": 12.0,
+     "B2": 10.0,
+     "B3": 8.0,
+     "B4": 6.0,
+     "B5": 4.0,
+     "B6": 2.0,
+     "B7": 0.0,
+     "P0": 0.0,
+     "P1": 2.0,
+     "P2": 4.0,
+     "P3": 6.0,
+     "P4": 8.0,
+     "P5": 10.0,
+     "P6": 12.0,
+     "P7": 14.0
+    }
+   }
+  ],
+  "note": "UP drive = c*(i + N-1-j), DOWN drive = c*(N-1-i + j); output fires iff drive > T_frac*c; ball and paddle inputs use disjoint relays"
+ },
+ "encoding": {
+  "burst_spikes": 3,
+  "isi_ms": 3,
+  "paddle_offset_ms": 1,
+  "ball_offset_ms": 1
+ },
+ "neurons": {
+  "input": {
+   "R_MOhm": 100.0,
+   "C_pF": 100.0
+  },
+  "relay": {
+   "R_MOhm": 1000.0,
+   "C_pF": 3.0
+  },
+  "output": {
+   "R_MOhm": 27.027,
+   "C_pF": 74.0
+  }
+ },
+ "receptor": {
+  "E": 0,
+  "rise": 0.5,
+  "decay": 3.0,
+  "onset_ms": 1.0
+ },
+ "pairs": [
+  {
+   "pre": "B0",
+   "post": "D0",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 13.72
+  },
+  {
+   "pre": "B0",
+   "post": "D3",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 7.84
+  },
+  {
+   "pre": "B1",
+   "post": "D0",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 0.98
+  },
+  {
+   "pre": "B1",
+   "post": "D6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 1.96
+  },
+  {
+   "pre": "B1",
+   "post": "U0",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 5.88
+  },
+  {
+   "pre": "B2",
+   "post": "D0",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 7.84
+  },
+  {
+   "pre": "B2",
+   "post": "U6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 3.92
+  },
+  {
+   "pre": "B3",
+   "post": "D5",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 1.96
+  },
+  {
+   "pre": "B3",
+   "post": "D6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 3.92
+  },
+  {
+   "pre": "B3",
+   "post": "U2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 18.62
+  },
+  {
+   "pre": "B4",
+   "post": "D5",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 13.72
+  },
+  {
+   "pre": "B4",
+   "post": "U5",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 26.46
+  },
+  {
+   "pre": "B5",
+   "post": "D3",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 8.82
+  },
+  {
+   "pre": "B5",
+   "post": "U2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "B5",
+   "post": "U6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "B6",
+   "post": "D6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 15.68
+  },
+  {
+   "pre": "B6",
+   "post": "U5",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 5.88
+  },
+  {
+   "pre": "B6",
+   "post": "U6",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 9.8
+  },
+  {
+   "pre": "B7",
+   "post": "U2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "B7",
+   "post": "U5",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 8.82
+  },
+  {
+   "pre": "D0",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 10.0,
+   "grown_cap_nS": 11.76
+  },
+  {
+   "pre": "D1",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 6.0,
+   "grown_cap_nS": 7.84
+  },
+  {
+   "pre": "D2",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 8.0,
+   "grown_cap_nS": 22.54
+  },
+  {
+   "pre": "D3",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 4.0,
+   "grown_cap_nS": 8.82
+  },
+  {
+   "pre": "D4",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 4.0,
+   "grown_cap_nS": 9.8
+  },
+  {
+   "pre": "D5",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 6.0,
+   "grown_cap_nS": 13.72
+  },
+  {
+   "pre": "D6",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 2.0,
+   "grown_cap_nS": 5.88
+  },
+  {
+   "pre": "D7",
+   "post": "DOWN",
+   "type": "AMPA",
+   "g_nS": 2.0,
+   "grown_cap_nS": 17.64
+  },
+  {
+   "pre": "P0",
+   "post": "U3",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 13.72
+  },
+  {
+   "pre": "P0",
+   "post": "U4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 10.78
+  },
+  {
+   "pre": "P1",
+   "post": "D7",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "P1",
+   "post": "U1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "P1",
+   "post": "U3",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 15.68
+  },
+  {
+   "pre": "P2",
+   "post": "D4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 5.88
+  },
+  {
+   "pre": "P2",
+   "post": "U3",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 1.96
+  },
+  {
+   "pre": "P3",
+   "post": "D1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 10.78
+  },
+  {
+   "pre": "P3",
+   "post": "U7",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "P4",
+   "post": "D2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 10.78
+  },
+  {
+   "pre": "P4",
+   "post": "U1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 0.98
+  },
+  {
+   "pre": "P4",
+   "post": "U4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 7.84
+  },
+  {
+   "pre": "P5",
+   "post": "D1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "P5",
+   "post": "D4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 6.86
+  },
+  {
+   "pre": "P5",
+   "post": "U4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 0.98
+  },
+  {
+   "pre": "P6",
+   "post": "D2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "P6",
+   "post": "D4",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "P6",
+   "post": "U1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 0.98
+  },
+  {
+   "pre": "P7",
+   "post": "D1",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 27.44
+  },
+  {
+   "pre": "P7",
+   "post": "D2",
+   "type": "AMPA",
+   "g_nS": 0.97,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "U0",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 2.0,
+   "grown_cap_nS": 2.94
+  },
+  {
+   "pre": "U1",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 2.0,
+   "grown_cap_nS": 4.9
+  },
+  {
+   "pre": "U2",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 6.0,
+   "grown_cap_nS": 6.86
+  },
+  {
+   "pre": "U3",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 10.0,
+   "grown_cap_nS": 16.66
+  },
+  {
+   "pre": "U4",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 4.0,
+   "grown_cap_nS": 5.88
+  },
+  {
+   "pre": "U5",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 8.0,
+   "grown_cap_nS": 8.82
+  },
+  {
+   "pre": "U6",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 4.0,
+   "grown_cap_nS": 22.54
+  },
+  {
+   "pre": "U7",
+   "post": "UP",
+   "type": "AMPA",
+   "g_nS": 8.0,
+   "grown_cap_nS": 21.56
+  }
+ ]
+}
