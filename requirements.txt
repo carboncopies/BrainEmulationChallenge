@@ -6,4 +6,5 @@ imageio
 pandas
 joblib
 numpy==2.2.4
+scipy==1.17.1
 psutil
