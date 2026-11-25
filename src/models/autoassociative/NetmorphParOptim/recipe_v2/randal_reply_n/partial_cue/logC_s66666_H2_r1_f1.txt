@@ -1,0 +1,11 @@
+{"StatusCode":0,"AuthKey":"eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3OTU1NTM4NTQsImlhdCI6MTc5NTUxMDY1NCwiaXNzIjoiQnJhaW5HZW5peCIsInJvbGUiOiJhZG1pbiIsInN1YiI6IkFkbW9uaXNoaW5nIn0.UbPmIqTBmznzheVmz01wrN3QC8qS_Vxo3DlWUTkQBLU"}
+sim 52 s66666_H2_r1_f1
+DELETE FAILED 52 Failed: {'ReqID': 671, 'StatusCode': 2}
+Traceback (most recent call last):
+  File "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/partial_cue/run_pw.py", line 74, in <module>
+    if __name__ == '__main__': main()
+                               ^^^^^^
+  File "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/partial_cue/run_pw.py", line 60, in main
+    n = len(sim.GetSomaPositions().get('SomaCenters', [])); assert n == N, n
+                                                                   ^^^^^^
+AssertionError: 0

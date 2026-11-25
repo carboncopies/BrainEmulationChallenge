@@ -1,0 +1,1 @@
+config B1_s55555 seed=55555 rc=0 wall=1441

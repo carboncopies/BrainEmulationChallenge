@@ -1,0 +1,105 @@
+== A: single recall / partial cues (counts = events meeting criterion / non-contaminated events; cont = contaminated) ==
+c     r     f   | full complete  full late>0 full nonmem runaway   | 3cell silent 3cell compl  | 2cell compl  | cont     seeds
+0     0     0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0     1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0     2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0     5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+0     0.56  0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0.56  1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0.56  2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0     0.56  5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+0     1     0   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0     1     1   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0     1     2   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0     1     5   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [x5 non-bio] [r1.0 upper bound]
+0.15  0     0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0     1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0     2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0     5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+0.15  0.56  0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0.56  1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0.56  2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+0.15  0.56  5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+0.15  1     0   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0.15  1     1   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0.15  1     2   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+0.15  1     5   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [x5 non-bio] [r1.0 upper bound]
+1.5   0     0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0     1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0     2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0     5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+1.5   0.56  0   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0.56  1   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0.56  2   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3
+1.5   0.56  5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+1.5   1     0   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+1.5   1     1   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+1.5   1     2   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [r1.0 upper bound]
+1.5   1     5   | 10/10          0/10       0/10       0/110     | 20/40        20/40        | 0/60         | 0        3 [x5 non-bio] [r1.0 upper bound]
+3     0     0   | 10/10          8/10       8/10       8/102     | 32/32        0/32         | 0/60         | 8        3
+3     0     1   | 10/10          2/10       5/10       2/108     | 38/38        0/38         | 0/60         | 2        3
+3     0     2   | 10/10          1/10       2/10       1/109     | 39/39        0/39         | 0/60         | 1        3
+3     0     5   | 10/10          0/10       0/10       0/110     | 40/40        0/40         | 0/60         | 0        3 [x5 non-bio]
+3     0.56  0   | 10/10          10/10      10/10      10/85     | 17/17        0/17         | 0/58         | 25       3
+3     0.56  1   | 10/10          10/10      10/10      10/86     | 18/18        0/18         | 0/58         | 24       3
+3     0.56  2   | 10/10          5/10       9/10       4/98      | 30/30        0/30         | 0/58         | 12       3
+3     0.56  5   | 10/10          1/10       3/10       1/103     | 36/36        0/36         | 0/57         | 7        3 [x5 non-bio]
+3     1     0   | 10/10          10/10      10/10      14/78     | 6/14         6/14         | 0/54         | 32       3 [r1.0 upper bound]
+3     1     1   | 10/10          10/10      10/10      11/77     | 8/14         6/14         | 0/53         | 33       3 [r1.0 upper bound]
+3     1     2   | 10/10          9/10       10/10      10/81     | 10/17        7/17         | 0/54         | 29       3 [r1.0 upper bound]
+3     1     5   | 10/10          3/10       7/10       3/99      | 16/32        16/32        | 0/57         | 11       3 [x5 non-bio] [r1.0 upper bound]
+
+== B: overlap (F2) cross-trigger; full cues; full_cross = >=1 other memory with all exclusive non-cue cells firing ==
+c     r     f   | own compl    full cross 10  full cross 30  full cross 450 any cross 30 | 3cell silent  
+0     0     0   | 52/52        19/52          19/52          19/52          19/52        | 104/104        cont 0 runaway 0 seeds 3
+0     0     1   | 52/52        18/52          18/52          18/52          18/52        | 104/104        cont 0 runaway 0 seeds 3
+0     0.56  0   | 52/52        27/52          27/52          27/52          27/52        | 104/104        cont 0 runaway 0 seeds 3
+0     0.56  1   | 52/52        26/52          26/52          26/52          26/52        | 104/104        cont 0 runaway 0 seeds 3
+0     1     0   | 52/52        30/52          32/52          32/52          32/52        | 52/104         cont 0 runaway 0 seeds 3 [r1.0 upper bound]
+0     1     1   | 52/52        29/52          29/52          29/52          29/52        | 52/104         cont 0 runaway 0 seeds 3 [r1.0 upper bound]
+1.5   0     0   | 52/52        44/52          44/52          44/52          44/52        | 104/104        cont 0 runaway 0 seeds 3
+1.5   0     1   | 52/52        44/52          44/52          44/52          44/52        | 104/104        cont 0 runaway 0 seeds 3
+1.5   0.56  0   | 51/51        47/51          47/51          47/51          47/51        | 71/71          cont 34 runaway 24 seeds 3
+1.5   0.56  1   | 52/52        47/52          47/52          47/52          47/52        | 102/102        cont 2 runaway 1 seeds 3
+1.5   1     0   | 45/48        45/48          46/48          46/48          47/48        | 21/61          cont 47 runaway 36 seeds 3 [r1.0 upper bound]
+1.5   1     1   | 48/48        48/48          48/48          48/48          48/48        | 45/90          cont 18 runaway 13 seeds 3 [r1.0 upper bound]
+
+== C: discard (valid pairs) per delta, pacing window W, trains (mean completions of 5 per interval), runaway pair events at d5 ==
+c 0    r 0    f 0  | discard d5/10/20/50/100 0/24 0/24 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 2.4 1.9 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0    f 1  | discard d5/10/20/50/100 17/24 13/24 0/24 0/24 0/24 | W 10 | trains I10/20/50/100 2.6 1.8 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0    f 2  | discard d5/10/20/50/100 24/24 19/24 1/24 0/24 0/24 | W 10 | trains I10/20/50/100 2.1 1.9 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0    f 5  | discard d5/10/20/50/100 24/24 24/24 8/24 0/24 0/24 | W 10 | trains I10/20/50/100 1.3 1.9 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [x5 non-bio]
+c 0    r 0.56 f 0  | discard d5/10/20/50/100 0/24 0/24 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 5.0 4.2 4.9 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0.56 f 1  | discard d5/10/20/50/100 13/24 11/24 0/24 0/24 0/24 | W 5 | trains I10/20/50/100 4.0 3.9 4.9 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0.56 f 2  | discard d5/10/20/50/100 22/24 16/24 0/24 0/24 0/24 | W 10 | trains I10/20/50/100 3.7 3.5 4.9 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 0    r 0.56 f 5  | discard d5/10/20/50/100 24/24 23/24 5/24 0/24 0/24 | W 10 | trains I10/20/50/100 2.8 3.2 4.9 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [x5 non-bio]
+c 0    r 1    f 0  | discard d5/10/20/50/100 0/24 0/24 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 5.0 5.0 5.0 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 0    r 1    f 1  | discard d5/10/20/50/100 12/24 5/24 0/24 0/24 0/24 | W 5 | trains I10/20/50/100 4.8 4.9 5.0 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 0    r 1    f 2  | discard d5/10/20/50/100 20/24 15/24 0/24 0/24 0/24 | W 10 | trains I10/20/50/100 4.3 4.8 5.0 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 0    r 1    f 5  | discard d5/10/20/50/100 24/24 24/24 0/24 0/24 0/24 | W 10 | trains I10/20/50/100 3.4 4.2 5.0 5.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [x5 non-bio] [r1.0 upper bound]
+c 1.5  r 0    f 0  | discard d5/10/20/50/100 0/24 0/0 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 3.0 2.0 2.0 3.0 | runaway d5 24/24 all 26 | cont 26/170 | solo 10/10 | seeds 3
+c 1.5  r 0    f 1  | discard d5/10/20/50/100 0/24 0/22 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 2.6 1.8 2.0 3.0 | runaway d5 2/24 all 2 | cont 2/170 | solo 10/10 | seeds 3
+c 1.5  r 0    f 2  | discard d5/10/20/50/100 0/24 5/24 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 2.1 1.9 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3
+c 1.5  r 0    f 5  | discard d5/10/20/50/100 3/24 18/24 7/24 0/24 0/24 | W 10 | trains I10/20/50/100 1.3 1.9 2.0 3.0 | runaway d5 0/24 all 0 | cont 0/170 | solo 10/10 | seeds 3 [x5 non-bio]
+c 1.5  r 0.56 f 0  | discard d5/10/20/50/100 0/24 0/0 1/20 0/24 0/18 | W 0 | trains I10/20/50/100 2.4 - 0.8 0.8 | runaway d5 24/24 all 34 | cont 36/170 | solo 10/10 | seeds 3
+c 1.5  r 0.56 f 1  | discard d5/10/20/50/100 0/24 0/18 0/23 0/23 0/24 | W 0 | trains I10/20/50/100 3.4 3.0 3.2 3.6 | runaway d5 6/24 all 15 | cont 16/170 | solo 10/10 | seeds 3
+c 1.5  r 0.56 f 2  | discard d5/10/20/50/100 0/24 1/23 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 3.6 3.3 5.0 5.0 | runaway d5 1/24 all 4 | cont 7/170 | solo 10/10 | seeds 3
+c 1.5  r 0.56 f 5  | discard d5/10/20/50/100 3/24 14/24 2/24 0/24 0/24 | W 10 | trains I10/20/50/100 2.8 3.2 5.0 5.0 | runaway d5 0/24 all 1 | cont 2/170 | solo 10/10 | seeds 3 [x5 non-bio]
+c 1.5  r 1    f 0  | discard d5/10/20/50/100 0/21 0/0 1/18 2/18 0/16 | W 0 | trains I10/20/50/100 2.0 - 0.7 0.5 | runaway d5 24/24 all 42 | cont 43/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 1.5  r 1    f 1  | discard d5/10/20/50/100 0/23 1/11 0/18 1/22 0/22 | W 0 | trains I10/20/50/100 2.8 - 0.6 0.7 | runaway d5 13/24 all 27 | cont 31/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 1.5  r 1    f 2  | discard d5/10/20/50/100 0/22 0/21 0/23 1/22 0/23 | W 0 | trains I10/20/50/100 3.4 4.0 2.8 3.8 | runaway d5 3/24 all 16 | cont 20/170 | solo 10/10 | seeds 3 [r1.0 upper bound]
+c 1.5  r 1    f 5  | discard d5/10/20/50/100 3/24 10/24 0/24 0/24 0/24 | W 0 | trains I10/20/50/100 2.9 3.9 4.5 4.1 | runaway d5 0/24 all 6 | cont 7/170 | solo 10/10 | seeds 3 [x5 non-bio] [r1.0 upper bound]
+
+== Scoring (preregistered P0-P11) ==
+P0   PASS  c1.5 same cells/counts True max diff 0.0 ms (9 spikes); c0 same cells/counts True max diff 0.0 ms (9 spikes)
+P1   PASS  violations: none
+P2   FAIL  f1 no-reverb violations: none; f0 r1.0 c1.5 any late>0: False
+P3   FAIL  r0.56 runaway seeds [33333, 66666, 77777], late+nonmem off 14580 on 13288 (reduction 9%); r1 runaway seeds [33333, 66666, 77777], late+nonmem off 10977 on 11459 (reduction -4%)
+P4   FAIL  silence shortfalls: none; r1.0 c1.5 seeds with 3-cell completion [33333, 66666, 77777]; r1.0 c<=1.5 pooled 3-cell completion 240/480
+P5   PASS  c<=1.5 2-cell completions: none; c3 >10%: none
+P6   FAIL  c0 r1 off 20 x1 20 x5 20; c0.15 r1 off 20 x1 20 x5 20; c1.5 r1 off 20 x1 20 x5 20; c3 r1 off 6 x1 6 x5 16
+P7   PASS  c0 GABA on full-cross10: r0 18/52, r0.56 26/52, r1.0 29/52; r0 GABA off 19/52
+P8   FAIL  violations: ['r0.56 f2 22/24 16/24 0/24 0/24 0/24', 'r1 f1 12/24 5/24 0/24 0/24 0/24', 'r1 f2 20/24 15/24 0/24 0/24 0/24']
+P9   PASS  r1.0 f1 runaway d5 13/24; f5 0/24
+P10  FAIL  W>20: none; I100 trains <90%: ['r0 f0 3.00', 'r0 f1 3.00', 'r0 f2 3.00', 'r0 f5 3.00']
+P11  FAIL  c0 r0.56 I10 mean completions: f1 4.00, f0 5.00
