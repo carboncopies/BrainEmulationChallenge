@@ -1,0 +1,163 @@
+Realism tester summary (profile ca3_verified)
+
+== s66666 (netmorph) /home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/instances/i2/out/Admonishing/NetmorphOutput/62dd3591-b8fc-495a-a6c8-1c8569892b26
+cells {'interneuron': 30, 'pyramidal': 144}; volume 2036600.2695426552 um^3 (region In (disc, from 202611250031_.nibr.clp)); contacts 9834
+NOTE NetMorph node files carry no radii: only length density is available (no volume fraction).
+NOTE ball_index.axon.interneuron = 6.1: the neurite is 6.1x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.pyramidal = 5.5: the neurite is 5.5x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.all = 5.7: the neurite is 5.7x denser near the centre than near the rim (axon/dendrite ball).
+metric                                               mean     median  literature             status   evidence
+proportion.interneuron                             0.1724     0.1724  0.07-0.125             flag     verified, derived estimate
+proportion.pyramidal                               0.8276     0.8276  0.875-0.93             flag     verified, derived estimate
+proportion.interneuron                             0.1724     0.1724  0.115                  pass     verified, derived estimate
+cells_per_volume                                8.544e+04  8.544e+04  165200-172400          flag     verified
+cells_per_volume                                8.544e+04  8.544e+04  140000+/-27000         flag     unverified
+cells_total.pyramidal                                   -          -  210000                 n/a      verified
+length.axon.interneuron                         5.057e+04  5.039e+04  21148-59018            pass     unverified
+length.axon.interneuron                         5.057e+04  5.039e+04  21535+/-12042          flag     verified
+length.axon.interneuron                         5.057e+04  5.039e+04  25081+/-10938          flag     verified
+length.axon.interneuron                         5.057e+04  5.039e+04  46180                  pass     unverified
+length.dendrite.interneuron                          7318       7176  9032+/-992             pass     verified
+length.dendrite.interneuron                          7318       7176  5021+/-1306            pass     unverified
+length.dendrite.interneuron                          7318       7176  4347+/-1125            flag     unverified
+length.dendrite.interneuron                          7318       7176  4300                   flag     verified
+length.dendrite.interneuron                          7318       7176  2910+/-1387            flag     verified
+reach_max.axon.interneuron                          376.1      368.4  390-870                flag     unverified, derived estimate
+reach_max.axon.interneuron                          376.1      368.4  680+/-207              pass     verified
+reach_max.axon.interneuron                          376.1      368.4  460-660                flag     verified, derived estimate
+reach_max.dendrite.interneuron                      318.6        312  392+/-89               pass     verified
+length.dendrite.pyramidal                       2.223e+04  1.946e+04  9300-15800             flag     verified
+length.dendrite.pyramidal                       2.223e+04  1.946e+04  12481+/-2999           flag     unverified
+length.dendrite.pyramidal                       2.223e+04  1.946e+04  11394                  flag     verified, derived estimate
+reach_max.dendrite.pyramidal                        703.8      710.4  None                   unknown  unverified
+length.axon.pyramidal                           2.007e+04  1.996e+04  150000-300000          info     verified
+length.axon.pyramidal                           2.007e+04  1.996e+04  500000-None            info     verified
+reach_max.axon.pyramidal                              342      331.9  1000-None              info     unverified, derived estimate
+syn_axon.pyramidal                                  37.39         36  15000-40000            info     verified
+conn_prob.pyramidal.to.pyramidal                   0.1736     0.1736  0.0092                 flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1736     0.1736  0.089                  flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1736     0.1736  0.1                    flag     verified
+conn_prob.pyramidal.to.interneuron                 0.2449     0.2449  0.1                    flag     verified
+conn_prob.interneuron.to.pyramidal                 0.5292     0.5292  0.25                   flag     verified
+conn_prob.interneuron.to.interneuron               0.4678     0.4678  0.25                   flag     verified
+syn_per_pair.pyramidal.to.pyramidal                 1.145          1  1-2                    pass     verified
+syn_per_pair.pyramidal.to.interneuron               1.221          1  1-3                    pass     verified, derived estimate
+syn_per_pair.interneuron.to.pyramidal               1.669          1  11                     flag     verified, derived estimate
+syn_per_pair.interneuron.to.interneuron             1.558          1  1                      flag     verified, derived estimate
+syn_dendrite.pyramidal.from.interneuron              26.5         23  140-None               flag     verified, derived estimate
+syn_dendrite.interneuron                             64.2         56  16294                  info     verified
+syn_dendrite.interneuron                             64.2         56  34810+/-2576           flag     verified
+targets.interneuron.to.pyramidal                     76.2         74  1500-None              info     verified
+ball_index.axon.interneuron                          6.13       6.13  0.5-2.0                flag     unverified, derived estimate
+ball_index.axon.pyramidal                           5.493      5.493  0.5-2.0                flag     unverified, derived estimate
+ball_index.dendrite.interneuron                     1.091      1.091  0.5-2.0                pass     unverified, derived estimate
+ball_index.dendrite.pyramidal                       1.532      1.532  0.5-2.0                pass     unverified, derived estimate
+syn_dendrite.pyramidal.from.pyramidal               28.42       24.5  12000                  info     unverified
+
+== s77777 (netmorph) /home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/instances/i5/out/Admonishing/NetmorphOutput/4276bfed-af34-4e54-88bc-7b66dc8d7177
+cells {'interneuron': 30, 'pyramidal': 144}; volume 2036600.2695426552 um^3 (region In (disc, from 202611250031_.nibr.clp)); contacts 9207
+NOTE NetMorph node files carry no radii: only length density is available (no volume fraction).
+NOTE ball_index.axon.interneuron = 6.4: the neurite is 6.4x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.pyramidal = 6.3: the neurite is 6.3x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.all = 6.3: the neurite is 6.3x denser near the centre than near the rim (axon/dendrite ball).
+metric                                               mean     median  literature             status   evidence
+proportion.interneuron                             0.1724     0.1724  0.07-0.125             flag     verified, derived estimate
+proportion.pyramidal                               0.8276     0.8276  0.875-0.93             flag     verified, derived estimate
+proportion.interneuron                             0.1724     0.1724  0.115                  pass     verified, derived estimate
+cells_per_volume                                8.544e+04  8.544e+04  165200-172400          flag     verified
+cells_per_volume                                8.544e+04  8.544e+04  140000+/-27000         flag     unverified
+cells_total.pyramidal                                   -          -  210000                 n/a      verified
+length.axon.interneuron                         4.336e+04  4.631e+04  21148-59018            pass     unverified
+length.axon.interneuron                         4.336e+04  4.631e+04  21535+/-12042          pass     verified
+length.axon.interneuron                         4.336e+04  4.631e+04  25081+/-10938          pass     verified
+length.axon.interneuron                         4.336e+04  4.631e+04  46180                  pass     unverified
+length.dendrite.interneuron                          6501       6182  9032+/-992             flag     verified
+length.dendrite.interneuron                          6501       6182  5021+/-1306            pass     unverified
+length.dendrite.interneuron                          6501       6182  4347+/-1125            pass     unverified
+length.dendrite.interneuron                          6501       6182  4300                   flag     verified
+length.dendrite.interneuron                          6501       6182  2910+/-1387            flag     verified
+reach_max.axon.interneuron                          375.7      376.1  390-870                flag     unverified, derived estimate
+reach_max.axon.interneuron                          375.7      376.1  680+/-207              pass     verified
+reach_max.axon.interneuron                          375.7      376.1  460-660                flag     verified, derived estimate
+reach_max.dendrite.interneuron                      310.7        308  392+/-89               pass     verified
+length.dendrite.pyramidal                       2.327e+04  1.963e+04  9300-15800             flag     verified
+length.dendrite.pyramidal                       2.327e+04  1.963e+04  12481+/-2999           flag     unverified
+length.dendrite.pyramidal                       2.327e+04  1.963e+04  11394                  flag     verified, derived estimate
+reach_max.dendrite.pyramidal                        701.4      707.3  None                   unknown  unverified
+length.axon.pyramidal                           2.094e+04  2.121e+04  150000-300000          info     verified
+length.axon.pyramidal                           2.094e+04  2.121e+04  500000-None            info     verified
+reach_max.axon.pyramidal                            359.8      356.5  1000-None              info     unverified, derived estimate
+syn_axon.pyramidal                                  38.56         37  15000-40000            info     verified
+conn_prob.pyramidal.to.pyramidal                   0.1825     0.1825  0.0092                 flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1825     0.1825  0.089                  flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1825     0.1825  0.1                    flag     verified
+conn_prob.pyramidal.to.interneuron                 0.2331     0.2331  0.1                    flag     verified
+conn_prob.interneuron.to.pyramidal                 0.4704     0.4704  0.25                   flag     verified
+conn_prob.interneuron.to.interneuron               0.4103     0.4103  0.25                   flag     verified
+syn_per_pair.pyramidal.to.pyramidal                 1.152          1  1-2                    pass     verified
+syn_per_pair.pyramidal.to.interneuron               1.215          1  1-3                    pass     verified, derived estimate
+syn_per_pair.interneuron.to.pyramidal               1.544          1  11                     flag     verified, derived estimate
+syn_per_pair.interneuron.to.interneuron             1.445          1  1                      pass     verified, derived estimate
+syn_dendrite.pyramidal.from.interneuron             21.79         21  140-None               flag     verified, derived estimate
+syn_dendrite.interneuron                               58       51.5  16294                  info     verified
+syn_dendrite.interneuron                               58       51.5  34810+/-2576           flag     verified
+targets.interneuron.to.pyramidal                    67.73         71  1500-None              info     verified
+ball_index.axon.interneuron                         6.431      6.431  0.5-2.0                flag     unverified, derived estimate
+ball_index.axon.pyramidal                           6.306      6.306  0.5-2.0                flag     unverified, derived estimate
+ball_index.dendrite.interneuron                     1.352      1.352  0.5-2.0                pass     unverified, derived estimate
+ball_index.dendrite.pyramidal                       1.289      1.289  0.5-2.0                pass     unverified, derived estimate
+syn_dendrite.pyramidal.from.pyramidal               30.06         28  12000                  info     unverified
+
+== s88888 (netmorph) /home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/instances/i8/out/Admonishing/NetmorphOutput/33789562-98cc-4555-97df-e478e4923b4c
+cells {'interneuron': 30, 'pyramidal': 144}; volume 2036600.2695426552 um^3 (region In (disc, from 202611250031_.nibr.clp)); contacts 10004
+NOTE NetMorph node files carry no radii: only length density is available (no volume fraction).
+NOTE ball_index.axon.interneuron = 6.7: the neurite is 6.7x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.pyramidal = 6.4: the neurite is 6.4x denser near the centre than near the rim (axon/dendrite ball).
+NOTE ball_index.axon.all = 6.5: the neurite is 6.5x denser near the centre than near the rim (axon/dendrite ball).
+metric                                               mean     median  literature             status   evidence
+proportion.interneuron                             0.1724     0.1724  0.07-0.125             flag     verified, derived estimate
+proportion.pyramidal                               0.8276     0.8276  0.875-0.93             flag     verified, derived estimate
+proportion.interneuron                             0.1724     0.1724  0.115                  pass     verified, derived estimate
+cells_per_volume                                8.544e+04  8.544e+04  165200-172400          flag     verified
+cells_per_volume                                8.544e+04  8.544e+04  140000+/-27000         flag     unverified
+cells_total.pyramidal                                   -          -  210000                 n/a      verified
+length.axon.interneuron                         4.429e+04  4.565e+04  21148-59018            pass     unverified
+length.axon.interneuron                         4.429e+04  4.565e+04  21535+/-12042          pass     verified
+length.axon.interneuron                         4.429e+04  4.565e+04  25081+/-10938          pass     verified
+length.axon.interneuron                         4.429e+04  4.565e+04  46180                  pass     unverified
+length.dendrite.interneuron                          6834       6689  9032+/-992             flag     verified
+length.dendrite.interneuron                          6834       6689  5021+/-1306            pass     unverified
+length.dendrite.interneuron                          6834       6689  4347+/-1125            flag     unverified
+length.dendrite.interneuron                          6834       6689  4300                   flag     verified
+length.dendrite.interneuron                          6834       6689  2910+/-1387            flag     verified
+reach_max.axon.interneuron                          379.6      377.7  390-870                flag     unverified, derived estimate
+reach_max.axon.interneuron                          379.6      377.7  680+/-207              pass     verified
+reach_max.axon.interneuron                          379.6      377.7  460-660                flag     verified, derived estimate
+reach_max.dendrite.interneuron                        321      323.4  392+/-89               pass     verified
+length.dendrite.pyramidal                       2.854e+04  1.995e+04  9300-15800             flag     verified
+length.dendrite.pyramidal                       2.854e+04  1.995e+04  12481+/-2999           flag     unverified
+length.dendrite.pyramidal                       2.854e+04  1.995e+04  11394                  flag     verified, derived estimate
+reach_max.dendrite.pyramidal                        703.7      706.9  None                   unknown  unverified
+length.axon.pyramidal                           1.949e+04  1.926e+04  150000-300000          info     verified
+length.axon.pyramidal                           1.949e+04  1.926e+04  500000-None            info     verified
+reach_max.axon.pyramidal                            348.6      345.2  1000-None              info     unverified, derived estimate
+syn_axon.pyramidal                                  39.81         39  15000-40000            info     verified
+conn_prob.pyramidal.to.pyramidal                   0.1915     0.1915  0.0092                 flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1915     0.1915  0.089                  flag     verified
+conn_prob.pyramidal.to.pyramidal                   0.1915     0.1915  0.1                    flag     verified
+conn_prob.pyramidal.to.interneuron                 0.2132     0.2132  0.1                    flag     verified
+conn_prob.interneuron.to.pyramidal                 0.5132     0.5132  0.25                   flag     verified
+conn_prob.interneuron.to.interneuron               0.4138     0.4138  0.25                   flag     verified
+syn_per_pair.pyramidal.to.pyramidal                 1.177          1  1-2                    pass     verified
+syn_per_pair.pyramidal.to.interneuron               1.186          1  1-3                    pass     verified, derived estimate
+syn_per_pair.interneuron.to.pyramidal               1.693          1  11                     flag     verified, derived estimate
+syn_per_pair.interneuron.to.interneuron             1.439          1  1                      pass     verified, derived estimate
+syn_dendrite.pyramidal.from.interneuron             26.06       22.5  140-None               flag     verified, derived estimate
+syn_dendrite.interneuron                            53.67       50.5  16294                  info     verified
+syn_dendrite.interneuron                            53.67       50.5  34810+/-2576           flag     verified
+targets.interneuron.to.pyramidal                     73.9         74  1500-None              info     verified
+ball_index.axon.interneuron                         6.678      6.678  0.5-2.0                flag     unverified, derived estimate
+ball_index.axon.pyramidal                           6.363      6.363  0.5-2.0                flag     unverified, derived estimate
+ball_index.dendrite.interneuron                      1.13       1.13  0.5-2.0                pass     unverified, derived estimate
+ball_index.dendrite.pyramidal                       1.433      1.433  0.5-2.0                pass     unverified, derived estimate
+syn_dendrite.pyramidal.from.pyramidal               32.23         27  12000                  info     unverified

@@ -1,0 +1,36 @@
+{
+ "origin_um": [
+  -740.0,
+  -820.0,
+  -980.0
+ ],
+ "voxel_um": 20.0,
+ "shape": [
+  74,
+  80,
+  74
+ ],
+ "index_order": "x fastest: ix + nx*(iy + ny*iz)",
+ "units": {
+  "axon_length.interneuron": "km/mm^3 (um/um^3)",
+  "axon_length.pyramidal": "km/mm^3 (um/um^3)",
+  "axon_length.all": "km/mm^3 (um/um^3)",
+  "dendrite_length.interneuron": "km/mm^3 (um/um^3)",
+  "dendrite_length.pyramidal": "km/mm^3 (um/um^3)",
+  "dendrite_length.all": "km/mm^3 (um/um^3)",
+  "soma.interneuron": "cells/mm^3",
+  "soma.pyramidal": "cells/mm^3",
+  "soma.all": "cells/mm^3",
+  "synapse.all": "contacts/mm^3"
+ },
+ "length_check_um": {
+  "segments": {
+   "axon": 2724496.425354826,
+   "dendrite": 2847897.3035738887
+  },
+  "deposited": {
+   "axon": 2724496.58203125,
+   "dendrite": 2847897.4609375
+  }
+ }
+}

@@ -1,0 +1,21 @@
+{
+ "n_graphs": 27,
+ "best_graph": "B1P_s33333",
+ "spearman_K42_vs_negW1": [
+  0.8798157459849685,
+  1.4934440932602195e-09
+ ],
+ "K42_sd_baseline_10seeds": 0.4216370213557839,
+ "K42_B1P": [
+  5,
+  4,
+  5,
+  5,
+  5
+ ],
+ "K42_sd_B1P": 0.44721359549995787,
+ "n_per_arm_for_delta1": 4.0,
+ "n_per_arm_for_delta2": 1.0,
+ "noise_over_effect_2": 0.22360679774997894,
+ "budget_6param_GP_growths": "about 15 per dimension x 6 = 90 (rule of thumb, Eriksson-Poloczek: >= 100 evals); at 25 min per growth and 3 concurrent = 12.5 h"
+}

@@ -1,0 +1,1110 @@
+{
+ "BASE_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   6,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 7,
+  "median_last": 7.35,
+  "max_last": 8.72,
+  "stops100": [
+   7,
+   7
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    7.26,
+    6
+   ]
+  },
+  "TERM": true,
+  "PASS75": true,
+  "seed": 66666,
+  "design": "L1-hold",
+  "rho": 16.500000000000007,
+  "join75": {
+   "28": [
+    1,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    0,
+    3
+   ],
+   "46": [
+    0,
+    2
+   ],
+   "57": [
+    1,
+    2
+   ]
+  },
+  "missing75": [],
+  "n_ignite": 0,
+  "max_member_input": 52.62,
+  "members_over_3T": 1,
+  "max_pair": 3.304045,
+  "PASS_T50": false
+ },
+ "BASE_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   4,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 5,
+  "median_last": 8.56,
+  "max_last": 9.12,
+  "stops100": [
+   5,
+   5
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    8.56,
+    5
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 77777,
+  "design": "L1-hold",
+  "rho": 16.49999999999999,
+  "join75": {
+   "65": [
+    3,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    1,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [
+   [
+    58
+   ],
+   [
+    3,
+    58
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 64.15,
+  "members_over_3T": 2,
+  "max_pair": 4.060488,
+  "PASS_T50": false
+ },
+ "W13_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   4,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 5,
+  "median_last": 8.14,
+  "max_last": 10.2,
+  "stops100": [
+   5,
+   5
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    8.56,
+    4
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 66666,
+  "design": "W13-hold",
+  "rho": 16.5,
+  "join75": {
+   "28": [
+    0,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    0,
+    3
+   ],
+   "46": [
+    0,
+    2
+   ],
+   "57": [
+    1,
+    2
+   ]
+  },
+  "missing75": [
+   [
+    28
+   ],
+   [
+    65
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 49.88,
+  "members_over_3T": 1,
+  "max_pair": 3.854129,
+  "PASS_T50": false
+ },
+ "W13_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   4,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 5,
+  "median_last": 8.47,
+  "max_last": 9.92,
+  "stops100": [
+   5,
+   5
+  ],
+  "median_per_member": 1.059,
+  "median_pyr450": 18.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    8.47,
+    5
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 77777,
+  "design": "W13-hold",
+  "rho": 16.500000000000007,
+  "join75": {
+   "65": [
+    1,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    0,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [
+   [
+    61,
+    65,
+    67,
+    74
+   ],
+   [
+    3,
+    58,
+    65,
+    87
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 62.47,
+  "members_over_3T": 1,
+  "max_pair": 5.848551,
+  "PASS_T50": false
+ },
+ "LPS_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   4,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 5,
+  "median_last": 7.91,
+  "max_last": 10.72,
+  "stops100": [
+   5,
+   5
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    7.045,
+    4
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 66666,
+  "design": "LPS-hold",
+  "rho": 15.38723941597708,
+  "join75": {
+   "28": [
+    1,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    0,
+    3
+   ],
+   "46": [
+    0,
+    2
+   ],
+   "57": [
+    0,
+    2
+   ]
+  },
+  "missing75": [
+   [
+    39,
+    77
+   ],
+   [
+    29,
+    39,
+    77,
+    79
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 54.37,
+  "members_over_3T": 1,
+  "max_pair": 4.9,
+  "PASS_T50": false
+ },
+ "LPS_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   3,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 4,
+  "median_last": 8.51,
+  "max_last": 9.91,
+  "stops100": [
+   4,
+   4
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    8.51,
+    4
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 77777,
+  "design": "LPS-hold",
+  "rho": 15.317720160859436,
+  "join75": {
+   "65": [
+    3,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    0,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [
+   [
+    4,
+    46
+   ],
+   [
+    58,
+    74
+   ],
+   [
+    3
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 62.03,
+  "members_over_3T": 2,
+  "max_pair": 4.9,
+  "PASS_T50": false
+ },
+ "CASC_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   5,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 6,
+  "median_last": 7.79,
+  "max_last": 11.61,
+  "stops100": [
+   6,
+   6
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    7.79,
+    6
+   ]
+  },
+  "TERM": true,
+  "PASS75": true,
+  "seed": 66666,
+  "design": "CASC-hold",
+  "rho": 16.39420262101625,
+  "join75": {
+   "28": [
+    1,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    1,
+    3
+   ],
+   "46": [
+    0,
+    2
+   ],
+   "57": [
+    0,
+    2
+   ]
+  },
+  "missing75": [
+   [
+    8
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 55.1,
+  "members_over_3T": 1,
+  "max_pair": 4.408565,
+  "PASS_T50": false
+ },
+ "CASC_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   5,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 6,
+  "median_last": 7.235,
+  "max_last": 8.15,
+  "stops100": [
+   6,
+   6
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    7.235,
+    6
+   ]
+  },
+  "TERM": true,
+  "PASS75": true,
+  "seed": 77777,
+  "design": "CASC-hold",
+  "rho": 16.5,
+  "join75": {
+   "65": [
+    3,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    2,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [
+   [
+    42
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 65.78,
+  "members_over_3T": 2,
+  "max_pair": 5.35387,
+  "PASS_T50": false
+ },
+ "RN_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   5,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 6,
+  "median_last": 6.994999999999999,
+  "max_last": 8.17,
+  "stops100": [
+   6,
+   6
+  ],
+  "median_per_member": 1.0,
+  "median_pyr450": 17.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    6.64,
+    5
+   ]
+  },
+  "TERM": true,
+  "PASS75": true,
+  "seed": 66666,
+  "design": "RN-hold",
+  "rho": 16.153005502027813,
+  "join75": {
+   "28": [
+    0,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    0,
+    3
+   ],
+   "46": [
+    0,
+    2
+   ],
+   "57": [
+    0,
+    2
+   ]
+  },
+  "missing75": [
+   [
+    28,
+    91
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 49.46,
+  "members_over_3T": 0,
+  "max_pair": 3.63155,
+  "PASS_T50": false
+ },
+ "RN_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   3,
+   6
+  ],
+  "p50": [
+   0,
+   6
+  ],
+  "p25_recruit": [
+   0,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 4,
+  "median_last": 9.55,
+  "max_last": 11.95,
+  "stops100": [
+   4,
+   4
+  ],
+  "median_per_member": 1.294,
+  "median_pyr450": 22.0,
+  "events_nonmember": [
+   0,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    null,
+    0
+   ],
+   "after_quiet": [
+    9.55,
+    4
+   ]
+  },
+  "TERM": true,
+  "PASS75": false,
+  "seed": 77777,
+  "design": "RN-hold",
+  "rho": 16.880741015418923,
+  "join75": {
+   "65": [
+    2,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    0,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [
+   [
+    61
+   ],
+   [
+    58
+   ],
+   [
+    3,
+    58,
+    65
+   ]
+  ],
+  "n_ignite": 0,
+  "max_member_input": 58.4,
+  "members_over_3T": 1,
+  "max_pair": 5.88,
+  "PASS_T50": false
+ },
+ "E20_s66666": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   6,
+   6
+  ],
+  "p50": [
+   6,
+   6
+  ],
+  "p25_recruit": [
+   1,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 13,
+  "median_last": 327.15,
+  "max_last": 371.26,
+  "stops100": [
+   0,
+   13
+  ],
+  "median_per_member": 27.235,
+  "median_pyr450": 530.0,
+  "events_nonmember": [
+   13,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    328.07,
+    4
+   ],
+   "after_quiet": [
+    328.91999999999996,
+    8
+   ]
+  },
+  "TERM": false,
+  "PASS75": false,
+  "seed": 66666,
+  "design": "E20-hold",
+  "rho": 20.4461746467976,
+  "join75": {
+   "28": [
+    1,
+    1
+   ],
+   "46": [
+    0,
+    0
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "join50": {
+   "28": [
+    3,
+    3
+   ],
+   "46": [
+    2,
+    2
+   ],
+   "57": [
+    2,
+    2
+   ]
+  },
+  "missing75": [],
+  "n_ignite": 13,
+  "max_member_input": 68.24,
+  "members_over_3T": 5,
+  "max_pair": 5.210021,
+  "PASS_T50": false
+ },
+ "E20_s77777": {
+  "full": [
+   1,
+   1
+  ],
+  "p75": [
+   6,
+   6
+  ],
+  "p50": [
+   5,
+   6
+  ],
+  "p25_recruit": [
+   2,
+   6
+  ],
+  "p1_recruit": [
+   0,
+   4
+  ],
+  "unrel_recruit": [
+   0,
+   4
+  ],
+  "n_completing": 12,
+  "median_last": 388.21000000000004,
+  "max_last": 415.62,
+  "stops100": [
+   0,
+   12
+  ],
+  "median_per_member": 27.176,
+  "median_pyr450": 468.0,
+  "events_nonmember": [
+   12,
+   27
+  ],
+  "contaminated": 0,
+  "PASS_T": false,
+  "carry": {
+   "after_reverb": [
+    369.98,
+    4
+   ],
+   "after_quiet": [
+    394.845,
+    8
+   ]
+  },
+  "TERM": false,
+  "PASS75": false,
+  "seed": 77777,
+  "design": "E20-hold",
+  "rho": 20.620379701385993,
+  "join75": {
+   "65": [
+    3,
+    3
+   ],
+   "70": [
+    1,
+    1
+   ]
+  },
+  "join50": {
+   "65": [
+    3,
+    3
+   ],
+   "70": [
+    0,
+    0
+   ]
+  },
+  "missing75": [],
+  "n_ignite": 12,
+  "max_member_input": 77.05,
+  "members_over_3T": 7,
+  "max_pair": 5.88,
+  "PASS_T50": false
+ }
+}

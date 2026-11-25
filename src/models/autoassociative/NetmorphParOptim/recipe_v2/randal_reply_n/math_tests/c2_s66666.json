@@ -1,0 +1,1 @@
+{"seed": 66666, "n_cands": 2527, "greedy": 2, "t_greedy": 5, "lp_bound": 5.0, "t_lp": 0, "milp_status": 0, "milp_msg": "Optimization terminated successfully. (HiGHS Status 7: Optimal)", "exact": 3, "dual_bound": 3.0, "t_milp": 5}

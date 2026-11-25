@@ -1,0 +1,241 @@
+{
+ "C6": {
+  "s66666": {
+   "members": [
+    8,
+    14,
+    19,
+    28,
+    29,
+    34,
+    39,
+    43,
+    46,
+    57,
+    64,
+    65,
+    66,
+    77,
+    79,
+    87,
+    91
+   ],
+   "worst13_input": [
+    8.98,
+    10.83,
+    11.51,
+    7.51,
+    11.68,
+    11.05,
+    11.74,
+    11.05,
+    8.98,
+    6.91,
+    9.64,
+    10.51,
+    9.75,
+    7.6,
+    10.36,
+    9.6,
+    10.02
+   ],
+   "rank_of_core_failing": {
+    "28": 1,
+    "46": 3,
+    "57": 0
+   },
+   "rank_of_all_failing": {
+    "28": 1,
+    "46": 3,
+    "57": 0,
+    "65": 10,
+    "77": 2,
+    "79": 9
+   },
+   "members_below_mean_minus_sd_by_insum": [
+    28,
+    57,
+    65
+   ],
+   "lowest5_by_worst13": [
+    57,
+    28,
+    77,
+    46,
+    8
+   ],
+   "insum": [
+    15.2,
+    17.18,
+    17.85,
+    11.68,
+    18.83,
+    20.03,
+    18.65,
+    18.65,
+    15.89,
+    14.5,
+    16.21,
+    14.52,
+    16.63,
+    15.89,
+    15.89,
+    18.56,
+    16.71
+   ]
+  },
+  "s77777": {
+   "members": [
+    3,
+    4,
+    11,
+    19,
+    40,
+    41,
+    42,
+    46,
+    58,
+    61,
+    65,
+    67,
+    70,
+    74,
+    81,
+    87,
+    94
+   ],
+   "worst13_input": [
+    6.37,
+    9.32,
+    10.1,
+    9.91,
+    11.9,
+    10.27,
+    12.03,
+    7.33,
+    9.43,
+    12.53,
+    6.76,
+    9.02,
+    9.66,
+    12.39,
+    11.73,
+    12.37,
+    10.27
+   ],
+   "rank_of_core_failing": {
+    "65": 1,
+    "70": 6,
+    "3": 0
+   },
+   "rank_of_all_failing": {
+    "65": 1,
+    "70": 6,
+    "3": 0,
+    "4": 4,
+    "46": 2
+   },
+   "members_below_mean_minus_sd_by_insum": [
+    3,
+    65,
+    70
+   ],
+   "lowest5_by_worst13": [
+    3,
+    65,
+    46,
+    67,
+    4
+   ],
+   "insum": [
+    9.8,
+    16.49,
+    16.83,
+    15.98,
+    19.89,
+    18.33,
+    19.82,
+    16.87,
+    15.33,
+    18.55,
+    11.76,
+    16.68,
+    13.74,
+    19.97,
+    20.53,
+    20.48,
+    16.87
+   ]
+  }
+ },
+ "C7": {
+  "s66666_Teff13.6_75%_vs_25%": {
+   "min_slack_over_members": -3.800000405311584,
+   "n_members_feasible": 13,
+   "slack_median": 2.108571243286133
+  },
+  "s66666_Teff13.6_50%_vs_25%": {
+   "min_slack_over_members": -11.640000081062317,
+   "n_members_feasible": 5,
+   "slack_median": -6.740000283718109
+  },
+  "s66666_Teff13.6_50%_vs_37%": {
+   "min_slack_over_members": -11.640000081062317,
+   "n_members_feasible": 4,
+   "slack_median": -6.740000283718109
+  },
+  "s66666_Teff15.0_75%_vs_25%": {
+   "min_slack_over_members": -5.2000004053115845,
+   "n_members_feasible": 11,
+   "slack_median": 1.659999132156372
+  },
+  "s66666_Teff15.0_50%_vs_25%": {
+   "min_slack_over_members": -13.040000081062317,
+   "n_members_feasible": 3,
+   "slack_median": -8.14000028371811
+  },
+  "s66666_Teff15.0_50%_vs_37%": {
+   "min_slack_over_members": -13.040000081062317,
+   "n_members_feasible": 2,
+   "slack_median": -8.14000028371811
+  },
+  "s77777_Teff13.6_75%_vs_25%": {
+   "min_slack_over_members": -3.800000405311584,
+   "n_members_feasible": 15,
+   "slack_median": 2.6685712201254708
+  },
+  "s77777_Teff13.6_50%_vs_25%": {
+   "min_slack_over_members": -9.680000162124633,
+   "n_members_feasible": 4,
+   "slack_median": -5.760000324249267
+  },
+  "s77777_Teff13.6_50%_vs_37%": {
+   "min_slack_over_members": -9.680000162124633,
+   "n_members_feasible": 1,
+   "slack_median": -5.760000324249267
+  },
+  "s77777_Teff15.0_75%_vs_25%": {
+   "min_slack_over_members": -5.2000004053115845,
+   "n_members_feasible": 12,
+   "slack_median": 2.468571220125471
+  },
+  "s77777_Teff15.0_50%_vs_25%": {
+   "min_slack_over_members": -11.080000162124634,
+   "n_members_feasible": 2,
+   "slack_median": -7.160000324249268
+  },
+  "s77777_Teff15.0_50%_vs_37%": {
+   "min_slack_over_members": -11.080000162124634,
+   "n_members_feasible": 1,
+   "slack_median": -7.160000324249268
+  },
+  "K42_50pct_cap_arith": {
+   "max_2cell_input": 13.72,
+   "T": 16.5,
+   "Teff": 15.0,
+   "feasible_at_T": false,
+   "feasible_at_Teff15": false,
+   "feasible_at_Teff13p6": true
+  }
+ }
+}

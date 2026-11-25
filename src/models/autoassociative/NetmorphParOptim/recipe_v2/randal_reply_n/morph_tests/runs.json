@@ -1,0 +1,170 @@
+{
+ "A09_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i0/out/Admonishing/NetmorphOutput/12531bf8-8ff0-4bf1-bf3e-c07d7d595791",
+  "batch": "batch_i0",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "A05_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i0/out/Admonishing/NetmorphOutput/064cab7c-0600-43cd-b14b-f07a78a095cb",
+  "batch": "batch_i0",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "A02_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i0/out/Admonishing/NetmorphOutput/ba8c70f2-d0e1-435b-b9c0-16a51376d686",
+  "batch": "batch_i0",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A01_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i1/out/Admonishing/NetmorphOutput/59f79682-83de-4501-8cb2-ad87601ed693",
+  "batch": "batch_i1",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "Bs_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i1/out/Admonishing/NetmorphOutput/4f83bc94-cd37-405e-95ea-43f97e0e7e51",
+  "batch": "batch_i1",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "Bsd_s66666": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i1/out/Admonishing/NetmorphOutput/c852f02d-a8f2-4b43-a3cb-f129ed70fe92",
+  "batch": "batch_i1",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A09_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i2/out/Admonishing/NetmorphOutput/f7450cb3-15ec-47e1-b1ec-55e0403515d4",
+  "batch": "batch_i2",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "A05_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i2/out/Admonishing/NetmorphOutput/1283881d-2158-42b1-a308-f29c4a2d6c86",
+  "batch": "batch_i2",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "A02_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i2/out/Admonishing/NetmorphOutput/60703833-63fe-4371-b74f-6e8a3b209920",
+  "batch": "batch_i2",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A01_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i3/out/Admonishing/NetmorphOutput/14973177-8954-46c2-bcba-239258781c90",
+  "batch": "batch_i3",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "Bs_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i3/out/Admonishing/NetmorphOutput/43578b15-2123-4a97-b084-3f68995a48b0",
+  "batch": "batch_i3",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "Bsd_s77777": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i3/out/Admonishing/NetmorphOutput/a7293096-ce3f-424a-9c72-ba5e475c4dfe",
+  "batch": "batch_i3",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A09_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i4/out/Admonishing/NetmorphOutput/ccf61cf8-7c4b-4788-aaae-8312f5821cad",
+  "batch": "batch_i4",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "A05_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i4/out/Admonishing/NetmorphOutput/d5ecc5fb-2d94-4c19-8401-00a453fa78ee",
+  "batch": "batch_i4",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "A02_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i4/out/Admonishing/NetmorphOutput/42568aeb-1f3d-4e1f-b293-ca297604f661",
+  "batch": "batch_i4",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A01_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i5/out/Admonishing/NetmorphOutput/590cc443-4ab6-41b8-b6dc-f00908cf6dd7",
+  "batch": "batch_i5",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "Bs_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i5/out/Admonishing/NetmorphOutput/a669db94-2791-4f27-b723-eed25f93b197",
+  "batch": "batch_i5",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "Bsd_s88888": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i5/out/Admonishing/NetmorphOutput/f8f13cf9-deed-46c1-993d-c6c04087d5ce",
+  "batch": "batch_i5",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A09_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i6/out/Admonishing/NetmorphOutput/3e05a5ca-dbbd-4618-bafe-0fa1fa87bc1b",
+  "batch": "batch_i6",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "A05_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i6/out/Admonishing/NetmorphOutput/0b90348f-3e51-400b-9e74-e07c866e8cc0",
+  "batch": "batch_i6",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "A02_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i6/out/Admonishing/NetmorphOutput/e5881754-3eef-4612-bce0-e48bbd0be8d3",
+  "batch": "batch_i6",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ },
+ "A01_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i7/out/Admonishing/NetmorphOutput/a30e95a7-f43b-4b14-881d-1c5cfd1e22c0",
+  "batch": "batch_i7",
+  "runID": 0,
+  "status": "completed",
+  "nes_sim_id": "0"
+ },
+ "Bs_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i7/out/Admonishing/NetmorphOutput/f6b9eb63-e699-4a59-a050-1268bfcc7759",
+  "batch": "batch_i7",
+  "runID": 1,
+  "status": "completed",
+  "nes_sim_id": "1"
+ },
+ "Bsd_s99999": {
+  "dir": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests/instances/i7/out/Admonishing/NetmorphOutput/03e75bef-369f-4f17-b1a2-5c0fc4c6cbe7",
+  "batch": "batch_i7",
+  "runID": 2,
+  "status": "completed",
+  "nes_sim_id": "2"
+ }
+}

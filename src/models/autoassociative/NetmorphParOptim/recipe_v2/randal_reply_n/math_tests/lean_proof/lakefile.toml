@@ -1,0 +1,5 @@
+name = "assembly_proof"
+defaultTargets = ["AssemblyProof"]
+
+[[lean_lib]]
+name = "AssemblyProof"

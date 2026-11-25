@@ -1,0 +1,4988 @@
+{
+ "data": {
+  "x1_dm09_s66666": {
+   "ball_index.axon.all": {
+    "mean": 2722.5590664154,
+    "median": 2722.5590664154
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 3277.4788554010647,
+    "median": 3277.4788554010647
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4145272003728753,
+    "median": 1.4145272003728753
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 145.36132445603408,
+    "median": 147.00489797056923
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 135.8959406869273,
+    "median": 138.06822137646515
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 88.20774344843326,
+    "median": 85.595525783791
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.35405701754385965,
+    "median": 0.35405701754385965
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5994791666666667,
+    "median": 0.5994791666666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.3255208333333333,
+    "median": 0.3255208333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.45789473684210524,
+    "median": 0.45789473684210524
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.8909879219572623,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 4.269331016507385,
+    "median": 3.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.504,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.7413793103448274,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 33.635416666666664,
+    "median": 27.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 11.989583333333334,
+    "median": 13.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 57.55,
+    "median": 59.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 33.635416666666664,
+    "median": 34.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45710.908104491806,
+    "median": 47903.1609153159
+   },
+   "length.axon.pyramidal": {
+    "mean": 21033.423820574302,
+    "median": 20418.9158694352
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27162.35841057201,
+    "median": 21665.834538148432
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm09_s77777": {
+   "ball_index.axon.all": {
+    "mean": 3657.487243520701,
+    "median": 3657.487243520701
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 5357.511557348507,
+    "median": 5357.511557348507
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4855148964439941,
+    "median": 1.4855148964439941
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 121.48592674250756,
+    "median": 122.45074069899138
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 128.0760682722397,
+    "median": 129.48557621092635
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 73.06338779549719,
+    "median": 75.5406581011269
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.29276315789473684,
+    "median": 0.29276315789473684
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.534375,
+    "median": 0.534375
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.45729166666666665,
+    "median": 0.45729166666666665
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.6421052631578947,
+    "median": 0.6421052631578947
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 2.0722846441947564,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 4.947368421052632,
+    "median": 3.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.866742596810934,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 5.204918032786885,
+    "median": 3.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 27.8125,
+    "median": 17.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 10.6875,
+    "median": 11.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 51.3,
+    "median": 52.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 27.8125,
+    "median": 28.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45755.039250822505,
+    "median": 43988.7856073493
+   },
+   "length.axon.pyramidal": {
+    "mean": 18396.77109664008,
+    "median": 17416.942832828317
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27948.34783657883,
+    "median": 19751.40956114522
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 10,
+    "flag": 27,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm09_s88888": {
+   "ball_index.axon.all": {
+    "mean": 3208.62281972585,
+    "median": 3208.62281972585
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 4717.554553383261,
+    "median": 4717.554553383261
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4045340507550572,
+    "median": 1.4045340507550572
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 131.08002107406827,
+    "median": 128.05711994083083
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 127.94474018517012,
+    "median": 128.7143196267632
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 83.15433641962792,
+    "median": 82.00141497177158
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.25603070175438597,
+    "median": 0.25603070175438597
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.45208333333333334,
+    "median": 0.45208333333333334
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.45677083333333335,
+    "median": 0.45677083333333335
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.5684210526315789,
+    "median": 0.5684210526315789
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.929764453961456,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.7661290322580645,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 3.4150513112884835,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 5.435185185185185,
+    "median": 3.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 24.322916666666668,
+    "median": 13.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 9.041666666666666,
+    "median": 7.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 43.4,
+    "median": 44.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 24.322916666666668,
+    "median": 25.0
+   },
+   "length.axon.interneuron": {
+    "mean": 39873.56263066169,
+    "median": 43360.92841658674
+   },
+   "length.axon.pyramidal": {
+    "mean": 20004.115217199665,
+    "median": 19183.555980263816
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22436.862370477105,
+    "median": 18418.77410481355
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 10,
+    "flag": 27,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm02_s66666": {
+   "ball_index.axon.all": {
+    "mean": 18.07828115394463,
+    "median": 18.07828115394463
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 18.524371559638993,
+    "median": 18.524371559638993
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4145272003728753,
+    "median": 1.4145272003728753
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 251.73262918134657,
+    "median": 243.2562156642818
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 235.12365953393325,
+    "median": 235.65531166706603
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 103.5043883595708,
+    "median": 99.83536491709651
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.31721491228070176,
+    "median": 0.31721491228070176
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.6864583333333333,
+    "median": 0.6864583333333333
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.4,
+    "median": 0.4
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.618421052631579,
+    "median": 0.618421052631579
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.3301071552022123,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 2.235204855842185,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.46484375,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 2.1659574468085108,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 30.135416666666668,
+    "median": 29.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 13.729166666666666,
+    "median": 14.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 65.9,
+    "median": 70.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 30.135416666666668,
+    "median": 29.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45710.908105456554,
+    "median": 47903.16087988005
+   },
+   "length.axon.pyramidal": {
+    "mean": 21033.42382200438,
+    "median": 20418.915859807952
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27162.35841057201,
+    "median": 21665.834538148432
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm02_s77777": {
+   "ball_index.axon.all": {
+    "mean": 24.442155190331153,
+    "median": 24.442155190331153
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 23.885156425522982,
+    "median": 23.885156425522982
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.5654556344600323,
+    "median": 1.5654556344600323
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 241.4144120180421,
+    "median": 237.352094526469
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 230.87367256856803,
+    "median": 230.82003625764256
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 92.25602037637802,
+    "median": 92.95345592649139
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.2733552631578947,
+    "median": 0.2733552631578947
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.6526041666666667,
+    "median": 0.6526041666666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.4348958333333333,
+    "median": 0.4348958333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.7052631578947368,
+    "median": 0.7052631578947368
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.3273164861612514,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 2.312051077414206,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.4910179640718564,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 2.253731343283582,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 25.96875,
+    "median": 24.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 13.052083333333334,
+    "median": 13.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 62.65,
+    "median": 65.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 25.96875,
+    "median": 26.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44861.049382539735,
+    "median": 44971.43178436796
+   },
+   "length.axon.pyramidal": {
+    "mean": 18294.683288151875,
+    "median": 17656.281652238027
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28096.547595017048,
+    "median": 19528.384066324637
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm02_s88888": {
+   "ball_index.axon.all": {
+    "mean": 20.990434633284856,
+    "median": 20.990434633284856
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 20.609947145244018,
+    "median": 20.609947145244018
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4045340507550572,
+    "median": 1.4045340507550572
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 250.11583328022598,
+    "median": 256.41128212878726
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 231.7492252563243,
+    "median": 233.14234361996245
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 102.3236320180254,
+    "median": 93.66216786240616
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.26513157894736844,
+    "median": 0.26513157894736844
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.6088541666666667,
+    "median": 0.6088541666666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.4161458333333333,
+    "median": 0.4161458333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.5868421052631579,
+    "median": 0.5868421052631579
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2956989247311828,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.9709153122326775,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.623279098873592,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 2.0807174887892375,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 25.1875,
+    "median": 23.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 12.177083333333334,
+    "median": 12.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 58.45,
+    "median": 59.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 25.1875,
+    "median": 25.0
+   },
+   "length.axon.interneuron": {
+    "mean": 39873.562633387904,
+    "median": 43360.92841806907
+   },
+   "length.axon.pyramidal": {
+    "mean": 20004.115492455272,
+    "median": 19183.555982187165
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22436.862370477105,
+    "median": 18418.77410481355
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm01_s66666": {
+   "ball_index.axon.all": {
+    "mean": 4.568001426557466,
+    "median": 4.568001426557466
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 4.561916589952762,
+    "median": 4.561916589952762
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4145272003728753,
+    "median": 1.4145272003728753
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 356.01000422884675,
+    "median": 357.3566142784799
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 339.07283009178883,
+    "median": 338.31513937607986
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 132.14065979613457,
+    "median": 132.74269184247606
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.23607456140350877,
+    "median": 0.23607456140350877
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.6067708333333334,
+    "median": 0.6067708333333334
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.28489583333333335,
+    "median": 0.28489583333333335
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.5157894736842106,
+    "median": 0.5157894736842106
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2104040873200186,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.8412017167381973,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.29981718464351,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.6224489795918366,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 22.427083333333332,
+    "median": 20.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 12.135416666666666,
+    "median": 12.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 58.25,
+    "median": 60.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 22.427083333333332,
+    "median": 22.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45710.9081076383,
+    "median": 47903.16090510242
+   },
+   "length.axon.pyramidal": {
+    "mean": 21033.42382269959,
+    "median": 20418.91588344818
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27162.35841057201,
+    "median": 21665.834538148432
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm01_s77777": {
+   "ball_index.axon.all": {
+    "mean": 5.286040796732879,
+    "median": 5.286040796732879
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 5.240273802173243,
+    "median": 5.240273802173243
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4855148964439941,
+    "median": 1.4855148964439941
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 380.57385720355575,
+    "median": 370.24903998838823
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 335.28216952186284,
+    "median": 334.68464074577884
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 122.9917949636239,
+    "median": 122.12974952428911
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.19835526315789473,
+    "median": 0.19835526315789473
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5494791666666666,
+    "median": 0.5494791666666666
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2755208333333333,
+    "median": 0.2755208333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.5657894736842105,
+    "median": 0.5657894736842105
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.175787728026534,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.7952606635071091,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.2514177693761814,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.6651162790697673,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 18.84375,
+    "median": 16.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 10.989583333333334,
+    "median": 11.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 52.75,
+    "median": 52.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 18.84375,
+    "median": 19.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45755.039254834104,
+    "median": 43988.78559865816
+   },
+   "length.axon.pyramidal": {
+    "mean": 18396.771095633874,
+    "median": 17416.942830811662
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27948.34783657883,
+    "median": 19751.40956114522
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1_dm01_s88888": {
+   "ball_index.axon.all": {
+    "mean": 5.1334508983470455,
+    "median": 5.1334508983470455
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 5.188377853412015,
+    "median": 5.188377853412015
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4045340507550572,
+    "median": 1.4045340507550572
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 361.7873483465007,
+    "median": 348.858972261104
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 350.62355262874206,
+    "median": 347.9418504654669
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 132.51128489949954,
+    "median": 128.05612249522483
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.20657894736842106,
+    "median": 0.20657894736842106
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5255208333333333,
+    "median": 0.5255208333333333
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2755208333333333,
+    "median": 0.2755208333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.4342105263157895,
+    "median": 0.4342105263157895
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1671974522292994,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.5302279484638255,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.285444234404537,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4242424242424243,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 19.625,
+    "median": 20.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 10.510416666666666,
+    "median": 11.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 50.45,
+    "median": 53.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 19.625,
+    "median": 19.0
+   },
+   "length.axon.interneuron": {
+    "mean": 39873.562632873116,
+    "median": 43360.92840349116
+   },
+   "length.axon.pyramidal": {
+    "mean": 20004.11537862335,
+    "median": 19183.55598566789
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22436.862370477105,
+    "median": 18418.77410481355
+   },
+   "cells_per_volume": {
+    "mean": 85472.09906786971,
+    "median": 85472.09906786971
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm09_s66666": {
+   "ball_index.axon.all": {
+    "mean": 2006.384839712755,
+    "median": 2006.384839712755
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 2559.5724807061856,
+    "median": 2559.5724807061856
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4435219920661513,
+    "median": 1.4435219920661513
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 159.859696646177,
+    "median": 166.2916128767028
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 154.53359740330143,
+    "median": 157.0316012176596
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 103.44489030092409,
+    "median": 110.28650751443428
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.22494172494172493,
+    "median": 0.22494172494172493
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4351851851851852,
+    "median": 0.4351851851851852
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.29398148148148145,
+    "median": 0.29398148148148145
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.42298850574712643,
+    "median": 0.42298850574712643
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.9784110535405872,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 4.3446808510638295,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.014173228346457,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.608695652173913,
+    "median": 3.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 32.166666666666664,
+    "median": 15.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 13.055555555555555,
+    "median": 11.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 62.666666666666664,
+    "median": 63.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 32.166666666666664,
+    "median": 33.5
+   },
+   "length.axon.interneuron": {
+    "mean": 50571.69498474486,
+    "median": 50392.57753409704
+   },
+   "length.axon.pyramidal": {
+    "mean": 20070.300635675296,
+    "median": 19959.313511566892
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22232.231163513996,
+    "median": 19462.144900831867
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 10,
+    "flag": 27,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm09_s77777": {
+   "ball_index.axon.all": {
+    "mean": 2690.5333391242007,
+    "median": 2690.5333391242007
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 2673.2718616146894,
+    "median": 2673.2718616146894
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3341720061099869,
+    "median": 1.3341720061099869
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 160.91929417016192,
+    "median": 163.12166665909467
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 159.192443059101,
+    "median": 164.9972888123186
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 99.34754572085176,
+    "median": 100.56414805139721
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1945901320901321,
+    "median": 0.1945901320901321
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.39444444444444443,
+    "median": 0.39444444444444443
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.25,
+    "median": 0.25
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3425287356321839,
+    "median": 0.3425287356321839
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.796106813077115,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.4806338028169015,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.9537037037037037,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.2013422818791946,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 27.82638888888889,
+    "median": 13.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 11.833333333333334,
+    "median": 9.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 56.8,
+    "median": 55.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 27.82638888888889,
+    "median": 28.0
+   },
+   "length.axon.interneuron": {
+    "mean": 45665.48083798995,
+    "median": 44442.98996609441
+   },
+   "length.axon.pyramidal": {
+    "mean": 20065.170516459315,
+    "median": 19584.42080999302
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 23847.607201976578,
+    "median": 19186.992429910402
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm09_s88888": {
+   "ball_index.axon.all": {
+    "mean": 2952.9956000353723,
+    "median": 2952.9956000353723
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 3680.8543989254263,
+    "median": 3680.8543989254263
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3816909721326494,
+    "median": 1.3816909721326494
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 169.68816508360206,
+    "median": 176.4249103941575
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 158.20660564540285,
+    "median": 161.9213773972451
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 105.9591011355924,
+    "median": 114.71552847122405
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.25874125874125875,
+    "median": 0.25874125874125875
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5143518518518518,
+    "median": 0.5143518518518518
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.23796296296296296,
+    "median": 0.23796296296296296
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3448275862068966,
+    "median": 0.3448275862068966
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.7413663663663663,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.2857785778577857,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.4299610894941632,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.8333333333333335,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 37.0,
+    "median": 22.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 15.430555555555555,
+    "median": 15.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 74.06666666666666,
+    "median": 74.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 37.0,
+    "median": 37.5
+   },
+   "length.axon.interneuron": {
+    "mean": 44290.733357275094,
+    "median": 45651.39471378858
+   },
+   "length.axon.pyramidal": {
+    "mean": 19488.49383898382,
+    "median": 19256.679097064356
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28540.877178168714,
+    "median": 19950.45792963319
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm02_s66666": {
+   "ball_index.axon.all": {
+    "mean": 23.64388640564736,
+    "median": 23.64388640564736
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 23.635878718161194,
+    "median": 23.635878718161194
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4571276449391273,
+    "median": 1.4571276449391273
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 281.4638585840511,
+    "median": 275.3090633109805
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 252.74633342868148,
+    "median": 249.212409693622
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 115.84628581162573,
+    "median": 117.76961775355639
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.22261072261072262,
+    "median": 0.22261072261072262
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5914351851851852,
+    "median": 0.5914351851851852
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.30300925925925926,
+    "median": 0.30300925925925926
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.5540229885057472,
+    "median": 0.5540229885057472
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2770506108202444,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 2.083365949119374,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.4171122994652405,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 2.0062240663900415,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 31.833333333333332,
+    "median": 25.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 17.743055555555557,
+    "median": 17.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 85.16666666666667,
+    "median": 86.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 31.833333333333332,
+    "median": 32.0
+   },
+   "length.axon.interneuron": {
+    "mean": 50564.54264908836,
+    "median": 50425.7048570965
+   },
+   "length.axon.pyramidal": {
+    "mean": 20076.802908467827,
+    "median": 19934.378996363128
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22237.469930762403,
+    "median": 19462.144902124706
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm02_s77777": {
+   "ball_index.axon.all": {
+    "mean": 31.734390831001356,
+    "median": 31.734390831001356
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 31.930886810901516,
+    "median": 31.930886810901516
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.1995288442965877,
+    "median": 1.1995288442965877
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 261.10801261704205,
+    "median": 252.93788674492487
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 254.30893830042683,
+    "median": 253.42744042942394
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 111.51401898096353,
+    "median": 110.85461086782828
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.21712315462315462,
+    "median": 0.21712315462315462
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5034722222222222,
+    "median": 0.5034722222222222
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.31203703703703706,
+    "median": 0.31203703703703706
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.4839080459770115,
+    "median": 0.4839080459770115
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2305971818385149,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.8533333333333333,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.4658753709198813,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.9049881235154393,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 31.04861111111111,
+    "median": 26.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 15.104166666666666,
+    "median": 15.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 72.5,
+    "median": 74.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 31.04861111111111,
+    "median": 31.0
+   },
+   "length.axon.interneuron": {
+    "mean": 41657.161499565336,
+    "median": 40717.45607998428
+   },
+   "length.axon.pyramidal": {
+    "mean": 20424.28549833225,
+    "median": 19877.303868703755
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 23608.803070527243,
+    "median": 19351.78138287376
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm02_s88888": {
+   "ball_index.axon.all": {
+    "mean": 33.4259771792042,
+    "median": 33.4259771792042
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 34.026730781814955,
+    "median": 34.026730781814955
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3816909721326494,
+    "median": 1.3816909721326494
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 271.73477017439717,
+    "median": 274.0933644479203
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 247.50833373328453,
+    "median": 249.74746126129617
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 119.29137773658307,
+    "median": 123.79002490919098
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.24091880341880342,
+    "median": 0.24091880341880342
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5962962962962963,
+    "median": 0.5962962962962963
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2833333333333333,
+    "median": 0.2833333333333333
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.4793103448275862,
+    "median": 0.4793103448275862
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2610360814351944,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.951086956521739,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.3341503267973855,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.6954436450839327,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 34.451388888888886,
+    "median": 29.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 17.88888888888889,
+    "median": 18.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 85.86666666666666,
+    "median": 89.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 34.451388888888886,
+    "median": 34.5
+   },
+   "length.axon.interneuron": {
+    "mean": 44290.73334786648,
+    "median": 45651.39471316632
+   },
+   "length.axon.pyramidal": {
+    "mean": 19488.493840370684,
+    "median": 19256.67911053331
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28540.877178168714,
+    "median": 19950.45792963319
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm01_s66666": {
+   "ball_index.axon.all": {
+    "mean": 5.708918188315767,
+    "median": 5.708918188315767
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 6.130332351063575,
+    "median": 6.130332351063575
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4435219920661513,
+    "median": 1.4435219920661513
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 376.1458545494111,
+    "median": 368.3942735643701
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 342.0108665840704,
+    "median": 331.94714863628076
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 135.18664241483592,
+    "median": 135.87846105441247
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.17356254856254857,
+    "median": 0.17356254856254857
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5291666666666667,
+    "median": 0.5291666666666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2449074074074074,
+    "median": 0.2449074074074074
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.46781609195402296,
+    "median": 0.46781609195402296
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.144935646334639,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.669291338582677,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.22117202268431,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.5577395577395576,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 24.819444444444443,
+    "median": 22.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 15.875,
+    "median": 16.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 76.2,
+    "median": 74.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 24.819444444444443,
+    "median": 24.0
+   },
+   "length.axon.interneuron": {
+    "mean": 50571.69498560972,
+    "median": 50392.57752403067
+   },
+   "length.axon.pyramidal": {
+    "mean": 20070.300854941837,
+    "median": 19959.313501217817
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 22232.231163513996,
+    "median": 19462.144900831867
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm01_s77777": {
+   "ball_index.axon.all": {
+    "mean": 6.3427489481167525,
+    "median": 6.3427489481167525
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 6.430916613694931,
+    "median": 6.430916613694931
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.2980835407655396,
+    "median": 1.2980835407655396
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 375.6548322112219,
+    "median": 376.0625906748321
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 359.77686542413113,
+    "median": 356.52646113565817
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 134.0081889854574,
+    "median": 134.47768495446064
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1824980574980575,
+    "median": 0.1824980574980575
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4703703703703704,
+    "median": 0.4703703703703704
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.23310185185185187,
+    "median": 0.23310185185185187
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.4103448275862069,
+    "median": 0.4103448275862069
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1519425226184141,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.544291338582677,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.2154915590863953,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4453781512605042,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 26.09722222222222,
+    "median": 24.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 14.11111111111111,
+    "median": 14.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 67.73333333333333,
+    "median": 71.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 26.09722222222222,
+    "median": 26.0
+   },
+   "length.axon.interneuron": {
+    "mean": 43360.477329809386,
+    "median": 46311.22802522752
+   },
+   "length.axon.pyramidal": {
+    "mean": 20941.61805687413,
+    "median": 21214.588049376172
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 23266.291179528544,
+    "median": 19634.70110712428
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x1.5_dm01_s88888": {
+   "ball_index.axon.all": {
+    "mean": 6.462331429187083,
+    "median": 6.462331429187083
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 6.678306976080277,
+    "median": 6.678306976080277
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3816909721326494,
+    "median": 1.3816909721326494
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 379.60445782261996,
+    "median": 377.7450630296256
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 348.6383386332547,
+    "median": 345.2019979272229
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 139.45027995390996,
+    "median": 139.60128917006142
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.191482128982129,
+    "median": 0.191482128982129
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5131944444444444,
+    "median": 0.5131944444444444
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.21319444444444444,
+    "median": 0.21319444444444444
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.41379310344827586,
+    "median": 0.41379310344827586
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1770225716459548,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.6928281461434371,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1856677524429968,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4388888888888889,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 27.381944444444443,
+    "median": 24.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 15.395833333333334,
+    "median": 15.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 73.9,
+    "median": 74.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 27.381944444444443,
+    "median": 28.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44290.73334815926,
+    "median": 45651.39470784362
+   },
+   "length.axon.pyramidal": {
+    "mean": 19488.493839313174,
+    "median": 19256.679114657352
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28540.877178168714,
+    "median": 19950.45792963319
+   },
+   "cells_per_volume": {
+    "mean": 85436.50052598388,
+    "median": 85436.50052598388
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm09_s66666": {
+   "ball_index.axon.all": {
+    "mean": 2603.4065556087526,
+    "median": 2603.4065556087526
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 2400.255208843997,
+    "median": 2400.255208843997
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.317930357546235,
+    "median": 1.317930357546235
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 179.23790714414503,
+    "median": 188.12927747638102
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 162.31828550833868,
+    "median": 168.8887510132327
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 122.71686221904478,
+    "median": 131.28557407556985
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1856729930191972,
+    "median": 0.1856729930191972
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.33359375,
+    "median": 0.33359375
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.13450520833333332,
+    "median": 0.13450520833333332
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.19230769230769232,
+    "median": 0.19230769230769232
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 2.0716698487296226,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 4.147931303669009,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 3.0909970958373667,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 4.373333333333333,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 35.463541666666664,
+    "median": 8.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 13.34375,
+    "median": 5.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 64.05,
+    "median": 66.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 35.463541666666664,
+    "median": 36.0
+   },
+   "length.axon.interneuron": {
+    "mean": 43211.13307578441,
+    "median": 43618.940668430085
+   },
+   "length.axon.pyramidal": {
+    "mean": 20701.340981286976,
+    "median": 19927.090042450945
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28989.476620807603,
+    "median": 19131.965218038124
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm09_s77777": {
+   "ball_index.axon.all": {
+    "mean": 1578.6906077106073,
+    "median": 1578.6906077106073
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 1797.532304556435,
+    "median": 1797.532304556435
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3312025307193613,
+    "median": 1.3312025307193613
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 173.68392332494966,
+    "median": 187.8079417790002
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 163.5953739891061,
+    "median": 169.50285325992633
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 121.52838585942084,
+    "median": 133.26314554901938
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.16047665794066318,
+    "median": 0.16047665794066318
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.32669270833333336,
+    "median": 0.32669270833333336
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.18151041666666667,
+    "median": 0.18151041666666667
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.258974358974359,
+    "median": 0.258974358974359
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.933729821580289,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.5906735751295336,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.961979913916786,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 4.485148514851486,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 30.651041666666668,
+    "median": 8.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 13.067708333333334,
+    "median": 6.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 62.725,
+    "median": 63.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 30.651041666666668,
+    "median": 32.0
+   },
+   "length.axon.interneuron": {
+    "mean": 41948.91968377418,
+    "median": 43311.353924070645
+   },
+   "length.axon.pyramidal": {
+    "mean": 19033.783895957178,
+    "median": 19232.43292907837
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 34532.628759678446,
+    "median": 19872.212421320306
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm09_s88888": {
+   "ball_index.axon.all": {
+    "mean": 1741.9009179645152,
+    "median": 1741.9009179645152
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 1211.247847101571,
+    "median": 1211.247847101571
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3432474355754396,
+    "median": 1.3432474355754396
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 174.03715342717442,
+    "median": 176.0609117743031
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 174.10539045731306,
+    "median": 175.87358698905274
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 110.2279082745803,
+    "median": 108.38488099106186
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.18725458115183247,
+    "median": 0.18725458115183247
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.38333333333333336,
+    "median": 0.38333333333333336
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.25091145833333334,
+    "median": 0.25091145833333334
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3737179487179487,
+    "median": 0.3737179487179487
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.727100626183195,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.274796195652174,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.293201868188895,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.595197255574614,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 35.765625,
+    "median": 14.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 15.333333333333334,
+    "median": 11.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 73.6,
+    "median": 74.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 35.765625,
+    "median": 35.5
+   },
+   "length.axon.interneuron": {
+    "mean": 46182.969734035665,
+    "median": 47922.1371052711
+   },
+   "length.axon.pyramidal": {
+    "mean": 20268.301259847074,
+    "median": 19739.501537556214
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 24670.606932417624,
+    "median": 17804.282107547
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm02_s66666": {
+   "ball_index.axon.all": {
+    "mean": 65.8777140161838,
+    "median": 65.8777140161838
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 67.79190064188467,
+    "median": 67.79190064188467
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.2897953209727295,
+    "median": 1.2897953209727295
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 289.2467288049194,
+    "median": 286.8395519180719
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 262.33594491331525,
+    "median": 263.58371027373164
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 132.42291730874746,
+    "median": 134.31732187519646
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.19120855148342059,
+    "median": 0.19120855148342059
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.46484375,
+    "median": 0.46484375
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.209765625,
+    "median": 0.209765625
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3685897435897436,
+    "median": 0.3685897435897436
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.312749572162008,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.9983193277310924,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.2923649906890131,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.6991304347826086,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 36.520833333333336,
+    "median": 31.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 18.59375,
+    "median": 17.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 89.25,
+    "median": 88.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 36.520833333333336,
+    "median": 37.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44655.950737270396,
+    "median": 42866.89544670943
+   },
+   "length.axon.pyramidal": {
+    "mean": 20594.08078300612,
+    "median": 20086.6956181927
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28545.420408284805,
+    "median": 19332.157810526463
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm02_s77777": {
+   "ball_index.axon.all": {
+    "mean": 55.71302154084143,
+    "median": 55.71302154084143
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 48.945579647781464,
+    "median": 48.945579647781464
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3312025307193613,
+    "median": 1.3312025307193613
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 285.35054302568034,
+    "median": 286.5305744669238
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 261.39621821596955,
+    "median": 260.3501085320465
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 128.97069947292434,
+    "median": 133.9598283439862
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.18021924083769633,
+    "median": 0.18021924083769633
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4569010416666667,
+    "median": 0.4569010416666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.198828125,
+    "median": 0.198828125
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3628205128205128,
+    "median": 0.3628205128205128
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.337418671508549,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 2.01054431461955,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.3942370661427637,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.6607773851590106,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 34.421875,
+    "median": 28.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 18.276041666666668,
+    "median": 18.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 87.725,
+    "median": 89.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 34.421875,
+    "median": 35.5
+   },
+   "length.axon.interneuron": {
+    "mean": 41948.91968213681,
+    "median": 43311.35390672098
+   },
+   "length.axon.pyramidal": {
+    "mean": 19033.783899575606,
+    "median": 19232.432950281152
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 34532.628759678446,
+    "median": 19872.212421320306
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm02_s88888": {
+   "ball_index.axon.all": {
+    "mean": 45.211448200192805,
+    "median": 45.211448200192805
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 41.01823024356434,
+    "median": 41.01823024356434
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.2936166829917535,
+    "median": 1.2936166829917535
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 280.61682983576355,
+    "median": 278.7807670076861
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 270.4752434180159,
+    "median": 271.1765352188247
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 120.87681870346191,
+    "median": 119.59598124106901
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.19205388307155322,
+    "median": 0.19205388307155322
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.498046875,
+    "median": 0.498046875
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2515625,
+    "median": 0.2515625
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.44551282051282054,
+    "median": 0.44551282051282054
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.218230867528042,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.8530718954248366,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.318840579710145,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.772661870503597,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 36.682291666666664,
+    "median": 31.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 19.921875,
+    "median": 20.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 95.625,
+    "median": 100.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 36.682291666666664,
+    "median": 37.0
+   },
+   "length.axon.interneuron": {
+    "mean": 47211.27191814109,
+    "median": 48944.89928937262
+   },
+   "length.axon.pyramidal": {
+    "mean": 20081.077490377287,
+    "median": 19147.54807617163
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 24716.030790803405,
+    "median": 18205.622034738837
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 10,
+    "flag": 27,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm01_s66666": {
+   "ball_index.axon.all": {
+    "mean": 8.802709564196366,
+    "median": 8.802709564196366
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 8.423283805162384,
+    "median": 8.423283805162384
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.317930357546235,
+    "median": 1.317930357546235
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 387.1173170986558,
+    "median": 392.37340402107804
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 357.6394263674586,
+    "median": 354.8703544032629
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 146.6182728463585,
+    "median": 142.11327352543782
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.17040248691099477,
+    "median": 0.17040248691099477
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4412760416666667,
+    "median": 0.4412760416666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.17903645833333334,
+    "median": 0.17903645833333334
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.31153846153846154,
+    "median": 0.31153846153846154
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2112337974075853,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.6046031277663027,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.2174545454545453,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.397119341563786,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 32.546875,
+    "median": 29.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 17.651041666666668,
+    "median": 17.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 84.725,
+    "median": 88.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 32.546875,
+    "median": 32.5
+   },
+   "length.axon.interneuron": {
+    "mean": 43211.133071264616,
+    "median": 43618.94068629968
+   },
+   "length.axon.pyramidal": {
+    "mean": 20701.340982759546,
+    "median": 19927.090035951085
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28989.476620807603,
+    "median": 19131.965218038124
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm01_s77777": {
+   "ball_index.axon.all": {
+    "mean": 7.800270215756277,
+    "median": 7.800270215756277
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 7.247430581151374,
+    "median": 7.247430581151374
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3312025307193613,
+    "median": 1.3312025307193613
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 370.531328970217,
+    "median": 368.1344732794722
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 358.308230808216,
+    "median": 348.79895815726576
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 145.09619978922052,
+    "median": 144.78047988709787
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1549956369982548,
+    "median": 0.1549956369982548
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.40924479166666666,
+    "median": 0.40924479166666666
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.17135416666666667,
+    "median": 0.17135416666666667
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3076923076923077,
+    "median": 0.3076923076923077
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.260204081632653,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.7846006999681832,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1603343465045592,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 29.604166666666668,
+    "median": 25.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 16.369791666666668,
+    "median": 16.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 78.575,
+    "median": 84.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 29.604166666666668,
+    "median": 31.0
+   },
+   "length.axon.interneuron": {
+    "mean": 41948.919683336964,
+    "median": 43311.35390039813
+   },
+   "length.axon.pyramidal": {
+    "mean": 19033.78389839998,
+    "median": 19232.432954974014
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 34532.628759678446,
+    "median": 19872.212421320306
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x2_dm01_s88888": {
+   "ball_index.axon.all": {
+    "mean": 7.561590341291789,
+    "median": 7.561590341291789
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 7.188764259371625,
+    "median": 7.188764259371625
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3432474355754396,
+    "median": 1.3432474355754396
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 377.51797916548094,
+    "median": 367.44180493329554
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 361.5090436514528,
+    "median": 356.13034077635075
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 140.99606755773146,
+    "median": 142.29117430192605
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1587041884816754,
+    "median": 0.1587041884816754
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.45729166666666665,
+    "median": 0.45729166666666665
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.206640625,
+    "median": 0.206640625
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.38653846153846155,
+    "median": 0.38653846153846155
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1482817869415807,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.582004555808656,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1776937618147447,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4129353233830846,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 30.3125,
+    "median": 28.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 18.291666666666668,
+    "median": 18.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 87.8,
+    "median": 89.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 30.3125,
+    "median": 29.0
+   },
+   "length.axon.interneuron": {
+    "mean": 46182.97031871721,
+    "median": 47922.137099446736
+   },
+   "length.axon.pyramidal": {
+    "mean": 20268.30126018032,
+    "median": 19739.50153604804
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 24670.606932417624,
+    "median": 17804.282107547
+   },
+   "cells_per_volume": {
+    "mean": 85176.3478600224,
+    "median": 85176.3478600224
+   },
+   "_status": {
+    "pass": 12,
+    "flag": 25,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm09_s66666": {
+   "ball_index.axon.all": {
+    "mean": 1695.3610774972353,
+    "median": 1695.3610774972353
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 1900.9907722626115,
+    "median": 1900.9907722626115
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4686745355080852,
+    "median": 1.4686745355080852
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 186.95021056480053,
+    "median": 196.22442290403635
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 188.30627171018443,
+    "median": 195.11687335437963
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 129.04953689255134,
+    "median": 141.60248792160922
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.153721447928765,
+    "median": 0.153721447928765
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.31614583333333335,
+    "median": 0.31614583333333335
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.21579861111111112,
+    "median": 0.21579861111111112
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.29293785310734466,
+    "median": 0.29293785310734466
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.6288367700299071,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.0,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.7964601769911503,
+    "median": 2.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 4.509161041465767,
+    "median": 3.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 44.11805555555556,
+    "median": 11.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 18.96875,
+    "median": 8.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 91.05,
+    "median": 93.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 44.11805555555556,
+    "median": 45.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44924.58517059609,
+    "median": 45320.26029865347
+   },
+   "length.axon.pyramidal": {
+    "mean": 20469.5308988694,
+    "median": 20673.77844658112
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27433.484833357797,
+    "median": 18804.745179060737
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm09_s77777": {
+   "ball_index.axon.all": {
+    "mean": 1720.9601149195944,
+    "median": 1720.9601149195944
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 1881.3916186417846,
+    "median": 1881.3916186417846
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4317667746912164,
+    "median": 1.4317667746912164
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 196.09263678966357,
+    "median": 206.53143079900278
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 193.55401090991947,
+    "median": 202.2424814728998
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 132.01247112028744,
+    "median": 143.53754550661398
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1631460511033682,
+    "median": 0.1631460511033682
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.3458333333333333,
+    "median": 0.3458333333333333
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.190625,
+    "median": 0.190625
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.2824858757062147,
+    "median": 0.2824858757062147
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.6300333704115684,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.0659303882195448,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 2.4845173041894353,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 3.815,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 46.822916666666664,
+    "median": 15.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 20.75,
+    "median": 12.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 99.6,
+    "median": 100.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 46.822916666666664,
+    "median": 49.0
+   },
+   "length.axon.interneuron": {
+    "mean": 46474.2101207282,
+    "median": 45061.67895352491
+   },
+   "length.axon.pyramidal": {
+    "mean": 19884.282095652314,
+    "median": 20022.52106524982
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27857.469345089896,
+    "median": 19288.447702247577
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm09_s88888": {
+   "ball_index.axon.all": {
+    "mean": 1892.2378584526136,
+    "median": 1892.2378584526136
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 2372.849801804928,
+    "median": 2372.849801804928
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.371834683660422,
+    "median": 1.371834683660422
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 195.66048630218776,
+    "median": 200.93503319755905
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 188.94973415741717,
+    "median": 197.45391562272482
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 131.04842822458627,
+    "median": 138.22025124726872
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1672110917537747,
+    "median": 0.1672110917537747
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.3519675925925926,
+    "median": 0.3519675925925926
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.17320601851851852,
+    "median": 0.17320601851851852
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.269774011299435,
+    "median": 0.269774011299435
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.6131973084436726,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 3.004439329168037,
+    "median": 2.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.9315068493150684,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 2.723560209424084,
+    "median": 2.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 47.989583333333336,
+    "median": 15.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 21.118055555555557,
+    "median": 12.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 101.36666666666666,
+    "median": 99.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 47.989583333333336,
+    "median": 48.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44732.9688226096,
+    "median": 44882.29290493298
+   },
+   "length.axon.pyramidal": {
+    "mean": 19454.411740106825,
+    "median": 19265.257769259624
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 29666.726306443925,
+    "median": 19747.965174159075
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm02_s66666": {
+   "ball_index.axon.all": {
+    "mean": 95.16031589476478,
+    "median": 95.16031589476478
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 92.46715575499778,
+    "median": 92.46715575499778
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4686745355080852,
+    "median": 1.4686745355080852
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 294.46940221347097,
+    "median": 294.9869812007096
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 286.6119693886093,
+    "median": 291.1229880706488
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 137.5819479624432,
+    "median": 145.31396855285467
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.15833091366627952,
+    "median": 0.15833091366627952
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.41313657407407406,
+    "median": 0.41313657407407406
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.21481481481481482,
+    "median": 0.21481481481481482
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3581920903954802,
+    "median": 0.3581920903954802
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.241537403530221,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.805434934864827,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.4401939655172413,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.914826498422713,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 45.44097222222222,
+    "median": 35.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 24.788194444444443,
+    "median": 22.5
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 118.98333333333333,
+    "median": 121.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 45.44097222222222,
+    "median": 45.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44924.5851746824,
+    "median": 45320.260318509274
+   },
+   "length.axon.pyramidal": {
+    "mean": 20469.53079010669,
+    "median": 20673.778432748026
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27433.484833357797,
+    "median": 18804.745179060737
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm02_s77777": {
+   "ball_index.axon.all": {
+    "mean": 79.32629151860846,
+    "median": 79.32629151860846
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 75.08512109120392,
+    "median": 75.08512109120392
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3699137602843465,
+    "median": 1.3699137602843465
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 297.2797657735056,
+    "median": 307.32449661969633
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 290.15881555700133,
+    "median": 290.9369780446018
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 134.27672951687083,
+    "median": 137.5927919285743
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.15471351142082848,
+    "median": 0.15471351142082848
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.43547453703703703,
+    "median": 0.43547453703703703
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2013888888888889,
+    "median": 0.2013888888888889
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3788135593220339,
+    "median": 0.3788135593220339
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2233343759774788,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.8756146179401993,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.3258620689655172,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.7695749440715884,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 44.40277777777778,
+    "median": 37.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 26.12847222222222,
+    "median": 27.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 125.41666666666667,
+    "median": 128.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 44.40277777777778,
+    "median": 44.0
+   },
+   "length.axon.interneuron": {
+    "mean": 49849.21647615302,
+    "median": 51201.33606385838
+   },
+   "length.axon.pyramidal": {
+    "mean": 19769.503687181583,
+    "median": 19021.242597558994
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 28722.325932603846,
+    "median": 19005.60723541701
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 11,
+    "flag": 26,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm02_s88888": {
+   "ball_index.axon.all": {
+    "mean": 94.75456844442924,
+    "median": 94.75456844442924
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 92.4219245946471,
+    "median": 92.4219245946471
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.371834683660422,
+    "median": 1.371834683660422
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 310.9189021195774,
+    "median": 312.1400952993409
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 287.0500502597581,
+    "median": 290.99204935379885
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 141.44192738418045,
+    "median": 140.45229294764775
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.15833091366627952,
+    "median": 0.15833091366627952
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.43917824074074074,
+    "median": 0.43917824074074074
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.19033564814814816,
+    "median": 0.19033564814814816
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.34491525423728814,
+    "median": 0.34491525423728814
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2077634293573776,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.743180919752273,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.2900577683186378,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.5978705978705978,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 45.44097222222222,
+    "median": 36.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 26.350694444444443,
+    "median": 26.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 126.48333333333333,
+    "median": 126.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 45.44097222222222,
+    "median": 45.5
+   },
+   "length.axon.interneuron": {
+    "mean": 44732.968825496726,
+    "median": 44882.29290927225
+   },
+   "length.axon.pyramidal": {
+    "mean": 19454.41174132239,
+    "median": 19265.25777066998
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 29666.726306443925,
+    "median": 19747.965174159075
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm01_s66666": {
+   "ball_index.axon.all": {
+    "mean": 11.013280975557349,
+    "median": 11.013280975557349
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 11.29316878665237,
+    "median": 11.29316878665237
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4686745355080852,
+    "median": 1.4686745355080852
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 402.0336736011895,
+    "median": 403.88798059157284
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 371.4786335662487,
+    "median": 370.2451920744853
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 155.54889746209918,
+    "median": 156.83613176651937
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1359126984126984,
+    "median": 0.1359126984126984
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.3808449074074074,
+    "median": 0.3808449074074074
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.17309027777777777,
+    "median": 0.17309027777777777
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3076271186440678,
+    "median": 0.3076271186440678
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.186042371372619,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.5737729828293572,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1972584419926446,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4481175390266299,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 39.00694444444444,
+    "median": 32.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 22.850694444444443,
+    "median": 22.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 109.68333333333334,
+    "median": 112.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 39.00694444444444,
+    "median": 40.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44924.58517631358,
+    "median": 45320.26030654111
+   },
+   "length.axon.pyramidal": {
+    "mean": 20469.530898743058,
+    "median": 20673.77842444656
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27433.484833357797,
+    "median": 18804.745179060737
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 17,
+    "flag": 20,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm01_s77777": {
+   "ball_index.axon.all": {
+    "mean": 10.404785334913376,
+    "median": 10.404785334913376
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 9.739737384820703,
+    "median": 9.739737384820703
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3702836011554669,
+    "median": 1.3702836011554669
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 398.6559640630394,
+    "median": 390.5495506792931
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 373.8131439596382,
+    "median": 367.1382689832666
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 151.23621203927266,
+    "median": 150.72218251337085
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.13632404181184668,
+    "median": 0.13632404181184668
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.402662037037037,
+    "median": 0.402662037037037
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.16197916666666667,
+    "median": 0.16197916666666667
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.2946327683615819,
+    "median": 0.2946327683615819
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.15193468228612,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.5638114400689853,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1675598428010003,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.3796740172579098,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 39.125,
+    "median": 33.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 24.15972222222222,
+    "median": 23.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 115.96666666666667,
+    "median": 118.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 39.125,
+    "median": 39.0
+   },
+   "length.axon.interneuron": {
+    "mean": 46935.663937727135,
+    "median": 46481.580810517844
+   },
+   "length.axon.pyramidal": {
+    "mean": 19835.498747511534,
+    "median": 19764.584700413707
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 27918.783980697743,
+    "median": 19325.07000481268
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 16,
+    "flag": 21,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "x3_dm01_s88888": {
+   "ball_index.axon.all": {
+    "mean": 10.828543539877014,
+    "median": 10.828543539877014
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 10.568307648884954,
+    "median": 10.568307648884954
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.371834683660422,
+    "median": 1.371834683660422
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 392.3724363890797,
+    "median": 390.65055684239076
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 374.12497275859226,
+    "median": 368.83779621156054
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 152.38888477969846,
+    "median": 150.99138602913987
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.13626355013550134,
+    "median": 0.13626355013550134
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.40023148148148147,
+    "median": 0.40023148148148147
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.16157407407407406,
+    "median": 0.16157407407407406
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.3059322033898305,
+    "median": 0.3059322033898305
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1464085945130071,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.5591382301908618,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1608166189111748,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.365650969529086,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 39.107638888888886,
+    "median": 34.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 24.01388888888889,
+    "median": 23.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 115.26666666666667,
+    "median": 116.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 39.107638888888886,
+    "median": 39.0
+   },
+   "length.axon.interneuron": {
+    "mean": 44732.96882726229,
+    "median": 44882.292907068186
+   },
+   "length.axon.pyramidal": {
+    "mean": 19454.411308083538,
+    "median": 19265.25778251706
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 29666.726306443925,
+    "median": 19747.965174159075
+   },
+   "cells_per_volume": {
+    "mean": 86540.50030621808,
+    "median": 86540.50030621808
+   },
+   "_status": {
+    "pass": 17,
+    "flag": 20,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "ctrl_dm01_s66666": {
+   "ball_index.axon.all": {
+    "mean": 7.042009942104171,
+    "median": 7.042009942104171
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 7.009868640013588,
+    "median": 7.009868640013588
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.556788832646316,
+    "median": 1.556788832646316
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 380.74441301406273,
+    "median": 384.99684950689584
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 363.4965440027925,
+    "median": 359.6981204084522
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 146.84853144299035,
+    "median": 150.23552926893467
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.1737938596491228,
+    "median": 0.1737938596491228
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.5114583333333333,
+    "median": 0.5114583333333333
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.17708333333333334,
+    "median": 0.17708333333333334
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.27631578947368424,
+    "median": 0.27631578947368424
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.2820189274447948,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.8207739307535642,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.1323529411764706,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.2571428571428571,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 16.510416666666668,
+    "median": 15.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 10.229166666666666,
+    "median": 10.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 49.1,
+    "median": 51.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 16.510416666666668,
+    "median": 16.0
+   },
+   "length.axon.interneuron": {
+    "mean": 47440.61338484451,
+    "median": 47313.85338422243
+   },
+   "length.axon.pyramidal": {
+    "mean": 19953.188242230197,
+    "median": 20322.862123028768
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 30216.265337578807,
+    "median": 21231.144452301724
+   },
+   "cells_per_volume": {
+    "mean": 42588.1739300112,
+    "median": 42588.1739300112
+   },
+   "_status": {
+    "pass": 14,
+    "flag": 23,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "ctrl_dm01_s77777": {
+   "ball_index.axon.all": {
+    "mean": 8.26054388320536,
+    "median": 8.26054388320536
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 8.881542666366032,
+    "median": 8.881542666366032
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.4087637782253686,
+    "median": 1.4087637782253686
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 364.9138121911766,
+    "median": 368.10044817566506
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 363.0091980744193,
+    "median": 354.413024702095
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 138.2814691508452,
+    "median": 131.25173758867572
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.16326754385964912,
+    "median": 0.16326754385964912
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4197916666666667,
+    "median": 0.4197916666666667
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2171875,
+    "median": 0.2171875
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.40789473684210525,
+    "median": 0.40789473684210525
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1430490261920752,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.4950372208436724,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.158273381294964,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.4064516129032258,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 15.510416666666666,
+    "median": 13.5
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 8.395833333333334,
+    "median": 8.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 40.3,
+    "median": 40.5
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 15.510416666666666,
+    "median": 15.0
+   },
+   "length.axon.interneuron": {
+    "mean": 41153.787823301995,
+    "median": 41869.55091989506
+   },
+   "length.axon.pyramidal": {
+    "mean": 21266.68063431914,
+    "median": 20798.72498942542
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 23760.38658910591,
+    "median": 19145.05382693099
+   },
+   "cells_per_volume": {
+    "mean": 42588.1739300112,
+    "median": 42588.1739300112
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  },
+  "ctrl_dm01_s88888": {
+   "ball_index.axon.all": {
+    "mean": 6.754229086920673,
+    "median": 6.754229086920673
+   },
+   "ball_index.axon.interneuron": {
+    "mean": 6.253170461790913,
+    "median": 6.253170461790913
+   },
+   "ball_index.dendrite.all": {
+    "mean": 1.3516595495740396,
+    "median": 1.3516595495740396
+   },
+   "reach_max.axon.interneuron": {
+    "mean": 398.61513791908476,
+    "median": 389.3635102128518
+   },
+   "reach_max.axon.pyramidal": {
+    "mean": 356.6583322394999,
+    "median": 360.1841097264992
+   },
+   "reach_mean.axon.interneuron": {
+    "mean": 147.65736227338914,
+    "median": 149.58246337873032
+   },
+   "conn_prob.pyramidal.to.pyramidal": {
+    "mean": 0.15482456140350878,
+    "median": 0.15482456140350878
+   },
+   "conn_prob.interneuron.to.pyramidal": {
+    "mean": 0.4661458333333333,
+    "median": 0.4661458333333333
+   },
+   "conn_prob.pyramidal.to.interneuron": {
+    "mean": 0.2,
+    "median": 0.2
+   },
+   "conn_prob.interneuron.to.interneuron": {
+    "mean": 0.37894736842105264,
+    "median": 0.37894736842105264
+   },
+   "syn_per_pair.pyramidal.to.pyramidal": {
+    "mean": 1.1430594900849858,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.pyramidal": {
+    "mean": 1.6212290502793296,
+    "median": 1.0
+   },
+   "syn_per_pair.pyramidal.to.interneuron": {
+    "mean": 1.171875,
+    "median": 1.0
+   },
+   "syn_per_pair.interneuron.to.interneuron": {
+    "mean": 1.5,
+    "median": 1.0
+   },
+   "sources.pyramidal.from.pyramidal": {
+    "mean": 14.708333333333334,
+    "median": 13.0
+   },
+   "sources.pyramidal.from.interneuron": {
+    "mean": 9.322916666666666,
+    "median": 9.0
+   },
+   "targets.interneuron.to.pyramidal": {
+    "mean": 44.75,
+    "median": 42.0
+   },
+   "targets.pyramidal.to.pyramidal": {
+    "mean": 14.708333333333334,
+    "median": 14.0
+   },
+   "length.axon.interneuron": {
+    "mean": 46545.05727091148,
+    "median": 43331.5262879699
+   },
+   "length.axon.pyramidal": {
+    "mean": 19389.70738839635,
+    "median": 18815.07765923169
+   },
+   "length.dendrite.pyramidal": {
+    "mean": 25035.56897866871,
+    "median": 20116.539119786088
+   },
+   "cells_per_volume": {
+    "mean": 42588.1739300112,
+    "median": 42588.1739300112
+   },
+   "_status": {
+    "pass": 13,
+    "flag": 24,
+    "unknown": 1,
+    "info": 7,
+    "n/a": 1
+   }
+  }
+ },
+ "criteria": {
+  "x1_dm09": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    2,
+    3
+   ],
+   "PP12": [
+    2,
+    3
+   ],
+   "success": false
+  },
+  "x1_dm02": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x1_dm01": {
+   "S1": [
+    3,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x1.5_dm09": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    1,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x1.5_dm02": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x1.5_dm01": {
+   "S1": [
+    3,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x2_dm09": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    1,
+    3
+   ],
+   "PP12": [
+    2,
+    3
+   ],
+   "success": false
+  },
+  "x2_dm02": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x2_dm01": {
+   "S1": [
+    3,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x3_dm09": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x3_dm02": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    0,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "x3_dm01": {
+   "S1": [
+    0,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    3,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  },
+  "ctrl_dm01": {
+   "S1": [
+    3,
+    3
+   ],
+   "S1lit": [
+    0,
+    3
+   ],
+   "S2": [
+    0,
+    3
+   ],
+   "S3": [
+    1,
+    3
+   ],
+   "C1": [
+    0,
+    3
+   ],
+   "PP12": [
+    3,
+    3
+   ],
+   "success": false
+  }
+ },
+ "capacity": {
+  "x3_dm09_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i0_b0/viz/sample_0000.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 12706,
+   "p_conn": 0.1537,
+   "g_mean": 1.596259958243419,
+   "pairs_ge_thr": 441,
+   "strong_out_per_cell": 1.53125,
+   "lambda_max_nS": 69.27120796005046,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": true,
+   "n_4subsets_full": 16321595,
+   "cands_m4": 1,
+   "max_disjoint_m4": 1,
+   "cands_m2": 5352,
+   "max_disjoint_m2": 2
+  },
+  "x3_dm01_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i0_b0/viz/sample_0001.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 11234,
+   "p_conn": 0.1359,
+   "g_mean": 1.1623214738148693,
+   "pairs_ge_thr": 79,
+   "strong_out_per_cell": 0.2743055555555556,
+   "lambda_max_nS": 44.688824351713215,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 1426425,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x3_dm02_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i0_b0/viz/sample_0002.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 13087,
+   "p_conn": 0.1583,
+   "g_mean": 1.2167066025562698,
+   "pairs_ge_thr": 90,
+   "strong_out_per_cell": 0.3125,
+   "lambda_max_nS": 53.64125755107768,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 2024785,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x2_dm09_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i1_b0/viz/sample_0000.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 6809,
+   "p_conn": 0.1857,
+   "g_mean": 2.030236344914164,
+   "pairs_ge_thr": 588,
+   "strong_out_per_cell": 3.0625,
+   "lambda_max_nS": 71.34577817116727,
+   "lambda_max_strong_nS": 19.44841331679694,
+   "sampled_LB": true,
+   "n_4subsets_full": 14292796,
+   "cands_m4": 1468,
+   "max_disjoint_m4": 2,
+   "cands_m2": 116373,
+   "max_disjoint_m2": 5
+  },
+  "x2_dm01_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i1_b0/viz/sample_0001.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 6249,
+   "p_conn": 0.1704,
+   "g_mean": 1.1870090702778435,
+   "pairs_ge_thr": 35,
+   "strong_out_per_cell": 0.18229166666666666,
+   "lambda_max_nS": 38.66565439469516,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 40920,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x2_dm02_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i1_b0/viz/sample_0002.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 7012,
+   "p_conn": 0.1912,
+   "g_mean": 1.286494523728839,
+   "pairs_ge_thr": 72,
+   "strong_out_per_cell": 0.375,
+   "lambda_max_nS": 44.995078013601834,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 487640,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1.5_dm09_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b0/viz/sample_0000.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 4632,
+   "p_conn": 0.2249,
+   "g_mean": 1.9388427355540643,
+   "pairs_ge_thr": 358,
+   "strong_out_per_cell": 2.486111111111111,
+   "lambda_max_nS": 60.78446326828719,
+   "lambda_max_strong_nS": 17.63789389628308,
+   "sampled_LB": false,
+   "n_4subsets_full": 711024,
+   "cands_m4": 312,
+   "max_disjoint_m4": 2,
+   "cands_m2": 51232,
+   "max_disjoint_m2": 5
+  },
+  "x1.5_dm01_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b0/viz/sample_0001.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 3574,
+   "p_conn": 0.1736,
+   "g_mean": 1.122036886135159,
+   "pairs_ge_thr": 1,
+   "strong_out_per_cell": 0.006944444444444444,
+   "lambda_max_nS": 27.727881033527467,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1.5_dm02_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b0/viz/sample_0002.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 4584,
+   "p_conn": 0.2226,
+   "g_mean": 1.2515095444249857,
+   "pairs_ge_thr": 8,
+   "strong_out_per_cell": 0.05555555555555555,
+   "lambda_max_nS": 38.88766859322879,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm09_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b1/viz/sample_0000.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 3229,
+   "p_conn": 0.3541,
+   "g_mean": 1.8531680730667304,
+   "pairs_ge_thr": 173,
+   "strong_out_per_cell": 1.8020833333333333,
+   "lambda_max_nS": 62.84763818459031,
+   "lambda_max_strong_nS": 12.25064450421025,
+   "sampled_LB": false,
+   "n_4subsets_full": 74898,
+   "cands_m4": 2,
+   "max_disjoint_m4": 1,
+   "cands_m2": 1664,
+   "max_disjoint_m2": 4
+  },
+  "x1_dm01_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b1/viz/sample_0001.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2153,
+   "p_conn": 0.2361,
+   "g_mean": 1.1861959550472618,
+   "pairs_ge_thr": 1,
+   "strong_out_per_cell": 0.010416666666666666,
+   "lambda_max_nS": 26.356602018987797,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm02_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b1/viz/sample_0002.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2893,
+   "p_conn": 0.3172,
+   "g_mean": 1.3035049548290858,
+   "pairs_ge_thr": 6,
+   "strong_out_per_cell": 0.0625,
+   "lambda_max_nS": 39.28560996279859,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "ctrl_dm01_s66666": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i2_b1/viz/sample_0003.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 1585,
+   "p_conn": 0.1738,
+   "g_mean": 1.2563784931736413,
+   "pairs_ge_thr": 21,
+   "strong_out_per_cell": 0.21875,
+   "lambda_max_nS": 19.876399776564607,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 5985,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x3_dm09_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i3_b0/viz/sample_0000.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 13485,
+   "p_conn": 0.1631,
+   "g_mean": 1.5974326274905064,
+   "pairs_ge_thr": 417,
+   "strong_out_per_cell": 1.4479166666666667,
+   "lambda_max_nS": 77.0928021257352,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": true,
+   "n_4subsets_full": 6159920,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 1642,
+   "max_disjoint_m2": 2
+  },
+  "x3_dm01_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i3_b0/viz/sample_0001.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 11268,
+   "p_conn": 0.1363,
+   "g_mean": 1.1288959407715413,
+   "pairs_ge_thr": 19,
+   "strong_out_per_cell": 0.06597222222222222,
+   "lambda_max_nS": 45.39774847684165,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 715,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x3_dm02_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i3_b0/viz/sample_0002.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 12788,
+   "p_conn": 0.1547,
+   "g_mean": 1.19886763697775,
+   "pairs_ge_thr": 32,
+   "strong_out_per_cell": 0.1111111111111111,
+   "lambda_max_nS": 52.85438095448716,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 3876,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x2_dm09_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i4_b0/viz/sample_0000.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 5885,
+   "p_conn": 0.1605,
+   "g_mean": 1.8950551227684638,
+   "pairs_ge_thr": 411,
+   "strong_out_per_cell": 2.140625,
+   "lambda_max_nS": 56.85051191682915,
+   "lambda_max_strong_nS": 8.953834658860632,
+   "sampled_LB": true,
+   "n_4subsets_full": 18425526,
+   "cands_m4": 20,
+   "max_disjoint_m4": 1,
+   "cands_m2": 53066,
+   "max_disjoint_m2": 3
+  },
+  "x2_dm01_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i4_b0/viz/sample_0001.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 5684,
+   "p_conn": 0.155,
+   "g_mean": 1.2349999458394698,
+   "pairs_ge_thr": 70,
+   "strong_out_per_cell": 0.3645833333333333,
+   "lambda_max_nS": 35.89680193386624,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 91121,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 40,
+   "max_disjoint_m2": 1
+  },
+  "x2_dm02_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i4_b0/viz/sample_0002.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 6609,
+   "p_conn": 0.1802,
+   "g_mean": 1.3106702398579246,
+   "pairs_ge_thr": 94,
+   "strong_out_per_cell": 0.4895833333333333,
+   "lambda_max_nS": 44.58836838966475,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 415486,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 1821,
+   "max_disjoint_m2": 1
+  },
+  "x1.5_dm09_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b0/viz/sample_0000.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 4007,
+   "p_conn": 0.1946,
+   "g_mean": 1.7601845877885165,
+   "pairs_ge_thr": 234,
+   "strong_out_per_cell": 1.625,
+   "lambda_max_nS": 47.98837276868177,
+   "lambda_max_strong_nS": 5.879999637603761,
+   "sampled_LB": false,
+   "n_4subsets_full": 1636922,
+   "cands_m4": 12,
+   "max_disjoint_m4": 1,
+   "cands_m2": 38027,
+   "max_disjoint_m2": 3
+  },
+  "x1.5_dm01_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b0/viz/sample_0001.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 3758,
+   "p_conn": 0.1825,
+   "g_mean": 1.1289036244772546,
+   "pairs_ge_thr": 0,
+   "strong_out_per_cell": 0.0,
+   "lambda_max_nS": 29.00689604312071,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1.5_dm02_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b0/viz/sample_0002.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 4471,
+   "p_conn": 0.2171,
+   "g_mean": 1.205985186751111,
+   "pairs_ge_thr": 5,
+   "strong_out_per_cell": 0.034722222222222224,
+   "lambda_max_nS": 37.49191419821801,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm09_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b1/viz/sample_0000.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2670,
+   "p_conn": 0.2928,
+   "g_mean": 2.030838845820909,
+   "pairs_ge_thr": 213,
+   "strong_out_per_cell": 2.21875,
+   "lambda_max_nS": 55.61877493819324,
+   "lambda_max_strong_nS": 10.06004446349698,
+   "sampled_LB": false,
+   "n_4subsets_full": 559715,
+   "cands_m4": 1,
+   "max_disjoint_m4": 1,
+   "cands_m2": 21199,
+   "max_disjoint_m2": 3
+  },
+  "x1_dm01_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b1/viz/sample_0001.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 1809,
+   "p_conn": 0.1984,
+   "g_mean": 1.1522719242943131,
+   "pairs_ge_thr": 1,
+   "strong_out_per_cell": 0.010416666666666666,
+   "lambda_max_nS": 21.094830638596967,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm02_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b1/viz/sample_0002.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2493,
+   "p_conn": 0.2734,
+   "g_mean": 1.3007700994843898,
+   "pairs_ge_thr": 6,
+   "strong_out_per_cell": 0.0625,
+   "lambda_max_nS": 33.99633876561117,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 1,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "ctrl_dm01_s77777": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i5_b1/viz/sample_0003.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 1489,
+   "p_conn": 0.1633,
+   "g_mean": 1.120187998338383,
+   "pairs_ge_thr": 0,
+   "strong_out_per_cell": 0.0,
+   "lambda_max_nS": 17.82512161219333,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x3_dm09_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i6_b0/viz/sample_0000.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 13821,
+   "p_conn": 0.1672,
+   "g_mean": 1.5809332879586189,
+   "pairs_ge_thr": 389,
+   "strong_out_per_cell": 1.3506944444444444,
+   "lambda_max_nS": 73.50973411209696,
+   "lambda_max_strong_nS": 5.128511804556472,
+   "sampled_LB": false,
+   "n_4subsets_full": 2397907,
+   "cands_m4": 6,
+   "max_disjoint_m4": 1,
+   "cands_m2": 23559,
+   "max_disjoint_m2": 3
+  },
+  "x3_dm01_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i6_b0/viz/sample_0001.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 11263,
+   "p_conn": 0.1363,
+   "g_mean": 1.1234803750196825,
+   "pairs_ge_thr": 26,
+   "strong_out_per_cell": 0.09027777777777778,
+   "lambda_max_nS": 44.335716931762775,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 12650,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x3_dm02_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i6_b0/viz/sample_0002.json",
+   "n_pyr": 288,
+   "n_int": 60,
+   "pairs": 13087,
+   "p_conn": 0.1583,
+   "g_mean": 1.1836081100646993,
+   "pairs_ge_thr": 33,
+   "strong_out_per_cell": 0.11458333333333333,
+   "lambda_max_nS": 53.60363157905165,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 12650,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x2_dm09_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i7_b0/viz/sample_0000.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 6867,
+   "p_conn": 0.1873,
+   "g_mean": 1.6925585315757674,
+   "pairs_ge_thr": 329,
+   "strong_out_per_cell": 1.7135416666666667,
+   "lambda_max_nS": 56.98005569353188,
+   "lambda_max_strong_nS": 12.240895217180634,
+   "sampled_LB": true,
+   "n_4subsets_full": 5635250,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 21742,
+   "max_disjoint_m2": 2
+  },
+  "x2_dm01_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i7_b0/viz/sample_0001.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 5820,
+   "p_conn": 0.1587,
+   "g_mean": 1.1253161037603194,
+   "pairs_ge_thr": 0,
+   "strong_out_per_cell": 0.0,
+   "lambda_max_nS": 34.371639998711515,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x2_dm02_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i7_b0/viz/sample_0002.json",
+   "n_pyr": 192,
+   "n_int": 40,
+   "pairs": 7043,
+   "p_conn": 0.1921,
+   "g_mean": 1.19386619919321,
+   "pairs_ge_thr": 12,
+   "strong_out_per_cell": 0.0625,
+   "lambda_max_nS": 42.686610050142455,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1.5_dm09_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b0/viz/sample_0000.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 5328,
+   "p_conn": 0.2587,
+   "g_mean": 1.7065389562431756,
+   "pairs_ge_thr": 246,
+   "strong_out_per_cell": 1.7083333333333333,
+   "lambda_max_nS": 60.53400272823064,
+   "lambda_max_strong_nS": 10.936089654094616,
+   "sampled_LB": false,
+   "n_4subsets_full": 745565,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 9636,
+   "max_disjoint_m2": 3
+  },
+  "x1.5_dm01_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b0/viz/sample_0001.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 3943,
+   "p_conn": 0.1915,
+   "g_mean": 1.153482071252272,
+   "pairs_ge_thr": 2,
+   "strong_out_per_cell": 0.013888888888888888,
+   "lambda_max_nS": 30.851132262456318,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1.5_dm02_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b0/viz/sample_0002.json",
+   "n_pyr": 144,
+   "n_int": 30,
+   "pairs": 4961,
+   "p_conn": 0.2409,
+   "g_mean": 1.2358153065806603,
+   "pairs_ge_thr": 1,
+   "strong_out_per_cell": 0.006944444444444444,
+   "lambda_max_nS": 40.912645548329,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm09_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b1/viz/sample_0000.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2335,
+   "p_conn": 0.256,
+   "g_mean": 1.8911690672153578,
+   "pairs_ge_thr": 162,
+   "strong_out_per_cell": 1.6875,
+   "lambda_max_nS": 42.30834349312925,
+   "lambda_max_strong_nS": 9.437107031199787,
+   "sampled_LB": false,
+   "n_4subsets_full": 569391,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 37080,
+   "max_disjoint_m2": 2
+  },
+  "x1_dm01_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b1/viz/sample_0001.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 1884,
+   "p_conn": 0.2066,
+   "g_mean": 1.1438534550542792,
+   "pairs_ge_thr": 0,
+   "strong_out_per_cell": 0.0,
+   "lambda_max_nS": 22.23096442093671,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "x1_dm02_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b1/viz/sample_0002.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 2418,
+   "p_conn": 0.2651,
+   "g_mean": 1.26978489115674,
+   "pairs_ge_thr": 2,
+   "strong_out_per_cell": 0.020833333333333332,
+   "lambda_max_nS": 30.874713365097946,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  },
+  "ctrl_dm01_s88888": {
+   "dump": "/home/johnjose/cos/netmorph_work/recipe_v2/randal_reply_n/morph_tests2/batch_i8_b1/viz/sample_0003.json",
+   "n_pyr": 96,
+   "n_int": 20,
+   "pairs": 1412,
+   "p_conn": 0.1548,
+   "g_mean": 1.1201982532361412,
+   "pairs_ge_thr": 0,
+   "strong_out_per_cell": 0.0,
+   "lambda_max_nS": 16.841430200646272,
+   "lambda_max_strong_nS": 0.0,
+   "sampled_LB": false,
+   "n_4subsets_full": 0,
+   "cands_m4": 0,
+   "max_disjoint_m4": 0,
+   "cands_m2": 0,
+   "max_disjoint_m2": 0
+  }
+ },
+ "growth_s": {
+  "x3": [
+   29088,
+   28079,
+   27665,
+   24950,
+   24893,
+   28258,
+   27634,
+   27710,
+   27810
+  ],
+  "x2": [
+   13904,
+   13663,
+   13763,
+   17120,
+   17113,
+   16908,
+   10359,
+   10604,
+   10721
+  ],
+  "x1.5": [
+   5922,
+   5821,
+   6074,
+   5494,
+   5778,
+   5354,
+   6816,
+   6787,
+   6296
+  ],
+  "x1": [
+   2718,
+   3045,
+   4343,
+   2493,
+   2945,
+   2910,
+   2157,
+   2548,
+   2126
+  ],
+  "ctrl": [
+   4911,
+   2623,
+   2471
+  ]
+ },
+ "instance_rss_after": {
+  "batch_i5_b1": {
+   "sizes": [
+    "ctrl",
+    "x1"
+   ],
+   "rss_after_GB": 4.4215240478515625
+  },
+  "batch_i4_b0": {
+   "sizes": [
+    "x2"
+   ],
+   "rss_after_GB": 3.1910057067871094
+  },
+  "batch_i8_b1": {
+   "sizes": [
+    "ctrl",
+    "x1"
+   ],
+   "rss_after_GB": 4.380870819091797
+  },
+  "batch_i7_b0": {
+   "sizes": [
+    "x2"
+   ],
+   "rss_after_GB": 3.2579269409179688
+  },
+  "batch_i2_b0": {
+   "sizes": [
+    "x1.5"
+   ],
+   "rss_after_GB": 2.505786895751953
+  },
+  "batch_i1_b0": {
+   "sizes": [
+    "x2"
+   ],
+   "rss_after_GB": 3.2966156005859375
+  },
+  "batch_i0_b0": {
+   "sizes": [
+    "x3"
+   ],
+   "rss_after_GB": 4.9078369140625
+  },
+  "batch_i6_b0": {
+   "sizes": [
+    "x3"
+   ],
+   "rss_after_GB": 5.137393951416016
+  },
+  "batch_i3_b0": {
+   "sizes": [
+    "x3"
+   ],
+   "rss_after_GB": 5.0980987548828125
+  },
+  "batch_i8_b0": {
+   "sizes": [
+    "x1.5"
+   ],
+   "rss_after_GB": 2.5726776123046875
+  },
+  "batch_i2_b1": {
+   "sizes": [
+    "ctrl",
+    "x1"
+   ],
+   "rss_after_GB": 4.325263977050781
+  },
+  "batch_i5_b0": {
+   "sizes": [
+    "x1.5"
+   ],
+   "rss_after_GB": 2.2875328063964844
+  }
+ },
+ "instance_peak_rss_GB": {
+  "i0": 7.3,
+  "i1": 3.8,
+  "i2": 4.3,
+  "i3": 7.2,
+  "i4": 3.8,
+  "i5": 4.7,
+  "i6": 5.9,
+  "i7": 4.8,
+  "i8": 4.4
+ },
+ "time_fit": {
+  "exponent": 2.136447348052887,
+  "prefactor_s": 0.10625399393151704,
+  "law": "growth_s = 0.106 * N^2.14"
+ }
+}

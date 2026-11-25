@@ -1,0 +1,174 @@
+{
+ "_readme": "Biological-realism ranges for Netmorph parameter optimization. HARD limits = the team's authoritative parameter ranges (days 20-25; pyramidal 16-128; interneuron 16-128; minneuronseparation 10-15 um; shape.radius 100-200; shape.thickness 20-50; dm.weight 0.1-1.0); parameters must NEVER leave them. Fixed config: growth_F=0.39, growth_nu0=0.00013889. Density (10k-50k/mm^3) and pyramidal fraction (70-80%) are WARNINGS only (still reported). Every entry has a 'source'.",
+ "units": {
+  "shape.radius": "um (assumed)",
+  "shape.thickness": "um (assumed)",
+  "minneuronseparation": "um (assumed)",
+  "density": "neurons per mm^3"
+ },
+ "parameters": {
+  "days": {
+   "min": 20,
+   "max": 25,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "pyramidal": {
+   "min": 16,
+   "max": 300,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09). | morph_tests2 COPY: max 128 -> 300 (Randal allowed >128 pyramidal, relayed by John 2026-11-25; morph_tests2 only).",
+   "severity": "hard"
+  },
+  "interneuron": {
+   "min": 16,
+   "max": 128,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "minneuronseparation": {
+   "min": 10,
+   "max": 15,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "shape.radius": {
+   "min": 100,
+   "max": 200,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "shape.thickness": {
+   "min": 20,
+   "max": 50,
+   "integer": true,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "dm.weight": {
+   "min": 0.1,
+   "max": 1.0,
+   "integer": false,
+   "source": "docs",
+   "note": "Team hard limit (docs, as relayed 2026-11-09).",
+   "severity": "hard"
+  },
+  "D_synmax.pyramidal.pyramidal": {
+   "min": 0.0,
+   "max": 1.5,
+   "integer": false,
+   "source": "team (Randal Koene, 2026-11-13)",
+   "note": "Maximum only, min 0 (team: Randal Koene, email 2026-11-13, confirmed hard limits proposed by John). Spiny pairs bridge up to ~1.5 um; aspiny interneuron pairs 0.1-0.15 um.",
+   "severity": "hard"
+  },
+  "D_synmax.pyramidal.interneuron": {
+   "min": 0.0,
+   "max": 0.15,
+   "integer": false,
+   "source": "team (Randal Koene, 2026-11-13)",
+   "note": "Maximum only, min 0 (team: Randal Koene, email 2026-11-13, confirmed hard limits proposed by John). Spiny pairs bridge up to ~1.5 um; aspiny interneuron pairs 0.1-0.15 um.",
+   "severity": "hard"
+  },
+  "D_synmax.interneuron.pyramidal": {
+   "min": 0.0,
+   "max": 0.15,
+   "integer": false,
+   "source": "team (Randal Koene, 2026-11-13)",
+   "note": "Maximum only, min 0 (team: Randal Koene, email 2026-11-13, confirmed hard limits proposed by John). Spiny pairs bridge up to ~1.5 um; aspiny interneuron pairs 0.1-0.15 um.",
+   "severity": "hard"
+  },
+  "D_synmax.interneuron.interneuron": {
+   "min": 0.0,
+   "max": 0.15,
+   "integer": false,
+   "source": "team (Randal Koene, 2026-11-13)",
+   "note": "Maximum only, min 0 (team: Randal Koene, email 2026-11-13, confirmed hard limits proposed by John). Spiny pairs bridge up to ~1.5 um; aspiny interneuron pairs 0.1-0.15 um.",
+   "severity": "hard"
+  }
+ },
+ "netmorph_growth_parameters": {
+  "_note": "Fixed by the team; not optimized.",
+  "growth_F": {
+   "fixed": 0.39,
+   "source": "docs"
+  },
+  "growth_nu0": {
+   "fixed": 0.00013889,
+   "source": "docs"
+  },
+  "spine_length": {
+   "min": 0.5,
+   "max": 2.0,
+   "source": "docs",
+   "note": "um"
+  }
+ },
+ "derived_checks": {
+  "neuron_density_per_mm3": {
+   "min": 10000,
+   "max": 50000,
+   "severity": "warning",
+   "source": "docs",
+   "formula": "(pyramidal + interneuron) / (pi * radius^2 * thickness * 1e-9)  [um^3 -> mm^3]",
+   "note": "WARNING only (not rejected). Density range from docs. Radius/thickness unit (um) is an ASSUMPTION."
+  },
+  "pyramidal_fraction": {
+   "min": 0.7,
+   "max": 0.8,
+   "severity": "warning",
+   "source": "docs",
+   "formula": "pyramidal / (pyramidal + interneuron)",
+   "note": "WARNING only (not rejected). Docs: pyramidal 70-80 %, interneurons 20-30 %. Phase0 samples the two counts independently (fraction 11-89 %), so many Phase0 rows violate this."
+  },
+  "assumed_interneuron_fraction_if_column_missing": {
+   "value": 0.25,
+   "source": "assumption",
+   "note": "Phase1 labeled files have no interneuron column; interneuron count is then imputed as pyramidal*0.25/0.75 (midpoint of docs 20-30 %) for density checks only."
+  },
+  "soma_radius_um": {
+   "pyramidal": [
+    7,
+    10
+   ],
+   "interneuron": [
+    4,
+    6
+   ],
+   "source": "docs"
+  },
+  "min_separation_vs_soma": {
+   "severity": "soft",
+   "source": "assumption",
+   "formula": "minneuronseparation >= 2*mean_soma_radius_of_mix where pyr radius=8.5, int radius=5 (midpoints of docs ranges)",
+   "note": "ASSUMPTION: that minneuronseparation is a centre-to-centre distance in um. Netmorph semantics not verified, so this is only a soft flag."
+  },
+  "synapses_per_neuron": {
+   "severity": "info",
+   "source": "docs",
+   "pyr_pyr": [
+    5000,
+    10000
+   ],
+   "pyr_int": [
+    1000,
+    5000
+   ],
+   "int_int": [
+    1000,
+    5000
+   ],
+   "int_pyr": null,
+   "note": "Docs numbers. Reported as predicted usable_connections / n_source_neurons, but this is NOT a like-for-like comparison: the simulated patch holds only ~100 neurons and 'usable connections' is a filtered subset, so per-neuron counts are expected to be orders of magnitude below 5k-10k. Info only, never rejects. No docs number for Int->Pyr (left null)."
+  }
+ }
+}
