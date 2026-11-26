@@ -379,6 +379,10 @@ pyr1.oblique.E_competes_with=same_arbor;
 D_synmax.pyramidal.pyramidal=2.0;
 D_synmax.pyramidal.interneuron=2.0;
 D_synmax.interneuron.pyramidal=2.0;
+# Keep the original axon contact point formula so that this model, used by
+# the BrainGenix xor_scnm tutorial, grows the same network as before the
+# 2026-11 fix. Remove this line (or set corrected) for the corrected formula.
+synapse_contact_fraction=legacy;
 
 # GENERAL SIMULATION PARAMETERS
 # Branching is not enforced at the root length of axons and dendrites
