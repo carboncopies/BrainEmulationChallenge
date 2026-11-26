@@ -37,9 +37,32 @@ Parser.add_argument("-Burst", action="store_true", help="Burst input")
 Parser.add_argument("-Long", action="store_true", help="Long burst driver")
 Parser.add_argument("-Autoassociative", action="store_true", help="Autoassociative network")
 Parser.add_argument("-Patterns", default=1, type=int, help="Number of patterns")
+# Autoassociative trial protocols:
+#   default:       Encoding phase (full patterns, STDP as set by -STDP), followed by a
+#                  retrieval phase (partial cues, STDP off unless -RetrievalSTDP).
+#   -inspectSTDP:  Original protocol, alternating encoding and half-pattern cue batches
+#                  throughout the run, useful for watching gradual STDP encoding.
+Parser.add_argument("-inspectSTDP", action="store_true", help="Autoassociative: alternate encoding and half-pattern cue batches (original protocol)")
+Parser.add_argument("-EncodeTrials", default=200, type=int, help="Autoassociative: number of full-pattern encoding presentations per pattern")
+Parser.add_argument("-RetrievalTrials", default=20, type=int, help="Autoassociative: number of partial-cue retrieval trials per pattern")
+Parser.add_argument("-CueMin", default=0.5, type=float, help="Autoassociative: minimum cue size as fraction of pattern")
+Parser.add_argument("-CueMax", default=0.8, type=float, help="Autoassociative: maximum cue size as fraction of pattern")
+Parser.add_argument("-EncodeInterval", default=70.0, type=float, help="Autoassociative: ms between encoding presentations")
+Parser.add_argument("-RetrievalInterval", default=200.0, type=float, help="Autoassociative: ms between retrieval trials (also the response window)")
+Parser.add_argument("-RetrievalSTDP", action="store_true", help="Autoassociative: keep STDP on during retrieval trials")
+Parser.add_argument("-EncodeJitter", default=5.0, type=float, help="Autoassociative: max random delay (ms) of each neuron's spike in an encoding presentation (perfectly synchronous presentation only strengthens low-to-high neuron index connections)")
 Parser.add_argument("-Dt", default=1.0, type=float, help="Simulation step size in ms")
 Parser.add_argument("-T", type=float, help="Simulation time in ms")
 Args = Parser.parse_args()
+
+def saveModel(name:str):
+    # ModelSave currently fails for this LIFC model on at least one NES build
+    # (TaskStatus 3). Saving is only needed for -Reload, so failure is not fatal.
+    try:
+        MySim.ModelSave(name)
+        print('Model saved')
+    except Exception as e:
+        print('WARNING: ModelSave failed, continuing without a saved model (-Reload will not work): '+str(e))
 
 # Initialize data collection for entry in DB file
 DBdata = vbp.InitExpDB(
@@ -541,8 +564,7 @@ else:
         print('Made synapse boxes and LIFC Receptors from principal neurons onto interneurons')
 
 
-        MySim.ModelSave('LIFtest')
-        print('Model saved')
+        saveModel('LIFtest')
 
     else:
 
@@ -675,8 +697,7 @@ else:
 
         print('Made LIFC Receptors')
 
-        MySim.ModelSave('LIFtest')
-        print('Model saved')
+        saveModel('LIFtest')
 
 
 if Args.Autoassociative:
@@ -703,26 +724,119 @@ if Args.Autoassociative:
     print('Cue neurons:')
     print(cue_neurons)
 
-    training_stim = [ i*STIMINTERVAL for i in range(numpatterns*REPEATSPERBATCH) ]
-    batchduration = STIMINTERVAL*numpatterns*REPEATSPERBATCH
-    batchinterval = batchduration + 100
-    repeatinterval = 2*batchinterval
-    repeats = int(T // repeatinterval)
+    # Every stimulation event is recorded as a trial, so that encoding and retrieval
+    # trials can be separated in analysis (see output/trials.csv).
+    #   phase: 'encode' (full pattern) or 'retrieve' (partial cue)
+    #   stim_offsets_ms: per stimulated neuron delay after t_ms (encoding jitter)
+    trials = []
+    def addTrial(phase:str, pattern:int, t_ms:float, stimulated:list, window_ms:float, offsets:list=None):
+        stimulated = sorted(stimulated)
+        trials.append({
+            'trial': len(trials),
+            'phase': phase,
+            'pattern': pattern,
+            't_ms': t_ms,
+            'window_ms': window_ms,
+            'stimulated': stimulated,
+            'stim_offsets_ms': offsets if offsets else [ 0.0 for n in stimulated ],
+            'cue_fraction': len(stimulated)/len(pattern_neurons[pattern]),
+        })
 
-    timeneuronpairs_list = []
-    for n in range(numneurons):
+    if Args.inspectSTDP:
+        # Original protocol: batches of encoding presentations alternate with batches of
+        # half-pattern cue presentations for the whole duration T.
+        training_stim = [ i*STIMINTERVAL for i in range(numpatterns*REPEATSPERBATCH) ]
+        batchduration = STIMINTERVAL*numpatterns*REPEATSPERBATCH
+        batchinterval = batchduration + 100
+        repeatinterval = 2*batchinterval
+        repeats = int(T // repeatinterval)
+
         for r in range(repeats):
             for s in range(len(training_stim)):
                 p = s % numpatterns
-                if n in pattern_neurons[p]:
-                    timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r, n) )
-
-    for n in range(numneurons):
-        for r in range(repeats):
+                addTrial('encode', p, training_stim[s]+repeatinterval*r, pattern_neurons[p], STIMINTERVAL)
             for s in range(len(training_stim)):
                 p = s % numpatterns
-                if n in cue_neurons[p]:
-                    timeneuronpairs_list.append( (training_stim[s]+repeatinterval*r+batchinterval, n)  )
+                addTrial('retrieve', p, training_stim[s]+repeatinterval*r+batchinterval, cue_neurons[p], STIMINTERVAL)
+
+        run_segments = [ (T, Args.STDP) ]
+
+    else:
+        # Default protocol: an encoding phase followed by a retrieval phase.
+        #   Encoding: each pattern presented -EncodeTrials times (patterns interleaved).
+        #   Retrieval: each pattern cued -RetrievalTrials times with cues of between
+        #   -CueMin and -CueMax of the pattern's neurons, each cue a different subset.
+        if Args.T:
+            print('Note: -T is ignored by the default Autoassociative protocol, T is derived from the number of trials.')
+        if not Args.STDP:
+            print('WARNING: -STDP not set, so the encoding phase will not change weights (no-learning control).')
+        if numpatterns > 1:
+            # With jittered encoding, within-pattern weights saturate in both directions, and the
+            # resulting stronger attractors can ignite spontaneously, so that STDP then links
+            # the patterns. The -inspectSTDP protocol does not do this, because its synchronous
+            # presentations only strengthen low-to-high neuron index connections.
+            print('WARNING: With -Patterns > 1 the default protocol currently develops cross-pattern weights (see -inspectSTDP).')
+
+        rng = np.random.RandomState(Args.Seed)
+        PHASEGAP = 500.0 # ms of quiet between encoding and retrieval phases
+
+        t = 0.0
+        for r in range(Args.EncodeTrials):
+            for p in range(numpatterns):
+                offsets = [ round(float(rng.uniform(0.0, Args.EncodeJitter)), 2) for n in pattern_neurons[p] ]
+                addTrial('encode', p, t, pattern_neurons[p], Args.EncodeInterval, offsets)
+                t += Args.EncodeInterval
+        t_encode_end = t + PHASEGAP
+
+        # Distinct cue subsets per pattern, cycling through cue sizes so that the
+        # range from CueMin to CueMax is evenly represented.
+        def cueSubsets(pattern:list, num:int)->list:
+            psize = len(pattern)
+            minsize = max(1, int(math.ceil(Args.CueMin*psize - 1e-9)))
+            maxsize = min(psize, int(math.floor(Args.CueMax*psize + 1e-9)))
+            if minsize > maxsize:
+                raise ValueError('No cue size between -CueMin %.2f and -CueMax %.2f of a %d neuron pattern.' % (Args.CueMin, Args.CueMax, psize))
+            sizes = list(range(minsize, maxsize+1))
+            available = { s: math.comb(psize, s) for s in sizes }
+            used = set()
+            subsets = []
+            i = 0
+            while len(subsets) < num:
+                if not any(available.values()):
+                    print('Note: Only %d distinct cues exist, repeating cues.' % len(used))
+                    used.clear()
+                    available = { s: math.comb(psize, s) for s in sizes }
+                s = sizes[i % len(sizes)]
+                i += 1
+                if available[s] == 0:
+                    continue
+                while True:
+                    cue = tuple(sorted(rng.choice(pattern, size=s, replace=False).tolist()))
+                    if cue not in used:
+                        break
+                used.add(cue)
+                available[s] -= 1
+                subsets.append(list(cue))
+            rng.shuffle(subsets)
+            return subsets
+
+        cues = [ cueSubsets(pattern_neurons[p], Args.RetrievalTrials) for p in range(numpatterns) ]
+        retrieval_order = [ (p, k) for p in range(numpatterns) for k in range(Args.RetrievalTrials) ]
+        rng.shuffle(retrieval_order)
+
+        t = t_encode_end
+        for p, k in retrieval_order:
+            addTrial('retrieve', p, t, cues[p][k], Args.RetrievalInterval)
+            t += Args.RetrievalInterval
+        T = int(math.ceil(t))
+
+        run_segments = [ (t_encode_end, Args.STDP), (T - t_encode_end, Args.STDP and Args.RetrievalSTDP) ]
+
+    num_encode = sum(1 for tr in trials if tr['phase']=='encode')
+    num_retrieve = len(trials) - num_encode
+    print('Trials: %d encoding, %d retrieval, T = %d ms' % (num_encode, num_retrieve, T))
+
+    timeneuronpairs_list = sorted([ (tr['t_ms']+dt, n) for tr in trials for n, dt in zip(tr['stimulated'], tr['stim_offsets_ms']) ])
 
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
@@ -756,6 +870,8 @@ else:
     MySim.SetSpecificAPTimes(timeneuronpairs_list)
     print('Simulation stimulation specified')
 
+    run_segments = [ (T, Args.STDP) ]
+
 connections_before_dict = MySim.GetConnectome()
 if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before', { 'figsize': (6,6), 'linewidth': 0.5, 'figext': 'pdf', }):
     vbp.ErrorToDB(DBdata, 'File error: Failed to store plots of connectivity')
@@ -764,13 +880,66 @@ if not vbp.PlotAndStoreConnections(connections_before_dict, 'output', 'before_co
 
 # Run simulation and record membrane potential
 MySim.RecordAll(-1)
-MySim.RunAndWait(Runtime_ms=T, Dt_ms=Args.Dt, timeout_s=100.0)
+for segment_ms, segment_STDP in run_segments:
+    MySim.SetSTDP(_DoSTDP=segment_STDP)
+    print('Running %.1f ms with STDP %s' % (segment_ms, 'on' if segment_STDP else 'off'))
+    MySim.RunAndWait(Runtime_ms=segment_ms, Dt_ms=Args.Dt, timeout_s=100.0)
 print('Functional stimulation completed')
 
 recording_dict = MySim.GetRecording()
 print('Recorded data retrieved')
 spikes_dict = MySim.GetSpikeTimes()
 print('Spike times retrieved')
+
+if Args.Autoassociative:
+    # Score every trial from the spikes in its response window [t_ms, t_ms+window_ms):
+    #   recalled:   pattern neurons that were not stimulated but spiked
+    #   recall:     fraction of non-stimulated pattern neurons that spiked
+    #   intruders:  principal neurons outside the pattern that spiked
+    import csv
+    spiketimes = { int(k): v.get('tSpike_ms', []) for k, v in spikes_dict.get('SpikeTimes', {}).items() }
+    def spikedIn(n:int, t0:float, t1:float)->bool:
+        return any(t0 <= ts < t1 for ts in spiketimes.get(n, []))
+
+    for tr in trials:
+        t0, t1 = tr['t_ms'], tr['t_ms']+tr['window_ms']
+        pattern = pattern_neurons[tr['pattern']]
+        targets = [ n for n in pattern if n not in tr['stimulated'] ]
+        tr['recalled'] = [ n for n in targets if spikedIn(n, t0, t1) ]
+        tr['intruders'] = [ n for n in range(numneurons) if n not in pattern and spikedIn(n, t0, t1) ]
+        tr['interneurons_spiking'] = sum(1 for i in range(numinterneurons) if spikedIn(numneurons+i, t0, t1))
+        tr['recall'] = len(tr['recalled'])/len(targets) if targets else 1.0
+        tr['complete'] = (len(tr['recalled']) == len(targets)) and not tr['intruders']
+
+    os.makedirs('output', exist_ok=True)
+    with open('output/trials.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerow(['trial', 'phase', 'pattern', 't_ms', 'window_ms', 'cue_fraction', 'stimulated', 'recalled', 'intruders', 'interneurons_spiking', 'recall', 'complete'])
+        for tr in trials:
+            writer.writerow([
+                tr['trial'], tr['phase'], tr['pattern'], tr['t_ms'], tr['window_ms'], '%.3f' % tr['cue_fraction'],
+                ' '.join(map(str, tr['stimulated'])), ' '.join(map(str, tr['recalled'])), ' '.join(map(str, tr['intruders'])),
+                tr['interneurons_spiking'], '%.3f' % tr['recall'], int(tr['complete']),
+            ])
+    with open('output/trials.json', 'w') as f:
+        json.dump({
+            'protocol': 'inspectSTDP' if Args.inspectSTDP else 'encode_then_retrieve',
+            'T_ms': T,
+            'STDP_segments': [ {'duration_ms': d, 'STDP': s} for d, s in run_segments ],
+            'pattern_neurons': pattern_neurons,
+            'interneuron_ids': [ numneurons+i for i in range(numinterneurons) ],
+            'trials': trials,
+        }, f, indent=1)
+    print('Trial records saved to output/trials.csv and output/trials.json')
+
+    retrieval = [ tr for tr in trials if tr['phase']=='retrieve' ]
+    if retrieval:
+        print('Retrieval summary (%d trials):' % len(retrieval))
+        for frac in sorted(set(round(tr['cue_fraction'], 3) for tr in retrieval)):
+            sub = [ tr for tr in retrieval if round(tr['cue_fraction'], 3) == frac ]
+            print('  cue %5.1f%%: %3d trials, mean recall %.2f, complete %d/%d, with intruders %d' % (
+                100*frac, len(sub), np.mean([tr['recall'] for tr in sub]),
+                sum(tr['complete'] for tr in sub), len(sub), sum(1 for tr in sub if tr['intruders'])))
 
 #with open('output/raw.json', 'w') as f:
 #    json.dump(recording_dict, f)
